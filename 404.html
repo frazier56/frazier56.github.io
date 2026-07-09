@@ -24,6 +24,13 @@
       }
     }
   } catch (e) {}
+  // Came from inside the OneSocial app (e.g. closing the sign-in modal) → back to the app
+  try {
+    if (document.referrer && document.referrer.indexOf("/onesocial-app-preview") > -1) {
+      location.replace("/onesocial-app-preview/");
+      return;
+    }
+  } catch (e) {}
   // Anything else that lands on the root → One World Labs hub
   location.replace("/onescore-preview/oneworldlabs.html");
 })();
