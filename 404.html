@@ -14,6 +14,16 @@
     location.replace("/onesocial-app-preview/" + q + h);
     return;
   }
+  // Signed-in OneSocial user bounced to the root by the app → send them back into the app
+  try {
+    for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i);
+      if (k && k.indexOf("sb-") === 0 && k.indexOf("-auth-token") > -1 && localStorage.getItem(k)) {
+        location.replace("/onesocial-app-preview/");
+        return;
+      }
+    }
+  } catch (e) {}
   // Anything else that lands on the root → One World Labs hub
   location.replace("/onescore-preview/oneworldlabs.html");
 })();
