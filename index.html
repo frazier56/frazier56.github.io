@@ -2,19 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>One World Labs</title>
-<style>body{margin:0;background:#FAFAF8;font-family:Inter,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;color:#6b7280;font-size:14px}</style>
 <script>
+/* One ID / OAuth redirect-catcher — must stay at the top of index.html and 404.html */
 (function () {
   var h = location.hash || "";
   var q = location.search || "";
-  // OAuth callback (Supabase returns tokens in hash, or ?code= for PKCE) → hand off to the OneSocial app with tokens intact
+  // OAuth callback (Supabase returns tokens in hash, or ?code= for PKCE) -> hand off to the OneSocial app with tokens intact
   if (/access_token|refresh_token|error_description|type=recovery/.test(h) || /[?&]code=/.test(q)) {
     location.replace("/onesocial-app-preview/" + q + h);
     return;
   }
-  // Signed-in OneSocial user bounced to the root by the app → send them back into the app
+  // Signed-in OneSocial user bounced to the root by the app -> send them back into the app
   try {
     for (var i = 0; i < localStorage.length; i++) {
       var k = localStorage.key(i);
@@ -24,19 +22,185 @@
       }
     }
   } catch (e) {}
-  // Came from inside the OneSocial app (e.g. closing the sign-in modal) → back to the app
+  // Came from inside the OneSocial app (e.g. closing the sign-in modal) -> back to the app
   try {
     if (document.referrer && document.referrer.indexOf("/onesocial-app-preview") > -1) {
       location.replace("/onesocial-app-preview/");
       return;
     }
   } catch (e) {}
-  // Anything else that lands on the root → One World Labs hub
-  location.replace("/onescore-preview/oneworldlabs.html");
+  // Anything else: render this page (the One World Labs hub is the homepage now)
 })();
 </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>One World Labs — Tools that grow small business</title>
+<meta name="description" content="OneVoice, OneApp, OneScore, OneSocial — one family of tools that helps small businesses and freelancers get seen, get trusted, and get paid. No algorithm firewall." />
+<link rel="manifest" href="./owl-manifest.webmanifest" />
+<link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+<meta name="theme-color" content="#FAFAF8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg:#FAFAF8; --ink:#111827; --muted:#6b7280; --teal:#14b8a6; --teal-d:#0d9488; --card:#ffffff; --border:#e5e7eb; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:Inter,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:600px; margin:0 auto; padding:48px 20px 80px; text-align:center; }
+
+  /* Umbrella logo — mark and word joined as one unit */
+  .brand { display:inline-flex; align-items:center; }
+  .brand img { height:58px; width:auto; display:block; }
+  .brand .words { text-align:left; margin-left:-9px; }
+  .brand .top { font-size:34px; line-height:.95; letter-spacing:-.01em; }
+  .brand .top .ne { color:var(--teal); font-weight:600; }
+  .brand .top .word { font-weight:800; }
+  .brand .sub { font-size:10.5px; letter-spacing:.13em; font-weight:600; color:var(--muted); text-transform:uppercase; margin-top:4px; }
+
+  h1 { font-size:32px; font-weight:800; letter-spacing:-.02em; margin-top:34px; }
+  h1 .t { color:var(--teal-d); }
+  .lede { color:var(--muted); font-size:16.5px; line-height:1.6; margin:14px auto 0; max-width:470px; }
+  .pill { display:inline-block; margin-top:18px; background:rgba(20,184,166,.1); color:var(--teal-d); font-weight:700; font-size:13px; padding:6px 14px; border-radius:999px; }
+
+  /* Family rail — the visual "these are all One World Labs" thread */
+  .family { margin-top:34px; text-align:left; position:relative; padding-left:22px; }
+  .family:before { content:""; position:absolute; left:6px; top:8px; bottom:8px; width:3px; border-radius:3px;
+    background:linear-gradient(180deg,#2dd4bf,#0d9488); }
+  .famlabel { font-size:11px; font-weight:700; letter-spacing:.16em; color:var(--teal-d); text-transform:uppercase; margin-bottom:12px; }
+
+  a.card { position:relative; display:flex; align-items:center; gap:18px; background:var(--card); border:1px solid var(--border);
+    border-radius:18px; padding:20px 22px; text-decoration:none; color:inherit; margin-bottom:14px;
+    box-shadow:0 1px 3px rgba(17,24,39,.05), 0 8px 24px rgba(17,24,39,.05); transition:transform .15s, border-color .15s; }
+  a.card:hover { transform:translateY(-2px); border-color:var(--teal); }
+  a.card:before { content:""; position:absolute; left:-19px; top:50%; width:12px; height:3px; background:#0d9488; border-radius:2px; }
+
+  /* Product wordmark — one seamless unit, name on the LEFT */
+  .namecol { flex-shrink:0; width:172px; text-align:left; }
+  .pname { font-size:24px; line-height:1; letter-spacing:-.01em; white-space:nowrap; }
+  .pname .one { color:var(--teal); font-weight:700; }
+  .pname .word { font-weight:800; color:var(--ink); }
+  .psub { font-size:8.5px; letter-spacing:.11em; font-weight:700; color:var(--muted); text-transform:uppercase; margin-top:4px; }
+
+  .desccol { flex:1; min-width:0; text-align:left; border-left:1px solid var(--border); padding-left:18px; }
+  .carddesc { color:var(--muted); font-size:13.5px; line-height:1.5; }
+  .soon { display:inline-block; margin-top:6px; font-size:10px; font-weight:700; letter-spacing:.08em; color:#b45309; background:#fef3c7; border-radius:999px; padding:3px 10px; }
+
+  .contact { margin-top:44px; border-top:1px solid var(--border); padding-top:28px; color:var(--muted); font-size:14px; line-height:1.8; }
+  .contact a { color:var(--teal-d); font-weight:600; text-decoration:none; }
+  .foot { margin-top:26px; font-size:12px; color:#9ca3af; }
+  @media (max-width:480px) {
+    a.card { flex-direction:column; align-items:flex-start; gap:10px; }
+    .desccol { border-left:none; padding-left:0; border-top:1px solid var(--border); padding-top:10px; width:100%; }
+    .namecol { width:auto; }
+  }
+
+  /* splash */
+  #owl-splash { position:fixed; inset:0; z-index:99; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 1.5s ease; }
+  #owl-splash.gone { opacity:0; pointer-events:none; }
+  #owl-splash img { height:84px; width:auto; animation:owl-heart 3s ease-in-out infinite; }
+  #owl-splash .st { margin-top:14px; font-size:30px; font-weight:800; letter-spacing:-.01em; }
+  #owl-splash .st .one { color:var(--teal-d); }
+  #owl-splash .ss { margin-top:4px; font-size:13px; font-weight:600; color:var(--muted); letter-spacing:.14em; text-transform:uppercase; }
+  #owl-splash .bar { margin-top:26px; width:135px; height:4px; border-radius:999px; background:#e5e7eb; overflow:hidden; }
+  #owl-splash .bar i { display:block; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--teal),var(--teal-d)); animation:owl-load 1.9s ease-out forwards; }
+  @keyframes owl-heart { 0%,100%{transform:scale(1)} 50%{transform:scale(1.045)} }
+  @keyframes owl-load { to { width:100% } }
+</style>
 </head>
 <body>
-<p>Redirecting… <a href="/onescore-preview/oneworldlabs.html">One World Labs</a></p>
+<div id="owl-splash">
+  <img src="./logo-mark.png" alt="" />
+  <div class="st"><span class="one">One</span> World Labs</div>
+  <div class="ss">Our family of tools</div>
+  <div class="bar"><i></i></div>
+</div>
+<script>
+  setTimeout(function(){ document.getElementById("owl-splash").classList.add("gone"); }, 2000);
+  setTimeout(function(){ var e=document.getElementById("owl-splash"); e&&e.remove(); }, 3600);
+</script>
+<div class="wrap">
+
+  <span class="brand">
+    <img src="logo-mark.png" alt="O" />
+    <span class="words">
+      <div class="top"><span class="ne">ne</span><span class="word">&thinsp;World&thinsp;Labs</span></div>
+      <div class="sub">Tools that grow small business</div>
+    </span>
+  </span>
+
+  <h1>Get seen. Get trusted. <span class="t">Get paid.</span></h1>
+  <p class="lede">
+    You built a real business — but algorithms decide who sees it, your reputation is scattered across
+    ten platforms, and every missed call is money gone. One World Labs builds simple tools that put
+    small businesses and freelancers back in control — no algorithm firewall between you and your customers.
+  </p>
+  <span class="pill">One family. One login. Your whole business.</span>
+
+  <div class="family">
+    <div class="famlabel">The One World Labs family</div>
+
+    <a class="card" href="https://onevoice.onesocial.ai" target="_blank" rel="noreferrer" title="OneVoice">
+      <span class="namecol">
+        <div class="pname"><span class="one">One</span><span class="word">Voice</span></div>
+        <div class="psub">AI Voice Assistant</div>
+      </span>
+      <span class="desccol">
+        <div class="carddesc">Never miss another call. Your AI receptionist answers 24/7, qualifies leads, and books appointments while you work.</div>
+      </span>
+    </a>
+
+    <a class="card" href="/onescore-preview/oneapp.html" title="OneApp">
+      <span class="namecol">
+        <div class="pname"><span class="one">One</span><span class="word">App</span></div>
+        <div class="psub">Your Business. One App.</div>
+      </span>
+      <span class="desccol">
+        <div class="carddesc">Website, bookings, payments, and marketing — your whole storefront in a single app.</div>
+      </span>
+    </a>
+
+    <a class="card" href="https://frazier56.github.io/onescore-preview/" title="OneScore">
+      <span class="namecol">
+        <div class="pname"><span class="one">One</span><span class="word">Score</span></div>
+        <div class="psub">Professional &amp; Social Credibility</div>
+      </span>
+      <span class="desccol">
+        <div class="carddesc">Your whole reputation — followers, reviews, real work — in one verified number you can post anywhere. Free forever.</div>
+      </span>
+    </a>
+
+    <a class="card" href="https://frazier56.github.io/onesocial-app-preview/" title="OneSocial">
+      <span class="namecol">
+        <div class="pname"><span class="one">One</span><span class="word">Social</span></div>
+        <div class="psub">Professional Network</div>
+      </span>
+      <span class="desccol">
+        <div class="carddesc">The credibility-first marketplace: verified reviews, jobs, and payments in one place — where proof gets you hired.</div>
+      </span>
+    </a>
+  </div>
+
+  <!-- One ID — unified sign-in (launches with unified accounts) -->
+  <div class="oneid" id="one-id" style="margin-top:34px;padding:22px 20px;border:1px solid var(--border);border-radius:20px;background:var(--card);text-align:center">
+    <div style="font-size:15px;font-weight:800"><span style="color:var(--teal-d)">One</span> ID</div>
+    <p style="margin-top:6px;font-size:13px;line-height:1.55;color:var(--muted);max-width:26rem;margin-left:auto;margin-right:auto">
+      One sign-in for every One World app — sign in once and you're in OneVoice, OneScore, and OneSocial everywhere.
+    </p>
+    <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-app-preview%2F" style="text-decoration:none"
+      style="margin-top:14px;display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border:1px solid var(--border);border-radius:12px;background:#fff;font-family:inherit;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+      Sign in with Google
+    </a>
+    <p id="oneid-note" style="display:none;margin-top:10px;font-size:12px;color:var(--teal-d);font-weight:600">
+      One tap, one account — Google sign-in through One ID takes you into OneSocial signed in.
+    </p>
+  </div>
+
+  <div class="contact">
+    <strong style="color:var(--ink)">Contact us</strong><br />
+    <a href="mailto:contact@oneworldlabs.ai">contact@oneworldlabs.ai</a><br />
+    Built for small businesses and freelancers, everywhere.
+  </div>
+
+  <p class="foot">© 2026 One World Labs, Inc. · OneVoice · OneApp · OneScore · OneSocial</p>
+</div>
 </body>
 </html>

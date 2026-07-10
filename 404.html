@@ -2,19 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>One World Labs</title>
-<style>body{margin:0;background:#FAFAF8;font-family:Inter,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;color:#6b7280;font-size:14px}</style>
 <script>
+/* One ID / OAuth redirect-catcher — must stay at the top of index.html and 404.html */
 (function () {
   var h = location.hash || "";
   var q = location.search || "";
-  // OAuth callback (Supabase returns tokens in hash, or ?code= for PKCE) → hand off to the OneSocial app with tokens intact
+  // OAuth callback (Supabase returns tokens in hash, or ?code= for PKCE) -> hand off to the OneSocial app with tokens intact
   if (/access_token|refresh_token|error_description|type=recovery/.test(h) || /[?&]code=/.test(q)) {
     location.replace("/onesocial-app-preview/" + q + h);
     return;
   }
-  // Signed-in OneSocial user bounced to the root by the app → send them back into the app
+  // Signed-in OneSocial user bounced to the root by the app -> send them back into the app
   try {
     for (var i = 0; i < localStorage.length; i++) {
       var k = localStorage.key(i);
@@ -24,19 +22,22 @@
       }
     }
   } catch (e) {}
-  // Came from inside the OneSocial app (e.g. closing the sign-in modal) → back to the app
+  // Came from inside the OneSocial app (e.g. closing the sign-in modal) -> back to the app
   try {
     if (document.referrer && document.referrer.indexOf("/onesocial-app-preview") > -1) {
       location.replace("/onesocial-app-preview/");
       return;
     }
   } catch (e) {}
-  // Anything else that lands on the root → One World Labs hub
-  location.replace("/onescore-preview/oneworldlabs.html");
+  // Anything else -> home (the hub)
+  location.replace("/");
 })();
 </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>One World Labs</title>
+<style>body{margin:0;background:#FAFAF8;font-family:Inter,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;color:#6b7280;font-size:14px}</style>
 </head>
 <body>
-<p>Redirecting… <a href="/onescore-preview/oneworldlabs.html">One World Labs</a></p>
+<p>Redirecting… <a href="/">One World Labs</a></p>
 </body>
 </html>
