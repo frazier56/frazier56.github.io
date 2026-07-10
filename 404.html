@@ -180,7 +180,7 @@
   .phint svg{width:12px;height:12px}
 
   /* hover PREVIEW popover — replaces the little arrow */
-  .preview{position:absolute;z-index:20;width:280px;background:var(--card-2);border:1px solid var(--border);
+  .preview{position:absolute;z-index:60;width:280px;background:var(--card-2);border:1px solid var(--border);
     border-radius:14px;box-shadow:var(--shadow-lift);overflow:hidden;opacity:0;pointer-events:none;
     transform:translateY(6px) scale(.98);transition:opacity .18s var(--ease),transform .18s var(--ease)}
   .app-slot:hover .preview,.preview.show{opacity:1;transform:none}
@@ -235,6 +235,48 @@
     .orb,.wire,.pill .dot{animation:none!important}
     .reveal{opacity:1;transform:none;transition:none}
     html{scroll-behavior:auto}
+  }
+  /* ===== TWO WORLDS ===== */
+  .worlds{margin:26px auto 0;max-width:1000px;display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:start}
+  .world{display:flex;flex-direction:column;gap:14px}
+  .worldhead{display:flex;flex-direction:column;gap:3px;padding:0 2px 2px}
+  .wtag{font-size:15px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+  .wtag-app{color:var(--teal-ink)}
+  .wsub{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--faint);text-transform:uppercase}
+  .wcol{display:flex;flex-direction:column;gap:14px}
+  .worlddiv{align-self:stretch;display:flex;flex-direction:column;align-items:center;padding-top:46px;min-height:100%}
+  .worlddiv .wline{width:1px;flex:1;background:linear-gradient(180deg,transparent,var(--border) 15%,var(--teal),var(--border) 85%,transparent)}
+  .worlddiv .wknot{width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 6px var(--core-halo);margin:10px 0}
+  .appbadge{margin-left:auto;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-ink);background:var(--core-halo);border:1px solid var(--core-ring);padding:3px 8px;border-radius:999px}
+  .appbadge-svc{color:var(--muted);background:transparent;border-color:var(--border)}
+  .worlds .app-slot{position:relative;transform:none;width:auto}
+  .worlds a.app{position:static;transform:none;width:auto}
+  .worlds a.app:hover{transform:translateY(-4px)}
+  .world-svc .preview{left:calc(100% + 14px);top:0}
+  .world-app .preview{right:calc(100% + 14px);top:0}
+  .app-slot:hover .preview{z-index:70}
+  .core-inline{display:flex;align-items:center;gap:13px;margin-top:4px;padding:14px 18px;border-radius:16px;text-decoration:none;color:var(--ink);background:var(--core-bg);border:1.5px solid var(--core-ring);cursor:pointer;box-shadow:0 0 0 8px var(--core-halo),var(--shadow);transition:transform .18s var(--ease),box-shadow .3s var(--ease),border-color .18s}
+  .core-inline:hover{transform:translateY(-2px);border-color:var(--teal);box-shadow:0 0 0 10px var(--core-halo),var(--shadow-lift)}
+  .core-inline:focus-visible{outline:none;box-shadow:0 0 0 4px var(--teal),0 0 0 10px var(--core-halo)}
+  .core-inline .gmark{width:30px;height:30px;flex-shrink:0}
+  .core-inline .cin{display:flex;flex-direction:column;text-align:left}
+  .core-inline .clabel{font-size:15px;font-weight:800}
+  .core-inline .clabel .one{color:var(--teal)}
+  .core-inline .csub{font-size:11.5px;font-weight:700;color:var(--muted)}
+  .core-inline .ok{display:none;width:30px;height:30px;border-radius:50%;background:var(--teal);align-items:center;justify-content:center;flex-shrink:0}
+  .core-inline.signedin .gmark{display:none}
+  .core-inline.signedin .ok{display:flex}
+  /* MOBILE: stack worlds, simplified, NO previews (no hover on phones) */
+  @media (max-width:860px){
+    .worlds{grid-template-columns:1fr;max-width:460px;gap:6px}
+    .worlddiv{flex-direction:row;padding:12px 0;min-height:0}
+    .worlddiv .wline{width:auto;height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),var(--teal),var(--border),transparent)}
+    .worlddiv .wknot{margin:0 10px}
+    .worlds .preview{display:none!important}
+    .worlds .phint-web{display:none}
+    .worlds a.app{padding:15px 16px}
+    .worlds .pdesc{font-size:12.5px;margin-top:5px}
+    .core-inline{justify-content:center;padding:15px}
   }
 </style>
 </head>
@@ -297,95 +339,72 @@
   <!-- ===== CONSTELLATION ===== -->
   <section class="constel reveal" id="one-id">
     <div class="famlabel" data-i18n="famlabel">The One World Labs family</div>
-    <div class="famhead" data-i18n="famhead">Five apps. One ecosystem.</div>
-    <p class="famsub" data-i18n="famsub">Each one works alone. Together, they run your whole business.</p>
+    <div class="famhead" data-i18n="famhead">Two kinds of tools. One login.</div>
+    <p class="famsub" data-i18n="famsub">Services we run for you — and apps you use to get seen, trusted, and paid.</p>
 
     <!-- DESKTOP: balanced pentagon, all 5 equidistant + wired to the One ID core -->
-    <div class="orbit" id="orbit">
-      <svg class="wires" viewBox="0 0 1040 762" preserveAspectRatio="none" aria-hidden="true">
-        <line class="wire" x1="520" y1="381" x2="520" y2="92"/>
-        <line class="wire" x1="520" y1="381" x2="894" y2="290" style="animation-delay:.25s"/>
-        <line class="wire" x1="520" y1="381" x2="749" y2="625" style="animation-delay:.5s"/>
-        <line class="wire" x1="520" y1="381" x2="291" y2="625" style="animation-delay:.75s"/>
-        <line class="wire" x1="520" y1="381" x2="146" y2="290" style="animation-delay:1s"/>
-      </svg>
-
-      <!-- ONE ID — the single Google sign-in button, dead center, one place only -->
-      <a class="core" id="core" href="#" role="button" aria-label="Sign in with Google — One ID">
-        <svg class="gmark" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
-        <span class="ok" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
-        <span class="clabel"><span class="one">One</span> ID</span>
-        <span class="csub" id="coresub" data-i18n="core_signin">Sign in with Google</span>
-      </a>
-
-      <!-- 5 app slots at the pentagon points (left/top set by JS to stay exact) -->
-      <div class="app-slot" data-x="50" data-y="12">
-        <a class="app" href="https://onevoice.onesocial.ai" data-app="voice">
-          <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Voice</span></div></div>
-          <div class="psub" data-i18n="voice_sub">AI voice assistant</div>
-          <p class="pdesc" data-i18n="voice_desc">Never miss a call. Your AI receptionist answers 24/7, qualifies leads, and books appointments.</p>
-          <div class="phint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-        </a>
-        <div class="preview" data-src="https://onevoice.onesocial.ai"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Voice</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
+    <div class="worlds" id="worlds">
+      <div class="world world-svc">
+        <div class="worldhead"><span class="wtag" data-i18n="w_svc_t">Done for you</span><span class="wsub" data-i18n="w_svc">Services we run · websites</span></div>
+        <div class="wcol">
+        <div class="app-slot">
+          <a class="app" href="/onescore-preview/oneapp.html" data-app="app">
+            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">App</span></div><span class="appbadge appbadge-svc" data-i18n="badge_svc">Service</span></div>
+            <div class="psub" data-i18n="app_sub">Your business. One app.</div>
+            <p class="pdesc" data-i18n="app_desc">Your website rebuilt by AI in about a minute — then we handle hosting, domain, and email.</p>
+            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
+          </a>
+          <div class="preview" data-src="/onescore-preview/oneapp.html"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>App</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
+        </div>
+        <div class="app-slot">
+          <a class="app" href="https://onevoice.onesocial.ai" data-app="voice">
+            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Voice</span></div><span class="appbadge appbadge-svc" data-i18n="badge_svc">Service</span></div>
+            <div class="psub" data-i18n="voice_sub">AI voice assistant</div>
+            <p class="pdesc" data-i18n="voice_desc">Never miss a call. Your AI receptionist answers 24/7, qualifies leads, and books appointments.</p>
+            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
+          </a>
+          <div class="preview" data-src="https://onevoice.onesocial.ai"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Voice</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
+        </div>
+        </div>
       </div>
 
-      <div class="app-slot" data-x="86" data-y="38">
-        <a class="app" href="/onescore-preview/oneapp.html" data-app="app">
-          <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">App</span></div></div>
-          <div class="psub" data-i18n="app_sub">Your business. One app.</div>
-          <p class="pdesc" data-i18n="app_desc">Your website rebuilt by AI in about a minute — then we handle hosting, domain, and email.</p>
-          <div class="phint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-        </a>
-        <div class="preview" data-src="/onescore-preview/oneapp.html"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>App</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
-      </div>
+      <div class="worlddiv" aria-hidden="true"><span class="wline"></span><span class="wknot"></span><span class="wline"></span></div>
 
-      <div class="app-slot" data-x="72" data-y="82">
-        <a class="app" href="/onescore-preview/" data-app="score">
-          <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Score</span></div></div>
-          <div class="psub" data-i18n="score_sub">Professional credibility</div>
-          <p class="pdesc" data-i18n="score_desc">Your whole reputation — reviews, real work, social proof — in one verified number. Free forever.</p>
-          <div class="phint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
+      <div class="world world-app">
+        <div class="worldhead"><span class="wtag wtag-app" data-i18n="w_app_t">Get seen · trusted · paid</span><span class="wsub" data-i18n="w_app">Apps that work together · one login</span></div>
+        <div class="wcol">
+        <div class="app-slot">
+          <a class="app" href="/onescore-preview/" data-app="score">
+            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Score</span></div><span class="appbadge" data-i18n="badge_app">App</span></div>
+            <div class="psub" data-i18n="score_sub">Professional credibility</div>
+            <p class="pdesc" data-i18n="score_desc">Your whole reputation — reviews, real work, social proof — in one verified number. Free forever.</p>
+            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
+          </a>
+          <div class="preview" data-src="/onescore-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Score</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
+        </div>
+        <div class="app-slot">
+          <a class="app" href="https://frazier56.github.io/onesocial-v2-preview/" data-app="social">
+            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Social</span></div><span class="appbadge" data-i18n="badge_app">App</span></div>
+            <div class="psub" data-i18n="social_sub">The credibility marketplace</div>
+            <p class="pdesc" data-i18n="social_desc">Where proof gets you hired — verified reviews, jobs, and payments in one simple place.</p>
+            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
+          </a>
+          <div class="preview" data-src="https://frazier56.github.io/onesocial-v2-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Social</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
+        </div>
+        <div class="app-slot">
+          <a class="app" href="https://frazier56.github.io/oneevents-preview/" data-app="events">
+            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Events</span></div><span class="appbadge" data-i18n="badge_app">App</span></div>
+            <div class="psub" data-i18n="events_sub">Events & tickets</div>
+            <p class="pdesc" data-i18n="events_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
+            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
+          </a>
+          <div class="preview" data-src="https://frazier56.github.io/oneevents-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Events</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
+        </div>
+        </div>
+        <a class="core-inline" id="core" href="#" role="button" aria-label="Sign in with Google — One ID">
+          <svg class="gmark" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg><span class="ok" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
+          <span class="cin"><span class="clabel"><span class="one">One</span> ID</span><span class="csub" id="coresub" data-i18n="core_signin">Sign in with Google</span></span>
         </a>
-        <div class="preview" data-src="/onescore-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Score</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
-      </div>
-
-      <div class="app-slot" data-x="28" data-y="82">
-        <a class="app" href="https://frazier56.github.io/onesocial-v2-preview/" data-app="social">
-          <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Social</span></div></div>
-          <div class="psub" data-i18n="social_sub">The credibility marketplace</div>
-          <p class="pdesc" data-i18n="social_desc">Where proof gets you hired — verified reviews, jobs, and payments in one simple place.</p>
-          <div class="phint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-        </a>
-        <div class="preview" data-src="https://frazier56.github.io/onesocial-v2-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Social</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
-      </div>
-
-      <div class="app-slot" data-x="14" data-y="38">
-        <a class="app" href="https://frazier56.github.io/oneevents-preview/" data-app="events">
-          <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Events</span></div></div>
-          <div class="psub" data-i18n="events_sub">Events &amp; tickets</div>
-          <p class="pdesc" data-i18n="events_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
-          <div class="phint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-        </a>
-        <div class="preview" data-src="https://frazier56.github.io/oneevents-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Events</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
-      </div>
-    </div>
-
-    <!-- MOBILE: One ID card (Google button, one place) + clean app list -->
-    <div class="m-only">
-      <div class="m-core" id="mcore">
-        <h3><span class="one">One</span> ID</h3>
-        <p id="mcoretext" data-i18n="mcore_p">One login for every One World app. Sign in once, and you're in everywhere.</p>
-        <a class="glogin" id="mglogin" href="#">
-          <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
-          <span id="mgtext" data-i18n="core_signin">Sign in with Google</span>
-        </a>
-      </div>
-      <div class="m-apps">
-        <a class="m-app" href="https://onevoice.onesocial.ai"><span class="mdot"><i></i></span><span><span class="mname"><span class="one">One</span><span class="word">Voice</span></span><span class="msub" data-i18n="voice_sub">AI voice assistant</span></span><span class="marr">›</span></a>
-        <a class="m-app" href="/onescore-preview/oneapp.html"><span class="mdot"><i></i></span><span><span class="mname"><span class="one">One</span><span class="word">App</span></span><span class="msub" data-i18n="app_sub">Your business. One app.</span></span><span class="marr">›</span></a>
-        <a class="m-app" href="/onescore-preview/"><span class="mdot"><i></i></span><span><span class="mname"><span class="one">One</span><span class="word">Score</span></span><span class="msub" data-i18n="score_sub">Professional credibility</span></span><span class="marr">›</span></a>
-        <a class="m-app" href="https://frazier56.github.io/onesocial-v2-preview/"><span class="mdot"><i></i></span><span><span class="mname"><span class="one">One</span><span class="word">Social</span></span><span class="msub" data-i18n="social_sub">The credibility marketplace</span></span><span class="marr">›</span></a>
-        <a class="m-app" href="https://frazier56.github.io/oneevents-preview/"><span class="mdot"><i></i></span><span><span class="mname"><span class="one">One</span><span class="word">Events</span></span><span class="msub" data-i18n="events_sub">Events &amp; tickets</span></span><span class="marr">›</span></a>
       </div>
     </div>
   </section>
@@ -421,6 +440,8 @@ function isSignedIn(){
 
 /* ===== i18n ===== */
 var I18N={en:{flag:'🇺🇸',code:'EN'},es:{flag:'🇪🇸',code:'ES',
+  famhead:'Dos tipos de herramientas. Un acceso.',famsub:'Servicios que hacemos por ti — y apps para que te vean, confíen y te paguen.',
+  w_svc_t:'Hecho para ti',w_svc:'Servicios que operamos · sitios web',w_app_t:'Que te vean · confíen · paguen',w_app:'Apps que trabajan juntas · un acceso',badge_app:'App',badge_svc:'Servicio',
   tagline:'Herramientas que hacen crecer tu negocio',
   pill:'Cinco apps · Un acceso · Cero intermediarios',
   h1:'Que te vean. Que confíen.<br /><span class="t">Que te paguen.</span>',
@@ -467,23 +488,11 @@ document.getElementById('menubtn').addEventListener('click',function(){dOpen(tru
 document.getElementById('drawerx').addEventListener('click',function(){dOpen(false);});
 scrim.addEventListener('click',function(){dOpen(false);});
 
-/* ===== position the 5 app slots exactly on the pentagon points ===== */
-(function(){
-  document.querySelectorAll('#orbit .app-slot').forEach(function(s){
-    s.style.left=s.getAttribute('data-x')+'%';
-    s.style.top =s.getAttribute('data-y')+'%';
-    /* open the preview toward the center so it never leaves the viewport */
-    var x=+s.getAttribute('data-x'), y=+s.getAttribute('data-y'), pv=s.querySelector('.preview');
-    if(pv){
-      pv.style[x>50?'right':'left']='calc(100% + 14px)';
-      if(x>45&&x<55){pv.style.left='50%';pv.style.transform='translateX(-50%)';pv.style.top='calc(100% + 12px)';}
-      else pv.style.top=(y>50?'auto':'0'); if(y>50)pv.style.bottom='0';
-    }
-  });
-})();
+/* (pentagon positioning removed — two-world layout is CSS grid) */
 
 /* ===== lazy hover previews (real page, scaled) ===== */
-document.querySelectorAll('#orbit .app-slot').forEach(function(s){
+if(window.matchMedia('(hover:hover) and (min-width:861px)').matches){
+document.querySelectorAll('.worlds .app-slot').forEach(function(s){
   var loaded=false;
   s.addEventListener('mouseenter',function(){
     if(loaded)return;loaded=true;
@@ -496,6 +505,7 @@ document.querySelectorAll('#orbit .app-slot').forEach(function(s){
     setTimeout(function(){var l=frame.querySelector('.pvload');if(l&&l.style.display!=='none')l.textContent='Preview unavailable';},6000);
   });
 });
+}
 
 /* ===== One ID: sign-in vs signed-in ===== */
 function paintSignedIn(){
