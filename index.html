@@ -85,7 +85,7 @@
     font-size:13px;font-weight:700;cursor:pointer;transition:border-color .15s,transform .12s,background .15s}
   .iconbtn:hover{border-color:var(--teal);transform:translateY(-1px)}
   .iconbtn:focus-visible{outline:none;box-shadow:0 0 0 3px var(--core-halo)}
-  .flag{font-size:16px;line-height:1}
+  .flag{height:14px;width:auto;vertical-align:middle;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
   .langwrap{position:relative}
   .langmenu{position:absolute;right:0;top:46px;min-width:156px;background:var(--card-2);border:1px solid var(--border);
     border-radius:14px;box-shadow:var(--shadow);overflow:hidden;display:none}
@@ -291,10 +291,10 @@
   </a>
   <div class="barbtns">
     <div class="langwrap">
-      <button class="iconbtn" id="langbtn" aria-haspopup="true" aria-label="Language"><span class="flag" id="langflag">🇺🇸</span><span id="langcode">EN</span></button>
+      <button class="iconbtn" id="langbtn" aria-haspopup="true" aria-label="Language"><img class="flag" id="langflag" src="https://flagcdn.com/32x24/us.png" alt="" /><span id="langcode">EN</span></button>
       <div class="langmenu" id="langmenu" role="menu">
-        <button data-lang="en" role="menuitem"><span class="flag">🇺🇸</span> English</button>
-        <button data-lang="es" role="menuitem"><span class="flag">🇪🇸</span> Español</button>
+        <button data-lang="en" role="menuitem"><img class="flag" src="https://flagcdn.com/32x24/us.png" alt="" /> English</button>
+        <button data-lang="es" role="menuitem"><img class="flag" src="https://flagcdn.com/32x24/es.png" alt="" /> Español</button>
       </div>
     </div>
     <button class="iconbtn" id="themebtn" aria-label="Toggle light and dark mode"><span id="themeicon">🌙</span></button>
@@ -439,7 +439,7 @@ function isSignedIn(){
 }
 
 /* ===== i18n ===== */
-var I18N={en:{flag:'🇺🇸',code:'EN'},es:{flag:'🇪🇸',code:'ES',
+var I18N={en:{flag:'🇺🇸',cc:'us',code:'EN'},es:{flag:'🇪🇸',cc:'es',code:'ES',
   famhead:'Dos tipos de herramientas. Un acceso.',famsub:'Servicios que hacemos por ti — y apps para que te vean, confíen y te paguen.',
   w_svc_t:'Hecho para ti',w_svc:'Servicios que operamos · sitios web',w_app_t:'Que te vean · confíen · paguen',w_app:'Apps que trabajan juntas · un acceso',badge_app:'App',badge_svc:'Servicio',
   tagline:'Herramientas que hacen crecer tu negocio',
@@ -463,7 +463,7 @@ var ENC={};
 function applyLang(l){
   document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(!(k in ENC))ENC[k]=el.textContent;el.textContent=(l==='es'&&I18N.es[k])?I18N.es[k]:ENC[k];});
   document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(!(k in ENC))ENC[k]=el.innerHTML;el.innerHTML=(l==='es'&&I18N.es[k])?I18N.es[k]:ENC[k];});
-  document.getElementById('langflag').textContent=I18N[l].flag;document.getElementById('langcode').textContent=I18N[l].code;document.documentElement.lang=l;
+  document.getElementById('langflag').src='https://flagcdn.com/32x24/'+I18N[l].cc+'.png';document.getElementById('langcode').textContent=I18N[l].code;document.documentElement.lang=l;
   try{localStorage.setItem('owl-lang',l);}catch(e){}
   paintSignedIn(); /* re-apply signed-in label in current language */
 }
