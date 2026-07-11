@@ -75,10 +75,10 @@
   .bar{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;
     padding:11px 18px;background:var(--bar);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
     border-bottom:1px solid var(--border)}
-  .brandmini{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+  .brandmini{display:flex;align-items:center;gap:0;text-decoration:none;color:var(--ink)}
   .brandmini img{height:30px;width:auto;display:block}
-  .brandmini b{font-size:16.5px;font-weight:800;letter-spacing:-.01em;white-space:nowrap}
-  .brandmini b .one{color:var(--teal)}
+  .brandmini b{font-size:16.5px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;margin-left:-2px}
+  .brandmini b .one{color:var(--teal)} .brandmini b .ne{color:var(--teal);font-weight:800}
   .barbtns{display:flex;align-items:center;gap:8px}
   .iconbtn{display:flex;align-items:center;justify-content:center;gap:6px;height:40px;min-width:40px;padding:0 11px;
     border-radius:11px;border:1px solid var(--border);background:var(--card);color:var(--ink);font-family:inherit;
@@ -122,7 +122,7 @@
   .hero{padding:120px 0 6px;text-align:center}
   .brand{display:inline-flex;align-items:center}
   .brand img{height:54px;width:auto;display:block}
-  .brand .words{text-align:left;margin-left:-7px}
+  .brand .words{text-align:left;margin-left:-3px}
   .brand .top{font-size:31px;line-height:.95;letter-spacing:-.01em}
   .brand .top .ne{color:var(--teal);font-weight:700}
   .brand .top .word{font-weight:800}
@@ -287,7 +287,7 @@
 <header class="bar">
   <a class="brandmini" href="/" aria-label="One World Labs home">
     <img src="/logo-mark.png" alt="" />
-    <b><span class="one">One</span> World Labs</b>
+    <b><span class="ne">ne</span> World Labs</b>
   </a>
   <div class="barbtns">
     <div class="langwrap">
@@ -311,8 +311,8 @@
   <a class="dlink" href="https://onevoice.onesocial.ai"><span><span class="one">One</span>Voice</span><span class="dsub" data-i18n="d_voice">AI receptionist</span></a>
   <a class="dlink" href="/onescore-preview/oneapp.html"><span><span class="one">One</span>App</span><span class="dsub" data-i18n="d_app">AI websites</span></a>
   <a class="dlink" href="/onescore-preview/"><span><span class="one">One</span>Score</span><span class="dsub" data-i18n="d_score">Credibility score</span></a>
-  <a class="dlink" href="https://frazier56.github.io/onesocial-v2-preview/"><span><span class="one">One</span>Social</span><span class="dsub" data-i18n="d_social">Get hired</span></a>
-  <a class="dlink" href="https://frazier56.github.io/oneevents-preview/"><span><span class="one">One</span>Events</span><span class="dsub" data-i18n="d_events">Events &amp; tickets</span></a>
+  <a class="dlink" href="/onesocial-v2-preview/"><span><span class="one">One</span>Social</span><span class="dsub" data-i18n="d_social">Get hired</span></a>
+  <a class="dlink" href="/oneevents-preview/"><span><span class="one">One</span>Events</span><span class="dsub" data-i18n="d_events">Events &amp; tickets</span></a>
   <div class="dsec" data-i18n="d_contact">Contact</div>
   <a class="dlink" href="mailto:contact@oneworldlabs.ai" style="font-size:13.5px;font-weight:600">contact@oneworldlabs.ai</a>
   <div class="dcta">
@@ -383,22 +383,22 @@
           <div class="preview" data-src="/onescore-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Score</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
         </div>
         <div class="app-slot">
-          <a class="app" href="https://frazier56.github.io/onesocial-v2-preview/" data-app="social">
+          <a class="app" href="/onesocial-v2-preview/" data-app="social">
             <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Social</span></div><span class="appbadge" data-i18n="badge_app">App</span></div>
             <div class="psub" data-i18n="social_sub">The credibility marketplace</div>
             <p class="pdesc" data-i18n="social_desc">Where proof gets you hired — verified reviews, jobs, and payments in one simple place.</p>
             <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
           </a>
-          <div class="preview" data-src="https://frazier56.github.io/onesocial-v2-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Social</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
+          <div class="preview" data-src="/onesocial-v2-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Social</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
         </div>
         <div class="app-slot">
-          <a class="app" href="https://frazier56.github.io/oneevents-preview/" data-app="events">
+          <a class="app" href="/oneevents-preview/" data-app="events">
             <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Events</span></div><span class="appbadge" data-i18n="badge_app">App</span></div>
             <div class="psub" data-i18n="events_sub">Events & tickets</div>
             <p class="pdesc" data-i18n="events_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
             <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
           </a>
-          <div class="preview" data-src="https://frazier56.github.io/oneevents-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Events</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
+          <div class="preview" data-src="/oneevents-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Events</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
         </div>
         </div>
         <a class="core-inline" id="core" href="#" role="button" aria-label="Sign in with Google — One ID">
@@ -420,7 +420,7 @@
 <script>
 /* ===== Supabase Google OAuth (One ID) ===== */
 var SB_PROJECT = "dxtsyxwyzhvcvmoghjss";
-var APP_HOME   = "https://frazier56.github.io/onesocial-v2-preview/"; /* where sign-in lands */
+var APP_HOME   = "/onesocial-v2-preview/"; /* where sign-in lands */
 function googleUrl(){
   return "https://"+SB_PROJECT+".supabase.co/auth/v1/authorize?provider=google&redirect_to="+encodeURIComponent(APP_HOME);
 }
