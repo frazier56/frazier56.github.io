@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>One ID · One World Labs</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" href="/logo-mark.png" />
+<style>
+  :root{ --ink:#0B0F1A; --paper:#FAFAF8; --teal:#14B8A6; --teal2:#0D9488; }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    font-family:Inter,system-ui,-apple-system,sans-serif;
+    background:radial-gradient(130% 90% at 50% -10%, rgba(20,184,166,.18), transparent 60%), #0B0F1A;
+    color:#E5E7EB; min-height:100dvh; display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .card{
+    width:100%; max-width:440px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.10);
+    border-radius:28px; padding:28px 24px; backdrop-filter:blur(20px); box-shadow:0 24px 60px rgba(0,0,0,.5);
+    text-align:center;
+  }
+  .brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px}
+  .brand img{width:34px;height:34px;object-fit:contain}
+  .brand b{font-size:19px;font-weight:800;letter-spacing:-.3px}
+  .brand b span{color:var(--teal)}
+  .kicker{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:10px 0 2px}
+  h1{font-size:24px;font-weight:800;margin:6px 0 6px;letter-spacing:-.4px;color:#fff}
+  p.sub{font-size:13.5px;color:#9CA3AF;margin:0 0 20px;line-height:1.5}
+  .gbtn{
+    display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px 16px;border-radius:14px;
+    background:#fff;color:#111827;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:transform .12s, box-shadow .12s;
+  }
+  .gbtn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+  .gbtn:disabled{opacity:.6;cursor:default}
+  .gicon{width:19px;height:19px}
+  .apps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+  .app{
+    display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;text-decoration:none;
+    padding:14px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);
+    color:#E5E7EB;transition:transform .12s, border-color .12s, background .12s;
+  }
+  .app:hover{transform:translateY(-2px);border-color:rgba(20,184,166,.6);background:rgba(20,184,166,.08)}
+  .app .emoji{font-size:22px}
+  .app .name{font-weight:800;font-size:15px;color:#fff}
+  .app .tag{font-size:11.5px;color:#9CA3AF;line-height:1.35}
+  .app.wide{grid-column:1 / -1;flex-direction:row;align-items:center;gap:12px}
+  .app.wide .name{font-size:14px}
+  .foot{margin-top:20px;font-size:11.5px;color:#6B7280}
+  .foot a{color:#9CA3AF;text-decoration:none}
+  .signout{margin-top:14px;background:none;border:none;color:#9CA3AF;font-size:12.5px;cursor:pointer;text-decoration:underline}
+  .err{margin-top:12px;font-size:12.5px;color:#FCA5A5}
+  .spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#111;border-radius:50%;animation:s 1s linear infinite;vertical-align:-3px}
+  @keyframes s{to{transform:rotate(360deg)}}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand"><img src="/logo-mark.png" alt=""/><b>One<span>World</span> Labs</b></div>
+    <div class="kicker">One ID</div>
+
+    <!-- Signed-out -->
+    <div id="signin">
+      <h1>One login for your whole world</h1>
+      <p class="sub">Sign in once and jump straight into any One World app — your credibility, events, and profile travel with you.</p>
+      <button class="gbtn" id="googleBtn" onclick="signIn()">
+        <svg class="gicon" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        <span id="gLabel">Continue with Google</span>
+      </button>
+      <div class="err hidden" id="err"></div>
+    </div>
+
+    <!-- Signed-in: chooser -->
+    <div id="chooser" class="hidden">
+      <h1 id="hello">Welcome back</h1>
+      <p class="sub">Which app do you want to open?</p>
+      <div class="apps">
+        <a class="app" href="/oneevents-preview/"><span class="emoji">🎟️</span><span class="name">OneEvent</span><span class="tag">Host, discover &amp; sell tickets</span></a>
+        <a class="app" href="/onescore-preview/"><span class="emoji">🔥</span><span class="name">OneScore</span><span class="tag">Your credibility score</span></a>
+        <a class="app" href="/onesocial-v2-preview/"><span class="emoji">💼</span><span class="name">OneSocial</span><span class="tag">Get hired on proof</span></a>
+        <a class="app" href="https://onevoice.onesocial.ai"><span class="emoji">📞</span><span class="name">OneVoice</span><span class="tag">AI receptionist</span></a>
+        <a class="app wide" href="/onescore-preview/oneapp.html"><span class="emoji">🌐</span><span><span class="name">OneApp</span><br><span class="tag">Your website, rebuilt by AI</span></span></a>
+      </div>
+      <button class="signout" onclick="signOut()">Not you? Sign out</button>
+    </div>
+
+    <div class="foot"><a href="/onescore-preview/oneworldlabs.html">← Back to One World Labs</a></div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  var SB_URL = "https://wseblryyqxawvbjmylbo.supabase.co";
+  var SB_KEY = "sb_publishable_hO1MOsFr6lk0XDC6gizF8g_WfBZ68Tc";
+  var client = window.supabase.createClient(SB_URL, SB_KEY, {
+    auth: { detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, flowType: "pkce" }
+  });
+
+  function show(id){ document.getElementById("signin").classList.add("hidden"); document.getElementById("chooser").classList.add("hidden"); document.getElementById(id).classList.remove("hidden"); }
+  function firstName(u){ var n=(u && (u.user_metadata&&(u.user_metadata.full_name||u.user_metadata.name)))||(u&&u.email)||""; return (n+"").split(" ")[0].split("@")[0]; }
+
+  async function render(){
+    try{
+      var res = await client.auth.getSession();
+      var session = res && res.data && res.data.session;
+      if(session && session.user){
+        var fn = firstName(session.user);
+        document.getElementById("hello").textContent = fn ? ("Welcome, " + fn) : "Welcome back";
+        show("chooser");
+        // clean the OAuth tokens out of the URL
+        if(location.hash || location.search){ history.replaceState({}, "", location.pathname); }
+      } else {
+        show("signin");
+      }
+    }catch(e){ show("signin"); }
+  }
+
+  async function signIn(){
+    var btn=document.getElementById("googleBtn"); btn.disabled=true;
+    document.getElementById("gLabel").innerHTML='<span class="spin"></span> Opening Google…';
+    try{
+      var r = await client.auth.signInWithOAuth({ provider:"google", options:{ redirectTo: location.origin + "/choose.html" } });
+      if(r && r.error) throw r.error;
+    }catch(e){
+      btn.disabled=false; document.getElementById("gLabel").textContent="Continue with Google";
+      var el=document.getElementById("err"); el.textContent = "Couldn't start sign-in: " + (e && e.message ? e.message : "unknown"); el.classList.remove("hidden");
+    }
+  }
+  async function signOut(){ try{ await client.auth.signOut(); }catch(e){} render(); }
+
+  client.auth.onAuthStateChange(function(){ render(); });
+  render();
+</script>
+</body>
+</html>
