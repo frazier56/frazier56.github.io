@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <script>
@@ -13,292 +13,277 @@
   }
 })();
 </script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>One World Labs — Tools that grow small business</title>
-<meta name="description" content="OneVoice, OneApp, OneScore, OneSocial, OneEvent — one family of simple tools that helps small businesses and freelancers get seen, get trusted, and get paid." />
-<link rel="manifest" href="/owl-manifest.webmanifest" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<meta name="theme-color" content="#FAFAF8" />
+<title>One World Labs — Work smarter across your whole business</title>
+<meta name="description" content="OneScore, OneSocial, OneEvents — apps you use. OneVoice and OneApp — done-for-you services. One login ties them all together. Built for small businesses and freelancers." />
+<link rel="manifest" href="./owl-manifest.webmanifest" />
+<link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+<meta name="theme-color" content="#0B0F1A" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
-  /* ===================== TOKENS ===================== */
-  :root{
+  :root {
     --teal:#14B8A6; --teal-d:#0D9488; --teal-l:#2DD4BF;
-    --r-card:18px; --r-btn:12px; --r-pill:999px;
-    --maxw:1080px;
-    --ease:cubic-bezier(.2,.8,.2,1);
+    --r-card:18px; --r-btn:12px;
   }
-  /* LIGHT = default, designed first */
-  html[data-theme="light"]{
-    --bg:#FAFAF8; --bg2:#F3F2EC; --ink:#0B0F1A; --muted:#4A5160; --faint:#8A93A3;
-    --card:#FFFFFF; --card-2:#FFFFFF; --border:#E7E5DD; --border-2:#EDEBE3;
-    --shadow:0 1px 2px rgba(11,15,26,.05), 0 12px 32px rgba(11,15,26,.07);
-    --shadow-lift:0 2px 6px rgba(11,15,26,.06), 0 22px 50px rgba(20,184,166,.16);
-    --bar:rgba(250,250,248,.82);
-    --line:#D8D5CB; --line-glow:rgba(20,184,166,.55);
-    --core-bg:#FFFFFF; --core-ring:rgba(20,184,166,.30); --core-halo:rgba(20,184,166,.12);
-    --teal-ink:var(--teal-d);
-    --sky-1:rgba(20,184,166,.10); --sky-2:rgba(45,212,191,.08); --sky-3:rgba(13,148,136,.07);
+  html[data-theme="dark"] {
+    --bg:#0B0F1A; --bg2:#11161F; --ink:#FAFAF8; --muted:#A8B0BD; --faint:#6b7480;
+    --card:rgba(26,33,46,.55); --card-solid:#141a26; --border:rgba(250,250,248,.09);
+    --glass-hi:rgba(250,250,248,.06); --shadow:0 8px 32px rgba(0,0,0,.35);
+    --bar:rgba(11,15,26,.72); --glow:rgba(20,184,166,.14);
   }
-  /* DARK = its own layout, not "light with the lights off" */
-  html[data-theme="dark"]{
-    --bg:#0B0F1A; --bg2:#11161F; --ink:#FAFAF8; --muted:#A8B0BD; --faint:#6B7480;
-    --card:rgba(26,33,46,.55); --card-2:#141A26; --border:rgba(250,250,248,.10); --border-2:rgba(250,250,248,.08);
-    --shadow:0 8px 32px rgba(0,0,0,.38); --shadow-lift:0 14px 46px rgba(20,184,166,.20), 0 8px 32px rgba(0,0,0,.4);
-    --bar:rgba(11,15,26,.72);
-    --line:rgba(168,176,189,.28); --line-glow:rgba(45,212,191,.7);
-    --core-bg:rgba(26,33,46,.65); --core-ring:rgba(20,184,166,.5); --core-halo:rgba(20,184,166,.18);
-    --teal-ink:var(--teal-l);
-    --sky-1:rgba(20,184,166,.20); --sky-2:rgba(45,212,191,.14); --sky-3:rgba(13,148,136,.16);
+  html[data-theme="light"] {
+    --bg:#FAFAF8; --bg2:#f2f1ec; --ink:#0B0F1A; --muted:#4A5160; --faint:#8a93a3;
+    --card:rgba(255,255,255,.82); --card-solid:#ffffff; --border:rgba(11,15,26,.09);
+    --glass-hi:rgba(255,255,255,.7); --shadow:0 8px 32px rgba(11,15,26,.10);
+    --bar:rgba(250,250,248,.78); --glow:rgba(20,184,166,.10);
   }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:Inter,system-ui,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; transition:background .4s ease, color .4s ease; }
+  a { color:inherit; }
 
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .35s var(--ease),color .35s var(--ease)}
+  /* ---------- aurora backdrop ---------- */
+  .sky { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+  .orb { position:absolute; border-radius:50%; filter:blur(90px); opacity:.5; }
+  .orb.a { width:560px; height:560px; left:-160px; top:-180px; background:radial-gradient(circle, rgba(20,184,166,.30), transparent 65%); animation:drift1 26s ease-in-out infinite; }
+  .orb.b { width:640px; height:640px; right:-220px; top:14%; background:radial-gradient(circle, rgba(13,148,136,.22), transparent 65%); animation:drift2 32s ease-in-out infinite; }
+  .orb.c { width:480px; height:480px; left:28%; bottom:-240px; background:radial-gradient(circle, rgba(45,212,191,.16), transparent 65%); animation:drift1 38s ease-in-out infinite reverse; }
+  @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(70px,40px)} }
+  @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-60px,-50px)} }
+  html[data-theme="light"] .orb { opacity:.38; }
 
-  /* atmospheric backdrop — subtle in light, luminous in dark */
-  .sky{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-  .orb{position:absolute;border-radius:50%;filter:blur(90px)}
-  .orb.a{width:560px;height:560px;left:-160px;top:-180px;background:radial-gradient(circle,var(--sky-1),transparent 65%);animation:drift1 28s ease-in-out infinite}
-  .orb.b{width:640px;height:640px;right:-220px;top:20%;background:radial-gradient(circle,var(--sky-3),transparent 65%);animation:drift2 34s ease-in-out infinite}
-  .orb.c{width:480px;height:480px;left:30%;bottom:-240px;background:radial-gradient(circle,var(--sky-2),transparent 65%);animation:drift1 40s ease-in-out infinite reverse}
-  @keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
-  @keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-55px,-45px)}}
-
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-  .reveal.in{opacity:1;transform:none}
-
-  /* ===================== TOP BAR ===================== */
-  .bar{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;
-    padding:11px 18px;background:var(--bar);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
-    border-bottom:1px solid var(--border)}
-  .brandmini{display:flex;align-items:center;gap:0;text-decoration:none;color:var(--ink)}
-  .brandmini img{height:30px;width:auto;display:block}
-  .brandmini b{font-size:16.5px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;margin-left:-2px}
-  .brandmini b .one{color:var(--teal)} .brandmini b .ne{color:var(--teal);font-weight:800}
-  .barbtns{display:flex;align-items:center;gap:8px}
-  .iconbtn{display:flex;align-items:center;justify-content:center;gap:6px;height:40px;min-width:40px;padding:0 11px;
-    border-radius:11px;border:1px solid var(--border);background:var(--card);color:var(--ink);font-family:inherit;
-    font-size:13px;font-weight:700;cursor:pointer;transition:border-color .15s,transform .12s,background .15s}
-  .iconbtn:hover{border-color:var(--teal);transform:translateY(-1px)}
-  .iconbtn:focus-visible{outline:none;box-shadow:0 0 0 3px var(--core-halo)}
-  .flag{height:14px;width:auto;vertical-align:middle;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
-  .langwrap{position:relative}
-  .langmenu{position:absolute;right:0;top:46px;min-width:156px;background:var(--card-2);border:1px solid var(--border);
-    border-radius:14px;box-shadow:var(--shadow);overflow:hidden;display:none}
-  .langmenu.open{display:block}
-  .langmenu button{display:flex;align-items:center;gap:10px;width:100%;padding:12px 15px;background:none;border:0;
-    color:var(--ink);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;text-align:left}
-  .langmenu button:hover{background:var(--bg2)}
-
+  /* ---------- top bar ---------- */
+  .bar { position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:var(--bar); backdrop-filter:blur(18px) saturate(130%); -webkit-backdrop-filter:blur(18px) saturate(130%); border-bottom:1px solid var(--border); }
+  .bar .brandmini { display:flex; align-items:center; gap:2px; text-decoration:none; color:var(--ink); min-width:0; }
+  .bar .brandmini img { height:30px; width:auto; flex:0 0 auto; }
+  .bar .brandmini b { font-size:16.5px; font-weight:800; letter-spacing:-.01em; white-space:nowrap; margin-left:-1px; overflow:hidden; text-overflow:ellipsis; }
+  .bar .brandmini b .one { color:var(--teal); font-weight:800; }
+  .barbtns { display:flex; align-items:center; gap:8px; flex:0 0 auto; }
+  .signin-top { display:none; }
+  @media (min-width:860px){ .signin-top { display:inline-flex; } }
+  @media (max-width:520px){
+    .bar { padding:8px 11px; }
+    .bar .brandmini img { height:27px; }
+    .bar .brandmini b { font-size:15px; }
+    .barbtns { gap:6px; }
+    .iconbtn { height:36px; min-width:36px; padding:0 9px; font-size:12.5px; }
+    .langmenu { top:42px; }
+  }
+  .iconbtn { display:flex; align-items:center; justify-content:center; gap:6px; height:38px; min-width:38px; padding:0 10px; border-radius:11px; border:1px solid var(--border); background:var(--card); backdrop-filter:blur(10px); color:var(--ink); font-family:inherit; font-size:13px; font-weight:700; cursor:pointer; text-decoration:none; transition:border-color .15s ease, transform .12s ease; }
+  .iconbtn:hover { border-color:var(--teal); transform:translateY(-1px); }
+  .flag { font-size:16px; line-height:1; }
+  .langwrap { position:relative; }
+  .langmenu { position:absolute; right:0; top:44px; min-width:150px; background:var(--card-solid); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow); overflow:hidden; display:none; z-index:80; }
+  .langmenu.open { display:block; }
+  .langmenu button { display:flex; align-items:center; gap:9px; width:100%; padding:11px 14px; background:none; border:0; color:var(--ink); font-family:inherit; font-size:13.5px; font-weight:600; cursor:pointer; text-align:left; }
+  .langmenu button:hover { background:var(--glow); }
   /* drawer */
-  .scrim{position:fixed;inset:0;z-index:85;background:rgba(11,15,26,.42);opacity:0;pointer-events:none;transition:opacity .25s ease}
-  .scrim.on{opacity:1;pointer-events:auto}
-  .drawer{position:fixed;top:0;right:0;bottom:0;z-index:90;width:min(330px,88vw);background:var(--card-2);
-    border-left:1px solid var(--border);box-shadow:-18px 0 50px rgba(0,0,0,.22);transform:translateX(106%);
-    transition:transform .3s var(--ease);padding:18px;display:flex;flex-direction:column}
-  .drawer.open{transform:none}
-  .drawer .dx{align-self:flex-end}
-  .dsec{margin-top:14px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-ink)}
-  a.dlink{display:flex;align-items:center;justify-content:space-between;padding:13px 11px;border-radius:12px;
-    text-decoration:none;color:var(--ink);font-size:15px;font-weight:700}
-  a.dlink span.one{color:var(--teal)}
-  a.dlink:hover{background:var(--bg2)}
-  .dsub{font-size:11px;color:var(--faint);font-weight:600}
-  .dcta{margin-top:auto;display:flex;flex-direction:column;gap:9px;padding-top:16px}
-  .btn-primary{display:flex;align-items:center;justify-content:center;gap:9px;padding:14px;border-radius:var(--r-btn);
-    background:linear-gradient(180deg,var(--teal),var(--teal-d));color:#fff;font-size:14.5px;font-weight:800;
-    text-decoration:none;border:0;cursor:pointer;font-family:inherit;
-    box-shadow:0 8px 22px rgba(13,148,136,.30),inset 0 1px 0 rgba(255,255,255,.22);transition:transform .12s var(--ease)}
-  .btn-primary:hover{transform:translateY(-1px)}
-  .btn-ghost{display:flex;align-items:center;justify-content:center;padding:13px;border-radius:var(--r-btn);
-    border:1.5px solid var(--border);color:var(--ink);font-size:14.5px;font-weight:700;text-decoration:none;background:none}
-  .btn-ghost:hover{border-color:var(--teal)}
+  .drawer { position:fixed; top:0; right:0; bottom:0; z-index:70; width:min(320px, 86vw); background:var(--card-solid); border-left:1px solid var(--border); box-shadow:-18px 0 50px rgba(0,0,0,.35); transform:translateX(105%); transition:transform .3s cubic-bezier(.2,.8,.2,1); padding:18px; display:flex; flex-direction:column; }
+  .drawer.open { transform:none; }
+  .drawer .dx { align-self:flex-end; }
+  .drawer .dsec { margin-top:10px; font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--teal-d); }
+  html[data-theme="dark"] .drawer .dsec { color:var(--teal-l); }
+  .drawer a.dlink { display:flex; align-items:center; justify-content:space-between; padding:13px 10px; border-radius:12px; text-decoration:none; color:var(--ink); font-size:15px; font-weight:700; }
+  .drawer a.dlink span.one { color:var(--teal); font-weight:700; }
+  .drawer a.dlink:hover { background:var(--glow); }
+  .drawer .dsub { font-size:11px; color:var(--faint); font-weight:500; }
+  .dcta { margin-top:auto; display:flex; flex-direction:column; gap:9px; padding-top:16px; }
+  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 22px; border-radius:var(--r-btn); background:linear-gradient(180deg,var(--teal),var(--teal-d)); color:#fff; font-size:14.5px; font-weight:800; text-decoration:none; box-shadow:0 8px 26px rgba(13,148,136,.32), inset 0 1px 0 rgba(255,255,255,.22); border:0; cursor:pointer; font-family:inherit; transition:transform .12s ease; }
+  .btn-primary:hover { transform:translateY(-1px); }
+  .btn-ghost { display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:13px 20px; border-radius:var(--r-btn); border:1.5px solid var(--border); color:var(--ink); font-size:14.5px; font-weight:700; text-decoration:none; background:var(--card); cursor:pointer; font-family:inherit; }
+  .btn-ghost:hover { border-color:var(--teal); }
+  .scrim { position:fixed; inset:0; z-index:65; background:rgba(0,0,0,.45); opacity:0; pointer-events:none; transition:opacity .25s ease; }
+  .scrim.on { opacity:1; pointer-events:auto; }
 
-  /* ===================== HERO ===================== */
-  .hero{padding:120px 0 6px;text-align:center}
-  .brand{display:inline-flex;align-items:center}
-  .brand img{height:54px;width:auto;display:block}
-  .brand .words{text-align:left;margin-left:-3px}
-  .brand .top{font-size:31px;line-height:.95;letter-spacing:-.01em}
-  .brand .top .ne{color:var(--teal);font-weight:700}
-  .brand .top .word{font-weight:800}
-  .brand .sub{font-size:10px;letter-spacing:.15em;font-weight:700;color:var(--muted);text-transform:uppercase;margin-top:5px}
-  .pill{display:inline-flex;align-items:center;gap:8px;margin-top:26px;background:var(--core-halo);
-    border:1px solid var(--core-ring);color:var(--teal-ink);font-weight:700;font-size:12.5px;padding:7px 16px;border-radius:var(--r-pill)}
-  .pill .dot{width:7px;height:7px;border-radius:99px;background:var(--teal);animation:pulse 2.4s ease-in-out infinite}
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
-  h1{font-size:clamp(33px,6vw,56px);font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-top:18px}
-  h1 .t{background:linear-gradient(100deg,var(--teal),var(--teal-d));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lede{color:var(--muted);font-size:clamp(15px,2vw,17px);line-height:1.6;margin:16px auto 0;max-width:540px}
+  .wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
+  .reveal { opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity:1; transform:none; }
+  .eyebrow { text-align:center; font-size:12px; font-weight:800; letter-spacing:.18em; color:var(--teal-d); text-transform:uppercase; }
+  html[data-theme="dark"] .eyebrow { color:var(--teal-l); }
+  .sec-h { text-align:center; font-size:clamp(24px, 3.6vw, 34px); font-weight:800; letter-spacing:-.02em; margin-top:10px; }
+  .sec-sub { text-align:center; color:var(--muted); font-size:14.5px; margin-top:10px; max-width:580px; margin-left:auto; margin-right:auto; }
 
-  /* ===================== CONSTELLATION (desktop) ===================== */
-  .constel{margin-top:30px}
-  .famlabel{text-align:center;font-size:12px;font-weight:800;letter-spacing:.18em;color:var(--teal-ink);text-transform:uppercase}
-  .famhead{text-align:center;font-size:clamp(23px,3.4vw,32px);font-weight:800;letter-spacing:-.02em;margin-top:9px}
-  .famsub{text-align:center;color:var(--muted);font-size:14.5px;margin-top:9px}
+  /* ---------- hero ---------- */
+  .hero { padding:120px 0 26px; text-align:center; position:relative; }
+  .pill { display:inline-flex; align-items:center; gap:7px; background:var(--glow); border:1px solid rgba(20,184,166,.32); color:var(--teal-l); font-weight:700; font-size:12.5px; padding:7px 16px; border-radius:999px; }
+  html[data-theme="light"] .pill { color:var(--teal-d); }
+  .pill .dot { width:7px; height:7px; border-radius:99px; background:var(--teal); animation:pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.45; transform:scale(.8)} }
+  .statpill { display:inline-flex; align-items:center; gap:11px; background:var(--glow); border:1px solid rgba(20,184,166,.34); border-radius:999px; padding:8px 18px; box-shadow:inset 0 1px 0 var(--glass-hi); }
+  .statpill .st { display:inline-flex; align-items:baseline; gap:5px; white-space:nowrap; }
+  .statpill .st b { font-size:18px; font-weight:900; color:var(--teal); letter-spacing:-.02em; line-height:1; }
+  html[data-theme="light"] .statpill .st b { color:var(--teal-d); }
+  .statpill .st i { font-style:normal; font-size:11px; font-weight:800; letter-spacing:.11em; text-transform:uppercase; color:var(--muted); }
+  .statpill .sd { width:4px; height:4px; border-radius:50%; background:var(--teal); opacity:.55; flex:0 0 auto; }
+  @media (max-width:400px){ .statpill { gap:8px; padding:7px 14px; } .statpill .st b{ font-size:16px; } .statpill .st i{ font-size:10px; letter-spacing:.05em; } }
+  h1.hh { font-size:clamp(32px, 5.6vw, 56px); font-weight:900; letter-spacing:-.03em; line-height:1.05; margin-top:20px; }
+  h1.hh .rot { display:inline-block; min-width:5.5ch; text-align:left; background:linear-gradient(100deg,var(--teal-l),var(--teal-d)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .lede { color:var(--muted); font-size:clamp(15px, 2vw, 17.5px); line-height:1.65; margin:18px auto 0; max-width:580px; }
+  .herocta { margin-top:28px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .gicon { flex:0 0 auto; }
+  .microtrust { margin-top:16px; font-size:12.5px; color:var(--faint); }
 
-  .orbit{position:relative;margin:26px auto 0;max-width:1040px;height:762px}
-  svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
-  .wire{fill:none;stroke:var(--line);stroke-width:1.4;stroke-dasharray:5 7;animation:flow 1.5s linear infinite}
-  @keyframes flow{to{stroke-dashoffset:-12}}
+  /* ---------- One ID advert band ---------- */
+  .oneid-band { margin-top:8px; }
+  .oneid-inner { display:flex; align-items:center; gap:20px; padding:20px 24px; border:1px solid rgba(20,184,166,.3); border-radius:20px; background:var(--card); backdrop-filter:blur(16px); box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi); }
+  .oneid-key { flex:0 0 auto; width:54px; height:54px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,var(--teal),var(--teal-d)); color:#fff; box-shadow:0 8px 22px rgba(13,148,136,.3); }
+  .oneid-key svg { width:28px; height:28px; }
+  .oneid-txt { flex:1; min-width:0; }
+  .oneid-txt .t { font-size:16.5px; font-weight:800; } .oneid-txt .t .one { color:var(--teal); }
+  .oneid-txt p { color:var(--muted); font-size:13.5px; line-height:1.55; margin-top:4px; }
+  .gbtn { flex:0 0 auto; display:inline-flex; align-items:center; gap:10px; padding:12px 20px; border:1px solid var(--border); border-radius:12px; background:var(--card-solid); font-family:inherit; font-size:14px; font-weight:800; color:var(--ink); cursor:pointer; text-decoration:none; box-shadow:0 1px 3px rgba(0,0,0,.15); transition:transform .12s ease, border-color .15s ease; white-space:nowrap; }
+  .gbtn:hover { transform:translateY(-1px); border-color:var(--teal); }
+  @media (max-width:720px){ .oneid-inner { flex-direction:column; text-align:center; } .oneid-txt p { max-width:32rem; } }
 
-  /* CENTER = One ID = the single Google sign-in button (merged, one place only) */
-  .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;width:172px;height:172px;border-radius:50%;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;text-decoration:none;
-    color:var(--ink);background:var(--core-bg);border:1.5px solid var(--core-ring);cursor:pointer;font-family:inherit;
-    box-shadow:0 0 0 12px var(--core-halo),var(--shadow);transition:transform .18s var(--ease),box-shadow .3s var(--ease),border-color .18s}
-  .core:hover{transform:translate(-50%,-50%) scale(1.04);box-shadow:0 0 0 16px var(--core-halo),var(--shadow-lift);border-color:var(--teal)}
-  .core:focus-visible{outline:none;box-shadow:0 0 0 5px var(--teal),0 0 0 16px var(--core-halo)}
-  .core .gmark{width:38px;height:38px}
-  .core .clabel{font-size:15px;font-weight:800;letter-spacing:-.01em}
-  .core .clabel .one{color:var(--teal)}
-  .core .csub{font-size:10.5px;font-weight:700;letter-spacing:.04em;color:var(--muted)}
-  .core .ok{display:none;width:34px;height:34px;border-radius:50%;background:var(--teal);align-items:center;justify-content:center}
-  .core.signedin .gmark{display:none}
-  .core.signedin .ok{display:flex}
-  html[data-theme="dark"] .core{box-shadow:0 0 0 12px var(--core-halo),0 0 46px rgba(20,184,166,.18),var(--shadow)}
+  /* ---------- section shell ---------- */
+  .band { padding:60px 0; }
 
-  /* app nodes — all 5 identical, equidistant, each wired to core */
-  a.app{position:absolute;transform:translate(-50%,-50%);width:250px;z-index:4;display:block;text-decoration:none;color:inherit;
-    background:var(--card);border:1px solid var(--border);border-radius:var(--r-card);padding:16px 17px;
-    box-shadow:var(--shadow);transition:transform .18s var(--ease),border-color .18s,box-shadow .25s;
-    backdrop-filter:blur(14px) saturate(120%);-webkit-backdrop-filter:blur(14px) saturate(120%)}
-  a.app:hover{transform:translate(-50%,-50%) translateY(-4px);border-color:var(--teal);box-shadow:var(--shadow-lift)}
-  a.app:focus-visible{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--core-halo),var(--shadow)}
-  .apphead{display:flex;align-items:center;gap:8px}
-  .dotmark{width:9px;height:9px;border-radius:50%;background:var(--teal);flex-shrink:0;box-shadow:0 0 0 4px var(--core-halo)}
-  .pname{font-size:19px;line-height:1;letter-spacing:-.01em;white-space:nowrap}
-  .pname .one{color:var(--teal);font-weight:700}
-  .pname .word{font-weight:800}
-  .psub{font-size:8.5px;letter-spacing:.11em;font-weight:800;color:var(--teal-ink);text-transform:uppercase;margin-top:7px}
-  .pdesc{color:var(--muted);font-size:12.5px;line-height:1.5;margin-top:7px}
-  .phint{margin-top:9px;font-size:10.5px;font-weight:700;color:var(--faint);display:flex;align-items:center;gap:5px}
-  .phint svg{width:12px;height:12px}
+  /* ---------- app grid ---------- */
+  .apps-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:34px; }
+  a.tile { position:relative; overflow:hidden; display:flex; flex-direction:column; text-decoration:none; color:inherit; background:var(--card); backdrop-filter:blur(16px) saturate(120%); -webkit-backdrop-filter:blur(16px) saturate(120%); border:1px solid var(--border); border-radius:var(--r-card); padding:30px 22px 24px; box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi); transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+  a.tile:hover { transform:translateY(-5px); border-color:rgba(20,184,166,.55); box-shadow:0 16px 44px rgba(20,184,166,.14), var(--shadow); }
+  .tile-ico { position:absolute; top:14px; right:16px; width:58px; height:58px; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#fff; box-shadow:0 8px 20px rgba(0,0,0,.24); z-index:2; }
+  .tile-ico svg { width:29px; height:29px; }
+  .tile-ico img { width:58px; height:58px; border-radius:16px; object-fit:contain; }
+  .tile .pname { font-size:21px; line-height:1.05; letter-spacing:-.01em; white-space:nowrap; padding-right:72px; }
+  .tile .pname .one { color:var(--teal); font-weight:700; } .tile .pname .word { font-weight:800; }
+  .tile .psub { font-size:8.5px; letter-spacing:.12em; font-weight:800; color:var(--teal-d); text-transform:uppercase; margin-top:8px; padding-right:72px; }
+  html[data-theme="dark"] .tile .psub { color:var(--teal-l); }
+  .tile .pdesc { color:var(--muted); font-size:13.5px; line-height:1.55; margin-top:9px; flex:1; }
+  .tile .open { margin-top:16px; align-self:flex-start; display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:800; color:var(--teal); padding:9px 15px; border:1px solid rgba(20,184,166,.35); border-radius:999px; background:var(--glow); transition:gap .18s ease, background .18s ease; }
+  html[data-theme="light"] .tile .open { color:var(--teal-d); }
+  .tile:hover .open { gap:11px; background:rgba(20,184,166,.18); }
+  .tile .hint { margin-top:10px; font-size:11px; font-weight:600; color:var(--faint); display:none; align-items:center; gap:5px; }
+  @media (hover:hover){ .tile .hint { display:inline-flex; } }
+  /* live hover preview */
+  .tile-prev { position:absolute; inset:0; background:var(--card-solid); opacity:0; pointer-events:none; transition:opacity .28s ease; z-index:3; overflow:hidden; }
+  .previewing .tile-prev { opacity:1; }
+  a.svc { }
+  .svc-grid .tile-prev { z-index:5; }
+  .tile-prev .poster { position:absolute; inset:0; padding:24px 22px 54px; display:flex; flex-direction:column; justify-content:center; color:#fff; background:linear-gradient(150deg, var(--pc,#0D9488), #0B0F1A 118%); overflow:hidden; }
+  .tile-prev .poster:before { content:""; position:absolute; width:190px; height:190px; right:-46px; top:-56px; border-radius:50%; background:rgba(255,255,255,.16); }
+  .tile-prev .poster:after { content:""; position:absolute; width:120px; height:120px; left:-30px; bottom:10px; border-radius:50%; background:rgba(255,255,255,.08); }
+  .tile-prev .chrome { position:absolute; top:14px; left:16px; display:flex; gap:6px; z-index:2; }
+  .tile-prev .chrome i { width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.55); }
+  .tile-prev .poster .pn { position:relative; font-size:25px; font-weight:900; letter-spacing:-.02em; z-index:2; }
+  .tile-prev .poster .pn .o { opacity:.82; font-weight:800; }
+  .tile-prev .poster .pt { position:relative; margin-top:9px; font-size:14.5px; font-weight:600; line-height:1.4; color:rgba(255,255,255,.94); max-width:86%; z-index:2; }
+  .tile-prev .poster .bars { position:relative; margin-top:16px; display:flex; flex-direction:column; gap:7px; z-index:2; }
+  .tile-prev .poster .bars span { height:9px; border-radius:6px; background:rgba(255,255,255,.3); }
+  .tile-prev .poster .bars span:nth-child(1){ width:72%; } .tile-prev .poster .bars span:nth-child(2){ width:54%; } .tile-prev .poster .bars span:nth-child(3){ width:63%; }
+  .tile-prev .pvbar { position:absolute; left:0; right:0; bottom:0; padding:11px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; background:linear-gradient(0deg, rgba(2,6,14,.85), rgba(2,6,14,.35) 62%, transparent); color:#fff; font-size:12px; font-weight:800; z-index:4; }
+  .tile-prev .pvbar .go { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(180deg,var(--teal),var(--teal-d)); padding:7px 12px; border-radius:999px; box-shadow:0 4px 14px rgba(13,148,136,.4); }
+  .tile-prev .pvload { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--muted); background:var(--card-solid); z-index:3; }
+  .tile-prev.ready .pvload { display:none; }
 
-  /* hover PREVIEW popover — replaces the little arrow */
-  .preview{position:absolute;z-index:60;width:280px;background:var(--card-2);border:1px solid var(--border);
-    border-radius:14px;box-shadow:var(--shadow-lift);overflow:hidden;opacity:0;pointer-events:none;
-    transform:translateY(6px) scale(.98);transition:opacity .18s var(--ease),transform .18s var(--ease)}
-  .app-slot:hover .preview,.preview.show{opacity:1;transform:none}
-  .preview .pvhead{display:flex;align-items:center;gap:7px;padding:9px 12px;border-bottom:1px solid var(--border);font-size:12px;font-weight:800}
-  .preview .pvhead .one{color:var(--teal)}
-  .preview .pvframe{position:relative;height:168px;background:var(--bg2);overflow:hidden}
-  .preview .pvframe iframe{position:absolute;top:0;left:0;width:250%;height:250%;border:0;transform:scale(.4);transform-origin:top left;pointer-events:none}
-  .preview .pvload{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--faint);font-weight:700}
-  .app-slot{position:absolute;transform:translate(-50%,-50%)}
-  .app-slot a.app{position:static;transform:none}
-  .app-slot a.app:hover{transform:translateY(-4px)}
+  /* ---------- services ---------- */
+  .svc-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:16px; margin-top:34px; }
+  a.svc { position:relative; display:flex; flex-direction:column; text-decoration:none; color:inherit; background:linear-gradient(180deg, var(--card), var(--card)); border:1px solid var(--border); border-radius:var(--r-card); padding:24px; box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi); overflow:hidden; transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+  a.svc:before { content:""; position:absolute; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg, var(--teal-l), var(--teal-d)); }
+  a.svc:hover { transform:translateY(-5px); border-color:rgba(20,184,166,.55); box-shadow:0 16px 44px rgba(20,184,166,.14), var(--shadow); }
+  .svc-badge { position:absolute; top:16px; right:16px; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--teal-d); background:var(--glow); border:1px solid rgba(20,184,166,.3); border-radius:999px; padding:5px 11px; }
+  html[data-theme="dark"] .svc-badge { color:var(--teal-l); }
+  .svc-ico { width:58px; height:58px; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#fff; margin-bottom:15px; box-shadow:0 8px 20px rgba(0,0,0,.24); }
+  .svc-ico svg { width:29px; height:29px; }
+  .svc-ico img { width:58px; height:58px; border-radius:16px; object-fit:cover; }
+  .svc .pname { font-size:22px; line-height:1; letter-spacing:-.01em; }
+  .svc .pname .one { color:var(--teal); font-weight:700; } .svc .pname .word { font-weight:800; }
+  .svc .pdesc { color:var(--muted); font-size:14px; line-height:1.6; margin-top:9px; flex:1; }
+  .svc .open { margin-top:15px; display:inline-flex; align-items:center; gap:6px; font-size:14px; font-weight:800; color:var(--teal); }
+  .svc:hover .open { gap:9px; }
 
-  /* ===================== FOOTER ===================== */
-  .contact{margin-top:40px;text-align:center;color:var(--muted);font-size:14px;line-height:1.9}
-  .contact a{color:var(--teal-ink);font-weight:700;text-decoration:none}
-  .foot{margin-top:22px;padding-bottom:56px;text-align:center;font-size:12px;color:var(--faint)}
+  /* ---------- feature cards ---------- */
+  .feat-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:34px; }
+  .feat { background:var(--card); backdrop-filter:blur(16px); border:1px solid var(--border); border-radius:var(--r-card); padding:22px; box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi); }
+  .feat .fico { width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:var(--glow); color:var(--teal); margin-bottom:14px; }
+  .feat .fico svg { width:22px; height:22px; }
+  .feat h3 { font-size:16.5px; font-weight:800; letter-spacing:-.01em; }
+  .feat p { color:var(--muted); font-size:13.5px; line-height:1.6; margin-top:8px; }
+  .feat a.flink { margin-top:12px; display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:800; color:var(--teal); text-decoration:none; }
 
-  /* ===================== MOBILE (deliberate, not squished) ===================== */
-  .m-only{display:none}
-  @media (max-width:860px){
-    .hero{padding:100px 0 4px}
-    .constel .orbit{display:none}          /* pentagon is desktop-only */
-    .m-only{display:block}
-    /* One ID card — full width, the Google button, ONE place */
-    .m-core{margin:22px auto 0;max-width:440px;background:var(--card-2);border:1px solid var(--core-ring);
-      border-radius:20px;padding:22px 20px;text-align:center;box-shadow:var(--shadow)}
-    .m-core .glogin{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;margin-top:14px;
-      border-radius:var(--r-btn);border:1px solid var(--border);background:var(--card);color:var(--ink);
-      font-family:inherit;font-size:15px;font-weight:800;text-decoration:none;box-shadow:var(--shadow)}
-    .m-core .glogin img,.m-core .glogin svg{width:20px;height:20px}
-    .m-core h3{font-size:16px;font-weight:800}
-    .m-core h3 .one{color:var(--teal)}
-    .m-core p{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.5}
-    .m-core.signedin .glogin{background:linear-gradient(180deg,var(--teal),var(--teal-d));color:#fff;border:0}
-    /* app list — clean single column, equal cards */
-    .m-apps{margin:16px auto 0;max-width:440px;display:flex;flex-direction:column;gap:12px}
-    a.m-app{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);
-      border-radius:16px;padding:15px 16px;text-decoration:none;color:inherit;box-shadow:var(--shadow)}
-    a.m-app:active{transform:scale(.99)}
-    .m-app .mdot{width:38px;height:38px;border-radius:12px;background:var(--core-halo);display:flex;align-items:center;
-      justify-content:center;flex-shrink:0}
-    .m-app .mdot i{width:11px;height:11px;border-radius:50%;background:var(--teal)}
-    .m-app .mname{font-size:16px;letter-spacing:-.01em}
-    .m-app .mname .one{color:var(--teal);font-weight:700}.m-app .mname .word{font-weight:800}
-    .m-app .msub{font-size:12px;color:var(--muted);margin-top:2px}
-    .m-app .marr{margin-left:auto;color:var(--faint)}
-    .constel .famhead{font-size:23px}
+  /* ---------- use it anywhere ---------- */
+  .get-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:34px; }
+  @media (max-width:720px){ .get-grid { grid-template-columns:1fr; } }
+  .getcard { background:var(--card); border:1px solid var(--border); border-radius:var(--r-card); padding:26px; box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi); display:flex; flex-direction:column; align-items:flex-start; }
+  .getcard .gico { width:54px; height:54px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,var(--teal),var(--teal-d)); color:#fff; margin-bottom:16px; box-shadow:0 8px 22px rgba(13,148,136,.3); }
+  .getcard .gico svg { width:28px; height:28px; }
+  .getcard h3 { font-size:18px; font-weight:800; }
+  .getcard p { color:var(--muted); font-size:14px; line-height:1.6; margin-top:8px; }
+  .getcard .soon { margin-top:14px; display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); border:1px dashed var(--border); border-radius:999px; padding:7px 14px; }
+
+  /* ---------- FAQ ---------- */
+  .faq { max-width:760px; margin:34px auto 0; }
+  .qa { border:1px solid var(--border); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+  .qa button { width:100%; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:18px 20px; background:none; border:0; color:var(--ink); font-family:inherit; font-size:15.5px; font-weight:700; text-align:left; cursor:pointer; }
+  .qa .num { color:var(--teal); font-weight:900; margin-right:4px; }
+  .qa .chev { flex:0 0 auto; transition:transform .25s ease; color:var(--teal); }
+  .qa.open .chev { transform:rotate(180deg); }
+  .qa .a { max-height:0; overflow:hidden; transition:max-height .3s ease; }
+  .qa .a p { padding:0 20px 18px; color:var(--muted); font-size:14px; line-height:1.65; }
+  .qa.open .a { max-height:320px; }
+
+  /* ---------- footer ---------- */
+  .footer { border-top:1px solid var(--border); margin-top:20px; padding:40px 0 60px; }
+  .footcols { display:flex; flex-wrap:wrap; gap:28px 56px; justify-content:space-between; }
+  .footcol h4 { font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:12px; }
+  .footcol a { display:block; text-decoration:none; color:var(--muted); font-size:14px; font-weight:600; margin-bottom:9px; }
+  .footcol a:hover { color:var(--teal); }
+  .footcol a .one { color:var(--teal); }
+  .foot-bottom { margin-top:34px; padding-top:20px; border-top:1px solid var(--border); text-align:center; font-size:12.5px; color:var(--faint); }
+  .socials { display:flex; gap:12px; justify-content:center; margin-bottom:14px; }
+  .socials a { width:36px; height:36px; border-radius:10px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--muted); }
+  .socials a:hover { color:var(--teal); border-color:var(--teal); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orb, .pill .dot { animation:none !important; }
+    .reveal { opacity:1; transform:none; transition:none; }
+    html { scroll-behavior:auto; }
   }
-  @media (min-width:861px){ .m-only{display:none} }
 
-  @media (prefers-reduced-motion:reduce){
-    .orb,.wire,.pill .dot{animation:none!important}
-    .reveal{opacity:1;transform:none;transition:none}
-    html{scroll-behavior:auto}
-  }
-  /* ===== TWO WORLDS ===== */
-  .worlds{margin:26px auto 0;max-width:1000px;display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:start}
-  .world{display:flex;flex-direction:column;gap:14px}
-  .worldhead{display:flex;flex-direction:column;gap:3px;padding:0 2px 2px}
-  .wtag{font-size:15px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
-  .wtag-app{color:var(--teal-ink)}
-  .wsub{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--faint);text-transform:uppercase}
-  .wcol{display:flex;flex-direction:column;gap:14px}
-  .worlddiv{align-self:stretch;display:flex;flex-direction:column;align-items:center;padding-top:46px;min-height:100%}
-  .worlddiv .wline{width:1px;flex:1;background:linear-gradient(180deg,transparent,var(--border) 15%,var(--teal),var(--border) 85%,transparent)}
-  .worlddiv .wknot{width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 6px var(--core-halo);margin:10px 0}
-  .appbadge{margin-left:auto;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-ink);background:var(--core-halo);border:1px solid var(--core-ring);padding:3px 8px;border-radius:999px}
-  .appbadge-svc{color:var(--muted);background:transparent;border-color:var(--border)}
-  .worlds .app-slot{position:relative;transform:none;width:auto}
-  .worlds a.app{position:static;transform:none;width:auto}
-  .worlds a.app:hover{transform:translateY(-4px)}
-  .world-svc .preview{left:calc(100% + 14px);top:0}
-  .world-app .preview{right:calc(100% + 14px);top:0}
-  .app-slot:hover .preview{z-index:70}
-  .core-inline{display:flex;align-items:center;gap:13px;margin-top:4px;padding:14px 18px;border-radius:16px;text-decoration:none;color:var(--ink);background:var(--core-bg);border:1.5px solid var(--core-ring);cursor:pointer;box-shadow:0 0 0 8px var(--core-halo),var(--shadow);transition:transform .18s var(--ease),box-shadow .3s var(--ease),border-color .18s}
-  .core-inline:hover{transform:translateY(-2px);border-color:var(--teal);box-shadow:0 0 0 10px var(--core-halo),var(--shadow-lift)}
-  .core-inline:focus-visible{outline:none;box-shadow:0 0 0 4px var(--teal),0 0 0 10px var(--core-halo)}
-  .core-inline .gmark{width:30px;height:30px;flex-shrink:0}
-  .core-inline .cin{display:flex;flex-direction:column;text-align:left}
-  .core-inline .clabel{font-size:15px;font-weight:800}
-  .core-inline .clabel .one{color:var(--teal)}
-  .core-inline .csub{font-size:11.5px;font-weight:700;color:var(--muted)}
-  .core-inline .ok{display:none;width:30px;height:30px;border-radius:50%;background:var(--teal);align-items:center;justify-content:center;flex-shrink:0}
-  .core-inline.signedin .gmark{display:none}
-  .core-inline.signedin .ok{display:flex}
-  /* MOBILE: stack worlds, simplified, NO previews (no hover on phones) */
-  @media (max-width:860px){
-    .worlds{grid-template-columns:1fr;max-width:460px;gap:6px}
-    .worlddiv{flex-direction:row;padding:12px 0;min-height:0}
-    .worlddiv .wline{width:auto;height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),var(--teal),var(--border),transparent)}
-    .worlddiv .wknot{margin:0 10px}
-    .worlds .preview{display:none!important}
-    .worlds .phint-web{display:none}
-    .worlds a.app{padding:15px 16px}
-    .worlds .pdesc{font-size:12.5px;margin-top:5px}
-    .core-inline{justify-content:center;padding:15px}
-  }
+  /* splash */
+  #owl-splash { position:fixed; inset:0; z-index:99; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 1.1s ease; }
+  #owl-splash.gone { opacity:0; pointer-events:none; }
+  #owl-splash img { height:80px; width:auto; animation:owl-heart 3s ease-in-out infinite; }
+  #owl-splash .st { margin-top:14px; font-size:28px; font-weight:800; letter-spacing:-.01em; }
+  #owl-splash .st .one { color:var(--teal); }
+  #owl-splash .lbar { margin-top:22px; width:130px; height:4px; border-radius:999px; background:var(--border); overflow:hidden; }
+  #owl-splash .lbar i { display:block; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--teal),var(--teal-d)); animation:owl-load 1.4s ease-out forwards; }
+  @keyframes owl-heart { 0%,100%{transform:scale(1)} 50%{transform:scale(1.045)} }
+  @keyframes owl-load { to { width:100% } }
 </style>
 </head>
 <body>
 <div class="sky" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div></div>
 
-<!-- ===== TOP BAR (shared component pattern across all One World apps) ===== -->
+<div id="owl-splash">
+  <img src="./logo-mark.png" alt="" />
+  <div class="st"><span class="one">One</span> World Labs</div>
+  <div class="lbar"><i></i></div>
+</div>
+<script>
+  setTimeout(function(){ var e=document.getElementById("owl-splash"); e&&e.classList.add("gone"); }, 1400);
+  setTimeout(function(){ var e=document.getElementById("owl-splash"); e&&e.remove(); }, 2600);
+</script>
+
+<!-- ============ TOP BAR ============ -->
 <header class="bar">
   <a class="brandmini" href="/" aria-label="One World Labs home">
-    <img src="/logo-mark.png" alt="" />
-    <b><span class="ne">ne</span> World Labs</b>
+    <img src="./logo-mark.png" alt="O" />
+    <b><span class="one">ne</span>&thinsp;World Labs</b>
   </a>
   <div class="barbtns">
+    <a class="iconbtn signin-top" href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" data-i18n="signin">Sign in</a>
     <div class="langwrap">
-      <button class="iconbtn" id="langbtn" aria-haspopup="true" aria-label="Language"><img class="flag" id="langflag" src="https://flagcdn.com/32x24/us.png" alt="" /><span id="langcode">EN</span></button>
-      <div class="langmenu" id="langmenu" role="menu">
-        <button data-lang="en" role="menuitem"><img class="flag" src="https://flagcdn.com/32x24/us.png" alt="" /> English</button>
-        <button data-lang="es" role="menuitem"><img class="flag" src="https://flagcdn.com/32x24/es.png" alt="" /> Español</button>
+      <button class="iconbtn" id="langbtn" aria-label="Language"><span class="flag" id="langflag">🇺🇸</span><span id="langcode">EN</span></button>
+      <div class="langmenu" id="langmenu">
+        <button data-lang="en"><span class="flag">🇺🇸</span> English</button>
+        <button data-lang="es"><span class="flag">🇪🇸</span> Español</button>
       </div>
     </div>
-    <button class="iconbtn" id="themebtn" aria-label="Toggle light and dark mode"><span id="themeicon">🌙</span></button>
-    <button class="iconbtn" id="menubtn" aria-label="Open menu" aria-controls="drawer">
+    <button class="iconbtn" id="themebtn" aria-label="Toggle light and dark mode"><span id="themeicon">☀️</span></button>
+    <button class="iconbtn" id="menubtn" aria-label="Menu">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
   </div>
@@ -306,236 +291,391 @@
 
 <div class="scrim" id="scrim"></div>
 <nav class="drawer" id="drawer" aria-label="Menu">
-  <button class="iconbtn dx" id="drawerx" aria-label="Close menu">✕</button>
-  <div class="dsec" data-i18n="d_apps">Our apps</div>
+  <button class="iconbtn dx" id="drawerx" aria-label="Close">✕</button>
+  <div class="dsec" data-i18n="d_apps">Apps</div>
+  <a class="dlink" href="/onescore-preview/"><span><span class="one">One</span>Score</span><span class="dsub" data-i18n="d_score">Credibility score</span></a>
+  <a class="dlink" href="https://frazier56.github.io/onesocial-v2-preview/"><span><span class="one">One</span>Social</span><span class="dsub" data-i18n="d_social">Get hired</span></a>
+  <a class="dlink" href="https://frazier56.github.io/oneevents-preview/"><span><span class="one">One</span>Events</span><span class="dsub" data-i18n="d_events">Events &amp; tickets</span></a>
+  <div class="dsec" style="margin-top:14px" data-i18n="d_services">Services</div>
   <a class="dlink" href="https://onevoice.onesocial.ai"><span><span class="one">One</span>Voice</span><span class="dsub" data-i18n="d_voice">AI receptionist</span></a>
   <a class="dlink" href="/onescore-preview/oneapp.html"><span><span class="one">One</span>App</span><span class="dsub" data-i18n="d_app">AI websites</span></a>
-  <a class="dlink" href="/onescore-preview/"><span><span class="one">One</span>Score</span><span class="dsub" data-i18n="d_score">Credibility score</span></a>
-  <a class="dlink" href="/onesocial-v2-preview/"><span><span class="one">One</span>Social</span><span class="dsub" data-i18n="d_social">Get hired</span></a>
-  <a class="dlink" href="/oneevents-preview/"><span><span class="one">One</span>Events</span><span class="dsub" data-i18n="d_events">Events &amp; tickets</span></a>
-  <div class="dsec" data-i18n="d_contact">Contact</div>
-  <a class="dlink" href="mailto:contact@oneworldlabs.ai" style="font-size:13.5px;font-weight:600">contact@oneworldlabs.ai</a>
+  <div class="dsec" style="margin-top:14px" data-i18n="d_contact">Contact</div>
+  <a class="dlink" href="mailto:contact@oneworldlabs.inc" style="font-size:13.5px;font-weight:600">contact@oneworldlabs.inc</a>
   <div class="dcta">
-    <a class="btn-ghost" id="d-signin" href="#one-id" data-i18n="signin">Sign in</a>
-    <a class="btn-primary" id="d-join" href="#one-id" data-i18n="join">Join free</a>
+    <a class="btn-ghost" href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" data-i18n="signin_oneid">Sign in with One ID</a>
+    <a class="btn-primary" href="#apps" data-i18n="cta_jump">Jump into an app →</a>
   </div>
 </nav>
 
-<!-- ===== HERO ===== -->
 <div class="wrap">
+
+  <!-- ============ HERO ============ -->
   <section class="hero">
-    <span class="brand">
-      <img src="/logo-mark.png" alt="O" />
-      <span class="words">
-        <span class="top"><span class="ne">ne</span><span class="word">&thinsp;World&thinsp;Labs</span></span>
-        <span class="sub" data-i18n="tagline">Tools that grow small business</span>
-      </span>
-    </span>
-    <div><span class="pill"><span class="dot"></span><span data-i18n="pill">Five tools · One login · Zero gatekeepers</span></span></div>
-    <h1 data-i18n-html="h1">Get seen. Get trusted.<br /><span class="t">Get paid.</span></h1>
-    <p class="lede" data-i18n="lede">You built a real business — but algorithms decide who sees it and your reputation is scattered everywhere. We build simple tools that put you back in control.</p>
+    <div class="statpill">
+      <span class="st"><b>3</b><i data-i18n="s_apps">apps</i></span>
+      <span class="sd" aria-hidden="true"></span>
+      <span class="st"><b>2</b><i data-i18n="s_svcs">services</i></span>
+      <span class="sd" aria-hidden="true"></span>
+      <span class="st"><b>1</b><i data-i18n="s_login">login</i></span>
+    </div>
+    <h1 class="hh"><span data-i18n="h1_pre">Work smarter across your</span><br /><span data-i18n="h1_mid">business with </span><span class="rot" id="rot">OneScore</span></h1>
+    <p class="lede" data-i18n="lede">Apps you use and services we run for you — tied together by one login — so small businesses and freelancers get seen, get trusted, and get paid.</p>
+    <div class="herocta">
+      <a class="btn-primary" href="#apps" data-i18n="cta_jump">Jump into an app →</a>
+      <a class="btn-ghost" href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F">
+        <svg class="gicon" width="17" height="17" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+        <span data-i18n="cta_signin">Sign in with One ID</span>
+      </a>
+    </div>
+    <div class="microtrust" data-i18n="microtrust">One login for every app · Free to start · No credit card</div>
   </section>
 
-  <!-- ===== CONSTELLATION ===== -->
-  <section class="constel reveal" id="one-id">
-    <div class="famlabel" data-i18n="famlabel">The One World Labs family</div>
-    <div class="famhead" data-i18n="famhead">Two kinds of tools. One login.</div>
-    <p class="famsub" data-i18n="famsub">Services we run for you — and apps you use to get seen, trusted, and paid.</p>
+  <!-- ============ JUMP INTO YOUR FAVORITE APP (3 apps) ============ -->
+  <section class="band reveal" id="apps" style="padding-top:56px">
+    <div class="eyebrow" data-i18n="apps_eye">The apps</div>
+    <h2 class="sec-h" data-i18n="apps_h">Jump into your favorite app</h2>
+    <p class="sec-sub" data-i18n="apps_sub">Three apps you use yourself — one login gets you into all of them.</p>
 
-    <!-- DESKTOP: balanced pentagon, all 5 equidistant + wired to the One ID core -->
-    <div class="worlds" id="worlds">
-      <div class="world world-svc">
-        <div class="worldhead"><span class="wtag" data-i18n="w_svc_t">Done for you</span><span class="wsub" data-i18n="w_svc">Services we run · websites</span></div>
-        <div class="wcol">
-        <div class="app-slot">
-          <a class="app" href="/onescore-preview/oneapp.html" data-app="app">
-            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">App</span></div><span class="appbadge appbadge-svc" data-i18n="badge_svc">Service</span></div>
-            <div class="psub" data-i18n="app_sub">Your business. One app.</div>
-            <p class="pdesc" data-i18n="app_desc">Your website rebuilt by AI in about a minute — then we handle hosting, domain, and email.</p>
-            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-          </a>
-          <div class="preview" data-src="/onescore-preview/oneapp.html"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>App</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
+    <div class="apps-grid">
+      <a class="tile" href="/onescore-preview/" title="OneScore">
+        <div class="tile-ico" data-ico="onescore" style="background:linear-gradient(180deg,#FBBF24,#F59E0B)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <div class="app-slot">
-          <a class="app" href="https://onevoice.onesocial.ai" data-app="voice">
-            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Voice</span></div><span class="appbadge appbadge-svc" data-i18n="badge_svc">Service</span></div>
-            <div class="psub" data-i18n="voice_sub">AI voice assistant</div>
-            <p class="pdesc" data-i18n="voice_desc">Never miss a call. Your AI receptionist answers 24/7, qualifies leads, and books appointments.</p>
-            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-          </a>
-          <div class="preview" data-src="https://onevoice.onesocial.ai"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Voice</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
+        <div class="pname"><span class="one">One</span><span class="word">Score</span></div>
+        <div class="psub" data-i18n="score_sub">Professional credibility</div>
+        <p class="pdesc" data-i18n="score_desc">Your whole reputation — reviews, real work, social proof — in one verified number you can post anywhere. Free forever.</p>
+        <span class="open"><span data-i18n="open_score">Open OneScore</span> →</span>
+      </a>
+
+      <a class="tile" href="https://frazier56.github.io/onesocial-v2-preview/" title="OneSocial">
+        <div class="tile-ico" data-ico="onesocial" style="background:linear-gradient(180deg,#F472B6,#EC4899)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
+        <div class="pname"><span class="one">One</span><span class="word">Social</span></div>
+        <div class="psub" data-i18n="social_sub">The credibility marketplace</div>
+        <p class="pdesc" data-i18n="social_desc">Where proof gets you hired — verified reviews, jobs, and payments in one credibility-first marketplace.</p>
+        <span class="open"><span data-i18n="open_social">Open OneSocial</span> →</span>
+      </a>
+
+      <a class="tile" href="https://frazier56.github.io/oneevents-preview/" title="OneEvents">
+        <div class="tile-ico" data-ico="oneevents" style="background:linear-gradient(180deg,#4ADE80,#22C55E)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
         </div>
+        <div class="pname"><span class="one">One</span><span class="word">Events</span></div>
+        <div class="psub" data-i18n="events_sub">Events &amp; tickets</div>
+        <p class="pdesc" data-i18n="events_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
+        <span class="open"><span data-i18n="open_events">Open OneEvents</span> →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="band reveal" id="services">
+    <div class="eyebrow" data-i18n="svc_eye">Done for you</div>
+    <h2 class="sec-h" data-i18n="svc_h">Enhance your business with our services</h2>
+    <p class="sec-sub" data-i18n="svc_sub">Hands-off services our team runs for you — so you can focus on the work.</p>
+
+    <div class="svc-grid">
+      <a class="svc" href="https://onevoice.onesocial.ai" title="OneVoice">
+        <span class="svc-badge" data-i18n="badge_dfy">Done for you</span>
+        <div class="svc-ico" data-ico="onevoice" style="background:linear-gradient(180deg,#2DD4BF,#0D9488)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="pname"><span class="one">One</span><span class="word">Voice</span></div>
+        <p class="pdesc" data-i18n="svc_voice_desc">An AI receptionist that answers every call 24/7, qualifies the lead, and books the appointment — so a missed call is never a missed customer. We set it up and run it for you.</p>
+        <span class="open"><span data-i18n="get_voice">Get OneVoice</span> →</span>
+      </a>
+
+      <a class="svc" href="/onescore-preview/oneapp.html" title="OneApp">
+        <span class="svc-badge" data-i18n="badge_dfy">Done for you</span>
+        <div class="svc-ico" data-ico="oneapp" style="background:linear-gradient(180deg,#818CF8,#6366F1)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="pname"><span class="one">One</span><span class="word">App</span></div>
+        <p class="pdesc" data-i18n="svc_app_desc">We build your website with AI, then handle the hosting, domain, email, and ongoing updates for you — a real web presence without the hassle.</p>
+        <span class="open"><span data-i18n="get_app">Get OneApp</span> →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ RUNNING A BUSINESS, MADE SIMPLER ============ -->
+  <section class="band reveal">
+    <div class="eyebrow" data-i18n="feat_eye">Why it works</div>
+    <h2 class="sec-h" data-i18n="feat_h">Running a business, made simpler</h2>
+    <p class="sec-sub" data-i18n="feat_sub">The busywork that eats your day — answered calls, a real website, proof you can trust — handled in one place.</p>
+
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <h3 data-i18n="f1_h">Never miss a call</h3>
+        <p data-i18n="f1_p">OneVoice answers every call 24/7, qualifies the lead, and books the appointment — so a missed call is never a missed customer.</p>
+        <a class="flink" href="https://onevoice.onesocial.ai"><span data-i18n="f1_l">Meet OneVoice</span> →</a>
       </div>
-
-      <div class="worlddiv" aria-hidden="true"><span class="wline"></span><span class="wknot"></span><span class="wline"></span></div>
-
-      <div class="world world-app">
-        <div class="worldhead"><span class="wtag wtag-app" data-i18n="w_app_t">Get seen · trusted · paid</span><span class="wsub" data-i18n="w_app">Apps that work together · one login</span></div>
-        <div class="wcol">
-        <div class="app-slot">
-          <a class="app" href="/onescore-preview/" data-app="score">
-            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Score</span></div><span class="appbadge" data-i18n="badge_app">App</span></div>
-            <div class="psub" data-i18n="score_sub">Professional credibility</div>
-            <p class="pdesc" data-i18n="score_desc">Your whole reputation — reviews, real work, social proof — in one verified number. Free forever.</p>
-            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-          </a>
-          <div class="preview" data-src="/onescore-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Score</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
-        </div>
-        <div class="app-slot">
-          <a class="app" href="/onesocial-v2-preview/" data-app="social">
-            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Social</span></div><span class="appbadge" data-i18n="badge_app">App</span></div>
-            <div class="psub" data-i18n="social_sub">The credibility marketplace</div>
-            <p class="pdesc" data-i18n="social_desc">Where proof gets you hired — verified reviews, jobs, and payments in one simple place.</p>
-            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-          </a>
-          <div class="preview" data-src="/onesocial-v2-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Social</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
-        </div>
-        <div class="app-slot">
-          <a class="app" href="/oneevents-preview/" data-app="events">
-            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Events</span></div><span class="appbadge" data-i18n="badge_app">App</span></div>
-            <div class="psub" data-i18n="events_sub">Events & tickets</div>
-            <p class="pdesc" data-i18n="events_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
-            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-          </a>
-          <div class="preview" data-src="/oneevents-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Events</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
-        </div>
-        </div>
-        <a class="core-inline" id="core" href="#" role="button" aria-label="Sign in with Google — One ID">
-          <svg class="gmark" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg><span class="ok" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
-          <span class="cin"><span class="clabel"><span class="one">One</span> ID</span><span class="csub" id="coresub" data-i18n="core_signin">Sign in with Google</span></span>
-        </a>
+      <div class="feat">
+        <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3 data-i18n="f2_h">A website built with AI</h3>
+        <p data-i18n="f2_p">Tell OneApp about your business and it builds your site with AI — then we host it, set up your email and domain, and keep it updated for you.</p>
+        <a class="flink" href="/onescore-preview/oneapp.html"><span data-i18n="f2_l">See OneApp</span> →</a>
+      </div>
+      <div class="feat">
+        <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
+        <h3 data-i18n="f3_h">Proof you can point to</h3>
+        <p data-i18n="f3_p">OneScore turns your reviews and real work into one verified number — credibility you can post anywhere, free forever.</p>
+        <a class="flink" href="/onescore-preview/"><span data-i18n="f3_l">Get your OneScore</span> →</a>
+      </div>
+      <div class="feat">
+        <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3 data-i18n="f4_h">Get hired and get paid</h3>
+        <p data-i18n="f4_p">OneSocial is the marketplace where verified proof wins the job — and OneEvents sells tickets and collects payment in minutes.</p>
+        <a class="flink" href="https://frazier56.github.io/onesocial-v2-preview/"><span data-i18n="f4_l">Explore OneSocial</span> →</a>
       </div>
     </div>
   </section>
 
-  <div class="contact reveal">
-    <strong style="color:var(--ink)" data-i18n="contact_h">Contact us</strong><br />
-    <a href="mailto:contact@oneworldlabs.ai">contact@oneworldlabs.ai</a><br />
-    <span data-i18n="contact_p">Built for small businesses and freelancers, everywhere.</span>
-  </div>
-  <p class="foot">© 2026 One World Labs, Inc. · OneVoice · OneApp · OneScore · OneSocial · OneEvent</p>
+  <!-- ============ USE IT ANYWHERE ============ -->
+  <section class="band reveal">
+    <div class="eyebrow" data-i18n="get_eye">Use it anywhere</div>
+    <h2 class="sec-h" data-i18n="get_h">Works on any phone or computer</h2>
+    <p class="sec-sub" data-i18n="get_sub">No download required. Open it in your browser today — and add it to your home screen so it opens like an app.</p>
+
+    <div class="get-grid">
+      <div class="getcard">
+        <div class="gico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg></div>
+        <h3 data-i18n="get1_h">Add to your phone</h3>
+        <p data-i18n="get1_p">Open any One World app in your mobile browser, tap Share, and choose "Add to Home Screen." It installs an icon and opens full-screen — no App Store needed.</p>
+        <span class="soon" data-i18n="get1_soon">Native apps coming soon</span>
+      </div>
+      <div class="getcard">
+        <div class="gico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h3 data-i18n="get2_h">Use it on desktop</h3>
+        <p data-i18n="get2_p">Everything runs in your browser on any computer — nothing to install, nothing to update. Bookmark oneworldlabs.ai and you're one click from every app.</p>
+        <a class="btn-primary" href="#apps" style="margin-top:14px" data-i18n="get2_cta">Jump into an app →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DID YOU KNOW (FAQ) ============ -->
+  <section class="band reveal">
+    <div class="eyebrow" data-i18n="faq_eye">Good to know</div>
+    <h2 class="sec-h" data-i18n="faq_h">Did you know?</h2>
+
+    <div class="faq" id="faq">
+      <div class="qa">
+        <button><span><span class="num">01 /</span> <span data-i18n="q1">One World Labs is apps you use plus services we run</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="a"><p data-i18n="a1">Three apps you use yourself — OneScore for credibility, OneSocial to get hired, OneEvents for tickets — plus two done-for-you services our team runs: OneVoice answers your calls and OneApp builds and manages your website. Everything shares one login and one profile.</p></div>
+      </div>
+      <div class="qa">
+        <button><span><span class="num">02 /</span> <span data-i18n="q2">You can start free — no credit card</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="a"><p data-i18n="a2">OneScore is free forever, and every app lets you get started without paying up front. Our done-for-you services are paid — you only upgrade when a tool is earning its keep.</p></div>
+      </div>
+      <div class="qa">
+        <button><span><span class="num">03 /</span> <span data-i18n="q3">One login gets you into everything</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="a"><p data-i18n="a3">Sign in once with One ID and you're in every One World app and service — no separate accounts, no re-entering your details, no juggling passwords across tools.</p></div>
+      </div>
+      <div class="qa">
+        <button><span><span class="num">04 /</span> <span data-i18n="q4">Built credibility-first — you stay in control</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="a"><p data-i18n="a4">No algorithm decides who sees your business, and your reputation isn't scattered across ten platforms. Your proof is verified, yours, and portable — you decide where it shows up.</p></div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footcols">
+      <div class="footcol">
+        <h4 data-i18n="f_apps">Apps</h4>
+        <a href="/onescore-preview/"><span class="one">One</span>Score</a>
+        <a href="https://frazier56.github.io/onesocial-v2-preview/"><span class="one">One</span>Social</a>
+        <a href="https://frazier56.github.io/oneevents-preview/"><span class="one">One</span>Events</a>
+      </div>
+      <div class="footcol">
+        <h4 data-i18n="f_services">Services</h4>
+        <a href="https://onevoice.onesocial.ai"><span class="one">One</span>Voice</a>
+        <a href="/onescore-preview/oneapp.html"><span class="one">One</span>App</a>
+      </div>
+      <div class="footcol">
+        <h4 data-i18n="f_company">Company</h4>
+        <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" data-i18n="signin_oneid">Sign in with One ID</a>
+        <a href="mailto:contact@oneworldlabs.inc" data-i18n="f_contact">Contact</a>
+      </div>
+      <div class="footcol">
+        <h4 data-i18n="f_start">Get started</h4>
+        <a href="#apps" data-i18n="cta_jump">Jump into an app →</a>
+        <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" data-i18n="signin_oneid">Sign in with One ID</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div class="socials">
+        <a href="#" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.25 8h4.5v14h-4.5V8zM8 8h4.3v1.9h.06c.6-1.1 2.05-2.26 4.22-2.26 4.5 0 5.34 2.96 5.34 6.8V22h-4.5v-6.6c0-1.57-.03-3.6-2.2-3.6-2.2 0-2.53 1.72-2.53 3.5V22H8V8z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="X"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.9l-5.4-7-6.2 7H1.4l8-9.2L1 2h7l4.9 6.5L18.9 2zm-1.2 18h1.9L7.1 4H5.1l12.6 16z"/></svg></a>
+      </div>
+      <span data-i18n="copyright">© 2026 One World Labs, Inc. · OneScore · OneSocial · OneEvents · OneVoice · OneApp</span><br />
+      <span style="color:var(--faint)" data-i18n="tagline_foot">Built for small businesses and freelancers, everywhere.</span>
+    </div>
+  </div>
+</footer>
+
 <script>
-/* ===== Supabase Google OAuth (One ID) ===== */
-var SB_PROJECT = "dxtsyxwyzhvcvmoghjss";
-var APP_HOME   = "/onesocial-v2-preview/"; /* where sign-in lands */
-function googleUrl(){
-  return "https://"+SB_PROJECT+".supabase.co/auth/v1/authorize?provider=google&redirect_to="+encodeURIComponent(APP_HOME);
-}
-/* detect an existing Lovable Cloud (Supabase) session in localStorage */
-function isSignedIn(){
-  try{
-    for(var i=0;i<localStorage.length;i++){
-      var k=localStorage.key(i);
-      if(k && /^sb-.*-auth-token$/.test(k)){
-        var v=JSON.parse(localStorage.getItem(k)||"null");
-        if(v && (v.access_token || (v.currentSession&&v.currentSession.access_token))) return true;
-      }
-    }
-  }catch(e){}
-  return false;
-}
+/* ---------- rotating name in hero ---------- */
+(function(){
+  var names = ['OneScore','OneSocial','OneEvents','OneVoice','OneApp'];
+  var i = 0, el = document.getElementById('rot');
+  if (!el) return;
+  el.style.transition = 'opacity .22s ease';
+  setInterval(function(){
+    i = (i+1) % names.length;
+    el.style.opacity = 0;
+    setTimeout(function(){ el.textContent = names[i]; el.style.opacity = 1; }, 220);
+  }, 2200);
+})();
 
-/* ===== i18n ===== */
-var I18N={en:{flag:'🇺🇸',cc:'us',code:'EN'},es:{flag:'🇪🇸',cc:'es',code:'ES',
-  famhead:'Dos tipos de herramientas. Un acceso.',famsub:'Servicios que hacemos por ti — y apps para que te vean, confíen y te paguen.',
-  w_svc_t:'Hecho para ti',w_svc:'Servicios que operamos · sitios web',w_app_t:'Que te vean · confíen · paguen',w_app:'Apps que trabajan juntas · un acceso',badge_app:'App',badge_svc:'Servicio',
-  tagline:'Herramientas que hacen crecer tu negocio',
-  pill:'Cinco apps · Un acceso · Cero intermediarios',
-  h1:'Que te vean. Que confíen.<br /><span class="t">Que te paguen.</span>',
-  lede:'Construiste un negocio real — pero los algoritmos deciden quién lo ve y tu reputación está dispersa. Creamos herramientas simples que te devuelven el control.',
-  famlabel:'La familia One World Labs',famhead:'Cinco apps. Un ecosistema.',
-  famsub:'Cada una funciona sola. Juntas, manejan todo tu negocio.',
-  core_signin:'Inicia sesión con Google',core_signedin:'Estás dentro',
-  hover_preview:'Pasa el cursor para previsualizar · clic para abrir',loading:'Cargando vista…',
-  voice_sub:'Asistente de voz IA',voice_desc:'No pierdas otra llamada. Tu recepcionista IA contesta 24/7, califica clientes y agenda citas.',
-  app_sub:'Tu negocio. Una app.',app_desc:'Tu sitio web reconstruido por IA en un minuto — y manejamos hosting, dominio y correo.',
-  score_sub:'Credibilidad profesional',score_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado. Gratis para siempre.',
-  social_sub:'El marketplace de credibilidad',social_desc:'Donde las pruebas te consiguen trabajo — reseñas, empleos y pagos en un solo lugar.',
-  events_sub:'Eventos y boletos',events_desc:'Crea un evento, vende boletos y registra invitados con QR — en minutos.',
-  mcore_p:'Un acceso para todas las apps One World. Entra una vez y estás en todas.',
-  d_apps:'Nuestras apps',d_voice:'Recepcionista IA',d_app:'Sitios web IA',d_score:'Puntaje de credibilidad',d_social:'Consigue trabajo',d_events:'Eventos y boletos',d_contact:'Contacto',
-  signin:'Iniciar sesión',join:'Únete gratis',contact_h:'Contáctanos',contact_p:'Hecho para pequeños negocios y freelancers, en todas partes.'
-}};
-var ENC={};
-function applyLang(l){
-  document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(!(k in ENC))ENC[k]=el.textContent;el.textContent=(l==='es'&&I18N.es[k])?I18N.es[k]:ENC[k];});
-  document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(!(k in ENC))ENC[k]=el.innerHTML;el.innerHTML=(l==='es'&&I18N.es[k])?I18N.es[k]:ENC[k];});
-  document.getElementById('langflag').src='https://flagcdn.com/32x24/'+I18N[l].cc+'.png';document.getElementById('langcode').textContent=I18N[l].code;document.documentElement.lang=l;
-  try{localStorage.setItem('owl-lang',l);}catch(e){}
-  paintSignedIn(); /* re-apply signed-in label in current language */
-}
-var langbtn=document.getElementById('langbtn'),langmenu=document.getElementById('langmenu');
-langbtn.addEventListener('click',function(e){e.stopPropagation();langmenu.classList.toggle('open');});
-document.addEventListener('click',function(){langmenu.classList.remove('open');});
-langmenu.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){applyLang(b.getAttribute('data-lang'));langmenu.classList.remove('open');});});
-
-/* ===== theme (LIGHT default) ===== */
-function setTheme(t){
-  document.documentElement.setAttribute('data-theme',t);
-  document.getElementById('themeicon').textContent=(t==='dark'?'☀️':'🌙');
-  document.querySelector('meta[name="theme-color"]').setAttribute('content',t==='dark'?'#0B0F1A':'#FAFAF8');
-  try{localStorage.setItem('owl-theme',t);}catch(e){}
-}
-document.getElementById('themebtn').addEventListener('click',function(){setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');});
-
-/* ===== drawer ===== */
-var drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
-function dOpen(o){drawer.classList.toggle('open',o);scrim.classList.toggle('on',o);}
-document.getElementById('menubtn').addEventListener('click',function(){dOpen(true);});
-document.getElementById('drawerx').addEventListener('click',function(){dOpen(false);});
-scrim.addEventListener('click',function(){dOpen(false);});
-
-/* (pentagon positioning removed — two-world layout is CSS grid) */
-
-/* ===== lazy hover previews (real page, scaled) ===== */
-if(window.matchMedia('(hover:hover) and (min-width:861px)').matches){
-document.querySelectorAll('.worlds .app-slot').forEach(function(s){
-  var loaded=false;
-  s.addEventListener('mouseenter',function(){
-    if(loaded)return;loaded=true;
-    var pv=s.querySelector('.preview'),frame=pv.querySelector('.pvframe'),src=pv.getAttribute('data-src');
-    var f=document.createElement('iframe');f.setAttribute('loading','lazy');f.setAttribute('sandbox','allow-scripts allow-same-origin');
-    f.setAttribute('scrolling','no');f.referrerPolicy='no-referrer';
-    f.onload=function(){var l=frame.querySelector('.pvload');if(l)l.style.display='none';};
-    f.onerror=function(){var l=frame.querySelector('.pvload');if(l)l.textContent='Preview unavailable';};
-    f.src=src;frame.appendChild(f);
-    setTimeout(function(){var l=frame.querySelector('.pvload');if(l&&l.style.display!=='none')l.textContent='Preview unavailable';},6000);
-  });
+/* ---------- FAQ accordion ---------- */
+document.querySelectorAll('#faq .qa').forEach(function(qa){
+  qa.querySelector('button').addEventListener('click', function(){ qa.classList.toggle('open'); });
 });
-}
 
-/* ===== One ID: sign-in vs signed-in ===== */
-function paintSignedIn(){
-  var lang=document.documentElement.lang==='es'?'es':'en';
-  var signed=isSignedIn(), core=document.getElementById('core'), sub=document.getElementById('coresub');
-  var mcore=document.getElementById('mcore'), mg=document.getElementById('mgtext'), mtext=document.getElementById('mcoretext');
-  var lblIn=(I18N[lang].core_signedin||"You're signed in"), lblSign=(I18N[lang].core_signin||"Sign in with Google");
-  if(signed){
-    core.classList.add('signedin');core.setAttribute('href',APP_HOME);sub.textContent=lblIn;
-    core.setAttribute('aria-label','You are signed in — choose an app');
-    if(mcore){mcore.classList.add('signedin');mg.textContent=lblIn;mg.parentNode.setAttribute('href',APP_HOME);
-      if(mtext)mtext.textContent=(lang==='es'?'Estás dentro. Elige una app abajo.':"You're signed in. Pick an app below.");}
-  }else{
-    core.classList.remove('signedin');core.setAttribute('href',googleUrl());sub.textContent=lblSign;
-    core.setAttribute('aria-label','Sign in with Google — One ID');
-    if(mcore){mcore.classList.remove('signedin');mg.textContent=lblSign;mg.parentNode.setAttribute('href',googleUrl());}
+/* ---------- i18n ---------- */
+var I18N = {
+  en: { flag:'🇺🇸', code:'EN' },
+  es: {
+    flag:'🇪🇸', code:'ES',
+    pill:'Un acceso · Tres apps · Dos servicios hechos para ti',
+    s_apps:'apps', s_svcs:'servicios', s_login:'acceso',
+    h1_pre:'Trabaja mejor en todo tu', h1_mid:'negocio con ',
+    lede:'Apps que usas y servicios que manejamos por ti — unidos por un solo acceso — para que los pequeños negocios y freelancers los vean, confíen en ellos y les paguen.',
+    cta_jump:'Entra a una app →', cta_signin:'Inicia con One ID', signin_oneid:'Inicia con One ID', signin:'Iniciar sesión',
+    microtrust:'Un acceso para cada app · Gratis para empezar · Sin tarjeta',
+    oneid_band_p:'Inicia una vez y entras a cada herramienta One World — OneScore, OneSocial, OneEvents, más tus servicios OneVoice y OneApp. Sin una cuenta aparte para cada una.',
+    oneid_signin:'Inicia con One ID',
+    apps_eye:'Las apps', apps_h:'Entra a tu app favorita', apps_sub:'Tres apps que usas tú mismo — un acceso te lleva a todas.',
+    score_sub:'Credibilidad profesional', score_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado que publicas donde sea. Gratis para siempre.',
+    social_sub:'El marketplace de credibilidad', social_desc:'Donde las pruebas te consiguen trabajo — reseñas verificadas, empleos y pagos en un marketplace basado en credibilidad.',
+    events_sub:'Eventos y boletos', events_desc:'Crea un evento, vende boletos y registra invitados con QR — en minutos.',
+    open_score:'Abrir OneScore', open_social:'Abrir OneSocial', open_events:'Abrir OneEvents',
+    svc_eye:'Hecho para ti', svc_h:'Mejora tu negocio con nuestros servicios', svc_sub:'Servicios que nuestro equipo maneja por ti — para que te enfoques en el trabajo.',
+    badge_dfy:'Hecho para ti',
+    svc_voice_desc:'Un recepcionista IA que contesta cada llamada 24/7, califica al cliente y agenda la cita — para que una llamada perdida nunca sea un cliente perdido. Lo configuramos y lo manejamos por ti.',
+    svc_app_desc:'Creamos tu sitio web con IA, y manejamos el hosting, el dominio, el correo y las actualizaciones por ti — presencia web real sin complicaciones.',
+    get_voice:'Obtén OneVoice', get_app:'Obtén OneApp',
+    feat_eye:'Por qué funciona', feat_h:'Manejar tu negocio, más simple',
+    feat_sub:'El trabajo pesado que se come tu día — llamadas contestadas, un sitio web real, pruebas confiables — resuelto en un solo lugar.',
+    f1_h:'Nunca pierdas una llamada', f1_p:'OneVoice contesta cada llamada 24/7, califica al cliente y agenda la cita — para que una llamada perdida nunca sea un cliente perdido.', f1_l:'Conoce OneVoice',
+    f2_h:'Un sitio web creado con IA', f2_p:'Cuéntale a OneApp sobre tu negocio y crea tu sitio con IA — luego lo alojamos, configuramos tu correo y dominio, y lo mantenemos actualizado.', f2_l:'Ver OneApp',
+    f3_h:'Pruebas que puedes mostrar', f3_p:'OneScore convierte tus reseñas y trabajo real en un número verificado — credibilidad que publicas donde sea, gratis para siempre.', f3_l:'Obtén tu OneScore',
+    f4_h:'Consigue trabajo y cobra', f4_p:'OneSocial es el marketplace donde la prueba verificada gana el trabajo — y OneEvents vende boletos y cobra en minutos.', f4_l:'Explora OneSocial',
+    get_eye:'Úsalo donde sea', get_h:'Funciona en cualquier teléfono o computadora',
+    get_sub:'Sin descargas. Ábrelo hoy en tu navegador — y agrégalo a tu pantalla de inicio para que abra como una app.',
+    get1_h:'Agrégalo a tu teléfono', get1_p:'Abre cualquier app One World en tu navegador móvil, toca Compartir y elige "Agregar a inicio". Instala un ícono y abre en pantalla completa — sin App Store.', get1_soon:'Apps nativas muy pronto',
+    get2_h:'Úsalo en tu computadora', get2_p:'Todo funciona en tu navegador en cualquier computadora — nada que instalar, nada que actualizar. Guarda oneworldlabs.ai y estás a un clic de cada app.', get2_cta:'Entra a una app →',
+    faq_eye:'Bueno saber', faq_h:'¿Sabías que?',
+    q1:'One World Labs es apps que usas más servicios que manejamos', a1:'Tres apps que usas tú mismo — OneScore para credibilidad, OneSocial para conseguir trabajo, OneEvents para boletos — más dos servicios hechos para ti que maneja nuestro equipo: OneVoice contesta tus llamadas y OneApp crea y administra tu sitio web. Todo comparte un acceso y un perfil.',
+    q2:'Puedes empezar gratis — sin tarjeta', a2:'OneScore es gratis para siempre, y cada app te deja empezar sin pagar por adelantado. Nuestros servicios hechos para ti son de pago — solo mejoras cuando una herramienta ya trabaja para tu negocio.',
+    q3:'Un acceso te lleva a todo', a3:'Inicia sesión una vez con One ID y estás en cada app y servicio One World — sin cuentas separadas, sin volver a poner tus datos, sin malabares con contraseñas.',
+    q4:'Basado en credibilidad — tú tienes el control', a4:'Ningún algoritmo decide quién ve tu negocio, y tu reputación no está dispersa en diez plataformas. Tu prueba es verificada, tuya y portátil — tú decides dónde aparece.',
+    d_apps:'Apps', d_services:'Servicios', d_voice:'Recepcionista IA', d_app:'Sitios web IA', d_score:'Puntaje de credibilidad', d_social:'Consigue trabajo', d_events:'Eventos y boletos', d_contact:'Contacto',
+    f_apps:'Apps', f_services:'Servicios', f_company:'Empresa', f_contact:'Contacto', f_start:'Empieza',
+    copyright:'© 2026 One World Labs, Inc. · OneScore · OneSocial · OneEvents · OneVoice · OneApp',
+    tagline_foot:'Hecho para pequeños negocios y freelancers, en todas partes.'
   }
+};
+var EN_CACHE = {};
+function applyLang(lang){
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if (!(k in EN_CACHE)) EN_CACHE[k] = el.textContent;
+    el.textContent = (lang === 'es' && I18N.es[k]) ? I18N.es[k] : EN_CACHE[k];
+  });
+  document.getElementById('langflag').textContent = I18N[lang].flag;
+  document.getElementById('langcode').textContent = I18N[lang].code;
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('owl-lang', lang); } catch(e){}
 }
-/* drawer sign-in/join also route through One ID */
-document.getElementById('d-signin').addEventListener('click',function(e){e.preventDefault();dOpen(false);if(isSignedIn())location.href=APP_HOME;else location.href=googleUrl();});
-document.getElementById('d-join').addEventListener('click',function(e){e.preventDefault();dOpen(false);location.href=googleUrl();});
+var langbtn = document.getElementById('langbtn'), langmenu = document.getElementById('langmenu');
+langbtn.addEventListener('click', function(e){ e.stopPropagation(); langmenu.classList.toggle('open'); });
+document.addEventListener('click', function(){ langmenu.classList.remove('open'); });
+langmenu.querySelectorAll('button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); langmenu.classList.remove('open'); });
+});
 
-/* ===== reveals ===== */
-if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});}
-else{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});}
+/* ---------- theme ---------- */
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('themeicon').textContent = t === 'dark' ? '☀️' : '🌙';
+  document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'dark' ? '#0B0F1A' : '#FAFAF8');
+  try { localStorage.setItem('owl-theme', t); } catch(e){}
+}
+document.getElementById('themebtn').addEventListener('click', function(){
+  setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
 
-/* ===== restore prefs + init ===== */
-try{var st=localStorage.getItem('owl-theme');setTheme(st==='dark'?'dark':'light');var sl=localStorage.getItem('owl-lang');if(sl&&sl!=='en')applyLang(sl);else document.documentElement.lang='en';}catch(e){setTheme('light');}
-paintSignedIn();
+/* ---------- drawer ---------- */
+var drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
+function drawerOpen(o){ drawer.classList.toggle('open', o); scrim.classList.toggle('on', o); }
+document.getElementById('menubtn').addEventListener('click', function(){ drawerOpen(true); });
+document.getElementById('drawerx').addEventListener('click', function(){ drawerOpen(false); });
+scrim.addEventListener('click', function(){ drawerOpen(false); });
+
+/* ---------- reveals ---------- */
+if ('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold:.08 });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+} else { document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); }); }
+
+/* ---------- optional 3D icon swap (drops in if icon PNGs exist) ---------- */
+(function(){
+  document.querySelectorAll('[data-ico]').forEach(function(box){
+    var name = box.getAttribute('data-ico');
+    var img = new Image();
+    img.onload = function(){ box.innerHTML=''; box.style.background='none'; box.style.boxShadow='none'; box.appendChild(img); };
+    img.alt = name; img.src = './ic-' + name + '.png';
+  });
+})();
+
+/* ---------- hover-to-preview (branded instant preview cards) + hint ---------- */
+(function(){
+  var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var META = {
+    onescore:{ c:'#F59E0B', n:['One','Score'], t:'Credibility for small businesses & freelance pros.' },
+    onesocial:{ c:'#EC4899', n:['One','Social'], t:'Where verified proof gets you hired.' },
+    oneevents:{ c:'#22C55E', n:['One','Events'], t:'Create events, sell tickets, check in with QR.' },
+    onevoice:{ c:'#0D9488', n:['One','Voice'], t:'Your AI receptionist — never miss a call.' },
+    oneapp:{ c:'#6366F1', n:['One','App'], t:'Your website, built and run by AI.' }
+  };
+  var cards = document.querySelectorAll('.apps-grid a.tile, .svc-grid a.svc');
+  cards.forEach(function(card){
+    var open = card.querySelector('.open');
+    if (open && !card.querySelector('.hint')){
+      var hint = document.createElement('span'); hint.className = 'hint';
+      hint.innerHTML = '✨ <span>' + (canHover ? 'Hover to preview · click to open' : 'Tap to open') + '</span>';
+      open.insertAdjacentElement('afterend', hint);
+    }
+    if (!canHover) return;
+    var ico = card.querySelector('[data-ico]'); if (!ico) return;
+    var m = META[ico.getAttribute('data-ico')]; if (!m) return;
+    var layer = document.createElement('div'); layer.className = 'tile-prev';
+    layer.innerHTML =
+      '<div class="poster" style="--pc:' + m.c + '">' +
+        '<div class="chrome"><i></i><i></i><i></i></div>' +
+        '<div class="pn"><span class="o">' + m.n[0] + '</span>' + m.n[1] + '</div>' +
+        '<div class="pt">' + m.t + '</div>' +
+        '<div class="bars"><span></span><span></span><span></span></div>' +
+      '</div>' +
+      '<div class="pvbar"><span>Preview</span><span class="go">Open ↗</span></div>';
+    card.appendChild(layer);
+    card.addEventListener('mouseenter', function(){ card.classList.add('previewing'); });
+    card.addEventListener('mouseleave', function(){ card.classList.remove('previewing'); });
+  });
+})();
+
+/* ---------- restore prefs ---------- */
+try {
+  var savedT = localStorage.getItem('owl-theme'); if (savedT) setTheme(savedT);
+  var savedL = localStorage.getItem('owl-lang'); if (savedL && savedL !== 'en') applyLang(savedL);
+} catch(e){}
 </script>
 </body>
 </html>
-    
