@@ -164,6 +164,7 @@
   .svc-grid .tile-prev { z-index:5; }
   .tile-prev .pvframe { position:absolute; inset:0; overflow:hidden; background:var(--bg2); }
   .tile-prev .pvframe iframe { position:absolute; top:0; left:0; border:0; pointer-events:none; transform-origin:top left; background:#fff; }
+  .tile-prev .pvframe img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; }
   .tile-prev .pvbar { position:absolute; left:0; right:0; bottom:0; padding:11px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; background:linear-gradient(0deg, rgba(2,6,14,.85), rgba(2,6,14,.35) 62%, transparent); color:#fff; font-size:12px; font-weight:800; z-index:4; }
   .tile-prev .pvbar .go { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(180deg,var(--teal),var(--teal-d)); padding:7px 12px; border-radius:999px; box-shadow:0 4px 14px rgba(13,148,136,.4); }
   .tile-prev .pvload { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--muted); background:var(--card-solid); z-index:3; }
@@ -628,8 +629,12 @@ if ('IntersectionObserver' in window){
 /* ---------- hover-to-preview (real live page, scaled iframe) + hint ---------- */
 (function(){
   var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  /* apps that render blank in an iframe (SPAs) use a real screenshot instead */
+  var STATIC = { onesocial:'./pv-onesocial.jpg', oneevents:'./pv-oneevents.jpg' };
+  if (canHover) Object.keys(STATIC).forEach(function(k){ var i = new Image(); i.src = STATIC[k]; });
   var cards = document.querySelectorAll('.apps-grid a.tile, .svc-grid a.svc');
   cards.forEach(function(card){
+    var _ico = card.querySelector('[data-ico]'); var key = _ico ? _ico.getAttribute('data-ico') : '';
     var open = card.querySelector('.open');
     if (open && !card.querySelector('.hint')){
       var hint = document.createElement('span'); hint.className = 'hint';
@@ -646,6 +651,12 @@ if ('IntersectionObserver' in window){
     function fail(){ var l = frame.querySelector('.pvload'); if (l){ l.style.display = 'flex'; l.textContent = 'Preview unavailable — click to open ↗'; } }
     function build(){
       if (loaded) return; loaded = true;
+      if (STATIC[key]){
+        var im = document.createElement('img'); im.alt = '';
+        im.onload = function(){ var l = frame.querySelector('.pvload'); if (l) l.style.display = 'none'; };
+        im.onerror = fail; im.src = STATIC[key]; frame.insertBefore(im, frame.firstChild);
+        return;
+      }
       var f = document.createElement('iframe');
       f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
       f.setAttribute('scrolling', 'no'); f.setAttribute('tabindex', '-1'); f.setAttribute('aria-hidden', 'true'); f.referrerPolicy = 'no-referrer';
