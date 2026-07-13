@@ -133,7 +133,7 @@
   .statpill .st i { font-style:normal; font-size:11px; font-weight:800; letter-spacing:.11em; text-transform:uppercase; color:var(--muted); }
   .statpill .sd { width:4px; height:4px; border-radius:50%; background:var(--teal); opacity:.55; flex:0 0 auto; }
   @media (max-width:400px){ .statpill { gap:8px; padding:7px 14px; } .statpill .st b{ font-size:16px; } .statpill .st i{ font-size:10px; letter-spacing:.05em; } }
-  h1.hh { font-size:clamp(32px, 5.6vw, 56px); font-weight:900; letter-spacing:-.03em; line-height:1.05; margin-top:20px; }
+  h1.hh { font-size:clamp(27px, 6.4vw, 56px); font-weight:900; letter-spacing:-.03em; line-height:1.08; margin-top:20px; }
   h1.hh .hone { color:var(--teal); }
   h1.hh .rot { display:inline-block; min-width:4.5ch; text-align:left; color:var(--ink); }
   .lede { color:var(--muted); font-size:clamp(15px, 2vw, 17.5px); line-height:1.65; margin:18px auto 0; max-width:580px; }
@@ -333,7 +333,7 @@
       <span class="sd" aria-hidden="true"></span>
       <span class="st"><b>1</b><i data-i18n="s_login">login</i></span>
     </div>
-    <h1 class="hh"><span data-i18n="h1_pre">Work smarter across your</span><br /><span data-i18n="h1_mid">business with </span><span class="hone">One</span><span class="rot" id="rot">Score</span></h1>
+    <h1 class="hh"><span data-i18n="h1_l1">Work smarter</span><br /><span data-i18n="h1_l2">across your business</span><br /><span data-i18n="h1_l3">with </span><span class="hone">One</span><span class="rot" id="rot">Score</span></h1>
     <p class="lede" data-i18n="lede">Apps you use and services we run for you — tied together by one login — so small businesses and freelancers get seen, get trusted, and get paid.</p>
     <div class="herocta">
       <a class="btn-primary" href="#apps" data-i18n="cta_jump">Jump into an app →</a>
@@ -560,7 +560,7 @@ var I18N = {
     flag:'es', code:'ES',
     pill:'Un acceso · Tres apps · Dos servicios hechos para ti',
     s_apps:'apps', s_svcs:'servicios', s_login:'acceso',
-    h1_pre:'Trabaja mejor en todo tu', h1_mid:'negocio con ',
+    h1_l1:'Trabaja mejor', h1_l2:'en todo tu negocio', h1_l3:'con ',
     lede:'Apps que usas y servicios que manejamos por ti — unidos por un solo acceso — para que los pequeños negocios y freelancers los vean, confíen en ellos y les paguen.',
     cta_jump:'Entra a una app →', cta_signin:'Inicia con One ID', signin_oneid:'Inicia con One ID', signin:'Iniciar sesión',
     microtrust:'Un acceso para cada app · Gratis para empezar · Sin tarjeta',
@@ -599,7 +599,7 @@ var I18N = {
   de: {
     flag:'de', code:'DE',
     s_apps:'Apps', s_svcs:'Services', s_login:'Login',
-    h1_pre:'Arbeite intelligenter in deinem', h1_mid:'Geschäft mit ',
+    h1_l1:'Arbeite intelligenter', h1_l2:'in deinem Geschäft', h1_l3:'mit ',
     lede:'Apps, die du nutzt, und Services, die wir für dich betreiben — verbunden durch einen Login — damit kleine Unternehmen und Freelancer gesehen werden, Vertrauen gewinnen und bezahlt werden.',
     cta_jump:'In eine App springen →', cta_signin:'Mit One ID anmelden', signin_oneid:'Mit One ID anmelden', signin:'Anmelden',
     microtrust:'Ein Login für jede App · Kostenlos starten · Keine Kreditkarte',
@@ -616,7 +616,7 @@ var I18N = {
   ru: {
     flag:'ru', code:'RU',
     s_apps:'прил.', s_svcs:'сервиса', s_login:'вход',
-    h1_pre:'Работайте умнее во всём вашем', h1_mid:'бизнесе с ',
+    h1_l1:'Работайте умнее', h1_l2:'во всём бизнесе', h1_l3:'с ',
     lede:'Приложения, которыми вы пользуетесь, и сервисы, которые мы ведём за вас — объединённые одним входом — чтобы малый бизнес и фрилансеры были замечены, вызывали доверие и получали оплату.',
     cta_jump:'Перейти в приложение →', cta_signin:'Войти через One ID', signin_oneid:'Войти через One ID', signin:'Войти',
     microtrust:'Один вход для всех приложений · Бесплатный старт · Без карты',
@@ -633,7 +633,7 @@ var I18N = {
   zh: {
     flag:'cn', code:'ZH',
     s_apps:'应用', s_svcs:'服务', s_login:'登录',
-    h1_pre:'更聪明地开展您的', h1_mid:'业务，携手 ',
+    h1_l1:'更聪明地经营', h1_l2:'您的业务', h1_l3:'携手 ',
     lede:'您使用的应用，加上我们为您运营的服务——用一个登录连接起来——让小企业和自由职业者被看见、被信任、并获得报酬。',
     cta_jump:'进入应用 →', cta_signin:'使用 One ID 登录', signin_oneid:'使用 One ID 登录', signin:'登录',
     microtrust:'一个登录畅通所有应用 · 免费开始 · 无需信用卡',
@@ -650,7 +650,7 @@ var I18N = {
   pt: {
     flag:'br', code:'PT',
     s_apps:'apps', s_svcs:'serviços', s_login:'login',
-    h1_pre:'Trabalhe de forma mais inteligente em todo o seu', h1_mid:'negócio com ',
+    h1_l1:'Trabalhe melhor', h1_l2:'em todo o seu negócio', h1_l3:'com ',
     lede:'Apps que você usa e serviços que administramos para você — unidos por um único login — para que pequenos negócios e freelancers sejam vistos, ganhem confiança e recebam pagamento.',
     cta_jump:'Entrar em um app →', cta_signin:'Entrar com One ID', signin_oneid:'Entrar com One ID', signin:'Entrar',
     microtrust:'Um login para cada app · Comece grátis · Sem cartão',
