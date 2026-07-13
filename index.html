@@ -16,7 +16,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>One World Labs — Work smarter across your whole business</title>
-<meta name="description" content="OneScore, OneSocial, OneEvents — apps you use. OneVoice and OneApp — done-for-you services. One login ties them all together. Built for small businesses and freelancers." />
+<meta name="description" content="OneScore, OneSocial, OneEvent — apps you use. OneVoice and OneApp — done-for-you services. One login ties them all together. Built for small businesses and freelancers." />
 <link rel="manifest" href="./owl-manifest.webmanifest" />
 <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
 <meta name="theme-color" content="#0B0F1A" />
@@ -75,10 +75,22 @@
   .iconbtn:hover { border-color:var(--teal); transform:translateY(-1px); }
   .flag { font-size:16px; line-height:1; }
   .langwrap { position:relative; }
-  .langmenu { position:absolute; right:0; top:44px; min-width:150px; background:var(--card-solid); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow); overflow:hidden; display:none; z-index:80; }
+  .iconbtn-lang { gap:5px; padding:0 9px; }
+  .langcode { display:none; font-size:12.5px; font-weight:800; letter-spacing:.02em; }
+  @media (min-width:640px){ .langcode { display:inline; } }
+  .langchev { opacity:.55; flex:0 0 auto; }
+  .flag-img { width:22px; height:16px; border-radius:3px; object-fit:cover; box-shadow:0 0 0 1px rgba(0,0,0,.12); display:block; flex:0 0 auto; }
+  .langmenu button .flag-img { width:24px; height:17px; }
+  .langmenu { position:absolute; right:0; top:46px; min-width:190px; background:var(--card-solid); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow); padding:6px; display:none; z-index:80; }
   .langmenu.open { display:block; }
-  .langmenu button { display:flex; align-items:center; gap:9px; width:100%; padding:11px 14px; background:none; border:0; color:var(--ink); font-family:inherit; font-size:13.5px; font-weight:600; cursor:pointer; text-align:left; }
+  .langmenu button { display:flex; align-items:center; gap:11px; width:100%; padding:9px 11px; background:none; border:0; border-radius:9px; color:var(--ink); font-family:inherit; font-size:14px; font-weight:600; cursor:pointer; text-align:left; }
   .langmenu button:hover { background:var(--glow); }
+  .langmenu button .flag { font-size:18px; }
+  .langmenu button .lname { flex:1; }
+  .langmenu button .lcheck { color:var(--teal); font-weight:900; font-size:14px; opacity:0; }
+  html[data-theme="light"] .langmenu button .lcheck { color:var(--teal-d); }
+  .langmenu button.active .lname { font-weight:800; }
+  .langmenu button.active .lcheck { opacity:1; }
   /* drawer */
   .drawer { position:fixed; top:0; right:0; bottom:0; z-index:70; width:min(320px, 86vw); background:var(--card-solid); border-left:1px solid var(--border); box-shadow:-18px 0 50px rgba(0,0,0,.35); transform:translateX(105%); transition:transform .3s cubic-bezier(.2,.8,.2,1); padding:18px; display:flex; flex-direction:column; }
   .drawer.open { transform:none; }
@@ -270,10 +282,14 @@
   </a>
   <div class="barbtns">
     <div class="langwrap">
-      <button class="iconbtn iconbtn-flag" id="langbtn" aria-label="Language"><span class="flag" id="langflag">🇺🇸</span></button>
-      <div class="langmenu" id="langmenu">
-        <button data-lang="en"><span class="flag">🇺🇸</span> English</button>
-        <button data-lang="es"><span class="flag">🇪🇸</span> Español</button>
+      <button class="iconbtn iconbtn-lang" id="langbtn" aria-label="Language" aria-haspopup="true"><img class="flag-img" id="langflag" src="https://flagcdn.com/w40/us.png" width="22" height="16" alt="" /><span class="langcode" id="langcode">EN</span><svg class="langchev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="langmenu" id="langmenu" role="menu">
+        <button data-lang="en" class="active"><img class="flag-img" src="https://flagcdn.com/w40/us.png" width="22" height="16" alt="" /><span class="lname">English</span><span class="lcheck">✓</span></button>
+        <button data-lang="es"><img class="flag-img" src="https://flagcdn.com/w40/es.png" width="22" height="16" alt="" /><span class="lname">Español</span><span class="lcheck">✓</span></button>
+        <button data-lang="de"><img class="flag-img" src="https://flagcdn.com/w40/de.png" width="22" height="16" alt="" /><span class="lname">Deutsch</span><span class="lcheck">✓</span></button>
+        <button data-lang="ru"><img class="flag-img" src="https://flagcdn.com/w40/ru.png" width="22" height="16" alt="" /><span class="lname">Русский</span><span class="lcheck">✓</span></button>
+        <button data-lang="zh"><img class="flag-img" src="https://flagcdn.com/w40/cn.png" width="22" height="16" alt="" /><span class="lname">中文</span><span class="lcheck">✓</span></button>
+        <button data-lang="pt"><img class="flag-img" src="https://flagcdn.com/w40/br.png" width="22" height="16" alt="" /><span class="lname">Português</span><span class="lcheck">✓</span></button>
       </div>
     </div>
     <button class="iconbtn" id="menubtn" aria-label="Menu">
@@ -288,7 +304,7 @@
   <div class="dsec" data-i18n="d_apps">Apps</div>
   <a class="dlink" href="/onescore-preview/"><span><span class="one">One</span>Score</span><span class="dsub" data-i18n="d_score">Credibility score</span></a>
   <a class="dlink" href="https://frazier56.github.io/onesocial-v2-preview/"><span><span class="one">One</span>Social</span><span class="dsub" data-i18n="d_social">Get hired</span></a>
-  <a class="dlink" href="https://frazier56.github.io/oneevents-preview/"><span><span class="one">One</span>Events</span><span class="dsub" data-i18n="d_events">Events &amp; tickets</span></a>
+  <a class="dlink" href="https://frazier56.github.io/oneevents-preview/"><span><span class="one">One</span>Event</span><span class="dsub" data-i18n="d_events">Events &amp; tickets</span></a>
   <div class="dsec" style="margin-top:14px" data-i18n="d_services">Services</div>
   <a class="dlink" href="https://onevoice.onesocial.ai"><span><span class="one">One</span>Voice</span><span class="dsub" data-i18n="d_voice">AI receptionist</span></a>
   <a class="dlink" href="/onescore-preview/oneapp.html"><span><span class="one">One</span>App</span><span class="dsub" data-i18n="d_app">AI websites</span></a>
@@ -355,14 +371,14 @@
         <span class="open"><span data-i18n="open_social">Open OneSocial</span> →</span>
       </a>
 
-      <a class="tile" href="https://frazier56.github.io/oneevents-preview/" title="OneEvents">
+      <a class="tile" href="https://frazier56.github.io/oneevents-preview/" title="OneEvent">
         <div class="tile-ico" data-ico="oneevents" style="background:linear-gradient(180deg,#4ADE80,#22C55E)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
         </div>
-        <div class="pname"><span class="one">One</span><span class="word">Events</span></div>
+        <div class="pname"><span class="one">One</span><span class="word">Event</span></div>
         <div class="psub" data-i18n="events_sub">Events &amp; tickets</div>
         <p class="pdesc" data-i18n="events_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
-        <span class="open"><span data-i18n="open_events">Open OneEvents</span> →</span>
+        <span class="open"><span data-i18n="open_events">Open OneEvent</span> →</span>
       </a>
     </div>
   </section>
@@ -424,7 +440,7 @@
       <div class="feat">
         <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
         <h3 data-i18n="f4_h">Get hired and get paid</h3>
-        <p data-i18n="f4_p">OneSocial is the marketplace where verified proof wins the job — and OneEvents sells tickets and collects payment in minutes.</p>
+        <p data-i18n="f4_p">OneSocial is the marketplace where verified proof wins the job — and OneEvent sells tickets and collects payment in minutes.</p>
         <a class="flink" href="https://frazier56.github.io/onesocial-v2-preview/"><span data-i18n="f4_l">Explore OneSocial</span> →</a>
       </div>
     </div>
@@ -460,7 +476,7 @@
     <div class="faq" id="faq">
       <div class="qa">
         <button><span><span class="num">01 /</span> <span data-i18n="q1">One World Labs is apps you use plus services we run</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="a"><p data-i18n="a1">Three apps you use yourself — OneScore for credibility, OneSocial to get hired, OneEvents for tickets — plus two done-for-you services our team runs: OneVoice answers your calls and OneApp builds and manages your website. Everything shares one login and one profile.</p></div>
+        <div class="a"><p data-i18n="a1">Three apps you use yourself — OneScore for credibility, OneSocial to get hired, OneEvent for tickets — plus two done-for-you services our team runs: OneVoice answers your calls and OneApp builds and manages your website. Everything shares one login and one profile.</p></div>
       </div>
       <div class="qa">
         <button><span><span class="num">02 /</span> <span data-i18n="q2">You can start free — no credit card</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
@@ -487,7 +503,7 @@
         <h4 data-i18n="f_apps">Apps</h4>
         <a href="/onescore-preview/"><span class="one">One</span>Score</a>
         <a href="https://frazier56.github.io/onesocial-v2-preview/"><span class="one">One</span>Social</a>
-        <a href="https://frazier56.github.io/oneevents-preview/"><span class="one">One</span>Events</a>
+        <a href="https://frazier56.github.io/oneevents-preview/"><span class="one">One</span>Event</a>
       </div>
       <div class="footcol">
         <h4 data-i18n="f_services">Services</h4>
@@ -511,7 +527,7 @@
         <a href="#" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
         <a href="#" aria-label="X"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.9l-5.4-7-6.2 7H1.4l8-9.2L1 2h7l4.9 6.5L18.9 2zm-1.2 18h1.9L7.1 4H5.1l12.6 16z"/></svg></a>
       </div>
-      <span data-i18n="copyright">© 2026 One World Labs, Inc. · OneScore · OneSocial · OneEvents · OneVoice · OneApp</span><br />
+      <span data-i18n="copyright">© 2026 One World Labs, Inc. · OneScore · OneSocial · OneEvent · OneVoice · OneApp</span><br />
       <span style="color:var(--faint)" data-i18n="tagline_foot">Built for small businesses and freelancers, everywhere.</span>
     </div>
   </div>
@@ -520,7 +536,7 @@
 <script>
 /* ---------- rotating name in hero ---------- */
 (function(){
-  var names = ['OneScore','OneSocial','OneEvents','OneVoice','OneApp'];
+  var names = ['OneScore','OneSocial','OneEvent','OneVoice','OneApp'];
   var i = 0, el = document.getElementById('rot');
   if (!el) return;
   el.style.transition = 'opacity .22s ease';
@@ -538,22 +554,22 @@ document.querySelectorAll('#faq .qa').forEach(function(qa){
 
 /* ---------- i18n ---------- */
 var I18N = {
-  en: { flag:'🇺🇸', code:'EN' },
+  en: { flag:'us', code:'EN' },
   es: {
-    flag:'🇪🇸', code:'ES',
+    flag:'es', code:'ES',
     pill:'Un acceso · Tres apps · Dos servicios hechos para ti',
     s_apps:'apps', s_svcs:'servicios', s_login:'acceso',
     h1_pre:'Trabaja mejor en todo tu', h1_mid:'negocio con ',
     lede:'Apps que usas y servicios que manejamos por ti — unidos por un solo acceso — para que los pequeños negocios y freelancers los vean, confíen en ellos y les paguen.',
     cta_jump:'Entra a una app →', cta_signin:'Inicia con One ID', signin_oneid:'Inicia con One ID', signin:'Iniciar sesión',
     microtrust:'Un acceso para cada app · Gratis para empezar · Sin tarjeta',
-    oneid_band_p:'Inicia una vez y entras a cada herramienta One World — OneScore, OneSocial, OneEvents, más tus servicios OneVoice y OneApp. Sin una cuenta aparte para cada una.',
+    oneid_band_p:'Inicia una vez y entras a cada herramienta One World — OneScore, OneSocial, OneEvent, más tus servicios OneVoice y OneApp. Sin una cuenta aparte para cada una.',
     oneid_signin:'Inicia con One ID',
     apps_eye:'Las apps', apps_h:'Entra a tu app favorita', apps_sub:'Tres apps que usas tú mismo — un acceso te lleva a todas.',
     score_sub:'Credibilidad profesional', score_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado que publicas donde sea. Gratis para siempre.',
     social_sub:'El marketplace de credibilidad', social_desc:'Donde las pruebas te consiguen trabajo — reseñas verificadas, empleos y pagos en un marketplace basado en credibilidad.',
     events_sub:'Eventos y boletos', events_desc:'Crea un evento, vende boletos y registra invitados con QR — en minutos.',
-    open_score:'Abrir OneScore', open_social:'Abrir OneSocial', open_events:'Abrir OneEvents',
+    open_score:'Abrir OneScore', open_social:'Abrir OneSocial', open_events:'Abrir OneEvent',
     svc_eye:'Hecho para ti', svc_h:'Mejora tu negocio con nuestros servicios', svc_sub:'Servicios que nuestro equipo maneja por ti — para que te enfoques en el trabajo.',
     badge_dfy:'Hecho para ti',
     svc_voice_desc:'Un recepcionista IA que contesta cada llamada 24/7, califica al cliente y agenda la cita — para que una llamada perdida nunca sea un cliente perdido. Lo configuramos y lo manejamos por ti.',
@@ -564,20 +580,88 @@ var I18N = {
     f1_h:'Nunca pierdas una llamada', f1_p:'OneVoice contesta cada llamada 24/7, califica al cliente y agenda la cita — para que una llamada perdida nunca sea un cliente perdido.', f1_l:'Conoce OneVoice',
     f2_h:'Un sitio web creado con IA', f2_p:'Cuéntale a OneApp sobre tu negocio y crea tu sitio con IA — luego lo alojamos, configuramos tu correo y dominio, y lo mantenemos actualizado.', f2_l:'Ver OneApp',
     f3_h:'Pruebas que puedes mostrar', f3_p:'OneScore convierte tus reseñas y trabajo real en un número verificado — credibilidad que publicas donde sea, gratis para siempre.', f3_l:'Obtén tu OneScore',
-    f4_h:'Consigue trabajo y cobra', f4_p:'OneSocial es el marketplace donde la prueba verificada gana el trabajo — y OneEvents vende boletos y cobra en minutos.', f4_l:'Explora OneSocial',
+    f4_h:'Consigue trabajo y cobra', f4_p:'OneSocial es el marketplace donde la prueba verificada gana el trabajo — y OneEvent vende boletos y cobra en minutos.', f4_l:'Explora OneSocial',
     get_eye:'Úsalo donde sea', get_h:'Funciona en cualquier teléfono o computadora',
     get_sub:'Sin descargas. Ábrelo hoy en tu navegador — y agrégalo a tu pantalla de inicio para que abra como una app.',
     get1_h:'Agrégalo a tu teléfono', get1_p:'Abre cualquier app One World en tu navegador móvil, toca Compartir y elige "Agregar a inicio". Instala un ícono y abre en pantalla completa — sin App Store.', get1_soon:'Apps nativas muy pronto',
     get2_h:'Úsalo en tu computadora', get2_p:'Todo funciona en tu navegador en cualquier computadora — nada que instalar, nada que actualizar. Guarda oneworldlabs.ai y estás a un clic de cada app.', get2_cta:'Entra a una app →',
     faq_eye:'Bueno saber', faq_h:'¿Sabías que?',
-    q1:'One World Labs es apps que usas más servicios que manejamos', a1:'Tres apps que usas tú mismo — OneScore para credibilidad, OneSocial para conseguir trabajo, OneEvents para boletos — más dos servicios hechos para ti que maneja nuestro equipo: OneVoice contesta tus llamadas y OneApp crea y administra tu sitio web. Todo comparte un acceso y un perfil.',
+    q1:'One World Labs es apps que usas más servicios que manejamos', a1:'Tres apps que usas tú mismo — OneScore para credibilidad, OneSocial para conseguir trabajo, OneEvent para boletos — más dos servicios hechos para ti que maneja nuestro equipo: OneVoice contesta tus llamadas y OneApp crea y administra tu sitio web. Todo comparte un acceso y un perfil.',
     q2:'Puedes empezar gratis — sin tarjeta', a2:'OneScore es gratis para siempre, y cada app te deja empezar sin pagar por adelantado. Nuestros servicios hechos para ti son de pago — solo mejoras cuando una herramienta ya trabaja para tu negocio.',
     q3:'Un acceso te lleva a todo', a3:'Inicia sesión una vez con One ID y estás en cada app y servicio One World — sin cuentas separadas, sin volver a poner tus datos, sin malabares con contraseñas.',
     q4:'Basado en credibilidad — tú tienes el control', a4:'Ningún algoritmo decide quién ve tu negocio, y tu reputación no está dispersa en diez plataformas. Tu prueba es verificada, tuya y portátil — tú decides dónde aparece.',
     d_apps:'Apps', d_services:'Servicios', d_voice:'Recepcionista IA', d_app:'Sitios web IA', d_score:'Puntaje de credibilidad', d_social:'Consigue trabajo', d_events:'Eventos y boletos', d_contact:'Contacto', d_appearance:'Apariencia', d_thememode:'Modo claro / oscuro',
     f_apps:'Apps', f_services:'Servicios', f_company:'Empresa', f_contact:'Contacto', f_start:'Empieza',
-    copyright:'© 2026 One World Labs, Inc. · OneScore · OneSocial · OneEvents · OneVoice · OneApp',
+    copyright:'© 2026 One World Labs, Inc. · OneScore · OneSocial · OneEvent · OneVoice · OneApp',
     tagline_foot:'Hecho para pequeños negocios y freelancers, en todas partes.'
+  },
+  de: {
+    flag:'de', code:'DE',
+    s_apps:'Apps', s_svcs:'Services', s_login:'Login',
+    h1_pre:'Arbeite intelligenter in deinem', h1_mid:'Geschäft mit ',
+    lede:'Apps, die du nutzt, und Services, die wir für dich betreiben — verbunden durch einen Login — damit kleine Unternehmen und Freelancer gesehen werden, Vertrauen gewinnen und bezahlt werden.',
+    cta_jump:'In eine App springen →', cta_signin:'Mit One ID anmelden', signin_oneid:'Mit One ID anmelden', signin:'Anmelden',
+    microtrust:'Ein Login für jede App · Kostenlos starten · Keine Kreditkarte',
+    apps_eye:'Die Apps', apps_h:'Öffne deine Lieblings-App', apps_sub:'Drei Apps, die du selbst nutzt — ein Login für alle.',
+    score_sub:'Berufliche Glaubwürdigkeit', social_sub:'Der Glaubwürdigkeits-Marktplatz', events_sub:'Events & Tickets',
+    open_score:'OneScore öffnen', open_social:'OneSocial öffnen', open_events:'OneEvent öffnen',
+    svc_eye:'Für dich erledigt', svc_h:'Bring dein Geschäft mit unseren Services voran', svc_sub:'Services, die unser Team für dich betreibt — damit du dich auf die Arbeit konzentrierst.', badge_dfy:'Für dich erledigt',
+    get_voice:'OneVoice holen', get_app:'OneApp holen',
+    feat_eye:'Warum es funktioniert', feat_h:'Ein Geschäft führen — einfacher',
+    get_eye:'Überall nutzbar', get_h:'Funktioniert auf jedem Handy oder Computer',
+    faq_eye:'Gut zu wissen', faq_h:'Wusstest du schon?',
+    d_apps:'Apps', d_services:'Services', d_contact:'Kontakt', d_appearance:'Darstellung', d_thememode:'Hell / Dunkel'
+  },
+  ru: {
+    flag:'ru', code:'RU',
+    s_apps:'прил.', s_svcs:'сервиса', s_login:'вход',
+    h1_pre:'Работайте умнее во всём вашем', h1_mid:'бизнесе с ',
+    lede:'Приложения, которыми вы пользуетесь, и сервисы, которые мы ведём за вас — объединённые одним входом — чтобы малый бизнес и фрилансеры были замечены, вызывали доверие и получали оплату.',
+    cta_jump:'Перейти в приложение →', cta_signin:'Войти через One ID', signin_oneid:'Войти через One ID', signin:'Войти',
+    microtrust:'Один вход для всех приложений · Бесплатный старт · Без карты',
+    apps_eye:'Приложения', apps_h:'Откройте любимое приложение', apps_sub:'Три приложения для вас — один вход ко всем.',
+    score_sub:'Профессиональная репутация', social_sub:'Маркетплейс доверия', events_sub:'События и билеты',
+    open_score:'Открыть OneScore', open_social:'Открыть OneSocial', open_events:'Открыть OneEvent',
+    svc_eye:'Сделаем за вас', svc_h:'Улучшите бизнес с нашими сервисами', svc_sub:'Сервисы, которые наша команда ведёт за вас — чтобы вы занимались делом.', badge_dfy:'Сделаем за вас',
+    get_voice:'Получить OneVoice', get_app:'Получить OneApp',
+    feat_eye:'Почему это работает', feat_h:'Вести бизнес — проще',
+    get_eye:'Доступно везде', get_h:'Работает на любом телефоне и компьютере',
+    faq_eye:'Полезно знать', faq_h:'А вы знали?',
+    d_apps:'Приложения', d_services:'Сервисы', d_contact:'Контакты', d_appearance:'Оформление', d_thememode:'Светлая / тёмная'
+  },
+  zh: {
+    flag:'cn', code:'ZH',
+    s_apps:'应用', s_svcs:'服务', s_login:'登录',
+    h1_pre:'更聪明地开展您的', h1_mid:'业务，携手 ',
+    lede:'您使用的应用，加上我们为您运营的服务——用一个登录连接起来——让小企业和自由职业者被看见、被信任、并获得报酬。',
+    cta_jump:'进入应用 →', cta_signin:'使用 One ID 登录', signin_oneid:'使用 One ID 登录', signin:'登录',
+    microtrust:'一个登录畅通所有应用 · 免费开始 · 无需信用卡',
+    apps_eye:'应用', apps_h:'进入您喜爱的应用', apps_sub:'三款您亲自使用的应用——一个登录全部畅通。',
+    score_sub:'专业可信度', social_sub:'可信度市场', events_sub:'活动与票务',
+    open_score:'打开 OneScore', open_social:'打开 OneSocial', open_events:'打开 OneEvent',
+    svc_eye:'为您代劳', svc_h:'用我们的服务提升您的业务', svc_sub:'由我们团队为您运营的服务——让您专注于工作。', badge_dfy:'为您代劳',
+    get_voice:'获取 OneVoice', get_app:'获取 OneApp',
+    feat_eye:'为何有效', feat_h:'让经营更简单',
+    get_eye:'随处可用', get_h:'在任何手机或电脑上都能用',
+    faq_eye:'温馨提示', faq_h:'您知道吗？',
+    d_apps:'应用', d_services:'服务', d_contact:'联系', d_appearance:'外观', d_thememode:'浅色 / 深色'
+  },
+  pt: {
+    flag:'br', code:'PT',
+    s_apps:'apps', s_svcs:'serviços', s_login:'login',
+    h1_pre:'Trabalhe de forma mais inteligente em todo o seu', h1_mid:'negócio com ',
+    lede:'Apps que você usa e serviços que administramos para você — unidos por um único login — para que pequenos negócios e freelancers sejam vistos, ganhem confiança e recebam pagamento.',
+    cta_jump:'Entrar em um app →', cta_signin:'Entrar com One ID', signin_oneid:'Entrar com One ID', signin:'Entrar',
+    microtrust:'Um login para cada app · Comece grátis · Sem cartão',
+    apps_eye:'Os apps', apps_h:'Entre no seu app favorito', apps_sub:'Três apps que você mesmo usa — um login para todos.',
+    score_sub:'Credibilidade profissional', social_sub:'O marketplace da credibilidade', events_sub:'Eventos e ingressos',
+    open_score:'Abrir OneScore', open_social:'Abrir OneSocial', open_events:'Abrir OneEvent',
+    svc_eye:'Feito para você', svc_h:'Impulsione seu negócio com nossos serviços', svc_sub:'Serviços que nossa equipe administra para você — para você focar no trabalho.', badge_dfy:'Feito para você',
+    get_voice:'Obter OneVoice', get_app:'Obter OneApp',
+    feat_eye:'Por que funciona', feat_h:'Gerir um negócio, mais simples',
+    get_eye:'Use em qualquer lugar', get_h:'Funciona em qualquer celular ou computador',
+    faq_eye:'Bom saber', faq_h:'Você sabia?',
+    d_apps:'Apps', d_services:'Serviços', d_contact:'Contato', d_appearance:'Aparência', d_thememode:'Claro / escuro'
   }
 };
 var EN_CACHE = {};
@@ -585,10 +669,11 @@ function applyLang(lang){
   document.querySelectorAll('[data-i18n]').forEach(function(el){
     var k = el.getAttribute('data-i18n');
     if (!(k in EN_CACHE)) EN_CACHE[k] = el.textContent;
-    el.textContent = (lang === 'es' && I18N.es[k]) ? I18N.es[k] : EN_CACHE[k];
+    el.textContent = (lang !== 'en' && I18N[lang] && I18N[lang][k]) ? I18N[lang][k] : EN_CACHE[k];
   });
-  document.getElementById('langflag').textContent = I18N[lang].flag;
+  document.getElementById('langflag').src = 'https://flagcdn.com/w40/' + I18N[lang].flag + '.png';
   var _lc = document.getElementById('langcode'); if (_lc) _lc.textContent = I18N[lang].code;
+  document.querySelectorAll('#langmenu button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
   document.documentElement.lang = lang;
   try { localStorage.setItem('owl-lang', lang); } catch(e){}
 }
