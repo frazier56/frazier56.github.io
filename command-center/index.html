@@ -7,28 +7,31 @@
 <title>One World Labs — Command Center</title>
 </head>
 <body style="margin:0">
-<div id="owl-root"></div>
+<div id="owl-root"><div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0B0F1A;color:#8B98A9;font-family:system-ui">Loading…</div></div>
 <style>
 #owl-root *{box-sizing:border-box;margin:0;padding:0}
-#owl-root{--bg:#0B0F1A;--bg2:#0f1522;--glass:rgba(255,255,255,.045);--glassb:rgba(255,255,255,.09);--teal:#2DD4BF;--teal2:#14B8A6;--tx:#E6EDF3;--mut:#8B98A9;--green:#34D399;--amber:#FBBF24;--blue:#60A5FA;
+#owl-root{--bg:#0B0F1A;--glass:rgba(255,255,255,.045);--glassb:rgba(255,255,255,.09);--teal:#2DD4BF;--teal2:#14B8A6;--tx:#E6EDF3;--mut:#8B98A9;--green:#34D399;--amber:#FBBF24;--blue:#60A5FA;--red:#F87171;
 font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--tx);background:var(--bg);min-height:100vh;-webkit-font-smoothing:antialiased}
 #owl-root .wrap{max-width:1180px;margin:0 auto;padding:22px}
-/* login */
 #owl-root .login{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(1200px 600px at 50% -10%,rgba(45,212,191,.10),transparent),var(--bg)}
-#owl-root .lcard{width:380px;background:var(--glass);border:1px solid var(--glassb);border-radius:20px;padding:30px;backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+#owl-root .lcard{width:390px;background:var(--glass);border:1px solid var(--glassb);border-radius:20px;padding:30px;backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.45)}
 #owl-root .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:.2px}
 #owl-root .dot{width:11px;height:11px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal)}
-#owl-root .lsub{color:var(--mut);font-size:13px;margin:14px 0 20px}
+#owl-root .lsub{color:var(--mut);font-size:13px;margin:12px 0 18px;line-height:1.5}
 #owl-root label{display:block;font-size:12px;color:var(--mut);margin:14px 0 6px}
 #owl-root input{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--glassb);border-radius:11px;padding:12px 13px;color:var(--tx);font-size:14px;outline:none}
 #owl-root input:focus{border-color:var(--teal)}
-#owl-root .otp{display:flex;gap:8px}
-#owl-root .otp input{text-align:center;letter-spacing:6px;font-weight:700}
+#owl-root input.code{text-align:center;letter-spacing:8px;font-weight:700;font-size:20px}
 #owl-root .btn{width:100%;margin-top:20px;background:linear-gradient(90deg,var(--teal),var(--teal2));color:#04231f;font-weight:800;border:none;border-radius:12px;padding:13px;font-size:15px;cursor:pointer}
 #owl-root .btn:hover{filter:brightness(1.06)}
+#owl-root .btn[disabled]{opacity:.55;cursor:default}
+#owl-root .link{color:var(--teal);font-size:12px;cursor:pointer;margin-top:14px;display:inline-block}
 #owl-root .note{font-size:11px;color:var(--mut);margin-top:16px;text-align:center;line-height:1.5}
-#owl-root .lock{font-size:11px;color:var(--amber);border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.07);border-radius:8px;padding:7px 9px;margin-top:14px;text-align:center}
-/* top bar */
+#owl-root .msg{font-size:12px;margin-top:14px;padding:8px 10px;border-radius:8px;text-align:center;display:none}
+#owl-root .msg.err{display:block;color:var(--red);background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.3)}
+#owl-root .msg.ok{display:block;color:var(--green);background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.3)}
+#owl-root .qr{background:#fff;padding:12px;border-radius:12px;width:190px;margin:16px auto 8px;display:block}
+#owl-root .secret{font-family:monospace;font-size:12px;color:var(--tx);background:rgba(255,255,255,.05);border:1px solid var(--glassb);border-radius:8px;padding:8px;text-align:center;word-break:break-all;margin-top:8px}
 #owl-root .top{position:sticky;top:0;z-index:5;background:rgba(11,15,26,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--glassb)}
 #owl-root .topin{max-width:1180px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:14px}
 #owl-root .pill{font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;border:1px solid var(--glassb);color:var(--mut)}
@@ -36,15 +39,13 @@ font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var
 #owl-root .spacer{flex:1}
 #owl-root .lo{font-size:12px;color:var(--mut);cursor:pointer;border:1px solid var(--glassb);padding:6px 11px;border-radius:9px}
 #owl-root .lo:hover{color:var(--tx)}
-/* kpi strip */
 #owl-root .kstrip{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:6px 0 22px}
 #owl-root .kpi{background:var(--glass);border:1px solid var(--glassb);border-radius:15px;padding:15px 16px}
 #owl-root .kpi .kl{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
 #owl-root .kpi .kv{font-size:24px;font-weight:800;margin-top:7px}
 #owl-root .kpi .kd{font-size:11px;margin-top:5px;color:var(--green)}
 #owl-root .kpi .kd.warm{color:var(--amber)}
-#owl-root h2.sec{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin:6px 2px 12px}
-/* app grid */
+#owl-root h2.sec{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin:6px 2px 12px;font-weight:700}
 #owl-root .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 #owl-root .card{background:var(--glass);border:1px solid var(--glassb);border-radius:17px;padding:18px;cursor:pointer;transition:.16s;position:relative;overflow:hidden}
 #owl-root .card:hover{transform:translateY(-3px);border-color:rgba(45,212,191,.45);box-shadow:0 14px 34px rgba(0,0,0,.4)}
@@ -52,7 +53,6 @@ font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var
 #owl-root .ico{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.25)}
 #owl-root .cname{font-weight:800;font-size:16px}
 #owl-root .ctag{font-size:11px;color:var(--mut)}
-#owl-root .sdot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px}
 #owl-root .st{font-size:11px;font-weight:700;margin-left:auto;padding:4px 9px;border-radius:20px}
 #owl-root .st.live{color:var(--green);background:rgba(52,211,153,.1)}
 #owl-root .st.beta{color:var(--blue);background:rgba(96,165,250,.1)}
@@ -65,7 +65,6 @@ font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var
 #owl-root .spark{margin-top:12px;height:34px;width:100%}
 #owl-root .drill{font-size:12px;color:var(--teal);margin-top:12px;font-weight:700}
 #owl-root .q{position:absolute;top:14px;right:14px;font-size:9px;color:var(--mut);opacity:.7}
-/* drill */
 #owl-root .back{display:inline-flex;align-items:center;gap:7px;color:var(--mut);font-size:13px;cursor:pointer;margin-bottom:16px}
 #owl-root .back:hover{color:var(--teal)}
 #owl-root .dhead{display:flex;align-items:center;gap:13px;margin-bottom:20px}
@@ -81,102 +80,143 @@ font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var
 #owl-root .foot{color:var(--mut);font-size:11px;text-align:center;margin:26px 0 8px;line-height:1.6}
 @media(max-width:820px){#owl-root .kstrip{grid-template-columns:repeat(2,1fr)}#owl-root .grid{grid-template-columns:1fr}#owl-root .phases{grid-template-columns:1fr 1fr}}
 </style>
-<script>
-(function(){
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+const SB_URL='https://wseblryyqxawvbjmylbo.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndzZWJscnl5cXhhd3Ziam15bGJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5NDU4NjksImV4cCI6MjA5MzUyMTg2OX0.y2yfMwSC_eh_jzI5eXsp6qD5zkl0OICtESV070EhRQM';
+const sb=createClient(SB_URL,SB_KEY);
+const root=document.getElementById('owl-root');
+
+/* ---------- auth UI ---------- */
+function card(html){root.innerHTML='<div class="login"><div class="lcard">'+
+ '<div class="logo"><span class="dot"></span> One World Labs</div>'+html+
+ '<div class="note">Restricted. One World Labs administrators only.</div></div></div>';}
+function err(m){var e=document.querySelector('.msg');if(e){e.className='msg err';e.textContent=m;}}
+function ok(m){var e=document.querySelector('.msg');if(e){e.className='msg ok';e.textContent=m;}}
+
+function showEmail(){
+ card('<div class="lsub">Command Center — sign in to continue</div>'+
+  '<label>Admin email</label><input id="em" type="email" placeholder="you@oneworldlabs.ai" autocomplete="username">'+
+  '<button class="btn" id="go">Send login code</button><div class="msg"></div>');
+ var b=document.getElementById('go');
+ b.onclick=async function(){var email=document.getElementById('em').value.trim();if(!email)return err('Enter your email.');
+  b.disabled=true;b.textContent='Sending…';
+  var {error}=await sb.auth.signInWithOtp({email,options:{shouldCreateUser:false}});
+  b.disabled=false;b.textContent='Send login code';
+  if(error)return err(error.message);
+  showCode(email);};
+}
+function showCode(email){
+ card('<div class="lsub">We emailed a 6-digit code to<br><b style="color:#E6EDF3">'+email+'</b></div>'+
+  '<label>Email code</label><input id="cd" class="code" maxlength="6" inputmode="numeric" placeholder="000000">'+
+  '<button class="btn" id="go">Verify</button><div class="msg"></div>'+
+  '<span class="link" id="bk">← Use a different email</span>');
+ document.getElementById('bk').onclick=showEmail;
+ var b=document.getElementById('go');
+ b.onclick=async function(){var token=document.getElementById('cd').value.trim();if(token.length<6)return err('Enter the 6-digit code.');
+  b.disabled=true;b.textContent='Verifying…';
+  var {error}=await sb.auth.verifyOtp({email,token,type:'email'});
+  b.disabled=false;b.textContent='Verify';
+  if(error)return err(error.message);
+  gate();};
+}
+async function gate(){
+ // 1) admin allowlist (RLS returns only your own row)
+ var {data:adm,error:ae}=await sb.from('command_center_admins').select('email');
+ if(ae){card('<div class="lsub">Access check failed.</div><div class="msg err" style="display:block">'+ae.message+'</div><span class="link" id="lo">Sign out</span>');document.getElementById('lo').onclick=doSignOut;return;}
+ if(!adm||!adm.length){await sb.auth.signOut();card('<div class="lsub">This account is not an authorized administrator.</div><span class="link" id="lo">Try another email</span>');document.getElementById('lo').onclick=showEmail;return;}
+ // 2) MFA / TOTP
+ var {data:f}=await sb.auth.mfa.listFactors();
+ var verified=(f&&f.totp?f.totp:[]).filter(function(x){return x.status==='verified';});
+ var {data:aal}=await sb.auth.mfa.getAuthenticatorAssuranceLevel();
+ if(!verified.length)return enrollMfa();
+ if(aal&&aal.currentLevel!=='aal2')return verifyMfa(verified[0].id);
+ dash();
+}
+async function enrollMfa(){
+ card('<div class="lsub">Set up two-factor authentication</div><div class="msg"></div>');
+ var {data,error}=await sb.auth.mfa.enroll({factorType:'totp',friendlyName:'OWL Command Center '+Date.now()});
+ if(error)return err(error.message);
+ var fid=data.id;
+ root.querySelector('.lcard').innerHTML='<div class="logo"><span class="dot"></span> One World Labs</div>'+
+  '<div class="lsub">Scan with Google Authenticator, Authy, or 1Password — then enter the 6-digit code.</div>'+
+  '<img class="qr" src="'+data.totp.qr_code+'" alt="TOTP QR">'+
+  '<div class="secret">'+data.totp.secret+'</div>'+
+  '<label>Authenticator code</label><input id="cd" class="code" maxlength="6" inputmode="numeric" placeholder="000000">'+
+  '<button class="btn" id="go">Verify &amp; finish</button><div class="msg"></div>'+
+  '<span class="link" id="lo">Sign out</span>';
+ document.getElementById('lo').onclick=doSignOut;
+ var b=document.getElementById('go');
+ b.onclick=async function(){var code=document.getElementById('cd').value.trim();if(code.length<6)return err('Enter the 6-digit code.');
+  b.disabled=true;b.textContent='Verifying…';
+  var ch=await sb.auth.mfa.challenge({factorId:fid});
+  if(ch.error){b.disabled=false;b.textContent='Verify & finish';return err(ch.error.message);}
+  var v=await sb.auth.mfa.verify({factorId:fid,challengeId:ch.data.id,code});
+  b.disabled=false;b.textContent='Verify & finish';
+  if(v.error)return err(v.error.message);
+  dash();};
+}
+async function verifyMfa(fid){
+ card('<div class="lsub">Enter the 6-digit code from your authenticator app</div>'+
+  '<label>Authenticator code</label><input id="cd" class="code" maxlength="6" inputmode="numeric" placeholder="000000">'+
+  '<button class="btn" id="go">Verify</button><div class="msg"></div>'+
+  '<span class="link" id="lo">Sign out</span>');
+ document.getElementById('lo').onclick=doSignOut;
+ var b=document.getElementById('go');
+ b.onclick=async function(){var code=document.getElementById('cd').value.trim();if(code.length<6)return err('Enter the 6-digit code.');
+  b.disabled=true;b.textContent='Verifying…';
+  var ch=await sb.auth.mfa.challenge({factorId:fid});
+  if(ch.error){b.disabled=false;b.textContent='Verify';return err(ch.error.message);}
+  var v=await sb.auth.mfa.verify({factorId:fid,challengeId:ch.data.id,code});
+  b.disabled=false;b.textContent='Verify';
+  if(v.error)return err(v.error.message);
+  dash();};
+}
+async function doSignOut(){await sb.auth.signOut();showEmail();}
+
+/* ---------- dashboard ---------- */
 var D={
- kpis:[
-  {l:'Portfolio MRR',v:'$1,860',d:'+18% MoM'},
-  {l:'Total Users',v:'2,006',d:'+312 (30d)'},
-  {l:'Paying Customers',v:'97',d:'+11 (30d)'},
-  {l:'Net New (30d)',v:'+312',d:'signups'},
-  {l:'Cash Runway',v:'14 mo',d:'est.',warm:1}
- ],
+ kpis:[{l:'Portfolio MRR',v:'$1,860',d:'+18% MoM'},{l:'Total Users',v:'2,006',d:'+312 (30d)'},{l:'Paying Customers',v:'97',d:'+11 (30d)'},{l:'Net New (30d)',v:'+312',d:'signups'},{l:'Cash Runway',v:'14 mo',d:'est.',warm:1}],
  apps:[
- {id:'onevoice',name:'OneVoice',tag:'AI phone answering',ico:'📞',status:'live',q:'live (early)',
-  hero:{v:'$891',l:'MRR',d:'+2 accounts'},spark:[3,4,6,9,14,19,26,31],
-  ph:{Acquisition:[['Demo calls (Ava)','34'],['Website visits','1.2K'],['Signups','3']],
-      Activation:[['Numbers connected','3'],['Agents live','4'],['First-call success','100%']],
-      Revenue:[['Paying accounts','3'],['MRR','$891'],['ARPU','$297']],
-      Retention:[['Active accounts','3'],['30-day churn','0'],['Calls answered','212']]}},
- {id:'oneapp',name:'OneApp',tag:'AI website builder',ico:'🌐',status:'beta',q:'launching',
-  hero:{v:'Launching',l:'phase',d:'funnel live',warm:1},spark:[0,0,1,2,3,5,6,8],
-  ph:{Acquisition:[['Funnel visits','640'],['Preview requests','22'],['Freebie claims','9']],
-      Activation:[['Sites built','9'],['Previews sent','22'],['Approved','4']],
-      Revenue:[['Subscribers','2'],['MRR','$398'],['Plan','$199/mo']],
-      Retention:[['Active sites','9'],['Hosting active','2'],['Upsell queue','7']]}},
- {id:'onescore',name:'OneScore',tag:'Credibility score',ico:'⭐',status:'live',q:'live',
-  hero:{v:'$540',l:'MRR',d:'+9 upgrades'},spark:[210,340,520,700,880,1010,1140,1240],
-  ph:{Acquisition:[['Users','1,240'],['Scores generated','1,240'],['Social OAuth links','870']],
-      Activation:[['Completed profiles','980'],['Passport views','2,340'],['Cohort filters used','410']],
-      Revenue:[['Paid upgrades','86'],['MRR','$540'],['Free→paid','6.9%']],
-      Retention:[['30-day active','58%'],['Recalcs','3,120'],['Refunds','1']]}},
- {id:'onesocial',name:'OneSocial',tag:'Credibility marketplace',ico:'💼',status:'beta',q:'beta',
-  hero:{v:'420',l:'members',d:'cap 1,500→2,000',warm:1},spark:[40,90,150,220,290,350,390,420],
-  ph:{Acquisition:[['Beta signups','420'],['Waitlist','1,180'],['Invite accepts','62%']],
-      Activation:[['Profiles complete','300'],['Jobs posted','74'],['QR pay setups','41']],
-      Revenue:[['Fee take rate','8.99%'],['GMV (30d)','$12.4K'],['Fee revenue','$1.1K']],
-      Retention:[['WAU','188'],['Messages/wk','1,020'],['Endorsements','560']]}},
- {id:'oneevent',name:'OneEvent',tag:'Events + ticketing',ico:'🎟️',status:'beta',q:'beta',
-  hero:{v:'$186',l:'fee rev',d:'8 events',warm:1},spark:[0,1,2,3,4,5,7,8],
-  ph:{Acquisition:[['Events created','8'],['Discover views','940'],['Organizers','5']],
-      Activation:[['Published events','6'],['Tickets listed','420'],['RSVPs','210']],
-      Revenue:[['Tickets sold','62'],['Fee take rate','5.99%'],['Fee revenue','$186']],
-      Retention:[['Repeat organizers','2'],['Check-ins','54'],['Refunds','0']]}},
- {id:'onereach',name:'OneReach',tag:'Cold-email engine',ico:'🚀',status:'warm',q:'warming up',
-  hero:{v:'Warmup',l:'phase',d:'go-live ~Aug 3',warm:1},spark:[0,0,0,0,0,0,0,0],
-  ph:{Source:[['Lead pool (Apollo)','343.6K'],['Credits / mo','2,505'],['Segment','US SMB 1–20 ✓verified']],
-      Send:[['Inboxes','6 (Dan Johnson)'],['Warmup','running'],['Emails sent','0']],
-      Engage:[['Open rate','—'],['Reply rate','—'],['Click rate','—']],
-      Convert:[['Signups','0'],['Cost / lead','—'],['Attributed MRR','$0']]}}
- ]
-};
-var root=document.getElementById('owl-root');
+ {id:'onevoice',name:'OneVoice',tag:'AI phone answering',ico:'📞',status:'live',q:'live (early)',hero:{v:'$891',l:'MRR',d:'+2 accounts'},spark:[3,4,6,9,14,19,26,31],
+  ph:{Acquisition:[['Demo calls (Ava)','34'],['Website visits','1.2K'],['Signups','3']],Activation:[['Numbers connected','3'],['Agents live','4'],['First-call success','100%']],Revenue:[['Paying accounts','3'],['MRR','$891'],['ARPU','$297']],Retention:[['Active accounts','3'],['30-day churn','0'],['Calls answered','212']]}},
+ {id:'oneapp',name:'OneApp',tag:'AI website builder',ico:'🌐',status:'beta',q:'launching',hero:{v:'Launching',l:'phase',d:'funnel live',warm:1},spark:[0,0,1,2,3,5,6,8],
+  ph:{Acquisition:[['Funnel visits','640'],['Preview requests','22'],['Freebie claims','9']],Activation:[['Sites built','9'],['Previews sent','22'],['Approved','4']],Revenue:[['Subscribers','2'],['MRR','$398'],['Plan','$199/mo']],Retention:[['Active sites','9'],['Hosting active','2'],['Upsell queue','7']]}},
+ {id:'onescore',name:'OneScore',tag:'Credibility score',ico:'⭐',status:'live',q:'live',hero:{v:'$540',l:'MRR',d:'+9 upgrades'},spark:[210,340,520,700,880,1010,1140,1240],
+  ph:{Acquisition:[['Users','1,240'],['Scores generated','1,240'],['Social OAuth links','870']],Activation:[['Completed profiles','980'],['Passport views','2,340'],['Cohort filters','410']],Revenue:[['Paid upgrades','86'],['MRR','$540'],['Free→paid','6.9%']],Retention:[['30-day active','58%'],['Recalcs','3,120'],['Refunds','1']]}},
+ {id:'onesocial',name:'OneSocial',tag:'Credibility marketplace',ico:'💼',status:'beta',q:'beta',hero:{v:'420',l:'members',d:'cap 1,500→2,000',warm:1},spark:[40,90,150,220,290,350,390,420],
+  ph:{Acquisition:[['Beta signups','420'],['Waitlist','1,180'],['Invite accepts','62%']],Activation:[['Profiles complete','300'],['Jobs posted','74'],['QR pay setups','41']],Revenue:[['Fee take rate','8.99%'],['GMV (30d)','$12.4K'],['Fee revenue','$1.1K']],Retention:[['WAU','188'],['Messages/wk','1,020'],['Endorsements','560']]}},
+ {id:'oneevent',name:'OneEvent',tag:'Events + ticketing',ico:'🎟️',status:'beta',q:'beta',hero:{v:'$186',l:'fee rev',d:'8 events',warm:1},spark:[0,1,2,3,4,5,7,8],
+  ph:{Acquisition:[['Events created','8'],['Discover views','940'],['Organizers','5']],Activation:[['Published events','6'],['Tickets listed','420'],['RSVPs','210']],Revenue:[['Tickets sold','62'],['Fee take rate','5.99%'],['Fee revenue','$186']],Retention:[['Repeat organizers','2'],['Check-ins','54'],['Refunds','0']]}},
+ {id:'onereach',name:'OneReach',tag:'Cold-email engine',ico:'🚀',status:'warm',q:'warming up',hero:{v:'Warmup',l:'phase',d:'go-live ~Aug 3',warm:1},spark:[0,0,0,0,0,0,0,0],
+  ph:{Source:[['Lead pool (Apollo)','343.6K'],['Credits / mo','2,505'],['Segment','US SMB 1–20']],Send:[['Inboxes','6 (Dan Johnson)'],['Warmup','running'],['Emails sent','0']],Engage:[['Open rate','—'],['Reply rate','—'],['Click rate','—']],Convert:[['Signups','0'],['Cost / lead','—'],['Attributed MRR','$0']]}}
+ ]};
 function spark(a,c){var w=100,h=34,mx=Math.max.apply(null,a)||1,mn=Math.min.apply(null,a),r=mx-mn||1;
  var pts=a.map(function(v,i){return (i/(a.length-1)*w).toFixed(1)+','+(h-((v-mn)/r)*(h-6)-3).toFixed(1)}).join(' ');
- var last=a[a.length-1],lx=w,ly=h-((last-mn)/r)*(h-6)-3;
- return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><polyline points="'+pts+'" fill="none" stroke="'+c+'" stroke-width="2" vector-effect="non-scaling-stroke"/><circle cx="'+lx+'" cy="'+ly.toFixed(1)+'" r="2.2" fill="'+c+'"/></svg>';}
-function login(){
- root.innerHTML='<div class="login"><div class="lcard">'+
- '<div class="logo"><span class="dot"></span> One World Labs</div>'+
- '<div class="lsub">Command Center — admin access only</div>'+
- '<label>Email</label><input id="e" type="email" placeholder="you@oneworldlabs.ai" autocomplete="off">'+
- '<label>Password</label><input id="p" type="password" placeholder="••••••••">'+
- '<label>2FA code</label><div class="otp"><input maxlength="1"><input maxlength="1"><input maxlength="1"><input maxlength="1"><input maxlength="1"><input maxlength="1"></div>'+
- '<button class="btn" id="si">Sign in</button>'+
- '<div class="lock">🔒 Prototype gate — not yet secured. Real Supabase login + genuine 2FA is the next build step (needs a backend).</div>'+
- '<div class="note">Restricted. One World Labs administrators only.</div>'+
- '</div></div>';
- document.getElementById('si').onclick=dash;
- var o=root.querySelectorAll('.otp input');o.forEach(function(x,i){x.oninput=function(){if(x.value&&o[i+1])o[i+1].focus()}});
-}
-function dash(){
+ var ly=h-((a[a.length-1]-mn)/r)*(h-6)-3;
+ return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><polyline points="'+pts+'" fill="none" stroke="'+c+'" stroke-width="2" vector-effect="non-scaling-stroke"/><circle cx="'+w+'" cy="'+ly.toFixed(1)+'" r="2.2" fill="'+c+'"/></svg>';}
+function topbar(){return '<div class="top"><div class="topin"><div class="logo"><span class="dot"></span> One World Labs</div><span class="pill adm">● Admin</span><span class="pill" id="who"></span><div class="spacer"></div><div class="lo" id="lo">Log out</div></div></div>';}
+async function dash(){
  var k=D.kpis.map(function(x){return '<div class="kpi"><div class="kl">'+x.l+'</div><div class="kv">'+x.v+'</div><div class="kd'+(x.warm?' warm':'')+'">'+x.d+'</div></div>'}).join('');
- var g=D.apps.map(function(a){var st=a.status,stc=st==='live'?'live':st==='warm'?'warm':'beta',stl=st==='live'?'Live':st==='warm'?'Warming':'Beta';
-  return '<div class="card" data-id="'+a.id+'"><div class="q">'+a.q+'</div><div class="chead"><div class="ico">'+a.ico+'</div><div><div class="cname">'+a.name+'</div><div class="ctag">'+a.tag+'</div></div><div class="st '+stc+'">'+stl+'</div></div>'+
-  '<div class="chero"><div class="chv">'+a.hero.v+'</div><div class="chl">'+a.hero.l+'</div></div><div class="cd'+(a.hero.warm?' warm':'')+'">'+a.hero.d+'</div>'+
-  spark(a.spark,a.status==='warm'?'#FBBF24':'#2DD4BF')+'<div class="drill">Drill in →</div></div>'}).join('');
- root.innerHTML='<div class="top"><div class="topin"><div class="logo"><span class="dot"></span> One World Labs</div><span class="pill adm">● Admin</span><span class="pill">Sun Jul 13, 2026</span><div class="spacer"></div><div class="lo" id="lo">Log out</div></div></div>'+
- '<div class="wrap"><h2 class="sec">Portfolio · all systems</h2><div class="kstrip">'+k+'</div>'+
- '<h2 class="sec">Apps · click any to drill down</h2><div class="grid">'+g+'</div>'+
- '<div class="foot">Mixed live + sample data — OneScore & OneVoice reflect early real activity; others are representative until live sources (Supabase · Stripe · GHL · Instantly · Apollo) are wired in.<br>One World Labs Command Center · admin only · v0.1 prototype</div></div>';
- document.getElementById('lo').onclick=login;
+ var g=D.apps.map(function(a){var stc=a.status==='live'?'live':a.status==='warm'?'warm':'beta',stl=a.status==='live'?'Live':a.status==='warm'?'Warming':'Beta';
+  return '<div class="card" data-id="'+a.id+'"><div class="q">'+a.q+'</div><div class="chead"><div class="ico">'+a.ico+'</div><div><div class="cname">'+a.name+'</div><div class="ctag">'+a.tag+'</div></div><div class="st '+stc+'">'+stl+'</div></div><div class="chero"><div class="chv">'+a.hero.v+'</div><div class="chl">'+a.hero.l+'</div></div><div class="cd'+(a.hero.warm?' warm':'')+'">'+a.hero.d+'</div>'+spark(a.spark,a.status==='warm'?'#FBBF24':'#2DD4BF')+'<div class="drill">Drill in →</div></div>'}).join('');
+ root.innerHTML=topbar()+'<div class="wrap"><h2 class="sec">Portfolio · all systems</h2><div class="kstrip">'+k+'</div><h2 class="sec">Apps · click any to drill down</h2><div class="grid">'+g+'</div><div class="foot">Mixed live + sample data — OneScore &amp; OneVoice reflect early real activity; others are representative until live sources (Supabase · Stripe · GHL · Instantly · Apollo) are wired in.<br>One World Labs Command Center · admin only · secured with email OTP + TOTP 2FA</div></div>';
+ document.getElementById('lo').onclick=doSignOut;
+ try{var {data:{user}}=await sb.auth.getUser();if(user)document.getElementById('who').textContent=user.email;}catch(e){}
  root.querySelectorAll('.card').forEach(function(c){c.onclick=function(){drill(c.getAttribute('data-id'))}});
 }
-function drill(id){
- var a=D.apps.filter(function(x){return x.id===id})[0];
- var cols=Object.keys(a.ph).map(function(k){var rows=a.ph[k].map(function(r){return '<div class="mrow"><span class="ml">'+r[0]+'</span><span class="mv">'+r[1]+'</span></div>'}).join('');
-  return '<div class="ph"><h3>'+k+'</h3>'+rows+'</div>'}).join('');
- var st=a.status,stc=st==='live'?'live':st==='warm'?'warm':'beta',stl=st==='live'?'Live':st==='warm'?'Warming':'Beta';
- root.innerHTML='<div class="top"><div class="topin"><div class="logo"><span class="dot"></span> One World Labs</div><span class="pill adm">● Admin</span><div class="spacer"></div><div class="lo" id="lo">Log out</div></div></div>'+
- '<div class="wrap"><div class="back" id="bk">← Back to command center</div>'+
- '<div class="dhead"><div class="ico">'+a.ico+'</div><div><div class="dh-t">'+a.name+'</div><div class="ctag">'+a.tag+'</div></div><div class="st '+stc+'" style="margin-left:auto">'+stl+'</div></div>'+
- '<div class="chero" style="margin:0 0 20px"><div class="chv">'+a.hero.v+'</div><div class="chl">'+a.hero.l+'</div><div class="cd'+(a.hero.warm?' warm':'')+'" style="margin-left:10px">'+a.hero.d+'</div></div>'+
- '<div class="phases">'+cols+'</div>'+
- '<div class="foot">'+a.name+' funnel · '+a.q+' · click Back for the portfolio view</div></div>';
+function drill(id){var a=D.apps.filter(function(x){return x.id===id})[0];
+ var cols=Object.keys(a.ph).map(function(k){var rows=a.ph[k].map(function(r){return '<div class="mrow"><span class="ml">'+r[0]+'</span><span class="mv">'+r[1]+'</span></div>'}).join('');return '<div class="ph"><h3>'+k+'</h3>'+rows+'</div>'}).join('');
+ var stc=a.status==='live'?'live':a.status==='warm'?'warm':'beta',stl=a.status==='live'?'Live':a.status==='warm'?'Warming':'Beta';
+ root.innerHTML=topbar()+'<div class="wrap"><div class="back" id="bk">← Back to command center</div><div class="dhead"><div class="ico">'+a.ico+'</div><div><div class="dh-t">'+a.name+'</div><div class="ctag">'+a.tag+'</div></div><div class="st '+stc+'" style="margin-left:auto">'+stl+'</div></div><div class="chero" style="margin:0 0 20px"><div class="chv">'+a.hero.v+'</div><div class="chl">'+a.hero.l+'</div><div class="cd'+(a.hero.warm?' warm':'')+'" style="margin-left:10px">'+a.hero.d+'</div></div><div class="phases">'+cols+'</div><div class="foot">'+a.name+' funnel · '+a.q+'</div></div>';
  document.getElementById('bk').onclick=dash;
- document.getElementById('lo').onclick=login;
+ document.getElementById('lo').onclick=doSignOut;
 }
-login();
+
+/* ---------- boot ---------- */
+(async function(){
+ try{var {data:{session}}=await sb.auth.getSession();if(session){gate();}else{showEmail();}}
+ catch(e){showEmail();}
 })();
 </script>
 </body>
