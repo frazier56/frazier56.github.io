@@ -134,7 +134,8 @@
   .statpill .sd { width:4px; height:4px; border-radius:50%; background:var(--teal); opacity:.55; flex:0 0 auto; }
   @media (max-width:400px){ .statpill { gap:8px; padding:7px 14px; } .statpill .st b{ font-size:16px; } .statpill .st i{ font-size:10px; letter-spacing:.05em; } }
   h1.hh { font-size:clamp(32px, 5.6vw, 56px); font-weight:900; letter-spacing:-.03em; line-height:1.05; margin-top:20px; }
-  h1.hh .rot { display:inline-block; min-width:5.5ch; text-align:left; background:linear-gradient(100deg,var(--teal-l),var(--teal-d)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  h1.hh .hone { color:var(--teal); }
+  h1.hh .rot { display:inline-block; min-width:4.5ch; text-align:left; color:var(--ink); }
   .lede { color:var(--muted); font-size:clamp(15px, 2vw, 17.5px); line-height:1.65; margin:18px auto 0; max-width:580px; }
   .herocta { margin-top:28px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
   .gicon { flex:0 0 auto; }
@@ -314,7 +315,7 @@
     <span class="dsub" style="display:inline-flex;align-items:center;gap:6px"><span id="themeicon">☀️</span></span>
   </button>
   <div class="dsec" style="margin-top:14px" data-i18n="d_contact">Contact</div>
-  <a class="dlink" href="mailto:contact@oneworldlabs.inc" style="font-size:13.5px;font-weight:600">contact@oneworldlabs.inc</a>
+  <a class="dlink" href="mailto:contact@oneworldlabs.ai" style="font-size:13.5px;font-weight:600">contact@oneworldlabs.ai</a>
   <div class="dcta">
     <a class="btn-ghost" href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" data-i18n="signin_oneid">Sign in with One ID</a>
     <a class="btn-primary" href="#apps" data-i18n="cta_jump">Jump into an app →</a>
@@ -332,7 +333,7 @@
       <span class="sd" aria-hidden="true"></span>
       <span class="st"><b>1</b><i data-i18n="s_login">login</i></span>
     </div>
-    <h1 class="hh"><span data-i18n="h1_pre">Work smarter across your</span><br /><span data-i18n="h1_mid">business with </span><span class="rot" id="rot">OneScore</span></h1>
+    <h1 class="hh"><span data-i18n="h1_pre">Work smarter across your</span><br /><span data-i18n="h1_mid">business with </span><span class="hone">One</span><span class="rot" id="rot">Score</span></h1>
     <p class="lede" data-i18n="lede">Apps you use and services we run for you — tied together by one login — so small businesses and freelancers get seen, get trusted, and get paid.</p>
     <div class="herocta">
       <a class="btn-primary" href="#apps" data-i18n="cta_jump">Jump into an app →</a>
@@ -513,7 +514,7 @@
       <div class="footcol">
         <h4 data-i18n="f_company">Company</h4>
         <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" data-i18n="signin_oneid">Sign in with One ID</a>
-        <a href="mailto:contact@oneworldlabs.inc" data-i18n="f_contact">Contact</a>
+        <a href="mailto:contact@oneworldlabs.ai" data-i18n="f_contact">Contact</a>
       </div>
       <div class="footcol">
         <h4 data-i18n="f_start">Get started</h4>
@@ -536,7 +537,7 @@
 <script>
 /* ---------- rotating name in hero ---------- */
 (function(){
-  var names = ['OneScore','OneSocial','OneEvent','OneVoice','OneApp'];
+  var names = ['Score','Social','Event','Voice','App'];
   var i = 0, el = document.getElementById('rot');
   if (!el) return;
   el.style.transition = 'opacity .22s ease';
