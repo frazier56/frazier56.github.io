@@ -134,17 +134,21 @@ async function gate(){
  dash();
 }
 async function enrollMfa(){
- card('<div class="lsub">Set up two-factor authentication</div><div class="msg"></div>');
- var {data,error}=await sb.auth.mfa.enroll({factorType:'totp',friendlyName:'OWL Command Center '+Date.now()});
+ card('<div class="lsub">Setting up two-factor authentication…</div><div class="msg"></div>');
+ // clean up any stale unverified TOTP factors so we don't accumulate them
+ try{var {data:fs}=await sb.auth.mfa.listFactors();var all=(fs&&fs.all)?fs.all:[];for(var i=0;i<all.length;i++){if(all[i].factor_type==='totp'&&all[i].status==='unverified'){await sb.auth.mfa.unenroll({factorId:all[i].id});}}}catch(e){}
+ var {data,error}=await sb.auth.mfa.enroll({factorType:'totp',friendlyName:'OWL Command Center'});
  if(error)return err(error.message);
  var fid=data.id;
  root.querySelector('.lcard').innerHTML='<div class="logo"><span class="dot"></span> One World Labs</div>'+
   '<div class="lsub">Scan with Google Authenticator, Authy, or 1Password — then enter the 6-digit code.</div>'+
-  '<img class="qr" src="'+data.totp.qr_code+'" alt="TOTP QR">'+
-  '<div class="secret">'+data.totp.secret+'</div>'+
+  '<img class="qr" id="qrimg" alt="TOTP QR">'+
+  '<div class="secret" id="secret"></div>'+
   '<label>Authenticator code</label><input id="cd" class="code" maxlength="6" inputmode="numeric" placeholder="000000">'+
   '<button class="btn" id="go">Verify &amp; finish</button><div class="msg"></div>'+
   '<span class="link" id="lo">Sign out</span>';
+ document.getElementById('qrimg').src=data.totp.qr_code;
+ document.getElementById('secret').textContent=data.totp.secret;
  document.getElementById('lo').onclick=doSignOut;
  var b=document.getElementById('go');
  b.onclick=async function(){var code=document.getElementById('cd').value.trim();if(code.length<6)return err('Enter the 6-digit code.');
