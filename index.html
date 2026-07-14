@@ -761,11 +761,8 @@
     (function(){
         var SUPABASE_URL = 'https://wseblryyqxawvbjmylbo.supabase.co';
         var VAIA_VOICE_ID = 'pFZP5JQG7iQjIQuC4Bku'; /* Lily — same voice for every utterance, greeting included */
-        var APP_KNOWLEDGE = "You are VAIA, the friendly voice guide for One World Labs (oneworldlabs.ai). " +
-            "One World Labs is one login, five products: OneScore (free professional credibility score from reviews & real work), " +
-            "OneSocial (credibility-first marketplace where verified proof gets you hired and paid), OneEvent (create events, sell tickets, QR check-in), " +
-            "OneVoice (done-for-you AI receptionist that answers calls 24/7, qualifies leads, books appointments), and OneApp (done-for-you AI-built website with hosting, domain, email). " +
-            "One ID signs you into all of them. Keep answers short, warm, and conversational — this is a spoken voice conversation, not an essay.";
+        /* Full 5-product knowledge base + rate limiting now live server-side in the vaia-chat edge
+           function (keyed off app:'homepage' below) — no client-side knowledge injection needed. */
         var widget = document.getElementById('vaia-widget');
         var orb = document.getElementById('vaia-orb');
         var closeBtn = document.getElementById('vaia-close');
@@ -854,11 +851,11 @@
             widget.classList.add('thinking');
             addMsg('user', userText);
             history.push({ role:'user', content: userText });
-            var msgs = [{ role:'user', content: APP_KNOWLEDGE }].concat(history);
             var replyEl = addMsg('vaia', '…');
             var full = '';
             var spokenUpTo = 0;
             var speakQueue = Promise.resolve();
+            var rateLimited = false;
 
             /* speak completed sentences as they arrive instead of waiting for the whole reply —
                this is what makes her feel like she's answering right away instead of after a pause */
@@ -886,10 +883,16 @@
             abortCtl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
             fetch(SUPABASE_URL + '/functions/v1/vaia-chat', {
                 method:'POST', headers:{'Content-Type':'application/json'},
-                body: JSON.stringify({ messages: msgs }),
+                body: JSON.stringify({ messages: history, app: 'homepage', mode: 'voice' }),
                 signal: abortCtl ? abortCtl.signal : undefined
             }).then(function(r){
-                if (!r.ok || !r.body) throw new Error('bad response');
+                if (!r.ok || !r.body) {
+                    return r.json().catch(function(){ return {}; }).then(function(errBody){
+                        var e = new Error(errBody.error || 'bad response');
+                        e.rateLimited = !!errBody.rateLimited;
+                        throw e;
+                    });
+                }
                 var reader = r.body.getReader(), decoder = new TextDecoder();
                 function pump(){
                     return reader.read().then(function(res){
@@ -919,10 +922,24 @@
             }).catch(function(err){
                 widget.classList.remove('thinking');
                 if (err && err.name === 'AbortError') return;
-                replyEl.textContent = "I'm having trouble connecting right now — try again in a moment.";
+                var m = (err && err.rateLimited && err.message) ? err.message : "I'm having trouble connecting right now — try again in a moment.";
+                rateLimited = !!(err && err.rateLimited);
+                full = m;
+                replyEl.textContent = m;
+                history.push({ role:'assistant', content: m });
+                return speak(m);
             }).then(function(){
                 widget.classList.remove('thinking');
                 busy = false;
+                if (rateLimited) {
+                    /* out of session budget for this visitor — go quiet instead of immediately
+                       re-asking (which would just hit the limit again) or looping TTS calls */
+                    asleep = true; voiceMode = false;
+                    widget.classList.remove('listening', 'speaking');
+                    widget.classList.add('asleep');
+                    everSlept = true;
+                    return;
+                }
                 if (voiceMode && !asleep) startListening();
             });
         }
