@@ -792,12 +792,22 @@
         function openPanel(){ widget.classList.add('open'); }
         function closePanel(){ widget.classList.remove('open'); }
 
+        /* the LLM always spells her name "VAIA" in generated text (correct for the transcript log),
+           but that spelling is ambiguous to TTS engines and got pronounced a different way almost
+           every time. Lee wants one consistent pronunciation: "VY-uh" (rhymes with "sky" + "uh").
+           Only the audio path gets this substitution — addMsg()/the visible transcript always keeps
+           the real spelling. */
+        function phoneticize(text){
+            return text.replace(/vaia/gi, 'VY-uh');
+        }
+
         /* one voice path for EVERY utterance (greeting included) so she never switches voices mid-conversation */
         function speak(text){
             widget.classList.add('speaking');
+            var spoken = phoneticize(text);
             return fetch(SUPABASE_URL + '/functions/v1/elevenlabs-tts', {
                 method: 'POST', headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ text: text, voiceId: VAIA_VOICE_ID })
+                body: JSON.stringify({ text: spoken, voiceId: VAIA_VOICE_ID })
             }).then(function(r){
                 var ct = r.headers.get('content-type') || '';
                 if (ct.indexOf('audio') !== -1) {
@@ -812,13 +822,16 @@
                         });
                     });
                 }
-                return fallbackSpeak(text);
-            }).catch(function(){ return fallbackSpeak(text); })
+                return fallbackSpeak(spoken);
+            }).catch(function(){ return fallbackSpeak(spoken); })
               .then(function(){ widget.classList.remove('speaking'); });
         }
 
-        /* only used if the ElevenLabs call truly fails — same content, so still one coherent turn */
+        /* only used if the ElevenLabs call truly fails — same content, so still one coherent turn.
+           Called with already-phoneticized text from speak(); the .replace() below is a no-op in
+           that case but keeps this safe if ever called directly with raw text elsewhere. */
         function fallbackSpeak(text){
+            text = phoneticize(text);
             return new Promise(function(resolve){
                 if (!('speechSynthesis' in window)) { resolve(); return; }
                 try {
