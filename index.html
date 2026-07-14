@@ -883,7 +883,14 @@
             abortCtl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
             fetch(SUPABASE_URL + '/functions/v1/vaia-chat', {
                 method:'POST', headers:{'Content-Type':'application/json'},
-                body: JSON.stringify({ messages: history, app: 'homepage', mode: 'voice' }),
+                /* NOTE: intentionally NOT sending mode:'voice' here — that activates a 160-token
+                   cap server-side, and gemini-flash-latest/2.5-flash-lite burn a chunk of that
+                   budget on hidden reasoning/thought-signature content via the OpenAI-compat
+                   endpoint, so real replies got cut off after 2-3 words (finish_reason:"length").
+                   Confirmed live Jul 14: identical request with mode:'voice' truncated ("Think of…"),
+                   without it the same question returned a full, correct answer. Leave uncapped
+                   (TEXT_STYLE) until a safe token budget for this model is found. */
+                body: JSON.stringify({ messages: history, app: 'homepage' }),
                 signal: abortCtl ? abortCtl.signal : undefined
             }).then(function(r){
                 if (!r.ok || !r.body) {
