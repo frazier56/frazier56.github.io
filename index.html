@@ -143,12 +143,14 @@
     #vaia-widget.listening .vaia-orb,
     #vaia-widget.thinking .vaia-orb,
     #vaia-widget.speaking .vaia-orb{opacity:.55}
-    /* thinking: bars vanish entirely and "Thinking" takes over the center of the orb, large and clear,
-       so there's zero ambiguity about whether she heard you and is working on a reply */
-    #vaia-widget.thinking .vaia-bars{display:none}
-    .vaia-think{display:none;position:absolute;inset:0;align-items:center;justify-content:center;text-align:center;font-size:12px;font-weight:800;letter-spacing:.12em;color:#00d2b4;text-transform:uppercase;z-index:4;animation:vaiaThinkPulse 1.4s ease-in-out infinite}
-    @media (min-width:640px){ .vaia-think{font-size:13.5px} }
-    #vaia-widget.thinking .vaia-think{display:flex}
+    /* four distinct states now: sleeping (dim), listening ("Listening" text), thinking ("Thinking" text),
+       talking (the vertical bars — bars are ONLY shown while she's actually speaking) */
+    #vaia-widget.thinking .vaia-bars,
+    #vaia-widget.listening .vaia-bars{display:none}
+    .vaia-think,.vaia-listen{display:none;position:absolute;inset:0;align-items:center;justify-content:center;text-align:center;font-size:12px;font-weight:800;letter-spacing:.12em;color:#00d2b4;text-transform:uppercase;z-index:4;animation:vaiaThinkPulse 1.4s ease-in-out infinite}
+    @media (min-width:640px){ .vaia-think,.vaia-listen{font-size:13.5px} }
+    #vaia-widget.thinking .vaia-think,
+    #vaia-widget.listening .vaia-listen{display:flex}
     @keyframes vaiaThinkPulse{0%,100%{opacity:.6;transform:scale(.94)}50%{opacity:1;transform:scale(1.12)}}
 
     .vaia-panel{width:290px;max-width:calc(100vw - 28px);max-height:0;overflow:hidden;opacity:0;transform:translateY(-8px);transition:max-height .3s ease,opacity .25s ease,transform .3s ease;border-radius:22px;border:1px solid var(--color-border);background:var(--color-card);background-color:var(--color-bg);backdrop-filter:blur(20px);box-shadow:0 20px 50px rgba(0,0,0,.22)}
@@ -250,6 +252,7 @@
             <div class="vaia-ring"></div><div class="vaia-ring"></div><div class="vaia-ring"></div>
             <div class="vaia-bars"><span></span><span></span><span></span><span></span><span></span></div>
             <div class="vaia-think">Thinking</div>
+            <div class="vaia-listen">Listening</div>
         </div>
     </div>
 
