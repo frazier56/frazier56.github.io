@@ -20,7 +20,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0B0F1A" id="theme-color-meta">
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
     tailwind.config = {
         darkMode: 'class',
@@ -31,13 +31,13 @@
                     heading: ['Sora', 'sans-serif'],
                 },
                 colors: {
-                    primary: '#00d2b4',
+                    primary: { DEFAULT: '#00d2b4', foreground: '#0a0a1a' },
                     secondary: 'var(--color-secondary)',
                     background: 'var(--color-bg)',
                     foreground: 'var(--color-fg)',
                     border: 'var(--color-border)',
                     card: 'var(--color-card)',
-                    muted: 'var(--color-muted)',
+                    muted: { DEFAULT: 'var(--color-secondary)', foreground: 'var(--color-muted)' },
                 }
             }
         }
@@ -68,52 +68,63 @@
         overflow-x: hidden;
     }
     h1, h2, h3, h4 { font-family: 'Sora', sans-serif; }
+    .fade-up{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease-out forwards}
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
-    /* ===== added: language menu ===== */
-    .langmenu{display:none;position:absolute;right:0;top:44px;width:190px;background:var(--color-card);border:1px solid var(--color-border);border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.18);overflow:hidden;z-index:60;padding:5px}
+    /* theme toggle icon crossfade (mirrors shadcn Sun/Moon pattern) */
+    #theme-toggle{position:relative}
+    #icon-sun{transition:transform .3s ease, opacity .3s ease}
+    #icon-moon{position:absolute;inset:0;margin:auto;transition:transform .3s ease, opacity .3s ease;opacity:0;transform:rotate(90deg) scale(0)}
+    .dark #icon-sun{opacity:0;transform:rotate(-90deg) scale(0)}
+    .dark #icon-moon{opacity:1;transform:rotate(0) scale(1)}
+
+    /* language menu */
+    .langmenu{display:none;position:absolute;right:0;top:44px;width:190px;background:var(--color-card);background-color:var(--color-bg);border:1px solid var(--color-border);border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.18);overflow:hidden;z-index:60;padding:5px}
     .langmenu.open{display:block}
     .langmenu button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;background:none;border:0;border-radius:9px;color:var(--color-fg);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;text-align:left}
     .langmenu button:hover{background:var(--color-secondary)}
     .langmenu button .chk{margin-left:auto;color:#00d2b4;font-weight:900;opacity:0}
     .langmenu button.active .chk{opacity:1}
 
-    /* ===== added: drawer ===== */
-    #scrim{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s ease}
-    #scrim.on{opacity:1;pointer-events:auto}
-    #drawer{position:fixed;top:0;right:0;bottom:0;z-index:70;width:min(320px,86vw);background:var(--color-card);background-color:var(--color-bg);border-left:1px solid var(--color-border);box-shadow:-18px 0 50px rgba(0,0,0,.3);transform:translateX(105%);transition:transform .3s cubic-bezier(.2,.8,.2,1);padding:18px;display:flex;flex-direction:column;overflow-y:auto}
-    #drawer.open{transform:none}
-    #drawer .dsec{margin-top:14px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#00d2b4}
-    #drawer a.dlink{display:flex;align-items:center;justify-content:space-between;padding:13px 10px;border-radius:12px;text-decoration:none;color:var(--color-fg);font-size:15px;font-weight:700}
-    #drawer a.dlink:hover{background:var(--color-secondary)}
-    #drawer a.dlink .dsub{font-size:11px;color:var(--color-muted);font-weight:600}
-
-    /* ===== added: live hover-preview on app cards ===== */
+    /* live hover-preview on app / service cards */
     a.app-card{position:relative;overflow:hidden}
     .tile-prev{position:absolute;inset:0;background:var(--color-card);background-color:var(--color-bg);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:10;border-radius:inherit}
     a.app-card:hover .tile-prev{opacity:1}
     .tile-prev .pvframe{position:absolute;inset:0;overflow:hidden;background:var(--color-secondary)}
     .tile-prev .pvframe iframe{position:absolute;top:0;left:0;border:0;pointer-events:none;transform-origin:top left;background:#fff}
     .tile-prev .pvframe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
-    .tile-prev .pvload{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--color-muted);background:var(--color-card);background-color:var(--color-bg)}
+    .tile-prev .pvload{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--color-muted);background:var(--color-card);background-color:var(--color-bg);text-align:center;padding:0 16px}
     .tile-prev .pvbar{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:linear-gradient(0deg,rgba(0,0,0,.78),rgba(0,0,0,.3) 65%,transparent);color:#fff;font-size:11.5px;font-weight:800}
     .tile-prev .pvbar .go{display:inline-flex;align-items:center;gap:5px;background:#00d2b4;color:#0a0a1a;padding:5px 11px;border-radius:999px}
-    .hint{display:none;margin-top:10px;font-size:11px;font-weight:700;color:var(--color-muted);align-items:center;gap:5px}
-    @media (hover:hover){ .hint{display:flex} }
+
+    /* accordion */
+    .qa .qa-content{max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .qa.open .qa-content{max-height:320px}
+    .qa.open .qa-chev{transform:rotate(90deg)}
+    .qa-chev{transition:transform .25s ease}
 </style>
 </head>
 <body class="dark">
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+<div class="min-h-screen bg-background text-foreground font-sans overflow-x-hidden">
+
+    <!-- Background Orbs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0 flex justify-center">
+        <div class="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-primary/10 blur-[120px]"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-secondary/20 blur-[100px]"></div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
         <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2">
-                <img src="/logo-mark.png" alt="Logo" class="h-8 w-8">
-                <span class="font-bold text-xl tracking-tight"><span class="text-primary">ne</span> World Labs</span>
+            <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center gap-2">
+                <img src="/logo-mark.png" alt="One World Labs" class="h-8 w-8">
+                <span class="font-heading font-bold text-xl tracking-tight"><span class="text-primary">ne</span> World Labs</span>
             </a>
             <div class="flex items-center gap-2 sm:gap-4">
-                <div class="relative">
-                    <button id="lang-btn" class="flex items-center gap-1.5 px-2.5 h-9 rounded-full border border-border bg-secondary hover:border-primary transition-colors text-xs font-bold" aria-haspopup="true" aria-label="Language">
-                        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" width="20" height="14" class="rounded-sm" alt="">
-                        <span id="lang-code" class="hidden sm:inline">EN</span>
+                <div class="relative hidden sm:block">
+                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="true" aria-label="Language">
+                        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="EN" class="h-4 w-6 rounded-sm object-cover">
+                        <span id="lang-code" class="font-medium text-sm">EN</span>
                     </button>
                     <div class="langmenu" id="lang-menu" role="menu">
                         <button data-lang="en" class="active"><img src="https://flagcdn.com/w40/us.png" width="20" height="14" class="rounded-sm" alt="">English<span class="chk">✓</span></button>
@@ -124,289 +135,421 @@
                         <button data-lang="pt"><img src="https://flagcdn.com/w40/br.png" width="20" height="14" class="rounded-sm" alt="">Português<span class="chk">✓</span></button>
                     </div>
                 </div>
-                <button id="theme-toggle" class="p-2 hover:bg-secondary rounded-full transition-colors">
-                    <!-- Sun Icon (shows in dark mode) -->
-                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <!-- Moon Icon (shows in light mode) -->
-                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                <button id="theme-toggle" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Toggle theme">
+                    <svg id="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    <svg id="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
                 </button>
-                <button id="menu-btn" class="p-2 hover:bg-secondary rounded-full transition-colors" aria-label="Open menu" aria-controls="drawer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <button id="menu-btn" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Open menu">
+                    <svg id="icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+                    <svg id="icon-x" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Hamburger drawer -->
-    <div id="scrim"></div>
-    <nav id="drawer" aria-label="Menu">
-        <button id="drawer-close" class="self-end p-2 rounded-full hover:bg-secondary" aria-label="Close menu">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-        <div class="dsec" data-i18n="d_apps">Apps</div>
-        <a class="dlink" href="/onescore/"><span><span class="text-primary">One</span>Score</span><span class="dsub" data-i18n="d_score">Credibility score</span></a>
-        <a class="dlink" href="https://frazier56.github.io/onesocial-v2-preview/"><span><span class="text-primary">One</span>Social</span><span class="dsub" data-i18n="d_social">Get hired</span></a>
-        <a class="dlink" href="https://frazier56.github.io/oneevents-preview/"><span><span class="text-primary">One</span>Event</span><span class="dsub" data-i18n="d_events">Events &amp; tickets</span></a>
-        <div class="dsec" style="margin-top:16px" data-i18n="d_services">Services</div>
-        <a class="dlink" href="https://onevoice.onesocial.ai"><span><span class="text-primary">One</span>Voice</span><span class="dsub" data-i18n="d_voice">AI receptionist</span></a>
-        <a class="dlink" href="/oneapp/"><span><span class="text-primary">One</span>App</span><span class="dsub" data-i18n="d_app">AI websites</span></a>
-        <div class="dsec" style="margin-top:16px" data-i18n="d_contact">Contact</div>
-        <a class="dlink" href="mailto:contact@oneworldlabs.ai" style="font-size:13.5px;font-weight:600">contact@oneworldlabs.ai</a>
-        <div class="mt-auto pt-4 flex flex-col gap-2.5">
-            <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="w-full text-center border border-gray-500 px-6 py-3 rounded-full font-bold" data-i18n="signin">Sign in</a>
-            <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="w-full text-center bg-primary text-[#0a0a1a] px-6 py-3 rounded-full font-bold" data-i18n="join">Join free</a>
+    <!-- Mobile / full menu overlay -->
+    <div id="menu-overlay" class="hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-xl pt-20 px-6 pb-6 overflow-y-auto">
+        <div class="flex flex-col gap-8 max-w-md mx-auto">
+            <div class="space-y-4">
+                <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Apps</h4>
+                <a href="/onescore/" class="block text-xl font-medium"><span class="text-primary">One</span>Score</a>
+                <a href="https://frazier56.github.io/onesocial-v2-preview/" class="block text-xl font-medium"><span class="text-primary">One</span>Social</a>
+                <a href="https://frazier56.github.io/oneevents-preview/" class="block text-xl font-medium"><span class="text-primary">One</span>Event</a>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Services</h4>
+                <a href="https://onevoice.onesocial.ai" class="block text-xl font-medium"><span class="text-primary">One</span>Voice</a>
+                <a href="/oneapp/" class="block text-xl font-medium"><span class="text-primary">One</span>App</a>
+            </div>
+            <div class="pt-6 border-t border-border/50 flex flex-col gap-4">
+                <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="w-full text-center h-10 px-6 inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">Sign in with One ID</a>
+                <a href="#apps" class="menu-close-link w-full text-center h-10 px-6 inline-flex items-center justify-center rounded-md border border-border font-medium hover:bg-secondary/50 transition-colors">Jump into an app</a>
+            </div>
         </div>
-    </nav>
+    </div>
 
-    <main class="pt-24 md:pt-32 pb-16 md:pb-20">
+    <main class="relative z-10 pt-24 md:pt-32 pb-16 md:pb-20">
         <!-- Hero Section -->
         <section class="container mx-auto px-4 text-center max-w-4xl mb-20 md:mb-32">
-            <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 py-2 rounded-full bg-secondary border border-border backdrop-blur-sm mb-8 text-xs sm:text-sm">
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">3</strong> <span class="text-muted" data-i18n="s_apps">apps</span></span>
+            <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 backdrop-blur-sm mb-8 text-xs sm:text-sm font-medium">
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">3</strong> <span class="text-muted-foreground">apps</span></span>
                 <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">2</strong> <span class="text-muted" data-i18n="s_svcs">services</span></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">2</strong> <span class="text-muted-foreground">services</span></span>
                 <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">1</strong> <span class="text-muted" data-i18n="s_login">login</span></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">1</strong> <span class="text-muted-foreground">login</span></span>
             </div>
 
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-[1.1]"><span data-i18n="h1_l1">Work smarter</span><br><span data-i18n="h1_l2">across your business</span><br><span data-i18n="h1_l3">with </span><span class="text-primary">One</span><span id="rot">App</span></h1>
+            <h1 class="fade-up text-4xl sm:text-5xl md:text-7xl font-heading font-bold tracking-tight leading-[1.1] mb-6">
+                Work smarter<br>
+                across your business<br>
+                with <span class="text-primary">One</span>App
+            </h1>
 
-            <p class="text-base sm:text-lg md:text-xl text-muted max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed" data-i18n="lede">Apps you use and services we run for you — tied together by one login — so small businesses and freelancers get seen, get trusted, and get paid.</p>
+            <p class="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed">
+                Apps you use and services we run for you — tied together by one login — so small businesses and freelancers get seen, get trusted, and get paid.
+            </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-                <a href="#apps" class="w-full sm:w-auto bg-primary text-[#0a0a1a] px-8 py-3 rounded-full font-bold text-base md:text-lg hover:opacity-90 transition-opacity inline-flex items-center justify-center" data-i18n="cta_jump">Jump into an app</a>
-                <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="w-full sm:w-auto border border-gray-500 px-8 py-3 rounded-full font-bold text-base md:text-lg flex items-center justify-center gap-3 hover:bg-secondary transition-colors">
-                    <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
-                    <span data-i18n="cta_signin">Sign in with One ID</span>
+                <a href="#apps" class="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center transition-colors">
+                    Jump into an app <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+                <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-full border border-foreground/50 hover:bg-secondary/50 inline-flex items-center justify-center transition-colors">
+                    <svg class="mr-2 h-6 w-6" width="24" height="24" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+                    Sign in with One ID
                 </a>
             </div>
-            <p class="text-sm text-muted font-medium" data-i18n="microtrust">One login for every app · Free to start · No credit card</p>
+
+            <p class="text-sm text-muted-foreground font-medium">
+                One login for every app · Free to start · No credit card
+            </p>
         </section>
+
         <!-- Apps Section -->
-        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32" id="apps">
+        <section id="apps" class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3">The apps</h3>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Jump into your favorite app</h2>
+                <p class="text-muted-foreground text-lg">Three apps you use yourself — one login gets you into all of them.</p>
+            </div>
+
             <div class="grid md:grid-cols-3 gap-6">
-                <a href="/onescore/" class="app-card block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all" data-ico="onescore">
+                <a href="/onescore/" data-ico="onescore" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
                     <div class="flex justify-between items-start mb-6">
-                        <h3 class="text-2xl font-bold"><span class="text-primary">One</span>Score</h3>
-                        <img src="/ic-onescore.png" alt="Icon" class="w-12 h-12">
+                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Score</h3>
+                        <img src="/ic-onescore.png" alt="OneScore" class="w-12 h-12 object-contain">
                     </div>
-                    <p class="text-muted mb-4" data-i18n="score_desc">Your whole reputation — reviews, real work, social proof — in one verified number you can post anywhere. Free forever.</p>
-                    <div class="text-primary font-bold"><span data-i18n="open_score">Open OneScore</span> →</div>
-                    <div class="hint">✨ <span data-i18n="hover_hint">Hover to preview · click to open</span></div>
-                    <div class="tile-prev">
-                        <div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div>
-                        <div class="pvbar"><span data-i18n="live_preview">Live preview</span><span class="go">Open ↗</span></div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Professional credibility</h4>
+                    <p class="text-muted-foreground leading-relaxed mb-8 h-24">Your whole reputation — reviews, real work, social proof — in one verified number you can post anywhere. Free forever.</p>
+                    <div class="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
+                        Open OneScore <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                     </div>
+                    <div class="tile-prev"><div class="pvframe"><div class="pvload">Loading preview…</div></div><div class="pvbar"><span>Live preview</span><span class="go">Open ↗</span></div></div>
                 </a>
-                <a href="https://frazier56.github.io/onesocial-v2-preview/" class="app-card block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all" data-ico="onesocial">
+                <a href="https://frazier56.github.io/onesocial-v2-preview/" data-ico="onesocial" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
                     <div class="flex justify-between items-start mb-6">
-                        <h3 class="text-2xl font-bold"><span class="text-primary">One</span>Social</h3>
-                        <img src="/ic-onesocial.png" alt="Icon" class="w-12 h-12">
+                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Social</h3>
+                        <img src="/ic-onesocial.png" alt="OneSocial" class="w-12 h-12 object-contain">
                     </div>
-                    <p class="text-muted mb-4" data-i18n="social_desc">Where proof gets you hired — verified reviews, jobs, and payments in one credibility-first marketplace.</p>
-                    <div class="text-primary font-bold"><span data-i18n="open_social">Open OneSocial</span> →</div>
-                    <div class="hint">✨ <span data-i18n="hover_hint">Hover to preview · click to open</span></div>
-                    <div class="tile-prev">
-                        <div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div>
-                        <div class="pvbar"><span data-i18n="live_preview">Live preview</span><span class="go">Open ↗</span></div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">The credibility marketplace</h4>
+                    <p class="text-muted-foreground leading-relaxed mb-8 h-24">Where proof gets you hired — verified reviews, jobs, and payments in one credibility-first marketplace.</p>
+                    <div class="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
+                        Open OneSocial <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                     </div>
+                    <div class="tile-prev"><div class="pvframe"><div class="pvload">Loading preview…</div></div><div class="pvbar"><span>Live preview</span><span class="go">Open ↗</span></div></div>
                 </a>
-                <a href="https://frazier56.github.io/oneevents-preview/" class="app-card block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all" data-ico="oneevents">
+                <a href="https://frazier56.github.io/oneevents-preview/" data-ico="oneevents" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
                     <div class="flex justify-between items-start mb-6">
-                        <h3 class="text-2xl font-bold"><span class="text-primary">One</span>Event</h3>
-                        <img src="/ic-oneevents.png" alt="Icon" class="w-12 h-12">
+                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Event</h3>
+                        <img src="/ic-oneevents.png" alt="OneEvent" class="w-12 h-12 object-contain">
                     </div>
-                    <p class="text-muted mb-4" data-i18n="events_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
-                    <div class="text-primary font-bold"><span data-i18n="open_events">Open OneEvent</span> →</div>
-                    <div class="hint">✨ <span data-i18n="hover_hint">Hover to preview · click to open</span></div>
-                    <div class="tile-prev">
-                        <div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div>
-                        <div class="pvbar"><span data-i18n="live_preview">Live preview</span><span class="go">Open ↗</span></div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Events &amp; tickets</h4>
+                    <p class="text-muted-foreground leading-relaxed mb-8 h-24">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
+                    <div class="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
+                        Open OneEvent <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                     </div>
+                    <div class="tile-prev"><div class="pvframe"><div class="pvload">Loading preview…</div></div><div class="pvbar"><span>Live preview</span><span class="go">Open ↗</span></div></div>
                 </a>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3">Done for you</h3>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Enhance your business with our services</h2>
+                <p class="text-muted-foreground text-base md:text-lg">Hands-off services our team runs for you — so you can focus on the work.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <a href="https://onevoice.onesocial.ai" data-ico="onevoice" class="app-card group relative overflow-hidden block p-6 md:p-10 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300">
+                    <div class="absolute top-6 right-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 rounded-full z-20">Done for you</div>
+                    <img src="/ic-onevoice.png" alt="OneVoice" class="w-16 h-16 object-contain mb-6">
+                    <h3 class="text-3xl font-bold font-heading mb-4"><span class="text-primary">One</span>Voice</h3>
+                    <p class="text-muted-foreground text-lg leading-relaxed mb-8">An AI receptionist that answers every call 24/7, qualifies the lead, and books the appointment — so a missed call is never a missed customer. We set it up and run it for you.</p>
+                    <div class="flex items-center text-primary font-medium group-hover:translate-x-1 transition-transform">
+                        Get OneVoice <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                    <div class="tile-prev"><div class="pvframe"><div class="pvload">Loading preview…</div></div><div class="pvbar"><span>Live preview</span><span class="go">Open ↗</span></div></div>
+                </a>
+                <a href="/oneapp/" data-ico="oneapp" class="app-card group relative overflow-hidden block p-6 md:p-10 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300">
+                    <div class="absolute top-6 right-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 rounded-full z-20">Done for you</div>
+                    <img src="/ic-oneapp.png" alt="OneApp" class="w-16 h-16 object-contain mb-6">
+                    <h3 class="text-3xl font-bold font-heading mb-4"><span class="text-primary">One</span>App</h3>
+                    <p class="text-muted-foreground text-lg leading-relaxed mb-8">We build your website with AI, then handle the hosting, domain, email, and ongoing updates for you — a real web presence without the hassle.</p>
+                    <div class="flex items-center text-primary font-medium group-hover:translate-x-1 transition-transform">
+                        Get OneApp <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                    <div class="tile-prev"><div class="pvframe"><div class="pvload">Loading preview…</div></div><div class="pvbar"><span>Live preview</span><span class="go">Open ↗</span></div></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3">Why it works</h3>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Running a business, made simpler</h2>
+                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">The busywork that eats your day — answered calls, a real website, proof you can trust — handled in one place.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 md:p-8 rounded-3xl bg-secondary/30 border border-border/50 flex flex-col">
+                    <div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-primary mb-6">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Never miss a call</h3>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">OneVoice answers every call 24/7, qualifies the lead, and books the appointment.</p>
+                    <a href="https://onevoice.onesocial.ai" class="text-primary text-sm font-medium hover:underline inline-flex items-center">Meet OneVoice <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                </div>
+                <div class="p-6 md:p-8 rounded-3xl bg-secondary/30 border border-border/50 flex flex-col">
+                    <div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-primary mb-6">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">A website built with AI</h3>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">Tell OneApp about your business and it builds your site with AI — then we host it.</p>
+                    <a href="/oneapp/" class="text-primary text-sm font-medium hover:underline inline-flex items-center">See OneApp <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                </div>
+                <div class="p-6 md:p-8 rounded-3xl bg-secondary/30 border border-border/50 flex flex-col">
+                    <div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-primary mb-6">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Proof you can point to</h3>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">OneScore turns your reviews and real work into one verified number.</p>
+                    <a href="/onescore/" class="text-primary text-sm font-medium hover:underline inline-flex items-center">Get your OneScore <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                </div>
+                <div class="p-6 md:p-8 rounded-3xl bg-secondary/30 border border-border/50 flex flex-col">
+                    <div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-primary mb-6">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Get hired and get paid</h3>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">OneSocial is the marketplace where verified proof wins the job.</p>
+                    <a href="https://frazier56.github.io/onesocial-v2-preview/" class="text-primary text-sm font-medium hover:underline inline-flex items-center">Explore OneSocial <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platforms Section -->
+        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3">Use it anywhere</h3>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Works on any phone or computer</h2>
+                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">No download required. Open it in your browser today — and add it to your home screen so it opens like an app.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="p-6 md:p-10 rounded-3xl bg-card border border-border">
+                    <div class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground mb-8">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Add to your phone</h3>
+                    <p class="text-muted-foreground text-lg leading-relaxed mb-8">Open any One World app in your mobile browser, tap Share, and choose "Add to Home Screen." It installs an icon and opens full-screen — no App Store needed.</p>
+                    <div class="inline-block px-4 py-2 rounded-full border border-border/50 text-xs font-bold tracking-wider text-muted-foreground">NATIVE APPS COMING SOON</div>
+                </div>
+                <div class="p-6 md:p-10 rounded-3xl bg-card border border-border">
+                    <div class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground mb-8">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Use it on desktop</h3>
+                    <p class="text-muted-foreground text-lg leading-relaxed mb-8">Everything runs in your browser on any computer — nothing to install, nothing to update. Bookmark oneworldlabs.ai and you're one click from every app.</p>
+                    <a href="#apps" class="rounded-full px-6 h-10 inline-flex items-center justify-center bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">Jump into an app <svg class="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container mx-auto px-4 max-w-3xl mb-20">
+            <div class="text-center mb-12">
+                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3">Good to know</h3>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold">Did you know?</h2>
+            </div>
+
+            <div id="faq">
+                <div class="qa border-b border-border/50 px-6 bg-card rounded-2xl mb-4">
+                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
+                        <span class="flex items-center gap-4"><span class="text-primary font-bold text-sm">01 /</span>One World Labs is apps you use plus services we run</span>
+                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14">Three apps you use yourself — OneScore for credibility, OneSocial to get hired, OneEvent for tickets — plus two done-for-you services our team runs: OneVoice answers your calls and OneApp builds and manages your website. Everything shares one login and one profile.</p></div>
+                </div>
+                <div class="qa border-b border-border/50 px-6 bg-card rounded-2xl mb-4">
+                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
+                        <span class="flex items-center gap-4"><span class="text-primary font-bold text-sm">02 /</span>You can start free — no credit card</span>
+                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14">OneScore is free forever, and every app lets you get started without paying up front. Our done-for-you services are paid — you only upgrade when a tool is earning its keep.</p></div>
+                </div>
+                <div class="qa border-b border-border/50 px-6 bg-card rounded-2xl mb-4">
+                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
+                        <span class="flex items-center gap-4"><span class="text-primary font-bold text-sm">03 /</span>One login gets you into everything</span>
+                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14">Sign in once with One ID and you're in every One World app and service — no separate accounts, no re-entering your details, no juggling passwords across tools.</p></div>
+                </div>
+                <div class="qa border-b border-border/50 px-6 bg-card rounded-2xl mb-4">
+                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
+                        <span class="flex items-center gap-4"><span class="text-primary font-bold text-sm">04 /</span>Built credibility-first — you stay in control</span>
+                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14">No algorithm decides who sees your business, and your reputation isn't scattered across ten platforms. Your proof is verified, yours, and portable — you decide where it shows up.</p></div>
+                </div>
             </div>
         </section>
     </main>
+
     <!-- Footer -->
-    <footer class="border-t border-border pt-12 md:pt-20 pb-8 md:pb-10 bg-background">
+    <footer class="border-t border-border/50 bg-background pt-12 md:pt-20 pb-8 md:pb-10">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 mb-12 md:mb-16">
                 <div>
-                    <h4 class="font-bold text-sm text-muted uppercase tracking-wider mb-6" data-i18n="f_apps">Apps</h4>
+                    <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6">Apps</h4>
                     <ul class="space-y-4">
-                        <li><a href="/onescore/" class="hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Score</a></li>
-                        <li><a href="https://frazier56.github.io/onesocial-v2-preview/" class="hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Social</a></li>
-                        <li><a href="https://frazier56.github.io/oneevents-preview/" class="hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Event</a></li>
+                        <li><a href="/onescore/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Score</a></li>
+                        <li><a href="https://frazier56.github.io/onesocial-v2-preview/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Social</a></li>
+                        <li><a href="https://frazier56.github.io/oneevents-preview/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Event</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-sm text-muted uppercase tracking-wider mb-6" data-i18n="f_services">Services</h4>
+                    <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6">Services</h4>
                     <ul class="space-y-4">
-                        <li><a href="https://onevoice.onesocial.ai" class="hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Voice</a></li>
-                        <li><a href="/oneapp/" class="hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>App</a></li>
+                        <li><a href="https://onevoice.onesocial.ai" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Voice</a></li>
+                        <li><a href="/oneapp/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>App</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-sm text-muted uppercase tracking-wider mb-6" data-i18n="f_company">Company</h4>
+                    <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6">Company</h4>
                     <ul class="space-y-4">
-                        <li><a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="hover:text-primary transition-colors" data-i18n="signin_oneid">Sign in with One ID</a></li>
-                        <li><a href="mailto:contact@oneworldlabs.ai" class="hover:text-primary transition-colors" data-i18n="f_contact">Contact</a></li>
+                        <li><a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="text-foreground hover:text-primary transition-colors">Sign in with One ID</a></li>
+                        <li><a href="mailto:contact@oneworldlabs.ai" class="text-foreground hover:text-primary transition-colors">Contact</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-sm text-muted uppercase tracking-wider mb-6" data-i18n="f_start">Get started</h4>
+                    <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6">Get started</h4>
                     <ul class="space-y-4">
-                        <li><a href="#apps" class="hover:text-primary transition-colors" data-i18n="cta_jump">Jump into an app →</a></li>
-                        <li><a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="hover:text-primary transition-colors" data-i18n="signin_oneid">Sign in with One ID</a></li>
+                        <li><a href="#apps" class="text-foreground hover:text-primary transition-colors inline-flex items-center">Jump into an app <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></li>
+                        <li><a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="text-foreground hover:text-primary transition-colors">Sign in with One ID</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="pt-8 border-t border-border text-center text-muted text-sm">
-                <p><span data-i18n="copyright">© 2026 One World Labs, Inc. · Built for small businesses and freelancers, everywhere.</span></p>
+
+            <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border/50 gap-6 text-center md:text-left">
+                <div class="flex items-center gap-4">
+                    <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.25 8h4.5v14h-4.5V8zM8 8h4.3v1.9h.06c.6-1.1 2.05-2.26 4.22-2.26 4.5 0 5.34 2.96 5.34 6.8V22h-4.5v-6.6c0-1.57-.03-3.6-2.2-3.6-2.2 0-2.53 1.72-2.53 3.5V22H8V8z"/></svg></a>
+                    <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+                    <a href="#" aria-label="X" class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.9l-5.4-7-6.2 7H1.4l8-9.2L1 2h7l4.9 6.5L18.9 2zm-1.2 18h1.9L7.1 4H5.1l12.6 16z"/></svg></a>
+                </div>
+                <div class="text-sm text-muted-foreground">
+                    <p class="mb-1">© 2026 One World Labs, Inc. · OneScore · OneSocial · OneEvent · OneVoice · OneApp</p>
+                    <p>Built for small businesses and freelancers, everywhere.</p>
+                </div>
             </div>
         </div>
     </footer>
-    <!-- Theme Toggle Script -->
-    <script>
-        var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-        var themeColorMeta = document.getElementById('theme-color-meta');
-        function setThemeIcons(isDark){
-            if(isDark){ themeToggleLightIcon.classList.remove('hidden'); themeToggleDarkIcon.classList.add('hidden'); }
-            else { themeToggleDarkIcon.classList.remove('hidden'); themeToggleLightIcon.classList.add('hidden'); }
-            if(themeColorMeta) themeColorMeta.setAttribute('content', isDark ? '#0B0F1A' : '#FAFAF8');
-        }
-        // Change the icons inside the button based on previous settings
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) || !('color-theme' in localStorage)) {
-            document.body.classList.add('dark');
-            setThemeIcons(true);
-        } else {
-            document.body.classList.remove('dark');
-            setThemeIcons(false);
-        }
-        var themeToggleBtn = document.getElementById('theme-toggle');
-        themeToggleBtn.addEventListener('click', function() {
-            if (document.body.classList.contains('dark')) {
-                document.body.classList.remove('dark');
-                localStorage.setItem('color-theme', 'light');
-                setThemeIcons(false);
-            } else {
-                document.body.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-                setThemeIcons(true);
-            }
-        });
+</div>
 
-        /* ---------- hero rotator ---------- */
-        (function(){
-            var names = ['App','Score','Social','Event','Voice'];
-            var i = 0, el = document.getElementById('rot');
-            if (!el) return;
-            el.style.transition = 'opacity .22s ease';
-            setInterval(function(){
-                i = (i+1) % names.length;
-                el.style.opacity = 0;
-                setTimeout(function(){ el.textContent = names[i]; el.style.opacity = 1; }, 220);
-            }, 2200);
-        })();
+<script>
+    /* ---------- theme toggle ---------- */
+    var themeColorMeta = document.getElementById('theme-color-meta');
+    function applyTheme(isDark){
+        document.body.classList.toggle('dark', isDark);
+        if (themeColorMeta) themeColorMeta.setAttribute('content', isDark ? '#0B0F1A' : '#FAFAF8');
+    }
+    var savedTheme = localStorage.getItem('color-theme');
+    applyTheme(savedTheme ? savedTheme === 'dark' : (window.matchMedia('(prefers-color-scheme: dark)').matches || !savedTheme));
+    document.getElementById('theme-toggle').addEventListener('click', function(){
+        var isDark = !document.body.classList.contains('dark');
+        applyTheme(isDark);
+        localStorage.setItem('color-theme', isDark ? 'dark' : 'light');
+    });
 
-        /* ---------- hamburger drawer ---------- */
-        var drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
-        function drawerOpen(o){ drawer.classList.toggle('open', o); scrim.classList.toggle('on', o); }
-        document.getElementById('menu-btn').addEventListener('click', function(){ drawerOpen(true); });
-        document.getElementById('drawer-close').addEventListener('click', function(){ drawerOpen(false); });
-        scrim.addEventListener('click', function(){ drawerOpen(false); });
+    /* ---------- mobile / full menu overlay ---------- */
+    var menuBtn = document.getElementById('menu-btn'), overlay = document.getElementById('menu-overlay');
+    var iconMenu = document.getElementById('icon-menu'), iconX = document.getElementById('icon-x');
+    function setMenu(open){
+        overlay.classList.toggle('hidden', !open);
+        iconMenu.classList.toggle('hidden', open);
+        iconX.classList.toggle('hidden', !open);
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    menuBtn.addEventListener('click', function(){ setMenu(overlay.classList.contains('hidden')); });
+    overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
 
-        /* ---------- language selector ---------- */
-        var I18N = {
-            en: { flag:'us', code:'EN' },
-            es: {
-                flag:'es', code:'ES',
-                s_apps:'apps', s_svcs:'servicios', s_login:'acceso',
-                h1_l1:'Trabaja mejor', h1_l2:'en todo tu negocio', h1_l3:'con ',
-                lede:'Apps que usas y servicios que manejamos por ti — unidos por un solo acceso — para que los pequeños negocios y freelancers los vean, confíen en ellos y les paguen.',
-                cta_jump:'Entra a una app', cta_signin:'Inicia con One ID', signin_oneid:'Inicia con One ID', signin:'Iniciar sesión', join:'Únete gratis',
-                microtrust:'Un acceso para cada app · Gratis para empezar · Sin tarjeta',
-                score_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado que publicas donde sea. Gratis para siempre.',
-                social_desc:'Donde las pruebas te consiguen trabajo — reseñas verificadas, empleos y pagos en un marketplace basado en credibilidad.',
-                events_desc:'Crea un evento, vende boletos y registra invitados con QR — en minutos.',
-                open_score:'Abrir OneScore', open_social:'Abrir OneSocial', open_events:'Abrir OneEvent',
-                hover_hint:'Pasa el cursor para previsualizar · clic para abrir', loading:'Cargando vista…', live_preview:'Vista en vivo',
-                d_apps:'Apps', d_services:'Servicios', d_voice:'Recepcionista IA', d_app:'Sitios web IA', d_score:'Puntaje de credibilidad', d_social:'Consigue trabajo', d_events:'Eventos y boletos', d_contact:'Contacto',
-                f_apps:'Apps', f_services:'Servicios', f_company:'Empresa', f_contact:'Contacto', f_start:'Empieza',
-                copyright:'© 2026 One World Labs, Inc. · Hecho para pequeños negocios y freelancers, en todas partes.'
-            },
-            de: { flag:'de', code:'DE', s_apps:'Apps', s_svcs:'Services', s_login:'Login', h1_l1:'Arbeite intelligenter', h1_l2:'in deinem Geschäft', h1_l3:'mit ', cta_jump:'In eine App springen', cta_signin:'Mit One ID anmelden', signin_oneid:'Mit One ID anmelden', signin:'Anmelden', join:'Kostenlos starten', d_apps:'Apps', d_services:'Services', d_contact:'Kontakt' },
-            ru: { flag:'ru', code:'RU', s_apps:'прил.', s_svcs:'сервиса', s_login:'вход', h1_l1:'Работайте умнее', h1_l2:'во всём бизнесе', h1_l3:'с ', cta_jump:'Перейти в приложение', cta_signin:'Войти через One ID', signin_oneid:'Войти через One ID', signin:'Войти', join:'Начать бесплатно', d_apps:'Приложения', d_services:'Сервисы', d_contact:'Контакты' },
-            zh: { flag:'cn', code:'ZH', s_apps:'应用', s_svcs:'服务', s_login:'登录', h1_l1:'更聪明地经营', h1_l2:'您的业务', h1_l3:'携手 ', cta_jump:'进入应用', cta_signin:'使用 One ID 登录', signin_oneid:'使用 One ID 登录', signin:'登录', join:'免费加入', d_apps:'应用', d_services:'服务', d_contact:'联系' },
-            pt: { flag:'br', code:'PT', s_apps:'apps', s_svcs:'serviços', s_login:'login', h1_l1:'Trabalhe melhor', h1_l2:'em todo o seu negócio', h1_l3:'com ', cta_jump:'Entrar em um app', cta_signin:'Entrar com One ID', signin_oneid:'Entrar com One ID', signin:'Entrar', join:'Comece grátis', d_apps:'Apps', d_services:'Serviços', d_contact:'Contato' }
-        };
-        var EN_CACHE = {};
-        function applyLang(lang){
-            document.querySelectorAll('[data-i18n]').forEach(function(el){
-                var k = el.getAttribute('data-i18n');
-                if (!(k in EN_CACHE)) EN_CACHE[k] = el.textContent;
-                el.textContent = (lang !== 'en' && I18N[lang] && I18N[lang][k]) ? I18N[lang][k] : EN_CACHE[k];
-            });
-            document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N[lang].flag + '.png';
-            var lc = document.getElementById('lang-code'); if (lc) lc.textContent = I18N[lang].code;
-            document.querySelectorAll('#lang-menu button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
-            document.documentElement.lang = lang;
-            try { localStorage.setItem('owl-lang', lang); } catch(e){}
-        }
-        var langBtn = document.getElementById('lang-btn'), langMenu = document.getElementById('lang-menu');
+    /* ---------- language selector ---------- */
+    var I18N = {
+        en: { flag:'us', code:'EN' },
+        es: { flag:'es', code:'ES' },
+        de: { flag:'de', code:'DE' },
+        ru: { flag:'ru', code:'RU' },
+        zh: { flag:'cn', code:'ZH' },
+        pt: { flag:'br', code:'PT' }
+    };
+    var langBtn = document.getElementById('lang-btn'), langMenu = document.getElementById('lang-menu');
+    if (langBtn) {
         langBtn.addEventListener('click', function(e){ e.stopPropagation(); langMenu.classList.toggle('open'); });
         document.addEventListener('click', function(){ langMenu.classList.remove('open'); });
         langMenu.querySelectorAll('button').forEach(function(b){
-            b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); langMenu.classList.remove('open'); });
-        });
-        try {
-            var savedLang = localStorage.getItem('owl-lang');
-            if (savedLang && savedLang !== 'en') applyLang(savedLang);
-        } catch(e){}
-
-        /* ---------- hover-to-preview (real live page, scaled iframe) ---------- */
-        (function(){
-            var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-            var STATIC = { onesocial:'/pv-onesocial.jpg', oneevents:'/pv-oneevents.jpg' };
-            if (canHover) Object.keys(STATIC).forEach(function(k){ var im = new Image(); im.src = STATIC[k]; });
-            if (!canHover) return;
-            document.querySelectorAll('a.app-card').forEach(function(card){
-                var key = card.getAttribute('data-ico');
-                var url = card.getAttribute('href'); if (!url) return;
-                var layer = card.querySelector('.tile-prev');
-                var frame = layer.querySelector('.pvframe');
-                var loaded = false;
-                function fail(){ var l = frame.querySelector('.pvload'); if (l){ l.style.display = 'flex'; l.textContent = 'Preview unavailable — click to open ↗'; } }
-                function build(){
-                    if (loaded) return; loaded = true;
-                    if (STATIC[key]) {
-                        var im = document.createElement('img'); im.alt = '';
-                        im.onload = function(){ var l = frame.querySelector('.pvload'); if (l) l.style.display = 'none'; };
-                        im.onerror = fail; im.src = STATIC[key]; frame.insertBefore(im, frame.firstChild);
-                        return;
-                    }
-                    var f = document.createElement('iframe');
-                    f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
-                    f.setAttribute('scrolling', 'no'); f.setAttribute('tabindex', '-1'); f.setAttribute('aria-hidden', 'true'); f.referrerPolicy = 'no-referrer';
-                    var vw = 900, s = card.clientWidth / vw;
-                    f.style.width = vw + 'px'; f.style.height = Math.round(card.clientHeight / s) + 'px'; f.style.transform = 'scale(' + s + ')';
-                    f.onload = function(){
-                        var l = frame.querySelector('.pvload'); if (l) l.style.display = 'none';
-                        setTimeout(function(){
-                            try {
-                                var d = f.contentDocument;
-                                if (d && (!d.body || d.body.innerText.trim().length === 0)) fail();
-                            } catch(e) { /* cross-origin: leave it showing */ }
-                        }, 1400);
-                    };
-                    f.onerror = fail;
-                    f.src = url; frame.insertBefore(f, frame.firstChild);
-                    setTimeout(function(){ var l = frame.querySelector('.pvload'); if (l && l.style.display !== 'none') fail(); }, 6000);
-                }
-                card.addEventListener('mouseenter', build);
+            b.addEventListener('click', function(){
+                var lang = b.getAttribute('data-lang');
+                document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N[lang].flag + '.png';
+                document.getElementById('lang-code').textContent = I18N[lang].code;
+                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); });
+                document.documentElement.lang = lang;
+                langMenu.classList.remove('open');
+                try { localStorage.setItem('owl-lang', lang); } catch(e){}
             });
-        })();
-    </script>
+        });
+    }
+
+    /* ---------- FAQ accordion (single-open) ---------- */
+    document.querySelectorAll('#faq .qa').forEach(function(qa){
+        qa.querySelector('.qa-trigger').addEventListener('click', function(){
+            var wasOpen = qa.classList.contains('open');
+            document.querySelectorAll('#faq .qa').forEach(function(o){ o.classList.remove('open'); });
+            if (!wasOpen) qa.classList.add('open');
+        });
+    });
+
+    /* ---------- hover-to-preview (real live page, scaled iframe) ---------- */
+    (function(){
+        var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+        var STATIC = { onesocial:'/pv-onesocial.jpg', oneevents:'/pv-oneevents.jpg' };
+        if (canHover) Object.keys(STATIC).forEach(function(k){ var im = new Image(); im.src = STATIC[k]; });
+        if (!canHover) return;
+        document.querySelectorAll('a.app-card').forEach(function(card){
+            var key = card.getAttribute('data-ico');
+            var url = card.getAttribute('href'); if (!url) return;
+            var layer = card.querySelector('.tile-prev');
+            var frame = layer.querySelector('.pvframe');
+            var loaded = false;
+            function fail(){ var l = frame.querySelector('.pvload'); if (l){ l.style.display = 'flex'; l.textContent = 'Preview unavailable — click to open ↗'; } }
+            function build(){
+                if (loaded) return; loaded = true;
+                if (STATIC[key]) {
+                    var im = document.createElement('img'); im.alt = '';
+                    im.onload = function(){ var l = frame.querySelector('.pvload'); if (l) l.style.display = 'none'; };
+                    im.onerror = fail; im.src = STATIC[key]; frame.insertBefore(im, frame.firstChild);
+                    return;
+                }
+                var f = document.createElement('iframe');
+                f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
+                f.setAttribute('scrolling', 'no'); f.setAttribute('tabindex', '-1'); f.setAttribute('aria-hidden', 'true'); f.referrerPolicy = 'no-referrer';
+                var vw = 900, s = card.clientWidth / vw;
+                f.style.width = vw + 'px'; f.style.height = Math.round(card.clientHeight / s) + 'px'; f.style.transform = 'scale(' + s + ')';
+                f.onload = function(){
+                    var l = frame.querySelector('.pvload'); if (l) l.style.display = 'none';
+                    setTimeout(function(){
+                        try {
+                            var d = f.contentDocument;
+                            if (d && (!d.body || d.body.innerText.trim().length === 0)) fail();
+                        } catch(e) { /* cross-origin: leave it showing */ }
+                    }, 1400);
+                };
+                f.onerror = fail;
+                f.src = url; frame.insertBefore(f, frame.firstChild);
+                setTimeout(function(){ var l = frame.querySelector('.pvload'); if (l && l.style.display !== 'none') fail(); }, 6000);
+            }
+            card.addEventListener('mouseenter', build);
+        });
+    })();
+</script>
 </body>
 </html>
