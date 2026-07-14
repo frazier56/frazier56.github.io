@@ -114,9 +114,11 @@
     /* ---------- VAIA floating voice orb (ambient, tap-to-talk) ---------- */
     #vaia-widget{position:fixed;top:74px;left:14px;right:auto;z-index:45;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
     @media (min-width:640px){ #vaia-widget{top:26vh;left:64px} }
-    /* no hard-edged disk — a soft radial fade + backdrop blur instead of a solid card background,
-       border, and drop shadow, so she reads as an ambient presence rather than a sticker on the page */
-    .vaia-orb{position:relative;width:132px;height:132px;border-radius:50%;background:radial-gradient(circle,var(--color-bg) 0%,var(--color-bg) 48%,transparent 78%);border:none;box-shadow:0 0 34px rgba(0,210,180,.16);backdrop-filter:blur(16px);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:vaiaGlow 4.5s ease-in-out infinite;transition:opacity .4s ease,filter .4s ease,box-shadow .4s ease;opacity:.85}
+    /* NO disk at all — no fill, no backdrop-blur. Both of those still read as a solid/frosted
+       circle sitting on the page and visibly interfere with whatever text is behind her. All
+       that's left is the soft teal glow (already blurred to a 34-56px halo, no hard edge) and
+       the ring pulses below — she's just the rings + glow, nothing else. */
+    .vaia-orb{position:relative;width:132px;height:132px;border-radius:50%;background:transparent;border:none;box-shadow:0 0 34px rgba(0,210,180,.16);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:vaiaGlow 4.5s ease-in-out infinite;transition:opacity .4s ease,filter .4s ease,box-shadow .4s ease;opacity:.85}
     @media (min-width:640px){ .vaia-orb{width:152px;height:152px} }
     @keyframes vaiaGlow{0%,100%{box-shadow:0 0 34px rgba(0,210,180,.16)}50%{box-shadow:0 0 56px rgba(0,210,180,.36)}}
     /* rings now emit from a small central point and dissolve outward as a blurred aura, not crisp
@@ -126,7 +128,7 @@
     .vaia-ring:nth-child(3){animation-delay:2.4s}
     @keyframes vaiaPulse{0%{transform:scale(1);opacity:.55}100%{transform:scale(4);opacity:0}}
     .vaia-bars{position:relative;display:flex;align-items:center;justify-content:center;gap:5px;height:40px;z-index:2;transition:height .25s ease,transform .25s ease}
-    .vaia-bars span{display:block;width:5px;border-radius:3px;background:#00d2b4;height:12px;animation:vaiaBar 2.2s ease-in-out infinite;opacity:.65}
+    .vaia-bars span{display:block;width:5px;border-radius:3px;background:#00d2b4;height:12px;animation:vaiaBar 2.2s ease-in-out infinite;opacity:.65;filter:drop-shadow(0 0 5px var(--color-bg)) drop-shadow(0 0 5px var(--color-bg))}
     .vaia-bars span:nth-child(1){animation-delay:0s}
     .vaia-bars span:nth-child(2){animation-delay:.16s}
     .vaia-bars span:nth-child(3){animation-delay:.32s}
@@ -151,7 +153,9 @@
        talking (the vertical bars — bars are ONLY shown while she's actually speaking) */
     #vaia-widget.thinking .vaia-bars,
     #vaia-widget.listening .vaia-bars{display:none}
-    .vaia-think,.vaia-listen{display:none;position:absolute;inset:0;align-items:center;justify-content:center;text-align:center;font-size:12px;font-weight:800;letter-spacing:.12em;color:#00d2b4;text-transform:uppercase;z-index:4;animation:vaiaThinkPulse 1.4s ease-in-out infinite}
+    /* no backdrop behind her anymore, so the label needs its own legibility — a soft halo in the
+       page's own background color instead of a hard circular card */
+    .vaia-think,.vaia-listen{display:none;position:absolute;inset:0;align-items:center;justify-content:center;text-align:center;font-size:12px;font-weight:800;letter-spacing:.12em;color:#00d2b4;text-transform:uppercase;z-index:4;animation:vaiaThinkPulse 1.4s ease-in-out infinite;text-shadow:0 0 6px var(--color-bg),0 0 10px var(--color-bg),0 0 16px var(--color-bg),0 0 16px var(--color-bg)}
     @media (min-width:640px){ .vaia-think,.vaia-listen{font-size:13.5px} }
     #vaia-widget.thinking .vaia-think,
     #vaia-widget.listening .vaia-listen{display:flex}
@@ -770,6 +774,11 @@
         var textIn = document.getElementById('vaia-text');
         var history = [];
         var busy = false, voiceMode = false, asleep = false, everSlept = false, currentAudio = null, pendingResolve = null, abortCtl = null;
+        /* tracks consecutive listen cycles that ended with nothing heard, so she can announce
+           "going to rest" after real silence instead of either looping forever or going mute
+           with no explanation (the "5th state" — neither listening, thinking, speaking, nor asleep) */
+        var noResultStreak = 0;
+        var AUTO_SLEEP_AFTER = 3;
 
         function addMsg(role, text){
             var b = document.createElement('div');
@@ -957,17 +966,38 @@
         if (Recognition) {
             recog = new Recognition();
             recog.lang = 'en-US'; recog.continuous = false; recog.interimResults = false;
-            recog.onstart = function(){ widget.classList.add('listening'); };
-            recog.onend = function(){ widget.classList.remove('listening'); };
+            var gotResultThisCycle = false;
+            recog.onstart = function(){ widget.classList.add('listening'); gotResultThisCycle = false; };
             recog.onresult = function(e){
                 var t = e.results[0][0].transcript;
-                if (t && t.trim()) askVaia(t.trim());
+                if (t && t.trim()) { gotResultThisCycle = true; noResultStreak = 0; askVaia(t.trim()); }
             };
-            recog.onerror = function(e){
+            recog.onerror = function(){ /* onend always fires right after — it owns what happens next */ };
+            /* onend is the ONE event that always fires no matter how the cycle ended (result, error,
+               or a plain silent timeout some browsers don't even report as an error) — so it's the
+               single place that decides what happens next. This is what closes the old "5th state":
+               previously a silent timeout with no error event just dropped her into limbo (not
+               listening, not thinking, not speaking, not asleep). Now every path leads to exactly
+               one of the four real states. */
+            recog.onend = function(){
                 widget.classList.remove('listening');
-                /* a plain "no-speech" timeout used to just go silent with zero feedback — quietly try
-                   listening again instead of leaving her looking dead when she's actually fine */
-                if (voiceMode && !asleep && !busy && e && e.error === 'no-speech') { startListening(); }
+                if (busy || asleep || !voiceMode) return; // askVaia() owns the next state, or she's off
+                if (gotResultThisCycle) return; // a local-intent reply is already handling its own restart
+                noResultStreak++;
+                if (noResultStreak >= AUTO_SLEEP_AFTER) {
+                    noResultStreak = 0;
+                    var line = "I haven't heard anything in a bit, so I'll rest for now — just tap me anytime to wake me back up!";
+                    addMsg('vaia', line);
+                    history.push({ role:'assistant', content: line });
+                    speak(line).then(function(){
+                        asleep = true; voiceMode = false;
+                        widget.classList.remove('listening', 'speaking');
+                        widget.classList.add('asleep');
+                        everSlept = true;
+                    });
+                    return;
+                }
+                startListening();
             };
         }
         function startListening(){
@@ -984,7 +1014,7 @@
             if (pendingResolve) { var _r = pendingResolve; pendingResolve = null; _r(); }
         }
 
-        var GREETING = "Hey, welcome to One World Labs — this is VAIA! Let me know if you have any questions.";
+        var GREETING = "Hey, welcome to One World Labs — this is VAIA! Let me know if you have any questions, or tap me anytime if you'd like me to go quiet.";
         var WAKE_LINES = [
             "Oh — I fell asleep there for a sec, sorry about that! I'm back now, how can I help?",
             "Whoops, dozed off for a moment. I'm back — what were we saying?",
@@ -1004,6 +1034,7 @@
         }
         function wake(){
             asleep = false;
+            noResultStreak = 0;
             widget.classList.remove('asleep');
             var goListen = function(){ voiceMode = true; startListening(); };
             if (everSlept) {
