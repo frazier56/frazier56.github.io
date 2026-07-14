@@ -1,7 +1,7 @@
-<!doctype html>
-<html lang="en" data-theme="dark">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <script>
 /* One ID / OAuth redirect-catcher — MUST stay at the very top of index.html and 404.html.
    Supabase returns tokens in the hash (#access_token=…) or ?code= for PKCE. Hand the
@@ -13,772 +13,400 @@
   }
 })();
 </script>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>One World Labs — Work smarter across your whole business</title>
-<meta name="description" content="OneScore, OneSocial, OneEvent — apps you use. OneVoice and OneApp — done-for-you services. One login ties them all together. Built for small businesses and freelancers." />
-<link rel="manifest" href="./owl-manifest.webmanifest" />
-<link rel="apple-touch-icon" href="./apple-touch-icon.png" />
-<meta name="theme-color" content="#0B0F1A" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<meta name="description" content="OneScore, OneSocial, OneEvent — apps you use. OneVoice and OneApp — done-for-you services. One login ties them all together. Built for small businesses and freelancers.">
+<link rel="manifest" href="/owl-manifest.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0B0F1A" id="theme-color-meta">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Manrope', 'sans-serif'],
+                    heading: ['Sora', 'sans-serif'],
+                },
+                colors: {
+                    primary: '#00d2b4',
+                    secondary: 'var(--color-secondary)',
+                    background: 'var(--color-bg)',
+                    foreground: 'var(--color-fg)',
+                    border: 'var(--color-border)',
+                    card: 'var(--color-card)',
+                    muted: 'var(--color-muted)',
+                }
+            }
+        }
+    }
+</script>
 <style>
-  :root {
-    --teal:#14B8A6; --teal-d:#0D9488; --teal-l:#2DD4BF;
-    --r-card:18px; --r-btn:12px;
-  }
-  html[data-theme="dark"] {
-    --bg:#0B0F1A; --bg2:#11161F; --ink:#FAFAF8; --muted:#A8B0BD; --faint:#6b7480;
-    --card:rgba(26,33,46,.55); --card-solid:#141a26; --border:rgba(250,250,248,.09);
-    --glass-hi:rgba(250,250,248,.06); --shadow:0 8px 32px rgba(0,0,0,.35);
-    --bar:rgba(11,15,26,.72); --glow:rgba(20,184,166,.14);
-  }
-  html[data-theme="light"] {
-    --bg:#FAFAF8; --bg2:#f2f1ec; --ink:#0B0F1A; --muted:#4A5160; --faint:#8a93a3;
-    --card:rgba(255,255,255,.82); --card-solid:#ffffff; --border:rgba(11,15,26,.09);
-    --glass-hi:rgba(255,255,255,.7); --shadow:0 8px 32px rgba(11,15,26,.10);
-    --bar:rgba(250,250,248,.78); --glow:rgba(20,184,166,.10);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body { background:var(--bg); color:var(--ink); font-family:Inter,system-ui,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; transition:background .4s ease, color .4s ease; }
-  a { color:inherit; }
+    :root {
+        --color-bg: #ffffff;
+        --color-fg: #0a0a1a;
+        --color-secondary: #f1f5f9;
+        --color-border: #e2e8f0;
+        --color-card: #ffffff;
+        --color-muted: #64748b;
+    }
+    .dark {
+        --color-bg: #0a0a1a;
+        --color-fg: #ffffff;
+        --color-secondary: #141432;
+        --color-border: rgba(255, 255, 255, 0.1);
+        --color-card: rgba(255, 255, 255, 0.03);
+        --color-muted: #94a3b8;
+    }
+    body {
+        font-family: 'Manrope', sans-serif;
+        background-color: var(--color-bg);
+        color: var(--color-fg);
+        transition: background-color 0.3s, color 0.3s;
+        overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: 'Sora', sans-serif; }
 
-  /* ---------- aurora backdrop ---------- */
-  .sky { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
-  .orb { position:absolute; border-radius:50%; filter:blur(90px); opacity:.5; }
-  .orb.a { width:560px; height:560px; left:-160px; top:-180px; background:radial-gradient(circle, rgba(20,184,166,.30), transparent 65%); animation:drift1 26s ease-in-out infinite; }
-  .orb.b { width:640px; height:640px; right:-220px; top:14%; background:radial-gradient(circle, rgba(13,148,136,.22), transparent 65%); animation:drift2 32s ease-in-out infinite; }
-  .orb.c { width:480px; height:480px; left:28%; bottom:-240px; background:radial-gradient(circle, rgba(45,212,191,.16), transparent 65%); animation:drift1 38s ease-in-out infinite reverse; }
-  @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(70px,40px)} }
-  @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-60px,-50px)} }
-  html[data-theme="light"] .orb { opacity:.38; }
+    /* ===== added: language menu ===== */
+    .langmenu{display:none;position:absolute;right:0;top:44px;width:190px;background:var(--color-card);border:1px solid var(--color-border);border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.18);overflow:hidden;z-index:60;padding:5px}
+    .langmenu.open{display:block}
+    .langmenu button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;background:none;border:0;border-radius:9px;color:var(--color-fg);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;text-align:left}
+    .langmenu button:hover{background:var(--color-secondary)}
+    .langmenu button .chk{margin-left:auto;color:#00d2b4;font-weight:900;opacity:0}
+    .langmenu button.active .chk{opacity:1}
 
-  /* ---------- top bar ---------- */
-  .bar { position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:var(--bar); backdrop-filter:blur(18px) saturate(130%); -webkit-backdrop-filter:blur(18px) saturate(130%); border-bottom:1px solid var(--border); }
-  .bar .brandmini { display:flex; align-items:center; gap:2px; text-decoration:none; color:var(--ink); min-width:0; }
-  .bar .brandmini img { height:30px; width:auto; flex:0 0 auto; }
-  .bar .brandmini b { font-size:16.5px; font-weight:800; letter-spacing:-.01em; white-space:nowrap; margin-left:-1px; overflow:hidden; text-overflow:ellipsis; }
-  .bar .brandmini b .one { color:var(--teal); font-weight:800; }
-  .barbtns { display:flex; align-items:center; gap:8px; flex:0 0 auto; }
-  .signin-top { display:none; }
-  @media (min-width:860px){ .signin-top { display:inline-flex; } }
-  @media (max-width:520px){
-    .bar { padding:8px 11px; }
-    .bar .brandmini img { height:27px; }
-    .bar .brandmini b { font-size:15px; }
-    .barbtns { gap:6px; }
-    .iconbtn { height:36px; min-width:36px; padding:0 9px; font-size:12.5px; }
-    .langmenu { top:42px; }
-  }
-  .iconbtn { display:flex; align-items:center; justify-content:center; gap:6px; height:38px; min-width:38px; padding:0 10px; border-radius:11px; border:1px solid var(--border); background:var(--card); backdrop-filter:blur(10px); color:var(--ink); font-family:inherit; font-size:13px; font-weight:700; cursor:pointer; text-decoration:none; transition:border-color .15s ease, transform .12s ease; }
-  .iconbtn:hover { border-color:var(--teal); transform:translateY(-1px); }
-  .flag { font-size:16px; line-height:1; }
-  .langwrap { position:relative; }
-  .iconbtn-lang { gap:5px; padding:0 9px; }
-  .langcode { display:none; font-size:12.5px; font-weight:800; letter-spacing:.02em; }
-  @media (min-width:640px){ .langcode { display:inline; } }
-  .langchev { opacity:.55; flex:0 0 auto; }
-  .flag-img { width:22px; height:16px; border-radius:3px; object-fit:cover; box-shadow:0 0 0 1px rgba(0,0,0,.12); display:block; flex:0 0 auto; }
-  .langmenu button .flag-img { width:24px; height:17px; }
-  .langmenu { position:absolute; right:0; top:46px; min-width:190px; background:var(--card-solid); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow); padding:6px; display:none; z-index:80; }
-  .langmenu.open { display:block; }
-  .langmenu button { display:flex; align-items:center; gap:11px; width:100%; padding:9px 11px; background:none; border:0; border-radius:9px; color:var(--ink); font-family:inherit; font-size:14px; font-weight:600; cursor:pointer; text-align:left; }
-  .langmenu button:hover { background:var(--glow); }
-  .langmenu button .flag { font-size:18px; }
-  .langmenu button .lname { flex:1; }
-  .langmenu button .lcheck { color:var(--teal); font-weight:900; font-size:14px; opacity:0; }
-  html[data-theme="light"] .langmenu button .lcheck { color:var(--teal-d); }
-  .langmenu button.active .lname { font-weight:800; }
-  .langmenu button.active .lcheck { opacity:1; }
-  /* drawer */
-  .drawer { position:fixed; top:0; right:0; bottom:0; z-index:70; width:min(320px, 86vw); background:var(--card-solid); border-left:1px solid var(--border); box-shadow:-18px 0 50px rgba(0,0,0,.35); transform:translateX(105%); transition:transform .3s cubic-bezier(.2,.8,.2,1); padding:18px; display:flex; flex-direction:column; }
-  .drawer.open { transform:none; }
-  .drawer .dx { align-self:flex-end; }
-  .drawer .dsec { margin-top:10px; font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--teal-d); }
-  html[data-theme="dark"] .drawer .dsec { color:var(--teal-l); }
-  .drawer a.dlink { display:flex; align-items:center; justify-content:space-between; padding:13px 10px; border-radius:12px; text-decoration:none; color:var(--ink); font-size:15px; font-weight:700; }
-  .drawer a.dlink span.one { color:var(--teal); font-weight:700; }
-  .drawer a.dlink:hover { background:var(--glow); }
-  .drawer button.dtheme { display:flex; align-items:center; justify-content:space-between; width:100%; padding:13px 10px; border-radius:12px; border:0; background:none; color:var(--ink); font-size:15px; font-weight:700; font-family:inherit; cursor:pointer; text-align:left; }
-  .drawer button.dtheme:hover { background:var(--glow); }
-  .drawer button.dtheme #themeicon { font-size:17px; }
-  .drawer .dsub { font-size:11px; color:var(--faint); font-weight:500; }
-  .dcta { margin-top:auto; display:flex; flex-direction:column; gap:9px; padding-top:16px; }
-  .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 22px; border-radius:var(--r-btn); background:linear-gradient(180deg,var(--teal),var(--teal-d)); color:#fff; font-size:14.5px; font-weight:800; text-decoration:none; box-shadow:0 8px 26px rgba(13,148,136,.32), inset 0 1px 0 rgba(255,255,255,.22); border:0; cursor:pointer; font-family:inherit; transition:transform .12s ease; }
-  .btn-primary:hover { transform:translateY(-1px); }
-  .btn-ghost { display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:13px 20px; border-radius:var(--r-btn); border:1.5px solid var(--border); color:var(--ink); font-size:14.5px; font-weight:700; text-decoration:none; background:var(--card); cursor:pointer; font-family:inherit; }
-  .btn-ghost:hover { border-color:var(--teal); }
-  .scrim { position:fixed; inset:0; z-index:65; background:rgba(0,0,0,.45); opacity:0; pointer-events:none; transition:opacity .25s ease; }
-  .scrim.on { opacity:1; pointer-events:auto; }
+    /* ===== added: drawer ===== */
+    #scrim{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s ease}
+    #scrim.on{opacity:1;pointer-events:auto}
+    #drawer{position:fixed;top:0;right:0;bottom:0;z-index:70;width:min(320px,86vw);background:var(--color-card);background-color:var(--color-bg);border-left:1px solid var(--color-border);box-shadow:-18px 0 50px rgba(0,0,0,.3);transform:translateX(105%);transition:transform .3s cubic-bezier(.2,.8,.2,1);padding:18px;display:flex;flex-direction:column;overflow-y:auto}
+    #drawer.open{transform:none}
+    #drawer .dsec{margin-top:14px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#00d2b4}
+    #drawer a.dlink{display:flex;align-items:center;justify-content:space-between;padding:13px 10px;border-radius:12px;text-decoration:none;color:var(--color-fg);font-size:15px;font-weight:700}
+    #drawer a.dlink:hover{background:var(--color-secondary)}
+    #drawer a.dlink .dsub{font-size:11px;color:var(--color-muted);font-weight:600}
 
-  .wrap { max-width:1080px; margin:0 auto; padding:0 20px; }
-  .reveal { opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
-  .reveal.in { opacity:1; transform:none; }
-  .eyebrow { text-align:center; font-size:12px; font-weight:800; letter-spacing:.18em; color:var(--teal-d); text-transform:uppercase; }
-  html[data-theme="dark"] .eyebrow { color:var(--teal-l); }
-  .sec-h { text-align:center; font-size:clamp(24px, 3.6vw, 34px); font-weight:800; letter-spacing:-.02em; margin-top:10px; }
-  .sec-sub { text-align:center; color:var(--muted); font-size:14.5px; margin-top:10px; max-width:580px; margin-left:auto; margin-right:auto; }
-
-  /* ---------- hero ---------- */
-  .hero { padding:120px 0 26px; text-align:center; position:relative; }
-  .pill { display:inline-flex; align-items:center; gap:7px; background:var(--glow); border:1px solid rgba(20,184,166,.32); color:var(--teal-l); font-weight:700; font-size:12.5px; padding:7px 16px; border-radius:999px; }
-  html[data-theme="light"] .pill { color:var(--teal-d); }
-  .pill .dot { width:7px; height:7px; border-radius:99px; background:var(--teal); animation:pulse 2.4s ease-in-out infinite; }
-  @keyframes pulse { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.45; transform:scale(.8)} }
-  .statpill { display:inline-flex; align-items:center; gap:11px; background:var(--glow); border:1px solid rgba(20,184,166,.34); border-radius:999px; padding:8px 18px; box-shadow:inset 0 1px 0 var(--glass-hi); }
-  .statpill .st { display:inline-flex; align-items:baseline; gap:5px; white-space:nowrap; }
-  .statpill .st b { font-size:18px; font-weight:900; color:var(--teal); letter-spacing:-.02em; line-height:1; }
-  html[data-theme="light"] .statpill .st b { color:var(--teal-d); }
-  .statpill .st i { font-style:normal; font-size:11px; font-weight:800; letter-spacing:.11em; text-transform:uppercase; color:var(--muted); }
-  .statpill .sd { width:4px; height:4px; border-radius:50%; background:var(--teal); opacity:.55; flex:0 0 auto; }
-  @media (max-width:400px){ .statpill { gap:8px; padding:7px 14px; } .statpill .st b{ font-size:16px; } .statpill .st i{ font-size:10px; letter-spacing:.05em; } }
-  h1.hh { font-size:clamp(27px, 6.4vw, 56px); font-weight:900; letter-spacing:-.03em; line-height:1.08; margin-top:20px; }
-  h1.hh .hone { color:var(--teal); }
-  h1.hh .rot { display:inline-block; min-width:4.5ch; text-align:left; color:var(--ink); }
-  .lede { color:var(--muted); font-size:clamp(15px, 2vw, 17.5px); line-height:1.65; margin:18px auto 0; max-width:580px; }
-  .herocta { margin-top:28px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-  .gicon { flex:0 0 auto; }
-  .microtrust { margin-top:16px; font-size:12.5px; color:var(--faint); }
-
-  /* ---------- One ID advert band ---------- */
-  .oneid-band { margin-top:8px; }
-  .oneid-inner { display:flex; align-items:center; gap:20px; padding:20px 24px; border:1px solid rgba(20,184,166,.3); border-radius:20px; background:var(--card); backdrop-filter:blur(16px); box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi); }
-  .oneid-key { flex:0 0 auto; width:54px; height:54px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,var(--teal),var(--teal-d)); color:#fff; box-shadow:0 8px 22px rgba(13,148,136,.3); }
-  .oneid-key svg { width:28px; height:28px; }
-  .oneid-txt { flex:1; min-width:0; }
-  .oneid-txt .t { font-size:16.5px; font-weight:800; } .oneid-txt .t .one { color:var(--teal); }
-  .oneid-txt p { color:var(--muted); font-size:13.5px; line-height:1.55; margin-top:4px; }
-  .gbtn { flex:0 0 auto; display:inline-flex; align-items:center; gap:10px; padding:12px 20px; border:1px solid var(--border); border-radius:12px; background:var(--card-solid); font-family:inherit; font-size:14px; font-weight:800; color:var(--ink); cursor:pointer; text-decoration:none; box-shadow:0 1px 3px rgba(0,0,0,.15); transition:transform .12s ease, border-color .15s ease; white-space:nowrap; }
-  .gbtn:hover { transform:translateY(-1px); border-color:var(--teal); }
-  @media (max-width:720px){ .oneid-inner { flex-direction:column; text-align:center; } .oneid-txt p { max-width:32rem; } }
-
-  /* ---------- section shell ---------- */
-  .band { padding:60px 0; }
-
-  /* ---------- app grid ---------- */
-  .apps-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:34px; }
-  a.tile { position:relative; overflow:hidden; display:flex; flex-direction:column; text-decoration:none; color:inherit; background:var(--card); backdrop-filter:blur(16px) saturate(120%); -webkit-backdrop-filter:blur(16px) saturate(120%); border:1px solid var(--border); border-radius:var(--r-card); padding:30px 22px 24px; box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi); transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
-  a.tile:hover { transform:translateY(-5px); border-color:rgba(20,184,166,.55); box-shadow:0 16px 44px rgba(20,184,166,.14), var(--shadow); }
-  .tile-ico { position:absolute; top:14px; right:16px; width:58px; height:58px; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#fff; box-shadow:0 8px 20px rgba(0,0,0,.24); z-index:2; }
-  .tile-ico svg { width:29px; height:29px; }
-  .tile-ico img { width:58px; height:58px; border-radius:16px; object-fit:contain; }
-  .tile .pname { font-size:21px; line-height:1.05; letter-spacing:-.01em; white-space:nowrap; padding-right:72px; }
-  .tile .pname .one { color:var(--teal); font-weight:700; } .tile .pname .word { font-weight:800; }
-  .tile .psub { font-size:8.5px; letter-spacing:.12em; font-weight:800; color:var(--teal-d); text-transform:uppercase; margin-top:8px; padding-right:72px; }
-  html[data-theme="dark"] .tile .psub { color:var(--teal-l); }
-  .tile .pdesc { color:var(--muted); font-size:13.5px; line-height:1.55; margin-top:9px; flex:1; }
-  .tile .open { margin-top:16px; align-self:flex-start; display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:800; color:var(--teal); padding:9px 15px; border:1px solid rgba(20,184,166,.35); border-radius:999px; background:var(--glow); transition:gap .18s ease, background .18s ease; }
-  html[data-theme="light"] .tile .open { color:var(--teal-d); }
-  .tile:hover .open { gap:11px; background:rgba(20,184,166,.18); }
-  .tile .hint { margin-top:10px; font-size:11px; font-weight:600; color:var(--faint); display:none; align-items:center; gap:5px; }
-  @media (hover:hover){ .tile .hint { display:inline-flex; } }
-  /* live hover preview */
-  .tile-prev { position:absolute; inset:0; background:var(--card-solid); opacity:0; pointer-events:none; transition:opacity .28s ease; z-index:3; overflow:hidden; }
-  .previewing .tile-prev { opacity:1; }
-  a.svc { }
-  .svc-grid .tile-prev { z-index:5; }
-  .tile-prev .pvframe { position:absolute; inset:0; overflow:hidden; background:var(--bg2); }
-  .tile-prev .pvframe iframe { position:absolute; top:0; left:0; border:0; pointer-events:none; transform-origin:top left; background:#fff; }
-  .tile-prev .pvframe img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; }
-  .tile-prev .pvbar { position:absolute; left:0; right:0; bottom:0; padding:11px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; background:linear-gradient(0deg, rgba(2,6,14,.85), rgba(2,6,14,.35) 62%, transparent); color:#fff; font-size:12px; font-weight:800; z-index:4; }
-  .tile-prev .pvbar .go { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(180deg,var(--teal),var(--teal-d)); padding:7px 12px; border-radius:999px; box-shadow:0 4px 14px rgba(13,148,136,.4); }
-  .tile-prev .pvload { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--muted); background:var(--card-solid); z-index:3; }
-  .tile-prev.ready .pvload { display:none; }
-
-  /* ---------- services ---------- */
-  .svc-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:16px; margin-top:34px; }
-  a.svc { position:relative; display:flex; flex-direction:column; text-decoration:none; color:inherit; background:linear-gradient(180deg, var(--card), var(--card)); border:1px solid var(--border); border-radius:var(--r-card); padding:24px; box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi); overflow:hidden; transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
-  a.svc:before { content:""; position:absolute; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg, var(--teal-l), var(--teal-d)); }
-  a.svc:hover { transform:translateY(-5px); border-color:rgba(20,184,166,.55); box-shadow:0 16px 44px rgba(20,184,166,.14), var(--shadow); }
-  .svc-badge { position:absolute; top:16px; right:16px; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--teal-d); background:var(--glow); border:1px solid rgba(20,184,166,.3); border-radius:999px; padding:5px 11px; }
-  html[data-theme="dark"] .svc-badge { color:var(--teal-l); }
-  .svc-ico { width:58px; height:58px; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#fff; margin-bottom:15px; box-shadow:0 8px 20px rgba(0,0,0,.24); }
-  .svc-ico svg { width:29px; height:29px; }
-  .svc-ico img { width:58px; height:58px; border-radius:16px; object-fit:cover; }
-  .svc .pname { font-size:22px; line-height:1; letter-spacing:-.01em; }
-  .svc .pname .one { color:var(--teal); font-weight:700; } .svc .pname .word { font-weight:800; }
-  .svc .pdesc { color:var(--muted); font-size:14px; line-height:1.6; margin-top:9px; flex:1; }
-  .svc .open { margin-top:15px; display:inline-flex; align-items:center; gap:6px; font-size:14px; font-weight:800; color:var(--teal); }
-  .svc:hover .open { gap:9px; }
-
-  /* ---------- feature cards ---------- */
-  .feat-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:34px; }
-  .feat { background:var(--card); backdrop-filter:blur(16px); border:1px solid var(--border); border-radius:var(--r-card); padding:22px; box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi); }
-  .feat .fico { width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:var(--glow); color:var(--teal); margin-bottom:14px; }
-  .feat .fico svg { width:22px; height:22px; }
-  .feat h3 { font-size:16.5px; font-weight:800; letter-spacing:-.01em; }
-  .feat p { color:var(--muted); font-size:13.5px; line-height:1.6; margin-top:8px; }
-  .feat a.flink { margin-top:12px; display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:800; color:var(--teal); text-decoration:none; }
-
-  /* ---------- use it anywhere ---------- */
-  .get-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:34px; }
-  @media (max-width:720px){ .get-grid { grid-template-columns:1fr; } }
-  .getcard { background:var(--card); border:1px solid var(--border); border-radius:var(--r-card); padding:26px; box-shadow:var(--shadow), inset 0 1px 0 var(--glass-hi); display:flex; flex-direction:column; align-items:flex-start; }
-  .getcard .gico { width:54px; height:54px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,var(--teal),var(--teal-d)); color:#fff; margin-bottom:16px; box-shadow:0 8px 22px rgba(13,148,136,.3); }
-  .getcard .gico svg { width:28px; height:28px; }
-  .getcard h3 { font-size:18px; font-weight:800; }
-  .getcard p { color:var(--muted); font-size:14px; line-height:1.6; margin-top:8px; }
-  .getcard .soon { margin-top:14px; display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); border:1px dashed var(--border); border-radius:999px; padding:7px 14px; }
-
-  /* ---------- FAQ ---------- */
-  .faq { max-width:760px; margin:34px auto 0; }
-  .qa { border:1px solid var(--border); border-radius:14px; background:var(--card); margin-bottom:12px; overflow:hidden; }
-  .qa button { width:100%; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:18px 20px; background:none; border:0; color:var(--ink); font-family:inherit; font-size:15.5px; font-weight:700; text-align:left; cursor:pointer; }
-  .qa .num { color:var(--teal); font-weight:900; margin-right:4px; }
-  .qa .chev { flex:0 0 auto; transition:transform .25s ease; color:var(--teal); }
-  .qa.open .chev { transform:rotate(180deg); }
-  .qa .a { max-height:0; overflow:hidden; transition:max-height .3s ease; }
-  .qa .a p { padding:0 20px 18px; color:var(--muted); font-size:14px; line-height:1.65; }
-  .qa.open .a { max-height:320px; }
-
-  /* ---------- footer ---------- */
-  .footer { border-top:1px solid var(--border); margin-top:20px; padding:40px 0 60px; }
-  .footcols { display:flex; flex-wrap:wrap; gap:28px 56px; justify-content:space-between; }
-  .footcol h4 { font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:12px; }
-  .footcol a { display:block; text-decoration:none; color:var(--muted); font-size:14px; font-weight:600; margin-bottom:9px; }
-  .footcol a:hover { color:var(--teal); }
-  .footcol a .one { color:var(--teal); }
-  .foot-bottom { margin-top:34px; padding-top:20px; border-top:1px solid var(--border); text-align:center; font-size:12.5px; color:var(--faint); }
-  .socials { display:flex; gap:12px; justify-content:center; margin-bottom:14px; }
-  .socials a { width:36px; height:36px; border-radius:10px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--muted); }
-  .socials a:hover { color:var(--teal); border-color:var(--teal); }
-
-  @media (prefers-reduced-motion: reduce) {
-    .orb, .pill .dot { animation:none !important; }
-    .reveal { opacity:1; transform:none; transition:none; }
-    html { scroll-behavior:auto; }
-  }
-
-  /* splash */
-  #owl-splash { position:fixed; inset:0; z-index:99; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 1.1s ease; }
-  #owl-splash.gone { opacity:0; pointer-events:none; }
-  #owl-splash img { height:80px; width:auto; animation:owl-heart 3s ease-in-out infinite; }
-  #owl-splash .st { margin-top:14px; font-size:28px; font-weight:800; letter-spacing:-.01em; }
-  #owl-splash .st .one { color:var(--teal); }
-  #owl-splash .lbar { margin-top:22px; width:130px; height:4px; border-radius:999px; background:var(--border); overflow:hidden; }
-  #owl-splash .lbar i { display:block; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--teal),var(--teal-d)); animation:owl-load 1.4s ease-out forwards; }
-  @keyframes owl-heart { 0%,100%{transform:scale(1)} 50%{transform:scale(1.045)} }
-  @keyframes owl-load { to { width:100% } }
+    /* ===== added: live hover-preview on app cards ===== */
+    a.app-card{position:relative;overflow:hidden}
+    .tile-prev{position:absolute;inset:0;background:var(--color-card);background-color:var(--color-bg);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:10;border-radius:inherit}
+    a.app-card:hover .tile-prev{opacity:1}
+    .tile-prev .pvframe{position:absolute;inset:0;overflow:hidden;background:var(--color-secondary)}
+    .tile-prev .pvframe iframe{position:absolute;top:0;left:0;border:0;pointer-events:none;transform-origin:top left;background:#fff}
+    .tile-prev .pvframe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+    .tile-prev .pvload{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--color-muted);background:var(--color-card);background-color:var(--color-bg)}
+    .tile-prev .pvbar{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:linear-gradient(0deg,rgba(0,0,0,.78),rgba(0,0,0,.3) 65%,transparent);color:#fff;font-size:11.5px;font-weight:800}
+    .tile-prev .pvbar .go{display:inline-flex;align-items:center;gap:5px;background:#00d2b4;color:#0a0a1a;padding:5px 11px;border-radius:999px}
+    .hint{display:none;margin-top:10px;font-size:11px;font-weight:700;color:var(--color-muted);align-items:center;gap:5px}
+    @media (hover:hover){ .hint{display:flex} }
 </style>
 </head>
-<body>
-<div class="sky" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div></div>
-
-<div id="owl-splash">
-  <img src="./logo-mark.png" alt="" />
-  <div class="st"><span class="one">One</span> World Labs</div>
-  <div class="lbar"><i></i></div>
-</div>
-<script>
-  setTimeout(function(){ var e=document.getElementById("owl-splash"); e&&e.classList.add("gone"); }, 1400);
-  setTimeout(function(){ var e=document.getElementById("owl-splash"); e&&e.remove(); }, 2600);
-</script>
-
-<!-- ============ TOP BAR ============ -->
-<header class="bar">
-  <a class="brandmini" href="/" aria-label="One World Labs home">
-    <img src="./logo-mark.png" alt="O" />
-    <b><span class="one">ne</span>&thinsp;World Labs</b>
-  </a>
-  <div class="barbtns">
-    <div class="langwrap">
-      <button class="iconbtn iconbtn-lang" id="langbtn" aria-label="Language" aria-haspopup="true"><img class="flag-img" id="langflag" src="https://flagcdn.com/w40/us.png" width="22" height="16" alt="" /><span class="langcode" id="langcode">EN</span><svg class="langchev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
-      <div class="langmenu" id="langmenu" role="menu">
-        <button data-lang="en" class="active"><img class="flag-img" src="https://flagcdn.com/w40/us.png" width="22" height="16" alt="" /><span class="lname">English</span><span class="lcheck">✓</span></button>
-        <button data-lang="es"><img class="flag-img" src="https://flagcdn.com/w40/es.png" width="22" height="16" alt="" /><span class="lname">Español</span><span class="lcheck">✓</span></button>
-        <button data-lang="de"><img class="flag-img" src="https://flagcdn.com/w40/de.png" width="22" height="16" alt="" /><span class="lname">Deutsch</span><span class="lcheck">✓</span></button>
-        <button data-lang="ru"><img class="flag-img" src="https://flagcdn.com/w40/ru.png" width="22" height="16" alt="" /><span class="lname">Русский</span><span class="lcheck">✓</span></button>
-        <button data-lang="zh"><img class="flag-img" src="https://flagcdn.com/w40/cn.png" width="22" height="16" alt="" /><span class="lname">中文</span><span class="lcheck">✓</span></button>
-        <button data-lang="pt"><img class="flag-img" src="https://flagcdn.com/w40/br.png" width="22" height="16" alt="" /><span class="lname">Português</span><span class="lcheck">✓</span></button>
-      </div>
-    </div>
-    <button class="iconbtn" id="menubtn" aria-label="Menu">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-  </div>
-</header>
-
-<div class="scrim" id="scrim"></div>
-<nav class="drawer" id="drawer" aria-label="Menu">
-  <button class="iconbtn dx" id="drawerx" aria-label="Close">✕</button>
-  <div class="dsec" data-i18n="d_apps">Apps</div>
-  <a class="dlink" href="/onescore/"><span><span class="one">One</span>Score</span><span class="dsub" data-i18n="d_score">Credibility score</span></a>
-  <a class="dlink" href="https://frazier56.github.io/onesocial-v2-preview/"><span><span class="one">One</span>Social</span><span class="dsub" data-i18n="d_social">Get hired</span></a>
-  <a class="dlink" href="https://frazier56.github.io/oneevents-preview/"><span><span class="one">One</span>Event</span><span class="dsub" data-i18n="d_events">Events &amp; tickets</span></a>
-  <div class="dsec" style="margin-top:14px" data-i18n="d_services">Services</div>
-  <a class="dlink" href="https://onevoice.onesocial.ai"><span><span class="one">One</span>Voice</span><span class="dsub" data-i18n="d_voice">AI receptionist</span></a>
-  <a class="dlink" href="/oneapp/"><span><span class="one">One</span>App</span><span class="dsub" data-i18n="d_app">AI websites</span></a>
-  <div class="dsec" style="margin-top:14px" data-i18n="d_appearance">Appearance</div>
-  <button class="dlink dtheme" id="themebtn" aria-label="Toggle light and dark mode">
-    <span data-i18n="d_thememode">Light / dark mode</span>
-    <span class="dsub" style="display:inline-flex;align-items:center;gap:6px"><span id="themeicon">☀️</span></span>
-  </button>
-  <div class="dsec" style="margin-top:14px" data-i18n="d_contact">Contact</div>
-  <a class="dlink" href="mailto:contact@oneworldlabs.ai" style="font-size:13.5px;font-weight:600">contact@oneworldlabs.ai</a>
-  <div class="dcta">
-    <a class="btn-ghost" href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" data-i18n="signin_oneid">Sign in with One ID</a>
-    <a class="btn-primary" href="#apps" data-i18n="cta_jump">Jump into an app →</a>
-  </div>
-</nav>
-
-<div class="wrap">
-
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="statpill">
-      <span class="st"><b>3</b><i data-i18n="s_apps">apps</i></span>
-      <span class="sd" aria-hidden="true"></span>
-      <span class="st"><b>2</b><i data-i18n="s_svcs">services</i></span>
-      <span class="sd" aria-hidden="true"></span>
-      <span class="st"><b>1</b><i data-i18n="s_login">login</i></span>
-    </div>
-    <h1 class="hh"><span data-i18n="h1_l1">Work smarter</span><br /><span data-i18n="h1_l2">across your business</span><br /><span data-i18n="h1_l3">with </span><span class="hone">One</span><span class="rot" id="rot">Score</span></h1>
-    <p class="lede" data-i18n="lede">Apps you use and services we run for you — tied together by one login — so small businesses and freelancers get seen, get trusted, and get paid.</p>
-    <div class="herocta">
-      <a class="btn-primary" href="#apps" data-i18n="cta_jump">Jump into an app →</a>
-      <a class="btn-ghost" href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F">
-        <svg class="gicon" width="17" height="17" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
-        <span data-i18n="cta_signin">Sign in with One ID</span>
-      </a>
-    </div>
-    <div class="microtrust" data-i18n="microtrust">One login for every app · Free to start · No credit card</div>
-  </section>
-
-  <!-- ============ JUMP INTO YOUR FAVORITE APP (3 apps) ============ -->
-  <section class="band reveal" id="apps" style="padding-top:56px">
-    <div class="eyebrow" data-i18n="apps_eye">The apps</div>
-    <h2 class="sec-h" data-i18n="apps_h">Jump into your favorite app</h2>
-    <p class="sec-sub" data-i18n="apps_sub">Three apps you use yourself — one login gets you into all of them.</p>
-
-    <div class="apps-grid">
-      <a class="tile" href="/onescore/" title="OneScore">
-        <div class="tile-ico" data-ico="onescore" style="background:linear-gradient(180deg,#FBBF24,#F59E0B)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+<body class="dark">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2">
+                <img src="/logo-mark.png" alt="Logo" class="h-8 w-8">
+                <span class="font-bold text-xl tracking-tight"><span class="text-primary">ne</span> World Labs</span>
+            </a>
+            <div class="flex items-center gap-2 sm:gap-4">
+                <div class="relative">
+                    <button id="lang-btn" class="flex items-center gap-1.5 px-2.5 h-9 rounded-full border border-border bg-secondary hover:border-primary transition-colors text-xs font-bold" aria-haspopup="true" aria-label="Language">
+                        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" width="20" height="14" class="rounded-sm" alt="">
+                        <span id="lang-code" class="hidden sm:inline">EN</span>
+                    </button>
+                    <div class="langmenu" id="lang-menu" role="menu">
+                        <button data-lang="en" class="active"><img src="https://flagcdn.com/w40/us.png" width="20" height="14" class="rounded-sm" alt="">English<span class="chk">✓</span></button>
+                        <button data-lang="es"><img src="https://flagcdn.com/w40/es.png" width="20" height="14" class="rounded-sm" alt="">Español<span class="chk">✓</span></button>
+                        <button data-lang="de"><img src="https://flagcdn.com/w40/de.png" width="20" height="14" class="rounded-sm" alt="">Deutsch<span class="chk">✓</span></button>
+                        <button data-lang="ru"><img src="https://flagcdn.com/w40/ru.png" width="20" height="14" class="rounded-sm" alt="">Русский<span class="chk">✓</span></button>
+                        <button data-lang="zh"><img src="https://flagcdn.com/w40/cn.png" width="20" height="14" class="rounded-sm" alt="">中文<span class="chk">✓</span></button>
+                        <button data-lang="pt"><img src="https://flagcdn.com/w40/br.png" width="20" height="14" class="rounded-sm" alt="">Português<span class="chk">✓</span></button>
+                    </div>
+                </div>
+                <button id="theme-toggle" class="p-2 hover:bg-secondary rounded-full transition-colors">
+                    <!-- Sun Icon (shows in dark mode) -->
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <!-- Moon Icon (shows in light mode) -->
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+                <button id="menu-btn" class="p-2 hover:bg-secondary rounded-full transition-colors" aria-label="Open menu" aria-controls="drawer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
         </div>
-        <div class="pname"><span class="one">One</span><span class="word">Score</span></div>
-        <div class="psub" data-i18n="score_sub">Professional credibility</div>
-        <p class="pdesc" data-i18n="score_desc">Your whole reputation — reviews, real work, social proof — in one verified number you can post anywhere. Free forever.</p>
-        <span class="open"><span data-i18n="open_score">Open OneScore</span> →</span>
-      </a>
+    </header>
 
-      <a class="tile" href="https://frazier56.github.io/onesocial-v2-preview/" title="OneSocial">
-        <div class="tile-ico" data-ico="onesocial" style="background:linear-gradient(180deg,#F472B6,#EC4899)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <!-- Hamburger drawer -->
+    <div id="scrim"></div>
+    <nav id="drawer" aria-label="Menu">
+        <button id="drawer-close" class="self-end p-2 rounded-full hover:bg-secondary" aria-label="Close menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="dsec" data-i18n="d_apps">Apps</div>
+        <a class="dlink" href="/onescore/"><span><span class="text-primary">One</span>Score</span><span class="dsub" data-i18n="d_score">Credibility score</span></a>
+        <a class="dlink" href="https://frazier56.github.io/onesocial-v2-preview/"><span><span class="text-primary">One</span>Social</span><span class="dsub" data-i18n="d_social">Get hired</span></a>
+        <a class="dlink" href="https://frazier56.github.io/oneevents-preview/"><span><span class="text-primary">One</span>Event</span><span class="dsub" data-i18n="d_events">Events &amp; tickets</span></a>
+        <div class="dsec" style="margin-top:16px" data-i18n="d_services">Services</div>
+        <a class="dlink" href="https://onevoice.onesocial.ai"><span><span class="text-primary">One</span>Voice</span><span class="dsub" data-i18n="d_voice">AI receptionist</span></a>
+        <a class="dlink" href="/oneapp/"><span><span class="text-primary">One</span>App</span><span class="dsub" data-i18n="d_app">AI websites</span></a>
+        <div class="dsec" style="margin-top:16px" data-i18n="d_contact">Contact</div>
+        <a class="dlink" href="mailto:contact@oneworldlabs.ai" style="font-size:13.5px;font-weight:600">contact@oneworldlabs.ai</a>
+        <div class="mt-auto pt-4 flex flex-col gap-2.5">
+            <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="w-full text-center border border-gray-500 px-6 py-3 rounded-full font-bold" data-i18n="signin">Sign in</a>
+            <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="w-full text-center bg-primary text-[#0a0a1a] px-6 py-3 rounded-full font-bold" data-i18n="join">Join free</a>
         </div>
-        <div class="pname"><span class="one">One</span><span class="word">Social</span></div>
-        <div class="psub" data-i18n="social_sub">The credibility marketplace</div>
-        <p class="pdesc" data-i18n="social_desc">Where proof gets you hired — verified reviews, jobs, and payments in one credibility-first marketplace.</p>
-        <span class="open"><span data-i18n="open_social">Open OneSocial</span> →</span>
-      </a>
+    </nav>
 
-      <a class="tile" href="https://frazier56.github.io/oneevents-preview/" title="OneEvent">
-        <div class="tile-ico" data-ico="oneevents" style="background:linear-gradient(180deg,#4ADE80,#22C55E)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+    <main class="pt-24 md:pt-32 pb-16 md:pb-20">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-4 text-center max-w-4xl mb-20 md:mb-32">
+            <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 py-2 rounded-full bg-secondary border border-border backdrop-blur-sm mb-8 text-xs sm:text-sm">
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">3</strong> <span class="text-muted" data-i18n="s_apps">apps</span></span>
+                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">2</strong> <span class="text-muted" data-i18n="s_svcs">services</span></span>
+                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">1</strong> <span class="text-muted" data-i18n="s_login">login</span></span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-[1.1]"><span data-i18n="h1_l1">Work smarter</span><br><span data-i18n="h1_l2">across your business</span><br><span data-i18n="h1_l3">with </span><span class="text-primary">One</span><span id="rot">App</span></h1>
+
+            <p class="text-base sm:text-lg md:text-xl text-muted max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed" data-i18n="lede">Apps you use and services we run for you — tied together by one login — so small businesses and freelancers get seen, get trusted, and get paid.</p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                <a href="#apps" class="w-full sm:w-auto bg-primary text-[#0a0a1a] px-8 py-3 rounded-full font-bold text-base md:text-lg hover:opacity-90 transition-opacity inline-flex items-center justify-center" data-i18n="cta_jump">Jump into an app</a>
+                <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="w-full sm:w-auto border border-gray-500 px-8 py-3 rounded-full font-bold text-base md:text-lg flex items-center justify-center gap-3 hover:bg-secondary transition-colors">
+                    <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+                    <span data-i18n="cta_signin">Sign in with One ID</span>
+                </a>
+            </div>
+            <p class="text-sm text-muted font-medium" data-i18n="microtrust">One login for every app · Free to start · No credit card</p>
+        </section>
+        <!-- Apps Section -->
+        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32" id="apps">
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="/onescore/" class="app-card block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all" data-ico="onescore">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-bold"><span class="text-primary">One</span>Score</h3>
+                        <img src="/ic-onescore.png" alt="Icon" class="w-12 h-12">
+                    </div>
+                    <p class="text-muted mb-4" data-i18n="score_desc">Your whole reputation — reviews, real work, social proof — in one verified number you can post anywhere. Free forever.</p>
+                    <div class="text-primary font-bold"><span data-i18n="open_score">Open OneScore</span> →</div>
+                    <div class="hint">✨ <span data-i18n="hover_hint">Hover to preview · click to open</span></div>
+                    <div class="tile-prev">
+                        <div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div>
+                        <div class="pvbar"><span data-i18n="live_preview">Live preview</span><span class="go">Open ↗</span></div>
+                    </div>
+                </a>
+                <a href="https://frazier56.github.io/onesocial-v2-preview/" class="app-card block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all" data-ico="onesocial">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-bold"><span class="text-primary">One</span>Social</h3>
+                        <img src="/ic-onesocial.png" alt="Icon" class="w-12 h-12">
+                    </div>
+                    <p class="text-muted mb-4" data-i18n="social_desc">Where proof gets you hired — verified reviews, jobs, and payments in one credibility-first marketplace.</p>
+                    <div class="text-primary font-bold"><span data-i18n="open_social">Open OneSocial</span> →</div>
+                    <div class="hint">✨ <span data-i18n="hover_hint">Hover to preview · click to open</span></div>
+                    <div class="tile-prev">
+                        <div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div>
+                        <div class="pvbar"><span data-i18n="live_preview">Live preview</span><span class="go">Open ↗</span></div>
+                    </div>
+                </a>
+                <a href="https://frazier56.github.io/oneevents-preview/" class="app-card block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all" data-ico="oneevents">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-bold"><span class="text-primary">One</span>Event</h3>
+                        <img src="/ic-oneevents.png" alt="Icon" class="w-12 h-12">
+                    </div>
+                    <p class="text-muted mb-4" data-i18n="events_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
+                    <div class="text-primary font-bold"><span data-i18n="open_events">Open OneEvent</span> →</div>
+                    <div class="hint">✨ <span data-i18n="hover_hint">Hover to preview · click to open</span></div>
+                    <div class="tile-prev">
+                        <div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div>
+                        <div class="pvbar"><span data-i18n="live_preview">Live preview</span><span class="go">Open ↗</span></div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-border pt-12 md:pt-20 pb-8 md:pb-10 bg-background">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 mb-12 md:mb-16">
+                <div>
+                    <h4 class="font-bold text-sm text-muted uppercase tracking-wider mb-6" data-i18n="f_apps">Apps</h4>
+                    <ul class="space-y-4">
+                        <li><a href="/onescore/" class="hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Score</a></li>
+                        <li><a href="https://frazier56.github.io/onesocial-v2-preview/" class="hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Social</a></li>
+                        <li><a href="https://frazier56.github.io/oneevents-preview/" class="hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Event</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm text-muted uppercase tracking-wider mb-6" data-i18n="f_services">Services</h4>
+                    <ul class="space-y-4">
+                        <li><a href="https://onevoice.onesocial.ai" class="hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Voice</a></li>
+                        <li><a href="/oneapp/" class="hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>App</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm text-muted uppercase tracking-wider mb-6" data-i18n="f_company">Company</h4>
+                    <ul class="space-y-4">
+                        <li><a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="hover:text-primary transition-colors" data-i18n="signin_oneid">Sign in with One ID</a></li>
+                        <li><a href="mailto:contact@oneworldlabs.ai" class="hover:text-primary transition-colors" data-i18n="f_contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm text-muted uppercase tracking-wider mb-6" data-i18n="f_start">Get started</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#apps" class="hover:text-primary transition-colors" data-i18n="cta_jump">Jump into an app →</a></li>
+                        <li><a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" class="hover:text-primary transition-colors" data-i18n="signin_oneid">Sign in with One ID</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-border text-center text-muted text-sm">
+                <p><span data-i18n="copyright">© 2026 One World Labs, Inc. · Built for small businesses and freelancers, everywhere.</span></p>
+            </div>
         </div>
-        <div class="pname"><span class="one">One</span><span class="word">Event</span></div>
-        <div class="psub" data-i18n="events_sub">Events &amp; tickets</div>
-        <p class="pdesc" data-i18n="events_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
-        <span class="open"><span data-i18n="open_events">Open OneEvent</span> →</span>
-      </a>
-    </div>
-  </section>
+    </footer>
+    <!-- Theme Toggle Script -->
+    <script>
+        var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        var themeColorMeta = document.getElementById('theme-color-meta');
+        function setThemeIcons(isDark){
+            if(isDark){ themeToggleLightIcon.classList.remove('hidden'); themeToggleDarkIcon.classList.add('hidden'); }
+            else { themeToggleDarkIcon.classList.remove('hidden'); themeToggleLightIcon.classList.add('hidden'); }
+            if(themeColorMeta) themeColorMeta.setAttribute('content', isDark ? '#0B0F1A' : '#FAFAF8');
+        }
+        // Change the icons inside the button based on previous settings
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) || !('color-theme' in localStorage)) {
+            document.body.classList.add('dark');
+            setThemeIcons(true);
+        } else {
+            document.body.classList.remove('dark');
+            setThemeIcons(false);
+        }
+        var themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', function() {
+            if (document.body.classList.contains('dark')) {
+                document.body.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+                setThemeIcons(false);
+            } else {
+                document.body.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+                setThemeIcons(true);
+            }
+        });
 
-  <!-- ============ SERVICES ============ -->
-  <section class="band reveal" id="services">
-    <div class="eyebrow" data-i18n="svc_eye">Done for you</div>
-    <h2 class="sec-h" data-i18n="svc_h">Enhance your business with our services</h2>
-    <p class="sec-sub" data-i18n="svc_sub">Hands-off services our team runs for you — so you can focus on the work.</p>
+        /* ---------- hero rotator ---------- */
+        (function(){
+            var names = ['App','Score','Social','Event','Voice'];
+            var i = 0, el = document.getElementById('rot');
+            if (!el) return;
+            el.style.transition = 'opacity .22s ease';
+            setInterval(function(){
+                i = (i+1) % names.length;
+                el.style.opacity = 0;
+                setTimeout(function(){ el.textContent = names[i]; el.style.opacity = 1; }, 220);
+            }, 2200);
+        })();
 
-    <div class="svc-grid">
-      <a class="svc" href="https://onevoice.onesocial.ai" title="OneVoice">
-        <span class="svc-badge" data-i18n="badge_dfy">Done for you</span>
-        <div class="svc-ico" data-ico="onevoice" style="background:linear-gradient(180deg,#2DD4BF,#0D9488)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div class="pname"><span class="one">One</span><span class="word">Voice</span></div>
-        <p class="pdesc" data-i18n="svc_voice_desc">An AI receptionist that answers every call 24/7, qualifies the lead, and books the appointment — so a missed call is never a missed customer. We set it up and run it for you.</p>
-        <span class="open"><span data-i18n="get_voice">Get OneVoice</span> →</span>
-      </a>
+        /* ---------- hamburger drawer ---------- */
+        var drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
+        function drawerOpen(o){ drawer.classList.toggle('open', o); scrim.classList.toggle('on', o); }
+        document.getElementById('menu-btn').addEventListener('click', function(){ drawerOpen(true); });
+        document.getElementById('drawer-close').addEventListener('click', function(){ drawerOpen(false); });
+        scrim.addEventListener('click', function(){ drawerOpen(false); });
 
-      <a class="svc" href="/oneapp/" title="OneApp">
-        <span class="svc-badge" data-i18n="badge_dfy">Done for you</span>
-        <div class="svc-ico" data-ico="oneapp" style="background:linear-gradient(180deg,#818CF8,#6366F1)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <div class="pname"><span class="one">One</span><span class="word">App</span></div>
-        <p class="pdesc" data-i18n="svc_app_desc">We build your website with AI, then handle the hosting, domain, email, and ongoing updates for you — a real web presence without the hassle.</p>
-        <span class="open"><span data-i18n="get_app">Get OneApp</span> →</span>
-      </a>
-    </div>
-  </section>
+        /* ---------- language selector ---------- */
+        var I18N = {
+            en: { flag:'us', code:'EN' },
+            es: {
+                flag:'es', code:'ES',
+                s_apps:'apps', s_svcs:'servicios', s_login:'acceso',
+                h1_l1:'Trabaja mejor', h1_l2:'en todo tu negocio', h1_l3:'con ',
+                lede:'Apps que usas y servicios que manejamos por ti — unidos por un solo acceso — para que los pequeños negocios y freelancers los vean, confíen en ellos y les paguen.',
+                cta_jump:'Entra a una app', cta_signin:'Inicia con One ID', signin_oneid:'Inicia con One ID', signin:'Iniciar sesión', join:'Únete gratis',
+                microtrust:'Un acceso para cada app · Gratis para empezar · Sin tarjeta',
+                score_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado que publicas donde sea. Gratis para siempre.',
+                social_desc:'Donde las pruebas te consiguen trabajo — reseñas verificadas, empleos y pagos en un marketplace basado en credibilidad.',
+                events_desc:'Crea un evento, vende boletos y registra invitados con QR — en minutos.',
+                open_score:'Abrir OneScore', open_social:'Abrir OneSocial', open_events:'Abrir OneEvent',
+                hover_hint:'Pasa el cursor para previsualizar · clic para abrir', loading:'Cargando vista…', live_preview:'Vista en vivo',
+                d_apps:'Apps', d_services:'Servicios', d_voice:'Recepcionista IA', d_app:'Sitios web IA', d_score:'Puntaje de credibilidad', d_social:'Consigue trabajo', d_events:'Eventos y boletos', d_contact:'Contacto',
+                f_apps:'Apps', f_services:'Servicios', f_company:'Empresa', f_contact:'Contacto', f_start:'Empieza',
+                copyright:'© 2026 One World Labs, Inc. · Hecho para pequeños negocios y freelancers, en todas partes.'
+            },
+            de: { flag:'de', code:'DE', s_apps:'Apps', s_svcs:'Services', s_login:'Login', h1_l1:'Arbeite intelligenter', h1_l2:'in deinem Geschäft', h1_l3:'mit ', cta_jump:'In eine App springen', cta_signin:'Mit One ID anmelden', signin_oneid:'Mit One ID anmelden', signin:'Anmelden', join:'Kostenlos starten', d_apps:'Apps', d_services:'Services', d_contact:'Kontakt' },
+            ru: { flag:'ru', code:'RU', s_apps:'прил.', s_svcs:'сервиса', s_login:'вход', h1_l1:'Работайте умнее', h1_l2:'во всём бизнесе', h1_l3:'с ', cta_jump:'Перейти в приложение', cta_signin:'Войти через One ID', signin_oneid:'Войти через One ID', signin:'Войти', join:'Начать бесплатно', d_apps:'Приложения', d_services:'Сервисы', d_contact:'Контакты' },
+            zh: { flag:'cn', code:'ZH', s_apps:'应用', s_svcs:'服务', s_login:'登录', h1_l1:'更聪明地经营', h1_l2:'您的业务', h1_l3:'携手 ', cta_jump:'进入应用', cta_signin:'使用 One ID 登录', signin_oneid:'使用 One ID 登录', signin:'登录', join:'免费加入', d_apps:'应用', d_services:'服务', d_contact:'联系' },
+            pt: { flag:'br', code:'PT', s_apps:'apps', s_svcs:'serviços', s_login:'login', h1_l1:'Trabalhe melhor', h1_l2:'em todo o seu negócio', h1_l3:'com ', cta_jump:'Entrar em um app', cta_signin:'Entrar com One ID', signin_oneid:'Entrar com One ID', signin:'Entrar', join:'Comece grátis', d_apps:'Apps', d_services:'Serviços', d_contact:'Contato' }
+        };
+        var EN_CACHE = {};
+        function applyLang(lang){
+            document.querySelectorAll('[data-i18n]').forEach(function(el){
+                var k = el.getAttribute('data-i18n');
+                if (!(k in EN_CACHE)) EN_CACHE[k] = el.textContent;
+                el.textContent = (lang !== 'en' && I18N[lang] && I18N[lang][k]) ? I18N[lang][k] : EN_CACHE[k];
+            });
+            document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N[lang].flag + '.png';
+            var lc = document.getElementById('lang-code'); if (lc) lc.textContent = I18N[lang].code;
+            document.querySelectorAll('#lang-menu button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
+            document.documentElement.lang = lang;
+            try { localStorage.setItem('owl-lang', lang); } catch(e){}
+        }
+        var langBtn = document.getElementById('lang-btn'), langMenu = document.getElementById('lang-menu');
+        langBtn.addEventListener('click', function(e){ e.stopPropagation(); langMenu.classList.toggle('open'); });
+        document.addEventListener('click', function(){ langMenu.classList.remove('open'); });
+        langMenu.querySelectorAll('button').forEach(function(b){
+            b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); langMenu.classList.remove('open'); });
+        });
+        try {
+            var savedLang = localStorage.getItem('owl-lang');
+            if (savedLang && savedLang !== 'en') applyLang(savedLang);
+        } catch(e){}
 
-  <!-- ============ RUNNING A BUSINESS, MADE SIMPLER ============ -->
-  <section class="band reveal">
-    <div class="eyebrow" data-i18n="feat_eye">Why it works</div>
-    <h2 class="sec-h" data-i18n="feat_h">Running a business, made simpler</h2>
-    <p class="sec-sub" data-i18n="feat_sub">The busywork that eats your day — answered calls, a real website, proof you can trust — handled in one place.</p>
-
-    <div class="feat-grid">
-      <div class="feat">
-        <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-        <h3 data-i18n="f1_h">Never miss a call</h3>
-        <p data-i18n="f1_p">OneVoice answers every call 24/7, qualifies the lead, and books the appointment — so a missed call is never a missed customer.</p>
-        <a class="flink" href="https://onevoice.onesocial.ai"><span data-i18n="f1_l">Meet OneVoice</span> →</a>
-      </div>
-      <div class="feat">
-        <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <h3 data-i18n="f2_h">A website built with AI</h3>
-        <p data-i18n="f2_p">Tell OneApp about your business and it builds your site with AI — then we host it, set up your email and domain, and keep it updated for you.</p>
-        <a class="flink" href="/oneapp/"><span data-i18n="f2_l">See OneApp</span> →</a>
-      </div>
-      <div class="feat">
-        <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
-        <h3 data-i18n="f3_h">Proof you can point to</h3>
-        <p data-i18n="f3_p">OneScore turns your reviews and real work into one verified number — credibility you can post anywhere, free forever.</p>
-        <a class="flink" href="/onescore/"><span data-i18n="f3_l">Get your OneScore</span> →</a>
-      </div>
-      <div class="feat">
-        <div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h3 data-i18n="f4_h">Get hired and get paid</h3>
-        <p data-i18n="f4_p">OneSocial is the marketplace where verified proof wins the job — and OneEvent sells tickets and collects payment in minutes.</p>
-        <a class="flink" href="https://frazier56.github.io/onesocial-v2-preview/"><span data-i18n="f4_l">Explore OneSocial</span> →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ USE IT ANYWHERE ============ -->
-  <section class="band reveal">
-    <div class="eyebrow" data-i18n="get_eye">Use it anywhere</div>
-    <h2 class="sec-h" data-i18n="get_h">Works on any phone or computer</h2>
-    <p class="sec-sub" data-i18n="get_sub">No download required. Open it in your browser today — and add it to your home screen so it opens like an app.</p>
-
-    <div class="get-grid">
-      <div class="getcard">
-        <div class="gico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg></div>
-        <h3 data-i18n="get1_h">Add to your phone</h3>
-        <p data-i18n="get1_p">Open any One World app in your mobile browser, tap Share, and choose "Add to Home Screen." It installs an icon and opens full-screen — no App Store needed.</p>
-        <span class="soon" data-i18n="get1_soon">Native apps coming soon</span>
-      </div>
-      <div class="getcard">
-        <div class="gico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <h3 data-i18n="get2_h">Use it on desktop</h3>
-        <p data-i18n="get2_p">Everything runs in your browser on any computer — nothing to install, nothing to update. Bookmark oneworldlabs.ai and you're one click from every app.</p>
-        <a class="btn-primary" href="#apps" style="margin-top:14px" data-i18n="get2_cta">Jump into an app →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ DID YOU KNOW (FAQ) ============ -->
-  <section class="band reveal">
-    <div class="eyebrow" data-i18n="faq_eye">Good to know</div>
-    <h2 class="sec-h" data-i18n="faq_h">Did you know?</h2>
-
-    <div class="faq" id="faq">
-      <div class="qa">
-        <button><span><span class="num">01 /</span> <span data-i18n="q1">One World Labs is apps you use plus services we run</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="a"><p data-i18n="a1">Three apps you use yourself — OneScore for credibility, OneSocial to get hired, OneEvent for tickets — plus two done-for-you services our team runs: OneVoice answers your calls and OneApp builds and manages your website. Everything shares one login and one profile.</p></div>
-      </div>
-      <div class="qa">
-        <button><span><span class="num">02 /</span> <span data-i18n="q2">You can start free — no credit card</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="a"><p data-i18n="a2">OneScore is free forever, and every app lets you get started without paying up front. Our done-for-you services are paid — you only upgrade when a tool is earning its keep.</p></div>
-      </div>
-      <div class="qa">
-        <button><span><span class="num">03 /</span> <span data-i18n="q3">One login gets you into everything</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="a"><p data-i18n="a3">Sign in once with One ID and you're in every One World app and service — no separate accounts, no re-entering your details, no juggling passwords across tools.</p></div>
-      </div>
-      <div class="qa">
-        <button><span><span class="num">04 /</span> <span data-i18n="q4">Built credibility-first — you stay in control</span></span><span class="chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="a"><p data-i18n="a4">No algorithm decides who sees your business, and your reputation isn't scattered across ten platforms. Your proof is verified, yours, and portable — you decide where it shows up.</p></div>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<!-- ============ FOOTER ============ -->
-<footer class="footer">
-  <div class="wrap">
-    <div class="footcols">
-      <div class="footcol">
-        <h4 data-i18n="f_apps">Apps</h4>
-        <a href="/onescore/"><span class="one">One</span>Score</a>
-        <a href="https://frazier56.github.io/onesocial-v2-preview/"><span class="one">One</span>Social</a>
-        <a href="https://frazier56.github.io/oneevents-preview/"><span class="one">One</span>Event</a>
-      </div>
-      <div class="footcol">
-        <h4 data-i18n="f_services">Services</h4>
-        <a href="https://onevoice.onesocial.ai"><span class="one">One</span>Voice</a>
-        <a href="/oneapp/"><span class="one">One</span>App</a>
-      </div>
-      <div class="footcol">
-        <h4 data-i18n="f_company">Company</h4>
-        <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" data-i18n="signin_oneid">Sign in with One ID</a>
-        <a href="mailto:contact@oneworldlabs.ai" data-i18n="f_contact">Contact</a>
-      </div>
-      <div class="footcol">
-        <h4 data-i18n="f_start">Get started</h4>
-        <a href="#apps" data-i18n="cta_jump">Jump into an app →</a>
-        <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2Ffrazier56.github.io%2Fonesocial-v2-preview%2F" data-i18n="signin_oneid">Sign in with One ID</a>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <div class="socials">
-        <a href="#" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.25 8h4.5v14h-4.5V8zM8 8h4.3v1.9h.06c.6-1.1 2.05-2.26 4.22-2.26 4.5 0 5.34 2.96 5.34 6.8V22h-4.5v-6.6c0-1.57-.03-3.6-2.2-3.6-2.2 0-2.53 1.72-2.53 3.5V22H8V8z"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="#" aria-label="X"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.9l-5.4-7-6.2 7H1.4l8-9.2L1 2h7l4.9 6.5L18.9 2zm-1.2 18h1.9L7.1 4H5.1l12.6 16z"/></svg></a>
-      </div>
-      <span data-i18n="copyright">© 2026 One World Labs, Inc. · OneScore · OneSocial · OneEvent · OneVoice · OneApp</span><br />
-      <span style="color:var(--faint)" data-i18n="tagline_foot">Built for small businesses and freelancers, everywhere.</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-/* ---------- rotating name in hero ---------- */
-(function(){
-  var names = ['Score','Social','Event','Voice','App'];
-  var i = 0, el = document.getElementById('rot');
-  if (!el) return;
-  el.style.transition = 'opacity .22s ease';
-  setInterval(function(){
-    i = (i+1) % names.length;
-    el.style.opacity = 0;
-    setTimeout(function(){ el.textContent = names[i]; el.style.opacity = 1; }, 220);
-  }, 2200);
-})();
-
-/* ---------- FAQ accordion ---------- */
-document.querySelectorAll('#faq .qa').forEach(function(qa){
-  qa.querySelector('button').addEventListener('click', function(){ qa.classList.toggle('open'); });
-});
-
-/* ---------- i18n ---------- */
-var I18N = {
-  en: { flag:'us', code:'EN' },
-  es: {
-    flag:'es', code:'ES',
-    pill:'Un acceso · Tres apps · Dos servicios hechos para ti',
-    s_apps:'apps', s_svcs:'servicios', s_login:'acceso',
-    h1_l1:'Trabaja mejor', h1_l2:'en todo tu negocio', h1_l3:'con ',
-    lede:'Apps que usas y servicios que manejamos por ti — unidos por un solo acceso — para que los pequeños negocios y freelancers los vean, confíen en ellos y les paguen.',
-    cta_jump:'Entra a una app →', cta_signin:'Inicia con One ID', signin_oneid:'Inicia con One ID', signin:'Iniciar sesión',
-    microtrust:'Un acceso para cada app · Gratis para empezar · Sin tarjeta',
-    oneid_band_p:'Inicia una vez y entras a cada herramienta One World — OneScore, OneSocial, OneEvent, más tus servicios OneVoice y OneApp. Sin una cuenta aparte para cada una.',
-    oneid_signin:'Inicia con One ID',
-    apps_eye:'Las apps', apps_h:'Entra a tu app favorita', apps_sub:'Tres apps que usas tú mismo — un acceso te lleva a todas.',
-    score_sub:'Credibilidad profesional', score_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado que publicas donde sea. Gratis para siempre.',
-    social_sub:'El marketplace de credibilidad', social_desc:'Donde las pruebas te consiguen trabajo — reseñas verificadas, empleos y pagos en un marketplace basado en credibilidad.',
-    events_sub:'Eventos y boletos', events_desc:'Crea un evento, vende boletos y registra invitados con QR — en minutos.',
-    open_score:'Abrir OneScore', open_social:'Abrir OneSocial', open_events:'Abrir OneEvent',
-    svc_eye:'Hecho para ti', svc_h:'Mejora tu negocio con nuestros servicios', svc_sub:'Servicios que nuestro equipo maneja por ti — para que te enfoques en el trabajo.',
-    badge_dfy:'Hecho para ti',
-    svc_voice_desc:'Un recepcionista IA que contesta cada llamada 24/7, califica al cliente y agenda la cita — para que una llamada perdida nunca sea un cliente perdido. Lo configuramos y lo manejamos por ti.',
-    svc_app_desc:'Creamos tu sitio web con IA, y manejamos el hosting, el dominio, el correo y las actualizaciones por ti — presencia web real sin complicaciones.',
-    get_voice:'Obtén OneVoice', get_app:'Obtén OneApp',
-    feat_eye:'Por qué funciona', feat_h:'Manejar tu negocio, más simple',
-    feat_sub:'El trabajo pesado que se come tu día — llamadas contestadas, un sitio web real, pruebas confiables — resuelto en un solo lugar.',
-    f1_h:'Nunca pierdas una llamada', f1_p:'OneVoice contesta cada llamada 24/7, califica al cliente y agenda la cita — para que una llamada perdida nunca sea un cliente perdido.', f1_l:'Conoce OneVoice',
-    f2_h:'Un sitio web creado con IA', f2_p:'Cuéntale a OneApp sobre tu negocio y crea tu sitio con IA — luego lo alojamos, configuramos tu correo y dominio, y lo mantenemos actualizado.', f2_l:'Ver OneApp',
-    f3_h:'Pruebas que puedes mostrar', f3_p:'OneScore convierte tus reseñas y trabajo real en un número verificado — credibilidad que publicas donde sea, gratis para siempre.', f3_l:'Obtén tu OneScore',
-    f4_h:'Consigue trabajo y cobra', f4_p:'OneSocial es el marketplace donde la prueba verificada gana el trabajo — y OneEvent vende boletos y cobra en minutos.', f4_l:'Explora OneSocial',
-    get_eye:'Úsalo donde sea', get_h:'Funciona en cualquier teléfono o computadora',
-    get_sub:'Sin descargas. Ábrelo hoy en tu navegador — y agrégalo a tu pantalla de inicio para que abra como una app.',
-    get1_h:'Agrégalo a tu teléfono', get1_p:'Abre cualquier app One World en tu navegador móvil, toca Compartir y elige "Agregar a inicio". Instala un ícono y abre en pantalla completa — sin App Store.', get1_soon:'Apps nativas muy pronto',
-    get2_h:'Úsalo en tu computadora', get2_p:'Todo funciona en tu navegador en cualquier computadora — nada que instalar, nada que actualizar. Guarda oneworldlabs.ai y estás a un clic de cada app.', get2_cta:'Entra a una app →',
-    faq_eye:'Bueno saber', faq_h:'¿Sabías que?',
-    q1:'One World Labs es apps que usas más servicios que manejamos', a1:'Tres apps que usas tú mismo — OneScore para credibilidad, OneSocial para conseguir trabajo, OneEvent para boletos — más dos servicios hechos para ti que maneja nuestro equipo: OneVoice contesta tus llamadas y OneApp crea y administra tu sitio web. Todo comparte un acceso y un perfil.',
-    q2:'Puedes empezar gratis — sin tarjeta', a2:'OneScore es gratis para siempre, y cada app te deja empezar sin pagar por adelantado. Nuestros servicios hechos para ti son de pago — solo mejoras cuando una herramienta ya trabaja para tu negocio.',
-    q3:'Un acceso te lleva a todo', a3:'Inicia sesión una vez con One ID y estás en cada app y servicio One World — sin cuentas separadas, sin volver a poner tus datos, sin malabares con contraseñas.',
-    q4:'Basado en credibilidad — tú tienes el control', a4:'Ningún algoritmo decide quién ve tu negocio, y tu reputación no está dispersa en diez plataformas. Tu prueba es verificada, tuya y portátil — tú decides dónde aparece.',
-    d_apps:'Apps', d_services:'Servicios', d_voice:'Recepcionista IA', d_app:'Sitios web IA', d_score:'Puntaje de credibilidad', d_social:'Consigue trabajo', d_events:'Eventos y boletos', d_contact:'Contacto', d_appearance:'Apariencia', d_thememode:'Modo claro / oscuro',
-    f_apps:'Apps', f_services:'Servicios', f_company:'Empresa', f_contact:'Contacto', f_start:'Empieza',
-    copyright:'© 2026 One World Labs, Inc. · OneScore · OneSocial · OneEvent · OneVoice · OneApp',
-    tagline_foot:'Hecho para pequeños negocios y freelancers, en todas partes.'
-  },
-  de: {
-    flag:'de', code:'DE',
-    s_apps:'Apps', s_svcs:'Services', s_login:'Login',
-    h1_l1:'Arbeite intelligenter', h1_l2:'in deinem Geschäft', h1_l3:'mit ',
-    lede:'Apps, die du nutzt, und Services, die wir für dich betreiben — verbunden durch einen Login — damit kleine Unternehmen und Freelancer gesehen werden, Vertrauen gewinnen und bezahlt werden.',
-    cta_jump:'In eine App springen →', cta_signin:'Mit One ID anmelden', signin_oneid:'Mit One ID anmelden', signin:'Anmelden',
-    microtrust:'Ein Login für jede App · Kostenlos starten · Keine Kreditkarte',
-    apps_eye:'Die Apps', apps_h:'Öffne deine Lieblings-App', apps_sub:'Drei Apps, die du selbst nutzt — ein Login für alle.',
-    score_sub:'Berufliche Glaubwürdigkeit', social_sub:'Der Glaubwürdigkeits-Marktplatz', events_sub:'Events & Tickets',
-    open_score:'OneScore öffnen', open_social:'OneSocial öffnen', open_events:'OneEvent öffnen',
-    svc_eye:'Für dich erledigt', svc_h:'Bring dein Geschäft mit unseren Services voran', svc_sub:'Services, die unser Team für dich betreibt — damit du dich auf die Arbeit konzentrierst.', badge_dfy:'Für dich erledigt',
-    get_voice:'OneVoice holen', get_app:'OneApp holen',
-    feat_eye:'Warum es funktioniert', feat_h:'Ein Geschäft führen — einfacher',
-    get_eye:'Überall nutzbar', get_h:'Funktioniert auf jedem Handy oder Computer',
-    faq_eye:'Gut zu wissen', faq_h:'Wusstest du schon?',
-    d_apps:'Apps', d_services:'Services', d_contact:'Kontakt', d_appearance:'Darstellung', d_thememode:'Hell / Dunkel'
-  },
-  ru: {
-    flag:'ru', code:'RU',
-    s_apps:'прил.', s_svcs:'сервиса', s_login:'вход',
-    h1_l1:'Работайте умнее', h1_l2:'во всём бизнесе', h1_l3:'с ',
-    lede:'Приложения, которыми вы пользуетесь, и сервисы, которые мы ведём за вас — объединённые одним входом — чтобы малый бизнес и фрилансеры были замечены, вызывали доверие и получали оплату.',
-    cta_jump:'Перейти в приложение →', cta_signin:'Войти через One ID', signin_oneid:'Войти через One ID', signin:'Войти',
-    microtrust:'Один вход для всех приложений · Бесплатный старт · Без карты',
-    apps_eye:'Приложения', apps_h:'Откройте любимое приложение', apps_sub:'Три приложения для вас — один вход ко всем.',
-    score_sub:'Профессиональная репутация', social_sub:'Маркетплейс доверия', events_sub:'События и билеты',
-    open_score:'Открыть OneScore', open_social:'Открыть OneSocial', open_events:'Открыть OneEvent',
-    svc_eye:'Сделаем за вас', svc_h:'Улучшите бизнес с нашими сервисами', svc_sub:'Сервисы, которые наша команда ведёт за вас — чтобы вы занимались делом.', badge_dfy:'Сделаем за вас',
-    get_voice:'Получить OneVoice', get_app:'Получить OneApp',
-    feat_eye:'Почему это работает', feat_h:'Вести бизнес — проще',
-    get_eye:'Доступно везде', get_h:'Работает на любом телефоне и компьютере',
-    faq_eye:'Полезно знать', faq_h:'А вы знали?',
-    d_apps:'Приложения', d_services:'Сервисы', d_contact:'Контакты', d_appearance:'Оформление', d_thememode:'Светлая / тёмная'
-  },
-  zh: {
-    flag:'cn', code:'ZH',
-    s_apps:'应用', s_svcs:'服务', s_login:'登录',
-    h1_l1:'更聪明地经营', h1_l2:'您的业务', h1_l3:'携手 ',
-    lede:'您使用的应用，加上我们为您运营的服务——用一个登录连接起来——让小企业和自由职业者被看见、被信任、并获得报酬。',
-    cta_jump:'进入应用 →', cta_signin:'使用 One ID 登录', signin_oneid:'使用 One ID 登录', signin:'登录',
-    microtrust:'一个登录畅通所有应用 · 免费开始 · 无需信用卡',
-    apps_eye:'应用', apps_h:'进入您喜爱的应用', apps_sub:'三款您亲自使用的应用——一个登录全部畅通。',
-    score_sub:'专业可信度', social_sub:'可信度市场', events_sub:'活动与票务',
-    open_score:'打开 OneScore', open_social:'打开 OneSocial', open_events:'打开 OneEvent',
-    svc_eye:'为您代劳', svc_h:'用我们的服务提升您的业务', svc_sub:'由我们团队为您运营的服务——让您专注于工作。', badge_dfy:'为您代劳',
-    get_voice:'获取 OneVoice', get_app:'获取 OneApp',
-    feat_eye:'为何有效', feat_h:'让经营更简单',
-    get_eye:'随处可用', get_h:'在任何手机或电脑上都能用',
-    faq_eye:'温馨提示', faq_h:'您知道吗？',
-    d_apps:'应用', d_services:'服务', d_contact:'联系', d_appearance:'外观', d_thememode:'浅色 / 深色'
-  },
-  pt: {
-    flag:'br', code:'PT',
-    s_apps:'apps', s_svcs:'serviços', s_login:'login',
-    h1_l1:'Trabalhe melhor', h1_l2:'em todo o seu negócio', h1_l3:'com ',
-    lede:'Apps que você usa e serviços que administramos para você — unidos por um único login — para que pequenos negócios e freelancers sejam vistos, ganhem confiança e recebam pagamento.',
-    cta_jump:'Entrar em um app →', cta_signin:'Entrar com One ID', signin_oneid:'Entrar com One ID', signin:'Entrar',
-    microtrust:'Um login para cada app · Comece grátis · Sem cartão',
-    apps_eye:'Os apps', apps_h:'Entre no seu app favorito', apps_sub:'Três apps que você mesmo usa — um login para todos.',
-    score_sub:'Credibilidade profissional', social_sub:'O marketplace da credibilidade', events_sub:'Eventos e ingressos',
-    open_score:'Abrir OneScore', open_social:'Abrir OneSocial', open_events:'Abrir OneEvent',
-    svc_eye:'Feito para você', svc_h:'Impulsione seu negócio com nossos serviços', svc_sub:'Serviços que nossa equipe administra para você — para você focar no trabalho.', badge_dfy:'Feito para você',
-    get_voice:'Obter OneVoice', get_app:'Obter OneApp',
-    feat_eye:'Por que funciona', feat_h:'Gerir um negócio, mais simples',
-    get_eye:'Use em qualquer lugar', get_h:'Funciona em qualquer celular ou computador',
-    faq_eye:'Bom saber', faq_h:'Você sabia?',
-    d_apps:'Apps', d_services:'Serviços', d_contact:'Contato', d_appearance:'Aparência', d_thememode:'Claro / escuro'
-  }
-};
-var EN_CACHE = {};
-function applyLang(lang){
-  document.querySelectorAll('[data-i18n]').forEach(function(el){
-    var k = el.getAttribute('data-i18n');
-    if (!(k in EN_CACHE)) EN_CACHE[k] = el.textContent;
-    el.textContent = (lang !== 'en' && I18N[lang] && I18N[lang][k]) ? I18N[lang][k] : EN_CACHE[k];
-  });
-  document.getElementById('langflag').src = 'https://flagcdn.com/w40/' + I18N[lang].flag + '.png';
-  var _lc = document.getElementById('langcode'); if (_lc) _lc.textContent = I18N[lang].code;
-  document.querySelectorAll('#langmenu button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
-  document.documentElement.lang = lang;
-  try { localStorage.setItem('owl-lang', lang); } catch(e){}
-}
-var langbtn = document.getElementById('langbtn'), langmenu = document.getElementById('langmenu');
-langbtn.addEventListener('click', function(e){ e.stopPropagation(); langmenu.classList.toggle('open'); });
-document.addEventListener('click', function(){ langmenu.classList.remove('open'); });
-langmenu.querySelectorAll('button').forEach(function(b){
-  b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); langmenu.classList.remove('open'); });
-});
-
-/* ---------- theme ---------- */
-function setTheme(t){
-  document.documentElement.setAttribute('data-theme', t);
-  document.getElementById('themeicon').textContent = t === 'dark' ? '☀️' : '🌙';
-  document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'dark' ? '#0B0F1A' : '#FAFAF8');
-  try { localStorage.setItem('owl-theme', t); } catch(e){}
-}
-document.getElementById('themebtn').addEventListener('click', function(){
-  setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-});
-
-/* ---------- drawer ---------- */
-var drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
-function drawerOpen(o){ drawer.classList.toggle('open', o); scrim.classList.toggle('on', o); }
-document.getElementById('menubtn').addEventListener('click', function(){ drawerOpen(true); });
-document.getElementById('drawerx').addEventListener('click', function(){ drawerOpen(false); });
-scrim.addEventListener('click', function(){ drawerOpen(false); });
-
-/* ---------- reveals ---------- */
-if ('IntersectionObserver' in window){
-  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold:.08 });
-  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-} else { document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); }); }
-
-/* ---------- optional 3D icon swap (drops in if icon PNGs exist) ---------- */
-(function(){
-  document.querySelectorAll('[data-ico]').forEach(function(box){
-    var name = box.getAttribute('data-ico');
-    var img = new Image();
-    img.onload = function(){ box.innerHTML=''; box.style.background='none'; box.style.boxShadow='none'; box.appendChild(img); };
-    img.alt = name; img.src = './ic-' + name + '.png';
-  });
-})();
-
-/* ---------- hover-to-preview (real live page, scaled iframe) + hint ---------- */
-(function(){
-  var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-  /* apps that render blank in an iframe (SPAs) use a real screenshot instead */
-  var STATIC = { onesocial:'./pv-onesocial.jpg', oneevents:'./pv-oneevents.jpg' };
-  if (canHover) Object.keys(STATIC).forEach(function(k){ var i = new Image(); i.src = STATIC[k]; });
-  var cards = document.querySelectorAll('.apps-grid a.tile, .svc-grid a.svc');
-  cards.forEach(function(card){
-    var _ico = card.querySelector('[data-ico]'); var key = _ico ? _ico.getAttribute('data-ico') : '';
-    var open = card.querySelector('.open');
-    if (open && !card.querySelector('.hint')){
-      var hint = document.createElement('span'); hint.className = 'hint';
-      hint.innerHTML = '✨ <span>' + (canHover ? 'Hover to preview · click to open' : 'Tap to open') + '</span>';
-      open.insertAdjacentElement('afterend', hint);
-    }
-    if (!canHover) return;
-    var url = card.getAttribute('href'); if (!url || url.charAt(0) === '#') return;
-    var layer = document.createElement('div'); layer.className = 'tile-prev';
-    layer.innerHTML = '<div class="pvframe"><div class="pvload">Loading preview…</div></div>' +
-      '<div class="pvbar"><span>Live preview</span><span class="go">Open ↗</span></div>';
-    card.appendChild(layer);
-    var frame = layer.querySelector('.pvframe'), loaded = false;
-    function fail(){ var l = frame.querySelector('.pvload'); if (l){ l.style.display = 'flex'; l.textContent = 'Preview unavailable — click to open ↗'; } }
-    function build(){
-      if (loaded) return; loaded = true;
-      if (STATIC[key]){
-        var im = document.createElement('img'); im.alt = '';
-        im.onload = function(){ var l = frame.querySelector('.pvload'); if (l) l.style.display = 'none'; };
-        im.onerror = fail; im.src = STATIC[key]; frame.insertBefore(im, frame.firstChild);
-        return;
-      }
-      var f = document.createElement('iframe');
-      f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
-      f.setAttribute('scrolling', 'no'); f.setAttribute('tabindex', '-1'); f.setAttribute('aria-hidden', 'true'); f.referrerPolicy = 'no-referrer';
-      var vw = 900, s = card.clientWidth / vw;
-      f.style.width = vw + 'px'; f.style.height = Math.round(card.clientHeight / s) + 'px'; f.style.transform = 'scale(' + s + ')';
-      f.onload = function(){
-        var l = frame.querySelector('.pvload'); if (l) l.style.display = 'none';
-        /* same-origin apps that render blank (SPA in a frame) → graceful fallback */
-        setTimeout(function(){
-          try {
-            var d = f.contentDocument;
-            if (d && (!d.body || d.body.innerText.trim().length === 0)) fail();
-          } catch(e) { /* cross-origin: leave it showing */ }
-        }, 1400);
-      };
-      f.onerror = fail;
-      f.src = url; frame.insertBefore(f, frame.firstChild);
-      setTimeout(function(){ var l = frame.querySelector('.pvload'); if (l && l.style.display !== 'none') fail(); }, 6000);
-    }
-    card.addEventListener('mouseenter', function(){ build(); card.classList.add('previewing'); });
-    card.addEventListener('mouseleave', function(){ card.classList.remove('previewing'); });
-  });
-})();
-
-/* ---------- restore prefs ---------- */
-try {
-  var savedT = localStorage.getItem('owl-theme'); if (savedT) setTheme(savedT);
-  var savedL = localStorage.getItem('owl-lang'); if (savedL && savedL !== 'en') applyLang(savedL);
-} catch(e){}
-</script>
+        /* ---------- hover-to-preview (real live page, scaled iframe) ---------- */
+        (function(){
+            var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+            var STATIC = { onesocial:'/pv-onesocial.jpg', oneevents:'/pv-oneevents.jpg' };
+            if (canHover) Object.keys(STATIC).forEach(function(k){ var im = new Image(); im.src = STATIC[k]; });
+            if (!canHover) return;
+            document.querySelectorAll('a.app-card').forEach(function(card){
+                var key = card.getAttribute('data-ico');
+                var url = card.getAttribute('href'); if (!url) return;
+                var layer = card.querySelector('.tile-prev');
+                var frame = layer.querySelector('.pvframe');
+                var loaded = false;
+                function fail(){ var l = frame.querySelector('.pvload'); if (l){ l.style.display = 'flex'; l.textContent = 'Preview unavailable — click to open ↗'; } }
+                function build(){
+                    if (loaded) return; loaded = true;
+                    if (STATIC[key]) {
+                        var im = document.createElement('img'); im.alt = '';
+                        im.onload = function(){ var l = frame.querySelector('.pvload'); if (l) l.style.display = 'none'; };
+                        im.onerror = fail; im.src = STATIC[key]; frame.insertBefore(im, frame.firstChild);
+                        return;
+                    }
+                    var f = document.createElement('iframe');
+                    f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
+                    f.setAttribute('scrolling', 'no'); f.setAttribute('tabindex', '-1'); f.setAttribute('aria-hidden', 'true'); f.referrerPolicy = 'no-referrer';
+                    var vw = 900, s = card.clientWidth / vw;
+                    f.style.width = vw + 'px'; f.style.height = Math.round(card.clientHeight / s) + 'px'; f.style.transform = 'scale(' + s + ')';
+                    f.onload = function(){
+                        var l = frame.querySelector('.pvload'); if (l) l.style.display = 'none';
+                        setTimeout(function(){
+                            try {
+                                var d = f.contentDocument;
+                                if (d && (!d.body || d.body.innerText.trim().length === 0)) fail();
+                            } catch(e) { /* cross-origin: leave it showing */ }
+                        }, 1400);
+                    };
+                    f.onerror = fail;
+                    f.src = url; frame.insertBefore(f, frame.firstChild);
+                    setTimeout(function(){ var l = frame.querySelector('.pvload'); if (l && l.style.display !== 'none') fail(); }, 6000);
+                }
+                card.addEventListener('mouseenter', build);
+            });
+        })();
+    </script>
 </body>
 </html>
