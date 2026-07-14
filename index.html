@@ -794,11 +794,12 @@
 
         /* the LLM always spells her name "VAIA" in generated text (correct for the transcript log),
            but that spelling is ambiguous to TTS engines and got pronounced a different way almost
-           every time. Lee wants one consistent pronunciation: "VY-uh" (rhymes with "sky" + "uh").
-           Only the audio path gets this substitution — addMsg()/the visible transcript always keeps
-           the real spelling. */
+           every time. Correct pronunciation per Lee: first syllable rhymes with "say" (VAY, not
+           "sky"/VY — an earlier respelling of "VY-uh" got read back as a flat "VA-uh"). Target:
+           "VAY-uh". Only the audio path gets this substitution — addMsg()/the visible transcript
+           always keeps the real spelling. */
         function phoneticize(text){
-            return text.replace(/vaia/gi, 'VY-uh');
+            return text.replace(/vaia/gi, 'VAY-uh');
         }
 
         /* one voice path for EVERY utterance (greeting included) so she never switches voices mid-conversation */
