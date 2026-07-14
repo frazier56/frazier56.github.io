@@ -18,7 +18,7 @@
 <meta name="description" content="OneScore, OneSocial, OneEvent — apps you use. OneVoice and OneApp — done-for-you services. One login ties them all together. Built for small businesses and freelancers.">
 <link rel="manifest" href="/owl-manifest.webmanifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#0B0F1A" id="theme-color-meta">
+<meta name="theme-color" content="#FAFAF8" id="theme-color-meta">
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
@@ -111,28 +111,33 @@
     .qa.open .qa-chev{transform:rotate(90deg)}
     .qa-chev{transition:transform .25s ease}
 
-    /* ---------- VAIA floating voice orb ---------- */
-    #vaia-widget{position:fixed;top:76px;right:14px;z-index:45;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
-    @media (min-width:640px){ #vaia-widget{top:84px;right:24px} }
-    .vaia-orb{position:relative;width:60px;height:60px;border-radius:50%;background:var(--color-card);background-color:var(--color-bg);border:1px solid var(--color-border);box-shadow:0 8px 28px rgba(0,0,0,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    @media (min-width:640px){ .vaia-orb{width:68px;height:68px} }
-    .vaia-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid #00d2b4;opacity:0;animation:vaiaPulse 2.6s ease-out infinite}
-    .vaia-ring:nth-child(2){animation-delay:.85s}
-    .vaia-ring:nth-child(3){animation-delay:1.7s}
-    @keyframes vaiaPulse{0%{transform:scale(.85);opacity:.55}100%{transform:scale(1.85);opacity:0}}
-    .vaia-bars{position:relative;display:flex;align-items:center;justify-content:center;gap:3px;height:22px;z-index:2}
-    .vaia-bars span{display:block;width:3px;border-radius:2px;background:#00d2b4;height:6px;animation:vaiaBar 1.1s ease-in-out infinite}
+    /* ---------- VAIA floating voice orb (ambient, tap-to-talk) ---------- */
+    #vaia-widget{position:fixed;top:74px;right:14px;z-index:45;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+    @media (min-width:640px){ #vaia-widget{top:80px;right:24px} }
+    .vaia-orb{position:relative;width:120px;height:120px;border-radius:50%;background:var(--color-card);background-color:var(--color-bg);border:1px solid var(--color-border);box-shadow:0 8px 28px rgba(0,0,0,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:vaiaGlow 4.5s ease-in-out infinite;transition:opacity .4s ease,filter .4s ease}
+    @media (min-width:640px){ .vaia-orb{width:136px;height:136px} }
+    @keyframes vaiaGlow{0%,100%{box-shadow:0 8px 28px rgba(0,0,0,.18),0 0 0 rgba(0,210,180,0)}50%{box-shadow:0 8px 28px rgba(0,0,0,.18),0 0 38px rgba(0,210,180,.4)}}
+    .vaia-ring{position:absolute;inset:0;border-radius:50%;border:2px solid #00d2b4;opacity:0;animation:vaiaPulse 3.6s ease-out infinite}
+    .vaia-ring:nth-child(2){animation-delay:1.2s}
+    .vaia-ring:nth-child(3){animation-delay:2.4s}
+    @keyframes vaiaPulse{0%{transform:scale(.8);opacity:.5}100%{transform:scale(1.75);opacity:0}}
+    .vaia-bars{position:relative;display:flex;align-items:center;justify-content:center;gap:5px;height:40px;z-index:2}
+    .vaia-bars span{display:block;width:5px;border-radius:3px;background:#00d2b4;height:12px;animation:vaiaBar 2.2s ease-in-out infinite;opacity:.65}
     .vaia-bars span:nth-child(1){animation-delay:0s}
-    .vaia-bars span:nth-child(2){animation-delay:.12s}
-    .vaia-bars span:nth-child(3){animation-delay:.24s}
-    .vaia-bars span:nth-child(4){animation-delay:.36s}
-    .vaia-bars span:nth-child(5){animation-delay:.48s}
-    @keyframes vaiaBar{0%,100%{height:6px}50%{height:22px}}
-    #vaia-widget.listening .vaia-bars span{animation-duration:.5s}
-    #vaia-widget.listening .vaia-ring{animation-duration:1.3s}
+    .vaia-bars span:nth-child(2){animation-delay:.16s}
+    .vaia-bars span:nth-child(3){animation-delay:.32s}
+    .vaia-bars span:nth-child(4){animation-delay:.48s}
+    .vaia-bars span:nth-child(5){animation-delay:.64s}
+    @keyframes vaiaBar{0%,100%{height:10px}50%{height:26px}}
+    #vaia-widget.listening .vaia-bars span{animation-duration:.5s;opacity:1}
+    #vaia-widget.listening .vaia-bars span{animation-name:vaiaBarActive}
+    @keyframes vaiaBarActive{0%,100%{height:10px}50%{height:42px}}
+    #vaia-widget.listening .vaia-ring{animation-duration:1.4s}
     #vaia-widget.speaking .vaia-orb{border-color:#00d2b4}
-    .vaia-dot{position:absolute;bottom:2px;right:2px;width:12px;height:12px;border-radius:50%;background:#00d2b4;border:2px solid var(--color-bg);display:none}
-    #vaia-widget.active .vaia-dot{display:block}
+    #vaia-widget.speaking .vaia-bars span{animation-name:vaiaBarActive;animation-duration:.7s;opacity:1}
+    #vaia-widget.asleep .vaia-orb{animation:none;opacity:.38;filter:grayscale(70%)}
+    #vaia-widget.asleep .vaia-ring{animation-play-state:paused;opacity:0}
+    #vaia-widget.asleep .vaia-bars span{animation-play-state:paused;height:10px;opacity:.35}
 
     .vaia-panel{width:290px;max-width:calc(100vw - 28px);max-height:0;overflow:hidden;opacity:0;transform:translateY(-8px);transition:max-height .3s ease,opacity .25s ease,transform .3s ease;border-radius:22px;border:1px solid var(--color-border);background:var(--color-card);background-color:var(--color-bg);backdrop-filter:blur(20px);box-shadow:0 20px 50px rgba(0,0,0,.22)}
     @media (min-width:640px){ .vaia-panel{width:330px} }
@@ -149,7 +154,7 @@
     .vaia-textin{flex:1;min-width:0;background:var(--color-secondary);border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--color-fg)}
 </style>
 </head>
-<body class="dark">
+<body>
 <div class="min-h-screen bg-background text-foreground font-sans overflow-x-hidden">
 
     <!-- Background Orbs -->
@@ -161,8 +166,8 @@
     <!-- Navbar -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
         <div class="w-full px-3 sm:px-5 h-16 flex items-center justify-between">
-            <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center gap-2">
-                <img src="/logo-mark.png" alt="One World Labs" class="h-8 w-8">
+            <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center gap-[3px]">
+                <img src="/logo-mark.png" alt="One World Labs" class="h-8 w-8 -mr-[2px]">
                 <span class="font-heading font-bold text-xl tracking-tight"><span class="text-primary">ne</span> World Labs</span>
             </a>
             <div class="flex items-center gap-2 sm:gap-4">
@@ -225,17 +230,13 @@
                 </div>
                 <div id="vaia-log" class="vaia-log"></div>
                 <div class="vaia-controls">
-                    <button id="vaia-mic" class="vaia-mic" aria-label="Talk to VAIA">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-                    </button>
-                    <input id="vaia-text" class="vaia-textin" type="text" placeholder="Ask VAIA anything…">
+                    <input id="vaia-text" class="vaia-textin" type="text" placeholder="Type to VAIA (or just talk to her)…">
                 </div>
             </div>
         </div>
-        <div class="vaia-orb" id="vaia-orb" role="button" tabindex="0" aria-label="Talk to VAIA">
+        <div class="vaia-orb" id="vaia-orb" role="button" tabindex="0" aria-label="Tap to talk to VAIA">
             <div class="vaia-ring"></div><div class="vaia-ring"></div><div class="vaia-ring"></div>
             <div class="vaia-bars"><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="vaia-dot"></div>
         </div>
     </div>
 
@@ -525,7 +526,7 @@
         if (themeColorMeta) themeColorMeta.setAttribute('content', isDark ? '#0B0F1A' : '#FAFAF8');
     }
     var savedTheme = localStorage.getItem('color-theme');
-    applyTheme(savedTheme ? savedTheme === 'dark' : (window.matchMedia('(prefers-color-scheme: dark)').matches || !savedTheme));
+    applyTheme(savedTheme === 'dark'); /* default = light unless the visitor explicitly chose dark before */
     document.getElementById('theme-toggle').addEventListener('click', function(){
         var isDark = !document.body.classList.contains('dark');
         applyTheme(isDark);
@@ -733,22 +734,22 @@
         });
     })();
 
-    /* ---------- VAIA voice assistant ---------- */
+    /* ---------- VAIA voice assistant: ambient orb, tap to talk / tap to sleep ---------- */
     (function(){
         var SUPABASE_URL = 'https://wseblryyqxawvbjmylbo.supabase.co';
+        var VAIA_VOICE_ID = 'pFZP5JQG7iQjIQuC4Bku'; /* Lily — same voice for every utterance, greeting included */
         var APP_KNOWLEDGE = "You are VAIA, the friendly voice guide for One World Labs (oneworldlabs.ai). " +
             "One World Labs is one login, five products: OneScore (free professional credibility score from reviews & real work), " +
             "OneSocial (credibility-first marketplace where verified proof gets you hired and paid), OneEvent (create events, sell tickets, QR check-in), " +
             "OneVoice (done-for-you AI receptionist that answers calls 24/7, qualifies leads, books appointments), and OneApp (done-for-you AI-built website with hosting, domain, email). " +
-            "One ID signs you into all of them. Keep answers short, warm, and conversational — this is a voice conversation, not an essay.";
+            "One ID signs you into all of them. Keep answers short, warm, and conversational — this is a spoken voice conversation, not an essay.";
         var widget = document.getElementById('vaia-widget');
         var orb = document.getElementById('vaia-orb');
         var closeBtn = document.getElementById('vaia-close');
         var log = document.getElementById('vaia-log');
-        var micBtn = document.getElementById('vaia-mic');
         var textIn = document.getElementById('vaia-text');
         var history = [];
-        var busy = false, voiceMode = false, greeted = false;
+        var busy = false, voiceMode = false, asleep = false, everSlept = false, currentAudio = null, abortCtl = null;
 
         function addMsg(role, text){
             var b = document.createElement('div');
@@ -759,19 +760,25 @@
             return b;
         }
 
+        function openPanel(){ widget.classList.add('open'); }
+        function closePanel(){ widget.classList.remove('open'); }
+
+        /* one voice path for EVERY utterance (greeting included) so she never switches voices mid-conversation */
         function speak(text){
             widget.classList.add('speaking');
             return fetch(SUPABASE_URL + '/functions/v1/elevenlabs-tts', {
                 method: 'POST', headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ text: text, voiceId: 'pFZP5JQG7iQjIQuC4Bku' })
+                body: JSON.stringify({ text: text, voiceId: VAIA_VOICE_ID })
             }).then(function(r){
                 var ct = r.headers.get('content-type') || '';
                 if (ct.indexOf('audio') !== -1) {
                     return r.blob().then(function(blob){
                         return new Promise(function(resolve){
                             var audio = new Audio(URL.createObjectURL(blob));
-                            audio.onended = resolve; audio.onerror = resolve;
-                            audio.play().catch(resolve);
+                            currentAudio = audio;
+                            audio.onended = function(){ currentAudio = null; resolve(); };
+                            audio.onerror = function(){ currentAudio = null; resolve(); };
+                            audio.play().catch(function(){ currentAudio = null; resolve(); });
                         });
                     });
                 }
@@ -780,6 +787,7 @@
               .then(function(){ widget.classList.remove('speaking'); });
         }
 
+        /* only used if the ElevenLabs call truly fails — same content, so still one coherent turn */
         function fallbackSpeak(text){
             return new Promise(function(resolve){
                 if (!('speechSynthesis' in window)) { resolve(); return; }
@@ -792,17 +800,43 @@
             });
         }
 
+        /* handle "pull up / hide the chat" locally so the box only appears when asked, never on tap */
+        function handleLocalIntent(text){
+            var t = text.toLowerCase();
+            var wantsOpen = /(chat|text)\s*(window|box)?/.test(t) && /(pull up|open|show|bring up|display|see)/.test(t);
+            var wantsClose = /(chat|text)\s*(window|box)?/.test(t) && /(close|hide|minimize|get rid of|dismiss)/.test(t);
+            if (wantsOpen) {
+                addMsg('user', text);
+                openPanel();
+                var m = "Sure — here's our chat window.";
+                addMsg('vaia', m);
+                speak(m).then(function(){ if (voiceMode) startListening(); });
+                return true;
+            }
+            if (wantsClose) {
+                addMsg('user', text);
+                var m2 = "Got it, hiding the chat.";
+                addMsg('vaia', m2);
+                speak(m2).then(function(){ closePanel(); if (voiceMode) startListening(); });
+                return true;
+            }
+            return false;
+        }
+
         function askVaia(userText){
-            if (busy) return;
+            if (busy || !userText) return;
+            if (handleLocalIntent(userText)) return;
             busy = true;
             addMsg('user', userText);
             history.push({ role:'user', content: userText });
             var msgs = [{ role:'user', content: APP_KNOWLEDGE }].concat(history);
             var replyEl = addMsg('vaia', '…');
             var full = '';
+            abortCtl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
             fetch(SUPABASE_URL + '/functions/v1/vaia-chat', {
                 method:'POST', headers:{'Content-Type':'application/json'},
-                body: JSON.stringify({ messages: msgs })
+                body: JSON.stringify({ messages: msgs }),
+                signal: abortCtl ? abortCtl.signal : undefined
             }).then(function(r){
                 if (!r.ok || !r.body) throw new Error('bad response');
                 var reader = r.body.getReader(), decoder = new TextDecoder();
@@ -830,11 +864,12 @@
                 replyEl.textContent = full;
                 history.push({ role:'assistant', content: full });
                 return speak(full);
-            }).catch(function(){
+            }).catch(function(err){
+                if (err && err.name === 'AbortError') return;
                 replyEl.textContent = "I'm having trouble connecting right now — try again in a moment.";
             }).then(function(){
                 busy = false;
-                if (voiceMode) startListening();
+                if (voiceMode && !asleep) startListening();
             });
         }
 
@@ -844,45 +879,57 @@
         if (Recognition) {
             recog = new Recognition();
             recog.lang = 'en-US'; recog.continuous = false; recog.interimResults = false;
-            recog.onstart = function(){ widget.classList.add('listening'); micBtn.classList.add('on'); };
-            recog.onend = function(){ widget.classList.remove('listening'); micBtn.classList.remove('on'); };
+            recog.onstart = function(){ widget.classList.add('listening'); };
+            recog.onend = function(){ widget.classList.remove('listening'); };
             recog.onresult = function(e){
                 var t = e.results[0][0].transcript;
                 if (t && t.trim()) askVaia(t.trim());
             };
-            recog.onerror = function(){ widget.classList.remove('listening'); micBtn.classList.remove('on'); voiceMode = false; };
+            recog.onerror = function(){ widget.classList.remove('listening'); };
         }
         function startListening(){
-            if (!recog || busy) return;
+            if (!recog || busy || asleep) return;
             try { recog.start(); } catch(e){}
         }
         function stopListening(){
-            voiceMode = false;
             if (recog) { try { recog.stop(); } catch(e){} }
         }
 
-        function greet(){
-            if (greeted) return;
-            greeted = true;
-            var greeting = "Hey, welcome to One World Labs! This is the lab where one world holds everything your business needs, all in one place — we're a lab because we build the tools ourselves. Want me to walk you around, or do you have a question?";
-            addMsg('vaia', greeting);
-            history.push({ role:'assistant', content: greeting });
-            speak(greeting);
+        function stopSpeaking(){
+            window.speechSynthesis && window.speechSynthesis.cancel();
+            if (currentAudio) { try { currentAudio.pause(); } catch(e){} currentAudio = null; }
+        }
+
+        var GREETING = "Hey, welcome to One World Labs! This is the lab where one world holds everything your business needs, all in one place — we're a lab because we build the tools ourselves. Want me to walk you around, or do you have a question? Tap me any time to talk.";
+        var WAKE_LINE = "Oh — I fell asleep there for a minute, sorry about that! I'm back now. How can I help?";
+
+        function sleep(){
+            asleep = true;
+            voiceMode = false;
+            if (abortCtl) { try { abortCtl.abort(); } catch(e){} }
+            stopListening();
+            stopSpeaking();
+            widget.classList.remove('listening', 'speaking');
+            widget.classList.add('asleep');
+            everSlept = true;
+        }
+        function wake(){
+            asleep = false;
+            widget.classList.remove('asleep');
+            var goListen = function(){ voiceMode = true; startListening(); };
+            if (everSlept) { speak(WAKE_LINE).then(goListen); }
+            else { goListen(); }
         }
 
         orb.addEventListener('click', function(){
-            widget.classList.add('active');
-            var opening = !widget.classList.contains('open');
-            widget.classList.toggle('open', opening);
-            if (opening) greet();
-        });
-        orb.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') orb.click(); });
-        closeBtn.addEventListener('click', function(){ widget.classList.remove('open'); stopListening(); });
-        micBtn.addEventListener('click', function(){
-            if (widget.classList.contains('listening')) { stopListening(); return; }
+            if (asleep) { wake(); return; }
+            if (widget.classList.contains('listening') || widget.classList.contains('speaking') || voiceMode) { sleep(); return; }
+            /* first-ever tap: this IS the required user gesture — start the listening loop */
             voiceMode = true;
             startListening();
         });
+        orb.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); orb.click(); } });
+        closeBtn.addEventListener('click', function(){ closePanel(); /* closing the transcript never stops the conversation */ });
         textIn.addEventListener('keydown', function(e){
             if (e.key === 'Enter' && textIn.value.trim()) {
                 askVaia(textIn.value.trim());
@@ -890,18 +937,13 @@
             }
         });
 
-        /* best-effort auto-greet on load — mic still requires a tap (browser policy) */
+        /* auto-greet on load, same voice path as every other line — mic itself still needs a tap (browser policy) */
         window.addEventListener('load', function(){
             setTimeout(function(){
-                widget.classList.add('active');
-                if (!greeted) {
-                    greeted = true;
-                    var greeting = "Hey, welcome to One World Labs! This is the lab where one world holds everything your business needs, all in one place — we're a lab because we build the tools ourselves. Want me to walk you around, or do you have a question? Tap me any time to talk.";
-                    fallbackSpeak(greeting);
-                    history.push({ role:'assistant', content: greeting });
-                    addMsg('vaia', greeting);
-                }
-            }, 1400);
+                history.push({ role:'assistant', content: GREETING });
+                addMsg('vaia', GREETING);
+                speak(GREETING);
+            }, 1200);
         });
     })();
 </script>
