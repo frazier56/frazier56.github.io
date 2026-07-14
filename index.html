@@ -113,7 +113,7 @@
 
     /* ---------- VAIA floating voice orb (ambient, tap-to-talk) ---------- */
     #vaia-widget{position:fixed;top:74px;left:14px;right:auto;z-index:45;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-    @media (min-width:640px){ #vaia-widget{top:80px;left:24px} }
+    @media (min-width:640px){ #vaia-widget{top:26vh;left:64px} }
     .vaia-orb{position:relative;width:132px;height:132px;border-radius:50%;background:var(--color-card);background-color:var(--color-bg);border:1px solid var(--color-border);box-shadow:0 8px 28px rgba(0,0,0,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:vaiaGlow 4.5s ease-in-out infinite;transition:opacity .4s ease,filter .4s ease}
     @media (min-width:640px){ .vaia-orb{width:152px;height:152px} }
     @keyframes vaiaGlow{0%,100%{box-shadow:0 8px 28px rgba(0,0,0,.18),0 0 0 rgba(0,210,180,0)}50%{box-shadow:0 8px 28px rgba(0,0,0,.18),0 0 38px rgba(0,210,180,.4)}}
@@ -138,10 +138,15 @@
     #vaia-widget.asleep .vaia-orb{animation:none;opacity:.38;filter:grayscale(70%)}
     #vaia-widget.asleep .vaia-ring{animation-play-state:paused;opacity:0}
     #vaia-widget.asleep .vaia-bars span{animation-play-state:paused;height:10px;opacity:.35}
-    .vaia-think{display:none;position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:#00d2b4;text-transform:uppercase;z-index:3}
+    /* active/awake states stay translucent so page content shows through — idle keeps full opacity */
+    #vaia-widget.listening .vaia-orb,
+    #vaia-widget.thinking .vaia-orb,
+    #vaia-widget.speaking .vaia-orb{opacity:.55}
+    .vaia-think{display:none;position:absolute;bottom:15px;left:0;right:0;text-align:center;font-size:9px;font-weight:800;letter-spacing:.16em;color:#00d2b4;text-transform:uppercase;z-index:3;animation:vaiaThinkPulse 1.6s ease-in-out infinite}
     #vaia-widget.thinking .vaia-think{display:block}
-    #vaia-widget.thinking .vaia-bars{height:18px;transform:translateY(-10px)}
-    #vaia-widget.thinking .vaia-bars span{animation-duration:.9s;opacity:.5}
+    #vaia-widget.thinking .vaia-bars{height:16px;transform:translateY(-12px)}
+    #vaia-widget.thinking .vaia-bars span{animation-duration:.8s;opacity:.5}
+    @keyframes vaiaThinkPulse{0%,100%{opacity:.5;transform:scale(.9)}50%{opacity:1;transform:scale(1.1)}}
 
     .vaia-panel{width:290px;max-width:calc(100vw - 28px);max-height:0;overflow:hidden;opacity:0;transform:translateY(-8px);transition:max-height .3s ease,opacity .25s ease,transform .3s ease;border-radius:22px;border:1px solid var(--color-border);background:var(--color-card);background-color:var(--color-bg);backdrop-filter:blur(20px);box-shadow:0 20px 50px rgba(0,0,0,.22)}
     @media (min-width:640px){ .vaia-panel{width:330px} }
@@ -248,7 +253,7 @@
     <main class="relative z-10 pt-24 md:pt-32 pb-16 md:pb-20">
         <!-- Hero Section -->
         <section class="container mx-auto px-4 text-center max-w-4xl mb-20 md:mb-32">
-            <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 backdrop-blur-sm mb-8 text-xs sm:text-sm font-medium">
+            <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 backdrop-blur-sm mb-8 text-[10.5px] sm:text-[12.5px] font-medium">
                 <span class="flex items-center gap-1.5"><strong class="text-foreground">3</strong> <span class="text-muted-foreground" data-i18n="s_apps">apps</span></span>
                 <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
                 <span class="flex items-center gap-1.5"><strong class="text-foreground">2</strong> <span class="text-muted-foreground" data-i18n="s_svcs">services</span></span>
@@ -563,7 +568,10 @@
             setTimeout(function(){
                 i = (i + 1) % words.length;
                 el.textContent = words[i];
-                el.classList.remove('rot-fade');
+                void el.offsetWidth; /* force a reflow so the browser commits the opacity:0 + new-text state before we transition back — without this the fade-in gets coalesced and just pops in */
+                requestAnimationFrame(function(){
+                    el.classList.remove('rot-fade');
+                });
             }, 450);
         }, 1600);
     })();
@@ -966,7 +974,13 @@
             else { goListen(); }
         }
 
+        var orbBusy = false;
         orb.addEventListener('click', function(){
+            /* rapid double/triple taps used to desync sleep/wake (e.g. "wake up" firing without a real sleep in between) —
+               a short lock after each accepted tap keeps state consistent without feeling laggy on a normal single tap */
+            if (orbBusy) return;
+            orbBusy = true;
+            setTimeout(function(){ orbBusy = false; }, 450);
             if (asleep) { wake(); return; }
             if (widget.classList.contains('listening') || widget.classList.contains('speaking') || voiceMode) { sleep(); return; }
             /* first-ever tap: this IS the required user gesture — start the listening loop */
