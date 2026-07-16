@@ -156,7 +156,7 @@
     #vaia-widget.listening .vaia-ring{animation-duration:1.4s}
     #vaia-widget.speaking .vaia-orb{box-shadow:0 0 60px rgba(0,210,180,.5)}
     #vaia-widget.speaking .vaia-bars span{animation-name:vaiaBarActive;animation-duration:.7s;opacity:1}
-    #vaia-widget.asleep .vaia-orb{animation:none;opacity:.38;filter:grayscale(70%)}
+    #vaia-widget.asleep .vaia-orb{animation:vaiaGlow 9s ease-in-out infinite;opacity:.45;filter:grayscale(45%)}
     #vaia-widget.asleep .vaia-ring{animation-play-state:paused;opacity:0}
     #vaia-widget.asleep .vaia-bars span{animation-play-state:paused;height:10px;opacity:.35}
     /* she must NEVER go fully opaque and block page content — idle keeps a visible-but-translucent
@@ -1185,12 +1185,22 @@
             widget.classList.add('asleep');
             everSlept = true;
         }
+        var everWoken = false;
+        var FIRST_WAKE = "Oh — you woke me up! Hey, I'm glad you found me. I'm VAIA, your One World assistant — how can I help?";
         function wake(){
             asleep = false;
             noResultStreak = 0;
             widget.classList.remove('asleep');
             var goListen = function(){ voiceMode = true; startListening(); };
-            if (everSlept) {
+            if (!everWoken) {
+                /* Sleep-first (Lee, Jul 16): the FIRST tap is the introduction —
+                   she never speaks before being touched. */
+                everWoken = true;
+                history.push({ role:'assistant', content: FIRST_WAKE });
+                addMsg('vaia', FIRST_WAKE);
+                speak(FIRST_WAKE).then(goListen);
+            }
+            else if (everSlept) {
                 var line = WAKE_LINES[Math.floor(Math.random() * WAKE_LINES.length)];
                 speak(line).then(goListen);
             }
@@ -1224,14 +1234,12 @@
            if you have any questions," which is exactly why she looked like she wasn't hearing anyone.
            If the browser blocks the mic without a prior tap, startListening()/onerror handle that
            gracefully (she just waits for the first tap, same as before). */
+        /* Sleep-first (Lee, Jul 16): NO auto-greeting, ever. She was talking the moment
+           the page loaded and bothering people at work. She now starts asleep — dim,
+           slowly breathing — and only ever speaks after someone taps her (wake()). */
         window.addEventListener('load', function(){
-            setTimeout(function(){
-                history.push({ role:'assistant', content: GREETING });
-                addMsg('vaia', GREETING);
-                speak(GREETING).then(function(){
-                    if (!asleep) { voiceMode = true; startListening(); }
-                });
-            }, 1200);
+            asleep = true;
+            widget.classList.add('asleep');
         });
     })();
 </script>
