@@ -1,24 +1,920 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>OneVoice — redirecting…</title>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="0; url=https://onevoice.onesocial.ai/">
-<link rel="canonical" href="https://onevoice.onesocial.ai/">
-<style>
-  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;
-    background:#0B0F1A;color:#FAFAF8;text-align:center;padding:24px;}
-  a{color:#15C2B2;font-weight:700;}
-  p{font-size:15px;color:#9aa3b2;max-width:360px;}
-</style>
+<meta name="description" content="OneVoice — an AI receptionist that answers every call to your real-estate listing 24/7, qualifies buyers, and books showings.">
+<title>OneVoice — AI Receptionist for Real Estate</title>
+<style>html,body{margin:0;padding:0;background:#FAFAF8;}</style>
 </head>
 <body>
+<!-- OneVoice HOMEPAGE (page 1) — GHL-embeddable fragment for the ROOT step. Light throughout; logo = hosted white PNG rendered black via filter; full-bleed .ovhome wrapper. Pricing CTAs -> /get-started?plan=basic|pro. -->
+<style>
+:root{
+  --ink:#0B0F1A; --paper:#FAFAF8; --teal:#15C2B2; --teal2:#0B8C80; --tealtint:#E8FAF7;
+  --line:#e7e3d9; --txt:#0B0F1A; --txt2:#5a6677; --purpletint:#EFEDFB; --r:16px; --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',-apple-system,'Segoe UI',sans-serif;background:var(--paper);color:var(--txt);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+a{text-decoration:none;color:inherit;}
+h1,h2,h3{letter-spacing:-.02em;line-height:1.08;font-weight:800;}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:15px;padding:14px 26px;border-radius:12px;cursor:pointer;border:0;transition:.18s;}
+.btn.teal{background:var(--teal);color:#04241f;box-shadow:0 8px 22px rgba(21,194,178,.28);}
+.btn.teal:hover{background:var(--teal2);color:#fff;transform:translateY(-1px);}
+.btn.line{background:#fff;color:var(--txt);border:1px solid var(--line);}
+.btn.line:hover{border-color:var(--teal2);color:var(--teal2);}
+.reveal{opacity:0;transform:translateY(18px);transition:.7s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:none;}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal2);padding:7px 14px;border-radius:999px;background:var(--tealtint);border:1px solid #cdeeea;}
+.blink{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:blink 1.3s infinite;}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(21,194,178,.5)}50%{opacity:.35;box-shadow:0 0 0 5px rgba(21,194,178,0)}}
+.center{text-align:center;max-width:700px;margin:0 auto;}
+.h2{font-size:38px;margin-bottom:12px;}
+.h2 .hl{color:var(--teal2);font-style:italic;}
+.lead{font-size:17px;color:var(--txt2);}
+section.pad{padding:76px 0;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(250,250,248,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;}
+nav img.logo{height:54px;width:auto;}
+.navlinks{display:flex;gap:30px;}
+.navlinks a{color:var(--txt2);font-weight:600;font-size:14.5px;}
+.navlinks a:hover{color:var(--txt);}
+@media(max-width:860px){.navlinks{display:none;}}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;background:
+  radial-gradient(680px 380px at 88% 8%,rgba(21,194,178,.14),transparent 60%),
+  radial-gradient(560px 340px at 6% 92%,rgba(21,194,178,.08),transparent 60%),#fff;
+  border-bottom:1px solid var(--line);}
+.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(11,15,26,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(11,15,26,.03) 1px,transparent 1px);background-size:44px 44px;mask:radial-gradient(700px 400px at 80% 20%,#000,transparent 70%);}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center;padding-top:66px;padding-bottom:72px;}
+.hero h1{font-size:54px;font-weight:900;margin:18px 0 18px;}
+.hero h1 .hl{color:var(--teal2);font-style:italic;}
+.hero p.sub{font-size:17.5px;color:var(--txt2);max-width:520px;margin-bottom:28px;}
+.hero p.sub b{color:var(--txt);}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr;}.hero h1{font-size:38px;}}
+
+/* HERO GRAPHIC (AI answering) */
+.orbit{position:relative;height:400px;display:flex;align-items:center;justify-content:center;}
+.rings{position:absolute;width:340px;height:340px;border-radius:50%;border:1px dashed #d5cfc0;}
+.rings:after{content:"";position:absolute;inset:52px;border-radius:50%;border:1px dashed #ddd7c8;}
+.core{width:118px;height:118px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#2fe0cf,var(--teal) 55%,var(--teal2));display:flex;align-items:center;justify-content:center;color:#04241f;font-size:44px;box-shadow:0 20px 50px rgba(21,194,178,.4),0 0 0 14px rgba(21,194,178,.10);animation:corepulse 2.4s infinite;}
+@keyframes corepulse{0%,100%{box-shadow:0 20px 50px rgba(21,194,178,.4),0 0 0 12px rgba(21,194,178,.12)}50%{box-shadow:0 20px 50px rgba(21,194,178,.4),0 0 0 22px rgba(21,194,178,0)}}
+.ocard{position:absolute;background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px 13px;font-size:12.5px;font-weight:700;box-shadow:0 14px 34px rgba(11,15,26,.10);display:flex;align-items:center;gap:8px;}
+.ocard .s{font-size:11px;color:var(--txt2);font-weight:500;}
+.ocard i{width:9px;height:9px;border-radius:50%;background:var(--teal);flex:0 0 auto;}
+.ocard.a{top:60px;left:-6px;}.ocard.b{top:150px;right:-12px;}.ocard.c{bottom:64px;left:18px;}
+.hstat{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 8px;display:flex;gap:8px;box-shadow:0 16px 40px rgba(11,15,26,.1);}
+.hstat div{padding:0 12px;text-align:center;border-right:1px solid var(--line);}
+.hstat div:last-child{border:0;}
+.hstat b{display:block;font-size:16px;color:var(--txt);}
+.hstat span{font-size:10.5px;color:var(--txt2);}
+@media(max-width:900px){.orbit{height:330px;}}
+
+.trust{background:#fff;border-bottom:1px solid var(--line);color:var(--txt2);text-align:center;padding:16px;font-size:14px;font-weight:600;}
+.trust b{color:var(--teal2);}
+.videoframe{position:relative;border-radius:24px;overflow:hidden;border:1px solid #cdeeea;box-shadow:0 24px 60px rgba(21,194,178,.18);background:#05070d;max-width:340px;margin:0 auto;}
+.videoframe video{display:block;width:100%;height:auto;}
+
+/* NUMBERS TABLE (GHL style, light) */
+.roi{width:100%;border-collapse:separate;border-spacing:0;margin-top:36px;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 10px 40px rgba(11,15,26,.05);}
+.roi th,.roi td{padding:17px 20px;text-align:left;border-bottom:1px solid var(--line);}
+.roi thead th{font-size:13px;font-weight:800;color:var(--txt2);background:#faf9f4;text-align:center;}
+.roi thead th:first-child{text-align:left;}
+.roi thead th.imp{background:var(--purpletint);color:#4a3fb0;border-left:1px solid #ddd8f5;border-right:1px solid #ddd8f5;}
+.roi td{text-align:center;color:var(--txt2);font-weight:700;}
+.roi td:first-child{text-align:left;color:var(--txt);font-weight:600;}
+.roi td.ai{color:var(--teal2);font-weight:800;}
+.roi td.imp{background:rgba(83,74,183,.05);border-left:1px solid #ddd8f5;border-right:1px solid #ddd8f5;}
+.pill{display:inline-block;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:800;}
+.pill.vh{background:#e7f6e6;color:#2f7d24;}
+.pill.h{background:#eef7e6;color:#4a7d1f;}
+.pill.mh{background:#fdf1dc;color:#8a5a12;}
+.roi tr:last-child td{border-bottom:0;}
+@media(max-width:720px){.roi{font-size:13px;}.roi th,.roi td{padding:11px;}}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:42px;}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;box-shadow:0 6px 24px rgba(11,15,26,.04);}
+.step .n{width:40px;height:40px;border-radius:12px;background:var(--tealtint);color:var(--teal2);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;margin-bottom:15px;}
+.step h3{font-size:18px;margin-bottom:7px;}
+.step p{font-size:14.5px;color:var(--txt2);}
+@media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.steps{grid-template-columns:1fr;}}
+
+/* FEATURE ROWS */
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;margin-top:24px;}
+.frow.rev .fcopy{order:2;}
+.fcopy .eyebrow{display:inline-block;font-size:15px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal2);background:var(--tealtint);border:1px solid #cdeeea;padding:5px 12px;border-radius:999px;}
+.fcopy h3{font-size:32px;margin:10px 0 14px;}
+.fcopy h3 .hl{color:var(--teal2);font-style:italic;}
+.fcopy p{font-size:16px;color:var(--txt2);}
+.fcopy .go{display:inline-flex;align-items:center;gap:7px;margin-top:18px;color:var(--teal2);font-weight:800;font-size:15px;}
+@media(max-width:760px){.frow,.frow.rev{grid-template-columns:1fr;}.frow.rev .fcopy{order:0;}}
+
+/* PHONE */
+.stage{display:flex;justify-content:center;}
+.phone{position:relative;width:280px;height:566px;background:#05070d;border:11px solid #05070d;border-radius:48px;box-shadow:0 34px 80px rgba(11,15,26,.28);overflow:hidden;}
+.phone .screen{position:absolute;inset:0;background:linear-gradient(180deg,#0d1424,#0a0f1c);border-radius:37px;padding:24px 18px;display:flex;flex-direction:column;color:#fff;}
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#05070d;border-radius:0 0 16px 16px;z-index:3;}
+.callhead{text-align:center;margin-top:34px;}
+.callhead .st{font-size:12px;color:#8b93a3;}
+.callhead .nm{font-size:24px;font-weight:800;margin-top:10px;}
+.callhead .num{font-size:14px;color:#8b93a3;margin-top:3px;}
+.callhead .live{display:inline-flex;align-items:center;gap:7px;margin-top:12px;font-size:12px;color:var(--teal);font-weight:700;}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:blink 1.4s infinite;}
+.tscript{margin-top:18px;flex:1;overflow:hidden;display:flex;flex-direction:column;gap:8px;font-size:12.5px;}
+.tscript .b{max-width:84%;padding:8px 11px;border-radius:13px;line-height:1.35;}
+.tscript .ai{align-self:flex-start;background:rgba(21,194,178,.16);border:1px solid rgba(21,194,178,.32);}
+.tscript .cl{align-self:flex-end;background:#1a2338;}
+.tscript .tag{font-size:10px;color:#8b93a3;margin-bottom:2px;}
+.controls{display:flex;justify-content:space-between;padding:12px 4px 2px;}
+.ctrl{width:52px;text-align:center;font-size:10px;color:#8b93a3;}
+.ctrl .ic{width:46px;height:46px;border-radius:50%;background:#1a2338;display:flex;align-items:center;justify-content:center;margin:0 auto 5px;font-size:17px;}
+.ctrl.end .ic{background:#e5484d;}
+
+/* SMS mock */
+.smswrap{background:var(--tealtint);border:1px solid #cdeeea;border-radius:20px;padding:26px;}
+.sms{background:#fff;border-radius:16px;padding:16px 18px;border:1px solid var(--line);font-size:15px;line-height:1.55;box-shadow:0 8px 24px rgba(11,15,26,.06);}
+.sms .from{font-size:12px;color:var(--txt2);font-weight:700;margin-bottom:6px;}
+.sms a{color:var(--teal2);font-weight:800;}
+.sms .score{color:var(--teal2);font-weight:800;}
+
+/* PRO (light) */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:42px;}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:0 10px 34px rgba(11,15,26,.05);}
+.pcard h3{font-size:19px;margin-bottom:8px;}
+.pcard p{font-size:14px;color:var(--txt2);}
+.pmock{background:var(--tealtint);border:1px solid #cdeeea;border-radius:12px;padding:16px;margin-bottom:18px;min-height:132px;display:flex;flex-direction:column;justify-content:center;gap:10px;}
+.lead-row{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 12px;display:flex;align-items:center;gap:10px;box-shadow:0 5px 14px rgba(11,15,26,.06);}
+.lead-row .av{width:36px;height:36px;border-radius:50%;background:var(--teal);color:#04241f;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex:0 0 auto;}
+.lead-row .nm{font-weight:700;font-size:13.5px;line-height:1.2;}
+.lead-row .mt{font-size:11px;color:var(--txt2);}
+.lead-row .sc{margin-left:auto;background:var(--teal);color:#04241f;font-weight:800;font-size:13px;padding:6px 12px;border-radius:999px;white-space:nowrap;}
+.calstrip{display:flex;gap:5px;}
+.calstrip div{flex:1;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 3px;text-align:center;font-size:10.5px;color:var(--txt2);font-weight:700;}
+.calstrip div .d{font-size:9px;color:var(--txt2);font-weight:600;}
+.calstrip div.book{background:var(--teal);border-color:var(--teal);color:#04241f;}
+.calstrip div.book .d{color:#04241f;}
+.callogos{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;}
+.callogos span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;}
+.callogos span:before{content:"\2713";color:var(--teal2);font-weight:900;}
+.kan{display:flex;gap:6px;width:100%;}
+.kcol{flex:1;background:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 5px;font-size:9px;color:var(--txt2);text-align:center;font-weight:700;}
+.kcol .card{background:#f2f0ea;border-radius:5px;padding:6px 3px;margin-top:5px;color:var(--txt);font-size:9px;}
+.kcol.win{border-color:var(--teal);background:var(--tealtint);}.kcol.win .card{background:#fff;}
+@media(max-width:760px){.pgrid{grid-template-columns:1fr;}}
+
+/* STAT BAND (light) */
+.band{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center;padding:50px 0;}
+.bstats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.bstats b{display:block;font-size:36px;font-weight:900;color:var(--teal2);}
+.bstats span{font-size:13.5px;color:var(--txt2);}
+@media(max-width:680px){.bstats{grid-template-columns:repeat(2,1fr);gap:26px;}}
+
+/* PRICING */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1040px;margin:44px auto 0;}
+.plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px;position:relative;box-shadow:0 10px 34px rgba(11,15,26,.05);display:flex;flex-direction:column;}
+.plan.pro{border:2px solid var(--teal);box-shadow:0 22px 54px rgba(21,194,178,.18);}
+.plan .addl{font-size:14px;font-weight:800;color:var(--teal2);padding:12px 0 4px;border-top:1px solid var(--line);margin-bottom:18px;}
+.plan .pop{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal);color:#04241f;font-weight:800;font-size:12px;padding:6px 16px;border-radius:999px;}
+.plan .pname{font-weight:800;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);}
+.plan .price{font-size:46px;font-weight:900;margin:12px 0 2px;color:var(--txt);}
+.plan .price span{font-size:16px;color:var(--txt2);font-weight:600;}
+.plan .desc{font-size:14.5px;color:var(--txt2);margin:10px 0 20px;min-height:44px;}
+.plan ul{list-style:none;margin:0 0 16px;font-size:14.5px;color:var(--txt);flex:1;}
+.plan li{padding:8px 0 8px 28px;position:relative;color:var(--txt);}
+.plan li b{color:var(--txt);font-weight:800;}
+.plan li:before{content:"\2713";position:absolute;left:0;color:var(--teal2);font-weight:900;}
+.plan .btn{width:100%;justify-content:center;}
+.plan .trial{text-align:center;font-size:12.5px;color:var(--txt2);margin-top:12px;}
+.plan .price s{color:var(--txt2);font-weight:600;font-size:18px;opacity:.7;}
+.incl{max-width:840px;margin:34px auto 0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 30px;box-shadow:0 10px 34px rgba(11,15,26,.05);}
+.incl-h{font-weight:800;font-size:15px;color:var(--txt);margin-bottom:14px;text-align:center;}
+.incl-list{list-style:none;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 26px;font-size:14.5px;color:var(--txt);}
+.incl-list li{padding:6px 0 6px 26px;position:relative;}
+.incl-list li:before{content:"\2713";position:absolute;left:0;color:var(--teal2);font-weight:900;}
+@media(max-width:720px){.incl-list{grid-template-columns:1fr;}}
+@media(max-width:720px){.plans{grid-template-columns:1fr;}}
+
+/* TESTIMONIALS */
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px;}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:0 6px 24px rgba(11,15,26,.04);}
+.stars{color:#f2b53c;font-size:15px;margin-bottom:10px;}
+.tcard p{font-size:14.5px;color:var(--txt);}
+.tcard .who{margin-top:14px;font-size:13px;color:var(--txt2);font-weight:700;}
+@media(max-width:760px){.tgrid{grid-template-columns:1fr;}}
+
+/* FAQ */
+.faq{max-width:760px;margin:36px auto 0;}
+.q{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden;box-shadow:0 4px 16px rgba(11,15,26,.03);}
+.q button{width:100%;text-align:left;padding:18px 22px;font-size:16px;font-weight:700;background:none;border:0;cursor:pointer;display:flex;justify-content:space-between;gap:16px;color:var(--txt);}
+.q .a{max-height:0;overflow:hidden;transition:.3s;padding:0 22px;color:var(--txt2);font-size:15px;}
+.q.open .a{max-height:260px;padding:0 22px 18px;}
+.q .ico{color:var(--teal2);transition:.3s;flex:0 0 auto;font-size:20px;}
+.q.open .ico{transform:rotate(45deg);}
+
+/* FINAL CTA (light) */
+.final{background:radial-gradient(700px 300px at 50% 0,rgba(21,194,178,.16),transparent 65%),var(--tealtint);border-top:1px solid #cdeeea;text-align:center;padding:80px 0;}
+.final h2{font-size:40px;margin-bottom:22px;}
+
+/* FOOTER (light) */
+footer{background:#fff;border-top:1px solid var(--line);color:var(--txt2);padding:34px 0;font-size:13px;text-align:center;line-height:1.9;}
+footer img{height:60px;margin-bottom:12px;}
+footer a{color:var(--teal2);font-weight:700;}
+
+@media(max-width:600px){
+  section.pad{padding:52px 0;}
+  .wrap{padding:0 18px;}
+  nav .wrap{height:62px;} nav img.logo{height:44px;}
+  .hero .wrap{padding-top:40px;padding-bottom:48px;gap:34px;}
+  .hero h1{font-size:33px;} .hero p.sub{font-size:16px;}
+  .h2{font-size:28px;} .lead{font-size:16px;}
+  .fcopy h3{font-size:25px;} .fcopy .eyebrow{font-size:13.5px;}
+  .frow{gap:28px;}
+  .phone{width:250px;height:508px;}
+  .final h2{font-size:29px;}
+  .orbit{height:300px;}
+  .ocard{transform:scale(.9);} .ocard.a{left:2px;} .ocard.b{right:2px;} .ocard.c{left:8px;}
+  .hstat b{font-size:14px;} .hstat span{font-size:9.5px;} .hstat div{padding:0 9px;}
+  .plan{padding:26px;}
+}
+@media(max-width:820px){.pgrid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto;}}
+.ovhome{position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;width:100vw;max-width:100vw;overflow-x:hidden;background:var(--paper);}
+</style>
+<div class="ovhome">
+<nav><div class="wrap">
+  <a href="#top"><img class="logo" src="https://assets.cdn.filesafe.space/VkZwS3nGWMX06NRwLxJ8/media/6a4c98b12467f0ff08b2c1d0.png" alt="OneVoice"></a>
+  <div class="navlinks"><a href="#how">How it works</a><a href="#numbers">Why it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+  <a class="btn teal" style="padding:11px 22px;font-size:14px" href="#pricing">Get Started</a>
+</div></nav>
+
+
+<header class="hero" id="top"><div class="wrap">
   <div>
-    <p>Taking you to OneVoice…</p>
-    <p>If nothing happens, <a href="https://onevoice.onesocial.ai/">tap here</a>.</p>
+    <span class="badge"><span class="blink"></span> AI-Powered Receptionist</span>
+    <h1>Your business is <span class="hl">losing</span> customers every day</h1>
+    <p class="sub">Right now you're missing calls while you're showing homes, driving, or with family — and every missed call is a buyer calling <b>the next agent</b>. OneVoice answers every call instantly, qualifies the buyer, and books the showing — completely on autopilot.</p>
+    <a class="btn teal" href="#pricing">Get Started &rarr;</a>
   </div>
-  <script>location.replace('https://onevoice.onesocial.ai/');</script>
+  <div class="orbit">
+    <div class="rings"></div>
+    <div class="core">&#128222;</div>
+    <div class="ocard a"><i></i><div>Showing booked<div class="s">8 seconds ago</div></div></div>
+    <div class="ocard b"><i></i><div>Lead scored 9/10<div class="s">Hot buyer</div></div></div>
+    <div class="ocard c"><i></i><div>Text sent to agent<div class="s">Call summary</div></div></div>
+    <div class="hstat"><div><b>0%</b><span>Missed calls</span></div><div><b>&lt;1s</b><span>To answer</span></div><div><b>24/7</b><span>Always on</span></div></div>
+  </div>
+</div></header>
+
+<div class="trust">Answers 24/7 &middot; Qualifies every lead &middot; Books showings &middot; <b>Texts you instantly</b></div>
+
+
+<section class="pad" style="padding:56px 0"><div class="wrap reveal" style="max-width:560px">
+  <div class="center" style="margin-bottom:24px"><h2 class="h2">Watch the testimonial</h2></div>
+  <div class="videoframe">
+    <video src="https://assets.cdn.filesafe.space/VkZwS3nGWMX06NRwLxJ8/media/6a4d4cc7a97402b00bcee2ef.mp4" controls autoplay muted loop playsinline preload="metadata"></video>
+  </div>
+  <div class="center" style="margin-top:26px">
+    <a class="btn teal" href="tel:+12172909970" style="font-size:16px;padding:15px 28px">&#128222; Click to listen to a live demo</a>
+    <p style="margin-top:12px;font-size:13.5px;color:var(--txt2)">Our AI agent, Ava, will walk you through some of her capabilities — just tap to connect. You'll reach her at <b style="color:var(--txt)">(217) 290-9970</b>.</p>
+  </div>
+</div></section>
+
+<section class="pad" id="calc" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap reveal">
+    <div class="center" style="margin-bottom:32px">
+      <h2 class="h2">What are missed calls actually costing you?</h2>
+      <p class="lead">Answer three questions. See the real number.</p>
+    </div>
+
+    <div class="ovcalc-grid">
+      <div class="ovcalc-card">
+        <label class="ovcalc-label" for="ovcalc-profession">What's your business? <span class="ovcalc-optional">(optional)</span></label>
+        <div class="ovcalc-combo">
+          <input class="ovcalc-input" type="text" id="ovcalc-profession" autocomplete="off" placeholder="e.g. Real estate agent, barber, caterer...">
+          <div class="ovcalc-panel" id="ovcalc-panel"></div>
+        </div>
+
+        <label class="ovcalc-label" for="ovcalc-missed">Missed calls per day</label>
+        <div class="ovcalc-sliderrow">
+          <input class="ovcalc-slider" type="range" id="ovcalc-missed" min="1" max="100" step="1" value="5">
+          <span class="ovcalc-sliderval" id="ovcalc-missed-val">5</span>
+        </div>
+
+        <label class="ovcalc-label" for="ovcalc-conv">Current conversion rate</label>
+        <div class="ovcalc-sliderrow">
+          <input class="ovcalc-slider" type="range" id="ovcalc-conv" min="10" max="100" step="1" value="20">
+          <span class="ovcalc-sliderval" id="ovcalc-conv-val">20%</span>
+        </div>
+
+        <label class="ovcalc-label" for="ovcalc-value">Average customer value</label>
+        <div class="ovcalc-bigval" id="ovcalc-value-display">$250</div>
+        <input class="ovcalc-slider" type="range" id="ovcalc-value" min="50" max="5000" step="25" value="250">
+        <div class="ovcalc-moneyinput">
+          <span class="ovcalc-moneyprefix">$</span>
+          <input class="ovcalc-input ovcalc-input-small ovcalc-money-field" type="text" inputmode="numeric" id="ovcalc-value-number" value="250" aria-label="Average customer value, exact amount">
+        </div>
+      </div>
+
+      <div class="ovcalc-card ovcalc-result">
+        <div class="ovcalc-lossbox">
+          <p class="ovcalc-resultlabel ovcalc-losslabel">Currently losing</p>
+          <div class="ovcalc-statrow">
+            <div class="ovcalc-statbox ovcalc-statbox-loss"><span id="ovcalc-lost-customers">1</span></div>
+            <p class="ovcalc-statcaption">missed calls per day that were probably paying customers</p>
+          </div>
+          <p class="ovcalc-lossline">≈ <strong id="ovcalc-lost-revenue-month">$2,167</strong>/month · <strong id="ovcalc-lost-revenue">$26,000</strong>/year lost</p>
+        </div>
+
+        <div class="ovcalc-gainbox">
+          <p class="ovcalc-resultlabel">With OneVoice, you'll gain</p>
+          <div class="ovcalc-gainrow">
+            <div><span class="ovcalc-gainnum" id="ovcalc-gain-month">2</span><span class="ovcalc-gaincap">new customers/mo</span></div>
+            <div><span class="ovcalc-gainnum" id="ovcalc-gain-year">104</span><span class="ovcalc-gaincap">new customers/yr</span></div>
+          </div>
+        </div>
+
+        <div class="ovcalc-roibox">
+          <p class="ovcalc-resultlabel">Total annual revenue increase</p>
+          <div class="ovcalc-reveal-row">
+            <p class="ovcalc-bignum ovcalc-bignum-teal" id="ovcalc-roi-year1">$26,000</p>
+            <span class="ovcalc-reaction" id="ovcalc-reaction">😱</span>
+          </div>
+          <p class="ovcalc-reaction-caption" id="ovcalc-reaction-caption">That's real money walking away.</p>
+        </div>
+
+        <p class="ovcalc-sentence" id="ovcalc-sentence">
+          Based on what you entered, missed calls could be costing your business
+          approximately <strong>$26,000</strong> a year.
+        </p>
+
+        <p class="ovcalc-demoteaser">On your upcoming demo, we'll show you how to capture the revenue you're missing today.</p>
+
+        <a class="btn teal" href="#pricing" style="width:100%;justify-content:center">See if OneVoice pays for itself →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.ovcalc-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:stretch;}
+@media(max-width:900px){.ovcalc-grid{grid-template-columns:1fr;}}
+.ovcalc-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:28px;}
+.ovcalc-label{display:block;font-weight:700;font-size:14px;color:var(--txt);margin:18px 0 8px;}
+.ovcalc-label:first-child{margin-top:0;}
+.ovcalc-optional{font-weight:400;color:var(--txt2);}
+.ovcalc-hint{font-size:12.5px;color:var(--txt2);margin:6px 2px 0;line-height:1.4;}
+.ovcalc-input{width:100%;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--txt);font-family:inherit;}
+.ovcalc-input:focus{outline:2px solid var(--teal);outline-offset:1px;}
+.ovcalc-input-small{margin-top:0;font-weight:700;}
+
+/* glass combobox — replaces native <datalist> per brand canon (no native OS pickers) */
+.ovcalc-combo{position:relative;}
+.ovcalc-panel{
+  display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:40;
+  max-height:266px;overflow-y:auto;border-radius:16px;padding:6px;
+  background:rgba(255,255,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);box-shadow:0 16px 40px rgba(11,15,26,.14);
+}
+.ovcalc-panel.open{display:block;}
+.ovcalc-option{padding:10px 12px;border-radius:10px;font-size:14.5px;font-weight:600;color:var(--txt);cursor:pointer;}
+.ovcalc-option:hover,.ovcalc-option.active{background:var(--tealtint);color:var(--teal2);}
+.ovcalc-option-empty{padding:10px 12px;font-size:13.5px;color:var(--txt2);font-weight:500;}
+
+.ovcalc-sliderrow{display:flex;align-items:center;gap:14px;}
+/* Cross-browser range track — do NOT rely on accent-color alone (Safari/Android render
+   the unfilled track as a hard black/dark-gray default without this). Explicit light
+   track + teal thumb on every vendor prefix so it never goes dark on any device. */
+.ovcalc-slider{-webkit-appearance:none;appearance:none;flex:1;width:100%;height:6px;margin:6px 0;background:transparent;accent-color:var(--teal);cursor:pointer;}
+.ovcalc-slider::-webkit-slider-runnable-track{-webkit-appearance:none;height:6px;border-radius:999px;background:#e4e0d4;}
+.ovcalc-slider::-moz-range-track{height:6px;border-radius:999px;background:#e4e0d4;border:none;}
+.ovcalc-slider::-moz-range-progress{height:6px;border-radius:999px;background:var(--teal);}
+.ovcalc-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:var(--teal);border:2px solid #fff;box-shadow:0 1px 3px rgba(11,15,26,.25);margin-top:-6px;cursor:pointer;}
+.ovcalc-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--teal);border:2px solid #fff;box-shadow:0 1px 3px rgba(11,15,26,.25);cursor:pointer;}
+.ovcalc-sliderval{min-width:56px;text-align:right;font-weight:800;color:var(--teal2);font-size:19px;}
+.ovcalc-bigval{font-size:26px;font-weight:800;color:var(--teal2);margin-bottom:2px;}
+
+.ovcalc-moneyinput{position:relative;display:inline-block;margin-top:10px;max-width:180px;}
+.ovcalc-moneyprefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--txt);pointer-events:none;}
+.ovcalc-money-field{padding-left:26px !important;}
+
+.ovcalc-result{background:var(--tealtint);border-color:var(--teal);display:flex;flex-direction:column;justify-content:center;gap:18px;}
+.ovcalc-resultlabel{font-size:13px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;}
+.ovcalc-bignum{font-size:36px;font-weight:800;color:var(--txt);line-height:1.1;}
+.ovcalc-bignum-teal{font-size:46px;color:var(--teal2);}
+.ovcalc-statrow{display:flex;align-items:center;gap:14px;}
+.ovcalc-statbox{background:#fff;border:1px solid var(--teal);border-radius:12px;padding:10px 18px;font-size:30px;font-weight:800;color:var(--teal2);line-height:1;min-width:52px;text-align:center;}
+.ovcalc-statcaption{font-size:14.5px;font-weight:700;color:var(--txt);line-height:1.35;}
+
+/* loss / gain / ROI blocks — stolen structure from competitor calculators, OneVoice tokens */
+.ovcalc-lossbox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;}
+.ovcalc-losslabel{color:#8a6d1f;}
+.ovcalc-statbox-loss{border-color:var(--line);color:var(--txt);}
+.ovcalc-lossline{font-size:13.5px;color:var(--txt2);margin:10px 0 0;}
+.ovcalc-lossline strong{color:var(--txt);}
+.ovcalc-gainbox{background:var(--tealtint);border:1px solid var(--teal);border-radius:14px;padding:16px 18px;}
+.ovcalc-gainrow{display:flex;gap:22px;margin-top:6px;}
+.ovcalc-gainrow>div{display:flex;flex-direction:column;}
+.ovcalc-gainnum{font-size:28px;font-weight:800;color:var(--teal2);line-height:1.1;}
+.ovcalc-gaincap{font-size:12.5px;font-weight:700;color:var(--txt2);}
+.ovcalc-roibox{padding-top:2px;}
+.ovcalc-reveal-row{display:flex;align-items:center;gap:10px;}
+.ovcalc-reaction{font-size:38px;display:inline-block;transform:scale(0);}
+.ovcalc-reaction.pop{animation:ovcalcPop .55s cubic-bezier(.34,1.56,.64,1) both;}
+@keyframes ovcalcPop{
+  0%{transform:scale(0) rotate(-8deg);}
+  55%{transform:scale(1.25) rotate(4deg);}
+  75%{transform:scale(.95) rotate(-2deg);}
+  100%{transform:scale(1) rotate(0);}
+}
+.ovcalc-reaction-caption{font-size:13px;font-weight:700;color:var(--teal2);margin-top:6px;}
+.ovcalc-sentence{font-size:15px;color:var(--txt2);margin:0;line-height:1.5;}
+.ovcalc-sentence strong{color:var(--txt);}
+.ovcalc-demoteaser{font-size:14px;font-weight:700;color:var(--teal2);margin:0;line-height:1.4;}
+
+@media(max-width:480px){
+  .ovcalc-card{padding:20px;}
+  .ovcalc-statrow{flex-direction:column;align-items:flex-start;gap:8px;}
+  .ovcalc-statbox{align-self:flex-start;font-size:26px;padding:8px 16px;}
+  .ovcalc-bignum-teal{font-size:34px;}
+  .ovcalc-reveal-row{flex-wrap:wrap;}
+  .ovcalc-bigval{font-size:22px;}
+}
+</style>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+
+  // Rough per-customer / per-job value ballparks — not scientific, just realistic
+  // starting points so the calculator isn't meaningless at default settings.
+  // These can exceed the slider's $10k granularity cap (e.g. real estate) — the
+  // slider just pins to its max in that case, the exact-amount field stays true.
+  var PROFESSIONS = [
+    ['Real estate agent', 20000],
+    ['Barber', 20],
+    ['Hair stylist', 75],
+    ['Salon owner', 85],
+    ['Caterer', 2500],
+    ['Personal trainer', 75],
+    ['Dentist', 250],
+    ['Chiropractor', 75],
+    ['Plumber', 350],
+    ['Electrician', 350],
+    ['HVAC technician', 450],
+    ['Roofer', 8000],
+    ['Landscaper', 150],
+    ['Auto repair shop', 400],
+    ['Med spa', 500],
+    ['Photographer', 1200],
+    ['Wedding planner', 3500],
+    ['Lawyer', 2500],
+    ['Financial advisor', 1500],
+    ['Insurance agent', 600],
+    ['General contractor', 12000],
+    ['Tattoo artist', 200],
+    ['Veterinarian', 200],
+    ['Restaurant owner', 60],
+    ['Cleaning service', 150],
+    ['Tutor', 60],
+    ['Life coach', 300],
+    ['Dog groomer', 100],
+    ['Massage therapist', 100]
+  ];
+
+  var profession = $('ovcalc-profession');
+  var panel = $('ovcalc-panel');
+  var missed = $('ovcalc-missed'), missedVal = $('ovcalc-missed-val');
+  var conv = $('ovcalc-conv'), convVal = $('ovcalc-conv-val');
+  var value = $('ovcalc-value'), valueNumber = $('ovcalc-value-number'), valueDisplay = $('ovcalc-value-display');
+  var lostCustomers = $('ovcalc-lost-customers');
+  var lostRevenue = $('ovcalc-lost-revenue');
+  var lostRevenueMonth = $('ovcalc-lost-revenue-month');
+  var gainMonth = $('ovcalc-gain-month');
+  var gainYear = $('ovcalc-gain-year');
+  var roiYear1 = $('ovcalc-roi-year1');
+  var reaction = $('ovcalc-reaction');
+  var reactionCaption = $('ovcalc-reaction-caption');
+  var sentence = $('ovcalc-sentence');
+
+  var SLIDER_MAX = 5000;
+  var FIELD_MAX = 250000; // sanity ceiling on typed amounts only
+
+  function fmtMoney(n){
+    n = Math.round(n);
+    return '$' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+  function fmtCommas(n){
+    n = Math.round(n);
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+  function parseMoney(s){
+    return parseFloat(String(s || '').replace(/[^\d.]/g, '')) || 0;
+  }
+
+  function renderPanel(filter){
+    var f = (filter || '').toLowerCase().trim();
+    var matches = PROFESSIONS.filter(function(p){ return !f || p[0].toLowerCase().indexOf(f) !== -1; });
+    if (!matches.length){
+      panel.innerHTML = '<div class="ovcalc-option-empty">No match — no problem, just fill in the sliders below.</div>';
+    } else {
+      panel.innerHTML = matches.map(function(p){
+        return '<div class="ovcalc-option" data-name="' + p[0] + '" data-default="' + p[1] + '">' + p[0] + '</div>';
+      }).join('');
+    }
+    panel.classList.add('open');
+  }
+
+  function closePanel(){ panel.classList.remove('open'); }
+
+  profession.addEventListener('focus', function(){ renderPanel(profession.value); });
+  profession.addEventListener('input', function(){ renderPanel(profession.value); recalc(); });
+  document.addEventListener('click', function(e){
+    if (!panel.contains(e.target) && e.target !== profession) closePanel();
+  });
+  panel.addEventListener('click', function(e){
+    var opt = e.target.closest('.ovcalc-option');
+    if (!opt) return;
+    profession.value = opt.getAttribute('data-name');
+    var def = parseFloat(opt.getAttribute('data-default'));
+    if (!isNaN(def)){
+      valueNumber.value = fmtCommas(def);
+      value.value = Math.min(def, SLIDER_MAX);
+    }
+    closePanel();
+    recalc();
+  });
+
+  function syncValueFromSlider(){
+    valueNumber.value = fmtCommas(value.value);
+    recalc();
+  }
+  function syncValueFromNumber(){
+    // live recalculation off the raw typed value; don't reformat mid-keystroke (cursor jump)
+    var n = parseMoney(valueNumber.value);
+    value.value = Math.min(n, SLIDER_MAX);
+    recalc();
+  }
+  function formatValueNumberOnBlur(){
+    var n = Math.max(0, Math.min(parseMoney(valueNumber.value), FIELD_MAX));
+    valueNumber.value = fmtCommas(n);
+    value.value = Math.min(n, SLIDER_MAX);
+    recalc();
+  }
+  value.addEventListener('input', syncValueFromSlider);
+  valueNumber.addEventListener('input', syncValueFromNumber);
+  valueNumber.addEventListener('blur', formatValueNumberOnBlur);
+
+  function currentValue(){
+    return Math.max(0, Math.min(parseMoney(valueNumber.value), FIELD_MAX));
+  }
+
+  function recalc(){
+    var m = parseFloat(missed.value) || 0;   // missed calls PER DAY
+    var pct = parseFloat(conv.value) || 0;   // % of missed calls that would have converted
+    var v = currentValue();
+    var prof = (profession.value || '').trim();
+
+    missedVal.textContent = m;
+    convVal.textContent = pct + '%';
+    valueDisplay.textContent = fmtMoney(v);
+
+    var convRate = pct / 100;
+    var lostPerDay = m * convRate;
+    var revenuePerYear = lostPerDay * v * 365;
+
+    var lostRounded = Math.round(lostPerDay * 10) / 10;
+    lostCustomers.textContent = lostRounded.toString().replace(/\.0$/, '');
+    lostRevenue.textContent = fmtMoney(revenuePerYear);
+    if (lostRevenueMonth) lostRevenueMonth.textContent = fmtMoney(revenuePerYear / 12);
+
+    var gainedPerMonth = Math.round(lostPerDay * 30.44);
+    var gainedPerYear = Math.round(lostPerDay * 365);
+    if (gainMonth) gainMonth.textContent = fmtCommas(gainedPerMonth);
+    if (gainYear) gainYear.textContent = fmtCommas(gainedPerYear);
+    if (roiYear1) roiYear1.textContent = fmtMoney(revenuePerYear);
+
+    var who = prof ? ('your ' + prof + ' business') : 'your business';
+    sentence.innerHTML = 'Based on what you entered, missed calls could be costing ' + who +
+      ' approximately <strong>' + fmtMoney(revenuePerYear) + '</strong> a year.';
+
+    var caption = 'Every missed call is a shot at that.';
+    if (revenuePerYear >= 100000) caption = "That's real money walking away — every year.";
+    else if (revenuePerYear >= 20000) caption = "That's a serious amount to be losing.";
+    else if (revenuePerYear > 0) caption = "Small leaks sink big ships.";
+    reactionCaption.textContent = caption;
+
+    reaction.classList.remove('pop');
+    void reaction.offsetWidth; // restart animation
+    reaction.classList.add('pop');
+  }
+
+  missed.addEventListener('input', recalc);
+  conv.addEventListener('input', recalc);
+
+  valueNumber.value = fmtCommas(value.value);
+  recalc();
+})();
+</script>
+
+<section class="pad" id="numbers"><div class="wrap reveal">
+  <div class="center"><h2 class="h2">Numbers don't lie</h2><p class="lead">80% of leads are lost in the first 5 minutes. Respond to buyers instantly and beat every agent you're competing with.</p></div>
+  <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+  <table class="roi" style="min-width:540px">
+    <thead><tr><th>&nbsp;</th><th>You</th><th>OneVoice</th><th class="imp">Revenue Impact</th></tr></thead>
+    <tbody>
+      <tr><td>Missed calls every month</td><td>62%</td><td class="ai">0%</td><td class="imp"><span class="pill vh">Very High</span></td></tr>
+      <tr><td>After-hours availability</td><td>Rarely</td><td class="ai">24 / 7</td><td class="imp"><span class="pill h">High</span></td></tr>
+      <tr><td>Time to respond to a new lead</td><td>~34 min</td><td class="ai">&lt;1 sec</td><td class="imp"><span class="pill vh">Very High</span></td></tr>
+      <tr><td>Leads qualified &amp; scored</td><td>By hand, later</td><td class="ai">On the call</td><td class="imp"><span class="pill h">High</span></td></tr>
+      <tr><td>Showings booked while you're busy</td><td>Missed</td><td class="ai">Automatic</td><td class="imp"><span class="pill mh">Medium–High</span></td></tr>
+      <tr><td>Lead conversion rate</td><td>23%</td><td class="ai">48%</td><td class="imp"><span class="pill vh">Very High</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div></section>
+
+
+<section class="pad" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <div class="frow reveal">
+    <div class="fcopy">
+      <div class="eyebrow">Voice Agent</div>
+      <h3>Never miss a call, <span class="hl">ever again</span></h3>
+      <p>Your AI receptionist picks up every call to your listing 24/7 — walking buyers through the home, answering their questions, qualifying them, and booking a showing in natural conversation, even when you're already with a client.</p>
+      <a class="go" href="#pricing">Get Started &rarr;</a>
+    </div>
+    <div class="stage">
+      <div class="phone"><div class="notch"></div><div class="screen">
+        <div class="callhead"><div class="st">OneVoice &middot; incoming</div><div class="nm">Buyer</div><div class="num">(555) 482-9191</div><div class="live"><span class="dot"></span> AI answering — 00:42</div></div>
+        <div class="tscript" id="tscript"></div>
+        <div class="controls"><div class="ctrl"><div class="ic">&#128266;</div>speaker</div><div class="ctrl"><div class="ic">&#127908;</div>mute</div><div class="ctrl end"><div class="ic">&#10005;</div>end</div><div class="ctrl"><div class="ic">&#8599;</div>transfer</div></div>
+      </div></div>
+    </div>
+  </div>
+</div></section>
+
+
+<section class="pad" id="hear-ava" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap reveal">
+  <div class="center"><h2 class="h2">Hear Ava in action</h2><p class="lead">Real call flow, on a sample listing. Tap to play — about 15 seconds each.</p></div>
+  <div class="avaclips">
+    <div class="avaclip" data-audio="https://onevoice-checkout.vercel.app/demo-audio/ava-demo-1-availability.mp3">
+      <button class="avaplay" type="button" aria-label="Play sample call">&#9654;</button>
+      <div class="avameta"><div class="avatitle">&ldquo;Is it still available?&rdquo;</div><div class="avasub">Buyer asks about the listing</div></div>
+      <div class="avadur">0:19</div>
+    </div>
+    <div class="avaclip" data-audio="https://onevoice-checkout.vercel.app/demo-audio/ava-demo-2-scheduling.mp3">
+      <button class="avaplay" type="button" aria-label="Play sample call">&#9654;</button>
+      <div class="avameta"><div class="avatitle">&ldquo;Can I see it this weekend?&rdquo;</div><div class="avasub">Ava books the showing</div></div>
+      <div class="avadur">0:14</div>
+    </div>
+  </div>
+  <p class="avanote">AI-voiced sample calls on a demo listing, for illustration. On your upcoming demo, we'll show you how you can capture the revenue you're missing today.</p>
+</div></section>
+<style>
+  .avaclips{max-width:640px;margin:28px auto 8px;display:flex;flex-direction:column;gap:12px}
+  .avaclip{display:flex;align-items:center;gap:14px;background:var(--paper,#FAFAF8);border:1px solid var(--line,#e7e3d9);border-radius:14px;padding:14px 16px;transition:box-shadow .15s,border-color .15s}
+  .avaclip:hover{border-color:#cdeeea;box-shadow:0 2px 10px rgba(11,15,26,.06)}
+  .avaplay{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:none;background:linear-gradient(135deg,#15C2B2,#0B8C80);color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(11,140,128,.3)}
+  .avaplay.playing{background:#0B0F1A}
+  .avameta{flex:1 1 auto;min-width:0}
+  .avatitle{font-weight:800;font-size:15.5px;color:#0B0F1A;line-height:1.3}
+  .avasub{font-size:13px;color:#5a6677;margin-top:2px}
+  .avadur{flex:0 0 auto;font-size:12.5px;color:#8a93a3;font-variant-numeric:tabular-nums}
+  .avanote{text-align:center;font-size:12.5px;color:#8a93a3;max-width:520px;margin:14px auto 0}
+</style>
+<script>
+(function(){
+  var audio = new Audio();
+  var currentBtn = null;
+  function resetAll(){
+    document.querySelectorAll('.avaplay').forEach(function(b){ b.innerHTML='&#9654;'; b.classList.remove('playing'); });
+  }
+  document.querySelectorAll('.avaclip').forEach(function(clip){
+    var btn = clip.querySelector('.avaplay');
+    var src = clip.getAttribute('data-audio');
+    btn.addEventListener('click', function(){
+      if (currentBtn === btn && !audio.paused){
+        audio.pause(); resetAll(); currentBtn = null; return;
+      }
+      resetAll();
+      audio.src = src; audio.currentTime = 0;
+      audio.play().catch(function(){});
+      btn.innerHTML = '&#10074;&#10074;'; btn.classList.add('playing');
+      currentBtn = btn;
+    });
+  });
+  audio.addEventListener('ended', function(){ resetAll(); currentBtn = null; });
+})();
+</script>
+
+
+<section class="pad"><div class="wrap">
+  <div class="frow rev reveal">
+    <div class="fcopy">
+      <div class="eyebrow">Post-Call Text</div>
+      <h3>The instant it hangs up, <span class="hl">you get the text</span></h3>
+      <p>Every call ends with a text to your phone — the caller's name and a tappable number so you can call back in one touch, plus a lead score so you know exactly who to chase first.</p>
+      <a class="go" href="#pricing">Get Started &rarr;</a>
+    </div>
+    <div class="smswrap"><div class="sms"><div class="from">OneVoice · just now</div>New call from <b>Sarah</b> at <a href="tel:5554829191">(555) 482-9191</a>. Lead score: <span class="score">9/10</span>. Showing booked Thursday 6 PM. Call your hottest leads back first.</div></div>
+  </div>
+</div></section>
+
+
+<section class="pad" id="how" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap reveal">
+  <div class="center"><h2 class="h2">How it works</h2><p class="lead">Three steps. Zero effort on your end.</p></div>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>A buyer calls your listing</h3><p>Your OneVoice number rings — day, night, weekend, doesn't matter.</p></div>
+    <div class="step"><div class="n">2</div><h3>Your AI answers &amp; qualifies</h3><p>It walks them through the home, answers questions, and works out how serious they are.</p></div>
+    <div class="step"><div class="n">3</div><h3>It books your showing</h3><p>If the buyer's ready, your AI books it automatically — synced to your Google Calendar.</p></div>
+    <div class="step"><div class="n">4</div><h3>You get the text</h3><p>The second it hangs up: who called, what they wanted — and a lead score.</p></div>
+  </div>
+</div></section>
+
+
+<section class="pad"><div class="wrap reveal">
+  <div class="center"><span class="badge"><span class="blink"></span> Included on every plan</span><h2 class="h2" style="margin-top:16px">Let your AI do the <span class="hl">sorting</span></h2></div>
+  <div class="pgrid">
+    <div class="pcard">
+      <div class="pmock">
+        <div class="lead-row"><div class="av">SM</div><div><div class="nm">Sarah M.</div><div class="mt">Pre-approved · buying in 30 days</div></div><div class="sc">🔥 Hot · 9</div></div>
+        <div class="lead-row"><div class="av" style="background:#e7e3d9;color:#5a6677">JD</div><div><div class="nm">John D.</div><div class="mt">Just browsing · no timeline</div></div><div class="sc" style="background:#e7e3d9;color:#5a6677">Cool · 3</div></div>
+      </div>
+      <h3>AI Lead Analyzer</h3><p>Every caller is scored and ranked by how ready they are to buy — so you call your hottest leads back first.</p>
+    </div>
+    <div class="pcard">
+      <div class="pmock">
+        <div class="calstrip"><div><div class="d">Tue</div>—</div><div><div class="d">Wed</div>—</div><div class="book"><div class="d">Thu</div>6 PM</div><div><div class="d">Fri</div>—</div></div>
+        <div class="callogos"><span>Google</span><span>Outlook</span><span>Apple</span></div>
+      </div>
+      <h3>Calendar-Synced Booking</h3><p>Connect Google, Outlook, or Apple and your AI books showings around your real schedule — so it never double-books you.</p>
+    </div>
+    <div class="pcard">
+      <div class="pmock">
+        <div class="kan"><div class="kcol">New<div class="card">Sarah</div></div><div class="kcol">Contacted<div class="card">Mike</div></div><div class="kcol">Showing<div class="card">Ava</div></div><div class="kcol win">Won<div class="card">Jon</div></div></div>
+      </div>
+      <h3>Lead Pipeline Dashboard</h3><p>Every lead auto-drops into a visual board — New → Contacted → Showing → Won — so nothing slips.</p>
+    </div>
+  </div>
+</div></section>
+
+
+<section class="band"><div class="wrap"><div class="bstats reveal">
+  <div><b>0%</b><span>Missed calls</span></div><div><b>&lt;1s</b><span>To answer</span></div><div><b>24/7</b><span>Always on</span></div><div><b>Every</b><span>Lead scored &amp; logged</span></div>
+</div></div></section>
+
+
+<section class="pad" id="pricing"><div class="wrap">
+  <div class="center"><h2 class="h2">Simple pricing. Try it free.</h2><p class="lead">Same AI, same features on every plan — you only choose listings &amp; call volume. <b>50% off setup this summer.</b></p></div>
+  <div class="plans">
+    <div class="plan">
+      <div class="pname">Light</div><div class="price">$99<span>/mo per listing</span></div>
+      <div class="desc">One listing, always answered.</div>
+      <ul><li><b>1 listing</b> — add more anytime</li><li><b>$1.00</b> per answered call</li><li>Setup <s>$149</s> &rarr; <b>$74.50 today</b></li></ul>
+      <a class="btn teal" href="https://onevoice.onesocial.ai/get-started?plan=light">Start Free Trial</a>
+      <div class="trial">7-day free trial · cancel anytime</div>
+    </div>
+    <div class="plan pro">
+      <div class="pop">Most Popular</div>
+      <div class="pname">Basic</div><div class="price">$297<span>/mo</span></div>
+      <div class="desc">Up to four listings, one simple price.</div>
+      <ul><li><b>Up to 4 listings</b> — +$99/mo each extra</li><li><b>$0.99</b> per answered call</li><li>Setup <s>$249</s> &rarr; <b>$124.50 today</b></li></ul>
+      <a class="btn teal" href="https://onevoice.onesocial.ai/get-started?plan=basic">Start Free Trial</a>
+      <div class="trial">7-day free trial · cancel anytime</div>
+    </div>
+    <div class="plan">
+      <div class="pname">Pro</div><div class="price">$497<span>/mo</span></div>
+      <div class="desc">Unlimited calls, for high-volume agents.</div>
+      <ul><li><b>5 listings</b> — +$99/mo each extra</li><li><b>Unlimited calls</b> — no per-call fee</li><li>Setup <s>$349</s> &rarr; <b>$174.50 today</b></li></ul>
+      <a class="btn teal" href="https://onevoice.onesocial.ai/get-started?plan=pro">Start Free Trial</a>
+      <div class="trial">7-day free trial · cancel anytime</div>
+    </div>
+  </div>
+
+  <div class="incl">
+    <div class="incl-h">Every plan includes everything:</div>
+    <ul class="incl-list">
+      <li>Answers every call 24/7 — screens &amp; qualifies buyers</li>
+      <li>Books showings on your availability, with Google Calendar sync</li>
+      <li>Every caller gets a text with your name &amp; number to reach you back</li>
+      <li>You get a recap text after every call — with an AI lead-score analysis (who's hot, and why)</li>
+      <li>7-day no-commitment trial — cancel anytime</li>
+      <li>48-hour uptime guarantee — if it's ever down more than 48 hours, that month is free</li>
+    </ul>
+  </div>
+</div></section>
+
+
+<section class="pad" style="padding-top:12px;padding-bottom:36px"><div class="wrap reveal">
+  <div class="notreal">
+    <p class="notreal-q">6+ listings, a brokerage, or another business?</p>
+    <p class="notreal-sub">Enterprise is custom-built around your listing count and call volume — book a quick call and we'll put together your pricing.</p>
+    <button class="btn ghost" type="button" onclick="bookCall()">Book a call for custom pricing →</button>
+  </div>
+</div></section>
+
+<style>
+.notreal{max-width:560px;margin:0 auto;text-align:center;}
+.notreal-q{margin:0 0 6px;font-size:15px;font-weight:700;color:var(--txt);}
+.notreal-sub{margin:0 0 18px;font-size:13.5px;line-height:1.55;color:var(--txt2);}
+.btn.ghost{background:transparent;color:var(--teal2);border:1.5px solid var(--teal);box-shadow:none;}
+.btn.ghost:hover{background:var(--tealtint);color:var(--teal2);transform:translateY(-1px);}
+</style>
+
+
+<section class="pad" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap reveal">
+  <div class="center"><h2 class="h2">Agents trust OneVoice</h2></div>
+  <div class="tgrid">
+    <div class="tcard"><div class="stars">★★★★★</div><p>"I closed a buyer I would've completely missed — they called at 9 PM while I was at dinner. OneVoice booked the showing before I even saw the text."</p><div class="who">— Marcus T., Realtor · Atlanta, GA</div></div>
+    <div class="tcard"><div class="stars">★★★★★</div><p>"The lead scores are the game-changer. I stopped wasting mornings on tire-kickers and started calling my 9s and 10s first."</p><div class="who">— Priya N., Broker · Dallas, TX</div></div>
+    <div class="tcard"><div class="stars">★★★★★</div><p>"Setup took ten minutes and it syncs with my Google Calendar. It's like having a receptionist who never sleeps."</p><div class="who">— Dave R., Agent · Phoenix, AZ</div></div>
+  </div>
+</div></section>
+
+
+<section class="pad" id="faq"><div class="wrap reveal">
+  <div class="center"><h2 class="h2">Questions, answered</h2></div>
+  <div class="faq">
+    <div class="q"><button>Does it work with my current number?<span class="ico">+</span></button><div class="a">Yes. You get a dedicated OneVoice number for your listings, and calls are handled and summarized to you automatically — no change to your personal phone.</div></div>
+    <div class="q"><button>What exactly happens when a buyer calls?<span class="ico">+</span></button><div class="a">Your AI answers instantly, tells them about the property, answers questions, qualifies them, and (on Pro) books a showing on your calendar. The moment it hangs up, you get a text summary.</div></div>
+    <div class="q"><button>Can I cancel anytime?<span class="ico">+</span></button><div class="a">Absolutely. No contract — start with a 7-day free trial and cancel whenever you like.</div></div>
+    <div class="q"><button>Which calendars does it sync with?<span class="ico">+</span></button><div class="a">On Pro, OneVoice syncs with Google Calendar, Outlook / Microsoft 365, and Apple / iCloud so your AI books around your real availability.</div></div>
+    <div class="q"><button>Do I need any tech skills?<span class="ico">+</span></button><div class="a">None. Setup takes minutes, and if you'd like a hand, our team will walk you through it live on a quick call.</div></div>
+  </div>
+</div></section>
+
+
+<section class="final"><div class="wrap reveal">
+  <h2>Stop letting calls go to voicemail.</h2>
+  <a class="btn teal" href="#pricing" style="font-size:17px;padding:16px 34px">Start your 7-day free trial &rarr;</a>
+  <p style="margin-top:16px;font-size:13px;color:var(--txt2)">No contract · Cancel anytime · Setup in minutes</p>
+</div></section>
+
+
+<footer>
+  <img src="https://assets.cdn.filesafe.space/VkZwS3nGWMX06NRwLxJ8/media/6a4c98b12467f0ff08b2c1d0.png" alt="OneVoice"><br>
+  OneVoice, a OneSocial company · OneSocial AI, LLC<br>
+  <a href="tel:+18557700200">Call us: (855) 770-0200</a> · 1111b S Governors Ave, Dover, DE 19904
+</footer>
+
+<!-- BOOK-A-CALL MODAL (GHL calendar widget — same booking calendar used on the OneApp site; swap OV_BOOKING_URL below if OneVoice should point at a different calendar) -->
+<div class="mscrim" id="mscrim" onclick="if(event.target===this)closeBooking()">
+  <div class="mcard mcal">
+    <div class="mcalhead">
+      <b>Book your call</b>
+      <button class="mclose" onclick="closeBooking()" aria-label="Close">✕</button>
+    </div>
+    <iframe id="cal-frame" title="Book your OneVoice call" src="about:blank"></iframe>
+    <div style="text-align:center;padding:10px 0 12px"><a id="cal-open" href="#" target="_blank" rel="noopener" style="font-size:13px;color:var(--txt2)">Trouble loading? Open the calendar in a new tab ↗</a></div>
+  </div>
+</div>
+
+<style>
+.mscrim{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px;}
+.mscrim.open{display:flex;}
+.mcard.mcal{max-width:920px;width:97%;padding:0;overflow:hidden;background:#fff;border-radius:16px;}
+.mcalhead{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--line);}
+.mcalhead b{font-size:16px;font-weight:800;color:var(--txt);}
+.mclose{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--txt2);cursor:pointer;font-family:inherit;}
+#cal-frame{width:100%;height:640px;border:0;display:block;background:#fff;}
+@media(max-width:640px){#cal-frame{height:70vh;}}
+</style>
+
+<script>
+var OV_BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/rghlggjZP931B1mISGls';
+function bookCall(){
+  var f = document.getElementById('cal-frame');
+  if (!/leadconnector/.test(f.src || '')) f.src = OV_BOOKING_URL;
+  document.getElementById('cal-open').href = OV_BOOKING_URL;
+  document.getElementById('mscrim').classList.add('open');
+}
+function closeBooking(){
+  document.getElementById('mscrim').classList.remove('open');
+}
+</script>
+
+<script>
+(function(){var w=document.querySelector(".ov,.ovhome");var p=w&&w.parentElement;while(p&&p.tagName!=="BODY"){p.style.paddingTop="0";p.style.paddingBottom="0";p.style.marginTop="0";p=p.parentElement;}})();
+
+document.querySelectorAll('.q button').forEach(function(b){b.addEventListener('click',function(){b.parentElement.classList.toggle('open');});});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+var lines=[
+  {c:'cl',tag:'Buyer',t:'Is 742 Maple Crest still available?'},
+  {c:'ai',tag:'OneVoice AI',t:'It is! 4 bed, 2.5 bath. Want me to book you a showing this week?'},
+  {c:'cl',tag:'Buyer',t:'Yes — Thursday evening if you have it.'},
+  {c:'ai',tag:'OneVoice AI',t:'Done — Thursday 6 PM. Texting the details to your agent now.'}
+];
+var box=document.getElementById('tscript'),i=0;
+function add(){if(!box)return;if(i>=lines.length){setTimeout(function(){box.innerHTML='';i=0;add();},2600);return;}
+var l=lines[i++];var d=document.createElement('div');d.className='b '+l.c;d.innerHTML='<div class="tag">'+l.tag+'</div>'+l.t;box.appendChild(d);box.scrollTop=box.scrollHeight;setTimeout(add,1500);}
+add();
+</script>
+</div>
 </body>
 </html>
