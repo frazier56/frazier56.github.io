@@ -176,30 +176,57 @@ nav img.logo{height:54px;width:auto;}
 .bstats span{font-size:13.5px;color:var(--txt2);}
 @media(max-width:680px){.bstats{grid-template-columns:repeat(2,1fr);gap:26px;}}
 
-/* PRICING */
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1040px;margin:44px auto 0;}
-.plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px;position:relative;box-shadow:0 10px 34px rgba(11,15,26,.05);display:flex;flex-direction:column;}
-.plan.pro{border:2px solid var(--teal);box-shadow:0 22px 54px rgba(21,194,178,.18);}
-.plan .addl{font-size:14px;font-weight:800;color:var(--teal2);padding:12px 0 4px;border-top:1px solid var(--line);margin-bottom:18px;}
-.plan .pop{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--teal);color:#04241f;font-weight:800;font-size:12px;padding:6px 16px;border-radius:999px;}
-.plan .pname{font-weight:800;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);}
-.plan .price{font-size:46px;font-weight:900;margin:12px 0 2px;color:var(--txt);}
-.plan .price span{font-size:16px;color:var(--txt2);font-weight:600;}
-.plan .desc{font-size:14.5px;color:var(--txt2);margin:10px 0 20px;min-height:44px;}
-.plan ul{list-style:none;margin:0 0 16px;font-size:14.5px;color:var(--txt);flex:1;}
-.plan li{padding:8px 0 8px 28px;position:relative;color:var(--txt);}
+/* PRICING — glassmorphism cards */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1060px;margin:44px auto 0;position:relative;}
+.plans:before{content:"";position:absolute;inset:-40px -20px;z-index:0;pointer-events:none;filter:blur(6px);
+  background:radial-gradient(420px 240px at 22% 16%, rgba(21,194,178,.16), transparent 70%),
+             radial-gradient(420px 240px at 82% 32%, rgba(11,140,128,.13), transparent 70%);}
+.plan{position:relative;z-index:1;border-radius:22px;padding:30px 30px 26px;display:flex;flex-direction:column;overflow:hidden;
+  background:linear-gradient(158deg, rgba(255,255,255,.92), rgba(232,250,247,.62));
+  -webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
+  border:1px solid rgba(21,194,178,.22);
+  box-shadow:0 14px 40px rgba(11,15,26,.08), inset 0 1px 0 rgba(255,255,255,.7);}
+.plan.pro{border:1.5px solid rgba(21,194,178,.55);
+  background:linear-gradient(158deg, rgba(255,255,255,.95), rgba(214,247,242,.72));
+  box-shadow:0 22px 60px rgba(21,194,178,.22), inset 0 1px 0 rgba(255,255,255,.8);}
+.plan:after{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;pointer-events:none;
+  background:linear-gradient(105deg, transparent, rgba(255,255,255,.55), transparent);transform:skewX(-18deg);animation:sheen 7s ease-in-out infinite;}
+.plan.pro:after{animation-delay:1.2s;}
+@keyframes sheen{0%,72%{left:-60%;}88%,100%{left:130%;}}
+.plan .pop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);z-index:3;background:var(--teal);color:#04241f;font-weight:800;font-size:12px;padding:6px 16px;border-radius:999px;box-shadow:0 6px 16px rgba(21,194,178,.35);}
+.plan .pname{font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal2);}
+.plan .price{font-size:46px;font-weight:900;margin:10px 0 2px;color:var(--txt);letter-spacing:-.02em;}
+.plan .price span{font-size:15px;color:var(--txt2);font-weight:600;letter-spacing:0;}
+.plan .desc{font-size:14px;color:var(--txt2);margin:8px 0 18px;min-height:40px;}
+.plan ul{list-style:none;margin:0 0 18px;font-size:14.5px;color:var(--txt);flex:1;}
+.plan li{padding:7px 0 7px 26px;position:relative;color:var(--txt);white-space:nowrap;}
 .plan li b{color:var(--txt);font-weight:800;}
 .plan li:before{content:"\2713";position:absolute;left:0;color:var(--teal2);font-weight:900;}
-.plan .btn{width:100%;justify-content:center;}
-.plan .trial{text-align:center;font-size:12.5px;color:var(--txt2);margin-top:12px;}
-.plan .price s{color:var(--txt2);font-weight:600;font-size:18px;opacity:.7;}
-.incl{max-width:840px;margin:34px auto 0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 30px;box-shadow:0 10px 34px rgba(11,15,26,.05);}
-.incl-h{font-weight:800;font-size:15px;color:var(--txt);margin-bottom:14px;text-align:center;}
-.incl-list{list-style:none;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 26px;font-size:14.5px;color:var(--txt);}
-.incl-list li{padding:6px 0 6px 26px;position:relative;}
-.incl-list li:before{content:"\2713";position:absolute;left:0;color:var(--teal2);font-weight:900;}
-@media(max-width:720px){.incl-list{grid-template-columns:1fr;}}
-@media(max-width:720px){.plans{grid-template-columns:1fr;}}
+.plan li.meta{font-size:12.5px;color:var(--txt2);padding-top:2px;padding-bottom:2px;}
+.plan li.meta:before{content:"\00b7";font-size:20px;line-height:.5;left:2px;color:var(--txt2);}
+.plan li.setup{font-size:13.5px;}
+.plan li.setup s{color:#d8382f;text-decoration-color:#d8382f;text-decoration-thickness:2px;font-weight:600;margin-right:5px;}
+.plan li.setup b{color:var(--teal2);}
+.plan .btn{width:100%;justify-content:center;position:relative;z-index:2;}
+.plan .trial{text-align:center;font-size:12px;color:var(--txt2);margin-top:11px;}
+.setupbadge{position:absolute;top:14px;right:14px;z-index:4;width:64px;height:64px;border-radius:16px;display:grid;place-items:center;text-align:center;overflow:hidden;transform:rotate(3deg);
+  background:linear-gradient(150deg, rgba(21,194,178,.94), rgba(11,140,128,.94));
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:0 8px 22px rgba(11,140,128,.4), inset 0 1px 0 rgba(255,255,255,.6);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+.setupbadge span{color:#fff;font-weight:900;font-size:11px;line-height:1.08;letter-spacing:.04em;text-shadow:0 1px 2px rgba(0,0,0,.18);}
+.setupbadge:after{content:"";position:absolute;top:0;left:-70%;width:55%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-18deg);animation:sheen 4.5s ease-in-out infinite;}
+.fineprint{max-width:920px;margin:22px auto 0;text-align:center;font-size:13px;color:var(--txt2);line-height:1.6;}
+.fineprint b{color:var(--txt);font-weight:800;}
+.fineprint .fp-dim{opacity:.8;}
+.incl{max-width:980px;margin:30px auto 0;text-align:center;}
+.incl-h{font-weight:800;font-size:15px;color:var(--txt);margin-bottom:16px;}
+.incl-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;}
+.incl-pills .pill{display:inline-flex;align-items:center;font-size:13.5px;color:var(--txt);font-weight:600;padding:9px 16px 9px 34px;position:relative;border-radius:999px;white-space:nowrap;
+  background:linear-gradient(150deg, rgba(255,255,255,.9), rgba(232,250,247,.7));
+  border:1px solid rgba(21,194,178,.22);box-shadow:0 4px 14px rgba(11,15,26,.05);}
+.incl-pills .pill:before{content:"\2713";position:absolute;left:15px;color:var(--teal2);font-weight:900;}
+@media(max-width:720px){.plans{grid-template-columns:1fr;}.plan li{white-space:normal;}.incl-pills .pill{white-space:normal;}}
 
 /* TESTIMONIALS */
 .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px;}
@@ -770,42 +797,63 @@ footer a{color:var(--teal2);font-weight:700;}
 
 
 <section class="pad" id="pricing"><div class="wrap">
-  <div class="center"><h2 class="h2">Simple pricing. Try it free.</h2><p class="lead">Same AI, same features on every plan — you only choose listings &amp; call volume. <b>50% off setup this summer.</b></p></div>
+  <div class="center"><h2 class="h2">Simple pricing. No commitment.</h2><p class="lead">Same AI, same features on every plan — you only choose listings &amp; call volume.</p></div>
   <div class="plans">
-    <div class="plan">
+
+    <div class="plan glass">
       <div class="pname">Light</div><div class="price">$99<span>/mo per listing</span></div>
       <div class="desc">One listing, always answered.</div>
-      <ul><li><b>1 listing</b> — add more anytime</li><li><b>$1.00</b> per answered call</li><li>Setup <s>$149</s> &rarr; <b>$74.50 today</b></li></ul>
+      <ul>
+        <li><b>1 listing</b></li>
+        <li class="meta">$0.99 per answered call</li>
+        <li class="setup">Setup <b>$149</b></li>
+      </ul>
       <a class="btn teal" href="https://onevoice.onesocial.ai/get-started?plan=light">Start Free Trial</a>
       <div class="trial">7-day free trial · cancel anytime</div>
     </div>
-    <div class="plan pro">
+
+    <div class="plan glass pro">
       <div class="pop">Most Popular</div>
+      <div class="setupbadge" aria-label="50% off setup"><span>50%<br>OFF<br>SETUP</span></div>
       <div class="pname">Basic</div><div class="price">$297<span>/mo</span></div>
       <div class="desc">Up to four listings, one simple price.</div>
-      <ul><li><b>Up to 4 listings</b> — +$99/mo each extra</li><li><b>$0.99</b> per answered call</li><li>Setup <s>$249</s> &rarr; <b>$124.50 today</b></li></ul>
+      <ul>
+        <li><b>Up to 4 listings</b></li>
+        <li class="meta">$0.99 per answered call</li>
+        <li class="setup">Setup <s>$249</s> <b>$124.50</b></li>
+      </ul>
       <a class="btn teal" href="https://onevoice.onesocial.ai/get-started?plan=basic">Start Free Trial</a>
       <div class="trial">7-day free trial · cancel anytime</div>
     </div>
-    <div class="plan">
+
+    <div class="plan glass">
+      <div class="setupbadge" aria-label="50% off setup"><span>50%<br>OFF<br>SETUP</span></div>
       <div class="pname">Pro</div><div class="price">$497<span>/mo</span></div>
       <div class="desc">Unlimited calls, for high-volume agents.</div>
-      <ul><li><b>5 listings</b> — +$99/mo each extra</li><li><b>Unlimited calls</b> — no per-call fee</li><li>Setup <s>$349</s> &rarr; <b>$174.50 today</b></li></ul>
+      <ul>
+        <li><b>Up to 5 listings</b></li>
+        <li><b>Unlimited calls</b></li>
+        <li class="setup">Setup <s>$349</s> <b>$174.50</b></li>
+        <li class="meta">Optional: use your own SMS number</li>
+      </ul>
       <a class="btn teal" href="https://onevoice.onesocial.ai/get-started?plan=pro">Start Free Trial</a>
       <div class="trial">7-day free trial · cancel anytime</div>
     </div>
+
   </div>
 
+  <p class="fineprint"><b>$99/mo</b> per additional listing beyond what's included &nbsp;·&nbsp; Save <b>25%</b> paying 3 months up front, or <b>35%</b> paid annually <span class="fp-dim">(off the monthly price)</span></p>
+
   <div class="incl">
-    <div class="incl-h">Every plan includes everything:</div>
-    <ul class="incl-list">
-      <li>Answers every call 24/7 — screens &amp; qualifies buyers</li>
-      <li>Books showings on your availability, with Google Calendar sync</li>
-      <li>Every caller gets a text with your name &amp; number to reach you back</li>
-      <li>You get a recap text after every call — with an AI lead-score analysis (who's hot, and why)</li>
-      <li>7-day no-commitment trial — cancel anytime</li>
-      <li>48-hour uptime guarantee — if it's ever down more than 48 hours, that month is free</li>
-    </ul>
+    <div class="incl-h">Every plan includes everything</div>
+    <div class="incl-pills">
+      <span class="pill">Answers every call 24/7</span>
+      <span class="pill">Screens &amp; qualifies every buyer</span>
+      <span class="pill">Syncs with Google, Outlook &amp; Apple Calendar</span>
+      <span class="pill">Texts every caller your callback number</span>
+      <span class="pill">Recap text — know who to call back now</span>
+      <span class="pill">48-hour uptime guarantee</span>
+    </div>
   </div>
 </div></section>
 
