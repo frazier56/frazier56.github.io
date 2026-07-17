@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get started — OneVoice</title>
+<style>html,body{margin:0;padding:0;background:#FAFAF8;}</style>
+</head>
+<body>
+<!-- OneVoice CHECKOUT — PAGE 2 (GHL-embeddable fragment; paste into the /get-started funnel step like v5).
+     Marketing lives on the homepage. This page = account form + plan + payment only.
+     Plan preselected from the homepage link: ?plan=pro|basic (and optional ?listings=N). -->
+<style>
+  html,body{margin:0 !important;padding:0 !important;background:#FAFAF8 !important;}
+  .ov *{box-sizing:border-box;margin:0;padding:0;}
+  .ov{font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#0B0F1A;line-height:1.6;background:#FAFAF8;min-height:100vh;width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;}
+  .ov a{text-decoration:none;color:inherit;}
+  .ov .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  /* hero — light teal */
+  .ov-hero{background:linear-gradient(165deg,#DAF6F1 0%,#EEFBF9 55%,#FAFAF8 100%);text-align:center;padding:36px 24px 42px;}
+  .ov-hero img{height:74px;margin:0 auto 20px;display:block;}
+  .ov-hero h1{font-size:40px;font-weight:800;letter-spacing:-.7px;line-height:1.1;max-width:780px;margin:0 auto 12px;}
+  .ov-hero h1 i{color:#0B8C80;font-style:normal;}
+  .ov-hero p{font-size:16.5px;color:#3d4753;max-width:600px;margin:0 auto 20px;}
+  .ov-hear{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:#0B8C80;border:1.5px solid #7fd7cc;background:#fff;border-radius:40px;padding:10px 20px;font-size:14.5px;}
+  /* benefits */
+  .ov-bwrap{padding:44px 0 8px;text-align:center;}
+  .ov-beye{font-size:12px;font-weight:800;letter-spacing:2px;color:#0B8C80;text-transform:uppercase;margin-bottom:8px;}
+  .ov-bwrap h2{font-size:32px;font-weight:800;letter-spacing:-.5px;margin-bottom:28px;}
+  .ov-bens{display:flex;gap:20px;flex-wrap:wrap;}
+  .ov-ben{flex:1;min-width:210px;background:#fff;border:1px solid #eee7d9;border-radius:16px;padding:26px 20px;box-shadow:0 6px 20px rgba(11,15,26,.05);text-align:center;}
+  .ov-ben .bi{font-size:30px;margin-bottom:12px;}
+  .ov-ben h3{font-size:17px;font-weight:800;margin-bottom:8px;}
+  .ov-ben p{font-size:13.5px;color:#5a6677;line-height:1.55;}
+  /* CTA gate */
+  .ov-gate{text-align:center;padding:40px 0 60px;}
+  .ov-gate .glead{font-size:17px;color:#3d4753;margin-bottom:18px;}
+  .ov-start{display:inline-block;background:#15C2B2;color:#06231f;font-weight:800;font-size:18px;padding:17px 38px;border:none;border-radius:13px;cursor:pointer;box-shadow:0 10px 26px rgba(21,194,178,.35);transition:.15s;}
+  .ov-start:hover{background:#12b0a1;transform:translateY(-1px);}
+  .ov-gate .gsub{font-size:13px;color:#8a93a3;margin-top:12px;}
+  /* form (revealed) */
+  .ov-form{display:none;padding-bottom:20px;}
+  .ovf-head{text-align:center;padding:44px 0 44px;}
+  .ovf-head h2{font-size:28px;font-weight:800;letter-spacing:-.4px;}
+  .ovf-head p{color:#5a6677;font-size:16px;margin-top:8px;line-height:1.55;}
+  .ov-form.show{display:block;animation:ovfade .45s ease both;}
+  @keyframes ovfade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+  .ov-main{display:flex;gap:44px;align-items:flex-start;padding:6px 0 40px;}
+  .ov-left{flex:1 1 580px;min-width:300px;}
+  .ov-right{flex:0 0 330px;position:sticky;top:72px;}
+  @media(max-width:900px){.ov-main{flex-direction:column;gap:26px;}.ov-right{position:static;width:100%;}}
+  .ov-sec{padding:26px 0;border-top:1px solid #ece8dd;}
+  .ov-sec:first-child{border-top:none;padding-top:6px;}
+  .ov-eyebrow{font-size:12px;font-weight:800;letter-spacing:1.2px;color:#0B8C80;text-transform:uppercase;margin-bottom:4px;}
+  .ov-sec h2{font-size:22px;font-weight:800;letter-spacing:-.3px;margin-bottom:4px;}
+  .ov-sec .hint{color:#5a6677;font-size:14px;margin-bottom:18px;}
+  .ov-grid{display:flex;gap:18px;flex-wrap:wrap;}
+  .ov-field{flex:1;min-width:200px;margin-bottom:16px;}
+  .ov-field label{display:block;font-size:13px;font-weight:700;color:#2c3542;margin-bottom:6px;}
+  .ov-field input,.ov-field select,.ov-field textarea{width:100%;padding:12px 14px;border:1px solid #dfe4ea;border-radius:10px;font-size:15px;background:#fff;font-family:inherit;transition:border-color .15s;}
+  .ov-field input:focus,.ov-field select:focus,.ov-field textarea:focus{outline:none;border-color:#15C2B2;box-shadow:0 0 0 3px rgba(21,194,178,.15);}
+  .ov-field textarea{resize:vertical;min-height:96px;}
+  .ov-mini{font-size:12px;color:#8a93a3;margin-top:5px;}
+  .ov-plans{display:flex;gap:16px;flex-wrap:wrap;}
+  .ov-plan{flex:1;min-width:230px;border:1.5px solid #dfe4ea;border-radius:14px;padding:20px;cursor:pointer;background:#fff;transition:.15s;}
+  .ov-plan:hover{border-color:#a9d9d3;}
+  .ov-plan.on{border-color:#15C2B2;background:#F6FDFC;box-shadow:0 0 0 3px rgba(21,194,178,.12);}
+  .ov-plan .pn{font-weight:800;font-size:16px;}
+  .ov-plan .pp{font-size:26px;font-weight:800;margin:2px 0 10px;}
+  .ov-plan .pp span{font-size:13px;font-weight:400;color:#6B7385;}
+  .ov-plan ul{list-style:none;}
+  .ov-plan li{font-size:13.5px;color:#1A2233;padding:4px 0 4px 22px;position:relative;}
+  .ov-plan li:before{content:"\2713";position:absolute;left:0;color:#15C2B2;font-weight:800;}
+  .ov-plan li.add{color:#0B8C80;font-weight:700;}
+  .ov-plan li.add:before{content:"\002B";}
+  .ov-terms{display:flex;gap:12px;flex-wrap:wrap;}
+  .ov-term{flex:1;min-width:150px;border:1.5px solid #dfe4ea;border-radius:12px;padding:14px;text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:#3c4656;background:#fff;transition:.15s;}
+  .ov-term.on{border-color:#15C2B2;background:#F6FDFC;color:#0B8C80;}
+  .ov-term b{display:block;font-size:15px;color:#0B0F1A;margin-bottom:2px;}
+  .ov-term.on b{color:#0B8C80;}
+  .ov-listing{border:1px solid #e6e9ee;border-left:3px solid #15C2B2;border-radius:10px;padding:18px;margin-bottom:14px;background:#fff;}
+  .ov-listing h4{font-size:15px;margin-bottom:12px;color:#0B8C80;}
+  .ov-nudge{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0B8C80;background:#F1FBFA;border:1px dashed #9fe0d8;border-radius:10px;padding:12px 16px;margin-top:6px;}
+  /* summary — teal panel, white button */
+  .ov-sum{background:linear-gradient(170deg,#F1FDFB 0%,#E4F8F3 100%);color:#0B0F1A;border-radius:16px;padding:24px;border:1px solid #cdeeea;}
+  .ov-sum h3{font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#0B8C80;margin-bottom:14px;}
+  .ov-sumrow{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid rgba(11,140,128,.15);}
+  .ov-sumrow.tot{border-bottom:none;font-size:18px;font-weight:800;padding-top:14px;}
+  .ov-sumrow .lbl{color:#3c4656;}
+  .ov-save{color:#0B8C80;font-weight:800;font-size:13px;text-align:right;margin-top:8px;min-height:16px;}
+  .ov-trialnote{font-size:12.5px;color:#5a6677;margin-top:8px;}
+  .ov-credits{background:rgba(21,194,178,.12);border-radius:10px;padding:12px 14px;font-size:13px;color:#0b5f57;margin-top:14px;}
+  .ov-info{color:#0B8C80;font-weight:700;font-size:12px;cursor:pointer;margin-left:6px;white-space:nowrap;}
+  .ov-infotip{background:#f2fbfa;border:1px solid #bfe8e3;border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.5;color:#1A2233;margin:6px 0 8px;}
+  .ov-modal{display:none;position:fixed;inset:0;background:rgba(6,15,26,.62);z-index:9999;overflow:auto;}
+  .ov-modal-card{max-width:560px;margin:6vh auto;background:#fff;border-radius:16px;padding:26px;box-shadow:0 18px 60px rgba(0,0,0,.25);}
+  .ov-modal-card h3{margin:0 0 6px;font-size:20px;}
+  .ov-rvrow{display:flex;justify-content:space-between;gap:14px;padding:7px 0;border-bottom:1px solid #eef1f4;font-size:14px;}
+  .ov-rvrow .k{color:#5a6677;} .ov-rvrow .v{font-weight:600;text-align:right;word-break:break-word;max-width:64%;}
+  .ov-rv-email{background:#f2fbfa;border:1px solid #bfe8e3;border-radius:8px;padding:10px 12px;font-size:13px;margin:12px 0 4px;}
+  .ov-back{display:block;width:100%;background:#fff;color:#5a6677;border:1px solid #d8dee6;border-radius:12px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;margin-top:10px;}
+  .ov-pay{display:block;width:100%;background:#15C2B2;color:#06231f;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;margin-top:16px;transition:.15s;}
+  .ov-pay:hover{background:#12b0a1;}
+  .ov-fine{font-size:11px;color:#7f8a9b;margin-top:12px;line-height:1.6;}
+  .ov-next{background:#F1FBFA;border:1px solid #cdeeea;border-radius:16px;padding:24px 26px;margin:10px 0 30px;}
+  .ov-next h3{font-size:18px;margin-bottom:12px;}
+  .ov-next ul{list-style:none;}
+  .ov-next li{font-size:14px;color:#243244;padding:7px 0;}
+  .ov-foot{text-align:center;font-size:12.5px;color:#8a93a3;padding:26px 24px 40px;line-height:1.8;}
+  .ov-foot a{color:#0B8C80;text-decoration:underline;}
+
+  /* page-2 mini header (matches homepage) */
+  .ovnav{position:sticky;top:0;z-index:50;background:rgba(250,250,248,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid #ece8dd;}
+  .ovnav-in{max-width:1080px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .ovnav-logo img{height:32px;display:block;}
+  .ovnav-cta{display:inline-flex;align-items:center;gap:7px;font-weight:700;color:#0B8C80;border:1.5px solid #7fd7cc;background:#fff;border-radius:40px;padding:8px 16px;font-size:13.5px;white-space:nowrap;}
+  .ovnav-cta:hover{background:#F1FBFA;}
+  @media(max-width:560px){.ovnav-cta{font-size:11px;padding:7px 11px;}.ovnav-logo img{height:26px;}.ovnav-in{padding:10px 16px;}}
+
+  /* mobile audit (S24+/iPhone16+) */
+  @media(max-width:560px){
+    .ov .wrap{padding:0 15px;}
+    .ovf-head{padding:28px 0 26px;}
+    .ovf-head h2{font-size:23px;}
+    .ovf-head p{font-size:15px;}
+    .ov-main{gap:20px;padding-top:2px;}
+    .ov-sec{padding:20px 0;}
+    .ov-sec h2{font-size:20px;}
+    .ov-sum{padding:20px;}
+    .ov-grid{gap:12px;}
+    .ov-field{min-width:100%;}
+  }
+</style>
+
+<div class="ov">
+<header class="ovnav"><div class="ovnav-in"><a href="/onevoice/" class="ovnav-logo"><img src="https://assets.cdn.filesafe.space/VkZwS3nGWMX06NRwLxJ8/media/6a4c98b12467f0ff08b2c1d0.png" alt="OneVoice"></a><a href="tel:+12172909970" class="ovnav-cta">&#9742; Hear a live demo &mdash; (217) 290-9970</a></div></header>
+  <div class="wrap">
+    <div class="ov-form show" id="form">
+    <div class="ovf-head"><h2>Let's get you started</h2><p>Takes about two minutes &mdash; and you're covered by a 7-day free trial.</p></div>
+    <div class="ov-main">
+      <div class="ov-left">
+
+        <div class="ov-sec">
+          <div class="ov-eyebrow">Your details</div>
+          <h2>Set up your account</h2>
+          <p class="hint">This creates your login. You'll be live within 24 hours.</p>
+          <div class="ov-grid">
+            <div class="ov-field"><label>Full name</label><input name="name" type="text" placeholder="Jane Agent"></div>
+            <div class="ov-field"><label>Real estate company</label><input name="company" type="text" placeholder="Acme Realty"></div>
+          </div>
+          <div class="ov-grid">
+            <div class="ov-field"><label>Email</label><input name="email" type="email" placeholder="jane@acmerealty.com"></div>
+            <div class="ov-field"><label>Confirm email</label><input name="email2" type="email" placeholder="Re-enter your email" autocomplete="off"><div class="ov-mini" id="emailMatchMsg" style="display:none;color:#e05a5a;">Emails don&rsquo;t match yet &mdash; double-check for typos.</div></div>
+          </div>
+          <div class="ov-grid">
+            <div class="ov-field"><label>Mobile</label><input name="phone" type="tel" placeholder="(217) 555-0199"></div>
+            <div class="ov-field"><label>Real estate license #</label><input name="license" type="text" placeholder="e.g. 475.123456"></div>
+          </div>
+          <div class="ov-grid">
+            <div class="ov-field"><label>Choose a username</label><input name="username" type="text" placeholder="janeagent"><div class="ov-mini">You&rsquo;ll set your own password from your welcome email on first login.</div></div>
+            <div class="ov-field"></div>
+          </div>
+        </div>
+
+        <div class="ov-sec">
+          <div class="ov-eyebrow">Step 1</div>
+          <h2>How many listings?</h2>
+          <p class="hint">Each listing gets its own AI receptionist and its own dedicated number.</p>
+          <div class="ov-field" style="max-width:220px;margin-bottom:0;">
+            <select id="count">
+              <option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+              <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+              <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+              <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="ov-sec">
+          <div class="ov-eyebrow">Step 2</div>
+          <h2>Choose your plan</h2>
+          <p class="hint">Same AI &amp; features on every plan — you only choose listings &amp; call volume. 7-day free trial.</p>
+          <div class="ov-plans" id="plans">
+            <div class="ov-plan" data-tier="light">
+              <div class="pn">Light</div><div class="pp">$99<span>/mo per listing</span></div>
+              <ul>
+                <li>1 listing</li>
+                <li>$0.99 per answered call</li>
+                <li>Same AI &amp; features as every plan</li>
+              </ul>
+            </div>
+            <div class="ov-plan on" data-tier="basic">
+              <div class="pn">Basic &#11088;</div><div class="pp">$297<span>/mo</span></div>
+              <ul>
+                <li>Up to 4 listings</li>
+                <li>$0.99 per answered call</li>
+                <li>Same AI &amp; features as every plan</li>
+              </ul>
+            </div>
+            <div class="ov-plan" data-tier="pro">
+              <div class="pn">Pro</div><div class="pp">$497<span>/mo</span></div>
+              <ul>
+                <li>Up to 5 listings</li>
+                <li><b>Unlimited calls</b> — no per-call fee</li>
+                <li>Optional: use your own SMS number</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="ov-sec">
+          <div class="ov-eyebrow">Step 3</div>
+          <h2>How would you like to pay?</h2>
+          <p class="hint">Prepay to save. Cancel anytime.</p>
+          <div class="ov-terms" id="terms">
+            <div class="ov-term on" data-term="monthly"><b>Monthly</b>billed monthly</div>
+            <div class="ov-term" data-term="quarter"><b>3 months</b>save 25%</div>
+            <div class="ov-term" data-term="annual"><b>Annual</b>save 35%</div>
+          </div>
+        </div>
+
+        <div class="ov-sec">
+          <div class="ov-eyebrow">Step 4</div>
+          <h2>Tell us about each listing</h2>
+          <p class="hint">Paste the details for each property so your AI answers buyers accurately. Grab them from your MLS, Zillow, or Realtor.com and drop them in.</p>
+          <div id="listings"></div>
+          <div class="ov-nudge">&rarr;&nbsp; All set? Your total's on the right &mdash; hit <b>Proceed to payment</b>.</div>
+        </div>
+
+      </div>
+
+      <div class="ov-right">
+        <div class="ov-sum">
+          <h3>Your plan</h3>
+          <div class="ov-sumrow"><span class="lbl" id="sumPlan">Basic &middot; 1 listing</span><span id="sumMonthly">$297/mo</span></div>
+          <div class="ov-sumrow" id="sumTermRow" style="display:none;"><span class="lbl" id="sumTermLbl">Billed every 3 months</span><span id="sumTermAmt">$0</span></div>
+          <div class="ov-sumrow"><span class="lbl">One-time setup fee</span><span id="sumSetup">$124.50</span></div>
+          <div class="ov-sumrow tot"><span>Due today</span><span id="sumTotal">$124.50</span></div>
+          <div class="ov-save" id="sumSave"></div>
+          <div class="ov-trialnote" id="sumTrial"></div>
+
+          <div style="margin-top:14px;">
+            <input type="text" id="promoCode" placeholder="Promo code (optional)" style="width:100%;padding:10px 12px;border:1px solid #dfe4ea;border-radius:10px;font-size:13px;font-family:inherit;background:#fff;" autocomplete="off">
+            <div class="ov-mini" id="promoMsg" style="display:none;"></div>
+          </div>
+          <button type="button" class="ov-pay" id="payBtn">Proceed to payment &rarr;</button>
+          <div class="ov-fine" id="sumFine">7-day free trial on your plan. A one-time setup fee is charged today. Cancel anytime.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov-next">
+      <h3>What happens after you pay</h3>
+      <ul>
+        <li>&#128231;&nbsp;&nbsp;You'll see a confirmation and get a <b>welcome email within a couple of minutes</b> &mdash; log in and set your password.</li>
+        <li>&#128222;&nbsp;&nbsp;We provision each listing and <b>assign a dedicated number to each one within 24 hours</b> (high demand for AI voice numbers means we verify and set each up for you).</li>
+        <li>&#128204;&nbsp;&nbsp;Put each number on your listing &mdash; or forward your existing line to it. It answers 24/7 either way.</li>
+        <li>&#128202;&nbsp;&nbsp;Everything lives in your <b>dashboard</b>: every call, transcript, and booked showing in one place.</li>
+        <li>&#128260;&nbsp;&nbsp;<b>Add or cancel listings anytime.</b></li>
+      </ul>
+    </div>
+    </div><!-- /form -->
+    <div class="ov-foot">
+      Questions? Call us (855) 770-0200 or email us <a href="mailto:support.onevoice@onesocial.ai">support.onevoice@onesocial.ai</a><br>
+      OneVoice, a OneSocial company &middot; OneSocial AI, LLC &middot; 1111b S Governors Ave, Dover, DE 19904<br>
+      <a href="/privacy-page">Privacy Policy &amp; Terms</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="ov-modal" id="ovReview">
+  <div class="ov-modal-card">
+    <h3>Quick check before payment</h3>
+    <p class="hint" style="margin:0 0 12px;">30 seconds now saves a support call later. Make sure everything below is right.</p>
+    <div id="ovReviewBody"></div>
+    <div class="ov-rv-email" id="ovReviewEmailNote"></div>
+    <button type="button" class="ov-pay" id="ovReviewGo" style="margin-top:12px;">Looks right &mdash; continue to payment &rarr;</button>
+    <button type="button" class="ov-back" id="ovReviewBack">&larr; Go back &amp; edit</button>
+  </div>
+</div>
+<script>
+(function(){var w=document.querySelector(".ov,.ovhome");var p=w&&w.parentElement;while(p&&p.tagName!=="BODY"){p.style.paddingTop="0";p.style.paddingBottom="0";p.style.marginTop="0";p=p.parentElement;}})();
+
+(function(){
+  /* progressive reveal */
+  /* checkout is standalone page 2 — form always shown; plan comes from homepage via ?plan= */
+
+  // ===== v4 pricing (mirrors onevoice-checkout/lib/pricing.js) =====
+  var PRICE={ light:{base:99,name:'Light'}, basic:{base:297,name:'Basic'}, pro:{base:497,name:'Pro'} };
+  var INCLUDED={light:1, basic:4, pro:5};
+  var EXTRA=99;                              // $/mo per additional listing (all tiers)
+  var PERCALL={light:0.99, basic:0.99, pro:0}; // 0 = unlimited (Pro)
+  var SETUP_REG={light:149, basic:249, pro:349};
+  var PROMO_SETUP={basic:1, pro:1};          // 50% off setup — Basic/Pro only; Light = full $149
+  var TERM={monthly:{months:1,off:0,word:'monthly'},quarter:{months:3,off:.25,word:'every 3 months'},annual:{months:12,off:.35,word:'per year'}};
+  var state={tier:'basic',term:'monthly',count:1};
+  function money(n){ n=Math.round(n*100)/100; return '$'+n.toLocaleString('en-US',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2}); }
+  function monthlyFor(tier,n){ if(tier==='light') return 99*n; return PRICE[tier].base + EXTRA*Math.max(0,n-INCLUDED[tier]); }
+  function setupToday(tier){ var reg=SETUP_REG[tier]; return PROMO_SETUP[tier] ? reg*0.5 : reg; }
+
+  function calc(){
+    var t=TERM[state.term], n=Math.max(1,state.count||1), tier=state.tier;
+    var promoEl=document.getElementById('promoCode');
+    var isFounderTest=promoEl && promoEl.value.trim().toLowerCase()==='foundertest';
+    var monthly=monthlyFor(tier,n), setup=setupToday(tier), setupReg=SETUP_REG[tier];
+    var termTotal=monthly*t.months*(1-t.off);
+    var saved=monthly*t.months*t.off;
+    var promoMsg=document.getElementById('promoMsg');
+    if(isFounderTest){ setup=1; monthly=0; termTotal=0; saved=0; if(promoMsg){promoMsg.style.display='block';promoMsg.style.color='#0B8C80';promoMsg.textContent='Founder test code applied — $1 today, plan set to $0 (no future billing).';} }
+    else if(promoMsg){ promoMsg.style.display='none'; }
+    document.getElementById('sumPlan').innerHTML=PRICE[tier].name+' &middot; '+n+' listing'+(n>1?'s':'');
+    document.getElementById('sumMonthly').textContent=money(monthly)+'/mo';
+    document.getElementById('sumSetup').innerHTML=(!isFounderTest && PROMO_SETUP[tier]) ? ('<s style="color:#d8382f;">'+money(setupReg)+'</s> '+money(setup)) : money(setup);
+    document.getElementById('sumTotal').textContent=money(setup);
+    var tr=document.getElementById('sumTermRow');
+    if(state.term==='monthly'||isFounderTest){ tr.style.display='none'; }
+    else { tr.style.display='flex'; document.getElementById('sumTermLbl').textContent='Prepay '+t.word; document.getElementById('sumTermAmt').textContent=money(termTotal); }
+    document.getElementById('sumSave').textContent=saved>0?('You save '+money(saved)):'';
+    var callTxt = PERCALL[tier]>0 ? (money(PERCALL[tier])+' per answered call') : 'unlimited calls, no per-call fee';
+    document.getElementById('sumTrial').innerHTML=isFounderTest?'Founder test order &mdash; no future billing.':('After your 7-day free trial: <b>'+money(termTotal)+'</b> '+t.word+' &middot; '+callTxt+'.');
+    var fine=document.getElementById('sumFine');
+    if(fine){ fine.innerHTML = isFounderTest ? 'Founder test &mdash; $1 today, no future billing.' :
+      ('7-day free trial on your plan. A one-time setup fee is charged today ('+money(setup)+(PROMO_SETUP[tier]?', 50% off '+money(setupReg)+' this summer':'')+'). '+
+      (PERCALL[tier]>0 ? ('Then '+money(monthly)+'/mo after the trial, plus '+money(PERCALL[tier])+' per answered call.') : ('Then '+money(monthly)+'/mo after the trial &mdash; unlimited calls.'))+
+      ' $99/mo per additional listing. Cancel anytime.'); }
+  }
+
+  document.getElementById('plans').addEventListener('click',function(e){
+    var c=e.target.closest('.ov-plan'); if(!c)return;
+    [].forEach.call(this.children,function(x){x.classList.remove('on');});
+    c.classList.add('on'); state.tier=c.dataset.tier; renderListings(); calc();
+  });
+  document.getElementById('terms').addEventListener('click',function(e){
+    var c=e.target.closest('.ov-term'); if(!c)return;
+    [].forEach.call(this.children,function(x){x.classList.remove('on');});
+    c.classList.add('on'); state.term=c.dataset.term; calc();
+  });
+  document.getElementById('count').addEventListener('change',function(){state.count=parseInt(this.value)||1;renderListings();calc();});
+  document.getElementById('promoCode').addEventListener('input',calc);
+
+  var listings=document.getElementById('listings');
+  function block(i){
+    var cal = '<div class="ov-field"><label>Calendar to connect</label><select name="calendar"><option>Google Calendar</option><option>Outlook / Microsoft 365</option><option>Apple / iCloud Calendar</option><option>I\'ll choose after login</option></select><div class="ov-mini">You\'ll sign in to your calendar once after login so the AI books around your real schedule.</div></div>';
+    return '<div class="ov-listing"><h4>Listing '+i+'</h4>'+
+      '<div class="ov-field"><label>Paste your listing details <span class="ov-info" onclick="ovToggleTip(this)">&#9432; What is this?</span></label><div class="ov-infotip"><b>Copy, don&rsquo;t type &mdash; and don&rsquo;t worry about formatting.</b> Just paste the whole block from your MLS, Zillow, or Realtor.com listing. Our AI reads it and organizes what it needs. Adding your public listing link below helps us verify the details.</div><textarea name="details" placeholder="Address, price, beds/baths, square footage, year built, standout features, and anything you want buyers to hear (or NOT to be told). The more you paste, the better your AI answers."></textarea></div>'+
+      '<div class="ov-grid">'+
+        '<div class="ov-field"><label>Public listing link (optional)</label><input name="listingurl" type="url" placeholder="https://zillow.com/homedetails/..."></div>'+
+        '<div class="ov-field"><label>Name your AI assistant</label><input name="assistant" type="text" placeholder="Ava"></div>'+
+      '</div>'+
+      '<div class="ov-grid">'+
+        '<div class="ov-field"><label>Preferred area code (optional)</label><input name="areacode" type="text" maxlength="3" placeholder="e.g. 217 &mdash; leave blank for no preference"></div>'+
+        '<div class="ov-field"></div>'+
+      '</div>'+ cal +'</div>';
+  }
+  function renderListings(){
+    var n=Math.max(1,state.count||1), html='';
+    for(var i=1;i<=n;i++){html+=block(i);}
+    listings.innerHTML=html;
+  }
+
+  var CHECKOUT_ENDPOINT = 'https://onevoice-checkout.vercel.app/api/create-onevoice-checkout'; // live Vercel fn (CORS allows onevoice.onesocial.ai)
+  window.ovToggleTip = function(el){ var f=el.closest('.ov-field'); if(!f) return; var t=f.querySelector('.ov-infotip'); if(t) t.style.display = (t.style.display==='none'||!t.style.display) ? 'block' : 'none'; };
+  // hide tips by default (rendered inline)
+  document.addEventListener('input', function(ev){
+    if(ev.target && (ev.target.name==='email' || ev.target.name==='email2')){
+      var e1=(document.querySelector('[name="email"]')||{}).value||'', e2=(document.querySelector('[name="email2"]')||{}).value||'';
+      var msg=document.getElementById('emailMatchMsg');
+      if(msg) msg.style.display = (e2 && e1.trim().toLowerCase()!==e2.trim().toLowerCase()) ? 'block' : 'none';
+    }
+  });
+  function ovEsc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function ovStartCheckout(order, btn, orig){
+    btn.disabled=true; btn.textContent='Redirecting to payment…';
+    fetch(CHECKOUT_ENDPOINT,{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(order) })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d && d.url){ window.location = d.url; return; }
+        throw new Error((d && d.error) || 'No checkout URL returned');
+      })
+      .catch(function(e){
+        btn.disabled=false; btn.textContent=orig;
+        document.getElementById('ovReview').style.display='none';
+        alert('Could not start checkout: '+e.message);
+      });
+  }
+  document.getElementById('payBtn').addEventListener('click', function(){
+    var g=function(n){var el=document.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
+    if(!g('email')||!g('username')){ alert('Please enter your email and choose a username before continuing.'); return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(g('email'))){ alert('That email doesn\'t look right — please double-check it.'); return; }
+    if(g('email').toLowerCase()!==g('email2').toLowerCase()){ alert('Your email addresses don\'t match. Your login and receipt go to this address, so please re-enter it carefully.'); return; }
+    var order={ tier:state.tier, term:state.term, count:state.count,
+      promo:(document.getElementById('promoCode')||{}).value||'',
+      contact:{ name:g('name'), company:g('company'), email:g('email'), phone:g('phone'), license:g('license'), username:g('username') },
+      listings:[].map.call(document.querySelectorAll('.ov-listing'), function(b){
+        var q=function(s){var el=b.querySelector(s);return el?el.value:'';};
+        return { details:q('[name=details]'), url:q('[name=listingurl]'), assistant:q('[name=assistant]'), areacode:q('[name=areacode]'), availability:q('[name=availability]'), calendar:q('[name=calendar]') };
+      }) };
+    // REVIEW STEP: show what they entered before money moves
+    var rows='';
+    var add=function(k,v){ if(v) rows+='<div class="ov-rvrow"><span class="k">'+k+'</span><span class="v">'+ovEsc(v)+'</span></div>'; };
+    add('Name', order.contact.name); add('Company', order.contact.company);
+    add('Email', order.contact.email); add('Mobile', order.contact.phone);
+    add('Username', order.contact.username);
+    add('Plan', (PRICE[order.tier]?PRICE[order.tier].name:order.tier)+' · '+order.count+' listing'+(order.count>1?'s':'')+' · '+order.term);
+    if(order.promo) add('Promo code', order.promo);
+    order.listings.forEach(function(L,i){
+      var d=(L.details||'').replace(/\s+/g,' ').trim();
+      add('Listing '+(i+1), d ? (d.length>90 ? d.slice(0,90)+'…' : d) : '(no details pasted yet)');
+      if(L.assistant) add('Assistant '+(i+1), L.assistant);
+    });
+    document.getElementById('ovReviewBody').innerHTML = rows;
+    document.getElementById('ovReviewEmailNote').innerHTML = '&#128231; Your <b>welcome email, login link and receipt</b> will be sent to <b>'+ovEsc(order.contact.email)+'</b>. If that address is wrong, go back and fix it now.';
+    var m=document.getElementById('ovReview'); m.style.display='block';
+    var btn=this, orig=btn.textContent;
+    document.getElementById('ovReviewBack').onclick=function(){ m.style.display='none'; };
+    document.getElementById('ovReviewGo').onclick=function(){ ovStartCheckout(order, btn, orig); };
+  });
+
+  // Preselect plan + listing count from the homepage link (?plan=pro|basic & ?listings=N)
+  (function(){
+    var qs=new URLSearchParams(location.search);
+    var plan=(qs.get('plan')||'').toLowerCase();
+    if(PRICE[plan]){
+      state.tier=plan;
+      [].forEach.call(document.querySelectorAll('#plans .ov-plan'),function(x){
+        x.classList.toggle('on', x.dataset.tier===plan);
+      });
+    }
+    var n=parseInt(qs.get('listings'),10);
+    if(n>=1&&n<=20){ state.count=n; var sel=document.getElementById('count'); if(sel){ sel.value=String(n); } }
+  })();
+  renderListings(); calc();
+})();
+</script>
+</body>
+</html>
