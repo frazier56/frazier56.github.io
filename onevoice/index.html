@@ -178,20 +178,17 @@ nav img.logo{height:54px;width:auto;}
 
 /* PRICING — glassmorphism cards */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1060px;margin:44px auto 0;position:relative;}
-.plans:before{content:"";position:absolute;inset:-40px -20px;z-index:0;pointer-events:none;
-  background:radial-gradient(460px 260px at 22% 16%, rgba(21,194,178,.14), transparent 70%),
-             radial-gradient(460px 260px at 82% 32%, rgba(11,140,128,.11), transparent 70%);}
-.plan{position:relative;z-index:1;border-radius:22px;padding:30px 30px 26px;display:flex;flex-direction:column;overflow:hidden;
+.plans:before{content:"";position:absolute;inset:-120px -140px;z-index:0;pointer-events:none;
+  background:radial-gradient(760px 460px at 32% 6%, rgba(21,194,178,.10), transparent 60%),
+             radial-gradient(760px 460px at 74% 46%, rgba(11,140,128,.08), transparent 60%);}
+.plan{position:relative;z-index:1;border-radius:22px;padding:30px 30px 26px;display:flex;flex-direction:column;
   background:linear-gradient(158deg, rgba(255,255,255,.94), rgba(230,249,246,.9));
   border:1px solid rgba(21,194,178,.22);
   box-shadow:0 14px 40px rgba(11,15,26,.08), inset 0 1px 0 rgba(255,255,255,.7);}
 .plan.pro{border:1.5px solid rgba(21,194,178,.55);
   background:linear-gradient(158deg, rgba(255,255,255,.95), rgba(214,247,242,.72));
   box-shadow:0 22px 60px rgba(21,194,178,.22), inset 0 1px 0 rgba(255,255,255,.8);}
-.plan:after{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;pointer-events:none;
-  background:linear-gradient(105deg, transparent, rgba(255,255,255,.55), transparent);transform:skewX(-18deg);animation:sheen 7s ease-in-out infinite;}
-.plan.pro:after{animation-delay:1.2s;}
-@keyframes sheen{0%,72%{left:-60%;}88%,100%{left:130%;}}
+@keyframes sheen{0%,72%{left:-70%;}88%,100%{left:130%;}}
 .plan .pop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);z-index:3;background:var(--teal);color:#04241f;font-weight:800;font-size:12px;padding:6px 16px;border-radius:999px;box-shadow:0 6px 16px rgba(21,194,178,.35);}
 .plan .pname{font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal2);}
 .plan .price{font-size:46px;font-weight:900;margin:10px 0 2px;color:var(--txt);letter-spacing:-.02em;}
@@ -208,11 +205,13 @@ nav img.logo{height:54px;width:auto;}
 .plan li.setup b{color:var(--teal2);}
 .plan .btn{width:100%;justify-content:center;position:relative;z-index:2;}
 .plan .trial{text-align:center;font-size:12px;color:var(--txt2);margin-top:11px;}
-.setupbadge{position:absolute;top:14px;right:14px;z-index:4;width:64px;height:64px;border-radius:16px;display:grid;place-items:center;text-align:center;overflow:hidden;transform:rotate(3deg);
-  background:linear-gradient(150deg, rgba(21,194,178,.94), rgba(11,140,128,.94));
+.setupbadge{position:absolute;top:14px;right:14px;z-index:4;width:64px;height:64px;border-radius:16px;display:grid;place-items:center;text-align:center;overflow:hidden;transform-origin:center;
+  background:linear-gradient(150deg, #ef4d4a, #c62828);
   border:1px solid rgba(255,255,255,.5);
-  box-shadow:0 8px 22px rgba(11,140,128,.4), inset 0 1px 0 rgba(255,255,255,.6);}
-.setupbadge span{color:#fff;font-weight:900;font-size:11px;line-height:1.08;letter-spacing:.04em;text-shadow:0 1px 2px rgba(0,0,0,.18);}
+  box-shadow:0 8px 22px rgba(198,40,40,.42), inset 0 1px 0 rgba(255,255,255,.55);
+  animation:twist 3.2s ease-in-out infinite;}
+@keyframes twist{0%,100%{transform:rotate(5deg);}50%{transform:rotate(-5deg);}}
+.setupbadge span{color:#fff;font-weight:900;font-size:11px;line-height:1.08;letter-spacing:.04em;text-shadow:0 1px 2px rgba(0,0,0,.22);}
 .setupbadge:after{content:"";position:absolute;top:0;left:-70%;width:55%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-18deg);animation:sheen 4.5s ease-in-out infinite;}
 .fineprint{max-width:920px;margin:22px auto 0;text-align:center;font-size:13px;color:var(--txt2);line-height:1.6;}
 .fineprint b{color:var(--txt);font-weight:800;}
@@ -804,7 +803,7 @@ footer a{color:var(--teal2);font-weight:700;}
       <ul>
         <li><b>1 listing</b></li>
         <li class="meta">$0.99 per answered call</li>
-        <li class="setup">Setup <b>$149</b></li>
+        <li class="setup">Setup $149.00</li>
       </ul>
       <a class="btn teal" href="https://onevoice.onesocial.ai/get-started?plan=light">Start Free Trial</a>
       <div class="trial">7-day free trial · cancel anytime</div>
@@ -840,7 +839,7 @@ footer a{color:var(--teal2);font-weight:700;}
 
   </div>
 
-  <p class="fineprint"><b>$99/mo</b> per additional listing beyond what's included &nbsp;·&nbsp; Save <b>25%</b> paying 3 months up front, or <b>35%</b> paid annually <span class="fp-dim">(off the monthly price)</span></p>
+  <p class="fineprint">$99/mo per additional listing beyond what's included &nbsp;·&nbsp; Save 25% paying 3 months up front, or 35% paid annually</p>
 
   <div class="incl">
     <div class="incl-h">Every plan includes everything</div>
