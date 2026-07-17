@@ -178,12 +178,11 @@ nav img.logo{height:54px;width:auto;}
 
 /* PRICING — glassmorphism cards */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1060px;margin:44px auto 0;position:relative;}
-.plans:before{content:"";position:absolute;inset:-40px -20px;z-index:0;pointer-events:none;filter:blur(6px);
-  background:radial-gradient(420px 240px at 22% 16%, rgba(21,194,178,.16), transparent 70%),
-             radial-gradient(420px 240px at 82% 32%, rgba(11,140,128,.13), transparent 70%);}
+.plans:before{content:"";position:absolute;inset:-40px -20px;z-index:0;pointer-events:none;
+  background:radial-gradient(460px 260px at 22% 16%, rgba(21,194,178,.14), transparent 70%),
+             radial-gradient(460px 260px at 82% 32%, rgba(11,140,128,.11), transparent 70%);}
 .plan{position:relative;z-index:1;border-radius:22px;padding:30px 30px 26px;display:flex;flex-direction:column;overflow:hidden;
-  background:linear-gradient(158deg, rgba(255,255,255,.92), rgba(232,250,247,.62));
-  -webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
+  background:linear-gradient(158deg, rgba(255,255,255,.94), rgba(230,249,246,.9));
   border:1px solid rgba(21,194,178,.22);
   box-shadow:0 14px 40px rgba(11,15,26,.08), inset 0 1px 0 rgba(255,255,255,.7);}
 .plan.pro{border:1.5px solid rgba(21,194,178,.55);
@@ -212,8 +211,7 @@ nav img.logo{height:54px;width:auto;}
 .setupbadge{position:absolute;top:14px;right:14px;z-index:4;width:64px;height:64px;border-radius:16px;display:grid;place-items:center;text-align:center;overflow:hidden;transform:rotate(3deg);
   background:linear-gradient(150deg, rgba(21,194,178,.94), rgba(11,140,128,.94));
   border:1px solid rgba(255,255,255,.5);
-  box-shadow:0 8px 22px rgba(11,140,128,.4), inset 0 1px 0 rgba(255,255,255,.6);
-  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+  box-shadow:0 8px 22px rgba(11,140,128,.4), inset 0 1px 0 rgba(255,255,255,.6);}
 .setupbadge span{color:#fff;font-weight:900;font-size:11px;line-height:1.08;letter-spacing:.04em;text-shadow:0 1px 2px rgba(0,0,0,.18);}
 .setupbadge:after{content:"";position:absolute;top:0;left:-70%;width:55%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-18deg);animation:sheen 4.5s ease-in-out infinite;}
 .fineprint{max-width:920px;margin:22px auto 0;text-align:center;font-size:13px;color:var(--txt2);line-height:1.6;}
