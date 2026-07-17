@@ -180,9 +180,9 @@
           <p class="hint">Same AI &amp; features on every plan — you only choose listings &amp; call volume. 7-day free trial.</p>
           <div class="ov-plans" id="plans">
             <div class="ov-plan" data-tier="light">
-              <div class="pn">Light</div><div class="pp">$99<span>/mo per listing</span></div>
+              <div class="pn">Light</div><div class="pp">$99<span>/mo per agent</span></div>
               <ul>
-                <li>1 listing</li>
+                <li>1 AI agent</li>
                 <li>$0.99 per answered call</li>
                 <li>Same AI &amp; features as every plan</li>
               </ul>
@@ -190,7 +190,7 @@
             <div class="ov-plan on" data-tier="basic">
               <div class="pn">Basic &#11088;</div><div class="pp">$297<span>/mo</span></div>
               <ul>
-                <li>Up to 4 listings</li>
+                <li>Up to 4 AI agents</li>
                 <li>$0.99 per answered call</li>
                 <li>Same AI &amp; features as every plan</li>
               </ul>
@@ -198,7 +198,7 @@
             <div class="ov-plan" data-tier="pro">
               <div class="pn">Pro</div><div class="pp">$497<span>/mo</span></div>
               <ul>
-                <li>Up to 5 listings</li>
+                <li>Up to 6 AI agents</li>
                 <li><b>Unlimited calls</b> — no per-call fee</li>
                 <li>Optional: use your own SMS number</li>
               </ul>
@@ -286,7 +286,7 @@
 
   // ===== v4 pricing (mirrors onevoice-checkout/lib/pricing.js) =====
   var PRICE={ light:{base:99,name:'Light'}, basic:{base:297,name:'Basic'}, pro:{base:497,name:'Pro'} };
-  var INCLUDED={light:1, basic:4, pro:5};
+  var INCLUDED={light:1, basic:4, pro:6};
   var EXTRA=99;                              // $/mo per additional listing (all tiers)
   var PERCALL={light:0.99, basic:0.99, pro:0}; // 0 = unlimited (Pro)
   var SETUP_REG={light:149, basic:249, pro:349};
@@ -300,7 +300,7 @@
   function calc(){
     var t=TERM[state.term], n=Math.max(1,state.count||1), tier=state.tier;
     var promoEl=document.getElementById('promoCode');
-    var isFounderTest=promoEl && /^founder/i.test(promoEl.value.trim());
+    var isFounderTest=promoEl && ['founder100','founder50','foundertest'].indexOf((promoEl.value||'').trim().toLowerCase())>=0;
     var monthly=monthlyFor(tier,n), setup=setupToday(tier), setupReg=SETUP_REG[tier];
     var termTotal=monthly*t.months*(1-t.off);
     var saved=monthly*t.months*t.off;
