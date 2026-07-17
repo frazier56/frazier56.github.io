@@ -73,6 +73,10 @@
   .ov-plan li{font-size:13.5px;color:#1A2233;padding:4px 0 4px 22px;position:relative;}
   .ov-plan li:before{content:"\2713";position:absolute;left:0;color:#15C2B2;font-weight:800;}
   .ov-plan li.add{color:#0B8C80;font-weight:700;}
+  .ov-toggle{display:flex;gap:12px;flex-wrap:wrap;}
+  .ov-tg{flex:1;min-width:180px;text-align:center;border:1.5px solid #dfe4ea;border-radius:12px;padding:14px 16px;cursor:pointer;font-weight:700;font-size:14.5px;color:#1A2233;background:#fff;transition:.15s;}
+  .ov-tg:hover{border-color:#a9d9d3;}
+  .ov-tg.on{border-color:#15C2B2;background:#F6FDFC;box-shadow:0 0 0 3px rgba(21,194,178,.12);}
   .ov-plan li.add:before{content:"\002B";}
   .ov-terms{display:flex;gap:12px;flex-wrap:wrap;}
   .ov-term{flex:1;min-width:150px;border:1.5px solid #dfe4ea;border-radius:12px;padding:14px;text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:#3c4656;background:#fff;transition:.15s;}
@@ -162,8 +166,14 @@
 
         <div class="ov-sec">
           <div class="ov-eyebrow">Step 1</div>
-          <h2>How many listings?</h2>
-          <p class="hint">Each listing gets its own AI receptionist and its own dedicated number.</p>
+          <h2>Are you a real estate agent?</h2>
+          <p class="hint">This tailors your setup.</p>
+          <div class="ov-toggle" id="agentToggle">
+            <div class="ov-tg on" data-agent="yes">Yes &mdash; real estate</div>
+            <div class="ov-tg" data-agent="no">No &mdash; another business</div>
+          </div>
+          <h2 id="countTitle" style="font-size:19px;margin-top:22px;">How many listings?</h2>
+          <p class="hint" id="countHint">Each listing gets its own AI receptionist and its own dedicated number.</p>
           <div class="ov-field" style="max-width:220px;margin-bottom:0;">
             <select id="count">
               <option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
@@ -217,12 +227,18 @@
           </div>
         </div>
 
-        <div class="ov-sec">
+        <div class="ov-sec" id="step4">
           <div class="ov-eyebrow">Step 4</div>
           <h2>Tell us about each listing</h2>
           <p class="hint">Paste the details for each property so your AI answers buyers accurately. Grab them from your MLS, Zillow, or Realtor.com and drop them in.</p>
           <div id="listings"></div>
           <div class="ov-nudge">&rarr;&nbsp; All set? Your total's on the right &mdash; hit <b>Proceed to payment</b>.</div>
+        </div>
+        <div class="ov-sec" id="nonAgentNote" style="display:none;">
+          <div class="ov-eyebrow">Step 4</div>
+          <h2>We&rsquo;ll set it up for you</h2>
+          <p class="hint">Finish signup and our team reaches out within 24 hours to build and tune your AI agent(s) for your business &mdash; same 7-day trial, nothing else needed from you right now.</p>
+          <div class="ov-nudge">&rarr;&nbsp; Your total&rsquo;s on the right &mdash; hit <b>Proceed to payment</b>.</div>
         </div>
 
       </div>
@@ -292,7 +308,7 @@
   var SETUP_REG={light:149, basic:249, pro:349};
   var PROMO_SETUP={basic:1, pro:1};          // 50% off setup — Basic/Pro only; Light = full $149
   var TERM={monthly:{months:1,off:0,word:'monthly'},quarter:{months:3,off:.25,word:'every 3 months'},annual:{months:12,off:.35,word:'per year'}};
-  var state={tier:'basic',term:'monthly',count:1};
+  var state={tier:'basic',term:'monthly',count:1,isAgent:true};
   function money(n){ n=Math.round(n*100)/100; return '$'+n.toLocaleString('en-US',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2}); }
   function monthlyFor(tier,n){ if(tier==='light') return 99*n; return PRICE[tier].base + EXTRA*Math.max(0,n-INCLUDED[tier]); }
   function setupToday(tier){ var reg=SETUP_REG[tier]; return PROMO_SETUP[tier] ? reg*0.5 : reg; }
@@ -335,6 +351,21 @@
     c.classList.add('on'); state.term=c.dataset.term; calc();
   });
   document.getElementById('count').addEventListener('change',function(){state.count=parseInt(this.value)||1;renderListings();calc();});
+  document.getElementById('agentToggle').addEventListener('click',function(e){
+    var c=e.target.closest('.ov-tg'); if(!c)return;
+    state.isAgent=(c.dataset.agent!=='no'); applyAgentMode();
+    try{ localStorage.setItem('ov_getstarted_v1', JSON.stringify(ovSnapshot())); }catch(err){}
+  });
+  function applyAgentMode(){
+    var isA=state.isAgent!==false;
+    var ct=document.getElementById('countTitle'), ch=document.getElementById('countHint');
+    if(ct) ct.textContent=isA?'How many listings?':'How many AI agents?';
+    if(ch) ch.textContent=isA?'Each listing gets its own AI receptionist and its own dedicated number.':'Each agent answers one business line 24/7. Most businesses need just one.';
+    var s4=document.getElementById('step4'), na=document.getElementById('nonAgentNote');
+    if(s4) s4.style.display=isA?'':'none';
+    if(na) na.style.display=isA?'none':'';
+    [].forEach.call(document.querySelectorAll('#agentToggle .ov-tg'),function(x){x.classList.toggle('on',(x.dataset.agent==='yes')===isA);});
+  }
   document.getElementById('promoCode').addEventListener('input',calc);
 
   var listings=document.getElementById('listings');
@@ -345,10 +376,6 @@
       '<div class="ov-grid">'+
         '<div class="ov-field"><label>Public listing link (optional)</label><input name="listingurl" type="url" placeholder="https://zillow.com/homedetails/..."></div>'+
         '<div class="ov-field"><label>Name your AI assistant</label><input name="assistant" type="text" placeholder="Ava"></div>'+
-      '</div>'+
-      '<div class="ov-grid">'+
-        '<div class="ov-field"><label>Preferred area code (optional)</label><input name="areacode" type="text" maxlength="3" placeholder="e.g. 217 &mdash; leave blank for no preference"></div>'+
-        '<div class="ov-field"></div>'+
       '</div>'+ cal +'</div>';
   }
   function renderListings(){
@@ -392,11 +419,13 @@
     });
     if(g('email') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(g('email'))){ var ee=el('email'); if(ee) ee.classList.add('ov-invalid'); bad.push('a valid email'); }
     if(g('email') && g('email2') && g('email').toLowerCase()!==g('email2').toLowerCase()){ var e2=el('email2'); if(e2) e2.classList.add('ov-invalid'); bad.push('matching emails'); }
-    [].forEach.call(document.querySelectorAll('.ov-listing'), function(b,i){
-      var a=b.querySelector('[name=assistant]'), d=b.querySelector('[name=details]');
-      if(a && !a.value.trim()){ a.classList.add('ov-invalid'); bad.push('AI assistant name (listing '+(i+1)+')'); }
-      if(d && !d.value.trim()){ d.classList.add('ov-invalid'); bad.push('listing details (listing '+(i+1)+')'); }
-    });
+    if(state.isAgent!==false){
+      [].forEach.call(document.querySelectorAll('.ov-listing'), function(b,i){
+        var a=b.querySelector('[name=assistant]'), d=b.querySelector('[name=details]');
+        if(a && !a.value.trim()){ a.classList.add('ov-invalid'); bad.push('AI assistant name (listing '+(i+1)+')'); }
+        if(d && !d.value.trim()){ d.classList.add('ov-invalid'); bad.push('listing details (listing '+(i+1)+')'); }
+      });
+    }
     if(bad.length){
       var first=document.querySelector('.ov-invalid'); if(first){ try{first.scrollIntoView({behavior:'smooth',block:'center'});first.focus();}catch(e){} }
       alert('Please fill the highlighted field'+(bad.length>1?'s':'')+': '+bad.slice(0,6).join(', ')+(bad.length>6?', and more':'')+'.');
@@ -409,6 +438,7 @@
         var q=function(s){var el=b.querySelector(s);return el?el.value:'';};
         return { details:q('[name=details]'), url:q('[name=listingurl]'), assistant:q('[name=assistant]'), areacode:q('[name=areacode]'), calendar:q('[name=calendar]') };
       }) };
+    if(state.isAgent===false){ order.isAgent=false; order.listings=[]; for(var _i=0;_i<order.count;_i++){ order.listings.push({ details:'[Non-real-estate business - our team will collect details by phone within 24h]', assistant:(order.contact.company||'Your assistant'), url:'', calendar:'' }); } } else { order.isAgent=true; }
     // REVIEW STEP: show what they entered before money moves
     var rows='';
     var add=function(k,v){ if(v) rows+='<div class="ov-rvrow"><span class="k">'+k+'</span><span class="v">'+ovEsc(v)+'</span></div>'; };
@@ -433,7 +463,7 @@
   var LS_KEY='ov_getstarted_v1';
   function ovSnapshot(){
     var g=function(n){var e=document.querySelector('[name="'+n+'"]');return e?e.value:'';};
-    return { tier:state.tier, term:state.term, count:state.count,
+    return { tier:state.tier, term:state.term, count:state.count, isAgent:state.isAgent,
       promo:(document.getElementById('promoCode')||{}).value||'',
       contact:{ name:g('name'), company:g('company'), email:g('email'), email2:g('email2'), phone:g('phone') },
       listings:[].map.call(document.querySelectorAll('.ov-listing'), function(b){
@@ -455,6 +485,7 @@
     if(saved && TERM[saved.term]) state.term=saved.term;
     if(nParam>=1&&nParam<=20) state.count=nParam;
     else if(saved && saved.count>=1) state.count=saved.count;
+    if(saved && typeof saved.isAgent==='boolean') state.isAgent=saved.isAgent;
     [].forEach.call(document.querySelectorAll('#plans .ov-plan'),function(x){x.classList.toggle('on', x.dataset.tier===state.tier);});
     [].forEach.call(document.querySelectorAll('#terms .ov-term'),function(x){x.classList.toggle('on', x.dataset.term===state.term);});
     var csel=document.getElementById('count'); if(csel) csel.value=String(state.count);
@@ -472,6 +503,7 @@
         if(L.calendar){var c=b.querySelector('[name=calendar]'); if(c) c.value=L.calendar;}
       });
     }
+    applyAgentMode();
     calc();
   })();
 })();
