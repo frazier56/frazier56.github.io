@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You — OneVoice</title>
+<style>
+  :root{
+    --bg:#0B0F1A;
+    --card:#151A2E;
+    --border:#2A3350;
+    --text:#F7F7F2;
+    --muted:#9AA4B2;
+    --teal:#14B8A6;
+    --teal-hi:#2DD4BF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    display:flex;align-items:center;justify-content:center;
+    min-height:100dvh;padding:24px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    width:100%;max-width:480px;text-align:center;
+    display:flex;flex-direction:column;min-height:min(760px,92dvh);
+  }
+  .top{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:12px 6px;}
+  .logo{width:240px;max-width:66%;height:auto;display:block;}
+  h1{font-size:26px;line-height:1.25;font-weight:700;letter-spacing:-.01em;}
+  p{color:var(--muted);font-size:16px;line-height:1.55;max-width:380px;}
+  .promo{
+    margin-top:6px;display:inline-flex;align-items:center;gap:10px;
+    padding:12px 18px;border-radius:14px;
+    background:var(--card);
+  }
+  .promo .lbl{color:var(--muted);font-size:12px;letter-spacing:.14em;text-transform:uppercase;}
+  .promo .code{color:var(--teal-hi);font-size:18px;font-weight:700;letter-spacing:.06em;}
+  .foot{padding-top:18px;}
+  .btn{
+    display:block;width:100%;
+    padding:17px 20px;border-radius:16px;border:none;cursor:pointer;
+    background:linear-gradient(180deg,var(--teal-hi),var(--teal));
+    color:#03201C;font-size:17px;font-weight:700;letter-spacing:.01em;
+    text-decoration:none;text-align:center;
+    box-shadow:0 8px 24px rgba(20,184,166,.28);
+    transition:transform .06s ease, box-shadow .2s ease;
+  }
+  .btn:active{transform:translateY(1px);box-shadow:0 4px 14px rgba(20,184,166,.24);}
+  .fineprint{margin-top:14px;color:var(--muted);font-size:12px;line-height:1.5;}
+  .fineprint a{color:var(--teal-hi);text-decoration:none;}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <img class="logo" src="https://assets.cdn.filesafe.space/VkZwS3nGWMX06NRwLxJ8/media/6a4c98b12467f0ff08b2c1d0.png" alt="OneVoice">
+
+      <h1>Thank you — we'll be in touch!</h1>
+      <p>Ready to stop missing calls? Book a free consultation with our team and lock in <strong style="color:var(--text)">50% off your setup</strong>.</p>
+      <div class="promo">
+        <span class="lbl">Promo code</span>
+        <span class="code">PROMO50</span>
+      </div>
+      <p style="font-size:14px;margin-top:2px;">Tap below to grab a time that works for you.</p>
+    </div>
+
+    <div class="foot">
+      <a class="btn" href="https://api.leadconnectorhq.com/widget/booking/TkMyWsq0YqMLbpJuP1Tn">Book Now</a>
+      <div class="fineprint">
+        By booking, you agree to OneVoice's <a href="https://oneworldlabs.ai/onevoice/privacy/" target="_blank" rel="noopener">Privacy Policy</a>.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
