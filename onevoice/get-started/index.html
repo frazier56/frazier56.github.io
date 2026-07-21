@@ -164,54 +164,76 @@
           <p class="ov-mini" style="margin:2px 0 0;">You&rsquo;ll sign in with your email &mdash; and set your own password from your welcome email on first login.</p>
         </div>
 
+        <style>
+          .ovr-2col{display:flex;gap:16px;flex-wrap:wrap;}
+          .ovr-2col .ov-field{flex:1;min-width:240px;max-width:300px;margin-bottom:0;}
+          .ov-planrows{display:flex;flex-direction:column;gap:10px;}
+          .ov-planrow{display:flex;align-items:center;gap:14px;border:1.5px solid #c7ced6;border-radius:12px;padding:14px 16px;cursor:pointer;background:#fff;transition:.15s;}
+          .ov-planrow:hover{border-color:#a9d9d3;}
+          .ov-planrow.on{border-color:#15C2B2;background:#F6FDFC;box-shadow:0 0 0 3px rgba(21,194,178,.12);}
+          .ov-radio{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:2px solid #c7ced6;position:relative;transition:.15s;}
+          .ov-planrow.on .ov-radio{border-color:#15C2B2;}
+          .ov-planrow.on .ov-radio:after{content:"";position:absolute;inset:3px;border-radius:50%;background:#15C2B2;}
+          .ov-pr-name{font-weight:800;font-size:15.5px;color:#0B0F1A;flex:0 0 auto;min-width:70px;}
+          .ov-pr-name em{font-style:normal;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#0B8C80;background:#E8FAF7;border:1px solid #cdeeea;border-radius:6px;padding:2px 6px;margin-left:7px;white-space:nowrap;}
+          .ov-pr-price{font-weight:800;font-size:18px;color:#0B0F1A;flex:0 0 auto;min-width:96px;}
+          .ov-pr-price i{font-style:normal;font-size:12.5px;font-weight:500;color:#6B7385;}
+          .ov-pr-meta{font-size:13px;color:#5a6677;flex:1 1 auto;text-align:right;}
+          @media(max-width:560px){.ov-planrow{flex-wrap:wrap;}.ov-pr-meta{flex-basis:100%;text-align:left;padding-left:34px;order:5;}.ov-pr-price{margin-left:auto;}}
+          .ov-seg{display:inline-flex;border:1.5px solid #c7ced6;border-radius:12px;overflow:hidden;background:#fff;max-width:100%;flex-wrap:wrap;}
+          .ov-segbtn{padding:11px 20px;cursor:pointer;font-size:13.5px;font-weight:700;color:#3c4656;border-right:1.5px solid #c7ced6;text-align:center;transition:.15s;line-height:1.25;}
+          .ov-segbtn:last-child{border-right:none;}
+          .ov-segbtn:hover{background:#F6FDFC;}
+          .ov-segbtn.on{background:#15C2B2;color:#04231f;}
+          .ov-segbtn small{display:block;font-size:11px;font-weight:600;opacity:.85;}
+        </style>
         <div class="ov-sec">
           <div class="ov-eyebrow">Step 1</div>
-          <h2>Are you a real estate agent?</h2>
+          <h2>Tell us about your business</h2>
           <p class="hint">This tailors your setup.</p>
-          <div class="ov-toggle" id="agentToggle">
-            <div class="ov-tg on" data-agent="yes">Yes &mdash; real estate</div>
-            <div class="ov-tg" data-agent="no">No &mdash; another business</div>
-          </div>
-          <h2 id="countTitle" style="font-size:19px;margin-top:22px;">How many listings?</h2>
-          <p class="hint" id="countHint">Each listing gets its own AI receptionist and its own dedicated number.</p>
-          <div class="ov-field" style="max-width:220px;margin-bottom:0;">
-            <select id="count">
-              <option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-              <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
-              <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
-              <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
-            </select>
+          <div class="ovr-2col">
+            <div class="ov-field">
+              <label>Business type</label>
+              <select id="agentSelect">
+                <option value="yes" selected>Real estate agent</option>
+                <option value="no">Another business</option>
+              </select>
+            </div>
+            <div class="ov-field">
+              <label id="countLbl">How many listings?</label>
+              <select id="count">
+                <option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+                <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+              </select>
+              <div class="ov-mini" id="countHint">Each listing gets its own AI receptionist and dedicated number.</div>
+            </div>
           </div>
         </div>
 
         <div class="ov-sec">
           <div class="ov-eyebrow">Step 2</div>
           <h2>Choose your plan</h2>
-          <p class="hint">Same AI &amp; features on every plan — you only choose listings &amp; call volume. 7-day free trial.</p>
-          <div class="ov-plans" id="plans">
-            <div class="ov-plan" data-tier="light">
-              <div class="pn">Lite</div><div class="pp">$99<span>/mo per agent</span></div>
-              <ul>
-                <li>1 AI agent</li>
-                <li>$0.99 per answered call</li>
-                <li>Same AI &amp; features as every plan</li>
-              </ul>
+          <p class="hint">Same AI &amp; features on every plan — you only choose call volume. 7-day free trial.</p>
+          <div class="ov-planrows" id="plans">
+            <div class="ov-planrow" data-tier="light">
+              <span class="ov-radio"></span>
+              <span class="ov-pr-name">Lite</span>
+              <span class="ov-pr-price">$99<i>/mo</i></span>
+              <span class="ov-pr-meta">1 AI agent · $0.99 per answered call</span>
             </div>
-            <div class="ov-plan on" data-tier="basic">
-              <div class="pn">Basic &#11088;</div><div class="pp">$297<span>/mo</span></div>
-              <ul>
-                <li>Up to 4 AI agents</li>
-                <li>$0.69 per answered call</li>
-                <li>Same AI &amp; features as every plan</li>
-              </ul>
+            <div class="ov-planrow on" data-tier="basic">
+              <span class="ov-radio"></span>
+              <span class="ov-pr-name">Basic<em>Popular</em></span>
+              <span class="ov-pr-price">$297<i>/mo</i></span>
+              <span class="ov-pr-meta">Up to 4 AI agents · $0.69 per answered call</span>
             </div>
-            <div class="ov-plan" data-tier="pro">
-              <div class="pn">Pro</div><div class="pp">$497<span>/mo</span></div>
-              <ul>
-                <li>Up to 6 AI agents</li>
-                <li><b>$0.39 per answered call</b></li>
-                <li>Optional: use your own SMS number</li>
-              </ul>
+            <div class="ov-planrow" data-tier="pro">
+              <span class="ov-radio"></span>
+              <span class="ov-pr-name">Pro</span>
+              <span class="ov-pr-price">$497<i>/mo</i></span>
+              <span class="ov-pr-meta">Up to 6 AI agents · $0.39 per answered call</span>
             </div>
           </div>
         </div>
@@ -220,10 +242,10 @@
           <div class="ov-eyebrow">Step 3</div>
           <h2>How would you like to pay?</h2>
           <p class="hint">Prepay to save. Cancel anytime.</p>
-          <div class="ov-terms" id="terms">
-            <div class="ov-term on" data-term="monthly"><b>Monthly</b>billed monthly</div>
-            <div class="ov-term" data-term="quarter"><b>3 months</b>save 25%</div>
-            <div class="ov-term" data-term="annual"><b>Annual</b>save 35%</div>
+          <div class="ov-seg" id="terms">
+            <div class="ov-segbtn" data-term="monthly">Monthly<small>billed monthly</small></div>
+            <div class="ov-segbtn on" data-term="quarter">3 months<small>save 25%</small></div>
+            <div class="ov-segbtn" data-term="annual">Annual<small>save 35%</small></div>
           </div>
         </div>
 
@@ -308,7 +330,7 @@
   var SETUP_REG={light:149, basic:249, pro:449};
   var PROMO_SETUP={basic:0, pro:0};          // AUTO 50%-off DISABLED (Jul 20) — full setup shown/charged by default; 50% only via secret code SETUP50
   var TERM={monthly:{months:1,off:0,word:'monthly'},quarter:{months:3,off:.25,word:'every 3 months'},annual:{months:12,off:.35,word:'per year'}};
-  var state={tier:'basic',term:'monthly',count:1,isAgent:true};
+  var state={tier:'basic',term:'quarter',count:1,isAgent:true};
   function money(n){ n=Math.round(n*100)/100; return '$'+n.toLocaleString('en-US',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2}); }
   function monthlyFor(tier,n){ if(tier==='light') return 99*n; return PRICE[tier].base + EXTRA*Math.max(0,n-INCLUDED[tier]); }
   function setupToday(tier){ var reg=SETUP_REG[tier]; return PROMO_SETUP[tier] ? reg*0.5 : reg; }
@@ -341,30 +363,29 @@
   }
 
   document.getElementById('plans').addEventListener('click',function(e){
-    var c=e.target.closest('.ov-plan'); if(!c)return;
+    var c=e.target.closest('.ov-planrow'); if(!c)return;
     [].forEach.call(this.children,function(x){x.classList.remove('on');});
     c.classList.add('on'); state.tier=c.dataset.tier; renderListings(); calc();
   });
   document.getElementById('terms').addEventListener('click',function(e){
-    var c=e.target.closest('.ov-term'); if(!c)return;
+    var c=e.target.closest('.ov-segbtn'); if(!c)return;
     [].forEach.call(this.children,function(x){x.classList.remove('on');});
     c.classList.add('on'); state.term=c.dataset.term; calc();
   });
   document.getElementById('count').addEventListener('change',function(){state.count=parseInt(this.value)||1;renderListings();calc();});
-  document.getElementById('agentToggle').addEventListener('click',function(e){
-    var c=e.target.closest('.ov-tg'); if(!c)return;
-    state.isAgent=(c.dataset.agent!=='no'); applyAgentMode();
+  document.getElementById('agentSelect').addEventListener('change',function(){
+    state.isAgent=(this.value!=='no'); applyAgentMode();
     try{ localStorage.setItem('ov_getstarted_v1', JSON.stringify(ovSnapshot())); }catch(err){}
   });
   function applyAgentMode(){
     var isA=state.isAgent!==false;
-    var ct=document.getElementById('countTitle'), ch=document.getElementById('countHint');
+    var ct=document.getElementById('countLbl'), ch=document.getElementById('countHint');
     if(ct) ct.textContent=isA?'How many listings?':'How many AI agents?';
     if(ch) ch.textContent=isA?'Each listing gets its own AI receptionist and its own dedicated number.':'Each agent answers one business line 24/7. Most businesses need just one.';
     var s4=document.getElementById('step4'), na=document.getElementById('nonAgentNote');
     if(s4) s4.style.display=isA?'':'none';
     if(na) na.style.display=isA?'none':'';
-    [].forEach.call(document.querySelectorAll('#agentToggle .ov-tg'),function(x){x.classList.toggle('on',(x.dataset.agent==='yes')===isA);});
+    var sel=document.getElementById('agentSelect'); if(sel) sel.value=isA?'yes':'no';
   }
   document.getElementById('promoCode').addEventListener('input',calc);
 
@@ -496,8 +517,8 @@
     if(nParam>=1&&nParam<=20) state.count=nParam;
     else if(saved && saved.count>=1) state.count=saved.count;
     if(saved && typeof saved.isAgent==='boolean') state.isAgent=saved.isAgent;
-    [].forEach.call(document.querySelectorAll('#plans .ov-plan'),function(x){x.classList.toggle('on', x.dataset.tier===state.tier);});
-    [].forEach.call(document.querySelectorAll('#terms .ov-term'),function(x){x.classList.toggle('on', x.dataset.term===state.term);});
+    [].forEach.call(document.querySelectorAll('#plans .ov-planrow'),function(x){x.classList.toggle('on', x.dataset.tier===state.tier);});
+    [].forEach.call(document.querySelectorAll('#terms .ov-segbtn'),function(x){x.classList.toggle('on', x.dataset.term===state.term);});
     var csel=document.getElementById('count'); if(csel) csel.value=String(state.count);
     if(saved){
       var setV=function(n,v){var e=document.querySelector('[name="'+n+'"]'); if(e&&v) e.value=v;};
