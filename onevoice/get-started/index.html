@@ -248,8 +248,8 @@
           <h3>Your plan</h3>
           <div class="ov-sumrow"><span class="lbl" id="sumPlan">Basic &middot; 1 listing</span><span id="sumMonthly">$297/mo</span></div>
           <div class="ov-sumrow" id="sumTermRow" style="display:none;"><span class="lbl" id="sumTermLbl">Billed every 3 months</span><span id="sumTermAmt">$0</span></div>
-          <div class="ov-sumrow"><span class="lbl">One-time setup fee</span><span id="sumSetup">$124.50</span></div>
-          <div class="ov-sumrow tot"><span>Due today</span><span id="sumTotal">$124.50</span></div>
+          <div class="ov-sumrow"><span class="lbl">One-time setup fee</span><span id="sumSetup">$249.00</span></div>
+          <div class="ov-sumrow tot"><span>Due today</span><span id="sumTotal">$249.00</span></div>
           <div class="ov-save" id="sumSave"></div>
           <div class="ov-trialnote" id="sumTrial"></div>
 
@@ -306,7 +306,7 @@
   var EXTRA=99;                              // $/mo per additional listing (all tiers)
   var PERCALL={light:0.99, basic:0.99, pro:0}; // 0 = unlimited (Pro)
   var SETUP_REG={light:149, basic:249, pro:349};
-  var PROMO_SETUP={basic:1, pro:1};          // 50% off setup — Basic/Pro only; Light = full $149
+  var PROMO_SETUP={basic:0, pro:0};          // AUTO 50%-off DISABLED (Jul 20) — full setup shown/charged by default; 50% only via secret code SETUP50
   var TERM={monthly:{months:1,off:0,word:'monthly'},quarter:{months:3,off:.25,word:'every 3 months'},annual:{months:12,off:.35,word:'per year'}};
   var state={tier:'basic',term:'monthly',count:1,isAgent:true};
   function money(n){ n=Math.round(n*100)/100; return '$'+n.toLocaleString('en-US',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2}); }
@@ -372,9 +372,15 @@
   function block(i){
     var cal = '<div class="ov-field"><label>Calendar to connect</label><select name="calendar"><option>Google Calendar</option><option>Outlook / Microsoft 365</option><option>Apple / iCloud Calendar</option><option>I\'ll choose after login</option></select><div class="ov-mini">You\'ll sign in to your calendar once after login so the AI books around your real schedule.</div></div>';
     return '<div class="ov-listing"><h4>Listing '+i+'</h4>'+
-      '<div class="ov-field"><label>Paste your listing details <span class="ov-info" onclick="ovToggleTip(this)">&#9432; What is this?</span></label><div class="ov-infotip"><b>Copy, don&rsquo;t type &mdash; and don&rsquo;t worry about formatting.</b> Just paste the whole block from your MLS, Zillow, or Realtor.com listing. Our AI reads it and organizes what it needs. Adding your public listing link below helps us verify the details.</div><textarea name="details" placeholder="Address, price, beds/baths, square footage, year built, standout features, and anything you want buyers to hear (or NOT to be told). The more you paste, the better your AI answers."></textarea></div>'+
+      '<div class="ov-field"><label>Property address</label><input name="address" type="text" placeholder="621 Huntington Dr, Madison, MS 39110"></div>'+
       '<div class="ov-grid">'+
-        '<div class="ov-field"><label>Public listing link (optional)</label><input name="listingurl" type="url" placeholder="https://zillow.com/homedetails/..."></div>'+
+        '<div class="ov-field"><label>Asking price</label><input name="price" type="text" inputmode="numeric" placeholder="288,000"></div>'+
+        '<div class="ov-field"><label>Beds / Baths</label><div style="display:flex;gap:8px;"><input name="beds" type="text" inputmode="numeric" placeholder="4 beds" style="min-width:0;"><input name="baths" type="text" inputmode="numeric" placeholder="2 baths" style="min-width:0;"></div></div>'+
+      '</div>'+
+      '<div class="ov-mini" style="margin:-4px 0 10px;">These four are exactly what your AI quotes to buyers &mdash; straight from you, so they\'re always right.</div>'+
+      '<div class="ov-field"><label>Describe the home &amp; what your agent should say <span class="ov-info" onclick="ovToggleTip(this)">&#9432; What is this?</span></label><div class="ov-infotip"><b>Copy, don&rsquo;t type &mdash; and don&rsquo;t worry about formatting.</b> Paste the description block from your MLS, Zillow, or Realtor.com listing &mdash; or write your own. Our AI reads it and organizes what it needs.</div><textarea name="details" placeholder="Square footage, year built, standout features, and anything you want buyers to hear (or NOT to be told). The more detail, the better your AI answers."></textarea><div class="ov-mini"><b>Whatever you put here is what your agent will say</b> &mdash; it overrides your listing link. Want to change what your agent says later? Change it right here anytime; no need to edit your listing itself.</div></div>'+
+      '<div class="ov-grid">'+
+        '<div class="ov-field"><label>Public listing link (optional)</label><input name="listingurl" type="url" placeholder="https://zillow.com/homedetails/..."><div class="ov-mini">Adds color to your AI\'s answers. We never use the link for price, beds, baths, or agent info &mdash; your fields above are what your agent speaks.</div></div>'+
         '<div class="ov-field"><label>Name your AI assistant</label><input name="assistant" type="text" placeholder="Ava"></div>'+
       '</div>'+ cal +'</div>';
   }
@@ -422,8 +428,12 @@
     if(state.isAgent!==false){
       [].forEach.call(document.querySelectorAll('.ov-listing'), function(b,i){
         var a=b.querySelector('[name=assistant]'), d=b.querySelector('[name=details]');
+        [['address','property address'],['price','asking price'],['beds','beds'],['baths','baths']].forEach(function(p){
+          var f=b.querySelector('[name='+p[0]+']');
+          if(f && !f.value.trim()){ f.classList.add('ov-invalid'); bad.push(p[1]+' (listing '+(i+1)+')'); }
+        });
         if(a && !a.value.trim()){ a.classList.add('ov-invalid'); bad.push('AI assistant name (listing '+(i+1)+')'); }
-        if(d && !d.value.trim()){ d.classList.add('ov-invalid'); bad.push('listing details (listing '+(i+1)+')'); }
+        if(d && !d.value.trim()){ d.classList.add('ov-invalid'); bad.push('home description (listing '+(i+1)+')'); }
       });
     }
     if(bad.length){
@@ -436,7 +446,7 @@
       contact:{ name:g('name'), company:g('company'), email:g('email'), phone:g('phone') },
       listings:[].map.call(document.querySelectorAll('.ov-listing'), function(b){
         var q=function(s){var el=b.querySelector(s);return el?el.value:'';};
-        return { details:q('[name=details]'), url:q('[name=listingurl]'), assistant:q('[name=assistant]'), areacode:q('[name=areacode]'), calendar:q('[name=calendar]') };
+        return { address:q('[name=address]'), price:q('[name=price]'), beds:q('[name=beds]'), baths:q('[name=baths]'), details:q('[name=details]'), url:q('[name=listingurl]'), assistant:q('[name=assistant]'), areacode:q('[name=areacode]'), calendar:q('[name=calendar]') };
       }) };
     if(state.isAgent===false){ order.isAgent=false; order.listings=[]; for(var _i=0;_i<order.count;_i++){ order.listings.push({ details:'[Non-real-estate business - our team will collect details by phone within 24h]', assistant:(order.contact.company||'Your assistant'), url:'', calendar:'' }); } } else { order.isAgent=true; }
     // REVIEW STEP: show what they entered before money moves
@@ -468,7 +478,7 @@
       contact:{ name:g('name'), company:g('company'), email:g('email'), email2:g('email2'), phone:g('phone') },
       listings:[].map.call(document.querySelectorAll('.ov-listing'), function(b){
         var q=function(s){var e=b.querySelector(s);return e?e.value:'';};
-        return { details:q('[name=details]'), url:q('[name=listingurl]'), assistant:q('[name=assistant]'), areacode:q('[name=areacode]'), calendar:q('[name=calendar]') };
+        return { address:q('[name=address]'), price:q('[name=price]'), beds:q('[name=beds]'), baths:q('[name=baths]'), details:q('[name=details]'), url:q('[name=listingurl]'), assistant:q('[name=assistant]'), areacode:q('[name=areacode]'), calendar:q('[name=calendar]') };
       }) };
   }
   function ovSave(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(ovSnapshot())); }catch(e){} }
@@ -499,7 +509,7 @@
       var blocks=document.querySelectorAll('.ov-listing');
       saved.listings.forEach(function(L,i){ var b=blocks[i]; if(!b) return;
         var setB=function(sel,v){var e=b.querySelector(sel); if(e&&v) e.value=v;};
-        setB('[name=details]',L.details);setB('[name=listingurl]',L.url);setB('[name=assistant]',L.assistant);setB('[name=areacode]',L.areacode);
+        setB('[name=address]',L.address);setB('[name=price]',L.price);setB('[name=beds]',L.beds);setB('[name=baths]',L.baths);setB('[name=details]',L.details);setB('[name=listingurl]',L.url);setB('[name=assistant]',L.assistant);setB('[name=areacode]',L.areacode);
         if(L.calendar){var c=b.querySelector('[name=calendar]'); if(c) c.value=L.calendar;}
       });
     }
