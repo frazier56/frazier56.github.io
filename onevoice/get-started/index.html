@@ -168,8 +168,9 @@
         <style>
           .ovr-2col{display:flex;gap:16px;flex-wrap:wrap;}
           .ovr-2col .ov-field{flex:1;min-width:240px;max-width:300px;margin-bottom:0;}
-          .ovr-2col select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a6677' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:42px;font-weight:600;color:#0B0F1A;cursor:pointer;height:48px;box-shadow:0 1px 2px rgba(11,15,26,.05);}
+          .ovr-2col select{appearance:none;-webkit-appearance:none;-moz-appearance:none;border:1.5px solid #dfe4ea;border-radius:12px;background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a6677' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding:0 44px 0 16px;height:50px;font-size:15px;font-weight:600;color:#0B0F1A;cursor:pointer;box-shadow:0 1px 2px rgba(11,15,26,.05);transition:border-color .15s,box-shadow .15s;}
           .ovr-2col select:hover{border-color:#a9d9d3;}
+          .ovr-2col select:focus{outline:none;border-color:#15C2B2;box-shadow:0 0 0 3px rgba(21,194,178,.15);}
           .ov-planrows{display:flex;flex-direction:column;gap:10px;}
           .ov-planrow{display:flex;align-items:center;gap:14px;border:1.5px solid #c7ced6;border-radius:12px;padding:14px 16px;cursor:pointer;background:#fff;transition:.15s;}
           .ov-planrow:hover{border-color:#a9d9d3;}
@@ -198,8 +199,12 @@
             <div class="ov-field">
               <label>Business type</label>
               <select id="agentSelect">
-                <option value="yes" selected>Real estate agent</option>
-                <option value="no">Another business</option>
+                <option value="yes" selected>Real Estate</option>
+                <option value="legal">Legal</option>
+                <option value="medical">Medical &amp; Wellness</option>
+                <option value="financial">Financial Services</option>
+                <option value="homeservices">Home Services &amp; Contractors</option>
+                <option value="other">Other business</option>
               </select>
             </div>
             <div class="ov-field">
@@ -334,7 +339,7 @@
   var SETUP_REG={light:149, basic:249, pro:449};
   var PROMO_SETUP={basic:0, pro:0};          // AUTO 50%-off DISABLED (Jul 20) — full setup shown/charged by default; 50% only via secret code SETUP50
   var TERM={monthly:{months:1,off:0,word:'monthly'},quarter:{months:3,off:.25,word:'every 3 months'},annual:{months:12,off:.35,word:'per year'}};
-  var state={tier:'basic',term:'quarter',count:1,isAgent:true};
+  var state={tier:'basic',term:'quarter',count:1,isAgent:true,agentType:'yes',industry:'Real Estate'};
   function money(n){ n=Math.round(n*100)/100; return '$'+n.toLocaleString('en-US',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2}); }
   function monthlyFor(tier,n){ if(tier==='light') return 99*n; return PRICE[tier].base + EXTRA*Math.max(0,n-INCLUDED[tier]); }
   function setupToday(tier){ var reg=SETUP_REG[tier]; return PROMO_SETUP[tier] ? reg*0.5 : reg; }
@@ -378,7 +383,7 @@
   });
   document.getElementById('count').addEventListener('change',function(){state.count=parseInt(this.value)||1;renderListings();calc();});
   document.getElementById('agentSelect').addEventListener('change',function(){
-    state.isAgent=(this.value!=='no'); applyAgentMode();
+    state.agentType=this.value; state.isAgent=(this.value==='yes'); state.industry=this.options[this.selectedIndex].text; applyAgentMode();
     try{ localStorage.setItem('ov_getstarted_v1', JSON.stringify(ovSnapshot())); }catch(err){}
   });
   function applyAgentMode(){
@@ -389,7 +394,7 @@
     var s4=document.getElementById('step4'), na=document.getElementById('nonAgentNote');
     if(s4) s4.style.display=isA?'':'none';
     if(na) na.style.display=isA?'none':'';
-    var sel=document.getElementById('agentSelect'); if(sel) sel.value=isA?'yes':'no';
+    var sel=document.getElementById('agentSelect'); if(sel && state.agentType) sel.value=state.agentType;
   }
   document.getElementById('promoCode').addEventListener('input',calc);
 
@@ -403,7 +408,7 @@
         '<div class="ov-field"><label>Beds / Baths</label><div style="display:flex;gap:8px;"><input name="beds" type="text" inputmode="numeric" placeholder="4 beds" style="min-width:0;"><input name="baths" type="text" inputmode="numeric" placeholder="2 baths" style="min-width:0;"></div></div>'+
       '</div>'+
       '<div class="ov-mini" style="margin:-4px 0 10px;">These four are exactly what your AI quotes to buyers &mdash; straight from you, so they\'re always right.</div>'+
-      '<div class="ov-field"><label>Describe the home &amp; what your agent should say <span class="ov-info" onclick="ovToggleTip(this)">&#9432; What is this?</span></label><div class="ov-infotip"><b>Copy, don&rsquo;t type &mdash; and don&rsquo;t worry about formatting.</b> Paste the description block from your MLS, Zillow, or Realtor.com listing &mdash; or write your own. Our AI reads it and organizes what it needs.</div><textarea name="details" placeholder="Square footage, year built, standout features, and anything you want buyers to hear (or NOT to be told). The more detail, the better your AI answers."></textarea><div class="ov-mini"><b>Whatever you put here is what your agent will say</b> &mdash; it overrides your listing link. Want to change what your agent says later? Change it right here anytime; no need to edit your listing itself.</div></div>'+
+      '<div class="ov-field"><label>Describe the home &amp; what your agent should know <span class="ov-info" onclick="ovToggleTip(this)">&#9432; What is this?</span></label><div class="ov-infotip"><b>Copy, don&rsquo;t type &mdash; and don&rsquo;t worry about formatting.</b> Paste the description from your MLS, Zillow, or Realtor.com listing &mdash; or write your own. Your AI treats this as its <b>knowledge base</b> &mdash; it reads and organizes everything for you, then draws on it to answer buyers accurately on the call. This <b>overrides your public listing link</b> below. You can update it anytime from your dashboard after you sign in.</div><textarea name="details" placeholder="Square footage, year built, standout features, and anything you want buyers to hear (or NOT to be told). The more detail, the better your AI answers."></textarea></div>'+
       '<div class="ov-grid">'+
         '<div class="ov-field"><label>Public listing link (optional)</label><input name="listingurl" type="url" placeholder="https://zillow.com/homedetails/..."><div class="ov-mini">Adds color to your AI\'s answers. We never use the link for price, beds, baths, or agent info &mdash; your fields above are what your agent speaks.</div></div>'+
         '<div class="ov-field"><label>Name your AI assistant</label><input name="assistant" type="text" placeholder="Ava"></div>'+
@@ -473,7 +478,7 @@
         var q=function(s){var el=b.querySelector(s);return el?el.value:'';};
         return { address:q('[name=address]'), price:q('[name=price]'), beds:q('[name=beds]'), baths:q('[name=baths]'), details:q('[name=details]'), url:q('[name=listingurl]'), assistant:q('[name=assistant]'), areacode:q('[name=areacode]'), calendar:q('[name=calendar]') };
       }) };
-    if(state.isAgent===false){ order.isAgent=false; order.listings=[]; for(var _i=0;_i<order.count;_i++){ order.listings.push({ details:'[Non-real-estate business - our team will collect details by phone within 24h]', assistant:(order.contact.company||'Your assistant'), url:'', calendar:'' }); } } else { order.isAgent=true; }
+    order.industry=state.industry||''; if(state.isAgent===false){ order.isAgent=false; order.listings=[]; for(var _i=0;_i<order.count;_i++){ order.listings.push({ details:'['+(state.industry||'Business')+' — our team will collect details by phone within 24h]', assistant:(order.contact.company||'Your assistant'), url:'', calendar:'' }); } } else { order.isAgent=true; }
     // REVIEW STEP: show what they entered before money moves
     var rows='';
     var add=function(k,v){ if(v) rows+='<div class="ov-rvrow"><span class="k">'+k+'</span><span class="v">'+ovEsc(v)+'</span></div>'; };
@@ -498,7 +503,7 @@
   var LS_KEY='ov_getstarted_v1';
   function ovSnapshot(){
     var g=function(n){var e=document.querySelector('[name="'+n+'"]');return e?e.value:'';};
-    return { tier:state.tier, term:state.term, count:state.count, isAgent:state.isAgent,
+    return { tier:state.tier, term:state.term, count:state.count, isAgent:state.isAgent, agentType:state.agentType, industry:state.industry,
       promo:(document.getElementById('promoCode')||{}).value||'',
       contact:{ name:g('name'), company:g('company'), email:g('email'), email2:g('email2'), phone:g('phone') },
       listings:[].map.call(document.querySelectorAll('.ov-listing'), function(b){
@@ -520,7 +525,9 @@
     if(saved && TERM[saved.term]) state.term=saved.term;
     if(nParam>=1&&nParam<=20) state.count=nParam;
     else if(saved && saved.count>=1) state.count=saved.count;
-    if(saved && typeof saved.isAgent==='boolean') state.isAgent=saved.isAgent;
+    if(saved && saved.agentType){ state.agentType=saved.agentType; state.isAgent=(saved.agentType==='yes'); }
+    else if(saved && typeof saved.isAgent==='boolean'){ state.isAgent=saved.isAgent; state.agentType=saved.isAgent?'yes':'other'; }
+    var asel=document.getElementById('agentSelect'); if(asel){ asel.value=state.agentType; if(asel.options[asel.selectedIndex]) state.industry=asel.options[asel.selectedIndex].text; }
     [].forEach.call(document.querySelectorAll('#plans .ov-planrow'),function(x){x.classList.toggle('on', x.dataset.tier===state.tier);});
     [].forEach.call(document.querySelectorAll('#terms .ov-segbtn'),function(x){x.classList.toggle('on', x.dataset.term===state.term);});
     var csel=document.getElementById('count'); if(csel) csel.value=String(state.count);
