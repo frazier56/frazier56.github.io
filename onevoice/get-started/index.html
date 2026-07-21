@@ -171,6 +171,22 @@
           .ovr-2col select{appearance:none;-webkit-appearance:none;-moz-appearance:none;border:1.5px solid #dfe4ea;border-radius:12px;background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a6677' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding:0 44px 0 16px;height:50px;font-size:15px;font-weight:600;color:#0B0F1A;cursor:pointer;box-shadow:0 1px 2px rgba(11,15,26,.05);transition:border-color .15s,box-shadow .15s;}
           .ovr-2col select:hover{border-color:#a9d9d3;}
           .ovr-2col select:focus{outline:none;border-color:#15C2B2;box-shadow:0 0 0 3px rgba(21,194,178,.15);}
+          .ovsel{position:relative;}
+          .ovsel-btn{width:100%;height:50px;display:flex;align-items:center;justify-content:space-between;gap:10px;border:1.5px solid #dfe4ea;border-radius:12px;background:#fff;padding:0 16px;font-size:15px;font-weight:600;color:#0B0F1A;cursor:pointer;font-family:inherit;box-shadow:0 1px 2px rgba(11,15,26,.05);transition:border-color .15s,box-shadow .15s;}
+          .ovsel-btn:hover{border-color:#a9d9d3;}
+          .ovsel.open .ovsel-btn{border-color:#15C2B2;box-shadow:0 0 0 3px rgba(21,194,178,.15);}
+          .ovsel-btn svg{flex:0 0 auto;transition:transform .15s;}
+          .ovsel.open .ovsel-btn svg{transform:rotate(180deg);}
+          .ovsel-list{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:30;background:#fff;border:1px solid #e6e9ee;border-radius:12px;box-shadow:0 14px 34px rgba(11,15,26,.12);padding:6px;display:none;}
+          .ovsel.open .ovsel-list{display:block;}
+          .ovsel-opt{padding:11px 12px;border-radius:8px;font-size:14.5px;font-weight:600;color:#1A2233;cursor:pointer;transition:.12s;}
+          .ovsel-opt:hover{background:#F1FBFA;}
+          .ovsel-opt.on{color:#0B8C80;background:#F1FBFA;}
+          .ovstep{display:flex;align-items:center;height:50px;border:1.5px solid #dfe4ea;border-radius:12px;background:#fff;overflow:hidden;max-width:200px;box-shadow:0 1px 2px rgba(11,15,26,.05);}
+          .ovstep-btn{width:52px;height:100%;border:none;background:#F6FDFC;color:#0B8C80;font-size:22px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1;transition:.12s;}
+          .ovstep-btn:hover{background:#E4F8F3;}
+          .ovstep-in{flex:1;min-width:0;width:100%;border:none;text-align:center;font-size:16px;font-weight:700;color:#0B0F1A;background:#fff;font-family:inherit;}
+          .ovstep-in:focus{outline:none;}
           .ov-planrows{display:flex;flex-direction:column;gap:10px;}
           .ov-planrow{display:flex;align-items:center;gap:14px;border:1.5px solid #c7ced6;border-radius:12px;padding:14px 16px;cursor:pointer;background:#fff;transition:.15s;}
           .ov-planrow:hover{border-color:#a9d9d3;}
@@ -198,23 +214,25 @@
           <div class="ovr-2col">
             <div class="ov-field">
               <label>Business type</label>
-              <select id="agentSelect">
-                <option value="yes" selected>Real Estate</option>
-                <option value="legal">Legal</option>
-                <option value="medical">Medical &amp; Wellness</option>
-                <option value="financial">Financial Services</option>
-                <option value="homeservices">Home Services &amp; Contractors</option>
-                <option value="other">Other business</option>
-              </select>
+              <div class="ovsel" id="bizSel" data-value="yes">
+                <button type="button" class="ovsel-btn" id="bizBtn" aria-haspopup="listbox"><span id="bizVal">Real Estate</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5a6677" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+                <div class="ovsel-list" id="bizList" role="listbox">
+                  <div class="ovsel-opt on" data-value="yes">Real Estate</div>
+                  <div class="ovsel-opt" data-value="legal">Legal</div>
+                  <div class="ovsel-opt" data-value="medical">Medical &amp; Wellness</div>
+                  <div class="ovsel-opt" data-value="financial">Financial Services</div>
+                  <div class="ovsel-opt" data-value="homeservices">Home Services &amp; Contractors</div>
+                  <div class="ovsel-opt" data-value="other">Other business</div>
+                </div>
+              </div>
             </div>
             <div class="ov-field">
               <label id="countLbl">How many listings?</label>
-              <select id="count">
-                <option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-                <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
-                <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
-                <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
-              </select>
+              <div class="ovstep">
+                <button type="button" class="ovstep-btn" id="cntMinus" aria-label="Decrease">&minus;</button>
+                <input id="count" class="ovstep-in" type="text" inputmode="numeric" value="1" aria-label="How many">
+                <button type="button" class="ovstep-btn" id="cntPlus" aria-label="Increase">+</button>
+              </div>
               <div class="ov-mini" id="countHint">Each listing gets its own AI receptionist and dedicated number.</div>
             </div>
           </div>
@@ -381,11 +399,25 @@
     [].forEach.call(this.children,function(x){x.classList.remove('on');});
     c.classList.add('on'); state.term=c.dataset.term; calc();
   });
-  document.getElementById('count').addEventListener('change',function(){state.count=parseInt(this.value)||1;renderListings();calc();});
-  document.getElementById('agentSelect').addEventListener('change',function(){
-    state.agentType=this.value; state.isAgent=(this.value==='yes'); state.industry=this.options[this.selectedIndex].text; applyAgentMode();
-    try{ localStorage.setItem('ov_getstarted_v1', JSON.stringify(ovSnapshot())); }catch(err){}
-  });
+  (function(){
+    var sel=document.getElementById('bizSel'), btn=document.getElementById('bizBtn'), list=document.getElementById('bizList'), val=document.getElementById('bizVal');
+    if(sel&&btn&&list){
+      function pick(v,label){ sel.setAttribute('data-value',v); if(val)val.textContent=label; state.agentType=v; state.isAgent=(v==='yes'); state.industry=label;
+        [].forEach.call(list.children,function(o){o.classList.toggle('on',o.getAttribute('data-value')===v);});
+        applyAgentMode(); try{ localStorage.setItem('ov_getstarted_v1', JSON.stringify(ovSnapshot())); }catch(e){} }
+      btn.addEventListener('click',function(e){ e.stopPropagation(); sel.classList.toggle('open'); });
+      list.addEventListener('click',function(e){ var o=e.target.closest('.ovsel-opt'); if(!o)return; pick(o.getAttribute('data-value'), o.textContent); sel.classList.remove('open'); });
+      document.addEventListener('click',function(e){ if(!sel.contains(e.target)) sel.classList.remove('open'); });
+    }
+  })();
+  (function(){
+    var inp=document.getElementById('count'), mn=document.getElementById('cntMinus'), pl=document.getElementById('cntPlus');
+    function setC(n){ n=Math.max(1,Math.min(20,parseInt(n,10)||1)); if(inp)inp.value=n; state.count=n; renderListings(); calc(); try{localStorage.setItem('ov_getstarted_v1', JSON.stringify(ovSnapshot()));}catch(e){} }
+    if(mn) mn.addEventListener('click',function(){ setC((parseInt(inp.value,10)||1)-1); });
+    if(pl) pl.addEventListener('click',function(){ setC((parseInt(inp.value,10)||1)+1); });
+    if(inp){ inp.addEventListener('input',function(){ var v=inp.value.replace(/[^0-9]/g,''); inp.value=v; var n=parseInt(v,10); if(!isNaN(n)){ state.count=Math.max(1,Math.min(20,n)); renderListings(); calc(); } });
+      inp.addEventListener('blur',function(){ setC(inp.value); }); }
+  })();
   function applyAgentMode(){
     var isA=state.isAgent!==false;
     var ct=document.getElementById('countLbl'), ch=document.getElementById('countHint');
@@ -394,7 +426,8 @@
     var s4=document.getElementById('step4'), na=document.getElementById('nonAgentNote');
     if(s4) s4.style.display=isA?'':'none';
     if(na) na.style.display=isA?'none':'';
-    var sel=document.getElementById('agentSelect'); if(sel && state.agentType) sel.value=state.agentType;
+    var _bs=document.getElementById('bizSel'), _bv=document.getElementById('bizVal'), _bl=document.getElementById('bizList');
+    if(_bs && state.agentType){ _bs.setAttribute('data-value',state.agentType); if(_bl)[].forEach.call(_bl.children,function(o){var m=o.getAttribute('data-value')===state.agentType;o.classList.toggle('on',m);if(m){ if(_bv)_bv.textContent=o.textContent; state.industry=o.textContent; }}); }
   }
   document.getElementById('promoCode').addEventListener('input',calc);
 
@@ -408,7 +441,7 @@
         '<div class="ov-field"><label>Beds / Baths</label><div style="display:flex;gap:8px;"><input name="beds" type="text" inputmode="numeric" placeholder="4 beds" style="min-width:0;"><input name="baths" type="text" inputmode="numeric" placeholder="2 baths" style="min-width:0;"></div></div>'+
       '</div>'+
       '<div class="ov-mini" style="margin:-4px 0 10px;">These four are exactly what your AI quotes to buyers &mdash; straight from you, so they\'re always right.</div>'+
-      '<div class="ov-field"><label>Describe the home &amp; what your agent should know <span class="ov-info" onclick="ovToggleTip(this)">&#9432; What is this?</span></label><div class="ov-infotip"><b>Copy, don&rsquo;t type &mdash; and don&rsquo;t worry about formatting.</b> Paste the description from your MLS, Zillow, or Realtor.com listing &mdash; or write your own. Your AI treats this as its <b>knowledge base</b> &mdash; it reads and organizes everything for you, then draws on it to answer buyers accurately on the call. This <b>overrides your public listing link</b> below. You can update it anytime from your dashboard after you sign in.</div><textarea name="details" placeholder="Square footage, year built, standout features, and anything you want buyers to hear (or NOT to be told). The more detail, the better your AI answers."></textarea></div>'+
+      '<div class="ov-field"><label>Describe the home &amp; what your agent should know <span class="ov-info" onclick="ovToggleTip(this)">&#9432; What is this?</span></label><div class="ov-infotip"><b>Copy, don&rsquo;t type &mdash; and don&rsquo;t worry about formatting.</b> Paste the description from your MLS, Zillow, or Realtor.com listing &mdash; or write your own. Your AI treats this as its <b>knowledge base</b> &mdash; it reads and organizes everything for you, then answers buyers from it on the call. If you also add a public listing link below, <b>what you write here takes precedence</b> for what your AI says &mdash; it never changes your actual listing, it only guides your AI. You can update it anytime from your dashboard after you sign in.</div><textarea name="details" placeholder="Square footage, year built, standout features, and anything you want buyers to hear (or NOT to be told). The more detail, the better your AI answers."></textarea></div>'+
       '<div class="ov-grid">'+
         '<div class="ov-field"><label>Public listing link (optional)</label><input name="listingurl" type="url" placeholder="https://zillow.com/homedetails/..."><div class="ov-mini">Adds color to your AI\'s answers. We never use the link for price, beds, baths, or agent info &mdash; your fields above are what your agent speaks.</div></div>'+
         '<div class="ov-field"><label>Name your AI assistant</label><input name="assistant" type="text" placeholder="Ava"></div>'+
@@ -527,7 +560,7 @@
     else if(saved && saved.count>=1) state.count=saved.count;
     if(saved && saved.agentType){ state.agentType=saved.agentType; state.isAgent=(saved.agentType==='yes'); }
     else if(saved && typeof saved.isAgent==='boolean'){ state.isAgent=saved.isAgent; state.agentType=saved.isAgent?'yes':'other'; }
-    var asel=document.getElementById('agentSelect'); if(asel){ asel.value=state.agentType; if(asel.options[asel.selectedIndex]) state.industry=asel.options[asel.selectedIndex].text; }
+    // business-type dropdown display + state.industry are synced by applyAgentMode() below
     [].forEach.call(document.querySelectorAll('#plans .ov-planrow'),function(x){x.classList.toggle('on', x.dataset.tier===state.tier);});
     [].forEach.call(document.querySelectorAll('#terms .ov-segbtn'),function(x){x.classList.toggle('on', x.dataset.term===state.term);});
     var csel=document.getElementById('count'); if(csel) csel.value=String(state.count);
