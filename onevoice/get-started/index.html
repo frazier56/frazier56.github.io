@@ -57,13 +57,13 @@
   .ov-grid{display:flex;gap:18px;flex-wrap:wrap;}
   .ov-field{flex:1;min-width:200px;margin-bottom:16px;}
   .ov-field label{display:block;font-size:13px;font-weight:700;color:#2c3542;margin-bottom:6px;}
-  .ov-field input,.ov-field select,.ov-field textarea{width:100%;padding:12px 14px;border:1px solid #dfe4ea;border-radius:10px;font-size:15px;background:#fff;font-family:inherit;transition:border-color .15s,box-shadow .15s;}
+  .ov-field input,.ov-field select,.ov-field textarea{width:100%;padding:12px 14px;border:1px solid #c7ced6;border-radius:10px;font-size:15px;background:#fff;font-family:inherit;transition:border-color .15s,box-shadow .15s;}
   .ov-invalid{border-color:#e5484d !important;box-shadow:0 0 0 3px rgba(229,72,77,.16) !important;}
   .ov-field input:focus,.ov-field select:focus,.ov-field textarea:focus{outline:none;border-color:#15C2B2;box-shadow:0 0 0 3px rgba(21,194,178,.15);}
   .ov-field textarea{resize:vertical;min-height:96px;}
   .ov-mini{font-size:12px;color:#8a93a3;margin-top:5px;}
   .ov-plans{display:flex;gap:16px;flex-wrap:wrap;}
-  .ov-plan{flex:1;min-width:230px;border:1.5px solid #dfe4ea;border-radius:14px;padding:20px;cursor:pointer;background:#fff;transition:.15s;}
+  .ov-plan{flex:1;min-width:230px;border:1.5px solid #c7ced6;border-radius:14px;padding:20px;cursor:pointer;background:#fff;transition:.15s;}
   .ov-plan:hover{border-color:#a9d9d3;}
   .ov-plan.on{border-color:#15C2B2;background:#F6FDFC;box-shadow:0 0 0 3px rgba(21,194,178,.12);}
   .ov-plan .pn{font-weight:800;font-size:16px;}
@@ -74,16 +74,16 @@
   .ov-plan li:before{content:"\2713";position:absolute;left:0;color:#15C2B2;font-weight:800;}
   .ov-plan li.add{color:#0B8C80;font-weight:700;}
   .ov-toggle{display:flex;gap:12px;flex-wrap:wrap;}
-  .ov-tg{flex:1;min-width:180px;text-align:center;border:1.5px solid #dfe4ea;border-radius:12px;padding:14px 16px;cursor:pointer;font-weight:700;font-size:14.5px;color:#1A2233;background:#fff;transition:.15s;}
+  .ov-tg{flex:1;min-width:180px;text-align:center;border:1.5px solid #c7ced6;border-radius:12px;padding:14px 16px;cursor:pointer;font-weight:700;font-size:14.5px;color:#1A2233;background:#fff;transition:.15s;}
   .ov-tg:hover{border-color:#a9d9d3;}
   .ov-tg.on{border-color:#15C2B2;background:#F6FDFC;box-shadow:0 0 0 3px rgba(21,194,178,.12);}
   .ov-plan li.add:before{content:"\002B";}
   .ov-terms{display:flex;gap:12px;flex-wrap:wrap;}
-  .ov-term{flex:1;min-width:150px;border:1.5px solid #dfe4ea;border-radius:12px;padding:14px;text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:#3c4656;background:#fff;transition:.15s;}
+  .ov-term{flex:1;min-width:150px;border:1.5px solid #c7ced6;border-radius:12px;padding:14px;text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:#3c4656;background:#fff;transition:.15s;}
   .ov-term.on{border-color:#15C2B2;background:#F6FDFC;color:#0B8C80;}
   .ov-term b{display:block;font-size:15px;color:#0B0F1A;margin-bottom:2px;}
   .ov-term.on b{color:#0B8C80;}
-  .ov-listing{border:1px solid #e6e9ee;border-left:3px solid #15C2B2;border-radius:10px;padding:18px;margin-bottom:14px;background:#fff;}
+  .ov-listing{border:1.5px solid #cfd5dd;border-left:3px solid #15C2B2;border-radius:10px;padding:18px;margin-bottom:14px;background:#fff;}
   .ov-listing h4{font-size:15px;margin-bottom:12px;color:#0B8C80;}
   .ov-nudge{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0B8C80;background:#F1FBFA;border:1px dashed #9fe0d8;border-radius:10px;padding:12px 16px;margin-top:6px;}
   /* summary — teal panel, white button */
@@ -190,7 +190,7 @@
           <p class="hint">Same AI &amp; features on every plan — you only choose listings &amp; call volume. 7-day free trial.</p>
           <div class="ov-plans" id="plans">
             <div class="ov-plan" data-tier="light">
-              <div class="pn">Light</div><div class="pp">$99<span>/mo per agent</span></div>
+              <div class="pn">Lite</div><div class="pp">$99<span>/mo per agent</span></div>
               <ul>
                 <li>1 AI agent</li>
                 <li>$0.99 per answered call</li>
@@ -201,7 +201,7 @@
               <div class="pn">Basic &#11088;</div><div class="pp">$297<span>/mo</span></div>
               <ul>
                 <li>Up to 4 AI agents</li>
-                <li>$0.99 per answered call</li>
+                <li>$0.69 per answered call</li>
                 <li>Same AI &amp; features as every plan</li>
               </ul>
             </div>
@@ -209,7 +209,7 @@
               <div class="pn">Pro</div><div class="pp">$497<span>/mo</span></div>
               <ul>
                 <li>Up to 6 AI agents</li>
-                <li><b>Unlimited calls</b> — no per-call fee</li>
+                <li><b>$0.39 per answered call</b></li>
                 <li>Optional: use your own SMS number</li>
               </ul>
             </div>
@@ -254,7 +254,7 @@
           <div class="ov-trialnote" id="sumTrial"></div>
 
           <div style="margin-top:14px;">
-            <input type="text" id="promoCode" placeholder="Promo code (optional)" style="width:100%;padding:10px 12px;border:1px solid #dfe4ea;border-radius:10px;font-size:13px;font-family:inherit;background:#fff;" autocomplete="off">
+            <input type="text" id="promoCode" placeholder="Promo code (optional)" style="width:100%;padding:10px 12px;border:1px solid #c7ced6;border-radius:10px;font-size:13px;font-family:inherit;background:#fff;" autocomplete="off">
             <div class="ov-mini" id="promoMsg" style="display:none;"></div>
           </div>
           <button type="button" class="ov-pay" id="payBtn">Proceed to payment &rarr;</button>
@@ -301,10 +301,10 @@
   /* checkout is standalone page 2 — form always shown; plan comes from homepage via ?plan= */
 
   // ===== v4 pricing (mirrors onevoice-checkout/lib/pricing.js) =====
-  var PRICE={ light:{base:99,name:'Light'}, basic:{base:297,name:'Basic'}, pro:{base:497,name:'Pro'} };
+  var PRICE={ light:{base:99,name:'Lite'}, basic:{base:297,name:'Basic'}, pro:{base:497,name:'Pro'} };
   var INCLUDED={light:1, basic:4, pro:6};
   var EXTRA=99;                              // $/mo per additional listing (all tiers)
-  var PERCALL={light:0.99, basic:0.99, pro:0}; // 0 = unlimited (Pro)
+  var PERCALL={light:0.99, basic:0.69, pro:0.39};
   var SETUP_REG={light:149, basic:249, pro:449};
   var PROMO_SETUP={basic:0, pro:0};          // AUTO 50%-off DISABLED (Jul 20) — full setup shown/charged by default; 50% only via secret code SETUP50
   var TERM={monthly:{months:1,off:0,word:'monthly'},quarter:{months:3,off:.25,word:'every 3 months'},annual:{months:12,off:.35,word:'per year'}};
