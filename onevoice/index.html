@@ -876,7 +876,7 @@ footer a{color:var(--teal2);font-weight:700;}
   <div class="notreal">
     <p class="notreal-q">6+ listings, a brokerage, or another business?</p>
     <p class="notreal-sub">Enterprise is custom-built around your listing count and call volume — book a quick call and we'll put together your pricing.</p>
-    <button class="btn ghost" type="button" onclick="bookCall()">Book a call for custom pricing →</button>
+    <a class="btn ghost" href="tel:+18557700200">Call us for custom pricing →</a>
   </div>
 </div></section>
 
@@ -924,41 +924,7 @@ footer a{color:var(--teal2);font-weight:700;}
   <a href="tel:+18557700200">Call us: (855) 770-0200</a> · 1111b S Governors Ave, Dover, DE 19904
 </footer>
 
-<!-- BOOK-A-CALL MODAL (GHL calendar widget — same booking calendar used on the OneApp site; swap OV_BOOKING_URL below if OneVoice should point at a different calendar) -->
-<div class="mscrim" id="mscrim" onclick="if(event.target===this)closeBooking()">
-  <div class="mcard mcal">
-    <div class="mcalhead">
-      <b>Book your call</b>
-      <button class="mclose" onclick="closeBooking()" aria-label="Close">✕</button>
-    </div>
-    <iframe id="cal-frame" title="Book your OneVoice call" src="about:blank"></iframe>
-    <div style="text-align:center;padding:10px 0 12px"><a id="cal-open" href="#" target="_blank" rel="noopener" style="font-size:13px;color:var(--txt2)">Trouble loading? Open the calendar in a new tab ↗</a></div>
-  </div>
-</div>
-
-<style>
-.mscrim{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px;}
-.mscrim.open{display:flex;}
-.mcard.mcal{max-width:920px;width:97%;padding:0;overflow:hidden;background:#fff;border-radius:16px;}
-.mcalhead{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--line);}
-.mcalhead b{font-size:16px;font-weight:800;color:var(--txt);}
-.mclose{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--txt2);cursor:pointer;font-family:inherit;}
-#cal-frame{width:100%;height:640px;border:0;display:block;background:#fff;}
-@media(max-width:640px){#cal-frame{height:70vh;}}
-</style>
-
-<script>
-var OV_BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/rghlggjZP931B1mISGls';
-function bookCall(){
-  var f = document.getElementById('cal-frame');
-  if (!/leadconnector/.test(f.src || '')) f.src = OV_BOOKING_URL;
-  document.getElementById('cal-open').href = OV_BOOKING_URL;
-  document.getElementById('mscrim').classList.add('open');
-}
-function closeBooking(){
-  document.getElementById('mscrim').classList.remove('open');
-}
-</script>
+<!-- Book-a-call booking widget removed for A2P compliance (chat widget = only consent collector on the page). Custom pricing handled via phone / internal custom form. -->
 
 <script>
 (function(){var w=document.querySelector(".ov,.ovhome");var p=w&&w.parentElement;while(p&&p.tagName!=="BODY"){p.style.paddingTop="0";p.style.paddingBottom="0";p.style.marginTop="0";p=p.parentElement;}})();
