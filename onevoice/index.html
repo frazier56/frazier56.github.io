@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 <head>
 <meta charset="utf-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OneVoice — AI Receptionist for Real Estate</title>
 <meta name="description" content="OneVoice answers every call to your listing 24/7, qualifies the buyer, books the showing, and texts you instantly. Never miss another buyer.">
@@ -958,10 +959,12 @@ add();
 /* OneVoice language switcher */
 .navright{display:flex;align-items:center;gap:14px;}
 .ovlang{position:relative;font-family:inherit;}
-.ovlang-btn{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line,#e7e3d9);border-radius:12px;padding:7px 10px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;color:var(--txt,#0B0F1A);line-height:1;}
+.ovlang-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line,#e7e3d9);border-radius:12px;padding:7px 11px;cursor:pointer;font-family:inherit;font-weight:800;font-size:13px;color:var(--txt,#0B0F1A);line-height:1;}
 .ovlang-btn:hover{border-color:#cdeeea;}
 .ovlang-flag{width:22px;height:16px;border-radius:3px;object-fit:cover;display:block;}
-.ovlang-cur{font-size:12.5px;letter-spacing:.02em;}
+.ovlang-cur{font-size:13px;font-weight:800;letter-spacing:.06em;}
+/* keep the big bold price amount at full size even though it's wrapped in a span for currency-swap */
+.plan .price [data-usd]{font-size:inherit;font-weight:inherit;color:inherit;letter-spacing:inherit;}
 .ovlang-car{font-size:10px;color:var(--txt2,#5a6677);}
 .ovlang-list{display:none;position:absolute;right:0;top:calc(100% + 8px);z-index:90;min-width:186px;padding:6px;border-radius:14px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line,#e7e3d9);box-shadow:0 16px 40px rgba(11,15,26,.16);}
 .ovlang-list.open{display:block;}
