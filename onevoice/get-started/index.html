@@ -87,10 +87,11 @@
   .ov-listing h4{font-size:15px;margin-bottom:12px;color:#0B8C80;}
   .ov-nudge{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0B8C80;background:#F1FBFA;border:1px dashed #9fe0d8;border-radius:10px;padding:12px 16px;margin-top:6px;}
   /* summary — teal panel, white button */
-  .ov-sum{background:linear-gradient(170deg,#F1FDFB 0%,#E4F8F3 100%);color:#0B0F1A;border-radius:16px;padding:24px;border:1px solid #cdeeea;}
-  .ov-sum h3{font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#0B8C80;margin-bottom:14px;}
-  .ov-sumrow{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid rgba(11,140,128,.15);}
-  .ov-sumrow.tot{border-bottom:none;font-size:18px;font-weight:800;padding-top:14px;}
+  .ov-sum{background:#fff;color:#0B0F1A;border-radius:16px;padding:6px 22px 22px;border:1px solid #e6e9ee;box-shadow:0 12px 34px rgba(11,15,26,.07);position:relative;overflow:hidden;}
+  .ov-sum:before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#15C2B2,#0B8C80);}
+  .ov-sum h3{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#0B8C80;margin:20px 0 12px;}
+  .ov-sumrow{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;padding:11px 0;border-bottom:1px solid #eef1f4;}
+  .ov-sumrow.tot{border-bottom:none;font-size:20px;font-weight:800;padding-top:14px;}
   .ov-sumrow .lbl{color:#3c4656;}
   .ov-save{color:#0B8C80;font-weight:800;font-size:13px;text-align:right;margin-top:8px;min-height:16px;}
   .ov-trialnote{font-size:12.5px;color:#5a6677;margin-top:8px;}
@@ -167,6 +168,8 @@
         <style>
           .ovr-2col{display:flex;gap:16px;flex-wrap:wrap;}
           .ovr-2col .ov-field{flex:1;min-width:240px;max-width:300px;margin-bottom:0;}
+          .ovr-2col select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a6677' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:42px;font-weight:600;color:#0B0F1A;cursor:pointer;height:48px;box-shadow:0 1px 2px rgba(11,15,26,.05);}
+          .ovr-2col select:hover{border-color:#a9d9d3;}
           .ov-planrows{display:flex;flex-direction:column;gap:10px;}
           .ov-planrow{display:flex;align-items:center;gap:14px;border:1.5px solid #c7ced6;border-radius:12px;padding:14px 16px;cursor:pointer;background:#fff;transition:.15s;}
           .ov-planrow:hover{border-color:#a9d9d3;}
@@ -174,14 +177,14 @@
           .ov-radio{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:2px solid #c7ced6;position:relative;transition:.15s;}
           .ov-planrow.on .ov-radio{border-color:#15C2B2;}
           .ov-planrow.on .ov-radio:after{content:"";position:absolute;inset:3px;border-radius:50%;background:#15C2B2;}
-          .ov-pr-name{font-weight:800;font-size:15.5px;color:#0B0F1A;flex:0 0 auto;min-width:70px;}
-          .ov-pr-name em{font-style:normal;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#0B8C80;background:#E8FAF7;border:1px solid #cdeeea;border-radius:6px;padding:2px 6px;margin-left:7px;white-space:nowrap;}
-          .ov-pr-price{font-weight:800;font-size:18px;color:#0B0F1A;flex:0 0 auto;min-width:96px;}
+          .ov-pr-name{font-weight:800;font-size:16px;color:#0B0F1A;flex:0 0 58px;}
+          .ov-pr-price{font-weight:800;font-size:18px;color:#0B0F1A;flex:0 0 100px;}
           .ov-pr-price i{font-style:normal;font-size:12.5px;font-weight:500;color:#6B7385;}
-          .ov-pr-meta{font-size:13px;color:#5a6677;flex:1 1 auto;text-align:right;}
-          @media(max-width:560px){.ov-planrow{flex-wrap:wrap;}.ov-pr-meta{flex-basis:100%;text-align:left;padding-left:34px;order:5;}.ov-pr-price{margin-left:auto;}}
-          .ov-seg{display:inline-flex;border:1.5px solid #c7ced6;border-radius:12px;overflow:hidden;background:#fff;max-width:100%;flex-wrap:wrap;}
-          .ov-segbtn{padding:11px 20px;cursor:pointer;font-size:13.5px;font-weight:700;color:#3c4656;border-right:1.5px solid #c7ced6;text-align:center;transition:.15s;line-height:1.25;}
+          .ov-pr-badge{flex:0 0 auto;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#0B8C80;background:#E8FAF7;border:1px solid #cdeeea;border-radius:6px;padding:3px 8px;white-space:nowrap;}
+          .ov-pr-meta{font-size:14.5px;color:#5a6677;flex:1 1 auto;text-align:right;}
+          @media(max-width:560px){.ov-planrow{flex-wrap:wrap;row-gap:7px;}.ov-pr-name{flex:0 0 auto;}.ov-pr-price{flex:0 0 auto;margin-left:auto;}.ov-pr-badge{order:3;}.ov-pr-meta{flex-basis:100%;text-align:left;padding-left:34px;order:5;font-size:14px;}}
+          .ov-seg{display:flex;width:100%;max-width:440px;border:1.5px solid #c7ced6;border-radius:12px;overflow:hidden;background:#fff;}
+          .ov-segbtn{flex:1 1 0;padding:11px 10px;cursor:pointer;font-size:13.5px;font-weight:700;color:#3c4656;border-right:1.5px solid #c7ced6;text-align:center;transition:.15s;line-height:1.25;}
           .ov-segbtn:last-child{border-right:none;}
           .ov-segbtn:hover{background:#F6FDFC;}
           .ov-segbtn.on{background:#15C2B2;color:#04231f;}
@@ -225,8 +228,9 @@
             </div>
             <div class="ov-planrow on" data-tier="basic">
               <span class="ov-radio"></span>
-              <span class="ov-pr-name">Basic<em>Popular</em></span>
+              <span class="ov-pr-name">Basic</span>
               <span class="ov-pr-price">$297<i>/mo</i></span>
+              <span class="ov-pr-badge">Popular</span>
               <span class="ov-pr-meta">Up to 4 AI agents · $0.69 per answered call</span>
             </div>
             <div class="ov-planrow" data-tier="pro">
