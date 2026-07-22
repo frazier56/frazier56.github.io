@@ -109,7 +109,8 @@
     .dark #icon-moon{opacity:1;transform:rotate(0) scale(1)}
 
     /* language menu */
-    .langmenu{display:none;position:absolute;right:0;top:44px;width:190px;background:var(--color-card);background-color:var(--color-bg);border:1px solid var(--color-border);border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.18);overflow:hidden;z-index:60;padding:5px}
+    .langmenu{display:none;position:absolute;right:0;top:44px;width:190px;background:rgba(250,250,248,.72);border:1px solid rgba(255,255,255,.35);border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.4);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);overflow:hidden;z-index:60;padding:5px}
+    .dark .langmenu{background:rgba(20,24,38,.62);border-color:rgba(255,255,255,.1);box-shadow:0 12px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06)}
     .langmenu.open{display:block}
     .langmenu button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;background:none;border:0;border-radius:9px;color:var(--color-fg);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;text-align:left}
     .langmenu button:hover{background:var(--color-secondary)}
@@ -218,13 +219,13 @@
                         <span id="lang-code" class="font-medium text-sm hidden sm:inline">EN</span>
                     </button>
                     <div class="langmenu" id="lang-menu" role="menu">
-                        <button data-lang="en" class="active"><img src="https://flagcdn.com/w40/us.png" width="20" height="14" class="rounded-sm" alt="">English<span class="chk">✓</span></button>
-                        <button data-lang="es"><img src="https://flagcdn.com/w40/es.png" width="20" height="14" class="rounded-sm" alt="">Español<span class="chk">✓</span></button>
+                        <button data-lang="en" class="active"><img src="https://flagcdn.com/w40/us.png" width="20" height="14" class="rounded-sm" alt="">USA<span class="chk">✓</span></button>
                         <button data-lang="co"><img src="https://flagcdn.com/w40/co.png" width="20" height="14" class="rounded-sm" alt="">Colombia<span class="chk">✓</span></button>
-                        <button data-lang="de"><img src="https://flagcdn.com/w40/de.png" width="20" height="14" class="rounded-sm" alt="">Deutsch<span class="chk">✓</span></button>
-                        <button data-lang="ru"><img src="https://flagcdn.com/w40/ru.png" width="20" height="14" class="rounded-sm" alt="">Русский<span class="chk">✓</span></button>
-                        <button data-lang="zh"><img src="https://flagcdn.com/w40/cn.png" width="20" height="14" class="rounded-sm" alt="">中文<span class="chk">✓</span></button>
-                        <button data-lang="pt"><img src="https://flagcdn.com/w40/br.png" width="20" height="14" class="rounded-sm" alt="">Português<span class="chk">✓</span></button>
+                        <button data-lang="es"><img src="https://flagcdn.com/w40/es.png" width="20" height="14" class="rounded-sm" alt="">España<span class="chk">✓</span></button>
+                        <button data-lang="de"><img src="https://flagcdn.com/w40/de.png" width="20" height="14" class="rounded-sm" alt="">Deutschland<span class="chk">✓</span></button>
+                        <button data-lang="ru"><img src="https://flagcdn.com/w40/ru.png" width="20" height="14" class="rounded-sm" alt="">Россия<span class="chk">✓</span></button>
+                        <button data-lang="zh"><img src="https://flagcdn.com/w40/cn.png" width="20" height="14" class="rounded-sm" alt="">中国<span class="chk">✓</span></button>
+                        <button data-lang="pt"><img src="https://flagcdn.com/w40/br.png" width="20" height="14" class="rounded-sm" alt="">Brasil<span class="chk">✓</span></button>
                     </div>
                 </div>
                 <button id="theme-toggle" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Toggle theme">
@@ -1042,6 +1043,63 @@
     (function(){
         var SUPABASE_URL = 'https://wseblryyqxawvbjmylbo.supabase.co';
         var VAIA_VOICE_ID = 'pFZP5JQG7iQjIQuC4Bku'; /* Lily — same voice for every utterance, greeting included */
+
+        /* Language: VAIA now speaks whatever language is selected in the header flag switcher
+           (window.OWL_LANG, set by the lang-menu click handler), not just English. BCP-47 codes
+           drive both the browser's speech-recognition locale and the fallback-TTS voice; the
+           backend vaia-chat call also gets `lang` so Gemini replies in that language, and these
+           local hardcoded lines (greeting, chat-window toggles, error/rest lines) get their own
+           per-language text so nothing stays English-only once a language is picked. */
+        var VAIA_BCP47 = { en:'en-US', es:'es-ES', co:'es-CO', de:'de-DE', ru:'ru-RU', zh:'zh-CN', pt:'pt-BR' };
+        var VAIA_STRINGS = {
+            en: { greeting:"Hey, welcome to One World Labs — this is VAIA! Let me know if you have any questions, or tap me anytime if you'd like me to go quiet.",
+                  openChat:"Sure — here's our chat window.", closeChat:"Got it, hiding the chat.",
+                  noCatch:"Sorry, I didn't catch that — could you try again?",
+                  connError:"I'm having trouble connecting right now — try again in a moment.",
+                  restLine:"I haven't heard anything in a bit, so I'll rest for now — just tap me anytime to wake me back up!",
+                  wakeLines:["Oh — I fell asleep there for a sec, sorry about that! I'm back now, how can I help?","Whoops, dozed off for a moment. I'm back — what were we saying?","Sorry, I drifted off there for a bit! Back now — go ahead.","My bad, I nodded off for a second. I'm here — how can I help?"] },
+            es: { greeting:"¡Hola, bienvenido a One World Labs, soy VAIA! Avísame si tienes alguna pregunta, o tócame en cualquier momento si prefieres que me quede callada.",
+                  openChat:"Claro, aquí tienes nuestra ventana de chat.", closeChat:"Listo, ocultando el chat.",
+                  noCatch:"Perdona, no entendí bien — ¿puedes repetirlo?",
+                  connError:"Estoy teniendo problemas para conectarme ahora mismo — inténtalo de nuevo en un momento.",
+                  restLine:"No he escuchado nada en un rato, así que voy a descansar — tócame cuando quieras para despertarme.",
+                  wakeLines:["Uy, me quedé dormida un segundo, perdón. Ya volví, ¿en qué te ayudo?","Vaya, me distraje un momento. Ya estoy aquí — ¿qué decíamos?","Perdona, me desconecté un poco. Ya volví, adelante.","Disculpa, me dormité un segundo. Aquí estoy — ¿en qué te ayudo?"] },
+            co: { greeting:"¡Hola, bienvenido a One World Labs, soy VAIA! Cuéntame si tienes alguna pregunta, o tócame cuando quieras si prefieres que me quede callada.",
+                  openChat:"Claro que sí, acá tienes nuestra ventana de chat.", closeChat:"Listo, ocultando el chat.",
+                  noCatch:"Uy, no te entendí bien — ¿puedes repetirlo?",
+                  connError:"Estoy teniendo problemas para conectarme en este momento — inténtalo de nuevo en un momentico.",
+                  restLine:"No he escuchado nada hace un rato, así que voy a descansar — tócame cuando quieras para despertarme.",
+                  wakeLines:["Ay, me quedé dormida un segundo, disculpa. Ya volví, ¿en qué te ayudo?","Uy, me distraje un momento. Ya estoy acá — ¿qué me decías?","Perdón, me desconecté un poco. Ya volví, dime.","Disculpa, me dormité un segundo. Acá estoy — ¿en qué te colaboro?"] },
+            de: { greeting:"Hey, willkommen bei One World Labs — ich bin VAIA! Sag mir Bescheid, wenn du Fragen hast, oder tippe mich jederzeit an, wenn ich still sein soll.",
+                  openChat:"Klar — hier ist unser Chatfenster.", closeChat:"Alles klar, ich blende den Chat aus.",
+                  noCatch:"Entschuldigung, das habe ich nicht verstanden — kannst du das wiederholen?",
+                  connError:"Ich habe gerade Verbindungsprobleme — versuch es gleich noch einmal.",
+                  restLine:"Ich habe eine Weile nichts gehört, also ruhe ich mich jetzt aus — tipp mich jederzeit an, um mich zu wecken!",
+                  wakeLines:["Oh — ich bin kurz eingenickt, entschuldige! Ich bin wieder da, wie kann ich helfen?","Ups, kurz weggenickt. Bin wieder da — was haben wir besprochen?","Entschuldige, ich war kurz weg! Bin wieder da, leg los.","Sorry, kurz eingedöst. Ich bin hier — wie kann ich helfen?"] },
+            ru: { greeting:"Привет, добро пожаловать в One World Labs — это ВАЙЯ! Дай мне знать, если у тебя есть вопросы, или коснись меня в любой момент, если хочешь, чтобы я замолчала.",
+                  openChat:"Конечно — вот наше окно чата.", closeChat:"Хорошо, скрываю чат.",
+                  noCatch:"Извини, я не расслышала — можешь повторить?",
+                  connError:"У меня сейчас проблемы с подключением — попробуй ещё раз через момент.",
+                  restLine:"Я давно ничего не слышала, поэтому немного отдохну — коснись меня в любой момент, чтобы разбудить!",
+                  wakeLines:["Ой, я тут задремала на секунду, извини! Я снова на связи, чем помочь?","Упс, немного отвлеклась. Я вернулась — на чём мы остановились?","Извини, я ненадолго отключилась! Уже здесь, продолжай.","Прости, чуть задремала. Я тут — чем могу помочь?"] },
+            zh: { greeting:"嗨，欢迎来到 One World Labs——我是 VAIA！有任何问题都可以告诉我，如果想让我安静下来，随时点我一下就行。",
+                  openChat:"好的，这是我们的聊天窗口。", closeChat:"好的，正在隐藏聊天窗口。",
+                  noCatch:"抱歉，我没听清——可以再说一遍吗？",
+                  connError:"我现在连接有点问题——请稍后再试。",
+                  restLine:"我有一阵子没听到声音了，先休息一下——随时点我一下就能叫醒我！",
+                  wakeLines:["哦，我刚才打了个小盹，不好意思！我回来了，有什么可以帮你的？","呃，刚走神了一下。我回来了——我们说到哪了？","抱歉，我刚才走神了一下！我回来了，请继续。","不好意思，刚打了个盹。我在这儿——有什么可以帮你？"] },
+            pt: { greeting:"Oi, bem-vindo à One World Labs — eu sou a VAIA! Me avise se tiver alguma pergunta, ou toque em mim a qualquer momento se quiser que eu fique quieta.",
+                  openChat:"Claro — aqui está nossa janela de chat.", closeChat:"Certo, escondendo o chat.",
+                  noCatch:"Desculpa, não entendi direito — pode repetir?",
+                  connError:"Estou com problemas de conexão agora — tente de novo em um instante.",
+                  restLine:"Já faz um tempo que não escuto nada, então vou descansar — toque em mim quando quiser para me acordar!",
+                  wakeLines:["Ah, cochilei um segundinho, desculpa! Já voltei, como posso ajudar?","Opa, me distraí um instante. Já estou de volta — o que estávamos dizendo?","Desculpa, me desconectei um pouco! De volta, pode continuar.","Foi mal, cochilei rapidinho. Estou aqui — como posso ajudar?"] }
+        };
+        function vaiaT(key){
+            var lang = window.OWL_LANG || 'en';
+            var dict = VAIA_STRINGS[lang] || VAIA_STRINGS.en;
+            return (dict[key] != null) ? dict[key] : VAIA_STRINGS.en[key];
+        }
         /* Full 5-product knowledge base + rate limiting now live server-side in the vaia-chat edge
            function (keyed off app:'homepage' below) — no client-side knowledge injection needed. */
         var widget = document.getElementById('vaia-widget');
@@ -1115,6 +1173,7 @@
                 if (!('speechSynthesis' in window)) { resolve(); return; }
                 try {
                     var u = new SpeechSynthesisUtterance(text);
+                    u.lang = VAIA_BCP47[window.OWL_LANG || 'en'] || 'en-US';
                     u.rate = 1; u.pitch = 1;
                     u.onend = resolve; u.onerror = resolve;
                     window.speechSynthesis.speak(u);
@@ -1130,14 +1189,14 @@
             if (wantsOpen) {
                 addMsg('user', text);
                 openPanel();
-                var m = "Sure — here's our chat window.";
+                var m = vaiaT('openChat');
                 addMsg('vaia', m);
                 speak(m).then(function(){ if (voiceMode) startListening(); });
                 return true;
             }
             if (wantsClose) {
                 addMsg('user', text);
-                var m2 = "Got it, hiding the chat.";
+                var m2 = vaiaT('closeChat');
                 addMsg('vaia', m2);
                 speak(m2).then(function(){ closePanel(); if (voiceMode) startListening(); });
                 return true;
@@ -1191,7 +1250,7 @@
                    Confirmed live Jul 14: identical request with mode:'voice' truncated ("Think of…"),
                    without it the same question returned a full, correct answer. Leave uncapped
                    (TEXT_STYLE) until a safe token budget for this model is found. */
-                body: JSON.stringify({ messages: history, app: 'homepage' }),
+                body: JSON.stringify({ messages: history, app: 'homepage', lang: window.OWL_LANG || 'en' }),
                 signal: abortCtl ? abortCtl.signal : undefined
             }).then(function(r){
                 if (!r.ok || !r.body) {
@@ -1222,7 +1281,7 @@
                 }
                 return pump();
             }).then(function(){
-                if (!full) full = "Sorry, I didn't catch that — could you try again?";
+                if (!full) full = vaiaT('noCatch');
                 replyEl.textContent = full;
                 history.push({ role:'assistant', content: full });
                 drainSentences(true);
@@ -1230,7 +1289,7 @@
             }).catch(function(err){
                 widget.classList.remove('thinking');
                 if (err && err.name === 'AbortError') return;
-                var m = (err && err.rateLimited && err.message) ? err.message : "I'm having trouble connecting right now — try again in a moment.";
+                var m = (err && err.rateLimited && err.message) ? err.message : vaiaT('connError');
                 rateLimited = !!(err && err.rateLimited);
                 full = m;
                 replyEl.textContent = m;
@@ -1257,7 +1316,7 @@
         var recog = null;
         if (Recognition) {
             recog = new Recognition();
-            recog.lang = 'en-US'; recog.continuous = false; recog.interimResults = false;
+            recog.lang = VAIA_BCP47[window.OWL_LANG || 'en'] || 'en-US'; recog.continuous = false; recog.interimResults = false;
             var gotResultThisCycle = false;
             recog.onstart = function(){ widget.classList.add('listening'); gotResultThisCycle = false; };
             recog.onresult = function(e){
@@ -1278,7 +1337,7 @@
                 noResultStreak++;
                 if (noResultStreak >= AUTO_SLEEP_AFTER) {
                     noResultStreak = 0;
-                    var line = "I haven't heard anything in a bit, so I'll rest for now — just tap me anytime to wake me back up!";
+                    var line = vaiaT('restLine');
                     addMsg('vaia', line);
                     history.push({ role:'assistant', content: line });
                     speak(line).then(function(){
@@ -1306,14 +1365,6 @@
             if (pendingResolve) { var _r = pendingResolve; pendingResolve = null; _r(); }
         }
 
-        var GREETING = "Hey, welcome to One World Labs — this is VAIA! Let me know if you have any questions, or tap me anytime if you'd like me to go quiet.";
-        var WAKE_LINES = [
-            "Oh — I fell asleep there for a sec, sorry about that! I'm back now, how can I help?",
-            "Whoops, dozed off for a moment. I'm back — what were we saying?",
-            "Sorry, I drifted off there for a bit! Back now — go ahead.",
-            "My bad, I nodded off for a second. I'm here — how can I help?"
-        ];
-
         function sleep(){
             asleep = true;
             voiceMode = false;
@@ -1330,7 +1381,8 @@
             widget.classList.remove('asleep');
             var goListen = function(){ voiceMode = true; startListening(); };
             if (everSlept) {
-                var line = WAKE_LINES[Math.floor(Math.random() * WAKE_LINES.length)];
+                var wl = vaiaT('wakeLines');
+                var line = wl[Math.floor(Math.random() * wl.length)];
                 speak(line).then(goListen);
             }
             else { goListen(); }
@@ -1365,13 +1417,22 @@
            gracefully (she just waits for the first tap, same as before). */
         window.addEventListener('load', function(){
             setTimeout(function(){
-                history.push({ role:'assistant', content: GREETING });
-                addMsg('vaia', GREETING);
-                speak(GREETING).then(function(){
+                var greeting = vaiaT('greeting');
+                history.push({ role:'assistant', content: greeting });
+                addMsg('vaia', greeting);
+                speak(greeting).then(function(){
                     if (!asleep) { voiceMode = true; startListening(); }
                 });
             }, 1200);
         });
+
+        /* keep VAIA's ears in sync if the visitor switches language mid-session — updates the
+           speech-recognition locale for the NEXT listen cycle (can't hot-swap mid-utterance). */
+        var prevOwlLangChange = window.OWL_ON_LANG_CHANGE;
+        window.OWL_ON_LANG_CHANGE = function(){
+            if (typeof prevOwlLangChange === 'function') prevOwlLangChange();
+            if (recog) { try { recog.lang = VAIA_BCP47[window.OWL_LANG || 'en'] || 'en-US'; } catch(e){} }
+        };
     })();
 </script>
 </body>
