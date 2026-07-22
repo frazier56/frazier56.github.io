@@ -15,7 +15,7 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>One World Labs — Work smarter across your whole business</title>
-<meta name="description" content="OneJob, OneScore, OneEvent, OneSocial, OneAgent — apps you use. OneVoice and OnePage — done-for-you services. One login ties them all together. Built for small businesses and freelancers.">
+<meta name="description" content="OneScore, OneSocial, OneEvent — apps you use. OneVoice and OneApp — done-for-you services. One login ties them all together. Built for small businesses and freelancers.">
 <link rel="manifest" href="/owl-manifest.webmanifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#FAFAF8" id="theme-color-meta">
@@ -156,7 +156,7 @@
     #vaia-widget.listening .vaia-ring{animation-duration:1.4s}
     #vaia-widget.speaking .vaia-orb{box-shadow:0 0 60px rgba(0,210,180,.5)}
     #vaia-widget.speaking .vaia-bars span{animation-name:vaiaBarActive;animation-duration:.7s;opacity:1}
-    #vaia-widget.asleep .vaia-orb{animation:vaiaGlow 9s ease-in-out infinite;opacity:.45;filter:grayscale(45%)}
+    #vaia-widget.asleep .vaia-orb{animation:none;opacity:.38;filter:grayscale(70%)}
     #vaia-widget.asleep .vaia-ring{animation-play-state:paused;opacity:0}
     #vaia-widget.asleep .vaia-bars span{animation-play-state:paused;height:10px;opacity:.35}
     /* she must NEVER go fully opaque and block page content — idle keeps a visible-but-translucent
@@ -209,14 +209,18 @@
                 <span class="font-heading font-bold text-xl tracking-tight"><span class="text-primary">ne</span> World Labs</span>
             </a>
             <div class="flex items-center gap-2 sm:gap-4">
-                <div class="relative hidden sm:block">
-                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="true" aria-label="Language">
+                <!-- language selector: visible on EVERY viewport (was hidden below sm, matching
+                     OneVoice's mobile-visible flag switcher which Lee pointed to as the reference).
+                     7 flags matching OneVoice's current switcher, Colombia included. -->
+                <div class="relative">
+                    <button id="lang-btn" class="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="true" aria-label="Language">
                         <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="EN" class="h-4 w-6 rounded-sm object-cover">
-                        <span id="lang-code" class="font-medium text-sm">EN</span>
+                        <span id="lang-code" class="font-medium text-sm hidden sm:inline">EN</span>
                     </button>
                     <div class="langmenu" id="lang-menu" role="menu">
                         <button data-lang="en" class="active"><img src="https://flagcdn.com/w40/us.png" width="20" height="14" class="rounded-sm" alt="">English<span class="chk">✓</span></button>
                         <button data-lang="es"><img src="https://flagcdn.com/w40/es.png" width="20" height="14" class="rounded-sm" alt="">Español<span class="chk">✓</span></button>
+                        <button data-lang="co"><img src="https://flagcdn.com/w40/co.png" width="20" height="14" class="rounded-sm" alt="">Colombia<span class="chk">✓</span></button>
                         <button data-lang="de"><img src="https://flagcdn.com/w40/de.png" width="20" height="14" class="rounded-sm" alt="">Deutsch<span class="chk">✓</span></button>
                         <button data-lang="ru"><img src="https://flagcdn.com/w40/ru.png" width="20" height="14" class="rounded-sm" alt="">Русский<span class="chk">✓</span></button>
                         <button data-lang="zh"><img src="https://flagcdn.com/w40/cn.png" width="20" height="14" class="rounded-sm" alt="">中文<span class="chk">✓</span></button>
@@ -253,7 +257,7 @@
                     <span id="hbAvatarLetter" class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary/15 text-sm font-bold text-primary">·</span>
                     <span class="min-w-0">
                         <span id="hbNameLine" class="block truncate text-sm font-bold leading-tight">Signed in</span>
-                        <span class="block truncate text-xs text-muted-foreground">One ID</span>
+                        <span class="block truncate text-xs text-muted-foreground" data-i18n="oneid_label">One ID</span>
                     </span>
                 </div>
                 <button id="menu-close-x" type="button" class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-lg leading-none" aria-label="Close menu">&times;</button>
@@ -263,13 +267,13 @@
                 <div>
                     <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1 px-1" data-i18n="ftr_apps">Apps</h4>
                     <a href="/onescore-preview/" class="menu-navitem"><span><span class="menu-one">One</span>Score</span></a>
-                    <a href="https://frazier56.github.io/onesocial-v2-preview/" class="menu-navitem"><span><span class="menu-one">One</span>Job</span></a>
+                    <a href="https://frazier56.github.io/onesocial-v2-preview/" class="menu-navitem"><span><span class="menu-one">One</span>Social</span></a>
                     <a href="https://frazier56.github.io/oneevents-preview/" class="menu-navitem"><span><span class="menu-one">One</span>Event</span></a>
                 </div>
                 <div>
                     <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1 px-1" data-i18n="ftr_svcs">Services</h4>
-                    <a href="/onevoice/" class="menu-navitem"><span><span class="menu-one">One</span>Voice</span></a>
-                    <a href="/oneapp/" class="menu-navitem"><span><span class="menu-one">One</span>Page</span></a>
+                    <a href="https://onevoice.onesocial.ai" class="menu-navitem"><span><span class="menu-one">One</span>Voice</span></a>
+                    <a href="/oneapp/" class="menu-navitem"><span><span class="menu-one">One</span>App</span></a>
                 </div>
             </div>
 
@@ -277,7 +281,7 @@
 
             <!-- signed-out: One ID sign-in -->
             <div id="hb-signedout-cta" class="flex flex-col gap-2">
-                <a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="w-full text-center h-11 px-6 inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-primary-foreground font-semibold" data-i18n="cta_signin">
+                <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="w-full text-center h-11 px-6 inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-primary-foreground font-semibold" data-i18n="cta_signin">
                     <svg class="h-5 w-5 shrink-0" width="24" height="24" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
                     <span data-i18n="cta_signin">Sign in with One ID</span>
                 </a>
@@ -288,7 +292,7 @@
             <div id="hb-signedin-cta" class="hidden flex-col">
                 <button id="hbSignOutBtn" type="button" class="menu-signout">
                     <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
-                    Sign out
+                    <span data-i18n="signout">Sign out</span>
                 </button>
             </div>
 
@@ -323,7 +327,7 @@
         <!-- Hero Section -->
         <section class="container mx-auto px-4 text-center max-w-4xl mb-20 md:mb-32">
             <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 backdrop-blur-sm mb-8 text-[10.5px] sm:text-[12.5px] font-medium">
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">5</strong> <span class="text-muted-foreground" data-i18n="s_apps">apps</span></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">3</strong> <span class="text-muted-foreground" data-i18n="s_apps">apps</span></span>
                 <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
                 <span class="flex items-center gap-1.5"><strong class="text-foreground">2</strong> <span class="text-muted-foreground" data-i18n="s_svcs">services</span></span>
                 <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
@@ -344,7 +348,7 @@
                 <a href="#apps" class="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center transition-colors">
                     <span data-i18n="cta_jump">Jump into an app</span> <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                 </a>
-                <a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-full border border-foreground/70 hover:bg-secondary/50 inline-flex items-center justify-center transition-colors">
+                <a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-full border border-foreground/70 hover:bg-secondary/50 inline-flex items-center justify-center transition-colors">
                     <svg class="mr-2 h-6 w-6" width="24" height="24" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
                     <span data-i18n="cta_signin">Sign in with One ID</span>
                 </a>
@@ -363,8 +367,8 @@
                 </span>
                 <!-- plain text, not a second pill button (Lee: too much visual weight for what it does) —
                      sits directly under the pill on every viewport, mobile and desktop alike -->
-                <button id="signOutBtn" type="button" class="text-sm font-semibold text-muted-foreground hover:text-foreground hover:underline underline-offset-4 transition-colors">Sign out</button>
-                <p class="text-muted-foreground text-sm sm:text-base mt-2">Pick your favorite app below to jump back in — you're already signed in everywhere.</p>
+                <button id="signOutBtn" type="button" class="text-sm font-semibold text-muted-foreground hover:text-foreground hover:underline underline-offset-4 transition-colors" data-i18n="signout">Sign out</button>
+                <p class="text-muted-foreground text-sm sm:text-base mt-2" data-i18n="signedin_hint">Pick your favorite app below to jump back in — you're already signed in everywhere.</p>
                 <!-- cascading chevron cue: 3 chevrons light up top-to-bottom then fade, replacing the
                      single bouncing arrow with a "flowing downward" progression (Lee's ask) -->
                 <div class="scroll-cue mt-1" aria-hidden="true">
@@ -379,64 +383,15 @@
             </p>
         </section>
 
-        <!-- Services Section -->
-        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
-            <div class="text-center mb-10 md:mb-16">
-                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3" data-i18n="svc_eyebrow">Done for you</h3>
-                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4" data-i18n="svc_h2">Enhance your business with our services</h2>
-                <p class="text-muted-foreground text-base md:text-lg" data-i18n="svc_sub">Hands-off services our team runs for you — so you can focus on the work.</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <a href="/onevoice/" data-ico="onevoice" class="app-card group relative overflow-hidden block p-6 md:p-10 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300">
-                    <div class="absolute top-6 right-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 rounded-full z-20" data-i18n="dfy_badge">Done for you</div>
-                    <img src="/ic-onevoice.png" alt="OneVoice" class="w-16 h-16 object-contain mb-6">
-                    <h3 class="text-3xl font-bold font-heading mb-4"><span class="text-primary">One</span>Voice</h3>
-                    <p class="text-muted-foreground text-lg leading-relaxed mb-8" data-i18n="onevoice_desc">An AI receptionist that answers every call 24/7, qualifies the lead, and books the appointment — so a missed call is never a missed customer. We set it up and run it for you.</p>
-                    <div class="flex items-center text-primary font-medium group-hover:translate-x-1 transition-transform">
-                        <span data-i18n="onevoice_cta">Get OneVoice</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                    </div>
-                </a>
-                <a href="/oneapp/" data-ico="oneapp" class="app-card group relative overflow-hidden block p-6 md:p-10 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300">
-                    <div class="absolute top-6 right-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 rounded-full z-20" data-i18n="dfy_badge">Done for you</div>
-                    <img src="/ic-onepage.png" alt="OnePage" class="w-16 h-16 object-contain mb-6">
-                    <h3 class="text-3xl font-bold font-heading mb-4"><span class="text-primary">One</span>Page</h3>
-                    <p class="text-muted-foreground text-lg leading-relaxed mb-8" data-i18n="oneapp_desc">We build your website with AI, then handle the hosting, domain, email, and ongoing updates for you — a real web presence without the hassle.</p>
-                    <div class="flex items-center text-primary font-medium group-hover:translate-x-1 transition-transform">
-                        <span data-i18n="oneapp_cta">Get OnePage</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                    </div>
-                </a>
-                <div data-ico="oneapp-soon" class="app-card group relative overflow-hidden p-6 md:p-10 rounded-3xl bg-card border border-border border-dashed opacity-80">
-                    <div class="w-16 h-16 flex items-center justify-center mb-6"><span class="text-[44px] leading-none select-none">&#128241;</span></div>
-                    <h3 class="text-3xl font-bold font-heading mb-4"><span class="text-primary">One</span>App</h3>
-                    <p class="text-muted-foreground text-lg leading-relaxed mb-8" data-i18n="oneapp_new_desc">Turn your idea into a real, working app — built for you with AI, then hosted and maintained by our team. No code, no agencies.</p>
-                    <div class="flex items-center font-medium">
-                        <span class="rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-bold uppercase tracking-wider" data-i18n="coming_soon">Coming soon</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Apps Section -->
         <section id="apps" class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
             <div class="text-center mb-10 md:mb-16">
                 <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3" data-i18n="apps_eyebrow">The apps</h3>
                 <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4" data-i18n="apps_h2">Jump into your favorite app</h2>
-                <p class="text-muted-foreground text-lg" data-i18n="apps_sub">Five apps, one login — four live today, one on the way.</p>
+                <p class="text-muted-foreground text-lg" data-i18n="apps_sub">Three apps you use yourself — one login gets you into all of them.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
-                <a href="https://frazier56.github.io/onesocial-v2-preview/" data-ico="onejob" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
-                    <div class="flex justify-between items-start mb-6">
-                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Job</h3>
-                        <img src="/ic-onesocial.png" alt="OneJob" class="w-12 h-12 object-contain">
-                    </div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3" data-i18n="onejob_tag">The jobs marketplace</h4>
-                    <p class="text-muted-foreground leading-relaxed mb-8 h-24" data-i18n="onejob_desc">Get hired and get paid in 60 seconds — verified reviews, contracts, and payments held safely until the job is done.</p>
-                    <div class="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
-                        <span data-i18n="onejob_cta">Open OneJob</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                    </div>
-                </a>
                 <a href="/onescore-preview/" data-ico="onescore" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
                     <div class="flex justify-between items-start mb-6">
                         <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Score</h3>
@@ -446,6 +401,17 @@
                     <p class="text-muted-foreground leading-relaxed mb-8 h-24" data-i18n="onescore_desc">Your whole reputation — reviews, real work, social proof — in one verified number you can post anywhere. Free forever.</p>
                     <div class="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
                         <span data-i18n="onescore_cta">Open OneScore</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                </a>
+                <a href="https://frazier56.github.io/onesocial-v2-preview/" data-ico="onesocial" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Social</h3>
+                        <img src="/ic-onesocial.png" alt="OneSocial" class="w-12 h-12 object-contain">
+                    </div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3" data-i18n="onesocial_tag">The credibility marketplace</h4>
+                    <p class="text-muted-foreground leading-relaxed mb-8 h-24" data-i18n="onesocial_desc">Where proof gets you hired — verified reviews, jobs, and payments in one credibility-first marketplace.</p>
+                    <div class="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
+                        <span data-i18n="onesocial_cta">Open OneSocial</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                     </div>
                 </a>
                 <a href="https://frazier56.github.io/oneevents-preview/" data-ico="oneevents" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
@@ -459,28 +425,36 @@
                         <span data-i18n="oneevent_cta">Open OneEvent</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                     </div>
                 </a>
-                <a href="https://frazier56.github.io/onesocial-preview/" data-ico="onesocial" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
-                    <div class="flex justify-between items-start mb-6">
-                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Social</h3>
-                        <span class="text-[40px] leading-none select-none">&#129309;</span>
-                    </div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3" data-i18n="onesocial_tag">Your connected platforms</h4>
-                    <p class="text-muted-foreground leading-relaxed mb-8 h-24" data-i18n="onesocial_desc">All your platforms, one professional identity — connect your accounts and turn your following into verified credibility.</p>
-                    <div class="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
-                        <span data-i18n="onesocial_cta">Open OneSocial</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3" data-i18n="svc_eyebrow">Done for you</h3>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4" data-i18n="svc_h2">Enhance your business with our services</h2>
+                <p class="text-muted-foreground text-base md:text-lg" data-i18n="svc_sub">Hands-off services our team runs for you — so you can focus on the work.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <a href="https://onevoice.onesocial.ai" data-ico="onevoice" class="app-card group relative overflow-hidden block p-6 md:p-10 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300">
+                    <div class="absolute top-6 right-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 rounded-full z-20" data-i18n="dfy_badge">Done for you</div>
+                    <img src="/ic-onevoice.png" alt="OneVoice" class="w-16 h-16 object-contain mb-6">
+                    <h3 class="text-3xl font-bold font-heading mb-4"><span class="text-primary">One</span>Voice</h3>
+                    <p class="text-muted-foreground text-lg leading-relaxed mb-8" data-i18n="onevoice_desc">An AI receptionist that answers every call 24/7, qualifies the lead, and books the appointment — so a missed call is never a missed customer. We set it up and run it for you.</p>
+                    <div class="flex items-center text-primary font-medium group-hover:translate-x-1 transition-transform">
+                        <span data-i18n="onevoice_cta">Get OneVoice</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                     </div>
                 </a>
-                <div data-ico="oneagent" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border border-dashed opacity-80">
-                    <div class="flex justify-between items-start mb-6">
-                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Agent</h3>
-                        <span class="text-[40px] leading-none select-none">&#129302;</span>
+                <a href="/oneapp/" data-ico="oneapp" class="app-card group relative overflow-hidden block p-6 md:p-10 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300">
+                    <div class="absolute top-6 right-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 rounded-full z-20" data-i18n="dfy_badge">Done for you</div>
+                    <img src="/ic-oneapp.png" alt="OneApp" class="w-16 h-16 object-contain mb-6">
+                    <h3 class="text-3xl font-bold font-heading mb-4"><span class="text-primary">One</span>App</h3>
+                    <p class="text-muted-foreground text-lg leading-relaxed mb-8" data-i18n="oneapp_desc">We build your website with AI, then handle the hosting, domain, email, and ongoing updates for you — a real web presence without the hassle.</p>
+                    <div class="flex items-center text-primary font-medium group-hover:translate-x-1 transition-transform">
+                        <span data-i18n="oneapp_cta">Get OneApp</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                     </div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3" data-i18n="oneagent_tag">Your AI workforce</h4>
-                    <p class="text-muted-foreground leading-relaxed mb-8 h-24" data-i18n="oneagent_desc">AI agents that find work, pitch clients, and handle the busywork for you — while you do the job.</p>
-                    <div class="flex items-center font-medium text-sm">
-                        <span class="rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-bold uppercase tracking-wider" data-i18n="coming_soon">Coming soon</span>
-                    </div>
-                </div>
+                </a>
             </div>
         </section>
 
@@ -499,15 +473,15 @@
                     </div>
                     <h3 class="text-lg font-bold mb-3" data-i18n="f1_h">Never miss a call</h3>
                     <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow" data-i18n="f1_p">OneVoice answers every call 24/7, qualifies the lead, and books the appointment.</p>
-                    <a href="/onevoice/" class="text-primary text-sm font-medium hover:underline inline-flex items-center"><span data-i18n="f1_cta">Meet OneVoice</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="https://onevoice.onesocial.ai" class="text-primary text-sm font-medium hover:underline inline-flex items-center"><span data-i18n="f1_cta">Meet OneVoice</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
                 </div>
                 <div class="p-6 md:p-8 rounded-3xl bg-secondary/30 border border-border/50 flex flex-col">
                     <div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-primary mb-6">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>
                     </div>
                     <h3 class="text-lg font-bold mb-3" data-i18n="f2_h">A website built with AI</h3>
-                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow" data-i18n="f2_p">Tell OnePage about your business and it builds your site with AI — then we host it.</p>
-                    <a href="/oneapp/" class="text-primary text-sm font-medium hover:underline inline-flex items-center"><span data-i18n="f2_cta">See OnePage</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow" data-i18n="f2_p">Tell OneApp about your business and it builds your site with AI — then we host it.</p>
+                    <a href="/oneapp/" class="text-primary text-sm font-medium hover:underline inline-flex items-center"><span data-i18n="f2_cta">See OneApp</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
                 </div>
                 <div class="p-6 md:p-8 rounded-3xl bg-secondary/30 border border-border/50 flex flex-col">
                     <div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-primary mb-6">
@@ -522,8 +496,8 @@
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                     </div>
                     <h3 class="text-lg font-bold mb-3" data-i18n="f4_h">Get hired and get paid</h3>
-                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow" data-i18n="f4_p">OneJob is the marketplace where verified proof wins the job.</p>
-                    <a href="https://frazier56.github.io/onesocial-v2-preview/" class="text-primary text-sm font-medium hover:underline inline-flex items-center"><span data-i18n="f4_cta">Explore OneJob</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow" data-i18n="f4_p">OneSocial is the marketplace where verified proof wins the job.</p>
+                    <a href="https://frazier56.github.io/onesocial-v2-preview/" class="text-primary text-sm font-medium hover:underline inline-flex items-center"><span data-i18n="f4_cta">Explore OneSocial</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
                 </div>
             </div>
         </section>
@@ -569,7 +543,7 @@
                         <span class="flex items-center gap-4"><span class="text-primary font-bold text-sm">01 /</span><span data-i18n="q1_q">One World Labs is apps you use plus services we run</span></span>
                         <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
                     </button>
-                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14" data-i18n="q1_a">Five apps under one login — OneJob to get hired and paid, OneScore for credibility, OneEvent for tickets, plus OneSocial (connected platforms) and OneAgent (AI workforce) coming soon — plus two done-for-you services our team runs: OneVoice answers your calls and OnePage builds and manages your website. Everything shares one login and one profile.</p></div>
+                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14" data-i18n="q1_a">Three apps you use yourself — OneScore for credibility, OneSocial to get hired, OneEvent for tickets — plus two done-for-you services our team runs: OneVoice answers your calls and OneApp builds and manages your website. Everything shares one login and one profile.</p></div>
                 </div>
                 <div class="qa border-b border-border/50 px-6 bg-card rounded-2xl mb-4">
                     <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
@@ -604,21 +578,21 @@
                     <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6" data-i18n="ftr_apps">Apps</h4>
                     <ul class="space-y-4">
                         <li><a href="/onescore-preview/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Score</a></li>
-                        <li><a href="https://frazier56.github.io/onesocial-v2-preview/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Job</a></li>
+                        <li><a href="https://frazier56.github.io/onesocial-v2-preview/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Social</a></li>
                         <li><a href="https://frazier56.github.io/oneevents-preview/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Event</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6" data-i18n="ftr_svcs">Services</h4>
                     <ul class="space-y-4">
-                        <li><a href="/onevoice/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Voice</a></li>
-                        <li><a href="/oneapp/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Page</a></li>
+                        <li><a href="https://onevoice.onesocial.ai" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Voice</a></li>
+                        <li><a href="/oneapp/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>App</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6" data-i18n="ftr_company">Company</h4>
                     <ul class="space-y-4">
-                        <li><a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="text-foreground hover:text-primary transition-colors" data-i18n="cta_signin">Sign in with One ID</a></li>
+                        <li><a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="text-foreground hover:text-primary transition-colors" data-i18n="cta_signin">Sign in with One ID</a></li>
                         <li><a href="mailto:contact@oneworldlabs.ai" class="text-foreground hover:text-primary transition-colors" data-i18n="ftr_contact">Contact</a></li>
                     </ul>
                 </div>
@@ -626,7 +600,7 @@
                     <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6" data-i18n="ftr_getstarted">Get started</h4>
                     <ul class="space-y-4">
                         <li><a href="#apps" class="text-foreground hover:text-primary transition-colors inline-flex items-center"><span data-i18n="cta_jump">Jump into an app</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></li>
-                        <li><a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="text-foreground hover:text-primary transition-colors" data-i18n="cta_signin">Sign in with One ID</a></li>
+                        <li><a href="https://dxtsyxwyzhvcvmoghjss.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="text-foreground hover:text-primary transition-colors" data-i18n="cta_signin">Sign in with One ID</a></li>
                     </ul>
                 </div>
             </div>
@@ -638,7 +612,7 @@
                     <a href="#" aria-label="X" class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.9l-5.4-7-6.2 7H1.4l8-9.2L1 2h7l4.9 6.5L18.9 2zm-1.2 18h1.9L7.1 4H5.1l12.6 16z"/></svg></a>
                 </div>
                 <div class="text-sm text-muted-foreground">
-                    <p class="mb-1">© 2026 One World Labs, Inc. · OneJob · OneScore · OneEvent · OneSocial · OneAgent · OneVoice · OnePage · OneApp</p>
+                    <p class="mb-1">© 2026 One World Labs, Inc. · OneScore · OneSocial · OneEvent · OneVoice · OneApp</p>
                     <p data-i18n="ftr_tagline">Built for small businesses and freelancers, everywhere.</p>
                 </div>
             </div>
@@ -702,84 +676,199 @@
     var I18N_META = {
         en: { flag:'us', code:'EN' },
         es: { flag:'es', code:'ES' },
+        co: { flag:'co', code:'CO' },
         de: { flag:'de', code:'DE' },
         ru: { flag:'ru', code:'RU' },
         zh: { flag:'cn', code:'ZH' },
         pt: { flag:'br', code:'PT' }
     };
+    /* current active language, shared with the auth-state script below so dynamically-generated
+       text (the signed-in welcome message, which has to splice in the user's first name) also
+       translates — data-i18n alone can't handle text built at runtime. */
+    window.OWL_LANG = 'en';
+    window.OWL_ON_LANG_CHANGE = null; /* set by the auth-state IIFE once it's wired up */
     var I18N = {
         es: {
             s_apps:'apps', s_svcs:'servicios', s_login:'acceso',
             h1_l1:'Trabaja más inteligente con IA', h1_l2:'en todo tu negocio', h1_l3:'con ',
             lede:'Apps que usas y servicios que gestionamos por ti — unidos por un solo inicio de sesión — para que pequeñas empresas y autónomos sean vistos, generen confianza y cobren.',
             cta_jump:'Entrar a una app', cta_signin:'Iniciar sesión con One ID', microtrust:'Un inicio de sesión para cada app · Gratis para empezar · Sin tarjeta de crédito',
-            apps_eyebrow:'Las apps', apps_h2:'Entra a tu app favorita', apps_sub:'Cinco apps, un solo inicio de sesión — cuatro ya disponibles, una en camino.',
+            apps_eyebrow:'Las apps', apps_h2:'Entra a tu app favorita', apps_sub:'Tres apps que usas tú mismo — un solo inicio de sesión te da acceso a todas.',
             onescore_tag:'Credibilidad profesional', onescore_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado que puedes publicar donde quieras. Gratis para siempre.', onescore_cta:'Abrir OneScore',
-            onejob_tag:'El mercado de trabajos', onejob_desc:'Consigue trabajo y cobra en 60 segundos — reseñas verificadas, contratos y pagos retenidos de forma segura hasta terminar.', onejob_cta:'Abrir OneJob', onesocial_tag:'Tus plataformas conectadas', onesocial_desc:'Todas tus plataformas, una identidad profesional — conecta tus cuentas y convierte tus seguidores en credibilidad verificada.', onesocial_cta:'Abrir OneSocial', oneagent_tag:'Tu fuerza laboral de IA', oneagent_desc:'Agentes de IA que buscan trabajo, contactan clientes y hacen el trabajo pesado por ti.', coming_soon:'Muy pronto',
+            onesocial_tag:'El mercado de la credibilidad', onesocial_desc:'Donde la prueba te consigue trabajo — reseñas verificadas, empleos y pagos en un mercado basado en la credibilidad.', onesocial_cta:'Abrir OneSocial',
             oneevent_tag:'Eventos y boletos', oneevent_desc:'Crea un evento, vende boletos y registra invitados con QR — en minutos.', oneevent_cta:'Abrir OneEvent',
             preview_loading:'Cargando vista previa…', live_preview:'Vista previa en vivo', open_arrow:'Abrir ↗',
             svc_eyebrow:'Lo hacemos por ti', svc_h2:'Potencia tu negocio con nuestros servicios', svc_sub:'Servicios que nuestro equipo gestiona por ti — para que te concentres en el trabajo.',
             dfy_badge:'Lo hacemos por ti',
             onevoice_desc:'Una recepcionista con IA que responde cada llamada 24/7, califica al cliente y agenda la cita — para que una llamada perdida nunca sea un cliente perdido. Nosotros lo configuramos y gestionamos por ti.', onevoice_cta:'Obtener OneVoice',
-            oneapp_desc:'Creamos tu sitio web con IA y luego gestionamos el hosting, el dominio, el correo y las actualizaciones — presencia web real sin complicaciones.', oneapp_cta:'Obtener OnePage', oneapp_new_desc:'Convierte tu idea en una app real y funcional — la creamos por ti con IA, luego la alojamos y la mantenemos. Sin código, sin agencias.',
+            oneapp_desc:'Creamos tu sitio web con IA y luego gestionamos el hosting, el dominio, el correo y las actualizaciones — presencia web real sin complicaciones.', oneapp_cta:'Obtener OneApp',
             feat_eyebrow:'Por qué funciona', feat_h2:'Dirigir un negocio, más simple', feat_sub:'El trabajo pesado que consume tu día — llamadas contestadas, un sitio web real, prueba en la que confiar — todo en un solo lugar.',
             f1_h:'Nunca pierdas una llamada', f1_p:'OneVoice responde cada llamada 24/7, califica al cliente y agenda la cita.', f1_cta:'Conocer OneVoice',
-            f2_h:'Un sitio web hecho con IA', f2_p:'Cuéntale a OnePage sobre tu negocio y crea tu sitio con IA — luego lo alojamos.', f2_cta:'Ver OnePage',
+            f2_h:'Un sitio web hecho con IA', f2_p:'Cuéntale a OneApp sobre tu negocio y crea tu sitio con IA — luego lo alojamos.', f2_cta:'Ver OneApp',
             f3_h:'Prueba que puedes mostrar', f3_p:'OneScore convierte tus reseñas y trabajo real en un número verificado.', f3_cta:'Obtener tu OneScore',
-            f4_h:'Consigue trabajo y cobra', f4_p:'OneJob es el mercado donde la prueba verificada gana el trabajo.', f4_cta:'Explorar OneJob',
+            f4_h:'Consigue trabajo y cobra', f4_p:'OneSocial es el mercado donde la prueba verificada gana el trabajo.', f4_cta:'Explorar OneSocial',
             plat_eyebrow:'Úsalo donde sea', plat_h2:'Funciona en cualquier teléfono o computadora', plat_sub:'Sin descargas. Ábrelo en tu navegador hoy — y agrégalo a tu pantalla de inicio para que se abra como una app.',
             plat1_h:'Agrégalo a tu teléfono', plat1_p:'Abre cualquier app de One World en tu navegador móvil, toca Compartir y elige "Agregar a pantalla de inicio". Instala un ícono y se abre a pantalla completa — sin tienda de apps.', plat1_badge:'APPS NATIVAS PRÓXIMAMENTE',
             plat2_h:'Úsalo en escritorio', plat2_p:'Todo funciona en tu navegador en cualquier computadora — nada que instalar, nada que actualizar. Guarda oneworldlabs.ai en favoritos y estás a un clic de cada app.',
             faq_eyebrow:'Bueno saberlo', faq_h2:'¿Sabías que…?',
-            q1_q:'One World Labs son apps que usas más servicios que gestionamos', q1_a:'Cinco apps con un solo inicio de sesión — OneJob para conseguir trabajo y cobrar, OneScore para credibilidad, OneEvent para boletos, más OneSocial (plataformas conectadas) y OneAgent (IA) muy pronto — más dos servicios que nuestro equipo gestiona: OneVoice contesta tus llamadas y OnePage crea y administra tu sitio web. Todo comparte un inicio de sesión y un perfil.',
+            q1_q:'One World Labs son apps que usas más servicios que gestionamos', q1_a:'Tres apps que usas tú mismo — OneScore para credibilidad, OneSocial para conseguir trabajo, OneEvent para boletos — más dos servicios que nuestro equipo gestiona: OneVoice contesta tus llamadas y OneApp crea y administra tu sitio web. Todo comparte un inicio de sesión y un perfil.',
             q2_q:'Puedes empezar gratis — sin tarjeta de crédito', q2_a:'OneScore es gratis para siempre, y cada app te permite empezar sin pagar por adelantado. Nuestros servicios gestionados son de pago — solo mejoras cuando una herramienta ya te está dando resultado.',
             q3_q:'Un inicio de sesión te da acceso a todo', q3_a:'Inicia sesión una vez con One ID y estarás en cada app y servicio de One World — sin cuentas separadas, sin volver a ingresar tus datos, sin hacer malabares con contraseñas.',
             q4_q:'Construido con la credibilidad primero — tú tienes el control', q4_a:'Ningún algoritmo decide quién ve tu negocio, y tu reputación no está dispersa en diez plataformas. Tu prueba está verificada, es tuya y es portátil — tú decides dónde aparece.',
-            ftr_apps:'Apps', ftr_svcs:'Servicios', ftr_company:'Empresa', ftr_getstarted:'Empezar', ftr_contact:'Contacto', ftr_tagline:'Hecho para pequeñas empresas y autónomos, en todas partes.'
+            ftr_apps:'Apps', ftr_svcs:'Servicios', ftr_company:'Empresa', ftr_getstarted:'Empezar', ftr_contact:'Contacto', ftr_tagline:'Hecho para pequeñas empresas y autónomos, en todas partes.',
+            oneid_label:'One ID', signout:'Cerrar sesión', signedin_hint:'Elige tu app favorita abajo para continuar — ya tienes sesión iniciada en todas partes.',
+            signedin_welcome:'Sesión iniciada — ¡Bienvenido, {name}!', someone:'de nuevo', hb_welcome:'Bienvenido, {name}', hb_signedin_only:'Sesión iniciada'
+        },
+        co: {
+            s_apps:'apps', s_svcs:'servicios', s_login:'acceso',
+            h1_l1:'Trabaja más inteligente con IA', h1_l2:'en todo tu negocio', h1_l3:'con ',
+            lede:'Apps que usas y servicios que gestionamos por ti — unidos por un solo inicio de sesión — para que pequeños negocios e independientes sean vistos, generen confianza y cobren.',
+            cta_jump:'Entrar a una app', cta_signin:'Iniciar sesión con One ID', microtrust:'Un inicio de sesión para cada app · Gratis para empezar · Sin tarjeta de crédito',
+            apps_eyebrow:'Las apps', apps_h2:'Entra a tu app favorita', apps_sub:'Tres apps que usas tú mismo — un solo inicio de sesión te da acceso a todas.',
+            onescore_tag:'Credibilidad profesional', onescore_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado que puedes publicar donde quieras. Gratis para siempre.', onescore_cta:'Abrir OneScore',
+            onesocial_tag:'El mercado de la credibilidad', onesocial_desc:'Donde la prueba te consigue trabajo — reseñas verificadas, empleos y pagos en un mercado basado en la credibilidad.', onesocial_cta:'Abrir OneSocial',
+            oneevent_tag:'Eventos y boletas', oneevent_desc:'Crea un evento, vende boletas y registra invitados con QR — en minutos.', oneevent_cta:'Abrir OneEvent',
+            preview_loading:'Cargando vista previa…', live_preview:'Vista previa en vivo', open_arrow:'Abrir ↗',
+            svc_eyebrow:'Lo hacemos por ti', svc_h2:'Impulsa tu negocio con nuestros servicios', svc_sub:'Servicios que nuestro equipo gestiona por ti — para que te concentres en el trabajo.',
+            dfy_badge:'Lo hacemos por ti',
+            onevoice_desc:'Una recepcionista con IA que contesta cada llamada 24/7, califica al cliente y agenda la cita — para que una llamada perdida nunca sea un cliente perdido. Nosotros lo configuramos y gestionamos por ti.', onevoice_cta:'Obtener OneVoice',
+            oneapp_desc:'Creamos tu página web con IA y luego gestionamos el hosting, el dominio, el correo y las actualizaciones — presencia web real sin complicaciones.', oneapp_cta:'Obtener OneApp',
+            feat_eyebrow:'Por qué funciona', feat_h2:'Manejar un negocio, más fácil', feat_sub:'El trabajo pesado que consume tu día — llamadas contestadas, una página web real, prueba en la que confiar — todo en un solo lugar.',
+            f1_h:'Nunca pierdas una llamada', f1_p:'OneVoice contesta cada llamada 24/7, califica al cliente y agenda la cita.', f1_cta:'Conocer OneVoice',
+            f2_h:'Una página web hecha con IA', f2_p:'Cuéntale a OneApp sobre tu negocio y crea tu página con IA — luego la alojamos.', f2_cta:'Ver OneApp',
+            f3_h:'Prueba que puedes mostrar', f3_p:'OneScore convierte tus reseñas y trabajo real en un número verificado.', f3_cta:'Obtener tu OneScore',
+            f4_h:'Consigue trabajo y cobra', f4_p:'OneSocial es el mercado donde la prueba verificada gana el trabajo.', f4_cta:'Explorar OneSocial',
+            plat_eyebrow:'Úsalo donde sea', plat_h2:'Funciona en cualquier celular o computador', plat_sub:'Sin descargas. Ábrelo en tu navegador hoy — y agrégalo a tu pantalla de inicio para que se abra como una app.',
+            plat1_h:'Agrégalo a tu celular', plat1_p:'Abre cualquier app de One World en tu navegador móvil, toca Compartir y elige "Agregar a pantalla de inicio". Instala un ícono y se abre a pantalla completa — sin tienda de apps.', plat1_badge:'APPS NATIVAS PRÓXIMAMENTE',
+            plat2_h:'Úsalo en el computador', plat2_p:'Todo funciona en tu navegador en cualquier computador — nada que instalar, nada que actualizar. Guarda oneworldlabs.ai en favoritos y estás a un clic de cada app.',
+            faq_eyebrow:'Bueno saberlo', faq_h2:'¿Sabías que…?',
+            q1_q:'One World Labs son apps que usas más servicios que gestionamos', q1_a:'Tres apps que usas tú mismo — OneScore para credibilidad, OneSocial para conseguir trabajo, OneEvent para boletas — más dos servicios que nuestro equipo gestiona: OneVoice contesta tus llamadas y OneApp crea y administra tu página web. Todo comparte un inicio de sesión y un perfil.',
+            q2_q:'Puedes empezar gratis — sin tarjeta de crédito', q2_a:'OneScore es gratis para siempre, y cada app te permite empezar sin pagar por adelantado. Nuestros servicios gestionados son de pago — solo mejoras cuando una herramienta ya te está dando resultado.',
+            q3_q:'Un inicio de sesión te da acceso a todo', q3_a:'Inicia sesión una vez con One ID y estarás en cada app y servicio de One World — sin cuentas separadas, sin volver a ingresar tus datos, sin hacer malabares con contraseñas.',
+            q4_q:'Construido con la credibilidad primero — tú tienes el control', q4_a:'Ningún algoritmo decide quién ve tu negocio, y tu reputación no está dispersa en diez plataformas. Tu prueba está verificada, es tuya y es portátil — tú decides dónde aparece.',
+            ftr_apps:'Apps', ftr_svcs:'Servicios', ftr_company:'Empresa', ftr_getstarted:'Empezar', ftr_contact:'Contacto', ftr_tagline:'Hecho para pequeños negocios e independientes, en todas partes.',
+            oneid_label:'One ID', signout:'Cerrar sesión', signedin_hint:'Elige tu app favorita abajo para continuar — ya tienes sesión iniciada en todas partes.',
+            signedin_welcome:'Sesión iniciada — ¡Bienvenido, {name}!', someone:'de nuevo', hb_welcome:'Bienvenido, {name}', hb_signedin_only:'Sesión iniciada'
         },
         de: {
             s_apps:'Apps', s_svcs:'Dienste', s_login:'Login',
             h1_l1:'Arbeite smarter mit KI', h1_l2:'in deinem ganzen Business', h1_l3:'mit ',
             lede:'Apps, die du nutzt, und Dienste, die wir für dich betreiben — verbunden durch einen Login — damit kleine Unternehmen gesehen, vertraut und bezahlt werden.',
             cta_jump:'Zu einer App', cta_signin:'Mit One ID anmelden', microtrust:'Ein Login für jede App · Kostenlos starten · Keine Kreditkarte',
-            apps_eyebrow:'Die Apps', apps_h2:'Starte deine Lieblings-App', svc_eyebrow:'Für dich erledigt', svc_h2:'Stärke dein Geschäft mit unseren Diensten',
-            feat_eyebrow:'Warum es funktioniert', feat_h2:'Geschäft führen, einfacher gemacht',
-            plat_eyebrow:'Überall nutzbar', plat_h2:'Läuft auf jedem Handy oder Computer',
+            apps_eyebrow:'Die Apps', apps_h2:'Starte deine Lieblings-App', apps_sub:'Drei Apps, die du selbst nutzt — ein Login gibt dir Zugang zu allen.',
+            svc_eyebrow:'Für dich erledigt', svc_h2:'Stärke dein Geschäft mit unseren Diensten', svc_sub:'Dienste, die unser Team für dich betreibt — damit du dich auf die Arbeit konzentrieren kannst.',
+            dfy_badge:'Für dich erledigt', feat_eyebrow:'Warum es funktioniert', feat_h2:'Geschäft führen, einfacher gemacht',
+            onescore_tag:'Berufliche Glaubwürdigkeit', onescore_desc:'Dein gesamter Ruf — Bewertungen, echte Arbeit, sozialer Beweis — in einer verifizierten Zahl, die du überall posten kannst. Für immer kostenlos.', onescore_cta:'OneScore öffnen',
+            onesocial_tag:'Der Glaubwürdigkeits-Marktplatz', onesocial_desc:'Wo Beweise dir den Job verschaffen — verifizierte Bewertungen, Jobs und Zahlungen in einem glaubwürdigkeitsorientierten Marktplatz.', onesocial_cta:'OneSocial öffnen',
+            oneevent_tag:'Events & Tickets', oneevent_desc:'Erstelle ein Event, verkaufe Tickets und checke Gäste per QR-Code ein — in Minuten.', oneevent_cta:'OneEvent öffnen',
+            onevoice_desc:'Eine KI-Rezeptionistin, die jeden Anruf 24/7 entgegennimmt, den Lead qualifiziert und den Termin bucht — damit ein verpasster Anruf nie ein verpasster Kunde ist. Wir richten es für dich ein und betreiben es.', onevoice_cta:'OneVoice holen',
+            oneapp_desc:'Wir bauen deine Website mit KI und übernehmen dann Hosting, Domain, E-Mail und laufende Updates für dich — echte Web-Präsenz ohne Aufwand.', oneapp_cta:'OneApp holen',
+            feat_sub:'Der Kleinkram, der deinen Tag frisst — beantwortete Anrufe, eine echte Website, Beweise, denen man vertrauen kann — alles an einem Ort erledigt.',
+            f1_h:'Verpasse nie wieder einen Anruf', f1_p:'OneVoice beantwortet jeden Anruf 24/7, qualifiziert den Lead und bucht den Termin.', f1_cta:'OneVoice kennenlernen',
+            f2_h:'Eine mit KI gebaute Website', f2_p:'Erzähl OneApp von deinem Geschäft, und es baut deine Website mit KI — wir hosten sie dann.', f2_cta:'OneApp ansehen',
+            f3_h:'Beweise, auf die du zeigen kannst', f3_p:'OneScore macht aus deinen Bewertungen und echter Arbeit eine verifizierte Zahl.', f3_cta:'Hol dir deinen OneScore',
+            f4_h:'Job bekommen und bezahlt werden', f4_p:'OneSocial ist der Marktplatz, auf dem verifizierte Beweise den Job gewinnen.', f4_cta:'OneSocial entdecken',
+            plat_eyebrow:'Überall nutzbar', plat_h2:'Läuft auf jedem Handy oder Computer', plat_sub:'Kein Download nötig. Öffne es heute in deinem Browser — und füge es deinem Startbildschirm hinzu, damit es sich wie eine App öffnet.',
+            plat1_h:'Zum Handy hinzufügen', plat1_p:'Öffne eine beliebige One-World-App in deinem mobilen Browser, tippe auf Teilen und wähle „Zum Startbildschirm hinzufügen". Installiert ein Symbol und öffnet im Vollbild — kein App Store nötig.', plat1_badge:'NATIVE APPS DEMNÄCHST',
+            plat2_h:'Am Computer nutzen', plat2_p:'Alles läuft in deinem Browser auf jedem Computer — nichts zu installieren, nichts zu aktualisieren. Speichere oneworldlabs.ai als Lesezeichen und du bist einen Klick von jeder App entfernt.',
             faq_eyebrow:'Gut zu wissen', faq_h2:'Wusstest du schon?',
-            ftr_apps:'Apps', ftr_svcs:'Dienste', ftr_company:'Unternehmen', ftr_getstarted:'Loslegen', ftr_contact:'Kontakt', ftr_tagline:'Für kleine Unternehmen und Freelancer, überall.'
+            q1_q:'One World Labs sind Apps, die du nutzt, plus Dienste, die wir betreiben', q1_a:'Drei Apps, die du selbst nutzt — OneScore für Glaubwürdigkeit, OneSocial, um Jobs zu bekommen, OneEvent für Tickets — plus zwei Dienste, die unser Team betreibt: OneVoice beantwortet deine Anrufe, OneApp baut und verwaltet deine Website. Alles teilt sich einen Login und ein Profil.',
+            q2_q:'Du kannst kostenlos starten — keine Kreditkarte nötig', q2_a:'OneScore ist für immer kostenlos, und jede App lässt dich ohne Vorauszahlung starten. Unsere verwalteten Dienste sind kostenpflichtig — du upgradest erst, wenn ein Tool bereits für dich funktioniert.',
+            q3_q:'Ein Login gibt dir Zugang zu allem', q3_a:'Melde dich einmal mit One ID an und du bist in jeder One-World-App und jedem Dienst — keine separaten Konten, keine erneute Dateneingabe, kein Passwort-Jonglieren zwischen Tools.',
+            q4_q:'Glaubwürdigkeit zuerst gebaut — du behältst die Kontrolle', q4_a:'Kein Algorithmus entscheidet, wer dein Geschäft sieht, und dein Ruf ist nicht über zehn Plattformen verstreut. Dein Beweis ist verifiziert, gehört dir und ist portabel — du entscheidest, wo er erscheint.',
+            ftr_apps:'Apps', ftr_svcs:'Dienste', ftr_company:'Unternehmen', ftr_getstarted:'Loslegen', ftr_contact:'Kontakt', ftr_tagline:'Für kleine Unternehmen und Freelancer, überall.',
+            oneid_label:'One ID', signout:'Abmelden', signedin_hint:'Wähle unten deine Lieblings-App — du bist bereits überall angemeldet.',
+            signedin_welcome:'Angemeldet — Willkommen, {name}!', someone:'zurück', hb_welcome:'Willkommen, {name}', hb_signedin_only:'Angemeldet'
         },
         ru: {
             s_apps:'приложения', s_svcs:'услуги', s_login:'вход',
             h1_l1:'Работайте умнее с ИИ', h1_l2:'во всём вашем бизнесе', h1_l3:'с ',
             lede:'Приложения, которыми вы пользуетесь, и услуги, которые мы для вас ведём — объединённые единым входом — чтобы малый бизнес был заметен, вызывал доверие и получал оплату.',
             cta_jump:'Открыть приложение', cta_signin:'Войти через One ID', microtrust:'Один вход для всех приложений · Бесплатно · Без карты',
-            apps_eyebrow:'Приложения', apps_h2:'Откройте любимое приложение', svc_eyebrow:'Сделаем за вас', svc_h2:'Развивайте бизнес с нашими услугами',
-            feat_eyebrow:'Почему это работает', feat_h2:'Вести бизнес стало проще',
-            plat_eyebrow:'Используйте где угодно', plat_h2:'Работает на любом телефоне или компьютере',
+            apps_eyebrow:'Приложения', apps_h2:'Откройте любимое приложение', apps_sub:'Три приложения, которыми ты пользуешься сам — один вход даёт доступ ко всем.',
+            svc_eyebrow:'Сделаем за вас', svc_h2:'Развивайте бизнес с нашими услугами', svc_sub:'Сервисы, которыми управляет наша команда — чтобы ты мог сосредоточиться на деле.',
+            dfy_badge:'Сделано для тебя', feat_eyebrow:'Почему это работает', feat_h2:'Вести бизнес стало проще',
+            onescore_tag:'Профессиональная репутация', onescore_desc:'Вся твоя репутация — отзывы, реальная работа, социальные доказательства — в одном проверенном числе, которое можно опубликовать где угодно. Бесплатно навсегда.', onescore_cta:'Открыть OneScore',
+            onesocial_tag:'Маркетплейс доверия', onesocial_desc:'Где доказательства помогают получить работу — проверенные отзывы, вакансии и платежи на одной площадке, где главное — доверие.', onesocial_cta:'Открыть OneSocial',
+            oneevent_tag:'События и билеты', oneevent_desc:'Создай событие, продавай билеты и регистрируй гостей по QR-коду — за считанные минуты.', oneevent_cta:'Открыть OneEvent',
+            onevoice_desc:'ИИ-администратор, который отвечает на каждый звонок 24/7, квалифицирует лида и записывает на приём — пропущенный звонок больше не означает потерянного клиента. Мы всё настроим и будем управлять этим за тебя.', onevoice_cta:'Получить OneVoice',
+            oneapp_desc:'Мы создаём твой сайт с помощью ИИ, а затем берём на себя хостинг, домен, почту и обновления — реальное присутствие в сети без хлопот.', oneapp_cta:'Получить OneApp',
+            feat_sub:'Рутина, которая съедает твой день — пропущенные звонки, настоящий сайт, доказательства, которым можно доверять — всё решено в одном месте.',
+            f1_h:'Никогда не пропускай звонок', f1_p:'OneVoice отвечает на каждый звонок 24/7, квалифицирует лида и записывает на приём.', f1_cta:'Познакомиться с OneVoice',
+            f2_h:'Сайт, созданный с помощью ИИ', f2_p:'Расскажи OneApp о своём бизнесе — и он создаст твой сайт с помощью ИИ, а мы разместим его на хостинге.', f2_cta:'Посмотреть OneApp',
+            f3_h:'Доказательства, на которые можно указать', f3_p:'OneScore превращает твои отзывы и реальную работу в одно проверенное число.', f3_cta:'Получить свой OneScore',
+            f4_h:'Получай работу и оплату', f4_p:'OneSocial — маркетплейс, где проверенные доказательства выигрывают работу.', f4_cta:'Изучить OneSocial',
+            plat_eyebrow:'Используйте где угодно', plat_h2:'Работает на любом телефоне или компьютере', plat_sub:'Скачивать не нужно. Открой прямо сегодня в браузере — и добавь на главный экран, чтобы это работало как приложение.',
+            plat1_h:'Добавь на телефон', plat1_p:'Открой любое приложение One World в мобильном браузере, нажми «Поделиться» и выбери «На экран «Домой»». Установится значок, открывается на весь экран — App Store не нужен.', plat1_badge:'НАТИВНЫЕ ПРИЛОЖЕНИЯ СКОРО',
+            plat2_h:'Используй на компьютере', plat2_p:'Всё работает прямо в браузере на любом компьютере — ничего устанавливать и обновлять не нужно. Добавь oneworldlabs.ai в закладки — и ты в одном клике от любого приложения.',
             faq_eyebrow:'Полезно знать', faq_h2:'Знаете ли вы?',
-            ftr_apps:'Приложения', ftr_svcs:'Услуги', ftr_company:'Компания', ftr_getstarted:'Начать', ftr_contact:'Контакты', ftr_tagline:'Для малого бизнеса и фрилансеров, везде.'
+            q1_q:'One World Labs — это приложения, которыми ты пользуешься, плюс сервисы, которыми управляем мы', q1_a:'Три приложения, которыми ты пользуешься сам — OneScore для репутации, OneSocial для трудоустройства, OneEvent для билетов — плюс два сервиса, которыми управляет наша команда: OneVoice отвечает на твои звонки, а OneApp создаёт и обслуживает твой сайт. Всё работает через один вход и один профиль.',
+            q2_q:'Можно начать бесплатно — без карты', q2_a:'OneScore бесплатен навсегда, и в каждом приложении можно начать без предоплаты. Наши управляемые сервисы платные — ты переходишь на платный план только когда инструмент уже приносит пользу.',
+            q3_q:'Один вход даёт доступ ко всему', q3_a:'Войди один раз через One ID — и ты в каждом приложении и сервисе One World: без отдельных аккаунтов, без повторного ввода данных, без жонглирования паролями.',
+            q4_q:'Построено на доверии — контроль остаётся у тебя', q4_a:'Никакой алгоритм не решает, кто увидит твой бизнес, а твоя репутация не разбросана по десяти платформам. Твои доказательства проверены, принадлежат тебе и переносимы — ты решаешь, где их показывать.',
+            ftr_apps:'Приложения', ftr_svcs:'Услуги', ftr_company:'Компания', ftr_getstarted:'Начать', ftr_contact:'Контакты', ftr_tagline:'Для малого бизнеса и фрилансеров, везде.',
+            oneid_label:'One ID', signout:'Выйти', signedin_hint:'Выберите любимое приложение ниже — вы уже вошли везде.',
+            signedin_welcome:'Вы вошли — Добро пожаловать, {name}!', someone:'снова', hb_welcome:'Добро пожаловать, {name}', hb_signedin_only:'Вы вошли'
         },
         zh: {
             s_apps:'应用', s_svcs:'服务', s_login:'登录',
             h1_l1:'借助AI更智能地', h1_l2:'管理你的整个业务', h1_l3:'使用 ',
             lede:'你使用的应用，加上我们为你运营的服务——通过统一登录连接在一起——让小企业和自由职业者被看见、被信任、获得报酬。',
             cta_jump:'进入应用', cta_signin:'使用 One ID 登录', microtrust:'一次登录畅用所有应用 · 免费开始 · 无需信用卡',
-            apps_eyebrow:'应用', apps_h2:'进入你喜欢的应用', svc_eyebrow:'为你代劳', svc_h2:'用我们的服务提升你的业务',
-            feat_eyebrow:'为什么有效', feat_h2:'让经营业务更简单',
-            plat_eyebrow:'随处可用', plat_h2:'适用于任何手机或电脑',
+            apps_eyebrow:'应用', apps_h2:'进入你喜欢的应用', apps_sub:'三款你亲自使用的应用——一次登录即可全部访问。',
+            svc_eyebrow:'为你代劳', svc_h2:'用我们的服务提升你的业务', svc_sub:'由我们团队为你运营的省心服务——让你专注于工作本身。',
+            dfy_badge:'为你代劳', feat_eyebrow:'为什么有效', feat_h2:'经营业务更简单',
+            onescore_tag:'职业信誉', onescore_desc:'你的全部声誉——评价、真实工作、社交证明——汇聚成一个可随处发布的认证分数。永久免费。', onescore_cta:'打开 OneScore',
+            onesocial_tag:'信誉优先的市场', onesocial_desc:'凭证据获得工作机会——认证评价、职位与支付，尽在这个以信誉为先的市场。', onesocial_cta:'打开 OneSocial',
+            oneevent_tag:'活动与门票', oneevent_desc:'创建活动、销售门票，并通过二维码为宾客签到——几分钟内即可上线。', oneevent_cta:'打开 OneEvent',
+            onevoice_desc:'一位24/7全天候接听每通电话、筛选潜在客户并预约的AI前台——错过的电话不再等于失去的客户。我们为你搭建并持续运营。', onevoice_cta:'获取 OneVoice',
+            oneapp_desc:'我们用AI为你搭建网站，然后为你处理托管、域名、邮箱和持续更新——轻松拥有真正的网络形象。', oneapp_cta:'获取 OneApp',
+            feat_sub:'那些占据你一天时间的琐事——接听电话、真实的网站、值得信赖的证据——都在一个地方解决。',
+            f1_h:'绝不错过任何来电', f1_p:'OneVoice 24/7全天候接听每通电话，筛选潜在客户并预约。', f1_cta:'了解 OneVoice',
+            f2_h:'用AI搭建的网站', f2_p:'告诉 OneApp 你的业务，它就会用AI为你搭建网站——然后由我们负责托管。', f2_cta:'查看 OneApp',
+            f3_h:'拿得出手的证据', f3_p:'OneScore 将你的评价和真实工作转化为一个认证分数。', f3_cta:'获取你的 OneScore',
+            f4_h:'获得工作并获得报酬', f4_p:'OneSocial 是认证证据赢得工作机会的市场。', f4_cta:'探索 OneSocial',
+            plat_eyebrow:'随处可用', plat_h2:'适用于任何手机或电脑', plat_sub:'无需下载。今天就在浏览器中打开——并添加到主屏幕，像应用一样使用。',
+            plat1_h:'添加到手机', plat1_p:'在手机浏览器中打开任意 One World 应用，点击分享，选择"添加到主屏幕"。会安装一个图标并全屏打开——无需应用商店。', plat1_badge:'原生应用即将推出',
+            plat2_h:'在电脑上使用', plat2_p:'一切都在任何电脑的浏览器中运行——无需安装，无需更新。收藏 oneworldlabs.ai，一键直达每个应用。',
             faq_eyebrow:'你知道吗', faq_h2:'你知道吗？',
-            ftr_apps:'应用', ftr_svcs:'服务', ftr_company:'公司', ftr_getstarted:'开始使用', ftr_contact:'联系我们', ftr_tagline:'为各地的小企业和自由职业者打造。'
+            q1_q:'One World Labs 是你使用的应用，加上我们运营的服务', q1_a:'三款你亲自使用的应用——OneScore 提供信誉，OneSocial 助你获得工作，OneEvent 提供门票——再加上我们团队运营的两项服务：OneVoice 接听你的电话，OneApp 搭建并管理你的网站。所有一切共享一个登录和一个资料。',
+            q2_q:'可以免费开始——无需信用卡', q2_a:'OneScore 永久免费，每款应用都可以在无需预付费的情况下开始使用。我们的托管服务是付费的——只有当工具已经为你产生效果时，你才需要升级。',
+            q3_q:'一次登录即可访问一切', q3_a:'用 One ID 登录一次，你就能进入每一个 One World 应用和服务——无需单独的账户，无需重复输入信息，无需在多个工具间切换密码。',
+            q4_q:'以信誉为先构建——掌控权始终在你手中', q4_a:'没有算法决定谁能看到你的业务，你的声誉也不会分散在十个平台上。你的证据经过认证、归你所有且可携带——由你决定它出现在哪里。',
+            ftr_apps:'应用', ftr_svcs:'服务', ftr_company:'公司', ftr_getstarted:'开始使用', ftr_contact:'联系我们', ftr_tagline:'为各地的小企业和自由职业者打造。',
+            oneid_label:'One ID', signout:'退出登录', signedin_hint:'在下方选择你喜欢的应用——你已在所有应用中登录。',
+            signedin_welcome:'已登录 — 欢迎回来，{name}！', someone:'朋友', hb_welcome:'欢迎，{name}', hb_signedin_only:'已登录'
         },
         pt: {
             s_apps:'apps', s_svcs:'serviços', s_login:'login',
             h1_l1:'Trabalhe de forma mais inteligente com IA', h1_l2:'em todo o seu negócio', h1_l3:'com ',
             lede:'Apps que você usa e serviços que administramos para você — unidos por um único login — para que pequenas empresas e autônomos sejam vistos, ganhem confiança e recebam pagamento.',
             cta_jump:'Entrar em um app', cta_signin:'Entrar com One ID', microtrust:'Um login para cada app · Grátis para começar · Sem cartão de crédito',
-            apps_eyebrow:'Os apps', apps_h2:'Entre no seu app favorito', svc_eyebrow:'Feito para você', svc_h2:'Potencialize seu negócio com nossos serviços',
-            feat_eyebrow:'Por que funciona', feat_h2:'Gerir um negócio, mais simples',
-            plat_eyebrow:'Use em qualquer lugar', plat_h2:'Funciona em qualquer celular ou computador',
+            apps_eyebrow:'Os apps', apps_h2:'Entre no seu app favorito', apps_sub:'Três apps que você mesmo usa — um único login te dá acesso a todos.',
+            svc_eyebrow:'Feito para você', svc_h2:'Potencialize seu negócio com nossos serviços', svc_sub:'Serviços que nossa equipe opera para você — para que você foque no trabalho.',
+            dfy_badge:'Feito para você', feat_eyebrow:'Por que funciona', feat_h2:'Gerir um negócio, mais simples',
+            onescore_tag:'Credibilidade profissional', onescore_desc:'Toda a sua reputação — avaliações, trabalho real, prova social — em um número verificado que você pode publicar em qualquer lugar. Grátis para sempre.', onescore_cta:'Abrir OneScore',
+            onesocial_tag:'O mercado da credibilidade', onesocial_desc:'Onde a prova te consegue o emprego — avaliações verificadas, vagas e pagamentos em um mercado com credibilidade em primeiro lugar.', onesocial_cta:'Abrir OneSocial',
+            oneevent_tag:'Eventos e ingressos', oneevent_desc:'Crie um evento, venda ingressos e faça check-in dos convidados com QR — em minutos.', oneevent_cta:'Abrir OneEvent',
+            onevoice_desc:'Uma recepcionista de IA que atende cada chamada 24/7, qualifica o lead e agenda o compromisso — para que uma chamada perdida nunca seja um cliente perdido. Nós configuramos e operamos tudo para você.', onevoice_cta:'Obter OneVoice',
+            oneapp_desc:'Construímos seu site com IA e depois cuidamos da hospedagem, domínio, e-mail e atualizações contínuas — uma presença online de verdade, sem complicação.', oneapp_cta:'Obter OneApp',
+            feat_sub:'As tarefas que consomem seu dia — chamadas atendidas, um site de verdade, provas em que você pode confiar — tudo resolvido em um só lugar.',
+            f1_h:'Nunca perca uma chamada', f1_p:'OneVoice atende cada chamada 24/7, qualifica o lead e agenda o compromisso.', f1_cta:'Conheça o OneVoice',
+            f2_h:'Um site construído com IA', f2_p:'Conte ao OneApp sobre seu negócio e ele constrói seu site com IA — depois nós hospedamos.', f2_cta:'Ver OneApp',
+            f3_h:'Provas que você pode mostrar', f3_p:'OneScore transforma suas avaliações e trabalho real em um número verificado.', f3_cta:'Obtenha seu OneScore',
+            f4_h:'Seja contratado e receba pagamento', f4_p:'OneSocial é o mercado onde provas verificadas conquistam o emprego.', f4_cta:'Explorar OneSocial',
+            plat_eyebrow:'Use em qualquer lugar', plat_h2:'Funciona em qualquer celular ou computador', plat_sub:'Não precisa baixar. Abra hoje mesmo no seu navegador — e adicione à tela inicial para que abra como um app.',
+            plat1_h:'Adicione ao celular', plat1_p:'Abra qualquer app One World no navegador do celular, toque em Compartilhar e escolha "Adicionar à Tela de Início". Instala um ícone e abre em tela cheia — sem precisar de App Store.', plat1_badge:'APPS NATIVOS EM BREVE',
+            plat2_h:'Use no computador', plat2_p:'Tudo roda no seu navegador em qualquer computador — nada para instalar, nada para atualizar. Salve oneworldlabs.ai nos favoritos e você está a um clique de cada app.',
             faq_eyebrow:'Bom saber', faq_h2:'Você sabia?',
-            ftr_apps:'Apps', ftr_svcs:'Serviços', ftr_company:'Empresa', ftr_getstarted:'Começar', ftr_contact:'Contato', ftr_tagline:'Feito para pequenas empresas e autônomos, em qualquer lugar.'
+            q1_q:'One World Labs são apps que você usa, além de serviços que operamos', q1_a:'Três apps que você mesmo usa — OneScore para credibilidade, OneSocial para conseguir emprego, OneEvent para ingressos — além de dois serviços que nossa equipe opera: OneVoice atende suas chamadas e OneApp constrói e gerencia seu site. Tudo compartilha um login e um perfil.',
+            q2_q:'Você pode começar de graça — sem cartão de crédito', q2_a:'OneScore é grátis para sempre, e todo app permite que você comece sem pagar antecipadamente. Nossos serviços gerenciados são pagos — você só faz upgrade quando a ferramenta já está funcionando para você.',
+            q3_q:'Um login te dá acesso a tudo', q3_a:'Entre uma vez com o One ID e você está em todo app e serviço One World — sem contas separadas, sem reinserir seus dados, sem gerenciar senhas entre ferramentas.',
+            q4_q:'Construído com credibilidade em primeiro lugar — você mantém o controle', q4_a:'Nenhum algoritmo decide quem vê seu negócio, e sua reputação não fica espalhada em dez plataformas. Sua prova é verificada, é sua e é portátil — você decide onde ela aparece.',
+            ftr_apps:'Apps', ftr_svcs:'Serviços', ftr_company:'Empresa', ftr_getstarted:'Começar', ftr_contact:'Contato', ftr_tagline:'Feito para pequenas empresas e autônomos, em qualquer lugar.',
+            oneid_label:'One ID', signout:'Sair', signedin_hint:'Escolha seu app favorito abaixo para continuar — você já está conectado em todos os lugares.',
+            signedin_welcome:'Conectado — Bem-vindo, {name}!', someone:'de volta', hb_welcome:'Bem-vindo, {name}', hb_signedin_only:'Conectado'
         }
     };
     function applyLang(lang){
@@ -804,7 +893,12 @@
                 langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); });
                 document.documentElement.lang = lang;
                 langMenu.classList.remove('open');
+                window.OWL_LANG = lang;
                 applyLang(lang);
+                /* re-render any JS-built text (the signed-in welcome message splices in the
+                   user's first name at runtime, so data-i18n alone can't translate it — this
+                   hook lets the auth-state script redo it in the newly-selected language) */
+                if (window.OWL_ON_LANG_CHANGE) window.OWL_ON_LANG_CHANGE();
                 try { localStorage.setItem('owl-lang', lang); } catch(e){}
             });
         });
@@ -829,7 +923,7 @@
     /* ---------- One ID: recognize an existing sign-in, never auto-jump into an app ---------- */
     (function(){
         /* Same Supabase project + same storage key format the real apps (OneScore/OneSocial/
-           OneEvent) already use for auth (wseblryyqxawvbjmylbo — confirmed live in their bundles;
+           OneEvent) already use for auth (dxtsyxwyzhvcvmoghjss — confirmed live in their bundles;
            NOT the same project VAIA/billing use). Because this page and every app live under the
            same origin (www.oneworldlabs.ai/...), a session stored here is automatically visible
            to /onescore/, /onesocial-v2-preview/, /oneevents-preview/ too — true one-login SSO,
@@ -838,7 +932,7 @@
            where the user clicked from, which is the bug this fixes: sign-in now returns to this
            page and shows "pick your app" instead of dumping the user into one specific app. */
         if (!window.supabase) return;
-        var ONEID_URL = 'https://wseblryyqxawvbjmylbo.supabase.co';
+        var ONEID_URL = 'https://dxtsyxwyzhvcvmoghjss.supabase.co';
         var ONEID_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4dHN5eHd5emh2Y3Ztb2doanNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3NTI1ODcsImV4cCI6MjA4ODMyODU4N30.JKhqKOpoBjMrU1HZHUD1SzpGFkKcbqxphTaSHtPfCLs';
         var oneIdClient = window.supabase.createClient(ONEID_URL, ONEID_KEY, {
             auth: { detectSessionInUrl: true, persistSession: true, autoRefreshToken: true }
@@ -851,9 +945,19 @@
            in-place, plus a separate Sign Out button next to it — not a plain text message with no
            button. The hamburger drawer gets the same signed-in/out treatment (it previously had
            none at all — always showed "Sign in" even mid-session, no way to sign out from there). */
+        /* translate JS-built text (the welcome message splices in the user's first name at
+           runtime, so the static data-i18n swap can't handle it) — falls back to English if the
+           active language or key isn't in I18N (e.g. lang === 'en', which has no I18N entry
+           since English lives directly in the HTML). */
+        function t(key, fallback){
+            var dict = (typeof I18N !== 'undefined') ? I18N[window.OWL_LANG || 'en'] : null;
+            return (dict && dict[key] != null) ? dict[key] : fallback;
+        }
+        var lastSignedInUser = null;
         function showSignedIn(user){
+            lastSignedInUser = user;
             var fn = firstName(user);
-            var welcome = 'Signed in — Welcome, ' + (fn || 'there') + '!';
+            var welcome = t('signedin_welcome', 'Signed in — Welcome, {name}!').replace('{name}', fn || t('someone', 'there'));
             var out = document.getElementById('signedout-cta'), inn = document.getElementById('signedin-cta');
             if (out && inn) {
                 var msg = document.getElementById('welcomeMsg');
@@ -865,7 +969,7 @@
             if (hbOutId && hbInId) {
                 var letter = document.getElementById('hbAvatarLetter'), nameLine = document.getElementById('hbNameLine');
                 if (letter) letter.textContent = (fn || '?').slice(0, 1).toUpperCase();
-                if (nameLine) nameLine.textContent = fn ? ('Welcome, ' + fn) : 'Signed in';
+                if (nameLine) nameLine.textContent = fn ? t('hb_welcome', 'Welcome, {name}').replace('{name}', fn) : t('hb_signedin_only', 'Signed in');
                 hbOutId.classList.add('hidden');
                 hbInId.classList.remove('hidden'); hbInId.classList.add('flex');
             }
@@ -875,7 +979,12 @@
                 hbInCta.classList.remove('hidden'); hbInCta.classList.add('flex');
             }
         }
+        /* language switcher calls this after applyLang() so the signed-in welcome text (which
+           data-i18n can't reach, since it's built at runtime with the user's name spliced in)
+           updates too instead of staying stuck in whatever language was active at sign-in */
+        window.OWL_ON_LANG_CHANGE = function(){ if (lastSignedInUser) showSignedIn(lastSignedInUser); };
         function showSignedOut(){
+            lastSignedInUser = null;
             var out = document.getElementById('signedout-cta'), inn = document.getElementById('signedin-cta');
             if (out && inn) { inn.classList.add('hidden'); inn.classList.remove('flex'); out.classList.remove('hidden'); }
             var hbOutId = document.getElementById('hb-signedout-id'), hbInId = document.getElementById('hb-signedin-id');
@@ -895,7 +1004,7 @@
             if (session && session.user) showSignedIn(session.user);
             else showSignedOut();
         });
-        /* wire both Sign Out buttons (hero + hamburger) to the same One ID (wseblr) client */
+        /* wire both Sign Out buttons (hero + hamburger) to the same dxts client */
         function wireSignOut(id){
             var btn = document.getElementById(id);
             if (!btn) return;
@@ -1215,22 +1324,12 @@
             widget.classList.add('asleep');
             everSlept = true;
         }
-        var everWoken = false;
-        var FIRST_WAKE = "Oh — you woke me up! Hey, I'm glad you found me. I'm VAIA, your One World assistant — how can I help?";
         function wake(){
             asleep = false;
             noResultStreak = 0;
             widget.classList.remove('asleep');
             var goListen = function(){ voiceMode = true; startListening(); };
-            if (!everWoken) {
-                /* Sleep-first (Lee, Jul 16): the FIRST tap is the introduction —
-                   she never speaks before being touched. */
-                everWoken = true;
-                history.push({ role:'assistant', content: FIRST_WAKE });
-                addMsg('vaia', FIRST_WAKE);
-                speak(FIRST_WAKE).then(goListen);
-            }
-            else if (everSlept) {
+            if (everSlept) {
                 var line = WAKE_LINES[Math.floor(Math.random() * WAKE_LINES.length)];
                 speak(line).then(goListen);
             }
@@ -1264,12 +1363,14 @@
            if you have any questions," which is exactly why she looked like she wasn't hearing anyone.
            If the browser blocks the mic without a prior tap, startListening()/onerror handle that
            gracefully (she just waits for the first tap, same as before). */
-        /* Sleep-first (Lee, Jul 16): NO auto-greeting, ever. She was talking the moment
-           the page loaded and bothering people at work. She now starts asleep — dim,
-           slowly breathing — and only ever speaks after someone taps her (wake()). */
         window.addEventListener('load', function(){
-            asleep = true;
-            widget.classList.add('asleep');
+            setTimeout(function(){
+                history.push({ role:'assistant', content: GREETING });
+                addMsg('vaia', GREETING);
+                speak(GREETING).then(function(){
+                    if (!asleep) { voiceMode = true; startListening(); }
+                });
+            }, 1200);
         });
     })();
 </script>
