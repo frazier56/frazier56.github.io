@@ -10,7 +10,31 @@
   var h = location.hash || "", q = location.search || "";
   if (/access_token|refresh_token|error_description|type=recovery/.test(h) || /[?&]code=/.test(q)) {
     location.replace("/onejob/" + q + h);
+    return;
   }
+})();
+</script>
+<script>
+/* DEEP-LINK RESCUE — MUST stay directly under the OAuth catcher, above everything else.
+   GitHub Pages serves THIS file for every path it can't find, and it ignores a 404.html that
+   lives inside a subdirectory. So /onejob/app/qr — a route that only exists inside the OneJob
+   single-page app — used to render the One World homepage. That is what Lee saw as "pull to
+   refresh throws me back to oneworldlabs.ai": the refresh was a real 404, not a bad link.
+
+   Fix: recognise a sub-app path, remember where the user actually was, and hand control to that
+   app's real index (/onejob/, which IS a 200) so its router can restore the route. We pass the
+   route two ways because in-app browsers (Instagram, some Android webviews) block sessionStorage:
+     1. sessionStorage — survives, leaves the address bar clean
+     2. ?ow_r= on the handoff URL — always works; the app strips it immediately
+   No redirect loop is possible: /onejob/ resolves, so this file never runs again. */
+(function () {
+  var m = (location.pathname || "").match(/^\/(onejob|onesocial|oneevent)(\/.*)?$/i);
+  if (!m) return;
+  var app = m[1].toLowerCase();
+  var rest = (m[2] || "/") + (location.search || "") + (location.hash || "");
+  if (rest === "/" ) { location.replace("/" + app + "/"); return; }
+  try { sessionStorage.setItem("ow:deeplink", "/" + app + rest); } catch (e) { /* blocked */ }
+  location.replace("/" + app + "/?ow_r=" + encodeURIComponent(rest));
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
