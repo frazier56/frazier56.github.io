@@ -1,7 +1,7 @@
-<!doctype html>
-<html lang="en" data-theme="light">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <script>
 /* One ID / OAuth redirect-catcher — MUST stay at the very top of index.html and 404.html.
    Supabase returns tokens in the hash (#access_token=…) or ?code= for PKCE. Hand the
@@ -9,533 +9,1477 @@
 (function () {
   var h = location.hash || "", q = location.search || "";
   if (/access_token|refresh_token|error_description|type=recovery/.test(h) || /[?&]code=/.test(q)) {
-    location.replace("/onesocial-v2-preview/" + q + h);
+    location.replace("/onejob/" + q + h);
   }
 })();
 </script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>One World Labs — Tools that grow small business</title>
-<meta name="description" content="OneVoice, OneApp, OneScore, OneSocial, OneEvents — one family of simple tools that helps small businesses and freelancers get seen, get trusted, and get paid." />
-<link rel="manifest" href="/owl-manifest.webmanifest" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<meta name="theme-color" content="#FAFAF8" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One World Labs — Work smarter across your whole business</title>
+<meta name="description" content="OneJob, OneScore, OneEvent, OneSocial, OneAgent — apps you use. OneVoice and OneWeb — done-for-you services. One login ties them all together. Built for small businesses and freelancers.">
+<link rel="manifest" href="/owl-manifest.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAFAF8" id="theme-color-meta">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Manrope', 'sans-serif'],
+                    heading: ['Sora', 'sans-serif'],
+                },
+                colors: {
+                    primary: { DEFAULT: '#00d2b4', foreground: '#0a0a1a' },
+                    secondary: 'var(--color-secondary)',
+                    background: 'var(--color-bg)',
+                    foreground: 'var(--color-fg)',
+                    border: 'var(--color-border)',
+                    card: 'var(--color-card)',
+                    muted: { DEFAULT: 'var(--color-secondary)', foreground: 'var(--color-muted)' },
+                }
+            }
+        }
+    }
+</script>
 <style>
-  /* ===================== TOKENS ===================== */
-  :root{
-    --teal:#14B8A6; --teal-d:#0D9488; --teal-l:#2DD4BF;
-    --r-card:18px; --r-btn:12px; --r-pill:999px;
-    --maxw:1080px;
-    --ease:cubic-bezier(.2,.8,.2,1);
-  }
-  /* LIGHT = default, designed first */
-  html[data-theme="light"]{
-    --bg:#FAFAF8; --bg2:#F3F2EC; --ink:#0B0F1A; --muted:#4A5160; --faint:#8A93A3;
-    --card:#FFFFFF; --card-2:#FFFFFF; --border:#E7E5DD; --border-2:#EDEBE3;
-    --shadow:0 1px 2px rgba(11,15,26,.05), 0 12px 32px rgba(11,15,26,.07);
-    --shadow-lift:0 2px 6px rgba(11,15,26,.06), 0 22px 50px rgba(20,184,166,.16);
-    --bar:rgba(250,250,248,.82);
-    --line:#D8D5CB; --line-glow:rgba(20,184,166,.55);
-    --core-bg:#FFFFFF; --core-ring:rgba(20,184,166,.30); --core-halo:rgba(20,184,166,.12);
-    --teal-ink:var(--teal-d);
-    --sky-1:rgba(20,184,166,.10); --sky-2:rgba(45,212,191,.08); --sky-3:rgba(13,148,136,.07);
-  }
-  /* DARK = its own layout, not "light with the lights off" */
-  html[data-theme="dark"]{
-    --bg:#0B0F1A; --bg2:#11161F; --ink:#FAFAF8; --muted:#A8B0BD; --faint:#6B7480;
-    --card:rgba(26,33,46,.55); --card-2:#141A26; --border:rgba(250,250,248,.10); --border-2:rgba(250,250,248,.08);
-    --shadow:0 8px 32px rgba(0,0,0,.38); --shadow-lift:0 14px 46px rgba(20,184,166,.20), 0 8px 32px rgba(0,0,0,.4);
-    --bar:rgba(11,15,26,.72);
-    --line:rgba(168,176,189,.28); --line-glow:rgba(45,212,191,.7);
-    --core-bg:rgba(26,33,46,.65); --core-ring:rgba(20,184,166,.5); --core-halo:rgba(20,184,166,.18);
-    --teal-ink:var(--teal-l);
-    --sky-1:rgba(20,184,166,.20); --sky-2:rgba(45,212,191,.14); --sky-3:rgba(13,148,136,.16);
-  }
+    :root {
+        --color-bg: #ffffff;
+        --color-fg: #0a0a1a;
+        --color-secondary: #f1f5f9;
+        --color-border: #e2e8f0;
+        --color-card: #ffffff;
+        --color-muted: #64748b;
+    }
+    .dark {
+        --color-bg: #0a0a1a;
+        --color-fg: #ffffff;
+        --color-secondary: #141432;
+        --color-border: rgba(255, 255, 255, 0.1);
+        --color-card: rgba(255, 255, 255, 0.03);
+        --color-muted: #94a3b8;
+    }
+    body {
+        font-family: 'Manrope', sans-serif;
+        background-color: var(--color-bg);
+        color: var(--color-fg);
+        transition: background-color 0.3s, color 0.3s;
+        overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: 'Sora', sans-serif; }
+    .fade-up{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease-out forwards}
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+    .rot-word{display:inline-block;transition:opacity .45s ease;}
+    .rot-word.rot-fade{opacity:0;}
 
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .35s var(--ease),color .35s var(--ease)}
+    /* glass menu window — drawer style + a stronger glassmorphism pass matched to (and beyond)
+       OneEvent's GlassDrawer: heavier blur + saturate, lower fill opacity so it actually reads as
+       glass, plus an inset top highlight for the "light catching an edge" look. */
+    #menu-overlay{opacity:0;pointer-events:none;transition:opacity .25s ease;}
+    #menu-overlay.show{opacity:1;pointer-events:auto;}
+    .menu-panel{transform:scale(.96) translateY(10px);opacity:0;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .3s ease;background:rgba(250,250,248,.6);border-color:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(28px) saturate(180%);backdrop-filter:blur(28px) saturate(180%);box-shadow:0 20px 60px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.6);}
+    .dark .menu-panel{background:rgba(11,15,26,.56);border-color:rgba(255,255,255,.16);box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);}
+    #menu-overlay.show .menu-panel{transform:none;opacity:1;}
+    /* nav rows + sign-out row, same shape/hover language as OneEvent's drawer items. Label text is
+       wrapped in ONE span (not left as a bare text node) so flex "gap" never sneaks a gap in between
+       the teal "One" prefix and the rest of the word — that was the "two spaces" bug Lee flagged. */
+    .menu-navitem{display:flex;align-items:center;gap:10px;border-radius:14px;padding:10px 12px;font-size:15px;font-weight:600;color:var(--color-fg);transition:background-color .15s ease;}
+    .menu-navitem:hover{background:rgba(0,210,180,.1);}
+    /* the teal "One" prefix was low-contrast against the lighter glass — bolder weight + a slightly
+       deeper/brighter teal per theme so it actually reads instead of washing out */
+    .menu-one{font-weight:800;color:#00b3a0}
+    .dark .menu-one{color:#2ee6c8}
+    .menu-divider{height:1px;margin:12px 0;background:var(--color-border);}
+    .menu-signout{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border-radius:14px;padding:10px 12px;font-size:15px;font-weight:600;color:#ef4444;transition:background-color .15s ease;border:0;background:none;cursor:pointer;font-family:inherit;}
+    .menu-signout:hover{background:rgba(239,68,68,.1);}
 
-  /* atmospheric backdrop — subtle in light, luminous in dark */
-  .sky{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-  .orb{position:absolute;border-radius:50%;filter:blur(90px)}
-  .orb.a{width:560px;height:560px;left:-160px;top:-180px;background:radial-gradient(circle,var(--sky-1),transparent 65%);animation:drift1 28s ease-in-out infinite}
-  .orb.b{width:640px;height:640px;right:-220px;top:20%;background:radial-gradient(circle,var(--sky-3),transparent 65%);animation:drift2 34s ease-in-out infinite}
-  .orb.c{width:480px;height:480px;left:30%;bottom:-240px;background:radial-gradient(circle,var(--sky-2),transparent 65%);animation:drift1 40s ease-in-out infinite reverse}
-  @keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
-  @keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-55px,-45px)}}
+    /* cascading "scroll for more" chevron cue — replaces the single bouncing arrow. Three chevrons
+       light up top-to-bottom in sequence, then fade, reading as a gradual downward flow instead of a
+       single bounce. */
+    .scroll-cue{display:flex;flex-direction:column;align-items:center;color:#00d2b4}
+    .sc-chev{width:20px;height:10px;margin-top:-3px;opacity:.12;animation:scChevFade 1.8s ease-in-out infinite both}
+    @keyframes scChevFade{0%,100%{opacity:.12;transform:translateY(-2px)}35%{opacity:1;transform:translateY(2px)}70%{opacity:.12;transform:translateY(5px)}}
 
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-  .reveal.in{opacity:1;transform:none}
+    /* theme toggle icon crossfade (mirrors shadcn Sun/Moon pattern) */
+    #theme-toggle{position:relative}
+    #icon-sun{transition:transform .3s ease, opacity .3s ease}
+    #icon-moon{position:absolute;inset:0;margin:auto;transition:transform .3s ease, opacity .3s ease;opacity:0;transform:rotate(90deg) scale(0)}
+    .dark #icon-sun{opacity:0;transform:rotate(-90deg) scale(0)}
+    .dark #icon-moon{opacity:1;transform:rotate(0) scale(1)}
 
-  /* ===================== TOP BAR ===================== */
-  .bar{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;
-    padding:11px 18px;background:var(--bar);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
-    border-bottom:1px solid var(--border)}
-  .brandmini{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
-  .brandmini img{height:30px;width:auto;display:block}
-  .brandmini b{font-size:16.5px;font-weight:800;letter-spacing:-.01em;white-space:nowrap}
-  .brandmini b .one{color:var(--teal)}
-  .barbtns{display:flex;align-items:center;gap:8px}
-  .iconbtn{display:flex;align-items:center;justify-content:center;gap:6px;height:40px;min-width:40px;padding:0 11px;
-    border-radius:11px;border:1px solid var(--border);background:var(--card);color:var(--ink);font-family:inherit;
-    font-size:13px;font-weight:700;cursor:pointer;transition:border-color .15s,transform .12s,background .15s}
-  .iconbtn:hover{border-color:var(--teal);transform:translateY(-1px)}
-  .iconbtn:focus-visible{outline:none;box-shadow:0 0 0 3px var(--core-halo)}
-  .flag{height:14px;width:auto;vertical-align:middle;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
-  .langwrap{position:relative}
-  .langmenu{position:absolute;right:0;top:46px;min-width:156px;background:var(--card-2);border:1px solid var(--border);
-    border-radius:14px;box-shadow:var(--shadow);overflow:hidden;display:none}
-  .langmenu.open{display:block}
-  .langmenu button{display:flex;align-items:center;gap:10px;width:100%;padding:12px 15px;background:none;border:0;
-    color:var(--ink);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;text-align:left}
-  .langmenu button:hover{background:var(--bg2)}
+    /* language menu */
+    .langmenu{display:none;position:absolute;right:0;top:44px;width:190px;background:rgba(250,250,248,.94);border:1px solid rgba(255,255,255,.35);border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.4);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);overflow:hidden;z-index:60;padding:5px}
+    .dark .langmenu{background:rgba(16,20,32,.9);border-color:rgba(255,255,255,.1);box-shadow:0 12px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06)}
+    .langmenu.open{display:block}
+    .langmenu button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;background:none;border:0;border-radius:9px;color:var(--color-fg);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;text-align:left}
+    .langmenu button:hover{background:var(--color-secondary)}
+    .langmenu button .chk{margin-left:auto;color:#00d2b4;font-weight:900;opacity:0}
+    .langmenu button.active .chk{opacity:1}
 
-  /* drawer */
-  .scrim{position:fixed;inset:0;z-index:85;background:rgba(11,15,26,.42);opacity:0;pointer-events:none;transition:opacity .25s ease}
-  .scrim.on{opacity:1;pointer-events:auto}
-  .drawer{position:fixed;top:0;right:0;bottom:0;z-index:90;width:min(330px,88vw);background:var(--card-2);
-    border-left:1px solid var(--border);box-shadow:-18px 0 50px rgba(0,0,0,.22);transform:translateX(106%);
-    transition:transform .3s var(--ease);padding:18px;display:flex;flex-direction:column}
-  .drawer.open{transform:none}
-  .drawer .dx{align-self:flex-end}
-  .dsec{margin-top:14px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-ink)}
-  a.dlink{display:flex;align-items:center;justify-content:space-between;padding:13px 11px;border-radius:12px;
-    text-decoration:none;color:var(--ink);font-size:15px;font-weight:700}
-  a.dlink span.one{color:var(--teal)}
-  a.dlink:hover{background:var(--bg2)}
-  .dsub{font-size:11px;color:var(--faint);font-weight:600}
-  .dcta{margin-top:auto;display:flex;flex-direction:column;gap:9px;padding-top:16px}
-  .btn-primary{display:flex;align-items:center;justify-content:center;gap:9px;padding:14px;border-radius:var(--r-btn);
-    background:linear-gradient(180deg,var(--teal),var(--teal-d));color:#fff;font-size:14.5px;font-weight:800;
-    text-decoration:none;border:0;cursor:pointer;font-family:inherit;
-    box-shadow:0 8px 22px rgba(13,148,136,.30),inset 0 1px 0 rgba(255,255,255,.22);transition:transform .12s var(--ease)}
-  .btn-primary:hover{transform:translateY(-1px)}
-  .btn-ghost{display:flex;align-items:center;justify-content:center;padding:13px;border-radius:var(--r-btn);
-    border:1.5px solid var(--border);color:var(--ink);font-size:14.5px;font-weight:700;text-decoration:none;background:none}
-  .btn-ghost:hover{border-color:var(--teal)}
+    /* hover-to-preview feature removed (Jul 14 2026) — Lee: "finicky across the board", glitchy
+       and inconsistent. app-card no longer needs position:relative/overflow-hidden for it, but
+       both are harmless to leave for the hover border-glow/scale transitions already in use. */
 
-  /* ===================== HERO ===================== */
-  .hero{padding:120px 0 6px;text-align:center}
-  .brand{display:inline-flex;align-items:center}
-  .brand img{height:54px;width:auto;display:block}
-  .brand .words{text-align:left;margin-left:-7px}
-  .brand .top{font-size:31px;line-height:.95;letter-spacing:-.01em}
-  .brand .top .ne{color:var(--teal);font-weight:700}
-  .brand .top .word{font-weight:800}
-  .brand .sub{font-size:10px;letter-spacing:.15em;font-weight:700;color:var(--muted);text-transform:uppercase;margin-top:5px}
-  .pill{display:inline-flex;align-items:center;gap:8px;margin-top:26px;background:var(--core-halo);
-    border:1px solid var(--core-ring);color:var(--teal-ink);font-weight:700;font-size:12.5px;padding:7px 16px;border-radius:var(--r-pill)}
-  .pill .dot{width:7px;height:7px;border-radius:99px;background:var(--teal);animation:pulse 2.4s ease-in-out infinite}
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
-  h1{font-size:clamp(33px,6vw,56px);font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-top:18px}
-  h1 .t{background:linear-gradient(100deg,var(--teal),var(--teal-d));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lede{color:var(--muted);font-size:clamp(15px,2vw,17px);line-height:1.6;margin:16px auto 0;max-width:540px}
+    /* accordion */
+    .qa .qa-content{max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .qa.open .qa-content{max-height:320px}
+    .qa.open .qa-chev{transform:rotate(90deg)}
+    .qa-chev{transition:transform .25s ease}
 
-  /* ===================== CONSTELLATION (desktop) ===================== */
-  .constel{margin-top:30px}
-  .famlabel{text-align:center;font-size:12px;font-weight:800;letter-spacing:.18em;color:var(--teal-ink);text-transform:uppercase}
-  .famhead{text-align:center;font-size:clamp(23px,3.4vw,32px);font-weight:800;letter-spacing:-.02em;margin-top:9px}
-  .famsub{text-align:center;color:var(--muted);font-size:14.5px;margin-top:9px}
+    /* ---------- VAIA floating voice orb (ambient, tap-to-talk) ---------- */
+    #vaia-widget{position:fixed;top:74px;left:14px;right:auto;z-index:45;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+    @media (min-width:640px){ #vaia-widget{top:26vh;left:64px} }
+    /* NO disk at all — no fill, no backdrop-blur. Both of those still read as a solid/frosted
+       circle sitting on the page and visibly interfere with whatever text is behind her. All
+       that's left is the soft teal glow (already blurred to a 34-56px halo, no hard edge) and
+       the ring pulses below — she's just the rings + glow, nothing else. */
+    .vaia-orb{position:relative;width:132px;height:132px;border-radius:50%;background:transparent;border:none;box-shadow:0 0 34px rgba(0,210,180,.16);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:vaiaGlow 4.5s ease-in-out infinite;transition:opacity .4s ease,filter .4s ease,box-shadow .4s ease;opacity:.85}
+    @media (min-width:640px){ .vaia-orb{width:152px;height:152px} }
+    @keyframes vaiaGlow{0%,100%{box-shadow:0 0 34px rgba(0,210,180,.16)}50%{box-shadow:0 0 56px rgba(0,210,180,.36)}}
+    /* rings now emit from a small central point and dissolve outward as a blurred aura, not crisp
+       expanding circles — no visible line, just a soft pulse of light */
+    .vaia-ring{position:absolute;top:50%;left:50%;width:28%;height:28%;margin:-14% 0 0 -14%;border-radius:50%;background:radial-gradient(circle,rgba(0,210,180,.5) 0%,rgba(0,210,180,0) 70%);filter:blur(3px);opacity:0;animation:vaiaPulse 3.6s ease-out infinite}
+    .vaia-ring:nth-child(2){animation-delay:1.2s}
+    .vaia-ring:nth-child(3){animation-delay:2.4s}
+    @keyframes vaiaPulse{0%{transform:scale(1);opacity:.55}100%{transform:scale(4);opacity:0}}
+    .vaia-bars{position:relative;display:flex;align-items:center;justify-content:center;gap:5px;height:40px;z-index:2;transition:height .25s ease,transform .25s ease}
+    .vaia-bars span{display:block;width:5px;border-radius:3px;background:#00d2b4;height:12px;animation:vaiaBar 2.2s ease-in-out infinite;opacity:.65;filter:drop-shadow(0 0 5px var(--color-bg)) drop-shadow(0 0 5px var(--color-bg))}
+    .vaia-bars span:nth-child(1){animation-delay:0s}
+    .vaia-bars span:nth-child(2){animation-delay:.16s}
+    .vaia-bars span:nth-child(3){animation-delay:.32s}
+    .vaia-bars span:nth-child(4){animation-delay:.48s}
+    .vaia-bars span:nth-child(5){animation-delay:.64s}
+    @keyframes vaiaBar{0%,100%{height:10px}50%{height:26px}}
+    #vaia-widget.listening .vaia-bars span{animation-duration:.5s;opacity:1}
+    #vaia-widget.listening .vaia-bars span{animation-name:vaiaBarActive}
+    @keyframes vaiaBarActive{0%,100%{height:10px}50%{height:42px}}
+    #vaia-widget.listening .vaia-ring{animation-duration:1.4s}
+    #vaia-widget.speaking .vaia-orb{box-shadow:0 0 60px rgba(0,210,180,.5)}
+    #vaia-widget.speaking .vaia-bars span{animation-name:vaiaBarActive;animation-duration:.7s;opacity:1}
+    #vaia-widget.asleep .vaia-orb{animation:vaiaGlow 9s ease-in-out infinite;opacity:.45;filter:grayscale(45%)}
+    #vaia-widget.asleep .vaia-ring{animation-play-state:paused;opacity:0}
+    #vaia-widget.asleep .vaia-bars span{animation-play-state:paused;height:10px;opacity:.35}
+    /* she must NEVER go fully opaque and block page content — idle keeps a visible-but-translucent
+       baseline (set on .vaia-orb itself), active states go more translucent still, asleep stays dim */
+    #vaia-widget.listening .vaia-orb,
+    #vaia-widget.thinking .vaia-orb,
+    #vaia-widget.speaking .vaia-orb{opacity:.55}
+    /* four distinct states now: sleeping (dim), listening ("Listening" text), thinking ("Thinking" text),
+       talking (the vertical bars — bars are ONLY shown while she's actually speaking) */
+    #vaia-widget.thinking .vaia-bars,
+    #vaia-widget.listening .vaia-bars{display:none}
+    /* no backdrop behind her anymore, so the label needs its own legibility — a soft halo in the
+       page's own background color instead of a hard circular card */
+    .vaia-think,.vaia-listen{display:none;position:absolute;inset:0;align-items:center;justify-content:center;text-align:center;font-size:12px;font-weight:800;letter-spacing:.12em;color:#00d2b4;text-transform:uppercase;z-index:4;animation:vaiaThinkPulse 1.4s ease-in-out infinite;text-shadow:0 0 6px var(--color-bg),0 0 10px var(--color-bg),0 0 16px var(--color-bg),0 0 16px var(--color-bg)}
+    @media (min-width:640px){ .vaia-think,.vaia-listen{font-size:13.5px} }
+    #vaia-widget.thinking .vaia-think,
+    #vaia-widget.listening .vaia-listen{display:flex}
+    @keyframes vaiaThinkPulse{0%,100%{opacity:.6;transform:scale(.94)}50%{opacity:1;transform:scale(1.12)}}
 
-  .orbit{position:relative;margin:26px auto 0;max-width:1040px;height:762px}
-  svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
-  .wire{fill:none;stroke:var(--line);stroke-width:1.4;stroke-dasharray:5 7;animation:flow 1.5s linear infinite}
-  @keyframes flow{to{stroke-dashoffset:-12}}
-
-  /* CENTER = One ID = the single Google sign-in button (merged, one place only) */
-  .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;width:172px;height:172px;border-radius:50%;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;text-decoration:none;
-    color:var(--ink);background:var(--core-bg);border:1.5px solid var(--core-ring);cursor:pointer;font-family:inherit;
-    box-shadow:0 0 0 12px var(--core-halo),var(--shadow);transition:transform .18s var(--ease),box-shadow .3s var(--ease),border-color .18s}
-  .core:hover{transform:translate(-50%,-50%) scale(1.04);box-shadow:0 0 0 16px var(--core-halo),var(--shadow-lift);border-color:var(--teal)}
-  .core:focus-visible{outline:none;box-shadow:0 0 0 5px var(--teal),0 0 0 16px var(--core-halo)}
-  .core .gmark{width:38px;height:38px}
-  .core .clabel{font-size:15px;font-weight:800;letter-spacing:-.01em}
-  .core .clabel .one{color:var(--teal)}
-  .core .csub{font-size:10.5px;font-weight:700;letter-spacing:.04em;color:var(--muted)}
-  .core .ok{display:none;width:34px;height:34px;border-radius:50%;background:var(--teal);align-items:center;justify-content:center}
-  .core.signedin .gmark{display:none}
-  .core.signedin .ok{display:flex}
-  html[data-theme="dark"] .core{box-shadow:0 0 0 12px var(--core-halo),0 0 46px rgba(20,184,166,.18),var(--shadow)}
-
-  /* app nodes — all 5 identical, equidistant, each wired to core */
-  a.app{position:absolute;transform:translate(-50%,-50%);width:250px;z-index:4;display:block;text-decoration:none;color:inherit;
-    background:var(--card);border:1px solid var(--border);border-radius:var(--r-card);padding:16px 17px;
-    box-shadow:var(--shadow);transition:transform .18s var(--ease),border-color .18s,box-shadow .25s;
-    backdrop-filter:blur(14px) saturate(120%);-webkit-backdrop-filter:blur(14px) saturate(120%)}
-  a.app:hover{transform:translate(-50%,-50%) translateY(-4px);border-color:var(--teal);box-shadow:var(--shadow-lift)}
-  a.app:focus-visible{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--core-halo),var(--shadow)}
-  .apphead{display:flex;align-items:center;gap:8px}
-  .dotmark{width:9px;height:9px;border-radius:50%;background:var(--teal);flex-shrink:0;box-shadow:0 0 0 4px var(--core-halo)}
-  .pname{font-size:19px;line-height:1;letter-spacing:-.01em;white-space:nowrap}
-  .pname .one{color:var(--teal);font-weight:700}
-  .pname .word{font-weight:800}
-  .psub{font-size:8.5px;letter-spacing:.11em;font-weight:800;color:var(--teal-ink);text-transform:uppercase;margin-top:7px}
-  .pdesc{color:var(--muted);font-size:12.5px;line-height:1.5;margin-top:7px}
-  .phint{margin-top:9px;font-size:10.5px;font-weight:700;color:var(--faint);display:flex;align-items:center;gap:5px}
-  .phint svg{width:12px;height:12px}
-
-  /* hover PREVIEW popover — replaces the little arrow */
-  .preview{position:absolute;z-index:60;width:280px;background:var(--card-2);border:1px solid var(--border);
-    border-radius:14px;box-shadow:var(--shadow-lift);overflow:hidden;opacity:0;pointer-events:none;
-    transform:translateY(6px) scale(.98);transition:opacity .18s var(--ease),transform .18s var(--ease)}
-  .app-slot:hover .preview,.preview.show{opacity:1;transform:none}
-  .preview .pvhead{display:flex;align-items:center;gap:7px;padding:9px 12px;border-bottom:1px solid var(--border);font-size:12px;font-weight:800}
-  .preview .pvhead .one{color:var(--teal)}
-  .preview .pvframe{position:relative;height:168px;background:var(--bg2);overflow:hidden}
-  .preview .pvframe iframe{position:absolute;top:0;left:0;width:250%;height:250%;border:0;transform:scale(.4);transform-origin:top left;pointer-events:none}
-  .preview .pvload{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--faint);font-weight:700}
-  .app-slot{position:absolute;transform:translate(-50%,-50%)}
-  .app-slot a.app{position:static;transform:none}
-  .app-slot a.app:hover{transform:translateY(-4px)}
-
-  /* ===================== FOOTER ===================== */
-  .contact{margin-top:40px;text-align:center;color:var(--muted);font-size:14px;line-height:1.9}
-  .contact a{color:var(--teal-ink);font-weight:700;text-decoration:none}
-  .foot{margin-top:22px;padding-bottom:56px;text-align:center;font-size:12px;color:var(--faint)}
-
-  /* ===================== MOBILE (deliberate, not squished) ===================== */
-  .m-only{display:none}
-  @media (max-width:860px){
-    .hero{padding:100px 0 4px}
-    .constel .orbit{display:none}          /* pentagon is desktop-only */
-    .m-only{display:block}
-    /* One ID card — full width, the Google button, ONE place */
-    .m-core{margin:22px auto 0;max-width:440px;background:var(--card-2);border:1px solid var(--core-ring);
-      border-radius:20px;padding:22px 20px;text-align:center;box-shadow:var(--shadow)}
-    .m-core .glogin{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;margin-top:14px;
-      border-radius:var(--r-btn);border:1px solid var(--border);background:var(--card);color:var(--ink);
-      font-family:inherit;font-size:15px;font-weight:800;text-decoration:none;box-shadow:var(--shadow)}
-    .m-core .glogin img,.m-core .glogin svg{width:20px;height:20px}
-    .m-core h3{font-size:16px;font-weight:800}
-    .m-core h3 .one{color:var(--teal)}
-    .m-core p{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.5}
-    .m-core.signedin .glogin{background:linear-gradient(180deg,var(--teal),var(--teal-d));color:#fff;border:0}
-    /* app list — clean single column, equal cards */
-    .m-apps{margin:16px auto 0;max-width:440px;display:flex;flex-direction:column;gap:12px}
-    a.m-app{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);
-      border-radius:16px;padding:15px 16px;text-decoration:none;color:inherit;box-shadow:var(--shadow)}
-    a.m-app:active{transform:scale(.99)}
-    .m-app .mdot{width:38px;height:38px;border-radius:12px;background:var(--core-halo);display:flex;align-items:center;
-      justify-content:center;flex-shrink:0}
-    .m-app .mdot i{width:11px;height:11px;border-radius:50%;background:var(--teal)}
-    .m-app .mname{font-size:16px;letter-spacing:-.01em}
-    .m-app .mname .one{color:var(--teal);font-weight:700}.m-app .mname .word{font-weight:800}
-    .m-app .msub{font-size:12px;color:var(--muted);margin-top:2px}
-    .m-app .marr{margin-left:auto;color:var(--faint)}
-    .constel .famhead{font-size:23px}
-  }
-  @media (min-width:861px){ .m-only{display:none} }
-
-  @media (prefers-reduced-motion:reduce){
-    .orb,.wire,.pill .dot{animation:none!important}
-    .reveal{opacity:1;transform:none;transition:none}
-    html{scroll-behavior:auto}
-  }
-  /* ===== TWO WORLDS ===== */
-  .worlds{margin:26px auto 0;max-width:1000px;display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:start}
-  .world{display:flex;flex-direction:column;gap:14px}
-  .worldhead{display:flex;flex-direction:column;gap:3px;padding:0 2px 2px}
-  .wtag{font-size:15px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
-  .wtag-app{color:var(--teal-ink)}
-  .wsub{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--faint);text-transform:uppercase}
-  .wcol{display:flex;flex-direction:column;gap:14px}
-  .worlddiv{align-self:stretch;display:flex;flex-direction:column;align-items:center;padding-top:46px;min-height:100%}
-  .worlddiv .wline{width:1px;flex:1;background:linear-gradient(180deg,transparent,var(--border) 15%,var(--teal),var(--border) 85%,transparent)}
-  .worlddiv .wknot{width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 6px var(--core-halo);margin:10px 0}
-  .appbadge{margin-left:auto;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-ink);background:var(--core-halo);border:1px solid var(--core-ring);padding:3px 8px;border-radius:999px}
-  .appbadge-svc{color:var(--muted);background:transparent;border-color:var(--border)}
-  .worlds .app-slot{position:relative;transform:none;width:auto}
-  .worlds a.app{position:static;transform:none;width:auto}
-  .worlds a.app:hover{transform:translateY(-4px)}
-  .world-svc .preview{left:calc(100% + 14px);top:0}
-  .world-app .preview{right:calc(100% + 14px);top:0}
-  .app-slot:hover .preview{z-index:70}
-  .core-inline{display:flex;align-items:center;gap:13px;margin-top:4px;padding:14px 18px;border-radius:16px;text-decoration:none;color:var(--ink);background:var(--core-bg);border:1.5px solid var(--core-ring);cursor:pointer;box-shadow:0 0 0 8px var(--core-halo),var(--shadow);transition:transform .18s var(--ease),box-shadow .3s var(--ease),border-color .18s}
-  .core-inline:hover{transform:translateY(-2px);border-color:var(--teal);box-shadow:0 0 0 10px var(--core-halo),var(--shadow-lift)}
-  .core-inline:focus-visible{outline:none;box-shadow:0 0 0 4px var(--teal),0 0 0 10px var(--core-halo)}
-  .core-inline .gmark{width:30px;height:30px;flex-shrink:0}
-  .core-inline .cin{display:flex;flex-direction:column;text-align:left}
-  .core-inline .clabel{font-size:15px;font-weight:800}
-  .core-inline .clabel .one{color:var(--teal)}
-  .core-inline .csub{font-size:11.5px;font-weight:700;color:var(--muted)}
-  .core-inline .ok{display:none;width:30px;height:30px;border-radius:50%;background:var(--teal);align-items:center;justify-content:center;flex-shrink:0}
-  .core-inline.signedin .gmark{display:none}
-  .core-inline.signedin .ok{display:flex}
-  /* MOBILE: stack worlds, simplified, NO previews (no hover on phones) */
-  @media (max-width:860px){
-    .worlds{grid-template-columns:1fr;max-width:460px;gap:6px}
-    .worlddiv{flex-direction:row;padding:12px 0;min-height:0}
-    .worlddiv .wline{width:auto;height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--border),var(--teal),var(--border),transparent)}
-    .worlddiv .wknot{margin:0 10px}
-    .worlds .preview{display:none!important}
-    .worlds .phint-web{display:none}
-    .worlds a.app{padding:15px 16px}
-    .worlds .pdesc{font-size:12.5px;margin-top:5px}
-    .core-inline{justify-content:center;padding:15px}
-  }
+    .vaia-panel{width:290px;max-width:calc(100vw - 28px);max-height:0;overflow:hidden;opacity:0;transform:translateY(-8px);transition:max-height .3s ease,opacity .25s ease,transform .3s ease;border-radius:22px;border:1px solid var(--color-border);background:var(--color-card);background-color:var(--color-bg);backdrop-filter:blur(20px);box-shadow:0 20px 50px rgba(0,0,0,.22)}
+    @media (min-width:640px){ .vaia-panel{width:330px} }
+    #vaia-widget.open .vaia-panel{max-height:420px;opacity:1;transform:translateY(0)}
+    .vaia-panel-inner{display:flex;flex-direction:column;height:420px}
+    .vaia-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--color-border)}
+    .vaia-log{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;font-size:13.5px;line-height:1.5}
+    .vaia-msg{max-width:88%;padding:9px 12px;border-radius:14px}
+    .vaia-msg.user{align-self:flex-end;background:#00d2b4;color:#0a0a1a;border-bottom-right-radius:4px}
+    .vaia-msg.vaia{align-self:flex-start;background:var(--color-secondary);color:var(--color-fg);border-bottom-left-radius:4px}
+    .vaia-controls{display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--color-border)}
+    .vaia-mic{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:#00d2b4;color:#0a0a1a;display:flex;align-items:center;justify-content:center;border:0;cursor:pointer}
+    .vaia-mic.on{background:#ff4d4d;color:#fff}
+    .vaia-textin{flex:1;min-width:0;background:var(--color-secondary);border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--color-fg)}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-<div class="sky" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div></div>
+<div class="min-h-screen bg-background text-foreground font-sans overflow-x-hidden">
 
-<!-- ===== TOP BAR (shared component pattern across all One World apps) ===== -->
-<header class="bar">
-  <a class="brandmini" href="/" aria-label="One World Labs home">
-    <img src="/logo-mark.png" alt="" />
-    <b><span class="one">One</span> World Labs</b>
-  </a>
-  <div class="barbtns">
-    <div class="langwrap">
-      <button class="iconbtn" id="langbtn" aria-haspopup="true" aria-label="Language"><img class="flag" id="langflag" src="https://flagcdn.com/32x24/us.png" alt="" /><span id="langcode">EN</span></button>
-      <div class="langmenu" id="langmenu" role="menu">
-        <button data-lang="en" role="menuitem"><img class="flag" src="https://flagcdn.com/32x24/us.png" alt="" /> English</button>
-        <button data-lang="es" role="menuitem"><img class="flag" src="https://flagcdn.com/32x24/es.png" alt="" /> Español</button>
-      </div>
+    <!-- Background Orbs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0 flex justify-center">
+        <div class="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-primary/10 blur-[120px]"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-secondary/20 blur-[100px]"></div>
     </div>
-    <button class="iconbtn" id="themebtn" aria-label="Toggle light and dark mode"><span id="themeicon">🌙</span></button>
-    <button class="iconbtn" id="menubtn" aria-label="Open menu" aria-controls="drawer">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-  </div>
-</header>
 
-<div class="scrim" id="scrim"></div>
-<nav class="drawer" id="drawer" aria-label="Menu">
-  <button class="iconbtn dx" id="drawerx" aria-label="Close menu">✕</button>
-  <div class="dsec" data-i18n="d_apps">Our apps</div>
-  <a class="dlink" href="https://onevoice.onesocial.ai"><span><span class="one">One</span>Voice</span><span class="dsub" data-i18n="d_voice">AI receptionist</span></a>
-  <a class="dlink" href="/onescore-preview/oneapp.html"><span><span class="one">One</span>App</span><span class="dsub" data-i18n="d_app">AI websites</span></a>
-  <a class="dlink" href="/onescore-preview/"><span><span class="one">One</span>Score</span><span class="dsub" data-i18n="d_score">Credibility score</span></a>
-  <a class="dlink" href="https://frazier56.github.io/onesocial-v2-preview/"><span><span class="one">One</span>Social</span><span class="dsub" data-i18n="d_social">Get hired</span></a>
-  <a class="dlink" href="https://frazier56.github.io/oneevents-preview/"><span><span class="one">One</span>Events</span><span class="dsub" data-i18n="d_events">Events &amp; tickets</span></a>
-  <div class="dsec" data-i18n="d_contact">Contact</div>
-  <a class="dlink" href="mailto:contact@oneworldlabs.ai" style="font-size:13.5px;font-weight:600">contact@oneworldlabs.ai</a>
-  <div class="dcta">
-    <a class="btn-ghost" id="d-signin" href="#one-id" data-i18n="signin">Sign in</a>
-    <a class="btn-primary" id="d-join" href="#one-id" data-i18n="join">Join free</a>
-  </div>
-</nav>
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+        <div class="w-full px-3 sm:px-5 h-16 flex items-center justify-between">
+            <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center gap-[3px]">
+                <img src="/logo-mark.png" alt="One World Labs" class="h-8 w-8 -mr-[2px]">
+                <span class="font-heading font-bold text-xl tracking-tight"><span class="text-primary">ne</span> World Labs</span>
+            </a>
+            <div class="flex items-center gap-2 sm:gap-4">
+                <div class="relative">
+                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="true" aria-label="Language">
+                        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="EN" class="h-4 w-6 rounded-sm object-cover">
+                        <span id="lang-code" class="font-medium text-sm hidden sm:inline">EN</span>
+                    </button>
+                    <div class="langmenu" id="lang-menu" role="menu">
+                        <button data-lang="en" class="active"><img src="https://flagcdn.com/w40/us.png" width="20" height="14" class="rounded-sm" alt="">USA<span class="chk">✓</span></button>
+                        <button data-lang="co"><img src="https://flagcdn.com/w40/co.png" width="20" height="14" class="rounded-sm" alt="">Colombia<span class="chk">✓</span></button>
+                        <button data-lang="es"><img src="https://flagcdn.com/w40/es.png" width="20" height="14" class="rounded-sm" alt="">España<span class="chk">✓</span></button>
+                        <button data-lang="de"><img src="https://flagcdn.com/w40/de.png" width="20" height="14" class="rounded-sm" alt="">Deutschland<span class="chk">✓</span></button>
+                        <button data-lang="ru"><img src="https://flagcdn.com/w40/ru.png" width="20" height="14" class="rounded-sm" alt="">Россия<span class="chk">✓</span></button>
+                        <button data-lang="zh"><img src="https://flagcdn.com/w40/cn.png" width="20" height="14" class="rounded-sm" alt="">中国<span class="chk">✓</span></button>
+                        <button data-lang="pt"><img src="https://flagcdn.com/w40/br.png" width="20" height="14" class="rounded-sm" alt="">Brasil<span class="chk">✓</span></button>
+                    </div>
+                </div>
+                <button id="theme-toggle" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Toggle theme">
+                    <svg id="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    <svg id="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                </button>
+                <button id="menu-btn" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Open menu">
+                    <svg id="icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+                    <svg id="icon-x" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
 
-<!-- ===== HERO ===== -->
-<div class="wrap">
-  <section class="hero">
-    <span class="brand">
-      <img src="/logo-mark.png" alt="O" />
-      <span class="words">
-        <span class="top"><span class="ne">ne</span><span class="word">&thinsp;World&thinsp;Labs</span></span>
-        <span class="sub" data-i18n="tagline">Tools that grow small business</span>
-      </span>
-    </span>
-    <div><span class="pill"><span class="dot"></span><span data-i18n="pill">Five tools · One login · Zero gatekeepers</span></span></div>
-    <h1 data-i18n-html="h1">Get seen. Get trusted.<br /><span class="t">Get paid.</span></h1>
-    <p class="lede" data-i18n="lede">You built a real business — but algorithms decide who sees it and your reputation is scattered everywhere. We build simple tools that put you back in control.</p>
-  </section>
+    <!-- Mobile / full menu overlay — drawer style + glass tint matched to OneEvent's GlassDrawer
+         (see oneevents-delta/src/components/GlassDrawer.tsx). Also now One-ID-aware: shows a
+         "Sign in with One ID" row when signed out, or an identity row + red Sign Out row when
+         signed in (previously always showed "Sign in" regardless of session — no way to sign out
+         from here at all). -->
+    <div id="menu-overlay" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
+        <div class="menu-panel absolute right-3 top-[74px] flex max-h-[calc(100vh-90px)] w-[300px] max-w-[88vw] flex-col overflow-y-auto rounded-3xl border shadow-2xl p-4 sm:p-5">
 
-  <!-- ===== CONSTELLATION ===== -->
-  <section class="constel reveal" id="one-id">
-    <div class="famlabel" data-i18n="famlabel">The One World Labs family</div>
-    <div class="famhead" data-i18n="famhead">Two kinds of tools. One login.</div>
-    <p class="famsub" data-i18n="famsub">Services we run for you — and apps you use to get seen, trusted, and paid.</p>
+            <!-- identity row: One World Labs mark when signed out, avatar + name when signed in -->
+            <div class="mb-1 flex items-center justify-between gap-2">
+                <div id="hb-signedout-id" class="flex items-center gap-1.5 min-w-0">
+                    <img src="/logo-mark.png" alt="" class="h-6 w-6 shrink-0">
+                    <span class="text-[16px] font-heading font-bold tracking-tight truncate"><span class="text-primary">One</span> World Labs</span>
+                </div>
+                <div id="hb-signedin-id" class="hidden items-center gap-2.5 min-w-0">
+                    <span id="hbAvatarLetter" class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary/15 text-sm font-bold text-primary">·</span>
+                    <span class="min-w-0">
+                        <span id="hbNameLine" class="block truncate text-sm font-bold leading-tight">Signed in</span>
+                        <span class="block truncate text-xs text-muted-foreground" data-i18n="oneid_label">One ID</span>
+                    </span>
+                </div>
+                <button id="menu-close-x" type="button" class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-lg leading-none" aria-label="Close menu">&times;</button>
+            </div>
 
-    <!-- DESKTOP: balanced pentagon, all 5 equidistant + wired to the One ID core -->
-    <div class="worlds" id="worlds">
-      <div class="world world-svc">
-        <div class="worldhead"><span class="wtag" data-i18n="w_svc_t">Done for you</span><span class="wsub" data-i18n="w_svc">Services we run · websites</span></div>
-        <div class="wcol">
-        <div class="app-slot">
-          <a class="app" href="/onescore-preview/oneapp.html" data-app="app">
-            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">App</span></div><span class="appbadge appbadge-svc" data-i18n="badge_svc">Service</span></div>
-            <div class="psub" data-i18n="app_sub">Your business. One app.</div>
-            <p class="pdesc" data-i18n="app_desc">Your website rebuilt by AI in about a minute — then we handle hosting, domain, and email.</p>
-            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-          </a>
-          <div class="preview" data-src="/onescore-preview/oneapp.html"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>App</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
-        </div>
-        <div class="app-slot">
-          <a class="app" href="https://onevoice.onesocial.ai" data-app="voice">
-            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Voice</span></div><span class="appbadge appbadge-svc" data-i18n="badge_svc">Service</span></div>
-            <div class="psub" data-i18n="voice_sub">AI voice assistant</div>
-            <p class="pdesc" data-i18n="voice_desc">Never miss a call. Your AI receptionist answers 24/7, qualifies leads, and books appointments.</p>
-            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-          </a>
-          <div class="preview" data-src="https://onevoice.onesocial.ai"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Voice</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
-        </div>
-        </div>
-      </div>
+            <div class="mt-3 space-y-3">
+                <div>
+                    <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1 px-1" data-i18n="ftr_apps">Apps</h4>
+                    <a href="/onescore-preview/" class="menu-navitem"><span><span class="menu-one">One</span>Score</span></a>
+                    <a href="https://www.oneworldlabs.ai/onejob/" class="menu-navitem"><span><span class="menu-one">One</span>Job</span></a>
+                    <a href="https://www.oneworldlabs.ai/oneevents-preview/" class="menu-navitem"><span><span class="menu-one">One</span>Event</span></a>
+                </div>
+                <div>
+                    <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1 px-1" data-i18n="ftr_svcs">Services</h4>
+                    <a href="/onevoice/" class="menu-navitem"><span><span class="menu-one">One</span>Voice</span></a>
+                    <a href="/oneapp/" class="menu-navitem"><span><span class="menu-one">One</span>Web</span></a>
+                </div>
+            </div>
 
-      <div class="worlddiv" aria-hidden="true"><span class="wline"></span><span class="wknot"></span><span class="wline"></span></div>
+            <div class="menu-divider"></div>
 
-      <div class="world world-app">
-        <div class="worldhead"><span class="wtag wtag-app" data-i18n="w_app_t">Get seen · trusted · paid</span><span class="wsub" data-i18n="w_app">Apps that work together · one login</span></div>
-        <div class="wcol">
-        <div class="app-slot">
-          <a class="app" href="/onescore-preview/" data-app="score">
-            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Score</span></div><span class="appbadge" data-i18n="badge_app">App</span></div>
-            <div class="psub" data-i18n="score_sub">Professional credibility</div>
-            <p class="pdesc" data-i18n="score_desc">Your whole reputation — reviews, real work, social proof — in one verified number. Free forever.</p>
-            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-          </a>
-          <div class="preview" data-src="/onescore-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Score</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
+            <!-- signed-out: One ID sign-in -->
+            <div id="hb-signedout-cta" class="flex flex-col gap-2">
+                <a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="w-full text-center h-11 px-6 inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-primary-foreground font-semibold" data-i18n="cta_signin">
+                    <svg class="h-5 w-5 shrink-0" width="24" height="24" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+                    <span data-i18n="cta_signin">Sign in with One ID</span>
+                </a>
+                <a href="#apps" class="menu-close-link w-full text-center h-11 px-6 inline-flex items-center justify-center rounded-xl border border-border font-medium hover:bg-secondary/50 transition-colors" data-i18n="cta_jump">Jump into an app</a>
+            </div>
+
+            <!-- signed-in: sign out (red row, matches OneEvent's GlassDrawer sign-out styling) -->
+            <div id="hb-signedin-cta" class="hidden flex-col">
+                <button id="hbSignOutBtn" type="button" class="menu-signout">
+                    <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+                    <span data-i18n="signout">Sign out</span>
+                </button>
+            </div>
+
         </div>
-        <div class="app-slot">
-          <a class="app" href="https://frazier56.github.io/onesocial-v2-preview/" data-app="social">
-            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Social</span></div><span class="appbadge" data-i18n="badge_app">App</span></div>
-            <div class="psub" data-i18n="social_sub">The credibility marketplace</div>
-            <p class="pdesc" data-i18n="social_desc">Where proof gets you hired — verified reviews, jobs, and payments in one simple place.</p>
-            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-          </a>
-          <div class="preview" data-src="https://frazier56.github.io/onesocial-v2-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Social</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
-        </div>
-        <div class="app-slot">
-          <a class="app" href="https://frazier56.github.io/oneevents-preview/" data-app="events">
-            <div class="apphead"><span class="dotmark"></span><div class="pname"><span class="one">One</span><span class="word">Events</span></div><span class="appbadge" data-i18n="badge_app">App</span></div>
-            <div class="psub" data-i18n="events_sub">Events & tickets</div>
-            <p class="pdesc" data-i18n="events_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
-            <div class="phint phint-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="hover_preview">Hover to preview · click to open</span></div>
-          </a>
-          <div class="preview" data-src="https://frazier56.github.io/oneevents-preview/"><div class="pvhead"><span class="dotmark"></span><span><span class="one">One</span>Events</span></div><div class="pvframe"><div class="pvload" data-i18n="loading">Loading preview…</div></div></div>
-        </div>
-        </div>
-        <a class="core-inline" id="core" href="#" role="button" aria-label="Sign in with Google — One ID">
-          <svg class="gmark" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg><span class="ok" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
-          <span class="cin"><span class="clabel"><span class="one">One</span> ID</span><span class="csub" id="coresub" data-i18n="core_signin">Sign in with Google</span></span>
-        </a>
-      </div>
     </div>
-  </section>
 
-  <div class="contact reveal">
-    <strong style="color:var(--ink)" data-i18n="contact_h">Contact us</strong><br />
-    <a href="mailto:contact@oneworldlabs.ai">contact@oneworldlabs.ai</a><br />
-    <span data-i18n="contact_p">Built for small businesses and freelancers, everywhere.</span>
-  </div>
-  <p class="foot">© 2026 One World Labs, Inc. · OneVoice · OneApp · OneScore · OneSocial · OneEvents</p>
+    <!-- VAIA floating voice assistant -->
+    <div id="vaia-widget">
+        <div class="vaia-panel">
+            <div class="vaia-panel-inner">
+                <div class="vaia-head">
+                    <span class="font-heading font-bold text-sm flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary"></span> VAIA</span>
+                    <button id="vaia-close" class="h-7 w-7 inline-flex items-center justify-center rounded-md hover:bg-secondary/50" aria-label="Close VAIA">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    </button>
+                </div>
+                <div id="vaia-log" class="vaia-log"></div>
+                <div class="vaia-controls">
+                    <input id="vaia-text" class="vaia-textin" type="text" placeholder="Type to VAIA (or just talk to her)…">
+                </div>
+            </div>
+        </div>
+        <div class="vaia-orb" id="vaia-orb" role="button" tabindex="0" aria-label="Tap to talk to VAIA">
+            <div class="vaia-ring"></div><div class="vaia-ring"></div><div class="vaia-ring"></div>
+            <div class="vaia-bars"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="vaia-think">Thinking</div>
+            <div class="vaia-listen">Listening</div>
+        </div>
+    </div>
+
+    <main class="relative z-10 pt-24 md:pt-32 pb-16 md:pb-20">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-4 text-center max-w-4xl mb-20 md:mb-32">
+            <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 py-2 rounded-full bg-secondary/50 border border-border/50 backdrop-blur-sm mb-8 text-[10.5px] sm:text-[12.5px] font-medium">
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">5</strong> <span class="text-muted-foreground" data-i18n="s_apps">apps</span></span>
+                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">2</strong> <span class="text-muted-foreground" data-i18n="s_svcs">services</span></span>
+                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">1</strong> <span class="text-muted-foreground" data-i18n="s_login">login</span></span>
+            </div>
+
+            <h1 class="fade-up text-4xl sm:text-5xl md:text-7xl font-heading font-bold tracking-tight leading-[1.1] mb-6">
+                <span data-i18n="h1_l1">Work smarter with AI</span><br>
+                <span data-i18n="h1_l2">across your business</span><br>
+                <span data-i18n="h1_l3">with </span><span class="text-primary">One</span><span id="rot" class="rot-word">App</span>
+            </h1>
+
+            <p class="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed" data-i18n="lede">
+                Apps you use and services we run for you — tied together by one login — so small businesses and freelancers get seen, get trusted, and get paid.
+            </p>
+
+            <div id="signedout-cta" class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                <a href="#apps" class="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center transition-colors">
+                    <span data-i18n="cta_jump">Jump into an app</span> <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+                <a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-full border border-foreground/70 hover:bg-secondary/50 inline-flex items-center justify-center transition-colors">
+                    <svg class="mr-2 h-6 w-6" width="24" height="24" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+                    <span data-i18n="cta_signin">Sign in with One ID</span>
+                </a>
+            </div>
+
+            <!-- shown instead of the buttons above once One ID recognizes a signed-in session (see
+                 the auth-state script near the end of <body>) — never auto-redirects into an app,
+                 just points at the app cards below. The Google-style button STAYS in place and its
+                 label swaps in-place to reflect signed-in status; a separate Sign Out button sits
+                 next to it (stacks below on mobile) — per Lee's correction, a text message with no
+                 button was not enough. -->
+            <div id="signedin-cta" class="hidden flex-col items-center justify-center gap-1.5 mb-8">
+                <span class="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-full border border-foreground/70 inline-flex items-center justify-center gap-2">
+                    <svg class="h-6 w-6 shrink-0" width="24" height="24" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+                    <span id="welcomeMsg">Signed in — Welcome, there!</span>
+                </span>
+                <!-- plain text, not a second pill button (Lee: too much visual weight for what it does) —
+                     sits directly under the pill on every viewport, mobile and desktop alike -->
+                <button id="signOutBtn" type="button" class="text-sm font-semibold text-muted-foreground hover:text-foreground hover:underline underline-offset-4 transition-colors" data-i18n="signout">Sign out</button>
+                <p class="text-muted-foreground text-sm sm:text-base mt-2" data-i18n="signedin_hint">Pick your favorite app below to jump back in — you're already signed in everywhere.</p>
+                <!-- cascading chevron cue: 3 chevrons light up top-to-bottom then fade, replacing the
+                     single bouncing arrow with a "flowing downward" progression (Lee's ask) -->
+                <div class="scroll-cue mt-1" aria-hidden="true">
+                    <svg class="sc-chev" style="animation-delay:0s" viewBox="0 0 24 12"><path d="M2 2l10 8 10-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg class="sc-chev" style="animation-delay:.18s" viewBox="0 0 24 12"><path d="M2 2l10 8 10-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg class="sc-chev" style="animation-delay:.36s" viewBox="0 0 24 12"><path d="M2 2l10 8 10-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+            </div>
+
+            <p class="text-sm text-muted-foreground font-medium" data-i18n="microtrust">
+                One login for every app · Free to start · No credit card
+            </p>
+        </section>
+
+        <!-- Services Section -->
+        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3" data-i18n="svc_eyebrow">Done for you</h3>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4" data-i18n="svc_h2">Enhance your business with our services</h2>
+                <p class="text-muted-foreground text-base md:text-lg" data-i18n="svc_sub">Hands-off services our team runs for you — so you can focus on the work.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="/onevoice/" data-ico="onevoice" class="app-card group relative overflow-hidden block p-6 md:p-10 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300">
+                    <div class="absolute top-6 right-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 rounded-full z-20" data-i18n="dfy_badge">Done for you</div>
+                    <img src="/ic-onevoice.png" alt="OneVoice" class="w-16 h-16 object-contain mb-6">
+                    <h3 class="text-3xl font-bold font-heading mb-4"><span class="text-primary">One</span>Voice</h3>
+                    <p class="text-muted-foreground text-lg leading-relaxed mb-8" data-i18n="onevoice_desc">An AI receptionist that answers every call 24/7, qualifies the lead, and books the appointment — so a missed call is never a missed customer. We set it up and run it for you.</p>
+                    <div class="flex items-center text-primary font-medium group-hover:translate-x-1 transition-transform">
+                        <span data-i18n="onevoice_cta">Get OneVoice</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                </a>
+                <a href="/oneapp/" data-ico="oneapp" class="app-card group relative overflow-hidden block p-6 md:p-10 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300">
+                    <div class="absolute top-6 right-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 rounded-full z-20" data-i18n="dfy_badge">Done for you</div>
+                    <img src="/ic-onepage.png" alt="OneWeb" class="w-16 h-16 object-contain mb-6">
+                    <h3 class="text-3xl font-bold font-heading mb-4"><span class="text-primary">One</span>Web</h3>
+                    <p class="text-muted-foreground text-lg leading-relaxed mb-8" data-i18n="oneapp_desc">We build your website with AI, then handle the hosting, domain, email, and ongoing updates for you — a real web presence without the hassle.</p>
+                    <div class="flex items-center text-primary font-medium group-hover:translate-x-1 transition-transform">
+                        <span data-i18n="oneapp_cta">Get OneWeb</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                </a>
+                <div data-ico="oneapp-soon" class="app-card group relative overflow-hidden p-6 md:p-10 rounded-3xl bg-card border border-border border-dashed opacity-80">
+                    <div class="w-16 h-16 flex items-center justify-center mb-6"><span class="text-[44px] leading-none select-none">&#128241;</span></div>
+                    <h3 class="text-3xl font-bold font-heading mb-4"><span class="text-primary">One</span>App</h3>
+                    <p class="text-muted-foreground text-lg leading-relaxed mb-8" data-i18n="oneapp_new_desc">Turn your idea into a real, working app — built for you with AI, then hosted and maintained by our team. No code, no agencies.</p>
+                    <div class="flex items-center font-medium">
+                        <span class="rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-bold uppercase tracking-wider" data-i18n="coming_soon">Coming soon</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Apps Section -->
+        <section id="apps" class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3" data-i18n="apps_eyebrow">The apps</h3>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4" data-i18n="apps_h2">Jump into your favorite app</h2>
+                <p class="text-muted-foreground text-lg" data-i18n="apps_sub">Five apps, one login — four live today, one on the way.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="https://www.oneworldlabs.ai/onejob/" data-ico="onejob" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Job</h3>
+                        <img src="/ic-onesocial.png" alt="OneJob" class="w-12 h-12 object-contain">
+                    </div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3" data-i18n="onejob_tag">The jobs marketplace</h4>
+                    <p class="text-muted-foreground leading-relaxed mb-8 h-24" data-i18n="onejob_desc">Get hired and get paid in 60 seconds — verified reviews, contracts, and payments held safely until the job is done.</p>
+                    <div class="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
+                        <span data-i18n="onejob_cta">Open OneJob</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                </a>
+                <a href="/onescore-preview/" data-ico="onescore" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Score</h3>
+                        <img src="/ic-onescore.png" alt="OneScore" class="w-12 h-12 object-contain">
+                    </div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3" data-i18n="onescore_tag">Professional credibility</h4>
+                    <p class="text-muted-foreground leading-relaxed mb-8 h-24" data-i18n="onescore_desc">Your whole reputation — reviews, real work, social proof — in one verified number you can post anywhere. Free forever.</p>
+                    <div class="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
+                        <span data-i18n="onescore_cta">Open OneScore</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.oneworldlabs.ai/oneevents-preview/" data-ico="oneevents" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Event</h3>
+                        <img src="/ic-oneevents.png" alt="OneEvent" class="w-12 h-12 object-contain">
+                    </div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3" data-i18n="oneevent_tag">Events &amp; tickets</h4>
+                    <p class="text-muted-foreground leading-relaxed mb-8 h-24" data-i18n="oneevent_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
+                    <div class="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
+                        <span data-i18n="oneevent_cta">Open OneEvent</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.oneworldlabs.ai/onesocial-preview/" data-ico="onesocial" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_40px_-15px_rgba(0,210,180,0.3)]">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Social</h3>
+                        <span class="text-[40px] leading-none select-none">&#129309;</span>
+                    </div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3" data-i18n="onesocial_tag">Your connected platforms</h4>
+                    <p class="text-muted-foreground leading-relaxed mb-8 h-24" data-i18n="onesocial_desc">All your platforms, one professional identity — connect your accounts and turn your following into verified credibility.</p>
+                    <div class="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
+                        <span data-i18n="onesocial_cta">Open OneSocial</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                </a>
+                <div data-ico="oneagent" class="app-card group block p-6 md:p-8 rounded-3xl bg-card border border-border border-dashed opacity-80">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-bold font-heading"><span class="text-primary">One</span>Agent</h3>
+                        <span class="text-[40px] leading-none select-none">&#129302;</span>
+                    </div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3" data-i18n="oneagent_tag">Your AI workforce</h4>
+                    <p class="text-muted-foreground leading-relaxed mb-8 h-24" data-i18n="oneagent_desc">AI agents that find work, pitch clients, and handle the busywork for you — while you do the job.</p>
+                    <div class="flex items-center font-medium text-sm">
+                        <span class="rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-bold uppercase tracking-wider" data-i18n="coming_soon">Coming soon</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3" data-i18n="feat_eyebrow">Why it works</h3>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4" data-i18n="feat_h2">Running a business, made simpler</h2>
+                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="feat_sub">The busywork that eats your day — answered calls, a real website, proof you can trust — handled in one place.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 md:p-8 rounded-3xl bg-secondary/30 border border-border/50 flex flex-col">
+                    <div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-primary mb-6">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3" data-i18n="f1_h">Never miss a call</h3>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow" data-i18n="f1_p">OneVoice answers every call 24/7, qualifies the lead, and books the appointment.</p>
+                    <a href="/onevoice/" class="text-primary text-sm font-medium hover:underline inline-flex items-center"><span data-i18n="f1_cta">Meet OneVoice</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                </div>
+                <div class="p-6 md:p-8 rounded-3xl bg-secondary/30 border border-border/50 flex flex-col">
+                    <div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-primary mb-6">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3" data-i18n="f2_h">A website built with AI</h3>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow" data-i18n="f2_p">Tell OneWeb about your business and it builds your site with AI — then we host it.</p>
+                    <a href="/oneapp/" class="text-primary text-sm font-medium hover:underline inline-flex items-center"><span data-i18n="f2_cta">See OneWeb</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                </div>
+                <div class="p-6 md:p-8 rounded-3xl bg-secondary/30 border border-border/50 flex flex-col">
+                    <div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-primary mb-6">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3" data-i18n="f3_h">Proof you can point to</h3>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow" data-i18n="f3_p">OneScore turns your reviews and real work into one verified number.</p>
+                    <a href="/onescore-preview/" class="text-primary text-sm font-medium hover:underline inline-flex items-center"><span data-i18n="f3_cta">Get your OneScore</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                </div>
+                <div class="p-6 md:p-8 rounded-3xl bg-secondary/30 border border-border/50 flex flex-col">
+                    <div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-primary mb-6">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3" data-i18n="f4_h">Get hired and get paid</h3>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow" data-i18n="f4_p">OneJob is the marketplace where verified proof wins the job.</p>
+                    <a href="https://www.oneworldlabs.ai/onejob/" class="text-primary text-sm font-medium hover:underline inline-flex items-center"><span data-i18n="f4_cta">Explore OneJob</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platforms Section -->
+        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3" data-i18n="plat_eyebrow">Use it anywhere</h3>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4" data-i18n="plat_h2">Works on any phone or computer</h2>
+                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="plat_sub">No download required. Open it in your browser today — and add it to your home screen so it opens like an app.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="p-6 md:p-10 rounded-3xl bg-card border border-border">
+                    <div class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground mb-8">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" data-i18n="plat1_h">Add to your phone</h3>
+                    <p class="text-muted-foreground text-lg leading-relaxed mb-8" data-i18n="plat1_p">Open any One World app in your mobile browser, tap Share, and choose "Add to Home Screen." It installs an icon and opens full-screen — no App Store needed.</p>
+                    <div class="inline-block px-4 py-2 rounded-full border border-border/50 text-xs font-bold tracking-wider text-muted-foreground" data-i18n="plat1_badge">NATIVE APPS COMING SOON</div>
+                </div>
+                <div class="p-6 md:p-10 rounded-3xl bg-card border border-border">
+                    <div class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground mb-8">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" data-i18n="plat2_h">Use it on desktop</h3>
+                    <p class="text-muted-foreground text-lg leading-relaxed mb-8" data-i18n="plat2_p">Everything runs in your browser on any computer — nothing to install, nothing to update. Bookmark oneworldlabs.ai and you're one click from every app.</p>
+                    <a href="#apps" class="rounded-full px-6 h-10 inline-flex items-center justify-center bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"><span data-i18n="cta_jump">Jump into an app</span> <svg class="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container mx-auto px-4 max-w-3xl mb-20">
+            <div class="text-center mb-12">
+                <h3 class="text-primary text-sm font-bold tracking-widest uppercase mb-3" data-i18n="faq_eyebrow">Good to know</h3>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold" data-i18n="faq_h2">Did you know?</h2>
+            </div>
+
+            <div id="faq">
+                <div class="qa border-b border-border/50 px-6 bg-card rounded-2xl mb-4">
+                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
+                        <span class="flex items-center gap-4"><span class="text-primary font-bold text-sm">01 /</span><span data-i18n="q1_q">One World Labs is apps you use plus services we run</span></span>
+                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14" data-i18n="q1_a">Five apps under one login — OneJob to get hired and paid, OneScore for credibility, OneEvent for tickets, plus OneSocial (connected platforms) and OneAgent (AI workforce) coming soon — plus two done-for-you services our team runs: OneVoice answers your calls and OneWeb builds and manages your website. Everything shares one login and one profile.</p></div>
+                </div>
+                <div class="qa border-b border-border/50 px-6 bg-card rounded-2xl mb-4">
+                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
+                        <span class="flex items-center gap-4"><span class="text-primary font-bold text-sm">02 /</span><span data-i18n="q2_q">You can start free — no credit card</span></span>
+                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14" data-i18n="q2_a">OneScore is free forever, and every app lets you get started without paying up front. Our done-for-you services are paid — you only upgrade when a tool is earning its keep.</p></div>
+                </div>
+                <div class="qa border-b border-border/50 px-6 bg-card rounded-2xl mb-4">
+                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
+                        <span class="flex items-center gap-4"><span class="text-primary font-bold text-sm">03 /</span><span data-i18n="q3_q">One login gets you into everything</span></span>
+                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14" data-i18n="q3_a">Sign in once with One ID and you're in every One World app and service — no separate accounts, no re-entering your details, no juggling passwords across tools.</p></div>
+                </div>
+                <div class="qa border-b border-border/50 px-6 bg-card rounded-2xl mb-4">
+                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
+                        <span class="flex items-center gap-4"><span class="text-primary font-bold text-sm">04 /</span><span data-i18n="q4_q">Built credibility-first — you stay in control</span></span>
+                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14" data-i18n="q4_a">No algorithm decides who sees your business, and your reputation isn't scattered across ten platforms. Your proof is verified, yours, and portable — you decide where it shows up.</p></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-border/50 bg-background pt-12 md:pt-20 pb-8 md:pb-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 mb-12 md:mb-16">
+                <div>
+                    <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6" data-i18n="ftr_apps">Apps</h4>
+                    <ul class="space-y-4">
+                        <li><a href="/onescore-preview/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Score</a></li>
+                        <li><a href="https://www.oneworldlabs.ai/onejob/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Job</a></li>
+                        <li><a href="https://www.oneworldlabs.ai/oneevents-preview/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Event</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6" data-i18n="ftr_svcs">Services</h4>
+                    <ul class="space-y-4">
+                        <li><a href="/onevoice/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Voice</a></li>
+                        <li><a href="/oneapp/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Web</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6" data-i18n="ftr_company">Company</h4>
+                    <ul class="space-y-4">
+                        <li><a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="text-foreground hover:text-primary transition-colors" data-i18n="cta_signin">Sign in with One ID</a></li>
+                        <li><a href="mailto:contact@oneworldlabs.ai" class="text-foreground hover:text-primary transition-colors" data-i18n="ftr_contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm tracking-wider uppercase text-muted-foreground mb-6" data-i18n="ftr_getstarted">Get started</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#apps" class="text-foreground hover:text-primary transition-colors inline-flex items-center"><span data-i18n="cta_jump">Jump into an app</span> <svg class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></li>
+                        <li><a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="text-foreground hover:text-primary transition-colors" data-i18n="cta_signin">Sign in with One ID</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border/50 gap-6 text-center md:text-left">
+                <div class="flex items-center gap-4">
+                    <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.25 8h4.5v14h-4.5V8zM8 8h4.3v1.9h.06c.6-1.1 2.05-2.26 4.22-2.26 4.5 0 5.34 2.96 5.34 6.8V22h-4.5v-6.6c0-1.57-.03-3.6-2.2-3.6-2.2 0-2.53 1.72-2.53 3.5V22H8V8z"/></svg></a>
+                    <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+                    <a href="#" aria-label="X" class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.9l-5.4-7-6.2 7H1.4l8-9.2L1 2h7l4.9 6.5L18.9 2zm-1.2 18h1.9L7.1 4H5.1l12.6 16z"/></svg></a>
+                </div>
+                <div class="text-sm text-muted-foreground">
+                    <p class="mb-1">© 2026 One World Labs, Inc. · OneJob · OneScore · OneEvent · OneSocial · OneAgent · OneVoice · OneWeb · OneApp</p>
+                    <p data-i18n="ftr_tagline">Built for small businesses and freelancers, everywhere.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
 
 <script>
-/* ===== Supabase Google OAuth (One ID) ===== */
-var SB_PROJECT = "dxtsyxwyzhvcvmoghjss";
-var APP_HOME   = "https://frazier56.github.io/onesocial-v2-preview/"; /* where sign-in lands */
-function googleUrl(){
-  return "https://"+SB_PROJECT+".supabase.co/auth/v1/authorize?provider=google&redirect_to="+encodeURIComponent(APP_HOME);
-}
-/* detect an existing Lovable Cloud (Supabase) session in localStorage */
-function isSignedIn(){
-  try{
-    for(var i=0;i<localStorage.length;i++){
-      var k=localStorage.key(i);
-      if(k && /^sb-.*-auth-token$/.test(k)){
-        var v=JSON.parse(localStorage.getItem(k)||"null");
-        if(v && (v.access_token || (v.currentSession&&v.currentSession.access_token))) return true;
-      }
+    /* ---------- theme toggle ---------- */
+    var themeColorMeta = document.getElementById('theme-color-meta');
+    function applyTheme(isDark){
+        document.body.classList.toggle('dark', isDark);
+        if (themeColorMeta) themeColorMeta.setAttribute('content', isDark ? '#0B0F1A' : '#FAFAF8');
     }
-  }catch(e){}
-  return false;
-}
+    var savedTheme = localStorage.getItem('color-theme');
+    applyTheme(savedTheme === 'dark'); /* default = light unless the visitor explicitly chose dark before */
+    document.getElementById('theme-toggle').addEventListener('click', function(){
+        var isDark = !document.body.classList.contains('dark');
+        applyTheme(isDark);
+        localStorage.setItem('color-theme', isDark ? 'dark' : 'light');
+    });
 
-/* ===== i18n ===== */
-var I18N={en:{flag:'🇺🇸',cc:'us',code:'EN'},es:{flag:'🇪🇸',cc:'es',code:'ES',
-  famhead:'Dos tipos de herramientas. Un acceso.',famsub:'Servicios que hacemos por ti — y apps para que te vean, confíen y te paguen.',
-  w_svc_t:'Hecho para ti',w_svc:'Servicios que operamos · sitios web',w_app_t:'Que te vean · confíen · paguen',w_app:'Apps que trabajan juntas · un acceso',badge_app:'App',badge_svc:'Servicio',
-  tagline:'Herramientas que hacen crecer tu negocio',
-  pill:'Cinco apps · Un acceso · Cero intermediarios',
-  h1:'Que te vean. Que confíen.<br /><span class="t">Que te paguen.</span>',
-  lede:'Construiste un negocio real — pero los algoritmos deciden quién lo ve y tu reputación está dispersa. Creamos herramientas simples que te devuelven el control.',
-  famlabel:'La familia One World Labs',famhead:'Cinco apps. Un ecosistema.',
-  famsub:'Cada una funciona sola. Juntas, manejan todo tu negocio.',
-  core_signin:'Inicia sesión con Google',core_signedin:'Estás dentro',
-  hover_preview:'Pasa el cursor para previsualizar · clic para abrir',loading:'Cargando vista…',
-  voice_sub:'Asistente de voz IA',voice_desc:'No pierdas otra llamada. Tu recepcionista IA contesta 24/7, califica clientes y agenda citas.',
-  app_sub:'Tu negocio. Una app.',app_desc:'Tu sitio web reconstruido por IA en un minuto — y manejamos hosting, dominio y correo.',
-  score_sub:'Credibilidad profesional',score_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado. Gratis para siempre.',
-  social_sub:'El marketplace de credibilidad',social_desc:'Donde las pruebas te consiguen trabajo — reseñas, empleos y pagos en un solo lugar.',
-  events_sub:'Eventos y boletos',events_desc:'Crea un evento, vende boletos y registra invitados con QR — en minutos.',
-  mcore_p:'Un acceso para todas las apps One World. Entra una vez y estás en todas.',
-  d_apps:'Nuestras apps',d_voice:'Recepcionista IA',d_app:'Sitios web IA',d_score:'Puntaje de credibilidad',d_social:'Consigue trabajo',d_events:'Eventos y boletos',d_contact:'Contacto',
-  signin:'Iniciar sesión',join:'Únete gratis',contact_h:'Contáctanos',contact_p:'Hecho para pequeños negocios y freelancers, en todas partes.'
-}};
-var ENC={};
-function applyLang(l){
-  document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(!(k in ENC))ENC[k]=el.textContent;el.textContent=(l==='es'&&I18N.es[k])?I18N.es[k]:ENC[k];});
-  document.querySelectorAll('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(!(k in ENC))ENC[k]=el.innerHTML;el.innerHTML=(l==='es'&&I18N.es[k])?I18N.es[k]:ENC[k];});
-  document.getElementById('langflag').src='https://flagcdn.com/32x24/'+I18N[l].cc+'.png';document.getElementById('langcode').textContent=I18N[l].code;document.documentElement.lang=l;
-  try{localStorage.setItem('owl-lang',l);}catch(e){}
-  paintSignedIn(); /* re-apply signed-in label in current language */
-}
-var langbtn=document.getElementById('langbtn'),langmenu=document.getElementById('langmenu');
-langbtn.addEventListener('click',function(e){e.stopPropagation();langmenu.classList.toggle('open');});
-document.addEventListener('click',function(){langmenu.classList.remove('open');});
-langmenu.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){applyLang(b.getAttribute('data-lang'));langmenu.classList.remove('open');});});
+    /* ---------- mobile / full menu overlay ---------- */
+    var menuBtn = document.getElementById('menu-btn'), overlay = document.getElementById('menu-overlay');
+    var iconMenu = document.getElementById('icon-menu'), iconX = document.getElementById('icon-x');
+    function setMenu(open){
+        overlay.classList.toggle('show', open);
+        iconMenu.classList.toggle('hidden', open);
+        iconX.classList.toggle('hidden', !open);
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    menuBtn.addEventListener('click', function(){ setMenu(!overlay.classList.contains('show')); });
+    overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+    overlay.addEventListener('click', function(e){ if (e.target === overlay) setMenu(false); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && overlay.classList.contains('show')) setMenu(false); });
+    var menuCloseX = document.getElementById('menu-close-x');
+    if (menuCloseX) menuCloseX.addEventListener('click', function(){ setMenu(false); });
+    var hbSignOutBtnForClose = document.getElementById('hbSignOutBtn');
+    if (hbSignOutBtnForClose) hbSignOutBtnForClose.addEventListener('click', function(){ setMenu(false); });
 
-/* ===== theme (LIGHT default) ===== */
-function setTheme(t){
-  document.documentElement.setAttribute('data-theme',t);
-  document.getElementById('themeicon').textContent=(t==='dark'?'☀️':'🌙');
-  document.querySelector('meta[name="theme-color"]').setAttribute('content',t==='dark'?'#0B0F1A':'#FAFAF8');
-  try{localStorage.setItem('owl-theme',t);}catch(e){}
-}
-document.getElementById('themebtn').addEventListener('click',function(){setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');});
+    /* ---------- hero name rotator (fade, ~1s per word) ---------- */
+    (function(){
+        var words = ['App','Score','Social','Event','Voice'];
+        var el = document.getElementById('rot');
+        if (!el) return;
+        var i = 0;
+        setInterval(function(){
+            el.classList.add('rot-fade');
+            setTimeout(function(){
+                i = (i + 1) % words.length;
+                el.textContent = words[i];
+                void el.offsetWidth; /* force a reflow so the browser commits the opacity:0 + new-text state before we transition back — without this the fade-in gets coalesced and just pops in */
+                requestAnimationFrame(function(){
+                    el.classList.remove('rot-fade');
+                });
+            }, 450);
+        }, 1600);
+    })();
 
-/* ===== drawer ===== */
-var drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
-function dOpen(o){drawer.classList.toggle('open',o);scrim.classList.toggle('on',o);}
-document.getElementById('menubtn').addEventListener('click',function(){dOpen(true);});
-document.getElementById('drawerx').addEventListener('click',function(){dOpen(false);});
-scrim.addEventListener('click',function(){dOpen(false);});
+    /* ---------- language selector + full-page translation ---------- */
+    var I18N_META = {
+        en: { flag:'us', code:'EN' },
+        co: { flag:'co', code:'CO' },
+        es: { flag:'es', code:'ES' },
+        de: { flag:'de', code:'DE' },
+        ru: { flag:'ru', code:'RU' },
+        zh: { flag:'cn', code:'ZH' },
+        pt: { flag:'br', code:'PT' }
+    };
+    /* current active language, shared with the auth-state script below so dynamically-generated
+       text (the signed-in welcome message, which has to splice in the user's first name) also
+       translates — data-i18n alone can't handle text built at runtime. */
+    window.OWL_LANG = 'en';
+    window.OWL_ON_LANG_CHANGE = null; /* set by the auth-state IIFE once it's wired up */
+    var I18N = {
+        es: {
+            s_apps:'apps', s_svcs:'servicios', s_login:'acceso',
+            h1_l1:'Trabaja más inteligente con IA', h1_l2:'en todo tu negocio', h1_l3:'con ',
+            lede:'Apps que usas y servicios que gestionamos por ti — unidos por un solo inicio de sesión — para que pequeñas empresas y autónomos sean vistos, generen confianza y cobren.',
+            cta_jump:'Entrar a una app', cta_signin:'Iniciar sesión con One ID', microtrust:'Un inicio de sesión para cada app · Gratis para empezar · Sin tarjeta de crédito',
+            apps_eyebrow:'Las apps', apps_h2:'Entra a tu app favorita', apps_sub:'Cinco apps, un solo inicio de sesión — cuatro ya disponibles, una en camino.',
+            onescore_tag:'Credibilidad profesional', onescore_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado que puedes publicar donde quieras. Gratis para siempre.', onescore_cta:'Abrir OneScore',
+            onejob_tag:'El mercado de trabajos', onejob_desc:'Consigue trabajo y cobra en 60 segundos — reseñas verificadas, contratos y pagos retenidos de forma segura hasta terminar.', onejob_cta:'Abrir OneJob', onesocial_tag:'Tus plataformas conectadas', onesocial_desc:'Todas tus plataformas, una identidad profesional — conecta tus cuentas y convierte tus seguidores en credibilidad verificada.', onesocial_cta:'Abrir OneSocial', oneagent_tag:'Tu fuerza laboral de IA', oneagent_desc:'Agentes de IA que buscan trabajo, contactan clientes y hacen el trabajo pesado por ti.', coming_soon:'Muy pronto',
+            oneevent_tag:'Eventos y boletos', oneevent_desc:'Crea un evento, vende boletos y registra invitados con QR — en minutos.', oneevent_cta:'Abrir OneEvent',
+            preview_loading:'Cargando vista previa…', live_preview:'Vista previa en vivo', open_arrow:'Abrir ↗',
+            svc_eyebrow:'Lo hacemos por ti', svc_h2:'Potencia tu negocio con nuestros servicios', svc_sub:'Servicios que nuestro equipo gestiona por ti — para que te concentres en el trabajo.',
+            dfy_badge:'Lo hacemos por ti',
+            onevoice_desc:'Una recepcionista con IA que responde cada llamada 24/7, califica al cliente y agenda la cita — para que una llamada perdida nunca sea un cliente perdido. Nosotros lo configuramos y gestionamos por ti.', onevoice_cta:'Obtener OneVoice',
+            oneapp_desc:'Creamos tu sitio web con IA y luego gestionamos el hosting, el dominio, el correo y las actualizaciones — presencia web real sin complicaciones.', oneapp_cta:'Obtener OneWeb', oneapp_new_desc:'Convierte tu idea en una app real y funcional — la creamos por ti con IA, luego la alojamos y la mantenemos. Sin código, sin agencias.',
+            feat_eyebrow:'Por qué funciona', feat_h2:'Dirigir un negocio, más simple', feat_sub:'El trabajo pesado que consume tu día — llamadas contestadas, un sitio web real, prueba en la que confiar — todo en un solo lugar.',
+            f1_h:'Nunca pierdas una llamada', f1_p:'OneVoice responde cada llamada 24/7, califica al cliente y agenda la cita.', f1_cta:'Conocer OneVoice',
+            f2_h:'Un sitio web hecho con IA', f2_p:'Cuéntale a OneWeb sobre tu negocio y crea tu sitio con IA — luego lo alojamos.', f2_cta:'Ver OneWeb',
+            f3_h:'Prueba que puedes mostrar', f3_p:'OneScore convierte tus reseñas y trabajo real en un número verificado.', f3_cta:'Obtener tu OneScore',
+            f4_h:'Consigue trabajo y cobra', f4_p:'OneJob es el mercado donde la prueba verificada gana el trabajo.', f4_cta:'Explorar OneJob',
+            plat_eyebrow:'Úsalo donde sea', plat_h2:'Funciona en cualquier teléfono u ordenador', plat_sub:'Sin descargas. Ábrelo en tu navegador hoy — y agrégalo a tu pantalla de inicio para que se abra como una app.',
+            plat1_h:'Agrégalo a tu teléfono', plat1_p:'Abre cualquier app de One World en tu navegador móvil, toca Compartir y elige "Agregar a pantalla de inicio". Instala un icono y se abre a pantalla completa — sin tienda de apps.', plat1_badge:'APPS NATIVAS PRÓXIMAMENTE',
+            plat2_h:'Úsalo en escritorio', plat2_p:'Todo funciona en tu navegador en cualquier ordenador — nada que instalar, nada que actualizar. Guarda oneworldlabs.ai en favoritos y estás a un clic de cada app.',
+            faq_eyebrow:'Bueno saberlo', faq_h2:'¿Sabías que…?',
+            q1_q:'One World Labs son apps que usas más servicios que gestionamos', q1_a:'Cinco apps con un solo inicio de sesión — OneJob para conseguir trabajo y cobrar, OneScore para credibilidad, OneEvent para boletos, más OneSocial (plataformas conectadas) y OneAgent (IA) muy pronto — más dos servicios que nuestro equipo gestiona: OneVoice contesta tus llamadas y OneWeb crea y administra tu sitio web. Todo comparte un inicio de sesión y un perfil.',
+            q2_q:'Puedes empezar gratis — sin tarjeta de crédito', q2_a:'OneScore es gratis para siempre, y cada app te permite empezar sin pagar por adelantado. Nuestros servicios gestionados son de pago — solo mejoras cuando una herramienta ya te está dando resultado.',
+            q3_q:'Un inicio de sesión te da acceso a todo', q3_a:'Inicia sesión una vez con One ID y estarás en cada app y servicio de One World — sin cuentas separadas, sin volver a ingresar tus datos, sin hacer malabares con contraseñas.',
+            q4_q:'Construido con la credibilidad primero — tú tienes el control', q4_a:'Ningún algoritmo decide quién ve tu negocio, y tu reputación no está dispersa en diez plataformas. Tu prueba está verificada, es tuya y es portátil — tú decides dónde aparece.',
+            ftr_apps:'Apps', ftr_svcs:'Servicios', ftr_company:'Empresa', ftr_getstarted:'Empezar', ftr_contact:'Contacto', ftr_tagline:'Hecho para pequeñas empresas y autónomos, en todas partes.',
+            oneid_label:'One ID', signout:'Cerrar sesión', signedin_hint:'Elige tu app favorita abajo para continuar — ya tienes sesión iniciada en todas partes.',
+            signedin_welcome:'Sesión iniciada — ¡Bienvenido, {name}!', someone:'de nuevo', hb_welcome:'Bienvenido, {name}', hb_signedin_only:'Sesión iniciada'
+        },
+        co: {
+            s_apps:'apps', s_svcs:'servicios', s_login:'acceso',
+            h1_l1:'Trabaja de forma más inteligente con IA', h1_l2:'en todo tu negocio', h1_l3:'con ',
+            lede:'Apps que usas y servicios que gestionamos por ti — unidos por un solo inicio de sesión — para que pequeños negocios e independientes sean vistos, generen confianza y cobren.',
+            cta_jump:'Entrar a una app', cta_signin:'Iniciar sesión con One ID', microtrust:'Un inicio de sesión para cada app · Gratis para empezar · Sin tarjeta de crédito',
+            apps_eyebrow:'Las apps', apps_h2:'Entra a tu app favorita', apps_sub:'Cinco apps, un solo inicio de sesión — cuatro ya disponibles, una en camino.',
+            onescore_tag:'Credibilidad profesional', onescore_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado que puedes publicar donde quieras. Gratis para siempre.', onescore_cta:'Abrir OneScore',
+            onejob_tag:'El mercado de trabajos', onejob_desc:'Consigue trabajo y cobra en 60 segundos — reseñas verificadas, contratos y pagos retenidos de forma segura hasta terminar.', onejob_cta:'Abrir OneJob', onesocial_tag:'Tus plataformas conectadas', onesocial_desc:'Todas tus plataformas, una identidad profesional — conecta tus cuentas y convierte tus seguidores en credibilidad verificada.', onesocial_cta:'Abrir OneSocial', oneagent_tag:'Tu fuerza laboral de IA', oneagent_desc:'Agentes de IA que buscan trabajo, contactan clientes y hacen el trabajo pesado por ti.', coming_soon:'Muy pronto',
+            oneevent_tag:'Eventos y boletas', oneevent_desc:'Crea un evento, vende boletas y registra invitados con QR — en minutos.', oneevent_cta:'Abrir OneEvent',
+            preview_loading:'Cargando vista previa…', live_preview:'Vista previa en vivo', open_arrow:'Abrir ↗',
+            svc_eyebrow:'Lo hacemos por ti', svc_h2:'Impulsa tu negocio con nuestros servicios', svc_sub:'Servicios que nuestro equipo gestiona por ti — para que te concentres en el trabajo.',
+            dfy_badge:'Lo hacemos por ti',
+            onevoice_desc:'Una recepcionista con IA que contesta cada llamada 24/7, califica al cliente y agenda la cita — para que una llamada perdida nunca sea un cliente perdido. Nosotros lo configuramos y gestionamos por ti.', onevoice_cta:'Obtener OneVoice',
+            oneapp_desc:'Creamos tu página web con IA y luego gestionamos el hosting, el dominio, el correo y las actualizaciones — presencia web real sin complicaciones.', oneapp_cta:'Obtener OneWeb', oneapp_new_desc:'Convierte tu idea en una app real y funcional — la creamos por ti con IA, luego la alojamos y la mantenemos. Sin código, sin agencias.',
+            feat_eyebrow:'Por qué funciona', feat_h2:'Manejar un negocio, más fácil', feat_sub:'El trabajo pesado que consume tu día — llamadas contestadas, una página web real, prueba en la que confiar — todo en un solo lugar.',
+            f1_h:'Nunca pierdas una llamada', f1_p:'OneVoice contesta cada llamada 24/7, califica al cliente y agenda la cita.', f1_cta:'Conocer OneVoice',
+            f2_h:'Una página web hecha con IA', f2_p:'Cuéntale a OneWeb sobre tu negocio y crea tu página con IA — luego la alojamos.', f2_cta:'Ver OneWeb',
+            f3_h:'Prueba que puedes mostrar', f3_p:'OneScore convierte tus reseñas y trabajo real en un número verificado.', f3_cta:'Obtener tu OneScore',
+            f4_h:'Consigue trabajo y cobra', f4_p:'OneJob es el mercado donde la prueba verificada gana el trabajo.', f4_cta:'Explorar OneJob',
+            plat_eyebrow:'Úsalo donde sea', plat_h2:'Funciona en cualquier celular o computador', plat_sub:'Sin descargas. Ábrelo en tu navegador hoy — y agrégalo a tu pantalla de inicio para que se abra como una app.',
+            plat1_h:'Agrégalo a tu celular', plat1_p:'Abre cualquier app de One World en tu navegador móvil, toca Compartir y elige "Agregar a pantalla de inicio". Instala un ícono y se abre a pantalla completa — sin tienda de apps.', plat1_badge:'APPS NATIVAS PRÓXIMAMENTE',
+            plat2_h:'Úsalo en el computador', plat2_p:'Todo funciona en tu navegador en cualquier computador — nada que instalar, nada que actualizar. Guarda oneworldlabs.ai en favoritos y estás a un clic de cada app.',
+            faq_eyebrow:'Bueno saberlo', faq_h2:'¿Sabías que…?',
+            q1_q:'One World Labs son apps que usas más servicios que gestionamos', q1_a:'Cinco apps con un solo inicio de sesión — OneJob para conseguir trabajo y cobrar, OneScore para credibilidad, OneEvent para boletas, más OneSocial (plataformas conectadas) y OneAgent (IA) muy pronto — más dos servicios que nuestro equipo gestiona: OneVoice contesta tus llamadas y OneWeb crea y administra tu página web. Todo comparte un inicio de sesión y un perfil.',
+            q2_q:'Puedes empezar gratis — sin tarjeta de crédito', q2_a:'OneScore es gratis para siempre, y cada app te permite empezar sin pagar por adelantado. Nuestros servicios gestionados son de pago — solo mejoras cuando una herramienta ya te está dando resultado.',
+            q3_q:'Un inicio de sesión te da acceso a todo', q3_a:'Inicia sesión una vez con One ID y estarás en cada app y servicio de One World — sin cuentas separadas, sin volver a ingresar tus datos, sin hacer malabares con contraseñas.',
+            q4_q:'Construido con la credibilidad primero — tú tienes el control', q4_a:'Ningún algoritmo decide quién ve tu negocio, y tu reputación no está dispersa en diez plataformas. Tu prueba está verificada, es tuya y es portátil — tú decides dónde aparece.',
+            ftr_apps:'Apps', ftr_svcs:'Servicios', ftr_company:'Empresa', ftr_getstarted:'Empezar', ftr_contact:'Contacto', ftr_tagline:'Hecho para pequeños negocios e independientes, en todas partes.',
+            oneid_label:'One ID', signout:'Cerrar sesión', signedin_hint:'Elige tu app favorita abajo para continuar — ya tienes sesión iniciada en todas partes.',
+            signedin_welcome:'Sesión iniciada — ¡Bienvenido, {name}!', someone:'de nuevo', hb_welcome:'Bienvenido, {name}', hb_signedin_only:'Sesión iniciada'
+        },
+        de: {
+            s_apps:'Apps', s_svcs:'Dienste', s_login:'Login',
+            h1_l1:'Arbeite smarter mit KI', h1_l2:'in deinem ganzen Business', h1_l3:'mit ',
+            lede:'Apps, die du nutzt, und Dienste, die wir für dich betreiben — verbunden durch einen Login — damit kleine Unternehmen gesehen, vertraut und bezahlt werden.',
+            cta_jump:'Zu einer App', cta_signin:'Mit One ID anmelden', microtrust:'Ein Login für jede App · Kostenlos starten · Keine Kreditkarte',
+            apps_eyebrow:'Die Apps', apps_h2:'Starte deine Lieblings-App', apps_sub:'Fünf Apps, ein Login — vier schon live, eine kommt bald.',
+            onescore_tag:'Berufliche Glaubwürdigkeit', onescore_desc:'Dein gesamter Ruf — Bewertungen, echte Arbeit, sozialer Beweis — in einer verifizierten Zahl, die du überall posten kannst. Für immer kostenlos.', onescore_cta:'OneScore öffnen',
+            onejob_tag:'Der Job-Marktplatz', onejob_desc:'In 60 Sekunden einen Job bekommen und bezahlt werden — verifizierte Bewertungen, Verträge und sicher gehaltene Zahlungen bis zur Fertigstellung.', onejob_cta:'OneJob öffnen',
+            onesocial_tag:'Deine verbundenen Plattformen', onesocial_desc:'Alle deine Plattformen, eine berufliche Identität — verbinde deine Konten und verwandle deine Follower in verifizierte Glaubwürdigkeit.', onesocial_cta:'OneSocial öffnen',
+            oneagent_tag:'Deine KI-Belegschaft', oneagent_desc:'KI-Agenten, die Aufträge finden, Kunden ansprechen und die Kleinarbeit für dich erledigen.', coming_soon:'Demnächst',
+            oneevent_tag:'Events & Tickets', oneevent_desc:'Erstelle ein Event, verkaufe Tickets und checke Gäste per QR-Code ein — in Minuten.', oneevent_cta:'OneEvent öffnen',
+            preview_loading:'Vorschau wird geladen…', live_preview:'Live-Vorschau', open_arrow:'Öffnen ↗',
+            svc_eyebrow:'Für dich erledigt', svc_h2:'Stärke dein Geschäft mit unseren Diensten', svc_sub:'Dienste, die unser Team für dich betreibt — damit du dich auf die Arbeit konzentrieren kannst.',
+            dfy_badge:'Für dich erledigt',
+            onevoice_desc:'Eine KI-Rezeptionistin, die jeden Anruf 24/7 entgegennimmt, den Lead qualifiziert und den Termin bucht — damit ein verpasster Anruf nie ein verpasster Kunde ist. Wir richten es für dich ein und betreiben es.', onevoice_cta:'OneVoice holen',
+            oneapp_desc:'Wir bauen deine Website mit KI und übernehmen dann Hosting, Domain, E-Mail und laufende Updates für dich — echte Web-Präsenz ohne Aufwand.', oneapp_cta:'OneWeb holen', oneapp_new_desc:'Verwandle deine Idee in eine echte, funktionierende App — mit KI für dich gebaut, dann von unserem Team gehostet und gepflegt. Kein Code, keine Agenturen.',
+            feat_eyebrow:'Warum es funktioniert', feat_h2:'Geschäft führen, einfacher gemacht', feat_sub:'Der Kleinkram, der deinen Tag frisst — beantwortete Anrufe, eine echte Website, Beweise, denen man vertrauen kann — alles an einem Ort erledigt.',
+            f1_h:'Verpasse nie wieder einen Anruf', f1_p:'OneVoice beantwortet jeden Anruf 24/7, qualifiziert den Lead und bucht den Termin.', f1_cta:'OneVoice kennenlernen',
+            f2_h:'Eine mit KI gebaute Website', f2_p:'Erzähl OneWeb von deinem Geschäft, und es baut deine Website mit KI — wir hosten sie dann.', f2_cta:'OneWeb ansehen',
+            f3_h:'Beweise, auf die du zeigen kannst', f3_p:'OneScore macht aus deinen Bewertungen und echter Arbeit eine verifizierte Zahl.', f3_cta:'Hol dir deinen OneScore',
+            f4_h:'Job bekommen und bezahlt werden', f4_p:'OneJob ist der Marktplatz, auf dem verifizierte Beweise den Job gewinnen.', f4_cta:'OneJob entdecken',
+            plat_eyebrow:'Überall nutzbar', plat_h2:'Läuft auf jedem Handy oder Computer', plat_sub:'Kein Download nötig. Öffne es heute in deinem Browser — und füge es deinem Startbildschirm hinzu, damit es sich wie eine App öffnet.',
+            plat1_h:'Zum Handy hinzufügen', plat1_p:'Öffne eine beliebige One-World-App in deinem mobilen Browser, tippe auf Teilen und wähle „Zum Startbildschirm hinzufügen". Installiert ein Symbol und öffnet im Vollbild — kein App Store nötig.', plat1_badge:'NATIVE APPS DEMNÄCHST',
+            plat2_h:'Am Computer nutzen', plat2_p:'Alles läuft in deinem Browser auf jedem Computer — nichts zu installieren, nichts zu aktualisieren. Speichere oneworldlabs.ai als Lesezeichen und du bist einen Klick von jeder App entfernt.',
+            faq_eyebrow:'Gut zu wissen', faq_h2:'Wusstest du schon?',
+            q1_q:'One World Labs sind Apps, die du nutzt, plus Dienste, die wir betreiben', q1_a:'Fünf Apps mit einem Login — OneJob, um Jobs zu bekommen und bezahlt zu werden, OneScore für Glaubwürdigkeit, OneEvent für Tickets, plus OneSocial (verbundene Plattformen) und OneAgent (KI), die demnächst kommen — plus zwei Dienste, die unser Team betreibt: OneVoice beantwortet deine Anrufe, OneWeb baut und verwaltet deine Website. Alles teilt sich einen Login und ein Profil.',
+            q2_q:'Du kannst kostenlos starten — keine Kreditkarte nötig', q2_a:'OneScore ist für immer kostenlos, und jede App lässt dich ohne Vorauszahlung starten. Unsere verwalteten Dienste sind kostenpflichtig — du upgradest erst, wenn ein Tool bereits für dich funktioniert.',
+            q3_q:'Ein Login gibt dir Zugang zu allem', q3_a:'Melde dich einmal mit One ID an und du bist in jeder One-World-App und jedem Dienst — keine separaten Konten, keine erneute Dateneingabe, kein Passwort-Jonglieren zwischen Tools.',
+            q4_q:'Glaubwürdigkeit zuerst gebaut — du behältst die Kontrolle', q4_a:'Kein Algorithmus entscheidet, wer dein Geschäft sieht, und dein Ruf ist nicht über zehn Plattformen verstreut. Dein Beweis ist verifiziert, gehört dir und ist portabel — du entscheidest, wo er erscheint.',
+            ftr_apps:'Apps', ftr_svcs:'Dienste', ftr_company:'Unternehmen', ftr_getstarted:'Loslegen', ftr_contact:'Kontakt', ftr_tagline:'Für kleine Unternehmen und Freelancer, überall.',
+            oneid_label:'One ID', signout:'Abmelden', signedin_hint:'Wähle unten deine Lieblings-App, um weiterzumachen — du bist bereits überall angemeldet.',
+            signedin_welcome:'Angemeldet — Willkommen, {name}!', someone:'zurück', hb_welcome:'Willkommen, {name}', hb_signedin_only:'Angemeldet'
+        },
+        ru: {
+            s_apps:'приложения', s_svcs:'услуги', s_login:'вход',
+            h1_l1:'Работайте умнее с ИИ', h1_l2:'во всём вашем бизнесе', h1_l3:'с ',
+            lede:'Приложения, которыми вы пользуетесь, и услуги, которые мы для вас ведём — объединённые единым входом — чтобы малый бизнес был заметен, вызывал доверие и получал оплату.',
+            cta_jump:'Открыть приложение', cta_signin:'Войти через One ID', microtrust:'Один вход для всех приложений · Бесплатно · Без карты',
+            apps_eyebrow:'Приложения', apps_h2:'Откройте любимое приложение', apps_sub:'Пять приложений, один вход — четыре уже доступны, одно скоро.',
+            onescore_tag:'Профессиональная репутация', onescore_desc:'Вся твоя репутация — отзывы, реальная работа, социальные доказательства — в одном проверенном числе, которое можно опубликовать где угодно. Бесплатно навсегда.', onescore_cta:'Открыть OneScore',
+            onejob_tag:'Маркетплейс работы', onejob_desc:'Получи работу и оплату за 60 секунд — проверенные отзывы, контракты и безопасно удерживаемые платежи до завершения работы.', onejob_cta:'Открыть OneJob',
+            onesocial_tag:'Твои подключённые платформы', onesocial_desc:'Все твои платформы, одна профессиональная личность — подключи свои аккаунты и преврати подписчиков в проверенную репутацию.', onesocial_cta:'Открыть OneSocial',
+            oneagent_tag:'Твоя ИИ-рабочая сила', oneagent_desc:'ИИ-агенты, которые находят работу, связываются с клиентами и выполняют рутину за тебя.', coming_soon:'Скоро',
+            oneevent_tag:'События и билеты', oneevent_desc:'Создай событие, продавай билеты и регистрируй гостей по QR-коду — за считанные минуты.', oneevent_cta:'Открыть OneEvent',
+            preview_loading:'Загрузка превью…', live_preview:'Живое превью', open_arrow:'Открыть ↗',
+            svc_eyebrow:'Сделаем за вас', svc_h2:'Развивайте бизнес с нашими услугами', svc_sub:'Сервисы, которыми управляет наша команда — чтобы ты мог сосредоточиться на деле.',
+            dfy_badge:'Сделано для тебя',
+            onevoice_desc:'ИИ-администратор, который отвечает на каждый звонок 24/7, квалифицирует лида и записывает на приём — пропущенный звонок больше не означает потерянного клиента. Мы всё настроим и будем управлять этим за тебя.', onevoice_cta:'Получить OneVoice',
+            oneapp_desc:'Мы создаём твой сайт с помощью ИИ, а затем берём на себя хостинг, домен, почту и обновления — реальное присутствие в сети без хлопот.', oneapp_cta:'Получить OneWeb', oneapp_new_desc:'Преврати свою идею в настоящее рабочее приложение — мы создадим его для тебя с помощью ИИ, а затем разместим и будем его обслуживать. Без кода, без агентств.',
+            feat_eyebrow:'Почему это работает', feat_h2:'Вести бизнес стало проще', feat_sub:'Рутина, которая съедает твой день — пропущенные звонки, настоящий сайт, доказательства, которым можно доверять — всё решено в одном месте.',
+            f1_h:'Никогда не пропускай звонок', f1_p:'OneVoice отвечает на каждый звонок 24/7, квалифицирует лида и записывает на приём.', f1_cta:'Познакомиться с OneVoice',
+            f2_h:'Сайт, созданный с помощью ИИ', f2_p:'Расскажи OneWeb о своём бизнесе — и он создаст твой сайт с помощью ИИ, а мы разместим его на хостинге.', f2_cta:'Посмотреть OneWeb',
+            f3_h:'Доказательства, на которые можно указать', f3_p:'OneScore превращает твои отзывы и реальную работу в одно проверенное число.', f3_cta:'Получить свой OneScore',
+            f4_h:'Получай работу и оплату', f4_p:'OneJob — маркетплейс, где проверенные доказательства выигрывают работу.', f4_cta:'Изучить OneJob',
+            plat_eyebrow:'Используйте где угодно', plat_h2:'Работает на любом телефоне или компьютере', plat_sub:'Скачивать не нужно. Открой прямо сегодня в браузере — и добавь на главный экран, чтобы это работало как приложение.',
+            plat1_h:'Добавь на телефон', plat1_p:'Открой любое приложение One World в мобильном браузере, нажми «Поделиться» и выбери «На экран «Домой»». Установится значок, открывается на весь экран — App Store не нужен.', plat1_badge:'НАТИВНЫЕ ПРИЛОЖЕНИЯ СКОРО',
+            plat2_h:'Используй на компьютере', plat2_p:'Всё работает прямо в браузере на любом компьютере — ничего устанавливать и обновлять не нужно. Добавь oneworldlabs.ai в закладки — и ты в одном клике от любого приложения.',
+            faq_eyebrow:'Полезно знать', faq_h2:'Знаете ли вы?',
+            q1_q:'One World Labs — это приложения, которыми ты пользуешься, плюс сервисы, которыми управляем мы', q1_a:'Пять приложений с одним входом — OneJob, чтобы получать работу и оплату, OneScore для репутации, OneEvent для билетов, плюс OneSocial (подключённые платформы) и OneAgent (ИИ) уже скоро — плюс два сервиса, которыми управляет наша команда: OneVoice отвечает на твои звонки, а OneWeb создаёт и обслуживает твой сайт. Всё работает через один вход и один профиль.',
+            q2_q:'Можно начать бесплатно — без карты', q2_a:'OneScore бесплатен навсегда, и в каждом приложении можно начать без предоплаты. Наши управляемые сервисы платные — ты переходишь на платный план только когда инструмент уже приносит пользу.',
+            q3_q:'Один вход даёт доступ ко всему', q3_a:'Войди один раз через One ID — и ты в каждом приложении и сервисе One World: без отдельных аккаунтов, без повторного ввода данных, без жонглирования паролями.',
+            q4_q:'Построено на доверии — контроль остаётся у тебя', q4_a:'Никакой алгоритм не решает, кто увидит твой бизнес, а твоя репутация не разбросана по десяти платформам. Твои доказательства проверены, принадлежат тебе и переносимы — ты решаешь, где их показывать.',
+            ftr_apps:'Приложения', ftr_svcs:'Услуги', ftr_company:'Компания', ftr_getstarted:'Начать', ftr_contact:'Контакты', ftr_tagline:'Для малого бизнеса и фрилансеров, везде.',
+            oneid_label:'One ID', signout:'Выйти', signedin_hint:'Выбери своё любимое приложение ниже, чтобы продолжить — ты уже вошёл везде.',
+            signedin_welcome:'Вход выполнен — Добро пожаловать, {name}!', someone:'снова', hb_welcome:'Добро пожаловать, {name}', hb_signedin_only:'Вход выполнен'
+        },
+        zh: {
+            s_apps:'应用', s_svcs:'服务', s_login:'登录',
+            h1_l1:'借助AI更智能地', h1_l2:'管理你的整个业务', h1_l3:'使用 ',
+            lede:'你使用的应用，加上我们为你运营的服务——通过统一登录连接在一起——让小企业和自由职业者被看见、被信任、获得报酬。',
+            cta_jump:'进入应用', cta_signin:'使用 One ID 登录', microtrust:'一次登录畅用所有应用 · 免费开始 · 无需信用卡',
+            apps_eyebrow:'应用', apps_h2:'进入你喜欢的应用', apps_sub:'五款应用，一次登录——四款已上线，一款即将推出。',
+            onescore_tag:'职业信誉', onescore_desc:'你的全部声誉——评价、真实工作、社交证明——汇聚成一个可随处发布的认证分数。永久免费。', onescore_cta:'打开 OneScore',
+            onejob_tag:'求职市场', onejob_desc:'60秒内获得工作并获得报酬——认证评价、合同，付款在工作完成前安全托管。', onejob_cta:'打开 OneJob',
+            onesocial_tag:'你的互联平台', onesocial_desc:'所有平台，一个职业身份——连接你的账户，把粉丝转化为经过认证的信誉。', onesocial_cta:'打开 OneSocial',
+            oneagent_tag:'你的AI团队', oneagent_desc:'AI代理为你寻找工作、联系客户，处理繁琐事务。', coming_soon:'即将推出',
+            oneevent_tag:'活动与门票', oneevent_desc:'创建活动、销售门票，并通过二维码为宾客签到——几分钟内即可上线。', oneevent_cta:'打开 OneEvent',
+            preview_loading:'正在加载预览…', live_preview:'实时预览', open_arrow:'打开 ↗',
+            svc_eyebrow:'为你代劳', svc_h2:'用我们的服务提升你的业务', svc_sub:'由我们团队为你运营的省心服务——让你专注于工作本身。',
+            dfy_badge:'为你代劳',
+            onevoice_desc:'一位24/7全天候接听每通电话、筛选潜在客户并预约的AI前台——错过的电话不再等于失去的客户。我们为你搭建并持续运营。', onevoice_cta:'获取 OneVoice',
+            oneapp_desc:'我们用AI为你搭建网站，然后为你处理托管、域名、邮箱和持续更新——轻松拥有真正的网络形象。', oneapp_cta:'获取 OneWeb', oneapp_new_desc:'把你的想法变成一个真正能用的应用——我们用AI为你打造，再由我们团队托管和维护。无需代码，无需外包公司。',
+            feat_eyebrow:'为什么有效', feat_h2:'让经营业务更简单', feat_sub:'那些占据你一天时间的琐事——接听电话、真实的网站、值得信赖的证据——都在一个地方解决。',
+            f1_h:'绝不错过任何来电', f1_p:'OneVoice 24/7全天候接听每通电话，筛选潜在客户并预约。', f1_cta:'了解 OneVoice',
+            f2_h:'用AI搭建的网站', f2_p:'告诉 OneWeb 你的业务，它就会用AI为你搭建网站——然后由我们负责托管。', f2_cta:'查看 OneWeb',
+            f3_h:'拿得出手的证据', f3_p:'OneScore 将你的评价和真实工作转化为一个认证分数。', f3_cta:'获取你的 OneScore',
+            f4_h:'获得工作并获得报酬', f4_p:'OneJob 是认证证据赢得工作机会的市场。', f4_cta:'探索 OneJob',
+            plat_eyebrow:'随处可用', plat_h2:'适用于任何手机或电脑', plat_sub:'无需下载。今天就在浏览器中打开——并添加到主屏幕，像应用一样使用。',
+            plat1_h:'添加到手机', plat1_p:'在手机浏览器中打开任意 One World 应用，点击分享，选择"添加到主屏幕"。会安装一个图标并全屏打开——无需应用商店。', plat1_badge:'原生应用即将推出',
+            plat2_h:'在电脑上使用', plat2_p:'一切都在任何电脑的浏览器中运行——无需安装，无需更新。收藏 oneworldlabs.ai，一键直达每个应用。',
+            faq_eyebrow:'你知道吗', faq_h2:'你知道吗？',
+            q1_q:'One World Labs 是你使用的应用，加上我们运营的服务', q1_a:'五款应用共用一次登录——OneJob 帮你获得工作并获得报酬，OneScore 提供信誉，OneEvent 提供门票，再加上即将推出的 OneSocial（互联平台）和 OneAgent（AI）——外加我们团队运营的两项服务：OneVoice 接听你的电话，OneWeb 搭建并管理你的网站。所有一切共享一个登录和一个资料。',
+            q2_q:'可以免费开始——无需信用卡', q2_a:'OneScore 永久免费，每款应用都可以在无需预付费的情况下开始使用。我们的托管服务是付费的——只有当工具已经为你产生效果时，你才需要升级。',
+            q3_q:'一次登录即可访问一切', q3_a:'用 One ID 登录一次，你就能进入每一个 One World 应用和服务——无需单独的账户，无需重复输入信息，无需在多个工具间切换密码。',
+            q4_q:'以信誉为先构建——掌控权始终在你手中', q4_a:'没有算法决定谁能看到你的业务，你的声誉也不会分散在十个平台上。你的证据经过认证、归你所有且可携带——由你决定它出现在哪里。',
+            ftr_apps:'应用', ftr_svcs:'服务', ftr_company:'公司', ftr_getstarted:'开始使用', ftr_contact:'联系我们', ftr_tagline:'为各地的小企业和自由职业者打造。',
+            oneid_label:'One ID', signout:'退出登录', signedin_hint:'选择下方你喜欢的应用继续——你已经在所有地方登录。',
+            signedin_welcome:'已登录——欢迎回来，{name}！', someone:'回来', hb_welcome:'欢迎，{name}', hb_signedin_only:'已登录'
+        },
+        pt: {
+            s_apps:'apps', s_svcs:'serviços', s_login:'login',
+            h1_l1:'Trabalhe de forma mais inteligente com IA', h1_l2:'em todo o seu negócio', h1_l3:'com ',
+            lede:'Apps que você usa e serviços que administramos para você — unidos por um único login — para que pequenas empresas e autônomos sejam vistos, ganhem confiança e recebam pagamento.',
+            cta_jump:'Entrar em um app', cta_signin:'Entrar com One ID', microtrust:'Um login para cada app · Grátis para começar · Sem cartão de crédito',
+            apps_eyebrow:'Os apps', apps_h2:'Entre no seu app favorito', apps_sub:'Cinco apps, um único login — quatro já disponíveis, um a caminho.',
+            onescore_tag:'Credibilidade profissional', onescore_desc:'Toda a sua reputação — avaliações, trabalho real, prova social — em um número verificado que você pode publicar em qualquer lugar. Grátis para sempre.', onescore_cta:'Abrir OneScore',
+            onejob_tag:'O mercado de empregos', onejob_desc:'Seja contratado e receba pagamento em 60 segundos — avaliações verificadas, contratos e pagamentos retidos com segurança até a conclusão.', onejob_cta:'Abrir OneJob',
+            onesocial_tag:'Suas plataformas conectadas', onesocial_desc:'Todas as suas plataformas, uma identidade profissional — conecte suas contas e transforme seus seguidores em credibilidade verificada.', onesocial_cta:'Abrir OneSocial',
+            oneagent_tag:'Sua força de trabalho de IA', oneagent_desc:'Agentes de IA que buscam trabalho, contatam clientes e cuidam das tarefas repetitivas para você.', coming_soon:'Em breve',
+            oneevent_tag:'Eventos e ingressos', oneevent_desc:'Crie um evento, venda ingressos e faça check-in dos convidados com QR — em minutos.', oneevent_cta:'Abrir OneEvent',
+            preview_loading:'Carregando pré-visualização…', live_preview:'Pré-visualização ao vivo', open_arrow:'Abrir ↗',
+            svc_eyebrow:'Feito para você', svc_h2:'Potencialize seu negócio com nossos serviços', svc_sub:'Serviços que nossa equipe opera para você — para que você foque no trabalho.',
+            dfy_badge:'Feito para você',
+            onevoice_desc:'Uma recepcionista de IA que atende cada chamada 24/7, qualifica o lead e agenda o compromisso — para que uma chamada perdida nunca seja um cliente perdido. Nós configuramos e operamos tudo para você.', onevoice_cta:'Obter OneVoice',
+            oneapp_desc:'Construímos seu site com IA e depois cuidamos da hospedagem, domínio, e-mail e atualizações contínuas — uma presença online de verdade, sem complicação.', oneapp_cta:'Obter OneWeb', oneapp_new_desc:'Transforme sua ideia em um app real e funcional — nós o criamos para você com IA, depois hospedamos e mantemos. Sem código, sem agências.',
+            feat_eyebrow:'Por que funciona', feat_h2:'Gerir um negócio, mais simples', feat_sub:'As tarefas que consomem seu dia — chamadas atendidas, um site de verdade, provas em que você pode confiar — tudo resolvido em um só lugar.',
+            f1_h:'Nunca perca uma chamada', f1_p:'OneVoice atende cada chamada 24/7, qualifica o lead e agenda o compromisso.', f1_cta:'Conheça o OneVoice',
+            f2_h:'Um site construído com IA', f2_p:'Conte ao OneWeb sobre seu negócio e ele constrói seu site com IA — depois nós hospedamos.', f2_cta:'Ver OneWeb',
+            f3_h:'Provas que você pode mostrar', f3_p:'OneScore transforma suas avaliações e trabalho real em um número verificado.', f3_cta:'Obtenha seu OneScore',
+            f4_h:'Seja contratado e receba pagamento', f4_p:'OneJob é o mercado onde provas verificadas conquistam o emprego.', f4_cta:'Explorar OneJob',
+            plat_eyebrow:'Use em qualquer lugar', plat_h2:'Funciona em qualquer celular ou computador', plat_sub:'Não precisa baixar. Abra hoje mesmo no seu navegador — e adicione à tela inicial para que abra como um app.',
+            plat1_h:'Adicione ao celular', plat1_p:'Abra qualquer app One World no navegador do celular, toque em Compartilhar e escolha "Adicionar à Tela de Início". Instala um ícone e abre em tela cheia — sem precisar de App Store.', plat1_badge:'APPS NATIVOS EM BREVE',
+            plat2_h:'Use no computador', plat2_p:'Tudo roda no seu navegador em qualquer computador — nada para instalar, nada para atualizar. Salve oneworldlabs.ai nos favoritos e você está a um clique de cada app.',
+            faq_eyebrow:'Bom saber', faq_h2:'Você sabia?',
+            q1_q:'One World Labs são apps que você usa, além de serviços que operamos', q1_a:'Cinco apps com um único login — OneJob para conseguir emprego e receber pagamento, OneScore para credibilidade, OneEvent para ingressos, além de OneSocial (plataformas conectadas) e OneAgent (IA) em breve — além de dois serviços que nossa equipe opera: OneVoice atende suas chamadas e OneWeb constrói e gerencia seu site. Tudo compartilha um login e um perfil.',
+            q2_q:'Você pode começar de graça — sem cartão de crédito', q2_a:'OneScore é grátis para sempre, e todo app permite que você comece sem pagar antecipadamente. Nossos serviços gerenciados são pagos — você só faz upgrade quando a ferramenta já está funcionando para você.',
+            q3_q:'Um login te dá acesso a tudo', q3_a:'Entre uma vez com o One ID e você está em todo app e serviço One World — sem contas separadas, sem reinserir seus dados, sem gerenciar senhas entre ferramentas.',
+            q4_q:'Construído com credibilidade em primeiro lugar — você mantém o controle', q4_a:'Nenhum algoritmo decide quem vê seu negócio, e sua reputação não fica espalhada em dez plataformas. Sua prova é verificada, é sua e é portátil — você decide onde ela aparece.',
+            ftr_apps:'Apps', ftr_svcs:'Serviços', ftr_company:'Empresa', ftr_getstarted:'Começar', ftr_contact:'Contato', ftr_tagline:'Feito para pequenas empresas e autônomos, em qualquer lugar.',
+            oneid_label:'One ID', signout:'Sair', signedin_hint:'Escolha seu app favorito abaixo para continuar — você já está conectado em todos os lugares.',
+            signedin_welcome:'Conectado — Bem-vindo, {name}!', someone:'de volta', hb_welcome:'Bem-vindo, {name}', hb_signedin_only:'Conectado'
+        }
+    };
+    function applyLang(lang){
+        document.querySelectorAll('[data-i18n]').forEach(function(el){
+            var key = el.getAttribute('data-i18n');
+            if (!el.hasAttribute('data-i18n-en')) el.setAttribute('data-i18n-en', el.textContent);
+            var enText = el.getAttribute('data-i18n-en');
+            if (lang === 'en') { el.textContent = enText; return; }
+            var dict = I18N[lang];
+            el.textContent = (dict && dict[key]) ? dict[key] : enText;
+        });
+    }
+    var langBtn = document.getElementById('lang-btn'), langMenu = document.getElementById('lang-menu');
+    if (langBtn) {
+        langBtn.addEventListener('click', function(e){ e.stopPropagation(); langMenu.classList.toggle('open'); });
+        document.addEventListener('click', function(){ langMenu.classList.remove('open'); });
+        langMenu.querySelectorAll('button').forEach(function(b){
+            b.addEventListener('click', function(){
+                var lang = b.getAttribute('data-lang');
+                document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N_META[lang].flag + '.png';
+                document.getElementById('lang-code').textContent = I18N_META[lang].code;
+                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); });
+                document.documentElement.lang = lang;
+                langMenu.classList.remove('open');
+                window.OWL_LANG = lang;
+                applyLang(lang);
+                /* re-render any JS-built text (the signed-in welcome message splices in the
+                   user's first name at runtime, so data-i18n alone can't translate it — this
+                   hook lets the auth-state script redo it in the newly-selected language) */
+                if (window.OWL_ON_LANG_CHANGE) window.OWL_ON_LANG_CHANGE();
+                try { localStorage.setItem('owl-lang', lang); } catch(e){}
+            });
+        });
+        try {
+            var saved = localStorage.getItem('owl-lang');
+            if (saved && I18N_META[saved]) {
+                var btn = langMenu.querySelector('button[data-lang="' + saved + '"]');
+                if (btn) btn.click();
+            }
+        } catch(e){}
+    }
 
-/* (pentagon positioning removed — two-world layout is CSS grid) */
+    /* ---------- FAQ accordion (single-open) ---------- */
+    document.querySelectorAll('#faq .qa').forEach(function(qa){
+        qa.querySelector('.qa-trigger').addEventListener('click', function(){
+            var wasOpen = qa.classList.contains('open');
+            document.querySelectorAll('#faq .qa').forEach(function(o){ o.classList.remove('open'); });
+            if (!wasOpen) qa.classList.add('open');
+        });
+    });
 
-/* ===== lazy hover previews (real page, scaled) ===== */
-if(window.matchMedia('(hover:hover) and (min-width:861px)').matches){
-document.querySelectorAll('.worlds .app-slot').forEach(function(s){
-  var loaded=false;
-  s.addEventListener('mouseenter',function(){
-    if(loaded)return;loaded=true;
-    var pv=s.querySelector('.preview'),frame=pv.querySelector('.pvframe'),src=pv.getAttribute('data-src');
-    var f=document.createElement('iframe');f.setAttribute('loading','lazy');f.setAttribute('sandbox','allow-scripts allow-same-origin');
-    f.setAttribute('scrolling','no');f.referrerPolicy='no-referrer';
-    f.onload=function(){var l=frame.querySelector('.pvload');if(l)l.style.display='none';};
-    f.onerror=function(){var l=frame.querySelector('.pvload');if(l)l.textContent='Preview unavailable';};
-    f.src=src;frame.appendChild(f);
-    setTimeout(function(){var l=frame.querySelector('.pvload');if(l&&l.style.display!=='none')l.textContent='Preview unavailable';},6000);
-  });
-});
-}
+    /* ---------- One ID: recognize an existing sign-in, never auto-jump into an app ---------- */
+    (function(){
+        /* Same Supabase project + same storage key format the real apps (OneScore/OneSocial/
+           OneEvent) already use for auth (wseblryyqxawvbjmylbo — confirmed live in their bundles;
+           NOT the same project VAIA/billing use). Because this page and every app live under the
+           same origin (www.oneworldlabs.ai/...), a session stored here is automatically visible
+           to /onescore/, /onesocial-v2-preview/, /oneevents-preview/ too — true one-login SSO,
+           no token-passing needed. This page previously had NO auth-state awareness at all; the
+           "Sign in with One ID" links just hard-redirected straight into OneSocial regardless of
+           where the user clicked from, which is the bug this fixes: sign-in now returns to this
+           page and shows "pick your app" instead of dumping the user into one specific app. */
+        if (!window.supabase) return;
+        var ONEID_URL = 'https://wseblryyqxawvbjmylbo.supabase.co';
+        var ONEID_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4dHN5eHd5emh2Y3Ztb2doanNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3NTI1ODcsImV4cCI6MjA4ODMyODU4N30.JKhqKOpoBjMrU1HZHUD1SzpGFkKcbqxphTaSHtPfCLs';
+        var oneIdClient = window.supabase.createClient(ONEID_URL, ONEID_KEY, {
+            auth: { detectSessionInUrl: true, persistSession: true, autoRefreshToken: true }
+        });
+        function firstName(u){
+            var n = (u && u.user_metadata && (u.user_metadata.full_name || u.user_metadata.name)) || (u && u.email) || '';
+            return (n + '').split(' ')[0].split('@')[0];
+        }
+        /* Lee's correction: the hero's Google-style button STAYS in place with its label swapped
+           in-place, plus a separate Sign Out button next to it — not a plain text message with no
+           button. The hamburger drawer gets the same signed-in/out treatment (it previously had
+           none at all — always showed "Sign in" even mid-session, no way to sign out from there). */
+        function t(key, fallback){
+            var dict = (typeof I18N !== 'undefined') ? I18N[window.OWL_LANG || 'en'] : null;
+            return (dict && dict[key] != null) ? dict[key] : fallback;
+        }
+        var lastSignedInUser = null;
+        function showSignedIn(user){
+            lastSignedInUser = user;
+            var fn = firstName(user);
+            var welcome = t('signedin_welcome', 'Signed in — Welcome, {name}!').replace('{name}', fn || t('someone', 'there'));
+            var out = document.getElementById('signedout-cta'), inn = document.getElementById('signedin-cta');
+            if (out && inn) {
+                var msg = document.getElementById('welcomeMsg');
+                if (msg) msg.textContent = welcome;
+                out.classList.add('hidden');
+                inn.classList.remove('hidden'); inn.classList.add('flex');
+            }
+            var hbOutId = document.getElementById('hb-signedout-id'), hbInId = document.getElementById('hb-signedin-id');
+            if (hbOutId && hbInId) {
+                var letter = document.getElementById('hbAvatarLetter'), nameLine = document.getElementById('hbNameLine');
+                if (letter) letter.textContent = (fn || '?').slice(0, 1).toUpperCase();
+                if (nameLine) nameLine.textContent = fn ? t('hb_welcome', 'Welcome, {name}').replace('{name}', fn) : t('hb_signedin_only', 'Signed in');
+                hbOutId.classList.add('hidden');
+                hbInId.classList.remove('hidden'); hbInId.classList.add('flex');
+            }
+            var hbOutCta = document.getElementById('hb-signedout-cta'), hbInCta = document.getElementById('hb-signedin-cta');
+            if (hbOutCta && hbInCta) {
+                hbOutCta.classList.add('hidden');
+                hbInCta.classList.remove('hidden'); hbInCta.classList.add('flex');
+            }
+        }
+        window.OWL_ON_LANG_CHANGE = function(){ if (lastSignedInUser) showSignedIn(lastSignedInUser); };
+        function showSignedOut(){
+            lastSignedInUser = null;
+            var out = document.getElementById('signedout-cta'), inn = document.getElementById('signedin-cta');
+            if (out && inn) { inn.classList.add('hidden'); inn.classList.remove('flex'); out.classList.remove('hidden'); }
+            var hbOutId = document.getElementById('hb-signedout-id'), hbInId = document.getElementById('hb-signedin-id');
+            if (hbOutId && hbInId) { hbInId.classList.add('hidden'); hbInId.classList.remove('flex'); hbOutId.classList.remove('hidden'); }
+            var hbOutCta = document.getElementById('hb-signedout-cta'), hbInCta = document.getElementById('hb-signedin-cta');
+            if (hbOutCta && hbInCta) { hbInCta.classList.add('hidden'); hbInCta.classList.remove('flex'); hbOutCta.classList.remove('hidden'); }
+        }
+        oneIdClient.auth.getSession().then(function(res){
+            var session = res && res.data && res.data.session;
+            if (session && session.user) {
+                showSignedIn(session.user);
+                // clean the OAuth hash/query out of the URL once the session is captured
+                if (location.hash || location.search) { history.replaceState({}, '', location.pathname); }
+            }
+        }).catch(function(){ /* not signed in / network hiccup — leave the default signed-out CTA showing */ });
+        oneIdClient.auth.onAuthStateChange(function(_evt, session){
+            if (session && session.user) showSignedIn(session.user);
+            else showSignedOut();
+        });
+        /* wire both Sign Out buttons (hero + hamburger) to the same One ID (wseblr) client */
+        function wireSignOut(id){
+            var btn = document.getElementById(id);
+            if (!btn) return;
+            btn.addEventListener('click', function(){
+                btn.disabled = true;
+                var done = function(){ location.replace(location.pathname); };
+                oneIdClient.auth.signOut().then(done).catch(done);
+            });
+        }
+        wireSignOut('signOutBtn');
+        wireSignOut('hbSignOutBtn');
 
-/* ===== One ID: sign-in vs signed-in ===== */
-function paintSignedIn(){
-  var lang=document.documentElement.lang==='es'?'es':'en';
-  var signed=isSignedIn(), core=document.getElementById('core'), sub=document.getElementById('coresub');
-  var mcore=document.getElementById('mcore'), mg=document.getElementById('mgtext'), mtext=document.getElementById('mcoretext');
-  var lblIn=(I18N[lang].core_signedin||"You're signed in"), lblSign=(I18N[lang].core_signin||"Sign in with Google");
-  if(signed){
-    core.classList.add('signedin');core.setAttribute('href',APP_HOME);sub.textContent=lblIn;
-    core.setAttribute('aria-label','You are signed in — choose an app');
-    if(mcore){mcore.classList.add('signedin');mg.textContent=lblIn;mg.parentNode.setAttribute('href',APP_HOME);
-      if(mtext)mtext.textContent=(lang==='es'?'Estás dentro. Elige una app abajo.':"You're signed in. Pick an app below.");}
-  }else{
-    core.classList.remove('signedin');core.setAttribute('href',googleUrl());sub.textContent=lblSign;
-    core.setAttribute('aria-label','Sign in with Google — One ID');
-    if(mcore){mcore.classList.remove('signedin');mg.textContent=lblSign;mg.parentNode.setAttribute('href',googleUrl());}
-  }
-}
-/* drawer sign-in/join also route through One ID */
-document.getElementById('d-signin').addEventListener('click',function(e){e.preventDefault();dOpen(false);if(isSignedIn())location.href=APP_HOME;else location.href=googleUrl();});
-document.getElementById('d-join').addEventListener('click',function(e){e.preventDefault();dOpen(false);location.href=googleUrl();});
+        /* cross-tab/cross-app reactivity — root-caused Jul 14: signing in or out on a SIBLING app
+           (or this same page open in a second tab) changes the shared localStorage session, but
+           onAuthStateChange only fires for actions taken by THIS page's own client — it does not
+           watch raw storage writes from elsewhere. 'storage' fires in other tabs when the key
+           changes; visibilitychange/focus catch the rest (storage doesn't fire in the tab that made
+           the change, and some browsers are flaky about firing it at all). Without this, a user
+           who signs in/out on OneScore/OneSocial/OneEvent while this page is already open sees a
+           stale "signed in"/"signed out" state here until a manual reload. */
+        function recheckSession(){
+            oneIdClient.auth.getSession().then(function(res){
+                var session = res && res.data && res.data.session;
+                if (session && session.user) showSignedIn(session.user); else showSignedOut();
+            }).catch(function(){});
+        }
+        window.addEventListener('storage', function(e){
+            if (e.key && e.key.indexOf('sb-') === 0 && e.key.indexOf('-auth-token') > -1) recheckSession();
+        });
+        document.addEventListener('visibilitychange', function(){ if (!document.hidden) recheckSession(); });
+        window.addEventListener('focus', recheckSession);
+    })();
 
-/* ===== reveals ===== */
-if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});}
-else{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});}
+    /* ---------- VAIA voice assistant: ambient orb, tap to talk / tap to sleep ---------- */
+    (function(){
+        var SUPABASE_URL = 'https://wseblryyqxawvbjmylbo.supabase.co';
+        var VAIA_VOICE_ID = 'pFZP5JQG7iQjIQuC4Bku'; /* Lily — same voice for every utterance, greeting included */
 
-/* ===== restore prefs + init ===== */
-try{var st=localStorage.getItem('owl-theme');setTheme(st==='dark'?'dark':'light');var sl=localStorage.getItem('owl-lang');if(sl&&sl!=='en')applyLang(sl);else document.documentElement.lang='en';}catch(e){setTheme('light');}
-paintSignedIn();
+        /* Language: VAIA now speaks whatever language is selected in the header flag switcher
+           (window.OWL_LANG, set by the lang-menu click handler), not just English. BCP-47 codes
+           drive both the browser's speech-recognition locale and the fallback-TTS voice; the
+           backend vaia-chat call also gets `lang` so Gemini replies in that language, and these
+           local hardcoded lines (greeting, chat-window toggles, error/rest lines) get their own
+           per-language text so nothing stays English-only once a language is picked. */
+        var VAIA_BCP47 = { en:'en-US', es:'es-ES', co:'es-CO', de:'de-DE', ru:'ru-RU', zh:'zh-CN', pt:'pt-BR' };
+        var VAIA_STRINGS = {
+            en: { greeting:"Hey, welcome to One World Labs — this is VAIA! Let me know if you have any questions, or tap me anytime if you'd like me to go quiet.",
+                  openChat:"Sure — here's our chat window.", closeChat:"Got it, hiding the chat.",
+                  noCatch:"Sorry, I didn't catch that — could you try again?",
+                  connError:"I'm having trouble connecting right now — try again in a moment.",
+                  restLine:"I haven't heard anything in a bit, so I'll rest for now — just tap me anytime to wake me back up!",
+                  wakeLines:["Oh — I fell asleep there for a sec, sorry about that! I'm back now, how can I help?","Whoops, dozed off for a moment. I'm back — what were we saying?","Sorry, I drifted off there for a bit! Back now — go ahead.","My bad, I nodded off for a second. I'm here — how can I help?"],
+                  firstWake:"Oh — you woke me up! Hey, I'm glad you found me. I'm VAIA, your One World assistant — how can I help?" },
+            es: { greeting:"¡Hola, bienvenido a One World Labs, soy VAIA! Avísame si tienes alguna pregunta, o tócame en cualquier momento si prefieres que me quede callada.",
+                  openChat:"Claro, aquí tienes nuestra ventana de chat.", closeChat:"Listo, ocultando el chat.",
+                  noCatch:"Perdona, no entendí bien — ¿puedes repetirlo?",
+                  connError:"Estoy teniendo problemas para conectarme ahora mismo — inténtalo de nuevo en un momento.",
+                  restLine:"No he escuchado nada en un rato, así que voy a descansar — tócame cuando quieras para despertarme.",
+                  wakeLines:["Uy, me quedé dormida un segundo, perdón. Ya volví, ¿en qué te ayudo?","Vaya, me distraje un momento. Ya estoy aquí — ¿qué decíamos?","Perdona, me desconecté un poco. Ya volví, adelante.","Disculpa, me dormité un segundo. Aquí estoy — ¿en qué te ayudo?"],
+                  firstWake:"Ay, ¡me despertaste! Qué bueno que me encontraste. Soy VAIA, tu asistente de One World — ¿en qué te ayudo?" },
+            co: { greeting:"¡Hola, bienvenido a One World Labs, soy VAIA! Cuéntame si tienes alguna pregunta, o tócame cuando quieras si prefieres que me quede callada.",
+                  openChat:"Claro que sí, acá tienes nuestra ventana de chat.", closeChat:"Listo, ocultando el chat.",
+                  noCatch:"Uy, no te entendí bien — ¿puedes repetirlo?",
+                  connError:"Estoy teniendo problemas para conectarme en este momento — inténtalo de nuevo en un momentico.",
+                  restLine:"No he escuchado nada hace un rato, así que voy a descansar — tócame cuando quieras para despertarme.",
+                  wakeLines:["Ay, me quedé dormida un segundo, disculpa. Ya volví, ¿en qué te ayudo?","Uy, me distraje un momento. Ya estoy acá — ¿qué me decías?","Perdón, me desconecté un poco. Ya volví, dime.","Disculpa, me dormité un segundo. Acá estoy — ¿en qué te colaboro?"],
+                  firstWake:"Ay, ¡me despertaste! Qué bueno que me encontraste. Soy VAIA, tu asistente de One World — ¿en qué te colaboro?" },
+            de: { greeting:"Hey, willkommen bei One World Labs — ich bin VAIA! Sag mir Bescheid, wenn du Fragen hast, oder tippe mich jederzeit an, wenn ich still sein soll.",
+                  openChat:"Klar — hier ist unser Chatfenster.", closeChat:"Alles klar, ich blende den Chat aus.",
+                  noCatch:"Entschuldigung, das habe ich nicht verstanden — kannst du das wiederholen?",
+                  connError:"Ich habe gerade Verbindungsprobleme — versuch es gleich noch einmal.",
+                  restLine:"Ich habe eine Weile nichts gehört, also ruhe ich mich jetzt aus — tipp mich jederzeit an, um mich zu wecken!",
+                  wakeLines:["Oh — ich bin kurz eingenickt, entschuldige! Ich bin wieder da, wie kann ich helfen?","Ups, kurz weggenickt. Bin wieder da — was haben wir besprochen?","Entschuldige, ich war kurz weg! Bin wieder da, leg los.","Sorry, kurz eingedöst. Ich bin hier — wie kann ich helfen?"],
+                  firstWake:"Oh — du hast mich geweckt! Schön, dass du mich gefunden hast. Ich bin VAIA, deine One-World-Assistentin — wie kann ich helfen?" },
+            ru: { greeting:"Привет, добро пожаловать в One World Labs — это ВАЙЯ! Дай мне знать, если у тебя есть вопросы, или коснись меня в любой момент, если хочешь, чтобы я замолчала.",
+                  openChat:"Конечно — вот наше окно чата.", closeChat:"Хорошо, скрываю чат.",
+                  noCatch:"Извини, я не расслышала — можешь повторить?",
+                  connError:"У меня сейчас проблемы с подключением — попробуй ещё раз через момент.",
+                  restLine:"Я давно ничего не слышала, поэтому немного отдохну — коснись меня в любой момент, чтобы разбудить!",
+                  wakeLines:["Ой, я тут задремала на секунду, извини! Я снова на связи, чем помочь?","Упс, немного отвлеклась. Я вернулась — на чём мы остановились?","Извини, я ненадолго отключилась! Уже здесь, продолжай.","Прости, чуть задремала. Я тут — чем могу помочь?"],
+                  firstWake:"Ой — ты меня разбудил! Здорово, что ты меня нашёл. Я ВАЙЯ, твой помощник One World — чем могу помочь?" },
+            zh: { greeting:"嗨，欢迎来到 One World Labs——我是 VAIA！有任何问题都可以告诉我，如果想让我安静下来，随时点我一下就行。",
+                  openChat:"好的，这是我们的聊天窗口。", closeChat:"好的，正在隐藏聊天窗口。",
+                  noCatch:"抱歉，我没听清——可以再说一遍吗？",
+                  connError:"我现在连接有点问题——请稍后再试。",
+                  restLine:"我有一阵子没听到声音了，先休息一下——随时点我一下就能叫醒我！",
+                  wakeLines:["哦，我刚才打了个小盹，不好意思！我回来了，有什么可以帮你的？","呃，刚走神了一下。我回来了——我们说到哪了？","抱歉，我刚才走神了一下！我回来了，请继续。","不好意思，刚打了个盹。我在这儿——有什么可以帮你？"],
+                  firstWake:"哦——你把我叫醒了！很高兴你找到了我。我是 VAIA，你的 One World 助手——有什么可以帮你的？" },
+            pt: { greeting:"Oi, bem-vindo à One World Labs — eu sou a VAIA! Me avise se tiver alguma pergunta, ou toque em mim a qualquer momento se quiser que eu fique quieta.",
+                  openChat:"Claro — aqui está nossa janela de chat.", closeChat:"Certo, escondendo o chat.",
+                  noCatch:"Desculpa, não entendi direito — pode repetir?",
+                  connError:"Estou com problemas de conexão agora — tente de novo em um instante.",
+                  restLine:"Já faz um tempo que não escuto nada, então vou descansar — toque em mim quando quiser para me acordar!",
+                  wakeLines:["Ah, cochilei um segundinho, desculpa! Já voltei, como posso ajudar?","Opa, me distraí um instante. Já estou de volta — o que estávamos dizendo?","Desculpa, me desconectei um pouco! De volta, pode continuar.","Foi mal, cochilei rapidinho. Estou aqui — como posso ajudar?"],
+                  firstWake:"Ah — você me acordou! Que bom que me encontrou. Eu sou a VAIA, sua assistente One World — como posso ajudar?" }
+        };
+        function vaiaT(key){
+            var lang = window.OWL_LANG || 'en';
+            var dict = VAIA_STRINGS[lang] || VAIA_STRINGS.en;
+            return (dict[key] != null) ? dict[key] : VAIA_STRINGS.en[key];
+        }
+        /* Full 5-product knowledge base + rate limiting now live server-side in the vaia-chat edge
+           function (keyed off app:'homepage' below) — no client-side knowledge injection needed. */
+        var widget = document.getElementById('vaia-widget');
+        var orb = document.getElementById('vaia-orb');
+        var closeBtn = document.getElementById('vaia-close');
+        var log = document.getElementById('vaia-log');
+        var textIn = document.getElementById('vaia-text');
+        var history = [];
+        var busy = false, voiceMode = false, asleep = false, everSlept = false, currentAudio = null, pendingResolve = null, abortCtl = null;
+        /* tracks consecutive listen cycles that ended with nothing heard, so she can announce
+           "going to rest" after real silence instead of either looping forever or going mute
+           with no explanation (the "5th state" — neither listening, thinking, speaking, nor asleep) */
+        var noResultStreak = 0;
+        var AUTO_SLEEP_AFTER = 3;
+
+        function addMsg(role, text){
+            var b = document.createElement('div');
+            b.className = 'vaia-msg ' + (role === 'user' ? 'user' : 'vaia');
+            b.textContent = text;
+            log.appendChild(b);
+            log.scrollTop = log.scrollHeight;
+            return b;
+        }
+
+        function openPanel(){ widget.classList.add('open'); }
+        function closePanel(){ widget.classList.remove('open'); }
+
+        /* the LLM always spells her name "VAIA" in generated text (correct for the transcript log),
+           but that spelling is ambiguous to TTS engines and got pronounced a different way almost
+           every time. Two hyphenated phonetic respellings ("VY-uh", "VAY-uh") both got read back
+           wrong. Trying a plain natural word-shape instead of a phonetic hint — "Vaya" — since
+           TTS engines often handle real word shapes more reliably than hyphenated spellings.
+           Only the audio path gets this substitution — addMsg()/the visible transcript always
+           keeps the real "VAIA" spelling. */
+        function phoneticize(text){
+            return text.replace(/vaia/gi, 'Vaya');
+        }
+
+        /* one voice path for EVERY utterance (greeting included) so she never switches voices mid-conversation */
+        function speak(text){
+            widget.classList.add('speaking');
+            var spoken = phoneticize(text);
+            return fetch(SUPABASE_URL + '/functions/v1/elevenlabs-tts', {
+                method: 'POST', headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ text: spoken, voiceId: VAIA_VOICE_ID })
+            }).then(function(r){
+                var ct = r.headers.get('content-type') || '';
+                if (ct.indexOf('audio') !== -1) {
+                    return r.blob().then(function(blob){
+                        return new Promise(function(resolve){
+                            var audio = new Audio(URL.createObjectURL(blob));
+                            currentAudio = audio;
+                            pendingResolve = resolve;
+                            audio.onended = function(){ currentAudio = null; pendingResolve = null; resolve(); };
+                            audio.onerror = function(){ currentAudio = null; pendingResolve = null; resolve(); };
+                            audio.play().catch(function(){ currentAudio = null; pendingResolve = null; resolve(); });
+                        });
+                    });
+                }
+                return fallbackSpeak(spoken);
+            }).catch(function(){ return fallbackSpeak(spoken); })
+              .then(function(){ widget.classList.remove('speaking'); });
+        }
+
+        /* only used if the ElevenLabs call truly fails — same content, so still one coherent turn.
+           Called with already-phoneticized text from speak(); the .replace() below is a no-op in
+           that case but keeps this safe if ever called directly with raw text elsewhere. */
+        function fallbackSpeak(text){
+            text = phoneticize(text);
+            return new Promise(function(resolve){
+                if (!('speechSynthesis' in window)) { resolve(); return; }
+                try {
+                    var u = new SpeechSynthesisUtterance(text);
+                    u.lang = VAIA_BCP47[window.OWL_LANG || 'en'] || 'en-US';
+                    u.rate = 1; u.pitch = 1;
+                    u.onend = resolve; u.onerror = resolve;
+                    window.speechSynthesis.speak(u);
+                } catch(e) { resolve(); }
+            });
+        }
+
+        /* handle "pull up / hide the chat" locally so the box only appears when asked, never on tap */
+        function handleLocalIntent(text){
+            var t = text.toLowerCase();
+            var wantsOpen = /(chat|text)\s*(window|box)?/.test(t) && /(pull up|open|show|bring up|display|see)/.test(t);
+            var wantsClose = /(chat|text)\s*(window|box)?/.test(t) && /(close|hide|minimize|get rid of|dismiss)/.test(t);
+            if (wantsOpen) {
+                addMsg('user', text);
+                openPanel();
+                var m = vaiaT('openChat');
+                addMsg('vaia', m);
+                speak(m).then(function(){ if (voiceMode) startListening(); });
+                return true;
+            }
+            if (wantsClose) {
+                addMsg('user', text);
+                var m2 = vaiaT('closeChat');
+                addMsg('vaia', m2);
+                speak(m2).then(function(){ closePanel(); if (voiceMode) startListening(); });
+                return true;
+            }
+            return false;
+        }
+
+        function askVaia(userText){
+            if (busy || !userText) return;
+            if (handleLocalIntent(userText)) return;
+            busy = true;
+            widget.classList.add('thinking');
+            addMsg('user', userText);
+            history.push({ role:'user', content: userText });
+            var replyEl = addMsg('vaia', '…');
+            var full = '';
+            var spokenUpTo = 0;
+            var speakQueue = Promise.resolve();
+            var rateLimited = false;
+
+            /* speak completed sentences as they arrive instead of waiting for the whole reply —
+               this is what makes her feel like she's answering right away instead of after a pause */
+            function queueSentence(s){
+                s = s.trim();
+                if (!s) return;
+                speakQueue = speakQueue.then(function(){
+                    if (asleep) return;
+                    widget.classList.remove('thinking');
+                    return speak(s);
+                });
+            }
+            function drainSentences(finalFlush){
+                var unspoken = full.slice(spokenUpTo);
+                var re = /[^.!?]*[.!?]+(\s|$)/g, m, lastIndex = 0;
+                while ((m = re.exec(unspoken)) !== null) { queueSentence(m[0]); lastIndex = re.lastIndex; }
+                spokenUpTo += lastIndex;
+                if (finalFlush) {
+                    var rest = full.slice(spokenUpTo);
+                    if (rest.trim()) { queueSentence(rest); }
+                    spokenUpTo = full.length;
+                }
+            }
+
+            abortCtl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+            fetch(SUPABASE_URL + '/functions/v1/vaia-chat', {
+                method:'POST', headers:{'Content-Type':'application/json'},
+                /* NOTE: intentionally NOT sending mode:'voice' here — that activates a 160-token
+                   cap server-side, and gemini-flash-latest/2.5-flash-lite burn a chunk of that
+                   budget on hidden reasoning/thought-signature content via the OpenAI-compat
+                   endpoint, so real replies got cut off after 2-3 words (finish_reason:"length").
+                   Confirmed live Jul 14: identical request with mode:'voice' truncated ("Think of…"),
+                   without it the same question returned a full, correct answer. Leave uncapped
+                   (TEXT_STYLE) until a safe token budget for this model is found. */
+                body: JSON.stringify({ messages: history, app: 'homepage', lang: window.OWL_LANG || 'en' }),
+                signal: abortCtl ? abortCtl.signal : undefined
+            }).then(function(r){
+                if (!r.ok || !r.body) {
+                    return r.json().catch(function(){ return {}; }).then(function(errBody){
+                        var e = new Error(errBody.error || 'bad response');
+                        e.rateLimited = !!errBody.rateLimited;
+                        throw e;
+                    });
+                }
+                var reader = r.body.getReader(), decoder = new TextDecoder();
+                function pump(){
+                    return reader.read().then(function(res){
+                        if (res.done) return;
+                        var chunk = decoder.decode(res.value, {stream:true});
+                        chunk.split('\n').forEach(function(line){
+                            line = line.trim();
+                            if (line.indexOf('data:') !== 0) return;
+                            var payload = line.slice(5).trim();
+                            if (payload === '[DONE]') return;
+                            try {
+                                var json = JSON.parse(payload);
+                                var delta = json.choices && json.choices[0] && json.choices[0].delta && json.choices[0].delta.content;
+                                if (delta) { full += delta; replyEl.textContent = full; log.scrollTop = log.scrollHeight; drainSentences(false); }
+                            } catch(e){}
+                        });
+                        return pump();
+                    });
+                }
+                return pump();
+            }).then(function(){
+                if (!full) full = vaiaT('noCatch');
+                replyEl.textContent = full;
+                history.push({ role:'assistant', content: full });
+                drainSentences(true);
+                return speakQueue;
+            }).catch(function(err){
+                widget.classList.remove('thinking');
+                if (err && err.name === 'AbortError') return;
+                var m = (err && err.rateLimited && err.message) ? err.message : vaiaT('connError');
+                rateLimited = !!(err && err.rateLimited);
+                full = m;
+                replyEl.textContent = m;
+                history.push({ role:'assistant', content: m });
+                return speak(m);
+            }).then(function(){
+                widget.classList.remove('thinking');
+                busy = false;
+                if (rateLimited) {
+                    /* out of session budget for this visitor — go quiet instead of immediately
+                       re-asking (which would just hit the limit again) or looping TTS calls */
+                    asleep = true; voiceMode = false;
+                    widget.classList.remove('listening', 'speaking');
+                    widget.classList.add('asleep');
+                    everSlept = true;
+                    return;
+                }
+                if (voiceMode && !asleep) startListening();
+            });
+        }
+
+        /* ---- speech recognition (Chrome/Edge/Safari webkit) ---- */
+        var Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        var recog = null;
+        if (Recognition) {
+            recog = new Recognition();
+            recog.lang = VAIA_BCP47[window.OWL_LANG || 'en'] || 'en-US'; recog.continuous = false; recog.interimResults = false;
+            var gotResultThisCycle = false;
+            recog.onstart = function(){ widget.classList.add('listening'); gotResultThisCycle = false; };
+            recog.onresult = function(e){
+                var t = e.results[0][0].transcript;
+                if (t && t.trim()) { gotResultThisCycle = true; noResultStreak = 0; askVaia(t.trim()); }
+            };
+            recog.onerror = function(){ /* onend always fires right after — it owns what happens next */ };
+            /* onend is the ONE event that always fires no matter how the cycle ended (result, error,
+               or a plain silent timeout some browsers don't even report as an error) — so it's the
+               single place that decides what happens next. This is what closes the old "5th state":
+               previously a silent timeout with no error event just dropped her into limbo (not
+               listening, not thinking, not speaking, not asleep). Now every path leads to exactly
+               one of the four real states. */
+            recog.onend = function(){
+                widget.classList.remove('listening');
+                if (busy || asleep || !voiceMode) return; // askVaia() owns the next state, or she's off
+                if (gotResultThisCycle) return; // a local-intent reply is already handling its own restart
+                noResultStreak++;
+                if (noResultStreak >= AUTO_SLEEP_AFTER) {
+                    noResultStreak = 0;
+                    var line = vaiaT('restLine');
+                    addMsg('vaia', line);
+                    history.push({ role:'assistant', content: line });
+                    speak(line).then(function(){
+                        asleep = true; voiceMode = false;
+                        widget.classList.remove('listening', 'speaking');
+                        widget.classList.add('asleep');
+                        everSlept = true;
+                    });
+                    return;
+                }
+                startListening();
+            };
+        }
+        function startListening(){
+            if (!recog || busy || asleep) return;
+            try { recog.start(); } catch(e){}
+        }
+        function stopListening(){
+            if (recog) { try { recog.stop(); } catch(e){} }
+        }
+
+        function stopSpeaking(){
+            window.speechSynthesis && window.speechSynthesis.cancel();
+            if (currentAudio) { try { currentAudio.pause(); } catch(e){} currentAudio = null; }
+            if (pendingResolve) { var _r = pendingResolve; pendingResolve = null; _r(); }
+        }
+
+        function sleep(){
+            asleep = true;
+            voiceMode = false;
+            if (abortCtl) { try { abortCtl.abort(); } catch(e){} }
+            stopListening();
+            stopSpeaking();
+            widget.classList.remove('listening', 'speaking');
+            widget.classList.add('asleep');
+            everSlept = true;
+        }
+        var everWoken = false;
+        function wake(){
+            asleep = false;
+            noResultStreak = 0;
+            widget.classList.remove('asleep');
+            var goListen = function(){ voiceMode = true; startListening(); };
+            if (!everWoken) {
+                /* Sleep-first (Lee, Jul 16): the FIRST tap is the introduction —
+                   she never speaks before being touched. */
+                everWoken = true;
+                var firstWake = vaiaT('firstWake');
+                history.push({ role:'assistant', content: firstWake });
+                addMsg('vaia', firstWake);
+                speak(firstWake).then(goListen);
+            }
+            else if (everSlept) {
+                var wl = vaiaT('wakeLines');
+                var line = wl[Math.floor(Math.random() * wl.length)];
+                speak(line).then(goListen);
+            }
+            else { goListen(); }
+        }
+
+        var orbBusy = false;
+        orb.addEventListener('click', function(){
+            /* rapid double/triple taps used to desync sleep/wake (e.g. "wake up" firing without a real sleep in between) —
+               a short lock after each accepted tap keeps state consistent without feeling laggy on a normal single tap */
+            if (orbBusy) return;
+            orbBusy = true;
+            setTimeout(function(){ orbBusy = false; }, 450);
+            if (asleep) { wake(); return; }
+            if (widget.classList.contains('listening') || widget.classList.contains('speaking') || voiceMode) { sleep(); return; }
+            /* first-ever tap: this IS the required user gesture — start the listening loop */
+            voiceMode = true;
+            startListening();
+        });
+        orb.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); orb.click(); } });
+        closeBtn.addEventListener('click', function(){ closePanel(); /* closing the transcript never stops the conversation */ });
+        textIn.addEventListener('keydown', function(e){
+            if (e.key === 'Enter' && textIn.value.trim()) {
+                askVaia(textIn.value.trim());
+                textIn.value = '';
+            }
+        });
+
+        /* auto-greet on load, same voice path as every other line. Chain straight into listening the
+           moment the greeting finishes — she was previously left just sitting idle after "let me know
+           if you have any questions," which is exactly why she looked like she wasn't hearing anyone.
+           If the browser blocks the mic without a prior tap, startListening()/onerror handle that
+           gracefully (she just waits for the first tap, same as before). */
+        /* Sleep-first (Lee, Jul 16): NO auto-greeting, ever. She was talking the moment
+           the page loaded and bothering people at work. She now starts asleep — dim,
+           slowly breathing — and only ever speaks after someone taps her (wake()). */
+        window.addEventListener('load', function(){
+            asleep = true;
+            widget.classList.add('asleep');
+        });
+
+        /* keep VAIA's ears in sync if the visitor switches language mid-session — updates the
+           speech-recognition locale for the NEXT listen cycle (can't hot-swap mid-utterance). */
+        var prevOwlLangChange = window.OWL_ON_LANG_CHANGE;
+        window.OWL_ON_LANG_CHANGE = function(){
+            if (typeof prevOwlLangChange === 'function') prevOwlLangChange();
+            if (recog) { try { recog.lang = VAIA_BCP47[window.OWL_LANG || 'en'] || 'en-US'; } catch(e){} }
+        };
+    })();
 </script>
 </body>
 </html>
-    
