@@ -12,13 +12,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --ink:#0B0F1A; --paper:#FAFAF8; --teal:#14B8A6;
-    --bg:#0B0F1A; --fg:#FAFAF8; --muted:rgba(250,250,248,.62);
-    --line:rgba(255,255,255,.12); --card:rgba(255,255,255,.05);
-  }
-  @media (prefers-color-scheme: light){
-    :root{ --bg:#FAFAF8; --fg:#0B0F1A; --muted:rgba(11,15,26,.62);
-           --line:rgba(11,15,26,.12); --card:rgba(11,15,26,.035); }
+    --ink:#0B0F1A; --paper:#FAFAF8; --teal:#0d9488;
+    --bg:#FFFFFF; --fg:#0B0F1A; --muted:#475569;
+    --line:#e2e8f0; --card:#FAFAF8;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -38,7 +34,7 @@
     background:transparent;color:var(--muted);
   }
   .langs button[aria-pressed="true"]{
-    background:var(--teal);border-color:var(--teal);color:#04211D;
+    background:var(--teal);border-color:var(--teal);color:#fff;
   }
   .eyebrow{
     text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:800;
@@ -56,7 +52,7 @@
   }
   .cta{
     display:inline-flex;align-items:center;gap:9px;
-    background:var(--teal);color:#04211D;text-decoration:none;
+    background:var(--teal);color:#fff;text-decoration:none;
     font-weight:800;font-size:16px;padding:15px 26px;border-radius:18px;
     margin-top:6px;
   }
@@ -67,7 +63,7 @@
   .steps li::before{
     content:counter(s);position:absolute;left:0;top:1px;
     width:26px;height:26px;border-radius:999px;
-    background:var(--teal);color:#04211D;
+    background:var(--teal);color:#fff;
     font-size:13px;font-weight:800;display:grid;place-items:center;
   }
   table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:14.5px}
