@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Delete your OneJob account — One World Labs</title>
+<meta name="description" content="How to request deletion of your OneJob account and the data associated with it, what gets deleted, and what we are required to keep." />
+<meta name="robots" content="index,follow" />
+<link rel="icon" href="/logo-mark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0B0F1A; --paper:#FAFAF8; --teal:#14B8A6;
+    --bg:#0B0F1A; --fg:#FAFAF8; --muted:rgba(250,250,248,.62);
+    --line:rgba(255,255,255,.12); --card:rgba(255,255,255,.05);
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#FAFAF8; --fg:#0B0F1A; --muted:rgba(11,15,26,.62);
+           --line:rgba(11,15,26,.12); --card:rgba(11,15,26,.035); }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.55;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:28px 20px 72px}
+  header.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:34px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em}
+  .brand img{width:28px;height:28px;border-radius:8px}
+  .langs{display:flex;gap:6px}
+  .langs button{
+    font:inherit;font-weight:600;font-size:13px;cursor:pointer;
+    padding:7px 13px;border-radius:999px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);
+  }
+  .langs button[aria-pressed="true"]{
+    background:var(--teal);border-color:var(--teal);color:#04211D;
+  }
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:800;
+    color:var(--teal);margin:0 0 10px;
+  }
+  h1{font-size:clamp(28px,6vw,40px);line-height:1.12;letter-spacing:-.025em;margin:0 0 14px;font-weight:800}
+  h2{font-size:19px;letter-spacing:-.015em;margin:38px 0 12px;font-weight:800}
+  p{margin:0 0 14px;color:var(--fg)}
+  .lede{font-size:17px;color:var(--muted);margin-bottom:6px}
+  ul{margin:0 0 14px;padding-left:20px}
+  li{margin:0 0 8px}
+  .card{
+    border:1px solid var(--line);background:var(--card);
+    border-radius:22px;padding:22px;margin:24px 0;
+  }
+  .cta{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--teal);color:#04211D;text-decoration:none;
+    font-weight:800;font-size:16px;padding:15px 26px;border-radius:18px;
+    margin-top:6px;
+  }
+  .steps{counter-reset:s;list-style:none;padding:0;margin:6px 0 0}
+  .steps li{
+    counter-increment:s;position:relative;padding-left:40px;margin-bottom:14px;
+  }
+  .steps li::before{
+    content:counter(s);position:absolute;left:0;top:1px;
+    width:26px;height:26px;border-radius:999px;
+    background:var(--teal);color:#04211D;
+    font-size:13px;font-weight:800;display:grid;place-items:center;
+  }
+  table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:14.5px}
+  th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;
+    background:var(--card);padding:2px 6px;border-radius:6px;
+  }
+  a{color:var(--teal)}
+  footer{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+  [data-lang]{display:none}
+  [data-lang].on{display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="bar">
+    <div class="brand"><img src="/logo-mark.png" alt="" />One World Labs</div>
+    <div class="langs">
+      <button type="button" data-set="en" aria-pressed="true">English</button>
+      <button type="button" data-set="es" aria-pressed="false">Español</button>
+    </div>
+  </header>
+
+  <!-- ============================ ENGLISH ============================ -->
+  <main data-lang="en" class="on">
+    <p class="eyebrow">OneJob</p>
+    <h1>Delete your account</h1>
+    <p class="lede">You can ask us to delete your OneJob account and the personal data attached to it at any time. You don't need a reason, and you don't need to be signed in to make the request.</p>
+
+    <div class="card">
+      <h2 style="margin-top:0">Request deletion</h2>
+      <p>Email us from the address on your account. That's the whole process — we use the sending address to confirm it's you.</p>
+      <a class="cta" href="mailto:support@oneworldlabs.ai?subject=Delete%20my%20OneJob%20account&body=Please%20delete%20my%20OneJob%20account%20and%20the%20personal%20data%20associated%20with%20it.%0A%0AAccount%20email%3A%20%0AName%20on%20the%20account%3A%20%0A%0AI%20understand%20this%20cannot%20be%20undone.">Email a deletion request</a>
+      <p style="margin:16px 0 0;font-size:14px;color:var(--muted)">Or write to <strong>support@oneworldlabs.ai</strong> with the subject "Delete my OneJob account". If you email from a different address than the one on your account, we'll ask you to confirm from the account address before we act.</p>
+    </div>
+
+    <h2>What happens next</h2>
+    <ol class="steps">
+      <li>We confirm the request came from the account holder.</li>
+      <li>We tell you if anything has to be settled first — an open job, or a payment that hasn't finished moving. We won't delete an account with money in flight, because that would strand it.</li>
+      <li>We delete the account and the data listed below within <strong>30 days</strong>, and email you when it's done.</li>
+    </ol>
+
+    <h2>What we delete</h2>
+    <ul>
+      <li>Your login and profile — name, email, phone number, photo, bio, location, and languages.</li>
+      <li>Your listings, job posts, and the work history shown on your profile.</li>
+      <li>Your messages and conversations.</li>
+      <li>Your saved payment methods and payout details. Card numbers were never stored on our systems in the first place — they live with our payment processor.</li>
+      <li>Your OneScore and the connected-account links used to calculate it.</li>
+      <li>Your device tokens and notification settings.</li>
+    </ul>
+    <p>Deleting your OneJob account deletes your One World Labs sign-in, so it also ends your access to OneSocial, OneScore, OneEvent, and OneAgent. There is one account across all of them.</p>
+
+    <h2>What we have to keep, and why</h2>
+    <p>A short list, and none of it is used to build a profile of you after deletion.</p>
+    <table>
+      <thead><tr><th>What</th><th>Why</th><th>How long</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Records of completed payments — amount, date, and the two parties</td>
+          <td>Tax and financial-record law, and so the other side of a job keeps their own receipt</td>
+          <td>7 years</td>
+        </tr>
+        <tr>
+          <td>Records tied to an open dispute or chargeback</td>
+          <td>We can't drop evidence while a payment is being contested</td>
+          <td>Until it's resolved, then per the row above</td>
+        </tr>
+        <tr>
+          <td>Ratings and reviews you left for other people, with your name removed</td>
+          <td>Deleting them would rewrite someone else's reputation</td>
+          <td>Kept anonymous, indefinitely</td>
+        </tr>
+        <tr>
+          <td>Basic security and abuse logs</td>
+          <td>Fraud prevention and account-security investigations</td>
+          <td>12 months</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>This can't be undone</h2>
+    <p>Once an account is deleted we can't restore it, and we can't recover your job history, messages, or OneScore. Signing up again later starts a new account from zero.</p>
+
+    <h2>Questions</h2>
+    <p>Email <a href="mailto:support@oneworldlabs.ai">support@oneworldlabs.ai</a>. If you want to know what data we hold on you before deciding, ask for a copy — we'll send it.</p>
+  </main>
+
+  <!-- ============================ ESPAÑOL ============================ -->
+  <main data-lang="es">
+    <p class="eyebrow">OneJob</p>
+    <h1>Elimina tu cuenta</h1>
+    <p class="lede">Puedes pedirnos que eliminemos tu cuenta de OneJob y los datos personales asociados en cualquier momento. No necesitas dar un motivo ni iniciar sesión para hacer la solicitud.</p>
+
+    <div class="card">
+      <h2 style="margin-top:0">Solicitar la eliminación</h2>
+      <p>Escríbenos desde el correo de tu cuenta. Ese es todo el proceso — usamos el correo remitente para confirmar que eres tú.</p>
+      <a class="cta" href="mailto:support@oneworldlabs.ai?subject=Eliminar%20mi%20cuenta%20de%20OneJob&body=Por%20favor%20eliminen%20mi%20cuenta%20de%20OneJob%20y%20los%20datos%20personales%20asociados.%0A%0ACorreo%20de%20la%20cuenta%3A%20%0ANombre%20en%20la%20cuenta%3A%20%0A%0AEntiendo%20que%20esto%20no%20se%20puede%20deshacer.">Enviar solicitud por correo</a>
+      <p style="margin:16px 0 0;font-size:14px;color:var(--muted)">O escribe a <strong>support@oneworldlabs.ai</strong> con el asunto "Eliminar mi cuenta de OneJob". Si escribes desde un correo distinto al de tu cuenta, te pediremos que confirmes desde el correo de la cuenta antes de proceder.</p>
+    </div>
+
+    <h2>Qué pasa después</h2>
+    <ol class="steps">
+      <li>Confirmamos que la solicitud viene del titular de la cuenta.</li>
+      <li>Te avisamos si hay algo que resolver primero — un trabajo abierto o un pago que aún no termina de moverse. No eliminamos una cuenta con dinero en tránsito, porque quedaría atrapado.</li>
+      <li>Eliminamos la cuenta y los datos de la lista de abajo en un plazo de <strong>30 días</strong>, y te avisamos por correo cuando esté hecho.</li>
+    </ol>
+
+    <h2>Qué eliminamos</h2>
+    <ul>
+      <li>Tu acceso y tu perfil — nombre, correo, teléfono, foto, biografía, ubicación e idiomas.</li>
+      <li>Tus publicaciones, ofertas de trabajo y el historial laboral que aparece en tu perfil.</li>
+      <li>Tus mensajes y conversaciones.</li>
+      <li>Tus métodos de pago guardados y tus datos de cobro. Los números de tarjeta nunca se guardaron en nuestros sistemas — están con nuestro procesador de pagos.</li>
+      <li>Tu OneScore y las cuentas conectadas que se usan para calcularlo.</li>
+      <li>Los identificadores de tus dispositivos y tu configuración de notificaciones.</li>
+    </ul>
+    <p>Eliminar tu cuenta de OneJob elimina tu acceso a One World Labs, así que también termina tu acceso a OneSocial, OneScore, OneEvent y OneAgent. Es una sola cuenta para todos.</p>
+
+    <h2>Qué debemos conservar, y por qué</h2>
+    <p>Una lista corta, y nada de esto se usa para crear un perfil tuyo después de la eliminación.</p>
+    <table>
+      <thead><tr><th>Qué</th><th>Por qué</th><th>Cuánto tiempo</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Registros de pagos completados — monto, fecha y las dos partes</td>
+          <td>Obligaciones tributarias y contables, y para que la otra parte conserve su propio comprobante</td>
+          <td>7 años</td>
+        </tr>
+        <tr>
+          <td>Registros ligados a una disputa o contracargo abierto</td>
+          <td>No podemos eliminar evidencia mientras un pago está en disputa</td>
+          <td>Hasta que se resuelva, luego según la fila anterior</td>
+        </tr>
+        <tr>
+          <td>Calificaciones y reseñas que dejaste a otras personas, sin tu nombre</td>
+          <td>Eliminarlas reescribiría la reputación de alguien más</td>
+          <td>Anónimas, de forma indefinida</td>
+        </tr>
+        <tr>
+          <td>Registros básicos de seguridad y abuso</td>
+          <td>Prevención de fraude e investigaciones de seguridad de cuentas</td>
+          <td>12 meses</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Esto no se puede deshacer</h2>
+    <p>Una vez eliminada la cuenta no podemos restaurarla, ni recuperar tu historial de trabajos, tus mensajes ni tu OneScore. Si te registras de nuevo más adelante, empiezas una cuenta nueva desde cero.</p>
+
+    <h2>Preguntas</h2>
+    <p>Escribe a <a href="mailto:support@oneworldlabs.ai">support@oneworldlabs.ai</a>. Si quieres saber qué datos tenemos sobre ti antes de decidir, pídenos una copia — te la enviamos.</p>
+  </main>
+
+  <footer>
+    <span data-lang="en" class="on">OneJob is a One World Labs product. &nbsp;·&nbsp; <a href="/onejob/">Back to OneJob</a></span>
+    <span data-lang="es">OneJob es un producto de One World Labs. &nbsp;·&nbsp; <a href="/onejob/">Volver a OneJob</a></span>
+  </footer>
+</div>
+
+<script>
+  (function(){
+    var btns = document.querySelectorAll('.langs button');
+    function set(lang){
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-lang]').forEach(function(el){
+        el.classList.toggle('on', el.getAttribute('data-lang') === lang);
+      });
+      btns.forEach(function(b){
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-set') === lang));
+      });
+    }
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){ set(b.getAttribute('data-set')); });
+    });
+    // Colombia is the launch market — default to Spanish for Spanish-speaking browsers.
+    if ((navigator.language || '').toLowerCase().indexOf('es') === 0) set('es');
+  })();
+</script>
+</body>
+</html>
