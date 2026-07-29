@@ -5,6 +5,7 @@
 <meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Get started — OneVoice</title>
+<link rel="canonical" href="https://www.oneworldlabs.ai/onevoice/get-started/">
 <style>html,body{margin:0;padding:0;background:#FAFAF8;}</style>
 </head>
 <body>
@@ -270,10 +271,12 @@
           <div class="ov-eyebrow" data-i18n="co_s3_eyebrow">Step 3</div>
           <h2 data-i18n="co_s3_h2">How would you like to pay?</h2>
           <p class="hint" data-i18n="co_s3_hint">Prepay to save. Cancel anytime.</p>
-          <div class="ov-seg" id="terms">
-            <div class="ov-segbtn" data-term="monthly"><span data-i18n="co_term_monthly">Monthly</span><small data-i18n="co_term_monthly_sub">billed monthly</small></div>
-            <div class="ov-segbtn on" data-term="quarter"><span data-i18n="co_term_quarter">3 months</span><small data-i18n="co_term_quarter_sub">save 25%</small></div>
-            <div class="ov-segbtn" data-term="annual"><span data-i18n="co_term_annual">Annual</span><small data-i18n="co_term_annual_sub">save 35%</small></div>
+          <p id="ovLiteTermNote" style="display:none;margin:0 0 10px;font-size:13.5px;color:#6B6257;">Lite is billed monthly. Prepay terms are available on Basic and Pro.</p>
+            <p id="ovTierNote" style="display:none;margin:0 0 10px;font-size:13.5px;color:#0B8C80;font-weight:600;"></p>
+            <div class="ov-seg" id="terms">
+            <div class="ov-segbtn on" data-term="monthly"><span data-i18n="co_term_monthly">Monthly</span><small data-i18n="co_term_monthly_sub">billed monthly</small></div>
+            <div class="ov-segbtn" data-term="quarter"><span data-i18n="co_term_quarter">3 months</span><small class="ov-termsub" data-term-sub="quarter">save 25%</small></div>
+            <div class="ov-segbtn" data-term="annual"><span data-i18n="co_term_annual">Annual</span><small class="ov-termsub" data-term-sub="annual">save 35%</small></div>
           </div>
         </div>
 
@@ -328,7 +331,7 @@
     <div class="ov-foot">
       <span data-i18n="co_foot_questions">Questions? Call us (855) 770-0200 or email us</span> <a href="mailto:support.onevoice@onesocial.ai">support.onevoice@onesocial.ai</a><br>
       <span data-i18n="co_foot_tagline">OneVoice, a OneSocial company &middot; OneSocial AI, LLC &middot; 1111b S Governors Ave, Dover, DE 19904</span><br>
-      <a href="/privacy-page" data-i18n="co_foot_privacy">Privacy Policy &amp; Terms</a>
+      <a href="/onevoice/privacy/" data-i18n="co_foot_privacy">Privacy Policy &amp; Terms</a>
     </div>
   </div>
 </div>
@@ -361,7 +364,62 @@
   var SETUP_REG={light:149, basic:249, pro:449};
   var PROMO_SETUP={basic:0, pro:0};          // AUTO 50%-off DISABLED (Jul 20) — full setup shown/charged by default; 50% only via secret code SETUP50
   var TERM={monthly:{months:1,off:0,word:'monthly'},quarter:{months:3,off:.25,word:'every 3 months'},annual:{months:12,off:.35,word:'per year'}};
-  var state={tier:'basic',term:'quarter',count:1,isAgent:true,agentType:'yes',industry:'Real Estate'};
+  var state={tier:'basic',term:'monthly',count:1,isAgent:true,agentType:'yes',industry:'Real Estate'};
+  // ---- listing ladder -------------------------------------------------
+  // Lite is 99*n, so at 3 listings it costs the same as Basic ($297) but
+  // carries a worse per-call rate. Past each ceiling the next tier is
+  // strictly better, so we upgrade rather than let anyone overpay.
+  var TIER_ORDER=['light','basic','pro'];
+  var TIER_MAX={light:2, basic:5, pro:20};
+  function minTierFor(n){ return n<=TIER_MAX.light ? 'light' : (n<=TIER_MAX.basic ? 'basic' : 'pro'); }
+  function tierRank(t){ var i=TIER_ORDER.indexOf(t); return i<0?0:i; }
+  // Upgrade only. Never silently downgrade — a high-volume single-location
+  // buyer may legitimately want Pro with one listing for the $0.39 call rate.
+  function enforceTierForCount(){
+    var need=minTierFor(Math.max(1,state.count||1));
+    if(tierRank(need)>tierRank(state.tier)){ state.tier=need; syncPlanUI(); return true; }
+    return false;
+  }
+  function syncPlanUI(){
+    [].forEach.call(document.querySelectorAll('#plans .ov-planrow'),function(x){
+      x.classList.toggle('on', x.dataset.tier===state.tier); });
+    syncTermUI();
+  }
+  // ---- term discounts --------------------------------------------------
+  // Lite has the least headroom to its cost ceiling, so it is sold at list
+  // on every term. Basic and Pro keep the prepay discount.
+  var NO_TERM_DISCOUNT={light:true};
+  function offFor(tier,term){ return NO_TERM_DISCOUNT[tier] ? 0 : (TERM[term]?TERM[term].off:0); }
+  window.OV_SYNC_TERMS=function(){ syncTermUI(); };
+  function syncTermUI(){
+    // The server recomputes the charge from {tier,term,count}; the browser only
+    // sends those three. So Lite's no-discount rule has to be enforced by never
+    // letting a Lite order carry a discounted term — otherwise the page would
+    // show list price while Stripe charged the discount.
+    var flat=!!NO_TERM_DISCOUNT[state.tier];
+    if(flat && state.term!=='monthly') state.term='monthly';
+    [].forEach.call(document.querySelectorAll('#terms .ov-segbtn'),function(x){
+      var term=x.dataset.term, sub=x.querySelector('small');
+      var lock = flat && term!=='monthly';
+      x.classList.toggle('ov-segoff', lock);
+      x.setAttribute('aria-disabled', lock?'true':'false');
+      x.style.opacity   = lock?'.42':'';
+      x.style.pointerEvents = lock?'none':'';
+      x.classList.toggle('on', term===state.term);
+      if(sub && term!=='monthly'){
+        sub.textContent = (term==='quarter') ? T('co_term_quarter_sub','save 25%')
+                                             : T('co_term_annual_sub','save 35%');
+      }
+    });
+    var lite=document.getElementById('ovLiteTermNote');
+    if(lite) lite.style.display = flat ? 'block' : 'none';
+    var notice=document.getElementById('ovTierNote');
+    if(notice){
+      var n=Math.max(1,state.count||1), need=minTierFor(n);
+      notice.style.display = (need!=='light' && n>TIER_MAX.light && state.tier===need) ? 'block' : 'none';
+      notice.textContent = PRICE[state.tier].name+' covers '+n+' listings at '+money(monthlyFor(state.tier,n))+'/mo \u2014 the best price at this count.';
+    }
+  }
   function money(n){ if(window.OV_MONEY) return window.OV_MONEY(Math.round(n*100)); n=Math.round(n*100)/100; return '$'+n.toLocaleString('en-US',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2}); }
   function monthlyFor(tier,n){ if(tier==='light') return 99*n; return PRICE[tier].base + EXTRA*Math.max(0,n-INCLUDED[tier]); }
   function setupToday(tier){ var reg=SETUP_REG[tier]; return PROMO_SETUP[tier] ? reg*0.5 : reg; }
@@ -371,8 +429,9 @@
     var promoEl=document.getElementById('promoCode');
     var isFounderTest=promoEl && ['founder100','founder50','foundertest'].indexOf((promoEl.value||'').trim().toLowerCase())>=0;
     var monthly=monthlyFor(tier,n), setup=setupToday(tier), setupReg=SETUP_REG[tier];
-    var termTotal=monthly*t.months*(1-t.off);
-    var saved=monthly*t.months*t.off;
+    var off=offFor(tier,state.term);
+    var termTotal=monthly*t.months*(1-off);
+    var saved=monthly*t.months*off;
     var promoMsg=document.getElementById('promoMsg');
     if(isFounderTest){ setup=1; monthly=0; termTotal=0; saved=0; if(promoMsg){promoMsg.style.display='block';promoMsg.style.color='#0B8C80';promoMsg.textContent=T('co_founder_msg','Founder test code applied — $1 today, plan set to $0 (no future billing).');} }
     else if(promoMsg){ promoMsg.style.display='none'; }
@@ -396,10 +455,11 @@
   document.getElementById('plans').addEventListener('click',function(e){
     var c=e.target.closest('.ov-planrow'); if(!c)return;
     [].forEach.call(this.children,function(x){x.classList.remove('on');});
-    c.classList.add('on'); state.tier=c.dataset.tier; renderListings(); calc();
+    c.classList.add('on'); state.tier=c.dataset.tier; enforceTierForCount(); syncTermUI(); renderListings(); calc();
   });
   document.getElementById('terms').addEventListener('click',function(e){
     var c=e.target.closest('.ov-segbtn'); if(!c)return;
+    if(c.getAttribute('aria-disabled')==='true') return;   // guard BEFORE clearing, or the selection is wiped
     [].forEach.call(this.children,function(x){x.classList.remove('on');});
     c.classList.add('on'); state.term=c.dataset.term; calc();
   });
@@ -408,7 +468,7 @@
     if(sel&&btn&&list){
       function pick(v,label){ sel.setAttribute('data-value',v); if(val)val.textContent=label; state.agentType=v; state.isAgent=(v==='yes'); state.industry=label;
         [].forEach.call(list.children,function(o){o.classList.toggle('on',o.getAttribute('data-value')===v);});
-        applyAgentMode(); try{ localStorage.setItem('ov_getstarted_v1', JSON.stringify(ovSnapshot())); }catch(e){} }
+        applyAgentMode(); ovSave(); }
       btn.addEventListener('click',function(e){ e.stopPropagation(); sel.classList.toggle('open'); });
       list.addEventListener('click',function(e){ var o=e.target.closest('.ovsel-opt'); if(!o)return; pick(o.getAttribute('data-value'), o.textContent); sel.classList.remove('open'); });
       document.addEventListener('click',function(e){ if(!sel.contains(e.target)) sel.classList.remove('open'); });
@@ -416,10 +476,10 @@
   })();
   (function(){
     var inp=document.getElementById('count'), mn=document.getElementById('cntMinus'), pl=document.getElementById('cntPlus');
-    function setC(n){ n=Math.max(1,Math.min(20,parseInt(n,10)||1)); if(inp)inp.value=n; state.count=n; renderListings(); calc(); try{localStorage.setItem('ov_getstarted_v1', JSON.stringify(ovSnapshot()));}catch(e){} }
+    function setC(n){ n=Math.max(1,Math.min(20,parseInt(n,10)||1)); if(inp)inp.value=n; state.count=n; enforceTierForCount(); renderListings(); calc(); ovSave(); }
     if(mn) mn.addEventListener('click',function(){ setC((parseInt(inp.value,10)||1)-1); });
     if(pl) pl.addEventListener('click',function(){ setC((parseInt(inp.value,10)||1)+1); });
-    if(inp){ inp.addEventListener('input',function(){ var v=inp.value.replace(/[^0-9]/g,''); inp.value=v; var n=parseInt(v,10); if(!isNaN(n)){ state.count=Math.max(1,Math.min(20,n)); renderListings(); calc(); } });
+    if(inp){ inp.addEventListener('input',function(){ var v=inp.value.replace(/[^0-9]/g,''); inp.value=v; var n=parseInt(v,10); if(!isNaN(n)){ state.count=Math.max(1,Math.min(20,n)); enforceTierForCount(); renderListings(); calc(); } });
       inp.addEventListener('blur',function(){ setC(inp.value); }); }
   })();
   function applyAgentMode(){
@@ -469,15 +529,32 @@
     }
   });
   function ovEsc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  // The confirm button lives in the review panel, not on payBtn, so disabling
+  // payBtn alone let rapid clicks fire one POST each — five clicks, five Stripe
+  // sessions. Guard on an in-flight flag and lock the button the user is on.
+  var ovInFlight=false, ovClientRef=null;
+  function ovLockGo(lock){
+    var go=document.getElementById('ovReviewGo'); if(!go) return;
+    go.disabled=lock; go.style.pointerEvents=lock?'none':''; go.style.opacity=lock?'.55':'';
+  }
   function ovStartCheckout(order, btn, orig){
+    if(ovInFlight) return;                 // duplicate submit
+    ovInFlight=true; ovLockGo(true);
+    // stable per-attempt reference so the server can dedupe retries
+    if(!ovClientRef){
+      ovClientRef = 'ov_' + Date.now().toString(36) + '_' +
+        Math.random().toString(36).slice(2,10);
+    }
+    order.clientRef = ovClientRef;
     btn.disabled=true; btn.textContent=T('co_redirecting','Redirecting to payment…');
     fetch(CHECKOUT_ENDPOINT,{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(order) })
       .then(function(r){ return r.json(); })
       .then(function(d){
-        if(d && d.url){ window.location = d.url; return; }
+        if(d && d.url){ try{ localStorage.removeItem(LS_KEY); }catch(e){} window.location = d.url; return; }
         throw new Error((d && d.error) || 'No checkout URL returned');
       })
       .catch(function(e){
+        ovInFlight=false; ovLockGo(false);
         btn.disabled=false; btn.textContent=orig;
         document.getElementById('ovReview').style.display='none';
         alert(T('co_alert_checkout_err','Could not start checkout: ')+e.message);
@@ -549,7 +626,10 @@
         return { address:q('[name=address]'), price:q('[name=price]'), beds:q('[name=beds]'), baths:q('[name=baths]'), details:q('[name=details]'), url:q('[name=listingurl]'), assistant:q('[name=assistant]'), areacode:q('[name=areacode]'), calendar:q('[name=calendar]') };
       }) };
   }
-  function ovSave(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(ovSnapshot())); }catch(e){} }
+  var OV_TTL_MS = 24*60*60*1000;   // saved contact details expire after a day
+  function ovSave(){ try{ var snap=ovSnapshot(); snap._ts=Date.now(); localStorage.setItem(LS_KEY, JSON.stringify(snap)); }catch(e){} }
+  function ovClearSaved(){ try{ localStorage.removeItem(LS_KEY); }catch(e){} }
+  window.OV_CLEAR_SAVED=ovClearSaved;
   document.addEventListener('input', ovSave);
   document.addEventListener('change', ovSave);
 
@@ -557,7 +637,8 @@
     var qs=new URLSearchParams(location.search);
     var planParam=(qs.get('plan')||'').toLowerCase();
     var nParam=parseInt(qs.get('listings'),10);
-    var saved=null; try{ var raw=localStorage.getItem(LS_KEY); if(raw) saved=JSON.parse(raw); }catch(e){}
+    var saved=null; try{ var raw=localStorage.getItem(LS_KEY); if(raw){ saved=JSON.parse(raw);
+      if(!saved || !saved._ts || (Date.now()-saved._ts) > OV_TTL_MS){ saved=null; localStorage.removeItem(LS_KEY); } } }catch(e){}
     if(PRICE[planParam]) state.tier=planParam;                 // fresh ?plan wins
     else if(saved && PRICE[saved.tier]) state.tier=saved.tier; // else restore
     if(saved && TERM[saved.term]) state.term=saved.term;
@@ -568,6 +649,9 @@
     // business-type dropdown display + state.industry are synced by applyAgentMode() below
     [].forEach.call(document.querySelectorAll('#plans .ov-planrow'),function(x){x.classList.toggle('on', x.dataset.tier===state.tier);});
     [].forEach.call(document.querySelectorAll('#terms .ov-segbtn'),function(x){x.classList.toggle('on', x.dataset.term===state.term);});
+    enforceTierForCount();
+    [].forEach.call(document.querySelectorAll('#plans .ov-planrow'),function(x){x.classList.toggle('on', x.dataset.tier===state.tier);});
+    syncTermUI();
     var csel=document.getElementById('count'); if(csel) csel.value=String(state.count);
     if(saved){
       var setV=function(n,v){var e=document.querySelector('[name="'+n+'"]'); if(e&&v) e.value=v;};
@@ -654,7 +738,9 @@
 
   function t(key){
     var d = STR[current] || STR.us;
-    return (d && d[key] != null) ? d[key] : (STR.us && STR.us[key] != null ? STR.us[key] : key);
+    if (d && d[key] != null) return d[key];
+    if (STR.us && STR.us[key] != null) return STR.us[key];
+    return null;   // caller's fallback wins; applyText leaves authored text alone
   }
   window.OV_T = t;
   window.OV_LANG = function(){ return current; };
@@ -713,6 +799,7 @@
   /* ---------- text swap ---------- */
   function applyText(root){
     root = root || document;
+    if(!root.querySelector || root===document){ setTimeout(function(){ if(window.OV_SYNC_TERMS) window.OV_SYNC_TERMS(); },0); }
     root.querySelectorAll('[data-i18n]').forEach(function(el){ var v=t(el.getAttribute('data-i18n')); if(v!=null) el.innerHTML=v; });
     root.querySelectorAll('[data-i18n-ph]').forEach(function(el){ var v=t(el.getAttribute('data-i18n-ph')); if(v!=null) el.setAttribute('placeholder',v); });
     root.querySelectorAll('[data-i18n-aria]').forEach(function(el){ var v=t(el.getAttribute('data-i18n-aria')); if(v!=null) el.setAttribute('aria-label',v); });
