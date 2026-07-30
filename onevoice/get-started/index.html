@@ -242,10 +242,12 @@
           .ov-enttoggle svg{width:18px;height:18px;flex:0 0 18px;color:#5a6677;transition:transform .24s cubic-bezier(.2,.8,.2,1);}
           .ov-entwrap.open .ov-enttoggle{border-style:solid;border-color:#15C2B2;border-bottom-left-radius:0;border-bottom-right-radius:0;}
           .ov-entwrap.open .ov-enttoggle svg{transform:rotate(180deg);}
-          /* animate the height so it slides rather than snapping open */
-          .ov-entpanel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s cubic-bezier(.2,.8,.2,1);}
-          .ov-entpanel>*{overflow:hidden;}
-          .ov-entwrap.open .ov-entpanel{grid-template-rows:1fr;}
+          /* Explicit max-height, set from the measured content by JS. The
+             grid 0fr->1fr trick animates beautifully and silently collapsed to
+             zero height in some Chrome builds -- 1fr is not dependable as
+             "max-content" on an auto-height grid. */
+          .ov-entpanel{max-height:0;overflow:hidden;
+            transition:max-height .28s cubic-bezier(.2,.8,.2,1);}
           .ov-entpanel .ov-planrow{margin-top:10px;}
           @media(prefers-reduced-motion:reduce){.ov-entpanel{transition:none;}}
           .ov-book{display:block;text-align:center;text-decoration:none;}
@@ -532,9 +534,20 @@
   (function(){
     var wrap=document.getElementById('entWrap'), tg=document.getElementById('entToggle');
     if(!wrap||!tg) return;
-    function set(open){ wrap.classList.toggle('open',open); tg.setAttribute('aria-expanded',open?'true':'false'); }
+    var panel=document.getElementById('entPanel');
+    var inner=panel && panel.firstElementChild;
+    function measure(){ return inner ? inner.scrollHeight : 0; }
+    function set(open){
+      wrap.classList.toggle('open',open);
+      tg.setAttribute('aria-expanded',open?'true':'false');
+      if(panel) panel.style.maxHeight = open ? (measure()+8)+'px' : '0px';
+    }
     tg.addEventListener('click',function(){ set(!wrap.classList.contains('open')); });
+    /* the rows can change height when the language changes or the phone
+       rotates, so re-measure rather than trusting the first number */
+    window.addEventListener('resize',function(){ if(wrap.classList.contains('open')) set(true); });
     window.OV_ENT_OPEN=function(){ set(true); };
+    window.OV_ENT_REMEASURE=function(){ if(wrap.classList.contains('open')) set(true); };
   })();
   function syncSalesMode(){
     var sales = isSalesTier(state.tier);
