@@ -242,14 +242,14 @@
           .ov-enttoggle svg{width:18px;height:18px;flex:0 0 18px;color:#5a6677;transition:transform .24s cubic-bezier(.2,.8,.2,1);}
           .ov-entwrap.open .ov-enttoggle{border-style:solid;border-color:#15C2B2;border-bottom-left-radius:0;border-bottom-right-radius:0;}
           .ov-entwrap.open .ov-enttoggle svg{transform:rotate(180deg);}
-          /* Explicit max-height, set from the measured content by JS. The
-             grid 0fr->1fr trick animates beautifully and silently collapsed to
-             zero height in some Chrome builds -- 1fr is not dependable as
-             "max-content" on an auto-height grid. */
-          .ov-entpanel{max-height:0;overflow:hidden;
-            transition:max-height .28s cubic-bezier(.2,.8,.2,1);}
+          /* No height animation. Two cleverer versions of this (animated grid
+             rows, then a measured max-height) both resolved to zero height in
+             Lee's Chrome while working in test. display:none cannot do that. */
+          .ov-entpanel{display:none;}
+          .ov-entwrap.open .ov-entpanel{display:block;animation:ovEntIn .26s cubic-bezier(.2,.8,.2,1);}
+          @keyframes ovEntIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
           .ov-entpanel .ov-planrow{margin-top:10px;}
-          @media(prefers-reduced-motion:reduce){.ov-entpanel{transition:none;}}
+          @media(prefers-reduced-motion:reduce){.ov-entwrap.open .ov-entpanel{animation:none;}}
           .ov-book{display:block;text-align:center;text-decoration:none;}
           .ov-planrow.on{border-color:#15C2B2;background:#F6FDFC;box-shadow:0 0 0 3px rgba(21,194,178,.12);}
           .ov-radio{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:2px solid #c7ced6;position:relative;transition:.15s;}
@@ -534,20 +534,12 @@
   (function(){
     var wrap=document.getElementById('entWrap'), tg=document.getElementById('entToggle');
     if(!wrap||!tg) return;
-    var panel=document.getElementById('entPanel');
-    var inner=panel && panel.firstElementChild;
-    function measure(){ return inner ? inner.scrollHeight : 0; }
     function set(open){
       wrap.classList.toggle('open',open);
       tg.setAttribute('aria-expanded',open?'true':'false');
-      if(panel) panel.style.maxHeight = open ? (measure()+8)+'px' : '0px';
     }
     tg.addEventListener('click',function(){ set(!wrap.classList.contains('open')); });
-    /* the rows can change height when the language changes or the phone
-       rotates, so re-measure rather than trusting the first number */
-    window.addEventListener('resize',function(){ if(wrap.classList.contains('open')) set(true); });
     window.OV_ENT_OPEN=function(){ set(true); };
-    window.OV_ENT_REMEASURE=function(){ if(wrap.classList.contains('open')) set(true); };
   })();
   function syncSalesMode(){
     var sales = isSalesTier(state.tier);
