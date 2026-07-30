@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Get started — OneVoice</title>
 <link rel="canonical" href="https://www.oneworldlabs.ai/onevoice/get-started/">
-<style>html,body{margin:0;padding:0;background:#FBF3F6;}</style>
+<style>html,body{margin:0;padding:0;background:#E3ECFB;}</style>
 </head>
 <body>
 <!-- OneVoice CHECKOUT — PAGE 2 (GHL-embeddable fragment; paste into the /get-started funnel step like v5).
@@ -847,20 +847,22 @@
   --ovlift:0 20px 48px -20px rgba(58,40,72,.32),0 2px 8px -3px rgba(58,40,72,.13);
   --ovtext:#2C2622; --ovtext2:#6B6257; --ovtext3:#8A8079;
   --ovteal:#15C2B2; --ovtealdeep:#0B8C80;
+  /* blue is OneVoice's primary; teal stays the selected/confirmed state */
+  --ovblue:#2C6FE8; --ovblue2:#1B4FBF; --ovblue3:#12356F; --ovbluelt:#5A93F5;
 }
 /* ---- aurora field: one per page, fixed, non-interactive, behind all ---- */
 .field{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
-  background:linear-gradient(172deg,#FBF3F6 0%,#F6EDF8 28%,#EFE8FA 58%,#F7EEF0 100%);}
+  background:linear-gradient(172deg,#E3ECFB 0%,#D5E4FA 30%,#CFE0F8 60%,#DEEBFC 100%);}
 .field::before,.field::after{content:'';position:absolute;inset:-30%;will-change:transform;}
 .field::before{background:
-  radial-gradient(46% 38% at 18% 20%,rgba(146,88,232,.62),transparent 66%),
-  radial-gradient(42% 34% at 80% 12%,rgba(243,118,92,.56),transparent 64%),
-  radial-gradient(52% 42% at 64% 78%,rgba(88,132,242,.52),transparent 66%);
+  radial-gradient(50% 42% at 14% 16%,rgba(18,53,111,.62),transparent 66%),
+  radial-gradient(46% 38% at 84% 12%,rgba(44,111,232,.60),transparent 64%),
+  radial-gradient(56% 46% at 60% 82%,rgba(90,147,245,.56),transparent 66%);
   filter:blur(60px);animation:ovauroraA 46s ease-in-out infinite alternate;}
 .field::after{background:
-  radial-gradient(40% 32% at 84% 54%,rgba(252,176,74,.54),transparent 64%),
-  radial-gradient(44% 36% at 10% 72%,rgba(233,96,168,.50),transparent 66%),
-  radial-gradient(38% 30% at 44% 6%,rgba(96,224,206,.44),transparent 64%);
+  radial-gradient(44% 36% at 88% 50%,rgba(21,194,178,.42),transparent 64%),
+  radial-gradient(48% 40% at 6% 76%,rgba(18,53,111,.50),transparent 66%),
+  radial-gradient(42% 34% at 48% 2%,rgba(120,170,250,.52),transparent 64%);
   filter:blur(66px);animation:ovauroraB 58s ease-in-out infinite alternate;}
 @keyframes ovauroraA{0%{transform:translate3d(-3%,-2%,0) scale(1) rotate(0deg)}
   50%{transform:translate3d(4%,3%,0) scale(1.12) rotate(6deg)}
@@ -877,7 +879,7 @@
 
 /* ---- teal promo strip: the only place teal runs full-bleed ---- */
 .ovpromo{display:flex;align-items:center;justify-content:center;gap:14px;
-  background:linear-gradient(100deg,#0B8C80,#15C2B2 52%,#0FA99B);
+  background:linear-gradient(100deg,#12356F,#1B4FBF 38%,#0B8C80 88%,#15C2B2 100%);
   color:#fff;font-size:13.5px;font-weight:600;letter-spacing:.1px;
   padding:9px 20px;line-height:1.45;text-align:center;position:relative;z-index:60;}
 .ovpromo b{font-weight:800;}
@@ -1124,6 +1126,31 @@
   .ovlang-flag{display:none;}          /* code only when space is genuinely tight */
   .ovnav-cta{font-size:12px;padding:7px 11px;}
 }
+
+/* ---- pass 6: blue is the primary voice on this page too ---------------- */
+.ov-eyebrow,.ov-sum h3,.ov-info,.ov-foot a,.ovnav-cta{color:var(--ovblue2) !important;}
+.ov-sum:before{background:linear-gradient(90deg,var(--ovblue2),var(--ovblue) 52%,var(--ovbluelt));}
+.ov-hero h1 i{color:var(--ovblue2);}
+.ovlang-opt.active{background:rgba(44,111,232,.16);color:var(--ovblue2);}
+.ovlang-opt:hover{background:rgba(44,111,232,.12);}
+.ovlang-btn:hover{border-color:rgba(44,111,232,.55);}
+.ov-field input:focus,.ov-field select:focus,.ov-field textarea:focus{
+  border-color:rgba(44,111,232,.80);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.90),0 0 0 3px rgba(44,111,232,.20);}
+.ovstep-btn{background:rgba(44,111,232,.14);color:var(--ovblue2);}
+.ovstep-btn:hover{background:rgba(44,111,232,.26);}
+.ov-listing{border-left-color:var(--ovblue);}
+.ov-modal-card .ov-rv-email{background:linear-gradient(152deg,rgba(44,111,232,.14),rgba(44,111,232,.07));
+  border-color:rgba(44,111,232,.34);}
+/* actions stay clay-free here — the pay button is the primary action and this
+   page has always used a filled button for it, so it takes the brand blue */
+.ov-start,.ov-pay{background:linear-gradient(100deg,var(--ovblue2),var(--ovblue) 52%,var(--ovbluelt));
+  box-shadow:0 12px 28px -14px rgba(27,79,191,.62);}
+.ov-start:hover,.ov-pay:hover{background:linear-gradient(100deg,#173F99,#245FCC 52%,#4A83E4);}
+/* teal keeps its job: selected plan, active toggle, confirmed */
+.ov-planrow.on{border-color:var(--ovteal);}
+.ov-tg.on,.ov-term.on,.ov-segbtn.on{background:linear-gradient(100deg,#0B8C80,#15C2B2 52%,#0FA99B);}
+.ov-segind{background:linear-gradient(100deg,#0B8C80,#15C2B2 52%,#0FA99B);}
 </style>
 
 <script>
