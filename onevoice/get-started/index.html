@@ -169,8 +169,18 @@
             <div class="ov-field"><label data-i18n="co_lbl_email2">Confirm email</label><input name="email2" type="email" data-i18n-ph="ph_email2" placeholder="Re-enter your email" autocomplete="off"><div class="ov-mini" id="emailMatchMsg" data-i18n="co_email_mismatch" style="display:none;color:#e05a5a;">Emails don&rsquo;t match yet &mdash; double-check for typos.</div></div>
           </div>
           <div class="ov-grid">
-            <div class="ov-field"><label data-i18n="co_lbl_mobile">Mobile</label><input name="phone" type="tel" data-i18n-ph="ph_phone" placeholder="(217) 555-0199"></div>
-            <div class="ov-field"></div>
+            <div class="ov-field ov-phonefield"><label data-i18n="co_lbl_mobile">Mobile</label>
+              <div class="ov-phonerow">
+                <div class="ovsel ovsel-dial" id="dialSel" data-value="us">
+                  <button type="button" class="ovsel-btn" id="dialBtn" aria-haspopup="listbox" aria-label="Country dialling code">
+                    <span class="dial-flag" id="dialFlag">&#127482;&#127480;</span><span id="dialVal">+1</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5a6677" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                  </button>
+                  <div class="ovsel-list" id="dialList" role="listbox"></div>
+                </div>
+                <input name="phone" type="tel" inputmode="tel" autocomplete="tel-national" data-i18n-ph="ph_phone" placeholder="(217) 555-0199">
+              </div>
+            </div>
           </div>
           <p class="ov-mini" data-i18n="co_signin_note" style="margin:2px 0 0;">You&rsquo;ll sign in with your email &mdash; and set your own password from your welcome email on first login.</p>
         </div>
@@ -182,6 +192,17 @@
           .ovr-2col select:hover{border-color:#a9d9d3;}
           .ovr-2col select:focus{outline:none;border-color:#15C2B2;box-shadow:0 0 0 3px rgba(21,194,178,.15);}
           .ovsel{position:relative;}
+          /* The dial code sits in the same control as Business type so the form
+             has one visual language, and the number gets the room it needs. */
+          .ov-phonerow{display:flex;gap:10px;align-items:stretch;min-width:0;}
+          .ovsel-dial{flex:0 0 118px;}
+          .ovsel-dial .ovsel-btn{padding:0 11px;gap:7px;font-weight:700;}
+          .ovsel-dial .ovsel-list{left:0;right:auto;min-width:238px;max-height:264px;overflow-y:auto;}
+          .ovsel-dial .ovsel-opt{display:flex;align-items:center;gap:9px;}
+          .ovsel-dial .ovsel-opt b{margin-left:auto;color:#5a6677;font-weight:700;font-size:13px;}
+          .dial-flag{font-size:16px;line-height:1;}
+          .ov-phonerow input{flex:1 1 auto;min-width:0;}
+          @media(max-width:420px){.ovsel-dial{flex:0 0 104px;}}
           .ovsel-btn{width:100%;height:50px;display:flex;align-items:center;justify-content:space-between;gap:10px;border:1.5px solid #dfe4ea;border-radius:12px;background:#fff;padding:0 16px;font-size:15px;font-weight:600;color:#0B0F1A;cursor:pointer;font-family:inherit;box-shadow:0 1px 2px rgba(11,15,26,.05);transition:border-color .15s,box-shadow .15s;}
           .ovsel-btn:hover{border-color:#a9d9d3;}
           .ovsel.open .ovsel-btn{border-color:#15C2B2;box-shadow:0 0 0 3px rgba(21,194,178,.15);}
@@ -206,6 +227,27 @@
           .ov-planrow.ent .ov-pr-price b{color:#1B4FBF;font-size:15px;font-weight:900;}
           .ov-planrow.ent{border-style:dashed;}
           .ov-planrow.ent.on{border-style:solid;}
+          /* One row instead of two tall cards. The three buyable plans stay the
+             obvious choice; Enterprise is one tap away rather than in the way. */
+          .ov-entwrap{margin-top:2px;}
+          .ov-enttoggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+            border:1.5px dashed #c7ced6;border-radius:12px;padding:13px 16px;cursor:pointer;
+            background:linear-gradient(152deg,rgba(255,255,255,.72),rgba(255,255,255,.52));
+            backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);
+            font-family:inherit;text-align:left;color:#0B0F1A;transition:.15s;}
+          .ov-enttoggle:hover{border-color:#a9d9d3;}
+          .ov-entlabel{display:flex;flex-direction:column;gap:2px;min-width:0;}
+          .ov-entlabel b{font-size:15px;font-weight:800;}
+          .ov-entlabel span{font-size:12.5px;color:#5a6677;font-weight:600;line-height:1.4;}
+          .ov-enttoggle svg{width:18px;height:18px;flex:0 0 18px;color:#5a6677;transition:transform .24s cubic-bezier(.2,.8,.2,1);}
+          .ov-entwrap.open .ov-enttoggle{border-style:solid;border-color:#15C2B2;border-bottom-left-radius:0;border-bottom-right-radius:0;}
+          .ov-entwrap.open .ov-enttoggle svg{transform:rotate(180deg);}
+          /* animate the height so it slides rather than snapping open */
+          .ov-entpanel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s cubic-bezier(.2,.8,.2,1);}
+          .ov-entpanel>*{overflow:hidden;}
+          .ov-entwrap.open .ov-entpanel{grid-template-rows:1fr;}
+          .ov-entpanel .ov-planrow{margin-top:10px;}
+          @media(prefers-reduced-motion:reduce){.ov-entpanel{transition:none;}}
           .ov-book{display:block;text-align:center;text-decoration:none;}
           .ov-planrow.on{border-color:#15C2B2;background:#F6FDFC;box-shadow:0 0 0 3px rgba(21,194,178,.12);}
           .ov-radio{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:2px solid #c7ced6;position:relative;transition:.15s;}
@@ -259,7 +301,7 @@
           <div class="ov-eyebrow" data-i18n="co_s2_eyebrow">Step 2</div>
           <h2 data-i18n="co_s2_h2">Choose your plan</h2>
           <p class="hint" data-i18n="co_s2_hint">Same AI &amp; features on every plan — you only choose call volume. 7-day free trial.</p>
-          <div class="ov-planrows" id="plans"><div class="ov-planrow" data-tier="starter"><span class="ov-radio"></span><span class="ov-pr-name">Starter</span><span class="ov-pr-price"><span data-usd="14900">$149</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_starter">200 talk minutes</span> &middot; <span data-usd="85">$0.85</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow on" data-tier="business"><span class="ov-radio"></span><span class="ov-pr-name">Business</span><span class="ov-pr-price"><span data-usd="34900">$349</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-badge" data-i18n="co_badge_popular">Popular</span><span class="ov-pr-meta"><span data-i18n="co_meta_min_business">500 talk minutes</span> &middot; <span data-usd="75">$0.75</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow" data-tier="pro2"><span class="ov-radio"></span><span class="ov-pr-name">Pro</span><span class="ov-pr-price"><span data-usd="64900">$649</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_pro">1,000 talk minutes</span> &middot; <span data-usd="65">$0.65</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow ent" data-tier="ent_essentials" data-sales="1"><span class="ov-radio"></span><span class="ov-pr-name">Enterprise Essentials</span><span class="ov-pr-price"><span data-usd="149700">$1,497</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_ent">2,500 talk minutes</span> &middot; <span data-usd="45">$0.45</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow ent" data-tier="ent_custom" data-sales="1"><span class="ov-radio"></span><span class="ov-pr-name">Enterprise Connected / Complete</span><span class="ov-pr-price"><b data-i18n="co_talk_price">Contact sales</b></span><span class="ov-pr-meta" data-i18n="co_meta_ent_custom">Multi-location, written into your system of record</span></div></div>
+          <div class="ov-planrows" id="plans"><div class="ov-planrow" data-tier="starter"><span class="ov-radio"></span><span class="ov-pr-name">Starter</span><span class="ov-pr-price"><span data-usd="14900">$149</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_starter">200 talk minutes</span> &middot; <span data-usd="85">$0.85</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow on" data-tier="business"><span class="ov-radio"></span><span class="ov-pr-name">Business</span><span class="ov-pr-price"><span data-usd="34900">$349</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-badge" data-i18n="co_badge_popular">Popular</span><span class="ov-pr-meta"><span data-i18n="co_meta_min_business">500 talk minutes</span> &middot; <span data-usd="75">$0.75</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow" data-tier="pro2"><span class="ov-radio"></span><span class="ov-pr-name">Pro</span><span class="ov-pr-price"><span data-usd="64900">$649</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_pro">1,000 talk minutes</span> &middot; <span data-usd="65">$0.65</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-entwrap" id="entWrap"><button type="button" class="ov-enttoggle" id="entToggle" aria-expanded="false" aria-controls="entPanel"><span class="ov-entlabel"><b data-i18n="co_ent_head">Enterprise</b><span data-i18n="co_ent_sub">Higher call volume, multi-location, built with a person</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="ov-entpanel" id="entPanel"><div class="ov-entinner"><div class="ov-planrow ent" data-tier="ent_essentials" data-sales="1"><span class="ov-radio"></span><span class="ov-pr-name">Essentials</span><span class="ov-pr-price"><span data-usd="149700">$1,497</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_ent">2,500 talk minutes</span> &middot; <span data-usd="45">$0.45</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow ent" data-tier="ent_custom" data-sales="1"><span class="ov-radio"></span><span class="ov-pr-name">Connected / Complete</span><span class="ov-pr-price"><b data-i18n="co_talk_price">Contact sales</b></span><span class="ov-pr-meta" data-i18n="co_meta_ent_custom">Multi-location, written into your system of record</span></div></div></div></div></div>
         </div>
 
         <div class="ov-sec">
@@ -483,8 +525,20 @@
      an Enterprise row swaps the payment CTA for a booking link and hides the
      running total, rather than pretending to price it. */
   function isSalesTier(t){ return t === 'ent_essentials' || t === 'ent_custom'; }
+
+  /* Enterprise disclosure. Opens on tap, and opens itself if an Enterprise tier
+     is already selected -- a selected plan hidden inside a collapsed section is
+     how people end up confused about what they picked. */
+  (function(){
+    var wrap=document.getElementById('entWrap'), tg=document.getElementById('entToggle');
+    if(!wrap||!tg) return;
+    function set(open){ wrap.classList.toggle('open',open); tg.setAttribute('aria-expanded',open?'true':'false'); }
+    tg.addEventListener('click',function(){ set(!wrap.classList.contains('open')); });
+    window.OV_ENT_OPEN=function(){ set(true); };
+  })();
   function syncSalesMode(){
     var sales = isSalesTier(state.tier);
+    if(sales && window.OV_ENT_OPEN) window.OV_ENT_OPEN();
     var pay = document.getElementById('payBtn');
     var book = document.getElementById('bookBtn');
     if(pay)  pay.style.display  = sales ? 'none' : '';
@@ -716,6 +770,95 @@
         alert(T('co_alert_checkout_err','Could not start checkout: ')+e.message);
       });
   }
+
+  /* ---------- MOBILE NUMBER: dial code + live formatting ------------------
+     A raw 7705521868 typed into a Mobile field reads as a mistake, and on a
+     page that sells into seven countries there was nothing saying which
+     country the number belonged to. The picker defaults to whatever locale the
+     visitor has chosen, and the formatter reshapes the digits as they type. */
+  (function(){
+    var DIAL = [
+      {cc:'us', flag:'🇺🇸', dial:'+1',  label:'United States', fmt:'us'},
+      {cc:'co', flag:'🇨🇴', dial:'+57', label:'Colombia',      fmt:'3-3-4'},
+      {cc:'es', flag:'🇪🇸', dial:'+34', label:'España',   fmt:'3-3-3'},
+      {cc:'de', flag:'🇩🇪', dial:'+49', label:'Deutschland',   fmt:'plain'},
+      {cc:'ru', flag:'🇷🇺', dial:'+7',  label:'Россия', fmt:'3-3-2-2'},
+      {cc:'cn', flag:'🇨🇳', dial:'+86', label:'中国',  fmt:'3-4-4'},
+      {cc:'br', flag:'🇧🇷', dial:'+55', label:'Brasil',        fmt:'2-5-4'},
+      {cc:'gb', flag:'🇬🇧', dial:'+44', label:'United Kingdom',fmt:'plain'},
+      {cc:'ca', flag:'🇨🇦', dial:'+1',  label:'Canada',        fmt:'us'},
+      {cc:'mx', flag:'🇲🇽', dial:'+52', label:'México',   fmt:'2-4-4'}
+    ];
+    var wrap=document.getElementById('dialSel');
+    var btn=document.getElementById('dialBtn'), list=document.getElementById('dialList');
+    var flagEl=document.getElementById('dialFlag'), valEl=document.getElementById('dialVal');
+    var input=document.querySelector('[name="phone"]');
+    if(!wrap||!input) return;
+    var cur = DIAL[0];
+
+    function groups(spec){ return spec.split('-').map(Number); }
+    function format(digits, spec){
+      if(spec==='plain') return digits;
+      if(spec==='us'){
+        /* (770) 552-1868 -- the shape everyone in the US recognises */
+        if(digits.length<=3) return digits.length ? '('+digits : '';
+        if(digits.length<=6) return '('+digits.slice(0,3)+') '+digits.slice(3);
+        return '('+digits.slice(0,3)+') '+digits.slice(3,6)+'-'+digits.slice(6,10);
+      }
+      var out=[], i=0;
+      groups(spec).forEach(function(n){
+        if(i>=digits.length) return;
+        out.push(digits.slice(i,i+n)); i+=n;
+      });
+      if(i<digits.length) out.push(digits.slice(i));
+      return out.join(' ');
+    }
+    function maxDigits(spec){
+      if(spec==='us') return 10;
+      if(spec==='plain') return 14;
+      return groups(spec).reduce(function(a,b){return a+b;},0)+2;
+    }
+    function reformat(){
+      var d = input.value.replace(/\D/g,'').slice(0, maxDigits(cur.fmt));
+      input.value = format(d, cur.fmt);
+    }
+    function paint(){
+      flagEl.innerHTML=cur.flag; valEl.textContent=cur.dial;
+      wrap.setAttribute('data-value',cur.cc);
+      input.setAttribute('placeholder', cur.fmt==='us' ? '(217) 555-0199' : format('600123456789'.slice(0,maxDigits(cur.fmt)), cur.fmt));
+      list.innerHTML = DIAL.map(function(d){
+        return '<div class="ovsel-opt'+(d.cc===cur.cc?' on':'')+'" data-cc="'+d.cc+'" role="option">'+
+               '<span class="dial-flag">'+d.flag+'</span><span>'+d.label+'</span><b>'+d.dial+'</b></div>';
+      }).join('');
+      reformat();
+    }
+    /* follow the language picker: someone reading the page in Spanish for
+       Colombia is almost certainly typing a Colombian number */
+    window.OV_SET_DIAL_FROM_LOCALE = function(code){
+      var m = DIAL.filter(function(d){ return d.cc===code; })[0];
+      if(m){ cur=m; paint(); }
+    };
+    try{ var stored=localStorage.getItem('ov_ctry');
+      if(stored){ var m=DIAL.filter(function(d){return d.cc===stored;})[0]; if(m) cur=m; } }catch(e){}
+    paint();
+
+    btn.addEventListener('click',function(e){ e.stopPropagation(); wrap.classList.toggle('open'); });
+    list.addEventListener('click',function(e){
+      var o=e.target.closest('[data-cc]'); if(!o) return;
+      var m=DIAL.filter(function(d){return d.cc===o.getAttribute('data-cc');})[0];
+      if(m){ cur=m; paint(); }
+      wrap.classList.remove('open'); input.focus();
+    });
+    document.addEventListener('click',function(e){ if(!wrap.contains(e.target)) wrap.classList.remove('open'); });
+    input.addEventListener('input', reformat);
+    input.addEventListener('blur', reformat);
+    /* what gets submitted is the dial code plus the digits, never the pretty
+       version -- the display format is for the human, not for the record */
+    window.OV_PHONE_E164 = function(){
+      return cur.dial + input.value.replace(/\D/g,'');
+    };
+  })();
+
   document.getElementById('payBtn').addEventListener('click', function(){
     /* belt and braces: the button is hidden on a quoted tier, but a stale
        restored state must never post an Enterprise order to the payment API */
@@ -755,7 +898,7 @@
     }
     var order={ tier:state.tier, term:state.term, count:state.count,
       promo:(document.getElementById('promoCode')||{}).value||'',
-      contact:{ name:g('name'), company:g('company'), email:g('email'), phone:g('phone') },
+      contact:{ name:g('name'), company:g('company'), email:g('email'), phone:(window.OV_PHONE_E164?window.OV_PHONE_E164():g('phone'))   /* send +1770... not '(770) 552-1868' */ },
       // key stays `listings` -- the Vercel handler stashes this in KV for the
       // webhook that provisions one agent per number. Renaming it is a
       // coordinated backend change, not a form change.
@@ -798,7 +941,7 @@
     var g=function(n){var e=document.querySelector('[name="'+n+'"]');return e?e.value:'';};
     return { tier:state.tier, term:state.term, count:state.count, tollfree:state.tollfree, numtypes:state.numtypes, isAgent:state.isAgent, agentType:state.agentType, industry:state.industry,
       promo:(document.getElementById('promoCode')||{}).value||'',
-      contact:{ name:g('name'), company:g('company'), email:g('email'), email2:g('email2'), phone:g('phone') },
+      contact:{ name:g('name'), company:g('company'), email:g('email'), email2:g('email2'), phone:(window.OV_PHONE_E164?window.OV_PHONE_E164():g('phone'))   /* send +1770... not '(770) 552-1868' */ },
       listings:[].map.call(document.querySelectorAll('.ov-listing'), function(b){
         var q=function(s){var e=b.querySelector(s);return e?e.value:'';};
         return { label:q('[name=linelabel]'), numtype:q('[name=numtype]')||'local',
@@ -1383,6 +1526,9 @@
     document.querySelectorAll('.ov-intl-note').forEach(function(el){ el.style.display = (current==='us') ? 'none' : ''; });
     syncSwitcher();
     if(window.OV_CALC_REFRESH) window.OV_CALC_REFRESH();
+    /* someone reading in Spanish for Colombia is almost certainly typing a
+       Colombian number -- move the dial code with the language */
+    if(window.OV_SET_DIAL_FROM_LOCALE) window.OV_SET_DIAL_FROM_LOCALE(code);
     /* the head guard hid the body so nobody watches English swap to Spanish --
        take it back down now that the page says the right thing */
     document.documentElement.removeAttribute('data-ov-pending');
