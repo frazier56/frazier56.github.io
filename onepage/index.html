@@ -158,8 +158,8 @@
   .drawer .dfoot{margin-top:auto;font-size:11.5px;color:var(--muted-dark);text-align:center;padding-top:14px;}
 
   /* ---- hero (deep-red band) ---- */
-  .hero{background:radial-gradient(ellipse 900px 700px at 0% 0%,rgba(158,51,36,.34),transparent 60%),radial-gradient(ellipse 700px 500px at 100% 20%,rgba(21,194,178,.10),transparent 60%),linear-gradient(to bottom,var(--dark) 0%,var(--dark) calc(100% - 300px),#3A130C calc(100% - 220px),#7E2A1C calc(100% - 150px),#C06450 calc(100% - 82px),#E9B7AC calc(100% - 26px),transparent 100%);color:var(--cream);padding:112px 0 320px;position:relative;overflow:hidden;}
-  :root[data-theme="dark"] .hero{background:radial-gradient(ellipse 900px 700px at 0% 0%,rgba(158,51,36,.30),transparent 60%),radial-gradient(ellipse 700px 500px at 100% 20%,rgba(21,194,178,.08),transparent 60%),linear-gradient(to bottom,var(--dark) 0%,var(--dark) calc(100% - 280px),transparent 100%);}
+  .hero{background:radial-gradient(ellipse 900px 700px at 0% 0%,rgba(158,51,36,.34),transparent 60%),radial-gradient(ellipse 700px 500px at 100% 20%,rgba(21,194,178,.10),transparent 60%),linear-gradient(to bottom,var(--dark) 0%,var(--dark) calc(100% - 300px),#3A130C calc(100% - 220px),#7E2A1C calc(100% - 150px),#C06450 calc(100% - 88px),#E4AFA6 calc(100% - 34px),#FAF2F0 100%);color:var(--cream);padding:112px 0 320px;position:relative;overflow:hidden;}
+  :root[data-theme="dark"] .hero{background:radial-gradient(ellipse 900px 700px at 0% 0%,rgba(158,51,36,.30),transparent 60%),radial-gradient(ellipse 700px 500px at 100% 20%,rgba(21,194,178,.08),transparent 60%),linear-gradient(to bottom,var(--dark) 0%,var(--dark) calc(100% - 200px),var(--bg) 100%);}
   .hero .wrap{position:relative;z-index:2;}
   .hero-flex{display:flex;flex-direction:column;gap:40px;align-items:center;text-align:center;}
   .hero-text{max-width:31rem;}
@@ -194,7 +194,8 @@
   .badge-ai svg{color:var(--applt);}
 
   /* ---- offer band ---- */
-  .offer-sec{background:transparent;}
+  .offer-sec{background:linear-gradient(to bottom,#FAF2F0 0%,#FAF2F0 46px,rgba(250,242,240,0) 300px);}
+  :root[data-theme="dark"] .offer-sec{background:transparent;}
   .offerband{text-align:center;}
   .offerband .pin{display:inline-block;padding:5px 13px;border-radius:999px;background:linear-gradient(90deg,rgba(21,194,178,.16),rgba(47,224,206,.22));border:1px solid rgba(21,194,178,.32);color:var(--state2);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
   .offerband h2{margin-top:14px;font-size:23px;line-height:1.2;font-weight:900;letter-spacing:-.02em;color:var(--ink);}
