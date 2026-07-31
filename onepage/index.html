@@ -39,14 +39,14 @@
   :root[data-theme="dark"]{
     --dark:#07090E;--raised:#0E0A10;--elevated:#151019;
     --bg:#07090E;--ink:#F1EAE8;--muted:#C4B4AF;--faint:#8f817c;--cream:#F6ECEA;--muted-dark:#CBB6B0;
-    --card:#171019;--border:rgba(255,255,255,.12);
+    --card:#2A2E36;--border:rgba(255,255,255,.12);
     --app:var(--applt);--app2:var(--applt);
     --action:#B0402B;--action-lt:#C24C33;--action-dk:#6B2114;
     --frost:blur(30px) saturate(150%);--frost-lite:blur(16px) saturate(140%);
     --frostedge:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(255,255,255,.04);
     --glass-a:rgba(255,255,255,.055);--glass-b:rgba(255,255,255,.026);--glass-line:rgba(255,255,255,.10);
     --glass-drop:0 24px 60px -24px rgba(0,0,0,.7);
-    --menu-bg:#171019;--menu-line:rgba(255,255,255,.10);--menu-drop:0 26px 60px rgba(0,0,0,.6);
+    --menu-bg:#252A31;--menu-line:rgba(255,255,255,.10);--menu-drop:0 26px 60px rgba(0,0,0,.6);
     --sh-sm:0 1px 3px rgba(0,0,0,.4);--sh-lg:0 20px 50px -18px rgba(0,0,0,.7);
     --teal:#2FE0CE;--teal-d:#2FE0CE;--teal-l:#2FE0CE;
   }
@@ -59,19 +59,19 @@
 
   /* ---- the aurora field (Deep red) ---- */
   .field-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
-    background:linear-gradient(172deg,#F9F4F3 0%,#F8F0EF 30%,#F8EEED 60%,#F9F3F2 100%);}
+    background:linear-gradient(172deg,#FBF6F5 0%,#FAF2F1 42%,#FAF1F0 72%,#FBF6F5 100%);}
   :root[data-theme="dark"] .field-bg{background:#07090E;}
   .field-bg::before,.field-bg::after{content:'';position:absolute;inset:-18%;will-change:transform;}
   .field-bg::before{background:
-      radial-gradient(50% 42% at 14% 16%,rgba(110,33,23,.55),transparent 66%),
-      radial-gradient(46% 38% at 84% 12%,rgba(158,51,36,.52),transparent 64%),
-      radial-gradient(56% 46% at 60% 82%,rgba(222,128,115,.48),transparent 66%);
-    filter:blur(60px);animation:auroraA 46s ease-in-out infinite alternate;}
+      radial-gradient(72% 62% at 16% 12%,rgba(158,51,36,.16),transparent 74%),
+      radial-gradient(70% 60% at 86% 8%,rgba(190,74,54,.14),transparent 74%),
+      radial-gradient(78% 66% at 60% 88%,rgba(222,128,115,.15),transparent 76%);
+    filter:blur(96px);animation:auroraA 46s ease-in-out infinite alternate;}
   .field-bg::after{background:
-      radial-gradient(42% 34% at 82% 56%,rgba(182,55,37,.44),transparent 64%),
-      radial-gradient(44% 36% at 12% 74%,rgba(222,128,115,.42),transparent 66%),
-      radial-gradient(38% 30% at 46% 8%,rgba(21,194,178,.30),transparent 64%);
-    filter:blur(66px);animation:auroraB 58s ease-in-out infinite alternate;}
+      radial-gradient(60% 50% at 84% 58%,rgba(198,88,66,.11),transparent 70%),
+      radial-gradient(62% 52% at 10% 78%,rgba(222,128,115,.12),transparent 72%),
+      radial-gradient(52% 42% at 46% 4%,rgba(21,194,178,.10),transparent 68%);
+    filter:blur(108px);animation:auroraB 58s ease-in-out infinite alternate;}
   :root[data-theme="dark"] .field-bg::before{background:
       radial-gradient(56% 46% at 78% 8%,rgba(158,51,36,.30),transparent 66%),
       radial-gradient(50% 42% at 6% 92%,rgba(21,194,178,.16),transparent 66%);filter:blur(72px);}
@@ -129,8 +129,8 @@
   .nav.scrolled{padding:8px 18px;box-shadow:0 6px 24px -10px rgba(42,13,10,.28);}
   .nav .brand{display:flex;align-items:center;gap:9px;font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
   .nav .brand b{color:var(--app);font-weight:700;}
-  .nav .brand .mk{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--app),var(--app3));display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(158,51,36,.4);}
-  .nav .brand .mk svg{color:#fff;}
+  .nav .brand .mk{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,#F0BE4E,#C6871A);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(198,135,26,.5);}
+  .nav .brand .mk svg{color:#4A2E08;}
   .nav .ctrl{display:flex;align-items:center;gap:8px;}
   .iconbtn{width:38px;height:38px;border-radius:10px;border:1px solid var(--glass-line);background:linear-gradient(152deg,var(--glass-a),var(--glass-b));backdrop-filter:var(--frost-lite);-webkit-backdrop-filter:var(--frost-lite);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;transition:filter .15s ease;}
   .iconbtn:hover{filter:brightness(.97);}
