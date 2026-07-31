@@ -56,7 +56,8 @@
     background:linear-gradient(45deg,#fff44f,#ffdd44,#ffc533,#ffaa22,#ff8800,#e67300,#cc5500);
     box-shadow:0 25px 50px -12px rgba(249,115,22,.25)}
   .ring-in{display:block;width:100%;height:100%;border-radius:9999px;padding:4px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
-  .ring img{width:100%;height:100%;border-radius:9999px;object-fit:cover;object-position:top;display:block}
+  .ring-clip{display:block;width:100%;height:100%;border-radius:9999px;overflow:hidden}
+  .ring img{width:100%;height:100%;object-fit:cover;object-position:50% 10%;transform:scale(1.28);transform-origin:50% 14%;display:block}
   /* ---- identity ---- */
   h1{color:var(--amber);font-size:20px;font-weight:600;letter-spacing:.01em}
   .role{color:#fff;font-size:14px;margin-top:8px}
@@ -126,13 +127,10 @@
   }
   a.app .n{font-size:12.5px;font-weight:700;color:#fff;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.35)}
   a.app .s{font-size:10px;color:rgba(255,255,255,.88);white-space:normal;text-align:center;line-height:1.3;text-shadow:0 1px 2px rgba(0,0,0,.3)}
-  .gift{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;padding:14px;border-radius:14px;text-align:center;cursor:pointer;user-select:none;
-    background:linear-gradient(135deg,rgba(249,115,22,.2),rgba(245,158,11,.15));border:1px solid rgba(251,146,60,.4);transition:all .3s}
-  .gift:hover{background:linear-gradient(135deg,rgba(249,115,22,.3),rgba(245,158,11,.25));border-color:rgba(253,186,116,.7)}
-  .gift svg{width:22px;height:22px;flex:0 0 auto}
-  .gift .t{font-size:13px;font-weight:600;color:var(--gold)}
-  .gift .code{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;background:rgba(0,0,0,.35);border:1px solid rgba(255,212,102,.45);border-radius:8px;padding:2px 8px;color:#FFE49A}
-  .gift .s{font-size:11px;color:rgba(255,237,213,.8)}
+  .gift{margin-top:14px;text-align:center;font-size:12px;color:var(--dim);line-height:1.7}
+  .gift .code{display:inline-block;cursor:pointer;user-select:none;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.12em;
+    background:rgba(0,0,0,.35);border:1px solid rgba(255,212,102,.45);border-radius:8px;padding:2px 9px;color:#FFE49A;transition:border-color .2s}
+  .gift .code:hover{border-color:rgba(255,228,154,.8)}
   /* ---- save to contacts — teal gradient ---- */
   .save-wrap{max-width:26rem;margin:0 auto 44px;text-align:center}
   a.save{
@@ -181,7 +179,7 @@
 
       <div class="center">
         <button class="portrait-btn" id="photoBtn" aria-label="View photo full screen">
-          <span class="ring"><span class="ring-in"><img src="lee-frazier.webp" alt="Lee Frazier, Founder &amp; Chief Executive of One World Labs" width="176" height="176" loading="eager"></span></span>
+          <span class="ring"><span class="ring-in"><span class="ring-clip"><img src="lee-frazier.webp" alt="Lee Frazier, Founder &amp; Chief Executive of One World Labs" width="176" height="176" loading="eager"></span></span></span>
         </button>
         <h1>Lee Frazier</h1>
         <p class="role">Founder &amp; Chief Executive</p>
@@ -258,10 +256,7 @@
                     <a class="app" style="--h:var(--hue-app)" href="https://www.oneworldlabs.ai/" target="_blank" rel="noopener"><span class="n">OneApp</span><span class="s">Coming soon</span></a>
                   </div>
                 </div>
-                <div class="gift" id="giftCode" role="button" tabindex="0" aria-label="Copy founder discount code FOUNDER0001">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#FFD466" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
-                  <span><span class="t">Founder Discount · <span class="code">FOUNDER0001</span></span><br><span class="s" id="giftSub">30 days of VIP free on OneJob &amp; OneEvent · tap to copy</span></span>
-                </div>
+                <p class="gift">Founder discount — 30 days of VIP free on subscribing apps: <span class="code" id="giftCode" role="button" tabindex="0" aria-label="Copy founder discount code">FOUNDER0001</span> <span id="giftSub">· tap the code to copy</span></p>
               </div>
             </div>
           </div>
@@ -306,7 +301,7 @@
     cTile.classList.toggle('dim',openO); oTile.classList.toggle('dim',openC);
   }
   cT.addEventListener('click',function(){ setState(!cP.classList.contains('show'),false); });
-  oT.addEventListener('click',function(){ setState(false,!oP.classList.contains('show')); if(oP.classList.contains('show')){requestAnimationFrame(function(){focusScale();});} });
+  oT.addEventListener('click',function(){ setState(false,!oP.classList.contains('show')); if(oP.classList.contains('show')){requestAnimationFrame(focusScale);setTimeout(focusScale,250);} });
 
   /* carousel: card nearest the middle grows slightly (magnifier focus) */
   var car=document.querySelector('.car');
@@ -316,9 +311,11 @@
     for(var i=0;i<tiles.length;i++){
       var b=tiles[i].getBoundingClientRect();
       var d=Math.abs(b.left+b.width/2-cx);
-      var s=1+0.09*Math.max(0,1-d/240);
+      var f=Math.max(0,1-d/280);
+      var s=0.94+0.24*f;                 /* far 0.94 -> centered 1.18: clearly visible */
       tiles[i].style.transform='scale('+s.toFixed(3)+')';
-      tiles[i].style.zIndex=s>1.04?'2':'1';
+      tiles[i].style.opacity=(0.82+0.18*f).toFixed(2);
+      tiles[i].style.zIndex=f>0.6?'2':'1';
     }
   }
   var ticking=false;
