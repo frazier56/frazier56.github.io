@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Frazier;Lee;;;
+FN:Lee Frazier
+ORG:One World Labs, Inc.
+TITLE:Founder & Chief Executive
+TEL;TYPE=CELL,VOICE:+17705521868
+TEL;TYPE=WORK,VOICE:+18557700200
+EMAIL;TYPE=INTERNET,PREF:lee@oneworldlabs.ai
+URL:https://oneworldlabs.ai
+END:VCARD
