@@ -192,6 +192,11 @@
           .ovr-2col select:hover{border-color:#a9d9d3;}
           .ovr-2col select:focus{outline:none;border-color:#15C2B2;box-shadow:0 0 0 3px rgba(21,194,178,.15);}
           .ovsel{position:relative;}
+          /* A menu that has been lifted out of the form (see MENU PORTAL in the
+             script below) is positioned in viewport coordinates and painted
+             above everything, so no frosted section can swallow it. */
+          .ovsel-list.ovsel-portal{position:fixed;top:0;left:0;right:auto;
+            z-index:100000;display:block;box-shadow:0 22px 54px rgba(11,15,26,.22);}
           /* The dial code sits in the same control as Business type so the form
              has one visual language, and the number gets the room it needs. */
           .ov-phonerow{display:flex;gap:10px;align-items:stretch;min-width:0;}
@@ -225,6 +230,21 @@
              different from the three self-serve rows so nobody expects to pay
              for it on this page. */
           .ov-planrow.ent .ov-pr-price b{color:#1B4FBF;font-size:15px;font-weight:900;}
+          /* "Contact sales" is not a price, so it should not sit in the price
+             slot on the right. Centred, it reads as the action it actually is. */
+          /* Given its own full-width line it lands on the true horizontal
+             centre of the card, which is what an action wants -- squeezed into
+             the price slot it sat off-centre and read as a price. */
+          .ov-rowstack{flex-wrap:wrap;}
+          /* on a phone the card must not run edge to edge -- a dialog that
+             touches both bezels reads as a page, not as a decision */
+          .ov-entmodal{margin:8vh 14px !important;}
+          @media(min-width:620px){.ov-entmodal{margin:8vh auto !important;}}
+          .ov-entmodal h3{font-size:21px;}
+          .ov-pr-contact{flex:1 1 100%;text-align:center;margin:9px 0 1px;cursor:pointer;}
+          .ov-pr-contact b{display:inline-block;color:#1B4FBF;font-size:15.5px;font-weight:900;
+            border-bottom:1.5px solid rgba(27,79,191,.38);padding-bottom:2px;transition:.14s;}
+          .ov-pr-contact:hover b{color:#123A91;border-bottom-color:rgba(27,79,191,.72);}
           .ov-planrow.ent{border-style:dashed;}
           .ov-planrow.ent.on{border-style:solid;}
           /* One row instead of two tall cards. The three buyable plans stay the
@@ -303,7 +323,7 @@
           <div class="ov-eyebrow" data-i18n="co_s2_eyebrow">Step 2</div>
           <h2 data-i18n="co_s2_h2">Choose your plan</h2>
           <p class="hint" data-i18n="co_s2_hint">Same AI &amp; features on every plan — you only choose call volume. 7-day free trial.</p>
-          <div class="ov-planrows" id="plans"><div class="ov-planrow" data-tier="starter"><span class="ov-radio"></span><span class="ov-pr-name">Starter</span><span class="ov-pr-price"><span data-usd="14900">$149</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_starter">200 talk minutes</span> &middot; <span data-usd="85">$0.85</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow on" data-tier="business"><span class="ov-radio"></span><span class="ov-pr-name">Business</span><span class="ov-pr-price"><span data-usd="34900">$349</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-badge" data-i18n="co_badge_popular">Popular</span><span class="ov-pr-meta"><span data-i18n="co_meta_min_business">500 talk minutes</span> &middot; <span data-usd="75">$0.75</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow" data-tier="pro2"><span class="ov-radio"></span><span class="ov-pr-name">Pro</span><span class="ov-pr-price"><span data-usd="64900">$649</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_pro">1,000 talk minutes</span> &middot; <span data-usd="65">$0.65</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-entwrap" id="entWrap"><button type="button" class="ov-enttoggle" id="entToggle" aria-expanded="false" aria-controls="entPanel"><span class="ov-entlabel"><b data-i18n="co_ent_head">Enterprise</b><span data-i18n="co_ent_sub">Higher call volume, multi-location, built with a person</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="ov-entpanel" id="entPanel"><div class="ov-entinner"><div class="ov-planrow ent" data-tier="ent_essentials" data-sales="1"><span class="ov-radio"></span><span class="ov-pr-name">Essentials</span><span class="ov-pr-price"><span data-usd="149700">$1,497</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_ent">2,500 talk minutes</span> &middot; <span data-usd="45">$0.45</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow ent" data-tier="ent_custom" data-sales="1"><span class="ov-radio"></span><span class="ov-pr-name">Connected / Complete</span><span class="ov-pr-price"><b data-i18n="co_talk_price">Contact sales</b></span><span class="ov-pr-meta" data-i18n="co_meta_ent_custom">Multi-location, written into your system of record</span></div></div></div></div></div>
+          <div class="ov-planrows" id="plans"><div class="ov-planrow" data-tier="starter"><span class="ov-radio"></span><span class="ov-pr-name">Starter</span><span class="ov-pr-price"><span data-usd="14900">$149</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_starter">200 talk minutes</span> &middot; <span data-usd="85">$0.85</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow on" data-tier="business"><span class="ov-radio"></span><span class="ov-pr-name">Business</span><span class="ov-pr-price"><span data-usd="34900">$349</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-badge" data-i18n="co_badge_popular">Popular</span><span class="ov-pr-meta"><span data-i18n="co_meta_min_business">500 talk minutes</span> &middot; <span data-usd="75">$0.75</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow" data-tier="pro2"><span class="ov-radio"></span><span class="ov-pr-name">Pro</span><span class="ov-pr-price"><span data-usd="64900">$649</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_pro">1,000 talk minutes</span> &middot; <span data-usd="65">$0.65</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-entwrap" id="entWrap"><button type="button" class="ov-enttoggle" id="entToggle" aria-expanded="false" aria-controls="entPanel"><span class="ov-entlabel"><b data-i18n="co_ent_head">Enterprise</b><span data-i18n="co_ent_sub">Higher call volume, multi-location, built with a person</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="ov-entpanel" id="entPanel"><div class="ov-entinner"><div class="ov-planrow ent" data-tier="ent_essentials" data-sales="1"><span class="ov-radio"></span><span class="ov-pr-name">Essentials</span><span class="ov-pr-price"><span data-usd="149700">$1,497</span><i data-i18n="co_slash_mo">/mo</i></span><span class="ov-pr-meta"><span data-i18n="co_meta_min_ent">2,500 talk minutes</span> &middot; <span data-usd="45">$0.45</span><span data-i18n="co_per_min">/min</span> <span data-i18n="co_after">after</span></span></div><div class="ov-planrow ent ov-rowstack" data-tier="ent_custom" data-sales="1"><span class="ov-radio"></span><span class="ov-pr-name">Connected / Complete</span><span class="ov-pr-contact"><b data-i18n="co_talk_price">Contact sales</b></span><span class="ov-pr-meta" data-i18n="co_meta_ent_custom">Multi-location, written into your system of record</span></div></div></div></div></div>
         </div>
 
         <div class="ov-sec">
@@ -1597,6 +1617,128 @@
   window.addEventListener('resize',move);
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(move);
   setTimeout(move,0); setTimeout(move,300);
+})();
+</script>
+
+<!-- ===================== enterprise contact-sales confirm ================= -->
+<div class="ov-modal" id="ovEnt">
+  <div class="ov-modal-card ov-entmodal">
+    <div class="ov-entstep" id="ovEntS1">
+      <h3 data-i18n="co_ec_h1">Are you sure?</h3>
+      <p class="hint" data-i18n="co_ec_b1">You&rsquo;ve selected Enterprise customization. That means a custom package built around your business &mdash; call volume, locations and the systems you already run. It isn&rsquo;t bought on this page; it&rsquo;s quoted.</p>
+      <button type="button" class="ov-pay" id="ovEntGo1" data-i18n="co_ec_go1">Yes, continue &rarr;</button>
+      <button type="button" class="ov-back" id="ovEntX1" data-i18n="co_ec_cancel">Cancel</button>
+    </div>
+    <div class="ov-entstep" id="ovEntS2" style="display:none;">
+      <h3 data-i18n="co_ec_h2">Book a call with our sales team</h3>
+      <p class="hint" data-i18n="co_ec_b2">Next you&rsquo;ll pick a time. On the call we size the package to your actual call volume and send you a written quote &mdash; no payment is taken here.</p>
+      <button type="button" class="ov-pay" id="ovEntGo2" data-i18n="co_ec_go2">Continue to the calendar &rarr;</button>
+      <button type="button" class="ov-back" id="ovEntX2" data-i18n="co_ec_cancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- MENU PORTAL -------------------------------------------------
+   Every .ov-sec carries backdrop-filter for the frosted look, and
+   backdrop-filter creates a stacking context. That seals each step into its
+   own paint layer, so a menu opened in Step 1 physically cannot paint over
+   Step 2 -- and because Step 2 comes later in the DOM it covers the menu and
+   eats the clicks. Raising z-index from inside cannot fix it, and neither can
+   position:fixed, because a filtered ancestor also becomes the containing
+   block for fixed descendants.
+   The only reliable fix is to take the menu out of the section. On open the
+   list is moved to <body> and positioned in viewport coordinates; on close it
+   is put back exactly where it was, so every existing handler and every
+   getElementById in the page above keeps working untouched. */
+(function(){
+  var live=null, slot=null, anchor=null;
+
+  function place(){
+    if(!live||!anchor) return;
+    var r=anchor.getBoundingClientRect();
+    var vw=document.documentElement.clientWidth, vh=window.innerHeight;
+    /* never shrink a menu that declares its own min-width (the dial list
+       needs room for flag + country + code) */
+    var floor=live.__mw||0;
+    live.style.minWidth=Math.max(r.width,floor)+'px';
+    var w=live.offsetWidth, h=live.offsetHeight;
+    var left=r.left;
+    if(left+w>vw-8) left=vw-8-w;
+    if(left<8) left=8;
+    var top=r.bottom+6;
+    if(top+h>vh-8 && r.top-6-h>8) top=r.top-6-h;   /* flip up when there is no room below */
+    live.style.left=left+'px'; live.style.top=top+'px';
+  }
+
+  function out(list){
+    if(live===list) return;
+    back();
+    /* capture the declared min-width while the list is still inside the
+       select -- once it moves to <body>, .ovsel-dial .ovsel-list stops
+       matching and the menu would collapse to its content width */
+    if(list.__mw===undefined) list.__mw=parseFloat(getComputedStyle(list).minWidth)||0;
+    slot=document.createComment('ovsel'); 
+    list.parentNode.insertBefore(slot,list);
+    anchor=slot.previousElementSibling || slot.parentNode;
+    document.body.appendChild(list);
+    list.classList.add('ovsel-portal');
+    live=list; place();
+  }
+  function back(){
+    if(!live) return;
+    live.classList.remove('ovsel-portal');
+    live.style.cssText='';
+    if(slot&&slot.parentNode) slot.parentNode.insertBefore(live,slot);
+    if(slot&&slot.parentNode) slot.parentNode.removeChild(slot);
+    live=null; slot=null; anchor=null;
+  }
+
+  function watch(sel){
+    var list=sel.querySelector('.ovsel-list'); if(!list) return;
+    new MutationObserver(function(){
+      if(sel.classList.contains('open')) out(list); else if(live===list) back();
+    }).observe(sel,{attributes:true,attributeFilter:['class']});
+  }
+  function boot(){
+    [].forEach.call(document.querySelectorAll('.ovsel'),watch);
+    window.addEventListener('scroll',place,true);
+    window.addEventListener('resize',place);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
+})();
+
+/* ---------- ENTERPRISE: CONTACT SALES ----------------------------------
+   "Contact sales" is an exit, not a price. Two deliberate confirmations
+   before we throw someone into a booking calendar: the first says what
+   Enterprise actually means, the second says what happens next. Cancel at
+   either point puts them back on the form with nothing changed. */
+(function(){
+  var m=document.getElementById('ovEnt'); if(!m) return;
+  var s1=document.getElementById('ovEntS1'), s2=document.getElementById('ovEntS2');
+  function show(){ s1.style.display=''; s2.style.display='none'; m.style.display='block';
+    document.documentElement.style.overflow='hidden'; }
+  function hide(){ m.style.display='none'; document.documentElement.style.overflow=''; }
+  function step2(){ s1.style.display='none'; s2.style.display=''; }
+  function go(){
+    var b=document.getElementById('bookBtn');
+    var url=b?b.href:'https://api.leadconnectorhq.com/widget/booking/TkMyWsq0YqMLbpJuP1Tn';
+    hide();
+    var w=window.open(url,'_blank','noopener');
+    if(!w) window.location.href=url;    /* popup blocked -- do not silently do nothing */
+  }
+  document.getElementById('ovEntGo1').addEventListener('click',step2);
+  document.getElementById('ovEntGo2').addEventListener('click',go);
+  document.getElementById('ovEntX1').addEventListener('click',hide);
+  document.getElementById('ovEntX2').addEventListener('click',hide);
+  m.addEventListener('click',function(e){ if(e.target===m) hide(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&m.style.display==='block') hide(); });
+
+  var plans=document.getElementById('plans');
+  if(plans) plans.addEventListener('click',function(e){
+    if(e.target.closest('.ov-pr-contact')){ e.stopPropagation(); show(); }
+  });
+  window.OV_ENT_CONFIRM=show;
 })();
 </script>
 
