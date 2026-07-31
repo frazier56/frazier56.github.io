@@ -51,6 +51,13 @@
   .ov-left{flex:1 1 580px;min-width:300px;}
   .ov-right{flex:0 0 330px;position:sticky;top:72px;}
   @media(max-width:900px){.ov-main{flex-direction:column;gap:26px;}.ov-right{position:static;width:100%;}}
+  /* .ov is a full-bleed wrapper built on width:100vw. On desktop 100vw
+     INCLUDES the scrollbar, so the page overhangs by ~7px and scrolls
+     sideways. overflow-x:clip kills the scroll without moving the layout --
+     and unlike overflow:hidden it does not break position:sticky or the
+     portalled dropdown menus. */
+  html{overflow-x:clip;}
+  body{overflow-x:clip;max-width:100%;}
   .ov-sec{padding:26px 0;border-top:1px solid #ece8dd;}
   .ov-sec:first-child{border-top:none;padding-top:6px;}
   .ov-eyebrow{font-size:12px;font-weight:800;letter-spacing:1.2px;color:#0B8C80;text-transform:uppercase;margin-bottom:4px;}
