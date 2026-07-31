@@ -57,7 +57,7 @@
     box-shadow:0 25px 50px -12px rgba(249,115,22,.25)}
   .ring-in{display:block;width:100%;height:100%;border-radius:9999px;padding:4px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
   .ring-clip{display:block;width:100%;height:100%;border-radius:9999px;overflow:hidden}
-  .ring img{width:100%;height:100%;object-fit:cover;object-position:50% 10%;transform:scale(1.28);transform-origin:50% 14%;display:block}
+  .ring img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
   /* ---- identity ---- */
   h1{color:var(--amber);font-size:20px;font-weight:600;letter-spacing:.01em}
   .role{color:#fff;font-size:14px;margin-top:8px}
@@ -110,7 +110,7 @@
   a.act:hover span{color:#fff}
   /* ---- app carousel (horizontally scrollable) ---- */
   .car-wrap{position:relative}
-  .car{display:flex;gap:12px;overflow-x:auto;padding:10px calc(50% - 62px) 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .car{display:flex;gap:17px;overflow-x:auto;padding:10px calc(50% - 62px) 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .car::-webkit-scrollbar{display:none}
   a.app{scroll-snap-align:center;flex:0 0 auto;width:118px;min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px 10px 12px;border-radius:16px;text-decoration:none;
     background:
@@ -178,7 +178,7 @@
 
       <div class="center">
         <button class="portrait-btn" id="photoBtn" aria-label="View photo full screen">
-          <span class="ring"><span class="ring-in"><span class="ring-clip"><img src="lee-frazier.webp" alt="Lee Frazier, Founder &amp; Chief Executive of One World Labs" width="176" height="176" loading="eager"></span></span></span>
+          <span class="ring"><span class="ring-in"><span class="ring-clip"><img src="lee-face.webp" alt="Lee Frazier, Founder &amp; Chief Executive of One World Labs" width="176" height="176" loading="eager"></span></span></span>
         </button>
         <h1>Lee Frazier</h1>
         <p class="role">Founder &amp; Chief Executive</p>
@@ -253,7 +253,8 @@
                     <a class="app" style="--h:var(--hue-app)" href="https://www.oneworldlabs.ai/" target="_blank" rel="noopener"><span class="n">OneApp</span><span class="s">Coming soon</span></a>
                   </div>
                 </div>
-                <p class="gift">Founder discount — 30 days of VIP free on subscribing apps: <span class="code" id="giftCode" role="button" tabindex="0" aria-label="Copy founder discount code">FOUNDER0001</span> <span id="giftSub">· tap the code to copy</span></p>
+                <p class="gift">Founder discount — 30 days of free VIP subscription service<br>
+                <span class="code" id="giftCode" role="button" tabindex="0" aria-label="Copy founder discount code">FOUNDER0001</span></p>
               </div>
             </div>
           </div>
@@ -309,7 +310,7 @@
       var b=tiles[i].getBoundingClientRect();
       var d=Math.abs(b.left+b.width/2-cx);
       var f=Math.max(0,1-d/280);
-      var s=0.94+0.24*f;                 /* far 0.94 -> centered 1.18: clearly visible */
+      var s=0.94+0.20*f;                 /* far 0.94 -> centered 1.14: visible, without eating the gaps */
       tiles[i].style.transform='scale('+s.toFixed(3)+')';
       tiles[i].style.opacity=(0.82+0.18*f).toFixed(2);
       tiles[i].style.zIndex=f>0.6?'2':'1';
@@ -322,10 +323,9 @@
   window.addEventListener('resize',focusScale);
 
   /* founder code: tap to copy (no navigation) */
-  var gift=document.getElementById('giftCode'), giftSub=document.getElementById('giftSub');
-  var giftDefault=giftSub.textContent;
+  var gift=document.getElementById('giftCode');
   function copyCode(){
-    var done=function(){giftSub.textContent='Copied FOUNDER0001 ✓';setTimeout(function(){giftSub.textContent=giftDefault;},1800);};
+    var done=function(){gift.textContent='COPIED ✓';setTimeout(function(){gift.textContent='FOUNDER0001';},1500);};
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('FOUNDER0001').then(done,done);}
     else{done();}
   }
