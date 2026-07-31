@@ -90,12 +90,11 @@
     backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
   .face:hover .badge{transform:scale(1.08)}
   .face .sub{font-size:12px;color:var(--dim);margin-top:6px}
-  /* One World Labs face */
-  .owl-face{min-height:128px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
-  .owl-lockup{display:flex;align-items:center;gap:10px;transition:transform .3s}
-  .owl-face:hover .owl-lockup{transform:scale(1.05)}
-  .owl-lockup img{height:40px;width:40px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
-  .owl-lockup span{font-size:20px;font-weight:700;color:#fff;letter-spacing:.01em;white-space:nowrap}
+  /* One World Labs face — logo on top, same stack as Contact Me, equal card heights */
+  .tile{display:flex;flex-direction:column}
+  .tile .glass{flex:1;display:flex;flex-direction:column}
+  .owl-logo{height:58px;width:auto;display:block;margin:0 auto 14px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));transition:transform .3s}
+  .face:hover .owl-logo{transform:scale(1.08)}
   /* ---- panels ---- */
   .panel{display:none;padding:0 clamp(14px,3.4vw,28px) 28px}
   .panel.show{display:block;animation:fadein .3s ease both}
@@ -235,11 +234,9 @@
         <!-- One World Labs -->
         <div class="tile" id="owlTile">
           <div class="glass">
-            <button class="face owl-face" id="owlToggle" aria-expanded="false" aria-controls="owlPanel" aria-label="One World Labs">
-              <span class="owl-lockup">
-                <img src="owl-logo.png" alt="" width="34" height="40" style="width:auto;height:40px">
-                <span>One World Labs</span>
-              </span>
+            <button class="face" id="owlToggle" aria-expanded="false" aria-controls="owlPanel" aria-label="One World Labs">
+              <img class="owl-logo" src="owl-logo.png" alt="" width="49" height="58">
+              <h2>One World Labs</h2>
               <p class="sub">One login. Every app.</p>
             </button>
             <div class="panel" id="owlPanel">
