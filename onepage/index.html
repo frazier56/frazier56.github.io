@@ -127,7 +127,9 @@
     background:linear-gradient(152deg,var(--glass-a),var(--glass-b));backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);
     border-bottom:1px solid var(--glass-line);transition:box-shadow .25s ease,padding .25s ease;}
   .nav.scrolled{padding:8px 18px;box-shadow:0 6px 24px -10px rgba(42,13,10,.28);}
-  .nav .brand{display:flex;align-items:center;gap:9px;font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
+  .nav .brand{display:flex;align-items:center;gap:3px;font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
+  .nav .brand .logo-o{height:26px;width:auto;filter:sepia(1) saturate(3.6) hue-rotate(-15deg) brightness(1.02);}
+  .nav .brand .brandtxt{font-weight:800;}
   .nav .brand b{color:var(--app);font-weight:700;}
   .nav .brand .mk{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,#F0BE4E,#C6871A);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(198,135,26,.5);}
   .nav .brand .mk svg{color:#4A2E08;}
@@ -156,8 +158,9 @@
   .drawer .dfoot{margin-top:auto;font-size:11.5px;color:var(--muted-dark);text-align:center;padding-top:14px;}
 
   /* ---- hero (deep-red band) ---- */
-  .hero{background:radial-gradient(ellipse 900px 700px at 0% 0%,rgba(158,51,36,.34),transparent 60%),radial-gradient(ellipse 700px 500px at 100% 20%,rgba(21,194,178,.10),transparent 60%),var(--dark);color:var(--cream);padding:112px 0 76px;position:relative;overflow:hidden;}
-  .hero .wrap{position:relative;}
+  .hero{background:radial-gradient(ellipse 900px 700px at 0% 0%,rgba(158,51,36,.34),transparent 60%),radial-gradient(ellipse 700px 500px at 100% 20%,rgba(21,194,178,.10),transparent 60%),var(--dark);color:var(--cream);padding:112px 0 120px;position:relative;overflow:hidden;}
+  .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(to bottom,transparent 0%,var(--bg) 100%);pointer-events:none;z-index:1;}
+  .hero .wrap{position:relative;z-index:2;}
   .hero-flex{display:flex;flex-direction:column;gap:40px;align-items:center;text-align:center;}
   .hero-text{max-width:31rem;}
   .hero-mock-wrap{width:100%;display:flex;justify-content:center;}
@@ -442,8 +445,8 @@
 <!-- ======================= TOP NAV ======================= -->
 <nav class="nav">
   <div class="brand">
-    <span class="mk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg></span>
-    <span><b>One</b>Page</span>
+    <img class="logo-o" src="/onescore-preview/logo-mark.png" alt="OnePage logo" />
+    <span class="brandtxt">nePage</span>
   </div>
   <div class="ctrl">
     <button class="iconbtn" id="themebtn" aria-label="Toggle light/dark" onclick="toggleTheme()">
