@@ -22,9 +22,11 @@
   --bluelt:#5A93F5;--bluetint:#E8F0FE;--blueline:#BFD4F7;
   /* TEAL is the secondary: selected, recommended, confirmed. Same job it had. */
   --teal:#15C2B2;--teal2:#0B8C80;--teal3:#124A4C;--teal4:#0E3A3C;--tealtint:#E6F7F4;--tealline:#BFE9E2;
-  /* ACTION. Lee's colour: #782519 -- deeper and redder than the old clay.
+  /* ACTION. #332C26 -- espresso, read off the OneJob primary button.
+     --clay below is NOT the action colour: it is a decorative warm accent used
+     on italic heading highlights and eyebrows only. Never put it on a control.
      Shared across every One World product so "the thing you click" never moves. */
-  --clay:#8E2E1D;--clay2:#5E1B12;--claytint:#FBEDE9;--clayline:#E8C4BB;
+  --clay:#8E2E1D;--clay2:#241E19;--claytint:#FBEDE9;--clayline:#E8C4BB;
   --txt:#2C2622;--txt2:#6E6559;--txt3:#9C9284;--maxw:1340px;
   --glass:rgba(255,255,255,.47);--glass2:rgba(255,255,255,.59);--glassline:rgba(255,255,255,.70);
   --frost:blur(40px) saturate(192%);
@@ -140,18 +142,20 @@ section.pad{padding:92px 0;position:relative;}
 .btn.teal{background:
     linear-gradient(160deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.05) 44%,rgba(255,255,255,0) 62%),
     /* was a teal fill: a second primary, competing with .btn.clay on the same
-     page. The action colour is #782519 and there is only one of it. */
-    linear-gradient(140deg,#9A3320 0%,#782519 55%,#5E1B12 100%);
+     page. The action colour is #332C26 and there is only one of it. */
+    linear-gradient(140deg,#4A4038 0%,#332C26 52%,#241E19 100%);
   color:#fff;border-color:rgba(255,255,255,.26);border-radius:16px;
   box-shadow:0 1px 0 rgba(255,255,255,.4) inset,var(--shadow-s);}
 .btn.teal:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.4) inset,var(--shadow-m);}
-/* PRIMARY ACTION. Lee's colour: #782519. Deeper and redder than the old clay,
+/* PRIMARY ACTION. #332C26 -- the espresso brown OneJob already ships.
+   Replaced the old burnt RED, which was never a brown: against a pale blue
+   page a rust button reads as a warning rather than an invitation,
    and it now reads as a modern control rather than a flat slab -- a two-stop
    gradient for depth, a specular sheen baked in as the first background layer,
    and a larger radius to match the panes around it. */
 .btn.clay{background:
     linear-gradient(160deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.06) 42%,rgba(255,255,255,0) 62%),
-    linear-gradient(140deg,#9A3320 0%,#782519 55%,#5E1B12 100%);
+    linear-gradient(140deg,#4A4038 0%,#332C26 52%,#241E19 100%);
   color:#fff;border-color:rgba(255,255,255,.26);border-radius:16px;
   box-shadow:0 1px 0 rgba(255,255,255,.28) inset,var(--shadow-s);}
 .btn.clay:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.28) inset,var(--shadow-m);}
@@ -463,9 +467,9 @@ nav img.logo{height:54px;width:auto;}
 .dialnote{display:block;font-size:13px;color:var(--txt2);line-height:1.5;margin-top:11px;padding-top:11px;
   border-top:1px solid rgba(11,140,128,.2);}
 .listenbtns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;}
-.demoband .btn.teal{background:linear-gradient(140deg,#9A3320,#5E1B12);color:#fff;
+.demoband .btn.teal{background:linear-gradient(140deg,#4A4038,#241E19);color:#fff;
   border-color:rgba(255,255,255,.26);box-shadow:0 1px 0 rgba(255,255,255,.28) inset,var(--shadow-m);}
-.demoband .btn.teal:hover{background:linear-gradient(140deg,#A63A25,#6B2016);}
+.demoband .btn.teal:hover{background:linear-gradient(140deg,#584C42,#2E2721);}
 .listennote{font-size:12.5px;color:var(--txt2);margin-top:14px;}
 .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:32px 28px;padding-left:8px;}
 /* No rule down the left edge. The pane IS the decoration -- a coloured bar on
@@ -626,7 +630,7 @@ ul.two li svg{flex:0 0 20px;margin-top:4px;color:var(--teal2);}
   border:1px solid rgba(21,194,178,.42);}
 .mobar a.go{color:#fff;background:
     linear-gradient(160deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,.05) 44%,rgba(255,255,255,0) 62%),
-    linear-gradient(140deg,#9A3320 0%,#782519 55%,#5E1B12 100%);
+    linear-gradient(140deg,#4A4038 0%,#332C26 52%,#241E19 100%);
   border:1px solid rgba(255,255,255,.26);box-shadow:0 1px 0 rgba(255,255,255,.3) inset;}
 
 @media(max-width:640px){
