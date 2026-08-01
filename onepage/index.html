@@ -428,7 +428,7 @@
   .placeitem:hover{background:rgba(21,194,178,.1);}
   #b-panel,#b-loading{scroll-margin-top:80px;}
 
-</style>
+.mobcta{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;padding:9px var(--gutter) calc(9px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,rgba(250,242,241,.97) 55%,rgba(250,242,241,0));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}:root[data-theme="dark"] .mobcta{background:linear-gradient(to top,rgba(7,9,14,.97) 55%,rgba(7,9,14,0));}.mobcta a{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:14px;color:#fff;font-weight:800;font-size:15px;text-decoration:none;background:linear-gradient(140deg,var(--action-lt),var(--action) 60%,var(--action-dk));box-shadow:0 10px 26px -10px rgba(94,27,18,.75);}.mobcta a:active{transform:translateY(1px);}@media(max-width:768px){.mobcta.show{display:block;}body{padding-bottom:calc(74px + env(safe-area-inset-bottom,0px));}}</style>
 </head>
 <body>
 <div class="field-bg" aria-hidden="true"></div>
@@ -1443,5 +1443,7 @@ function resumePreview(id){
 })();
 </script>
 
+<div class="mobcta" id="mobcta"><a href="#builder" onclick="if(window.openDrawer)openDrawer(false)">See my site — free →</a></div>
+<script>(function(){var bar=document.getElementById("mobcta");if(!bar)return;var b=document.getElementById("builder");var mq=window.matchMedia("(max-width:768px)");var bv=false;if("IntersectionObserver" in window&&b){new IntersectionObserver(function(e){bv=e[0].isIntersecting;u();},{threshold:.12}).observe(b);}function u(){bar.classList.toggle("show",mq.matches&&window.pageYOffset>360&&!bv);}window.addEventListener("scroll",u,{passive:true});window.addEventListener("resize",u);if(mq.addEventListener)mq.addEventListener("change",u);u();})();</script>
 </body>
 </html>
