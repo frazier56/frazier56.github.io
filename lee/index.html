@@ -42,9 +42,9 @@
   }
   html[data-theme="light"]{
     --amber:#D97A06; --gold:#A87500; --ink:#2C2622; --muted:#4c463f; --dim:#6b655c;
-    --card-fill:linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.25) 16%),linear-gradient(160deg, rgba(255,255,255,.60), rgba(255,255,255,.34));
-    --card-border:rgba(30,35,50,.15);
-    --card-shadow:0 12px 34px rgba(50,55,80,.16), inset 0 1px 0 rgba(255,255,255,.9);
+    --card-fill:linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.10) 16%),linear-gradient(160deg, rgba(255,255,255,.42), rgba(246,243,255,.26) 55%, rgba(255,255,255,.34));
+    --card-border:rgba(255,255,255,.75);
+    --card-shadow:0 14px 36px rgba(88,96,150,.22), 0 2px 8px rgba(88,96,150,.10), inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(120,128,180,.10);
     --panel-line:rgba(30,35,50,.12);
     --menu-bg:rgba(255,255,255,.98); --menu-border:rgba(30,35,50,.15);
     --code-bg:rgba(0,0,0,.05); --code-border:rgba(160,120,10,.5); --code-ink:#8a6a00;
@@ -69,17 +69,23 @@
   .b4{top:18%;left:58%;width:28rem;height:28rem;background:linear-gradient(135deg,rgba(99,102,241,.20),rgba(139,92,246,.20));filter:blur(140px);opacity:.7}
   .core{position:absolute;inset:0;background:radial-gradient(58% 46% at 50% 44%, rgba(148,140,255,.14), rgba(96,165,250,.06) 45%, transparent 72%)}
   .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.38),transparent 30%,transparent 72%,rgba(0,0,0,.28))}
-  html[data-theme="light"] .blob{opacity:.45}
-  html[data-theme="light"] .core{background:radial-gradient(58% 46% at 50% 44%, rgba(124,110,255,.12), transparent 70%)}
+  /* light mode keeps SATURATED colour behind the panes so the frost has something to blur (lesson I1) */
+  html[data-theme="light"] .blob{opacity:.7}
+  html[data-theme="light"] .b1{background:linear-gradient(135deg,rgba(168,85,247,.30),rgba(59,130,246,.24))}
+  html[data-theme="light"] .b2{background:linear-gradient(135deg,rgba(168,85,247,.30),rgba(236,72,153,.26))}
+  html[data-theme="light"] .b3{background:linear-gradient(135deg,rgba(6,182,212,.26),rgba(59,130,246,.22))}
+  html[data-theme="light"] .b4{background:linear-gradient(135deg,rgba(99,102,241,.28),rgba(139,92,246,.28))}
+  html[data-theme="light"] .core{background:radial-gradient(58% 46% at 50% 44%, rgba(124,110,255,.16), transparent 70%)}
   html[data-theme="light"] .veil{background:linear-gradient(to top,rgba(255,255,255,.5),transparent 30%,transparent 75%,rgba(255,255,255,.4))}
   /* ---- top-right controls: theme toggle, then flag (rightmost) ---- */
-  .topbar{position:fixed;top:14px;right:clamp(14px,3vw,26px);display:flex;gap:10px;z-index:40}
-  .ctrl{width:42px;height:42px;border-radius:12px;border:1px solid var(--card-border);cursor:pointer;
-    background:var(--card-fill);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);
-    display:flex;align-items:center;justify-content:center;color:var(--ink);transition:transform .2s}
-  .ctrl:hover{transform:scale(1.06)}
-  .ctrl svg{width:20px;height:20px}
-  .ctrl .flag-svg{width:22px;height:15px;border-radius:2px;overflow:hidden;display:block}
+  .topbar{position:fixed;top:14px;right:clamp(14px,3vw,26px);display:flex;gap:14px;z-index:40;align-items:center}
+  .ctrl{width:46px;height:46px;border:0;border-radius:12px;cursor:pointer;background:none;
+    display:flex;align-items:center;justify-content:center;color:var(--ink);transition:transform .2s;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+  html[data-theme="light"] .ctrl{filter:drop-shadow(0 2px 6px rgba(0,0,0,.15))}
+  .ctrl:hover{transform:scale(1.1)}
+  .ctrl svg{width:23px;height:23px}
+  .ctrl .flag-svg{width:25px;height:17px;border-radius:2.5px;overflow:hidden;display:block}
   html[data-theme="light"] .sun{display:none}
   html:not([data-theme="light"]) .moon{display:none}
   /* language menu — near-opaque (kit lesson A2), fixed, never inside frosted ancestors (A1) */
