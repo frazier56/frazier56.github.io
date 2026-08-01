@@ -28,7 +28,7 @@
      2. ?ow_r= on the handoff URL — always works; the app strips it immediately
    No redirect loop is possible: /onejob/ resolves, so this file never runs again. */
 (function () {
-  var m = (location.pathname || "").match(/^\/(onejob|onesocial|oneevent)(\/.*)?$/i);
+  var m = (location.pathname || "").match(/^\/(onejob-violet|onejob|onesocial|oneevent)(\/.*)?$/i);
   if (!m) return;
   var app = m[1].toLowerCase();
   var rest = (m[2] || "/") + (location.search || "") + (location.hash || "");
