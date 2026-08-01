@@ -103,7 +103,7 @@ body{font-family:'Inter',-apple-system,'Segoe UI',sans-serif;color:var(--txt);li
 .ovlanglist button:hover{background:rgba(21,194,178,.16);}
 .ovlanglist button.on{background:rgba(21,194,178,.22);color:var(--blue3);font-weight:800;}
 .ovlanglist .flag{font-size:18px;line-height:1;}
-@media(max-width:820px){.promo{flex-direction:column;gap:7px;font-size:12.5px;padding:9px 16px;}
+/* PROMO STRIP OFF BELOW 820px. Two long sentences plus a phone number wrap to four or five lines on a phone and push the headline below the fold. The demo number already lives in the sticky bottom bar and the footer, so nothing is lost. Full strip still shows on desktop. */@media(max-width:820px){.promo{display:none !important;}
   .ovlangcode{display:none;}.ovlangbtn{padding:8px 10px;}}
 /* HORIZONTAL FIT. Fixed 18px gutters look right on a 390px iPhone and waste a
    strip of a 480px-wide Samsung. clamp() scales the gutter with the device so
