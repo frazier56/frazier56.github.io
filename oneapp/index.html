@@ -1,0 +1,1579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OneApp — Your Business. Their Pocket. | One World Labs</title>
+<meta name="description" content="We design your business its own mobile app — free — then launch it on the Apple App Store and Google Play for a one-time $499. See your app before you pay a dime. By One World Labs." />
+<link rel="apple-touch-icon" href="/onescore-preview/apple-touch-icon.png" />
+<meta name="theme-color" content="#0B0F1A" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+
+  /* ============================================================
+     OneApp — One World Labs · Warm berry #C52B69
+     Tokenised (light+dark) · frosted glass · espresso action button
+     Voice = berry · State = teal #15C2B2 · Action = espresso #332C26
+     Brother to OnePage. Structure mirrors /onepage/.
+     ============================================================ */
+  :root{
+    --app:#C52B69;--app2:#9E1F52;--app3:#6D1237;--app4:#400A20;--applt:#F06BA0;--apptint:#FDEBF1;--appline:#F6C8D8;--app-rgb:197,43,105;
+    --state:#15C2B2;--state2:#0E8C80;--statelt:#2FE0CE;--select:#0B0F1A;--depth:#0F766E;
+    --action:#332C26;--action-lt:#4A4038;--action-dk:#241E19;--action-sh:36,30,25;
+    --danger:#C0392B;--ok:#0F7E45;
+    --dark:#150610;--raised:#1E0A17;--elevated:#2A0E1E;
+    --bg:#FCF3F7;--ink:#2C2622;--muted:#6B6257;--faint:#8A8079;--cream:#FBEFF3;--muted-dark:#E0BECC;
+    --card:#ffffff;--border:rgba(197,43,105,.16);
+    --frost:blur(40px) saturate(185%);--frost-lite:blur(18px) saturate(165%);
+    --frostedge:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(255,255,255,.30);
+    --glass-a:rgba(255,255,255,.60);--glass-b:rgba(255,255,255,.32);--glass-line:rgba(255,255,255,.66);
+    --glass-drop:0 20px 48px -20px rgba(64,10,32,.28);
+    --menu-bg:#ffffff;--menu-line:#EFD6E1;--menu-drop:0 22px 54px rgba(64,10,32,.20);
+    --sh-sm:0 1px 3px rgba(64,10,32,.05),0 4px 14px rgba(64,10,32,.05);
+    --sh-lg:0 18px 44px -18px rgba(64,10,32,.30);
+    --r-card:16px;--r-btn:16px;--r-xl:22px;--tap:44px;
+    --gutter:clamp(16px,4.6vw,26px);
+    --ease:cubic-bezier(.18,.9,.24,1);
+    --phone-ink:#241019;--phone-bg:#FFF7FA;
+  }
+  :root[data-theme="dark"]{
+    --dark:#07090E;--raised:#0F0A10;--elevated:#171019;
+    --bg:#07090E;--ink:#F1EAEE;--muted:#C4B4BB;--faint:#8f8188;--cream:#F8ECF1;--muted-dark:#D3B7C2;
+    --card:#131A28;--border:rgba(255,255,255,.12);
+    --app:var(--applt);--app2:var(--applt);
+    --action:#63554B;--action-lt:#7A6B60;--action-dk:#463C34;--action-sh:12,9,8;
+    --frost:blur(30px) saturate(150%);--frost-lite:blur(16px) saturate(140%);
+    --frostedge:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(255,255,255,.04);
+    --glass-a:rgba(255,255,255,.055);--glass-b:rgba(255,255,255,.026);--glass-line:rgba(255,255,255,.10);
+    --glass-drop:0 24px 60px -24px rgba(0,0,0,.7);
+    --menu-bg:#252A31;--menu-line:rgba(255,255,255,.10);--menu-drop:0 26px 60px rgba(0,0,0,.6);
+    --sh-sm:0 1px 3px rgba(0,0,0,.4);--sh-lg:0 20px 50px -18px rgba(0,0,0,.7);
+    --state:#2FE0CE;--state2:#2FE0CE;--statelt:#2FE0CE;--select:#F1EAEE;
+    --phone-ink:#F1EAEE;--phone-bg:#12101A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;overflow-x:clip;}
+  body{background:transparent;color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip;max-width:100vw;transition:color .3s ease;}
+  img,video,svg,canvas,iframe,table,pre{max-width:100%;}
+  p,li,td,th,h1,h2,h3,h4,h5,dd,dt,figcaption,label{overflow-wrap:anywhere;}
+  .price,.tp b,.statnum,.tel,.nowrap,.kick,.pin,.tname,.flag,.badge-store b,.pfee b{overflow-wrap:normal;}
+  .wrap>*,.fgrid>*,.tiers>*,.steps>*,.ladder>*{min-width:0;}
+
+  /* ---- the aurora field (warm berry) ---- */
+  .field-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+    background:linear-gradient(172deg,#FDF7FA 0%,#FCF2F6 42%,#FCF1F5 72%,#FDF7FA 100%);}
+  :root[data-theme="dark"] .field-bg{background:#07090E;}
+  .field-bg::before,.field-bg::after{content:'';position:absolute;inset:-18%;will-change:transform;}
+  .field-bg::before{background:
+      radial-gradient(72% 62% at 16% 12%,rgba(197,43,105,.16),transparent 74%),
+      radial-gradient(70% 60% at 86% 8%,rgba(214,74,132,.14),transparent 74%),
+      radial-gradient(78% 66% at 60% 88%,rgba(240,107,160,.15),transparent 76%);
+    filter:blur(96px);animation:auroraA 46s ease-in-out infinite alternate;}
+  .field-bg::after{background:
+      radial-gradient(60% 50% at 84% 58%,rgba(206,88,132,.11),transparent 70%),
+      radial-gradient(62% 52% at 10% 78%,rgba(240,107,160,.12),transparent 72%),
+      radial-gradient(52% 42% at 46% 4%,rgba(21,194,178,.10),transparent 68%);
+    filter:blur(108px);animation:auroraB 58s ease-in-out infinite alternate;}
+  :root[data-theme="dark"] .field-bg::before{background:
+      radial-gradient(56% 46% at 78% 8%,rgba(197,43,105,.30),transparent 66%),
+      radial-gradient(50% 42% at 6% 92%,rgba(21,194,178,.16),transparent 66%);filter:blur(72px);}
+  :root[data-theme="dark"] .field-bg::after{background:
+      radial-gradient(44% 38% at 92% 58%,rgba(197,43,105,.15),transparent 64%),
+      radial-gradient(40% 34% at 30% 108%,rgba(44,111,232,.13),transparent 62%);filter:blur(80px);}
+  @keyframes auroraA{to{transform:translate3d(3%,-2%,0) rotate(6deg) scale(1.06);}}
+  @keyframes auroraB{to{transform:translate3d(-3%,2%,0) rotate(-5deg) scale(1.05);}}
+  @media(prefers-reduced-motion:reduce){.field-bg::before,.field-bg::after{animation:none;}}
+
+  .wrap{max-width:660px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter);}
+  .wrap.w-md{max-width:900px;}.wrap.w-lg{max-width:1040px;}.wrap.w-xl{max-width:1180px;}
+  section{padding:64px 0;}
+  .seclabel{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--app2);text-align:center;}
+  .sechead{margin-top:10px;font-size:26px;line-height:1.15;font-weight:800;letter-spacing:-.02em;text-align:center;color:var(--ink);}
+  .secsub{margin-top:10px;font-size:14.5px;line-height:1.65;color:var(--muted);text-align:center;max-width:42rem;margin-left:auto;margin-right:auto;}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}html{scroll-behavior:auto;}*{transition-duration:.01ms!important;}}
+
+  /* ---- glass primitive (shared, identical to every One World product) ---- */
+  .frost,.fc,.step,.panel,.addons,.faq details,.offer,.paidbox,.mcard,.offerband .mini span,.tglrow,.customstep,.picktwo,.aopt,.chip,.tt,.pp,.fb,.lstep,.feebox,.swatchbar{
+    background:linear-gradient(152deg,var(--glass-a) 0%,rgba(255,255,255,0) 46%),linear-gradient(152deg,var(--glass-a),var(--glass-b));
+    backdrop-filter:var(--frost);-webkit-backdrop-filter:var(--frost);
+    border:1px solid var(--glass-line);box-shadow:var(--frostedge),var(--glass-drop);}
+  @media(max-width:768px){.frost,.fc,.step,.panel,.addons,.faq details,.offer,.paidbox,.mcard,.offerband .mini span,.tglrow,.customstep,.picktwo,.aopt,.chip,.tt,.pp,.fb,.lstep,.feebox,.swatchbar{backdrop-filter:var(--frost-lite);-webkit-backdrop-filter:var(--frost-lite);}}
+
+  /* ---- buttons: ONE filled action per screen, espresso ---- */
+  .cta,.fsbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:var(--tap);padding:15px 30px;border-radius:var(--r-btn);
+    font-family:inherit;font-size:15.5px;font-weight:800;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.18);cursor:pointer;
+    background:linear-gradient(160deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,.04) 42%,rgba(255,255,255,0) 62%),linear-gradient(160deg,var(--action-lt) 0%,var(--action) 52%,var(--action-dk) 100%);
+    box-shadow:0 12px 26px -12px rgba(var(--action-sh),.55),0 2px 5px rgba(0,0,0,.10),inset 0 1px rgba(255,255,255,.16);transition:transform .15s var(--ease),box-shadow .15s ease,filter .15s ease;}
+  .cta:hover,.fsbtn:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 16px 32px -12px rgba(var(--action-sh),.62),inset 0 1px rgba(255,255,255,.16);}
+  .cta:active,.fsbtn:active{transform:translateY(1px);}
+  .cta:focus-visible,.fsbtn:focus-visible{outline:3px solid rgba(var(--app-rgb),.55);outline-offset:2px;}
+  .cta:disabled{opacity:.55;cursor:default;transform:none;filter:grayscale(.2);}
+  .cta.ghost{background:linear-gradient(152deg,var(--glass-a),var(--glass-b));backdrop-filter:var(--frost-lite);-webkit-backdrop-filter:var(--frost-lite);color:var(--app2);border:1.5px solid var(--appline);box-shadow:none;}
+  :root[data-theme="dark"] .cta.ghost{color:var(--applt);border-color:rgba(240,107,160,.4);}
+  .navcta{display:inline-flex;align-items:center;min-height:38px;padding:9px 16px;border-radius:11px;color:#fff;font-size:13px;font-weight:800;text-decoration:none;border:1px solid rgba(255,255,255,.16);
+    background:linear-gradient(160deg,var(--action-lt),var(--action) 55%,var(--action-dk));box-shadow:0 8px 18px -10px rgba(var(--action-sh),.6);}
+  .cta-sm{display:none;}@media(max-width:560px){.navcta{padding:8px 12px;font-size:12.5px;}.cta-lg{display:none;}.cta-sm{display:inline;}}
+  .fsbtn{width:100%;margin-top:14px;padding:16px;animation:fspulse 2.4s ease-in-out infinite;}
+  @keyframes fspulse{0%,100%{box-shadow:0 12px 26px -12px rgba(var(--action-sh),.5);transform:scale(1);}50%{box-shadow:0 18px 38px -12px rgba(var(--action-sh),.66);transform:scale(1.012);}}
+  @media(prefers-reduced-motion:reduce){.fsbtn{animation:none;}}
+  .arr{display:inline-block;vertical-align:-2px;margin-left:2px;transition:transform .15s ease;}
+  .cta:hover .arr,.fsbtn:hover .arr{transform:translateX(3px);}
+  .retrylink{margin-left:2px;background:none;border:0;color:var(--app2);font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;text-decoration:underline;padding:0;}
+
+  /* ---- nav ---- */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 18px;
+    background:linear-gradient(152deg,var(--glass-a),var(--glass-b));backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);
+    border-bottom:1px solid var(--glass-line);transition:box-shadow .25s ease,padding .25s ease;}
+  .nav.scrolled{padding:8px 18px;box-shadow:0 6px 24px -10px rgba(64,10,32,.28);}
+  .nav .brand{display:flex;align-items:center;gap:3px;font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.01em;min-width:0;}
+  .nav .brand .logo-o{height:26px;width:auto;flex-shrink:0;filter:sepia(1) saturate(8) hue-rotate(305deg) brightness(.95);}
+  .nav .brand .logo-fb{display:none;width:26px;height:26px;flex-shrink:0;border-radius:9px;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:900;background:linear-gradient(160deg,var(--app),var(--app3));}
+  .nav .ctrl{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .iconbtn{width:38px;height:38px;flex-shrink:0;border-radius:11px;border:1px solid var(--glass-line);background:linear-gradient(152deg,var(--glass-a),var(--glass-b));backdrop-filter:var(--frost-lite);-webkit-backdrop-filter:var(--frost-lite);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;transition:filter .15s ease;}
+  .iconbtn:hover{filter:brightness(.97);}
+  .iconbtn:focus-visible{outline:2px solid rgba(var(--app-rgb),.55);outline-offset:2px;}
+
+  /* ---- drawer ---- */
+  .scrim{position:fixed;inset:0;z-index:70;background:rgba(24,6,16,.54);opacity:0;pointer-events:none;transition:opacity .25s ease;}
+  .scrim.open{opacity:1;pointer-events:auto;}
+  .drawer{position:fixed;top:0;right:0;bottom:0;z-index:71;width:290px;max-width:84vw;overflow-y:auto;
+    background:linear-gradient(152deg,rgba(46,14,32,.88),rgba(22,8,16,.93));backdrop-filter:blur(30px) saturate(150%);-webkit-backdrop-filter:blur(30px) saturate(150%);
+    border-left:1px solid rgba(255,255,255,.1);transform:translateX(100%);transition:transform .3s var(--ease);display:flex;flex-direction:column;padding:18px;}
+  .drawer.open{transform:none;}
+  .drawer .dhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+  .drawer .dhead .brand{font-size:17px;font-weight:800;color:var(--cream);}
+  .drawer .dhead .brand b{color:var(--applt);}
+  .drawer .dhead .iconbtn{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);color:var(--cream);}
+  .drawer a,.drawer button.dlink{display:flex;align-items:center;gap:11px;min-height:var(--tap);padding:13px 12px;border-radius:12px;color:var(--cream);text-decoration:none;font-size:14.5px;font-weight:600;background:none;border:0;font-family:inherit;cursor:pointer;text-align:left;width:100%;}
+  .drawer a:hover,.drawer button.dlink:hover{background:rgba(255,255,255,.08);}
+  .drawer .prime{margin-top:4px;justify-content:center;color:#fff;font-weight:800;border:1px solid rgba(255,255,255,.16);
+    background:linear-gradient(160deg,var(--action-lt),var(--action) 55%,var(--action-dk));box-shadow:0 10px 22px -12px rgba(0,0,0,.7);}
+  .drawer .prime:hover{filter:brightness(1.08);background:linear-gradient(160deg,var(--action-lt),var(--action) 55%,var(--action-dk));}
+  .drawer .dsec{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-dark);padding-left:12px;margin-bottom:4px;}
+  .drawer .dfoot{margin-top:auto;font-size:11.5px;color:var(--muted-dark);text-align:center;padding-top:14px;}
+  /* phone GPUs choke on heavy blur — cap every chrome surface at 18px under 768 */
+  @media(max-width:768px){
+    .drawer{backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);}
+    .nav{backdrop-filter:blur(16px) saturate(175%);-webkit-backdrop-filter:blur(16px) saturate(175%);}
+  }
+
+  /* ---- hero: the approved arched-dome fade rides BEHIND the content ---- */
+  .hero{background:transparent;color:var(--cream);padding:112px 0 128px;position:relative;overflow:visible;z-index:0;}
+  .hero::before{content:"";position:absolute;left:0;right:0;top:0;height:calc(100% + 360px);background:url("hero-fade.png") top center/100% 100% no-repeat;z-index:-1;pointer-events:none;}
+  :root[data-theme="dark"] .hero::before{background:none;}
+  :root[data-theme="dark"] .hero{background:radial-gradient(ellipse 900px 700px at 0% 0%,rgba(197,43,105,.30),transparent 60%),radial-gradient(ellipse 700px 500px at 100% 20%,rgba(21,194,178,.08),transparent 60%),linear-gradient(to bottom,var(--dark) 0%,var(--dark) calc(100% - 220px),rgba(7,9,14,0) 100%);}
+  .offer-sec{position:relative;z-index:1;background:transparent;}
+  .hero .wrap{position:relative;z-index:2;}
+  .hero-flex{display:flex;flex-direction:column;gap:44px;align-items:center;text-align:center;}
+  .hero-text{max-width:31rem;}
+  .hero-mock-wrap{width:100%;display:flex;justify-content:center;}
+  @media(min-width:900px){.hero-flex{flex-direction:row;align-items:center;text-align:left;gap:52px;}.hero-text{flex:1 1 52%;max-width:none;}.hero-mock-wrap{flex:1 1 48%;justify-content:flex-end;}}
+  .hero .kick{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;white-space:nowrap;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);color:var(--applt);font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}
+  .hero .kick i{width:7px;height:7px;border-radius:999px;background:var(--applt);display:inline-block;flex-shrink:0;}
+  .hero h1{margin-top:22px;font-size:35px;line-height:1.1;font-weight:900;letter-spacing:-.025em;}
+  .hero h1 span{color:var(--applt);}
+  .hero .sub{margin-top:16px;font-size:15.5px;line-height:1.65;color:var(--muted-dark);max-width:31rem;margin-left:auto;margin-right:auto;}
+  @media(min-width:900px){.hero .sub{margin-left:0;margin-right:0;}}
+  .hero .sub b{color:var(--cream);font-weight:700;}
+  .trust{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+  @media(min-width:900px){.trust{justify-content:flex-start;}}
+  .trust span{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;white-space:nowrap;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:12px;font-weight:600;color:var(--muted-dark);}
+  .trust svg{color:var(--applt);flex-shrink:0;}
+
+  /* ---- store badges ---- */
+  .stores{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:18px;}
+  @media(min-width:900px){.stores{justify-content:flex-start;}}
+  .badge-store{display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border-radius:12px;white-space:nowrap;
+    background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    color:var(--cream);font-size:11px;font-weight:600;line-height:1.15;letter-spacing:.02em;}
+  .badge-store b{display:block;font-size:13.5px;font-weight:800;letter-spacing:-.01em;}
+  .badge-store svg{flex-shrink:0;color:var(--cream);}
+  .stores.onlight .badge-store{background:linear-gradient(152deg,var(--glass-a),var(--glass-b));border-color:var(--glass-line);color:var(--ink);box-shadow:var(--frostedge);}
+  .stores.onlight .badge-store svg{color:var(--app2);}
+
+  /* ---- the phone ---- */
+  .phonewrap{position:relative;display:flex;justify-content:center;width:100%;}
+  .phone{position:relative;width:268px;flex-shrink:0;border-radius:42px;padding:9px;
+    background:linear-gradient(158deg,#4C2033,#200B14 46%,#3A1526);
+    box-shadow:0 34px 70px -22px rgba(0,0,0,.62),0 6px 18px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(255,255,255,.06);}
+  .phone.float{animation:float 6s ease-in-out infinite;}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @media(prefers-reduced-motion:reduce){.phone.float{animation:none;}}
+  .phone .notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:88px;height:20px;border-radius:999px;background:#160610;z-index:4;}
+  .screen{position:relative;border-radius:34px;overflow:hidden;background:var(--phone-bg);height:520px;display:flex;flex-direction:column;color:var(--phone-ink);}
+  .sc-status{flex-shrink:0;height:34px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 18px 3px;font-size:10.5px;font-weight:700;color:var(--phone-ink);opacity:.85;}
+  .sc-head{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 14px 9px;position:relative;z-index:2;
+    background:linear-gradient(152deg,rgba(255,255,255,.5),rgba(255,255,255,.24));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.5);}
+  :root[data-theme="dark"] .sc-head{background:linear-gradient(152deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border-bottom-color:rgba(255,255,255,.1);}
+  .sc-name{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:800;letter-spacing:-.01em;min-width:0;}
+  .sc-name .mk{width:22px;height:22px;flex-shrink:0;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:900;box-shadow:0 3px 9px -3px rgba(0,0,0,.5);}
+  .sc-name .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .sc-hicons{display:flex;align-items:center;gap:9px;flex-shrink:0;opacity:.7;}
+  .sc-sub{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 14px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.72;}
+  .sc-vaia{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;white-space:nowrap;font-size:9.5px;font-weight:800;letter-spacing:.06em;color:#fff;}
+  .sc-body{flex:1 1 auto;overflow:hidden;padding:12px 13px 8px;display:flex;flex-direction:column;gap:9px;}
+  .sc-fade{position:absolute;left:0;right:0;bottom:62px;height:34px;pointer-events:none;background:linear-gradient(to bottom,rgba(255,255,255,0),var(--phone-bg));z-index:2;}
+  .sc-hero{border-radius:14px;padding:13px 14px;color:#fff;flex-shrink:0;box-shadow:0 8px 20px -10px rgba(0,0,0,.45);}
+  .sc-hero .eb{font-size:8.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.85;}
+  .sc-hero h4{margin-top:4px;font-size:15px;line-height:1.2;font-weight:800;letter-spacing:-.01em;}
+  .sc-hero p{margin-top:4px;font-size:10.5px;line-height:1.45;opacity:.9;}
+  .sc-hero .hb{margin-top:9px;display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:9px;background:rgba(255,255,255,.94);font-size:10px;font-weight:800;}
+  .sc-row{display:flex;align-items:center;gap:9px;border-radius:12px;padding:9px 10px;flex-shrink:0;
+    background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.75);box-shadow:0 4px 12px -6px rgba(0,0,0,.16);}
+  :root[data-theme="dark"] .sc-row{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.1);}
+  .sc-row .ri{width:30px;height:30px;flex-shrink:0;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;}
+  .sc-row .rt{flex:1 1 auto;min-width:0;}
+  .sc-row .rt b{display:block;font-size:11.5px;line-height:1.25;font-weight:800;letter-spacing:-.01em;overflow-wrap:anywhere;}
+  .sc-row .rt span{display:block;margin-top:1px;font-size:9.5px;line-height:1.35;opacity:.68;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .sc-row .rr{flex-shrink:0;font-size:11px;font-weight:800;white-space:nowrap;}
+  .sc-tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex-shrink:0;}
+  .sc-tile{border-radius:12px;padding:10px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.75);}
+  :root[data-theme="dark"] .sc-tile{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.1);}
+  .sc-tile b{display:block;font-size:15px;font-weight:900;letter-spacing:-.02em;}
+  .sc-tile span{display:block;margin-top:1px;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.62;}
+  .sc-cta{margin-top:auto;flex-shrink:0;display:block;width:100%;text-align:center;border-radius:12px;padding:11px;color:#fff;font-size:11.5px;font-weight:800;
+    background:linear-gradient(160deg,var(--action-lt),var(--action) 52%,var(--action-dk));box-shadow:0 8px 18px -9px rgba(0,0,0,.55);}
+  .sc-tabs{flex-shrink:0;position:relative;z-index:3;display:flex;align-items:flex-end;justify-content:space-around;gap:2px;height:62px;padding:0 6px 10px;
+    background:linear-gradient(152deg,rgba(255,255,255,.55),rgba(255,255,255,.3));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.55);}
+  :root[data-theme="dark"] .sc-tabs{background:linear-gradient(152deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border-top-color:rgba(255,255,255,.1);}
+  .sc-tab{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:8px;font-weight:700;letter-spacing:.01em;opacity:.5;background:none;border:0;font-family:inherit;color:inherit;cursor:pointer;padding:0;}
+  .sc-tab span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+  .sc-tab.on{opacity:1;}
+  .sc-tab.money{flex:0 0 auto;margin-top:-20px;}
+  .sc-tab.money .mb{width:46px;height:46px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;
+    box-shadow:0 10px 22px -8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.35);}
+  .sc-tab.money span{margin-top:1px;font-weight:800;}
+  .phone-glow{position:absolute;inset:-14% -10%;z-index:-1;pointer-events:none;filter:blur(46px);opacity:.6;
+    background:radial-gradient(52% 42% at 50% 42%,rgba(240,107,160,.5),transparent 70%);}
+
+  /* ---- offer band ---- */
+  .offerband{text-align:center;}
+  .offerband .pin{display:inline-block;padding:5px 13px;border-radius:999px;white-space:nowrap;background:linear-gradient(90deg,rgba(21,194,178,.16),rgba(47,224,206,.22));border:1px solid rgba(21,194,178,.32);color:var(--state2);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
+  .offerband h2{margin-top:14px;font-size:23px;line-height:1.2;font-weight:900;letter-spacing:-.02em;color:var(--ink);}
+  .offerband h2 s{color:var(--faint);text-decoration-color:var(--app);text-decoration-thickness:2.5px;font-weight:700;}
+  .offerband h2 em{color:var(--app2);font-style:normal;}
+  .offerband .limited{margin-top:6px;font-size:13px;font-weight:700;color:var(--app2);}
+  .offerband p{margin-top:12px;font-size:14px;line-height:1.65;color:var(--muted);max-width:34rem;margin-left:auto;margin-right:auto;}
+  .offerband .mini{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+  .offerband .mini span{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;white-space:nowrap;font-size:12.5px;font-weight:700;color:var(--ink);}
+  .offerband .mini svg{color:var(--state2);flex-shrink:0;}
+
+  /* ---- features ---- */
+  .fgrid{margin-top:26px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px;text-align:left;}
+  @media(min-width:640px){.fgrid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  @media(min-width:960px){.fgrid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+  .fc{border-radius:24px;padding:32px;transition:transform .18s ease;}
+  .fc:hover{transform:translateY(-2px);}
+  .ic{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(197,43,105,.16),rgba(197,43,105,.06));border:1px solid rgba(197,43,105,.2);display:flex;align-items:center;justify-content:center;color:var(--app);}
+  .fc p{margin-top:16px;font-size:17px;font-weight:800;letter-spacing:-.01em;color:var(--ink);}
+  .fc span{display:block;margin-top:6px;font-size:13.5px;line-height:1.6;color:var(--muted);}
+
+  /* ---- steps / who it's for ---- */
+  .steps.grid2{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;}
+  @media(min-width:640px){.steps.grid2{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;}}
+  .steps{margin-top:26px;display:flex;flex-direction:column;gap:12px;text-align:left;}
+  .step{display:flex;gap:14px;align-items:flex-start;border-radius:var(--r-card);padding:18px 16px;}
+  .stepn{flex-shrink:0;width:30px;height:30px;border-radius:999px;background:linear-gradient(180deg,var(--app),var(--app3));color:#fff;font-size:13.5px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(197,43,105,.3);}
+  .step p{font-size:14px;font-weight:700;color:var(--ink);}
+  .step span{display:block;margin-top:3px;font-size:12.5px;line-height:1.55;color:var(--muted);}
+
+  /* ---- the store-launch ladder (A-B-C) ---- */
+  .ladder{margin-top:28px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;text-align:left;counter-reset:lad;}
+  @media(min-width:760px){.ladder{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}}
+  @media(min-width:1060px){.ladder{grid-template-columns:repeat(4,minmax(0,1fr));}}
+  .lstep{position:relative;display:flex;flex-direction:column;border-radius:20px;padding:24px 20px 22px;}
+  .lstep .lltr{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;
+    background:linear-gradient(160deg,var(--app),var(--app3));box-shadow:0 8px 18px -8px rgba(197,43,105,.6);}
+  .lstep h4{margin-top:14px;margin-bottom:0;font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--ink);}
+  .lstep p{margin-top:7px;margin-bottom:14px;font-size:13px;line-height:1.6;color:var(--muted);}
+  .lstep .lwho{margin-top:auto;align-self:flex-start;padding-top:0;display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;white-space:nowrap;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    background:rgba(21,194,178,.13);border:1px solid rgba(21,194,178,.32);color:var(--state2);}
+  .lstep .lwho.you{background:rgba(197,43,105,.10);border-color:rgba(197,43,105,.28);color:var(--app2);}
+  :root[data-theme="dark"] .lstep .lwho.you{color:var(--applt);}
+  .feebox{margin-top:22px;border-radius:18px;padding:20px 18px;text-align:left;}
+  .feebox h4{font-size:14.5px;font-weight:800;color:var(--ink);text-align:center;}
+  .feebox p{margin-top:8px;font-size:13px;line-height:1.65;color:var(--muted);text-align:center;}
+  .pfee{margin-top:14px;display:grid;grid-template-columns:minmax(0,1fr);gap:10px;}
+  @media(min-width:560px){.pfee{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  .pfee div{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:12px;background:rgba(197,43,105,.06);border:1px solid var(--border);font-size:12.5px;line-height:1.4;color:var(--ink);}
+  .pfee b{display:block;font-size:13.5px;font-weight:800;}
+  .pfee svg{flex-shrink:0;color:var(--app2);}
+  :root[data-theme="dark"] .pfee svg{color:var(--applt);}
+
+  /* ---- pricing (berry band) ---- */
+  .pricing-dark{background:radial-gradient(circle at top right,rgba(197,43,105,.28),transparent 60%),radial-gradient(circle at bottom left,rgba(21,194,178,.10),transparent 60%),linear-gradient(160deg,var(--dark) 0%,var(--raised) 100%);}
+  :root[data-theme="dark"] .pricing-dark{background:radial-gradient(circle at top right,rgba(197,43,105,.30),transparent 62%),radial-gradient(circle at bottom left,rgba(21,194,178,.05),transparent 58%),radial-gradient(circle at 20% 110%,rgba(110,18,55,.35),transparent 62%),linear-gradient(160deg,#0A0710 0%,#120913 100%);}
+  .pricing-dark .seclabel{color:var(--applt);}
+  .pricing-dark .sechead{color:var(--cream);}
+  .pricing-dark .secsub{color:var(--muted-dark);}
+  .tiers{margin-top:26px;display:grid;grid-template-columns:minmax(0,1fr);gap:22px;text-align:left;}
+  .tier{display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.14);border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.02) 40%,rgba(0,0,0,.32));backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 8px 32px rgba(0,0,0,.25);padding:36px 26px 30px;position:relative;color:var(--cream);}
+  .tier.feat{border:2px solid var(--state);background:linear-gradient(160deg,rgba(21,194,178,.16),rgba(255,255,255,.02) 40%,rgba(0,0,0,.5));}
+  .tier .flag{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);padding:5px 14px;border-radius:999px;white-space:nowrap;background:linear-gradient(90deg,var(--depth),var(--state));color:#04302b;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 4px 12px rgba(21,194,178,.35);}
+  .tier .tname{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--statelt);}
+  .tier .tp{margin-top:8px;display:flex;align-items:baseline;gap:4px;flex-wrap:wrap;}
+  .tier .tp b{font-size:32px;font-weight:750;letter-spacing:-.02em;color:var(--cream);}
+  .tier .tp span{font-size:14px;color:var(--muted-dark);font-weight:600;}
+  .tier .tdesc{margin-top:6px;font-size:13px;line-height:1.55;color:var(--muted-dark);}
+  .tier ul{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px;}
+  .tier li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.5;color:var(--cream);}
+  .tier li svg{flex-shrink:0;margin-top:2px;color:var(--state);}
+  .tier li>div{flex:1 1 auto;min-width:0;}
+  .tier .tcta{margin-top:auto;padding-top:22px;}
+  .tier .tcta a{display:block;text-align:center;width:100%;}
+  .tier .tcta a.ghost{color:var(--statelt);border-color:rgba(47,224,206,.5);background:rgba(255,255,255,.05);}
+  .valuenote{margin-top:16px;font-size:12.5px;line-height:1.65;color:var(--muted-dark);text-align:center;max-width:52rem;margin-left:auto;margin-right:auto;}
+  @media(min-width:640px){.tiers{grid-template-columns:repeat(3,minmax(0,1fr));}.tier.feat{transform:translateY(-14px);}}
+
+  /* ---- FAQ ---- */
+  .faq{margin-top:24px;display:flex;flex-direction:column;gap:10px;text-align:left;}
+  .faq details{border-radius:14px;overflow:hidden;}
+  .faq summary{list-style:none;cursor:pointer;padding:16px 18px;font-size:14px;font-weight:700;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary:focus-visible{outline:2px solid rgba(var(--app-rgb),.55);outline-offset:-2px;}
+  .faq summary .pm{flex-shrink:0;width:20px;height:20px;color:var(--app);transition:transform .2s ease;}
+  .faq details[open] summary .pm{transform:rotate(45deg);}
+  .faq .fa{padding:0 18px 16px;font-size:13.5px;line-height:1.65;color:var(--muted);animation:fadein .25s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+  /* ---- designer panel ---- */
+  .panel{margin-top:26px;border-radius:20px;padding:26px 18px;text-align:left;}
+  .panel h2{font-size:19px;font-weight:800;letter-spacing:-.01em;text-align:center;color:var(--ink);}
+  .panel .ps{margin-top:8px;font-size:13.5px;line-height:1.6;color:var(--muted);text-align:center;}
+  .choice{margin-top:18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+  .chip{border-radius:14px;padding:14px 13px;font-size:13.5px;font-weight:700;text-align:left;cursor:pointer;font-family:inherit;color:var(--ink);border:2px solid var(--glass-line);transition:border-color .15s ease,box-shadow .15s ease;min-height:var(--tap);}
+  .chip small{display:block;margin-top:3px;font-size:11px;font-weight:500;color:var(--muted);}
+  .chip.on{border-color:var(--state);box-shadow:0 0 0 3px rgba(21,194,178,.14);}
+  .field{margin-top:12px;}
+  .field label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px;}
+  .field label .req{color:var(--danger);font-weight:800;margin-left:2px;}
+  .field input,.field textarea,.field select{width:100%;min-height:50px;border:1.5px solid var(--border);border-radius:14px;background:var(--card);padding:13px 14px;font-size:15px;font-weight:500;font-family:inherit;color:var(--ink);outline:none;box-shadow:0 1px 2px rgba(64,10,32,.05);transition:border-color .15s ease,box-shadow .15s ease;}
+  .field textarea{min-height:76px;resize:vertical;overflow:hidden;transition:height .12s ease,border-color .15s ease;}
+  .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--state);box-shadow:0 0 0 3px rgba(21,194,178,.18);}
+  .field.primary textarea{border-color:var(--state);min-height:104px;box-shadow:0 0 0 3px rgba(21,194,178,.1);}
+  .field input.errfield,.field textarea.errfield,.field select.errfield{border-color:var(--danger)!important;box-shadow:0 0 0 3px rgba(192,57,43,.16)!important;}
+  .field .fieldtip{margin-top:6px;font-size:11.5px;line-height:1.5;color:var(--faint);}
+  .errmsg{margin-top:12px;font-size:13px;font-weight:600;color:var(--danger);display:none;line-height:1.5;}
+  .center{text-align:center;margin-top:18px;}
+  .ttl{margin-top:6px;text-align:center;font-size:11.5px;color:var(--faint);line-height:1.55;}
+  .reassure-big{margin-top:16px;padding:14px 16px;border-radius:14px;background:rgba(21,194,178,.1);border:1.5px solid rgba(21,194,178,.3);font-size:15px;font-weight:700;line-height:1.5;text-align:center;color:var(--ink);}
+  .reassure-big b{color:var(--state2);}
+  .openlink{display:block;margin-top:10px;text-align:center;font-size:13px;font-weight:700;color:var(--app2);text-decoration:none;}
+  :root[data-theme="dark"] .openlink,:root[data-theme="dark"] .retrylink{color:var(--applt);}
+
+  /* ---- build progress ---- */
+  #b-loading{display:none;text-align:center;padding:22px 0 12px;}
+  .bprog{width:100%;max-width:320px;margin:0 auto;height:8px;border-radius:999px;background:var(--border);overflow:hidden;}
+  .bprogfill{height:100%;width:4%;border-radius:999px;background:linear-gradient(90deg,var(--app),var(--applt));transition:width .6s ease;}
+  #b-progpct{margin-top:10px;font-size:12.5px;font-weight:800;letter-spacing:.04em;color:var(--app2);text-align:center;}
+  :root[data-theme="dark"] #b-progpct{color:var(--applt);}
+  .bsteps{margin-top:20px;display:flex;flex-direction:column;gap:9px;max-width:380px;margin-left:auto;margin-right:auto;text-align:left;}
+  .bstep{display:flex;gap:10px;align-items:center;font-size:13.5px;line-height:1.4;color:var(--faint);opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease,color .3s ease;}
+  .bstep.show{opacity:1;transform:none;}
+  .bstep.active{color:var(--ink);font-weight:700;}
+  .bstep.done{color:var(--muted);font-weight:500;}
+  .bdot{flex-shrink:0;width:17px;height:17px;border-radius:999px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;}
+  .bstep.active .bdot{border-color:var(--app);}
+  .bstep.active .bdot::after{content:"";width:7px;height:7px;border-radius:999px;background:var(--app);animation:bpulse 1s ease-in-out infinite;}
+  @keyframes bpulse{0%,100%{opacity:.35}50%{opacity:1}}
+  .bstep.done .bdot{border-color:var(--state2);background:var(--state2);color:#fff;}
+  #b-loadsub{margin-top:18px;font-size:12px;color:var(--muted);}
+  #b-result{display:none;}
+
+  /* ---- result: the app viewer ---- */
+  .appview{margin-top:20px;display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .appview .vcol{width:100%;max-width:420px;}
+  @media(min-width:900px){.appview{flex-direction:row;align-items:flex-start;gap:34px;justify-content:center;}
+    .appview .phonewrap{width:auto;flex:0 0 auto;}
+    .appview .vcol{flex:1 1 340px;max-width:400px;}}
+  .screenpick{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:2px;}
+  @media(min-width:900px){.screenpick{justify-content:flex-start;}}
+  .spb{border-radius:999px;padding:8px 13px;min-height:36px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;color:var(--ink);
+    background:rgba(11,15,26,.05);border:1.5px solid transparent;transition:background .15s ease,color .15s ease;white-space:nowrap;}
+  :root[data-theme="dark"] .spb{background:rgba(255,255,255,.07);}
+  .spb.on{background:var(--select);color:var(--bg);}
+  :root[data-theme="dark"] .spb.on{background:var(--select);color:#0B0F1A;}
+  .swatchbar{margin-top:14px;border-radius:16px;padding:14px 14px 15px;}
+  .swatchbar .sh{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;}
+  .swatches{margin-top:11px;display:flex;flex-wrap:wrap;gap:9px;justify-content:center;}
+  .sw{width:38px;height:38px;border-radius:12px;border:2.5px solid transparent;cursor:pointer;padding:0;box-shadow:0 4px 12px -5px rgba(0,0,0,.4);transition:transform .15s ease;}
+  .sw:hover{transform:translateY(-2px);}
+  .sw.on{border-color:var(--state);box-shadow:0 0 0 3px rgba(21,194,178,.2);}
+  .sw:focus-visible{outline:2px solid rgba(var(--app-rgb),.55);outline-offset:2px;}
+  .madefor{margin-top:14px;font-size:13px;line-height:1.6;color:var(--muted);text-align:center;}
+  .madefor b{color:var(--ink);}
+
+  /* ---- claim / plan ---- */
+  .offer{margin-top:28px;border-radius:24px;padding:32px 22px;}
+  .offer h3{font-size:18px;font-weight:800;text-align:center;color:var(--ink);}
+  .offer .osub{margin-top:6px;font-size:13px;line-height:1.55;color:var(--muted);text-align:center;}
+  .planpick{margin-top:16px;display:flex;flex-direction:column;gap:12px;}
+  .pp{display:flex;gap:14px;align-items:flex-start;border-radius:16px;padding:18px 16px;cursor:pointer;font-family:inherit;text-align:left;width:100%;border:1.5px solid var(--glass-line);transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease;}
+  .pp:hover{transform:translateY(-1px);}
+  .pp.on{border-color:var(--state2);box-shadow:0 10px 24px -10px rgba(21,194,178,.4),inset 0 0 0 1px var(--state2);}
+  .pp .ppr{flex-shrink:0;width:18px;height:18px;margin-top:2px;border-radius:999px;border:2px solid var(--border);}
+  .pp.on .ppr{border-color:var(--state2);background:radial-gradient(circle,var(--state2) 45%,transparent 50%);}
+  .pp .ppmain{flex:1;min-width:0;}
+  .pp .ppmain b{font-size:14.5px;display:block;color:var(--ink);}
+  .pp .ppmain .amt{font-weight:900;}
+  .pp .ppmain>span{display:block;margin-top:3px;font-size:12.5px;line-height:1.5;color:var(--muted);}
+  .pp .ppmain b .amt{display:inline;font-weight:900;white-space:nowrap;}
+  .addons{margin-top:14px;border-radius:16px;padding:16px 14px;text-align:left;}
+  .addons h3{font-size:13px;font-weight:800;text-align:center;color:var(--ink);}
+  .aopts,.customfeat{margin-top:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;}
+  @media(max-width:430px){.aopts,.customfeat{grid-template-columns:minmax(0,1fr);}}
+  .aopt{display:flex;gap:10px;align-items:center;border-radius:12px;padding:12px 13px;cursor:pointer;font-family:inherit;text-align:left;color:var(--ink);font-size:12.5px;font-weight:600;line-height:1.35;transition:border-color .15s ease,box-shadow .15s ease;border:1.5px solid var(--glass-line);min-height:var(--tap);}
+  .aopt.on{border-color:var(--state2);box-shadow:0 0 0 3px rgba(21,194,178,.14);}
+  .aopt .abox{flex-shrink:0;width:18px;height:18px;border-radius:5px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;}
+  .aopt.on .abox{border-color:var(--state2);background:var(--state2);}
+  .aopt .abox svg{color:#fff;opacity:0;}
+  .aopt.on .abox svg{opacity:1;}
+  .paidbox{display:none;margin-top:26px;border-radius:20px;padding:30px 20px;text-align:center;}
+  .paidbox h2{font-size:21px;font-weight:800;color:var(--ink);}
+  .paidbox p{margin-top:10px;font-size:14px;line-height:1.65;color:var(--muted);}
+  .paidbox p.reassure{background:rgba(21,194,178,.09);border:1px solid rgba(21,194,178,.28);border-radius:12px;padding:10px 14px;color:var(--ink);}
+  .paidactions{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px 8px;align-items:center;justify-content:center;}
+  .paidactions .paidor{font-size:12.5px;color:var(--muted);}
+
+  /* ---- footer ---- */
+  .foot{margin-top:20px;padding:40px 0 64px;font-size:12.5px;color:var(--faint);text-align:center;}
+  .foot a{color:var(--app2);font-weight:700;text-decoration:none;}
+  :root[data-theme="dark"] .foot a{color:var(--applt);}
+  .foot .footphone a{font-size:16px;font-weight:800;color:var(--ink);}
+  .foot .footbrand{margin-top:14px;font-weight:700;color:var(--muted);font-size:13px;}
+  .foot .footbrand a{margin:0 2px;}
+  .foot .footaddr{margin-top:10px;}
+  .foot .footcopy{margin-top:14px;opacity:.7;}
+
+  /* ---- modals (opaque — never glass, per lessons A2) ---- */
+  .mscrim{position:fixed;inset:0;z-index:80;background:rgba(24,6,16,.62);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:8vh 14px;}
+  .mscrim.open{display:flex;}
+  .mcard{width:100%;max-width:400px;max-height:84vh;overflow-y:auto;-webkit-overflow-scrolling:touch;border-radius:20px;padding:24px 20px;text-align:left;
+    background:var(--menu-bg);border:1px solid var(--menu-line);box-shadow:var(--menu-drop);backdrop-filter:none;-webkit-backdrop-filter:none;}
+  .mcard.mcal{max-width:920px;width:97%;padding:0;overflow:hidden;}
+  .mcalhead{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--menu-line);}
+  .mcalhead b{font-size:16px;font-weight:800;color:var(--ink);}
+  #cal-frame{width:100%;height:640px;border:0;display:block;background:#fff;}
+  @media(max-width:640px){#cal-frame{height:70vh;}}
+  .mcard h3{font-size:19px;font-weight:800;text-align:center;color:var(--ink);}
+  .mcard .ms{margin-top:6px;font-size:13px;line-height:1.55;color:var(--muted);text-align:center;}
+  .mcard .mclose{float:right;margin:-6px -4px 0 0;width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;font-size:15px;}
+  .mcard .mclose:hover{color:var(--ink);}
+
+  /* ---- splash ---- */
+  #oa-splash{position:fixed;inset:0;z-index:99;background:radial-gradient(ellipse 700px 500px at 30% 20%,rgba(197,43,105,.38),transparent 60%),var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 1.5s ease;}
+  #oa-splash.gone{opacity:0;pointer-events:none;}
+  #oa-splash img{height:84px;width:auto;animation:oa-heart 3s ease-in-out infinite;filter:sepia(1) saturate(8) hue-rotate(305deg) brightness(.95);}
+  #oa-splash .st{margin-top:14px;font-size:30px;font-weight:800;letter-spacing:-.01em;color:var(--cream);}
+  #oa-splash .st b{color:var(--applt);font-weight:700;}
+  #oa-splash .ss{margin-top:4px;font-size:12px;font-weight:600;color:var(--muted-dark);letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:0 20px;}
+  #oa-splash .bar2{margin-top:26px;width:135px;height:4px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden;}
+  #oa-splash .bar2 i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--app),var(--applt));animation:oa-load 1.9s ease-out forwards;}
+  @keyframes oa-heart{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+  @keyframes oa-load{to{width:100%}}
+  @media(prefers-reduced-motion:reduce){#oa-splash img{animation:none;}}
+
+  #b-panel,#b-loading,#builder,#pricing,#faq,#how{scroll-margin-top:84px;}
+
+  /* LAST RULE IN THE SHEET so nothing later re-raises it: no surface blurs
+     harder than 18px on a phone (lessons A5). */
+  @media(max-width:768px){
+    .tier,.phone .sc-head,.phone .sc-tabs{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
+  }
+</style>
+</head>
+<body>
+<div class="field-bg" aria-hidden="true"></div>
+<div id="oa-splash">
+  <img src="/onescore-preview/logo-mark.png" alt="" onerror="this.style.display='none'" />
+  <div class="st"><b>One</b>App</div>
+  <div class="ss">Your Business. Their Pocket.</div>
+  <div class="bar2"><i></i></div>
+</div>
+<script>
+  setTimeout(function(){ var e=document.getElementById("oa-splash"); if(e) e.classList.add("gone"); }, 2000);
+  setTimeout(function(){ var e=document.getElementById("oa-splash"); if(e) e.remove(); }, 3600);
+</script>
+
+<!-- ======================= TOP NAV ======================= -->
+<nav class="nav">
+  <div class="brand">
+    <img class="logo-o" src="/onescore-preview/logo-mark.png" alt="" onerror="this.style.display='none';var f=this.nextElementSibling;if(f)f.style.display='flex';" />
+    <span class="logo-fb" aria-hidden="true">O</span>
+    <span class="brandtxt">neApp</span>
+  </div>
+  <div class="ctrl">
+    <button class="iconbtn" id="themebtn" aria-label="Toggle light and dark mode" onclick="toggleTheme()">
+      <svg id="ic-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+    </button>
+    <a class="navcta" href="#builder"><span class="cta-lg">Design my app free</span><span class="cta-sm">Free app →</span></a>
+    <button class="iconbtn" aria-label="Menu" onclick="openDrawer(true)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- drawer -->
+<div class="scrim" id="scrim" onclick="openDrawer(false)"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="dhead">
+    <div class="brand"><b>One</b>App</div>
+    <button class="iconbtn" aria-label="Close menu" onclick="openDrawer(false)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <a class="prime" href="#builder" onclick="openDrawer(false)">Design my app — free</a>
+  <a href="#how" onclick="openDrawer(false)">How the store launch works</a>
+  <a href="#pricing" onclick="openDrawer(false)">Pricing</a>
+  <a href="#faq" onclick="openDrawer(false)">Questions</a>
+  <a href="https://www.oneworldlabs.ai/choose.html">Sign in with One&nbsp;ID</a>
+  <button class="dlink" onclick="openDrawer(false);bookCall('nav')">Book a call</button>
+  <button class="dlink" onclick="toggleTheme()"><span id="dl-theme">Switch to light mode</span></button>
+  <div class="dsec">One World family</div>
+  <a href="https://www.oneworldlabs.ai/">One World Labs hub</a>
+  <a href="https://www.oneworldlabs.ai/onepage/">OnePage — websites</a>
+  <a href="https://www.oneworldlabs.ai/onevoice/">OneVoice — AI answering</a>
+  <a href="https://www.oneworldlabs.ai/onescore-preview/">OneScore — credibility</a>
+  <div class="dfoot">A One World Labs company</div>
+</aside>
+
+<!-- ======================= HERO ======================= -->
+<div class="hero">
+  <div class="wrap w-xl">
+    <div class="hero-flex">
+      <div class="hero-text">
+        <span class="kick"><i></i>The Summer of AI</span>
+        <h1>Your business deserves<br><span>its own app.</span></h1>
+        <p class="sub">We design your app free and show it to you in minutes. Love it? <b>We launch it on the Apple App Store and Google Play for a one-time $499</b> — accounts, listing, submission, all of it, in your name.</p>
+        <div style="margin-top:26px"><a class="cta" href="#builder">Design my app free →</a></div>
+        <div class="stores">
+          <span class="badge-store"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.8-3.5.8-.7 0-1.9-.8-3.1-.8-1.6 0-3.1.9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.5.8 1.1 1.7 2.4 3 2.4 1.2 0 1.6-.8 3.1-.8 1.4 0 1.8.8 3.1.7 1.3 0 2.1-1.2 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.7-3.9zM14.2 5.5c.7-.8 1.1-1.9 1-3-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.2-.6 2.9-1.4z"/></svg><span>Live on the<b>App Store</b></span></span>
+          <span class="badge-store"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1 9.3-9.3v-.2L3.6 2.3zM16.2 15.6l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1.1.6 1.1 1.6 0 2.2l-3.8 2zM15.5 16.3l-3.2-3.2-9.3 9.3c.4.4 1 .4 1.7.1l10.8-6.2M15.5 7.9L4.7 1.7C4 1.3 3.4 1.4 3 1.8l9.3 9.3 3.2-3.2z"/></svg><span>Live on<b>Google Play</b></span></span>
+        </div>
+        <div class="trust">
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>See your app free first</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Designed in about a minute</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg>You own the accounts</span>
+        </div>
+      </div>
+      <div class="hero-mock-wrap">
+        <div class="phonewrap">
+          <div class="phone-glow" aria-hidden="true"></div>
+          <div class="phone float" id="hero-phone" aria-label="Preview of a business mobile app"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= SUMMER-OF-AI OFFER ======================= -->
+<div class="offer-sec">
+<section class="wrap w-md reveal" id="offer">
+  <div class="offerband">
+    <span class="pin">Summer promotion</span>
+    <h2>A custom mobile app: <s>$12,000</s> → <em>Designed free today</em></h2>
+    <div class="limited">(Limited time only)</div>
+    <p>Building an app used to mean a developer, six months, and five figures. AI changed that. This summer we <b>design your app for free</b> — you see it on screen before you spend anything — and if you want it in the stores, that's a <b>one-time $499</b>. No monthly required.</p>
+    <div class="mini">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>See it in minutes</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Try it before you pay</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Both stores, one price</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ======================= WHO IT'S FOR ======================= -->
+<section class="wrap w-lg reveal">
+  <div class="seclabel">Who it's for</div>
+  <div class="sechead">A website gets you found.<br>An app gets you remembered.</div>
+  <p class="secsub">A website is somewhere a customer visits once. An app sits on their home screen — your name in their pocket, every day, with a button that books, orders, or calls you. That is the difference between being searched for and being chosen.</p>
+  <div class="steps grid2">
+    <div class="step"><div class="stepn">✓</div><div><p>Your customers come back — and you want them to come back to <em>you</em></p><span>Restaurants, salons, gyms, clinics, trades, shops. If someone buys from you more than once a year, an icon on their phone is worth more than any ad you can buy.</span></div></div>
+    <div class="step"><div class="stepn">✓</div><div><p>You look smaller than you are</p><span>Being on the App Store next to the national chains is the single fastest credibility upgrade a local business can buy. Most of your competitors will never do it.</span></div></div>
+  </div>
+</section>
+
+<!-- ======================= FEATURES ======================= -->
+<section class="wrap w-xl reveal" id="features">
+  <div class="seclabel">What your app comes with</div>
+  <div class="sechead">A real app. Not a shortcut<br>pretending to be one.</div>
+  <p class="secsub">Downloadable from the App Store and Google Play, with your icon on the home screen, your name under it, and push notifications you control.</p>
+  <div class="fgrid">
+    <div class="fc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg></div><p>Your icon, your name</p><span>A real listing on both stores — searchable, shareable, and yours. Not a bookmark, not a web link.</span></div>
+    <div class="fc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg></div><p>Push notifications</p><span>The only marketing channel you own outright. No ad spend, no algorithm, no per-message fee.</span></div>
+    <div class="fc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M16 3v4M8 3v4M4 11h16"/></svg></div><p>Booking &amp; ordering built in</p><span>One tap to book, order, or request a quote — straight into your calendar and your inbox.</span></div>
+    <div class="fc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M5 19h6"/></svg></div><p>Loyalty &amp; offers</p><span>Points, punch cards, members-only pricing. The reason a customer keeps the app instead of deleting it.</span></div>
+    <div class="fc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/></svg></div><p>Payments</p><span>Take deposits, orders and full payment inside the app. Money moves without a phone call.</span></div>
+    <div class="fc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-8 8H4l2-3a8 8 0 1115-5z"/><path d="M8.5 11h7M8.5 8.5h7"/></svg></div><p>An AI assistant inside</p><span>Answers questions, takes requests, and books jobs at 2am — the same engine that powers OneVoice.</span></div>
+  </div>
+</section>
+
+<!-- ======================= THE STORE-LAUNCH LADDER ======================= -->
+<section class="wrap w-xl reveal" id="how">
+  <div class="seclabel">How it works</div>
+  <div class="sechead">Getting into the stores is the hard part.<br>That's the part we do.</div>
+  <p class="secsub">Apple and Google both make you open a developer account, pass a review, and file a pile of paperwork. Most businesses stall right there. We walk you through every step and do everything we're allowed to do for you.</p>
+  <div class="ladder">
+    <div class="lstep">
+      <div class="lltr">A</div>
+      <h4>We design your app</h4>
+      <p>Tell us about your business. You'll be looking at your finished app — every screen, your colours, your services — in about a minute. Change anything you want. Still free.</p>
+      <span class="lwho">We do this</span>
+    </div>
+    <div class="lstep">
+      <div class="lltr">B</div>
+      <h4>Your store accounts, in your name</h4>
+      <p>Apple and Google require the business owner to open the accounts. We get on a screen-share and walk you through both — usually 20 minutes. You own them, permanently, and can fire us and keep your app.</p>
+      <span class="lwho you">Together, guided</span>
+    </div>
+    <div class="lstep">
+      <div class="lltr">C</div>
+      <h4>We build and submit</h4>
+      <p>Icon, screenshots, listing copy, privacy answers, age rating, the build itself. We file both submissions and handle whatever the reviewers come back with.</p>
+      <span class="lwho">We do this</span>
+    </div>
+    <div class="lstep">
+      <div class="lltr">D</div>
+      <h4>You're live and downloadable</h4>
+      <p>Typically 1–2 weeks from payment, most of it review time we don't control. Then we send you the two links, and your customers install it.</p>
+      <span class="lwho">We do this</span>
+    </div>
+  </div>
+  <div class="feebox">
+    <h4>Being straight with you about the store fees</h4>
+    <p>Apple and Google charge their own developer fees. They're paid by you, directly to them, because the accounts are in your name — that's what makes the app genuinely yours. We never mark them up.</p>
+    <div class="pfee">
+      <div><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.8-3.5.8-.7 0-1.9-.8-3.1-.8-1.6 0-3.1.9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.5.8 1.1 1.7 2.4 3 2.4 1.2 0 1.6-.8 3.1-.8 1.4 0 1.8.8 3.1.7 1.3 0 2.1-1.2 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.7-3.9zM14.2 5.5c.7-.8 1.1-1.9 1-3-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.2-.6 2.9-1.4z"/></svg><span><b>Apple — $99 a year</b>Paid to Apple, renews annually</span></div>
+      <div><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1 9.3-9.3v-.2L3.6 2.3zM16.2 15.6l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1.1.6 1.1 1.6 0 2.2l-3.8 2zM15.5 16.3l-3.2-3.2-9.3 9.3c.4.4 1 .4 1.7.1l10.8-6.2M15.5 7.9L4.7 1.7C4 1.3 3.4 1.4 3 1.8l9.3 9.3 3.2-3.2z"/></svg><span><b>Google — $25 once</b>Paid to Google, one time, ever</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PRICING ======================= -->
+<div class="pricing-dark">
+<section class="wrap w-xl reveal" id="pricing">
+  <div class="seclabel">Simple, honest pricing</div>
+  <div class="sechead">The design is free.<br>Pick how far you want to take it.</div>
+  <div class="tiers">
+    <!-- Design -->
+    <div class="tier">
+      <div class="tname">Design</div>
+      <div class="tp"><b>Free</b></div>
+      <div class="tdesc">Your whole app, designed and on screen in about a minute. Yours to look at, change, and think about.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div>Six full app screens, built for your business</div></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div>Your name, services and colours</div></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div>Change the look as many times as you like</div></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div>No card, no commitment, no call required</div></li>
+      </ul>
+      <div class="tcta"><a class="cta ghost" href="#builder">Start free →</a></div>
+    </div>
+    <!-- Launch -->
+    <div class="tier feat">
+      <div class="flag">Most popular</div>
+      <div class="tname">Launch</div>
+      <div class="tp"><b>$499</b><span>one time</span></div>
+      <div class="tdesc">Everything it takes to go from a design on screen to an app your customers can download.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div>Everything in Design</div></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>Both store accounts opened</b> — guided, in your name, on a screen-share</div></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div>Icon, screenshots, listing copy and privacy answers written for you</div></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>Submitted to Apple and Google</b> — we handle the review back-and-forth</div></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div>Booking or ordering, push notifications, payments</div></li>
+      </ul>
+      <div class="tcta"><a class="cta" href="#builder">Start free →</a></div>
+    </div>
+    <!-- Custom -->
+    <div class="tier">
+      <div class="tname">Custom</div>
+      <div class="tp"><b>From $2,500</b></div>
+      <div class="tdesc">When the app has to do something specific — logins, inventory, memberships, or talk to the system you already run on.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div>Customer accounts &amp; order history</div></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div>Loyalty programs &amp; memberships</div></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div>Connects to your booking, POS or job software</div></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div>Staff app and admin dashboard</div></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>Pretty much anything you can picture</b> — tell us, we'll quote it</div></li>
+      </ul>
+      <div class="tcta"><a class="cta ghost" href="#" onclick="openCustomModal();return false;">Book a call →</a></div>
+    </div>
+  </div>
+  <p class="valuenote">Apple's $99/year and Google's $25 one-time developer fees are paid by you directly to them, because the accounts are yours. Want us to keep the app updated, resubmitted and current after launch? Optional care is <b>$97/month</b> — never required, cancel anytime.</p>
+</section>
+</div>
+
+<!-- ======================= FAQ ======================= -->
+<section class="wrap reveal" id="faq">
+  <div class="seclabel">Good questions</div>
+  <div class="sechead">Everything you're wondering</div>
+  <div class="faq">
+    <details><summary>Is it really a real app?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><div class="fa">Yes — a real listing on the Apple App Store and Google Play that your customers search for, download, and get an icon for on their home screen. Not a bookmark, not a "save this page" trick. That's the whole point of the $499: getting through Apple's and Google's front doors is the hard part.</div></details>
+    <details><summary>What does the $499 actually cover?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><div class="fa">One time, everything from your approved design to a live download: opening both developer accounts with you, building the app, writing the store listing, producing the icon and screenshots, answering the privacy and age-rating questionnaires, submitting to both stores, and handling whatever the reviewers come back with. Apple's $99/year and Google's $25 one-time fees are separate and paid by you directly to them.</div></details>
+    <details><summary>Why do the accounts have to be in my name?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><div class="fa">Because it protects you. Apple and Google want the real business behind the app, and an app published under someone else's account can be taken away from you. Yours means the listing, the reviews, the download numbers and the app itself belong to your business permanently — you could stop working with us tomorrow and keep all of it. We walk you through the setup on a screen-share; it usually takes about twenty minutes.</div></details>
+    <details><summary>How long until it's live?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><div class="fa">Typically one to two weeks from the day you pay. Our part takes a few days; the rest is Apple's and Google's review queues, which we don't control. Google is usually faster. If a reviewer asks for a change, we make it and resubmit at no extra cost.</div></details>
+    <details><summary>Do I need a website first?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><div class="fa">No. They do different jobs — a website is how new customers find you, an app is how existing customers come back. If you don't have a site yet, our sister service <a href="https://www.oneworldlabs.ai/onepage/" style="color:var(--app2);font-weight:700">OnePage</a> builds you one free too, and the two work together.</div></details>
+    <details><summary>What happens after it's live?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><div class="fa">Your app keeps working. Apple and Google change their rules once or twice a year, and apps that aren't kept current eventually get pulled — so we offer optional care at $97/month to handle updates, resubmissions, content changes and monitoring. It's genuinely optional and you can start it later or cancel anytime.</div></details>
+    <details><summary>What if I don't buy?<svg class="pm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><div class="fa">Nothing happens. Look at your design, sleep on it, come back. We'll email you a link so you don't lose it. There's no card and no call required to see it.</div></details>
+  </div>
+</section>
+
+<!-- ======================= THE FREE APP DESIGNER ======================= -->
+<section class="wrap w-lg" id="builder">
+  <div class="seclabel">Start here — free</div>
+  <div class="sechead">See your app<br>before you pay a dime.</div>
+
+  <div class="paidbox" id="b-paid">
+    <h2>🎉 You're in.</h2>
+    <p>Your launch is booked. <b>Check your email for the confirmation and your next step</b> — a short screen-share where we open your Apple and Google accounts together, in your name.</p>
+    <p class="reassure">From there it's on us: we build, we write the listing, we submit, and we handle the reviewers. Most apps are live within <b>1–2 weeks</b>.</p>
+    <div class="paidactions">
+      <button type="button" class="cta" onclick="dismissPaid()">OK, got it</button>
+      <span class="paidor">Need something now?</span>
+      <a class="retrylink" href="tel:+18557700200">Call (855) 770-0200 →</a>
+    </div>
+  </div>
+
+  <div class="panel" id="b-panel">
+    <!-- step 1: email gate + brief -->
+    <div id="b-ask">
+      <h2>Design your free app</h2>
+      <p class="ps">Enter your email, then tell us about your business. Your app appears on screen in about a minute — no card, no call.</p>
+      <div class="field"><label for="in-email">Your email — where we save your design</label><input id="in-email" type="email" autocomplete="email" placeholder="you@email.com" /></div>
+      <div class="field"><label for="in-name">Business name <span class="req">*</span></label><input id="in-name" type="text" autocomplete="organization" placeholder="Riverside Plumbing" oninput="this.classList.remove('errfield');" /></div>
+      <div class="field"><label for="in-cat">What kind of business is it? <span class="req">*</span></label>
+        <select id="in-cat" onchange="this.classList.remove('errfield')">
+          <option value="">Choose one…</option>
+          <option value="trade">Home services — plumbing, HVAC, electrical, landscaping, cleaning</option>
+          <option value="food">Restaurant, café, bakery or food truck</option>
+          <option value="fitness">Gym, studio, trainer or coach</option>
+          <option value="beauty">Salon, barber, spa or med-spa</option>
+          <option value="clinic">Clinic, dental, veterinary or medical practice</option>
+          <option value="retail">Shop or retail</option>
+          <option value="pro">Professional services — legal, accounting, real estate, consulting</option>
+          <option value="other">Something else</option>
+        </select>
+      </div>
+      <div class="field"><label for="in-phone">Phone number <span class="req">*</span></label><input id="in-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 555-5555" oninput="formatPhone(this)" /></div>
+      <div class="field"><label for="in-city">City or service area <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input id="in-city" type="text" placeholder="Dover, DE" /></div>
+      <div class="field primary"><label for="in-desc">What do you do — in your own words <span class="req">*</span></label><textarea id="in-desc" rows="3" oninput="autoGrow(this);this.classList.remove('errfield')" placeholder="e.g. Family plumbing company — emergency repairs, water heaters, drain cleaning, remodels. Licensed &amp; insured, 20 years in business…"></textarea><div class="fieldtip">List your main services and what makes you different — this is what the app is actually built from. Keep it simple; you can change everything afterwards, free.</div></div>
+      <div class="errmsg" id="b-err"></div>
+      <div class="center">
+        <p style="font-size:15px;font-weight:800;margin-bottom:10px">Design your app for free, right now.</p>
+        <button class="cta" id="b-go" onclick="build()">Design it free <svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <p class="reassure-big">Nothing is charged and nobody calls you. You're just looking at your app.</p>
+      </div>
+      <p class="ttl" style="margin-top:14px">Free designs are saved for 48 hours so you can come back to yours.</p>
+    </div>
+
+    <!-- step 2: designing -->
+    <div id="b-loading">
+      <div class="bprog"><div class="bprogfill" id="b-progfill"></div></div>
+      <div id="b-progpct">Designing your app — 0%</div>
+      <div class="bsteps" id="b-steps"></div>
+      <div id="b-loadsub">This usually takes under a minute. Keep this tab open.</div>
+      <div class="center" style="margin-top:14px"><button type="button" class="retrylink" onclick="cancelBuild()">Cancel — let me change something first</button></div>
+    </div>
+
+    <!-- step 3: the app + claim -->
+    <div id="b-result">
+      <h2 id="r-title">Your app is ready. 👇</h2>
+      <p class="ps" id="r-sub">Tap through the screens. Change the colour. This is your app.</p>
+
+      <div class="appview">
+        <div class="phonewrap" style="flex:0 0 auto">
+          <div class="phone-glow" aria-hidden="true"></div>
+          <div class="phone" id="result-phone"></div>
+        </div>
+        <div class="vcol">
+          <div class="screenpick" id="screenpick"></div>
+          <div class="swatchbar">
+            <div class="sh">Your app's colour</div>
+            <div class="swatches" id="swatches"></div>
+          </div>
+          <p class="madefor" id="madefor"></p>
+          <p class="ttl">Everything here is changeable — colours, wording, which screens you get. Nothing is final until you say so.</p>
+        </div>
+      </div>
+
+      <p class="reassure-big">Like it? The next step is getting it into the App Store and Google Play — that's the <b>one-time $499</b>, and we do all of it with you.</p>
+
+      <div class="offer">
+        <h3>Ready to put it in the stores?</h3>
+        <div class="osub">One payment. Both stores. Accounts in your name, so the app is permanently yours.</div>
+
+        <div class="planpick" id="planpick">
+          <button class="pp on" id="pp-launch" onclick="pickPlan('launch')">
+            <div class="ppr"></div>
+            <div class="ppmain"><b>Launch — <span class="amt">$499</span> one time</b><span>Both store accounts opened with you · app built · listing, icon &amp; screenshots · submitted to Apple and Google · we handle the reviewers</span></div>
+          </button>
+          <button class="pp" id="pp-care" onclick="pickPlan('care')">
+            <div class="ppr"></div>
+            <div class="ppmain"><b>Launch + Care — <span class="amt">$499</span> + $97/mo</b><span>Everything in Launch, and we keep it alive: store rule changes, OS updates, resubmissions, content edits, monitoring. Cancel anytime.</span></div>
+          </button>
+          <button class="pp" id="pp-custom" onclick="pickPlan('custom')">
+            <div class="ppr"></div>
+            <div class="ppmain"><b>Custom — from $2,500</b><span>Accounts, loyalty, inventory, or connecting to the software you already run. We scope it on a call.</span></div>
+          </button>
+        </div>
+
+        <div class="addons" id="addonbox">
+          <h3>Anything else you'd want in it?</h3>
+          <div class="customfeat" id="customfeat"></div>
+        </div>
+
+        <div class="field"><label for="in-notes" id="notes-label">Anything you'd like changed? (optional)</label><textarea id="in-notes" rows="2" oninput="autoGrow(this)" placeholder="Use our green logo colours, add a gallery, put ordering on the home screen…"></textarea></div>
+        <div class="field"><label for="in-cname">Your name</label><input id="in-cname" type="text" autocomplete="name" placeholder="Full name" /></div>
+        <div class="field"><label for="in-ccompany">Business name</label><input id="in-ccompany" type="text" autocomplete="organization" placeholder="Company" /></div>
+        <div class="field"><label for="in-cemail">Email</label><input id="in-cemail" type="email" autocomplete="email" placeholder="you@email.com" /></div>
+        <div class="field"><label for="in-cphone">Phone</label><input id="in-cphone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 555-5555" oninput="formatPhone(this)" /></div>
+        <div class="errmsg" id="o-err"></div>
+        <div class="center"><button class="cta" id="o-go" onclick="openConfirm()">Launch my app — $499 <svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+        <p class="ttl">One-time $499 — no monthly required. Apple ($99/year) and Google ($25 once) charge their own developer fees, paid by you directly to them because the accounts are in your name. Typically live in 1–2 weeks, most of that Apple's and Google's review time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="foot wrap">
+  <div class="footphone"><a href="tel:+18557700200">Call us: (855) 770-0200</a></div>
+  <div class="footbrand">OneApp, a <a href="https://www.oneworldlabs.ai/">One World Labs</a> company &middot; <a href="https://www.oneworldlabs.ai/onevoice/">OneVoice</a> &middot; <a href="https://www.oneworldlabs.ai/onepage/">OnePage</a> &middot; <a href="https://www.oneworldlabs.ai/onescore-preview/">OneScore</a></div>
+  <div class="footaddr">1111b S Governors Ave, Dover, DE 19904</div>
+  <div class="footcopy">&copy; 2026 One World Labs, Inc.</div>
+</div>
+
+<!-- ======================= BOOKING MODAL ======================= -->
+<div class="mscrim" id="mscrim" onclick="if(event.target===this)closeBooking()">
+  <div class="mcard mcal">
+    <div class="mcalhead">
+      <b>Book your call</b>
+      <button class="mclose" onclick="closeBooking()" aria-label="Close">✕</button>
+    </div>
+    <iframe id="cal-frame" title="Book your OneApp call" src="about:blank"></iframe>
+    <div style="text-align:center;padding:10px 0 12px"><a class="openlink" id="cal-open" href="#" target="_blank" rel="noopener">Trouble loading? Open the calendar in a new tab ↗</a></div>
+  </div>
+</div>
+
+<!-- ======================= ORDER CONFIRM MODAL ======================= -->
+<div class="mscrim" id="confirmscrim" onclick="if(event.target===this)closeConfirm()">
+  <div class="mcard">
+    <button class="mclose" onclick="closeConfirm()" aria-label="Close">✕</button>
+    <h3>Confirm your launch</h3>
+    <div class="ms" style="margin-top:2px">Review before you continue — nothing charges on this screen.</div>
+    <div id="confirm-body" style="margin-top:16px;font-size:13.5px;"></div>
+    <div class="center" style="margin-top:18px"><button class="cta" id="confirm-go" onclick="proceedToPayment()">Confirm &amp; continue <svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+    <p class="ttl" style="margin-top:10px">We'll email your design link either way, so you never lose it.</p>
+  </div>
+</div>
+
+<!-- ======================= CUSTOM-INTEREST MODAL ======================= -->
+<div class="mscrim" id="pcscrim" onclick="if(event.target===this)closeCustomModal()">
+  <div class="mcard">
+    <button class="mclose" onclick="closeCustomModal()" aria-label="Close">✕</button>
+    <h3>Let's build something custom</h3>
+    <div class="ms" style="margin-top:2px">Tick what you're picturing and we'll scope it on a call — custom builds start at $2,500, quoted live.</div>
+    <div class="customfeat" id="pc-customfeat" style="margin-top:14px"></div>
+    <div class="field"><label for="pc-name">Your name</label><input id="pc-name" type="text" autocomplete="name" placeholder="Full name" /></div>
+    <div class="field"><label for="pc-email">Email</label><input id="pc-email" type="email" autocomplete="email" placeholder="you@email.com" /></div>
+    <div class="field"><label for="pc-phone">Phone</label><input id="pc-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 555-5555" oninput="formatPhone(this)" /></div>
+    <div class="errmsg" id="pc-err"></div>
+    <div class="center"><button class="cta" id="pc-go" onclick="submitCustomInterest()">Continue — pick a time <svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+  </div>
+</div>
+<script>
+/* ============================================================
+   OneApp — funnel + live app designer
+   The design preview is rendered entirely in the browser: no
+   backend call is needed to show a customer their app, so the
+   page cannot be broken by a service being down.
+   Lead capture uses the existing /api/oneapp-request endpoint.
+   ============================================================ */
+var API = 'https://onevoice-checkout.vercel.app';
+var BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/rghlggjZP931B1mISGls';
+
+/* Prices live here ONCE. Copy elsewhere is prose; these drive every button,
+   summary and payload. Never introduce a second source for a number. */
+var PRICE_LAUNCH = 499;
+var PRICE_CARE   = 97;
+var PRICE_CUSTOM = 2500;
+
+/* Stripe does not yet carry a OneApp launch price. Until it does, the claim
+   button captures the lead and books the kickoff call rather than posting a
+   tier the server would reject (lessons E3). Flip to true only after the
+   checkout endpoint knows 'launch' and 'care'. */
+var LIVE_CHECKOUT = false;
+
+var state = { plan:'launch', extras:[], profile:null, screen:'home', accent:0, email:'' };
+
+/* ---------------- helpers ---------------- */
+function $(id){ return document.getElementById(id); }
+function esc(s){ var d=document.createElement('div'); d.textContent=String(s==null?'':s); return d.innerHTML; }
+function validEmail(e){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e); }
+function err(id,msg){ var e=$(id); if(!e) return; e.textContent=msg; e.style.display='block'; }
+function autoGrow(el){ el.style.height='auto'; el.style.height=(el.scrollHeight+2)+'px'; }
+function formatPhone(el){
+  var d = el.value.replace(/\D/g,'').slice(0,10), out = d;
+  if (d.length > 6) out = '('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
+  else if (d.length > 3) out = '('+d.slice(0,3)+') '+d.slice(3);
+  else if (d.length > 0) out = '('+d;
+  el.value = out; el.classList.remove('errfield');
+}
+var CHECK = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+var ARROW = '<svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+/* ---------------- theme ---------------- */
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  try { localStorage.setItem('oapp-theme', t); } catch(e){}
+  var dl=$('dl-theme'); if(dl) dl.textContent = (t==='dark') ? 'Switch to light mode' : 'Switch to dark mode';
+  var m=document.querySelector('meta[name=theme-color]'); if(m) m.setAttribute('content','#0B0F1A');
+}
+function toggleTheme(){ applyTheme(document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark'); }
+(function(){ var t='light'; try{ t=localStorage.getItem('oapp-theme')||'light'; }catch(e){} applyTheme(t); })();
+
+/* ---------------- drawer + modals ---------------- */
+function openDrawer(on){
+  $('drawer').classList.toggle('open', on);
+  $('scrim').classList.toggle('open', on);
+  $('drawer').setAttribute('aria-hidden', on?'false':'true');
+}
+function bookCall(src, prefill){
+  var f=$('cal-frame'), url = BOOKING_URL;
+  if (prefill){
+    var qs=[];
+    if (prefill.first_name) qs.push('first_name='+encodeURIComponent(prefill.first_name));
+    if (prefill.last_name)  qs.push('last_name='+encodeURIComponent(prefill.last_name));
+    if (prefill.email)      qs.push('email='+encodeURIComponent(prefill.email));
+    if (prefill.phone)      qs.push('phone='+encodeURIComponent(prefill.phone));
+    if (qs.length) url += '?' + qs.join('&');
+  }
+  if (prefill || !/leadconnector/.test(f.src||'')) f.src = url;
+  $('cal-open').href = url;
+  $('mscrim').classList.add('open');
+}
+function closeBooking(){ $('mscrim').classList.remove('open'); }
+function closeConfirm(){ $('confirmscrim').classList.remove('open'); }
+function closeCustomModal(){ $('pcscrim').classList.remove('open'); }
+
+/* ---------------- the app design system ----------------
+   Six screens, five tabs, middle tab raised — the One World app
+   framework, dressed for the customer's business.                */
+
+var ACCENTS = [
+  { n:'Ocean',   a:'#1E5A8A', d:'#123C5E' },
+  { n:'Forest',  a:'#1F6B45', d:'#11492E' },
+  { n:'Sunset',  a:'#C25A21', d:'#8B3D12' },
+  { n:'Plum',    a:'#6B3B8F', d:'#472561' },
+  { n:'Slate',   a:'#3A4654', d:'#222C36' },
+  { n:'Crimson', a:'#A82638', d:'#741823' }
+];
+
+var IC = {
+  home:'<path d="M3 10.5L12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/>',
+  list:'<path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1.2"/><circle cx="3.5" cy="12" r="1.2"/><circle cx="3.5" cy="18" r="1.2"/>',
+  cal:'<rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M16 3v4M8 3v4M3 11h18"/>',
+  bag:'<path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 016 0v2"/>',
+  tag:'<path d="M20.6 12.6L12 21.2 3 12.2V4h8.2z"/><circle cx="8" cy="8" r="1.4"/>',
+  chat:'<path d="M21 12a8 8 0 01-8 8H4l2-3a8 8 0 1115-5z"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/>',
+  phone:'<path d="M5 3h4l2 5-2.5 1.5a12 12 0 006 6L16 13l5 2v4a2 2 0 01-2.2 2A17 17 0 013 5.2 2 2 0 015 3z"/>',
+  star:'<path d="M12 3l2.6 6.1L21 10l-5 4 1.4 6.6L12 17.4 6.6 20.6 8 14l-5-4 6.4-.9z"/>'
+};
+function ico(k,sz){ return '<svg width="'+(sz||17)+'" height="'+(sz||17)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+IC[k]+'</svg>'; }
+
+var CATS = {
+  trade: {
+    label:'home services',
+    tabs:['Home','Services','Book','Offers','Account'],
+    icons:['home','list','cal','tag','user'],
+    eb:'Emergency service', h:'Need it fixed today?', p:'Tap once and we\'re on the way — no phone tree, no waiting on hold.', hb:'Book a visit',
+    listT:'What we do', items:[
+      ['Emergency repair','24/7 · usually on site within 2 hours','From $89'],
+      ['Water heaters','Repair, replace, same-day install','Free quote'],
+      ['Drain &amp; sewer','Camera inspection included','From $129'],
+      ['Remodels','Kitchens, baths, whole-home','Free quote']],
+    moneyT:'Book a visit', moneyRows:[['Pick a service','Emergency, repair, quote or install'],['Choose a time','Today, tomorrow, or a day that suits'],['Confirm','We text you when we\'re 30 minutes out']],
+    moneyBtn:'Confirm booking',
+    offersT:'Members only', offers:[['$40 off your first call','New app customers · auto-applied','Saved'],['Free drain camera','With any drain service this month','Claim'],['Priority scheduling','App bookings jump the queue','Active']],
+    stats:[['24/7','Emergency line'],['4.9★','812 reviews']],
+    acct:[['Your visits','3 past · 1 upcoming'],['Saved addresses','Home · Rental'],['Payment methods','Visa •• 4242'],['Call us','(555) 555-5555']]
+  },
+  food: {
+    label:'restaurant',
+    tabs:['Home','Menu','Order','Rewards','Account'],
+    icons:['home','list','bag','star','user'],
+    eb:'Order ahead', h:'Skip the line.', p:'Order from your table, your car, or your couch — it\'s ready when you get here.', hb:'Start an order',
+    listT:'Today\'s menu', items:[
+      ['Signature burger','House blend, aged cheddar, secret sauce','$14'],
+      ['Wood-fired pizza','Margherita, pepperoni, or build your own','$16'],
+      ['Fresh catch','Whatever came in this morning','$24'],
+      ['Weekend brunch','Saturday &amp; Sunday until 2pm','$12+']],
+    moneyT:'Your order', moneyRows:[['Signature burger ×2','No onions · extra sauce'],['Wood-fired pizza','Half pepperoni'],['Pickup at 6:45pm','Ready when you arrive']],
+    moneyBtn:'Pay $44.00',
+    offersT:'Your rewards', offers:[['320 points','80 more for a free entrée','Earning'],['Free dessert','Birthday reward · expires Friday','Claim'],['Double points Tuesdays','Every order, all day','Active']],
+    stats:[['320','Reward points'],['4.8★','1,204 reviews']],
+    acct:[['Your orders','18 orders · last Tuesday'],['Favourites','Signature burger, house salad'],['Payment methods','Apple Pay'],['Call us','(555) 555-5555']]
+  },
+  fitness: {
+    label:'gym or studio',
+    tabs:['Home','Classes','Book','Rewards','Account'],
+    icons:['home','list','cal','star','user'],
+    eb:'This week', h:'Your next class is Thursday.', p:'Book, cancel, and check in from your phone — your spot is held the second you tap.', hb:'Book a class',
+    listT:'This week\'s schedule', items:[
+      ['Strength 101','Mon &amp; Wed · 6:00am · Coach Dana','4 spots'],
+      ['Spin 45','Tue · 5:30pm · Coach Marcus','2 spots'],
+      ['Yoga flow','Thu · 7:00pm · Coach Alia','Open'],
+      ['Saturday bootcamp','Sat · 9:00am · The whole team','6 spots']],
+    moneyT:'Book a class', moneyRows:[['Pick a class','Strength, spin, yoga or bootcamp'],['Choose your time','Live spot counts, updated instantly'],['Check in','Tap on arrival — no front-desk queue']],
+    moneyBtn:'Reserve my spot',
+    offersT:'Member perks', offers:[['Bring a friend free','Any class this month','Claim'],['12-week challenge','Starts Monday · members only','Join'],['Guest passes','2 remaining this quarter','Active']],
+    stats:[['14','Classes this month'],['4.9★','488 reviews']],
+    acct:[['Your membership','Unlimited · renews the 1st'],['Class history','14 this month'],['Payment methods','Visa •• 4242'],['Call us','(555) 555-5555']]
+  },
+  beauty: {
+    label:'salon or spa',
+    tabs:['Home','Services','Book','Offers','Account'],
+    icons:['home','list','cal','tag','user'],
+    eb:'Rebook in one tap', h:'Same chair, same time?', p:'Your stylist, your usual slot, booked before you put your phone down.', hb:'Book my usual',
+    listT:'Our services', items:[
+      ['Cut &amp; style','45 minutes · with any stylist','From $55'],
+      ['Colour &amp; balayage','2–3 hours · consultation included','From $180'],
+      ['Facials','Signature, hydrating or clarifying','From $95'],
+      ['Bridal &amp; events','Trial run included','Quote']],
+    moneyT:'Book an appointment', moneyRows:[['Choose a service','Cut, colour, facial or package'],['Pick your stylist','Or first available'],['Confirm','Reminder text the day before']],
+    moneyBtn:'Confirm appointment',
+    offersT:'Just for members', offers:[['20% off your next colour','App bookings only','Claim'],['Free deep conditioning','With any cut this month','Claim'],['Refer a friend','$25 each, both of you','Share']],
+    stats:[['6','Visits this year'],['4.9★','623 reviews']],
+    acct:[['Your appointments','Next: Thursday 2:00pm'],['Your stylist','Jordan · since 2023'],['Payment methods','Apple Pay'],['Call us','(555) 555-5555']]
+  },
+  clinic: {
+    label:'clinic or practice',
+    tabs:['Home','Services','Book','Records','Account'],
+    icons:['home','list','cal','list','user'],
+    eb:'Patient portal', h:'Book, check in, and see results.', p:'Everything you\'d call the front desk for — without calling the front desk.', hb:'Book an appointment',
+    listT:'What we treat', items:[
+      ['New patient visit','Full exam · 45 minutes','Most insurance'],
+      ['Routine check-up','Every 6 months · reminders on','Covered'],
+      ['Urgent same-day','Call before 10am for a slot','Same day'],
+      ['Specialist referral','We handle the paperwork','Included']],
+    moneyT:'Book an appointment', moneyRows:[['Reason for visit','Check-up, urgent, follow-up'],['Pick a time','Real availability, updated live'],['Check in from the car','Skip the waiting room']],
+    moneyBtn:'Confirm appointment',
+    offersT:'Your records', offers:[['Visit summaries','Every appointment, downloadable','View'],['Prescriptions','Request a refill in one tap','Request'],['Test results','Pushed the moment they land','2 new']],
+    stats:[['2','Upcoming visits'],['4.9★','341 reviews']],
+    acct:[['Your family','3 people on this account'],['Insurance','On file · verified'],['Forms','All complete'],['Call us','(555) 555-5555']]
+  },
+  retail: {
+    label:'shop',
+    tabs:['Home','Shop','Cart','Deals','Account'],
+    icons:['home','list','bag','tag','user'],
+    eb:'New this week', h:'Shop the whole store.', p:'Browse, buy, and pick up in store — or have it sent. Members see prices nobody else does.', hb:'Start shopping',
+    listT:'Shop by category', items:[
+      ['New arrivals','24 items added this week','Shop'],
+      ['Best sellers','What everyone\'s buying','Shop'],
+      ['Clearance','Up to 60% off','Shop'],
+      ['Gift cards','Any amount, sent instantly','Buy']],
+    moneyT:'Your cart', moneyRows:[['2 items','Ready to ship today'],['Pickup in store','Free · ready in 2 hours'],['Member pricing applied','You saved $18']],
+    moneyBtn:'Checkout $126.00',
+    offersT:'Member deals', offers:[['15% off everything','This weekend only','Claim'],['Free shipping','On app orders over $50','Active'],['Early access','Sales drop 24h early for you','Active']],
+    stats:[['$18','Saved this month'],['4.8★','956 reviews']],
+    acct:[['Your orders','7 orders · 1 in transit'],['Wishlist','12 saved items'],['Payment methods','Visa •• 4242'],['Call us','(555) 555-5555']]
+  },
+  pro: {
+    label:'professional practice',
+    tabs:['Home','Services','Contact','Updates','Account'],
+    icons:['home','list','phone','chat','user'],
+    eb:'Your account', h:'Everything in one place.', p:'Documents, updates, and a direct line to your team — without a single email chain.', hb:'Message my team',
+    listT:'How we help', items:[
+      ['Free consultation','30 minutes · no obligation','Book'],
+      ['Ongoing advisory','Monthly or as-needed','Retainer'],
+      ['Document review','Turnaround in 48 hours','Quote'],
+      ['Full representation','End to end, we handle it','Quote']],
+    moneyT:'Get in touch', moneyRows:[['Message your team','Answered within one business day'],['Book a call','Real calendar, real availability'],['Send documents','Encrypted upload, no email needed']],
+    moneyBtn:'Send message',
+    offersT:'Updates', offers:[['Your matter','Last update 2 days ago','View'],['Documents','3 ready for signature','Sign'],['Invoices','All settled','View']],
+    stats:[['48h','Response promise'],['5.0★','214 reviews']],
+    acct:[['Your matters','1 active'],['Documents','12 on file'],['Billing','Paid in full'],['Call us','(555) 555-5555']]
+  }
+};
+CATS.other = JSON.parse(JSON.stringify(CATS.pro));
+CATS.other.label = 'business';
+CATS.other.tabs = ['Home','Services','Contact','Offers','Account'];
+CATS.other.h = 'Your business, one tap away.';
+CATS.other.p = 'Everything a customer needs from you, on the screen they look at a hundred times a day.';
+
+/* ---------------- the renderer ---------------- */
+function initials(name){
+  var parts = String(name||'A').trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return 'A';
+  if (parts.length === 1) return parts[0].slice(0,1).toUpperCase();
+  return (parts[0].slice(0,1) + parts[1].slice(0,1)).toUpperCase();
+}
+function shortName(name){ var n=String(name||'Your Business').trim(); return n.length>22 ? n.slice(0,21)+'…' : n; }
+function servicesFrom(desc, cat){
+  /* Pull the customer's own words out of the description where we can, so the
+     screens read like their business and not a template. Falls back to the
+     category defaults for anything we can't find. */
+  var raw = String(desc||'').replace(/\s+/g,' ').split(/[,.;·—–\n]|\band\b|\/|\|/i)
+    .map(function(s){ return s.trim().replace(/^(we|our|i|they)\s+(do|offer|provide|are|specialise|specialize)\s+(in\s+)?/i,'').trim(); })
+    .filter(function(s){ return s.length>2 && s.length<34 && /[a-z]/i.test(s); });
+  var seen={}, out=[];
+  raw.forEach(function(s){
+    var k=s.toLowerCase(); if(seen[k]) return; seen[k]=1;
+    out.push(s.charAt(0).toUpperCase()+s.slice(1));
+  });
+  return out.slice(0,4);
+}
+function buildProfile(f){
+  var cat = CATS[f.cat] ? f.cat : 'other';
+  var c = CATS[cat];
+  var mine = servicesFrom(f.desc, cat);
+  var items = c.items.map(function(row,i){
+    return mine[i] ? [esc(mine[i]), row[1], row[2]] : row.slice();
+  });
+  return {
+    name:f.name, cat:cat, city:f.city||'', phone:f.phone||'', desc:f.desc||'',
+    c:c, items:items, initials:initials(f.name)
+  };
+}
+function accent(){ return ACCENTS[state.accent] || ACCENTS[0]; }
+function grad(a){ return 'linear-gradient(160deg,'+a.a+' 0%,'+a.d+' 100%)'; }
+
+function screenBody(p, key){
+  var a = accent(), c = p.c, h = '';
+  if (key === 'home'){
+    h += '<div class="sc-hero" style="background:'+grad(a)+'">'
+       + '<div class="eb">'+esc(c.eb)+'</div><h4>'+esc(c.h)+'</h4><p>'+esc(c.p)+'</p>'
+       + '<span class="hb" style="color:'+a.d+'">'+esc(c.hb)+' →</span></div>';
+    h += '<div class="sc-tiles">'
+       + '<div class="sc-tile"><b style="color:'+a.a+'">'+c.stats[0][0]+'</b><span>'+esc(c.stats[0][1])+'</span></div>'
+       + '<div class="sc-tile"><b style="color:'+a.a+'">'+c.stats[1][0]+'</b><span>'+esc(c.stats[1][1])+'</span></div></div>';
+    p.items.slice(0,2).forEach(function(it,i){
+      h += row(a, i, it[0], it[1], it[2]);
+    });
+  } else if (key === 'list'){
+    h += secTitle(c.listT);
+    p.items.forEach(function(it,i){ h += row(a, i, it[0], it[1], it[2]); });
+  } else if (key === 'money'){
+    h += secTitle(c.moneyT);
+    c.moneyRows.forEach(function(r,i){ h += row(a, i, r[0], r[1], ''); });
+    h += '<div class="sc-cta">'+esc(c.moneyBtn)+'</div>';
+  } else if (key === 'offers'){
+    h += secTitle(c.offersT);
+    c.offers.forEach(function(o,i){ h += row(a, i, o[0], o[1], o[2]); });
+  } else if (key === 'msg'){
+    h += secTitle('Messages');
+    h += '<div class="sc-hero" style="background:'+grad(a)+'">'
+       + '<div class="eb">Assistant</div><h4>Ask us anything.</h4>'
+       + '<p>"Are you open Sunday?" · "How much for a quote?" · Answered instantly, day or night.</p>'
+       + '<span class="hb" style="color:'+a.d+'">Start a message →</span></div>';
+    h += row(a, 0, esc(shortName(p.name)), 'Thanks — see you Thursday at 2pm 👍', '2m');
+    h += row(a, 1, 'Appointment reminder', 'Tomorrow, 9:00am. Reply to reschedule.', '1d');
+  } else if (key === 'account'){
+    h += secTitle('Account');
+    c.acct.forEach(function(r,i){
+      var sub = (r[0]==='Call us' && p.phone) ? esc(p.phone) : r[1];
+      h += row(a, i, r[0], sub, '');
+    });
+  }
+  return h;
+}
+function secTitle(t){ return '<div style="font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.55;padding:2px 2px 0">'+esc(t)+'</div>'; }
+function row(a, i, t, s, r){
+  var icons = ['star','list','cal','tag','chat','user'];
+  return '<div class="sc-row"><div class="ri" style="background:'+grad(a)+'">'+ico(icons[i % icons.length],14)+'</div>'
+       + '<div class="rt"><b>'+t+'</b><span>'+s+'</span></div>'
+       + (r ? '<div class="rr" style="color:'+a.a+'">'+esc(r)+'</div>' : '') + '</div>';
+}
+
+var SCREEN_KEYS = ['home','list','money','offers','msg','account'];
+function screenLabel(p, key){
+  var t = p.c.tabs;
+  return {home:t[0], list:t[1], money:t[2], offers:t[3], msg:'Messages', account:t[4]}[key];
+}
+function renderPhone(el, p, key, live){
+  if (!el || !p) return;
+  var a = accent(), c = p.c;
+  var tabKeys = ['home','list','money','offers','account'];
+  var tag = live ? 'button' : 'span';
+  var tabs = tabKeys.map(function(tk, i){
+    var active = (key === tk);
+    var act = live ? ' onclick="setScreen(\''+tk+'\')" type="button"' : ' aria-hidden="true"';
+    if (i === 2){
+      return '<'+tag+' class="sc-tab money'+(active?' on':'')+'"'+act+(live?' aria-label="'+esc(c.tabs[2])+'"':'')+'>'
+           + '<span class="mb" style="background:'+grad(a)+'">'+ico(c.icons[2],20)+'</span><span>'+esc(c.tabs[2])+'</span></'+tag+'>';
+    }
+    return '<'+tag+' class="sc-tab'+(active?' on':'')+'"'+act+' style="'+(active?'color:'+a.a:'')+'">'
+         + ico(c.icons[i],17) + '<span>'+esc(c.tabs[i])+'</span></'+tag+'>';
+  }).join('');
+
+  el.innerHTML =
+    '<div class="notch" aria-hidden="true"></div>'
+  + '<div class="screen">'
+  +   '<div class="sc-status"><span>9:41</span><span>▮▮▮ ▮</span></div>'
+  +   '<div class="sc-head"><div class="sc-name"><span class="mk" style="background:'+grad(a)+'">'+esc(p.initials)+'</span><span class="nm">'+esc(shortName(p.name))+'</span></div>'
+  +     '<div class="sc-hicons">'+ico('star',15)+ico('chat',15)+'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></div></div>'
+  +   '<div class="sc-sub"><span>'+esc(p.city || screenLabel(p,key))+'</span><span class="sc-vaia" style="background:'+grad(a)+'">ASSISTANT</span></div>'
+  +   '<div class="sc-body">'+screenBody(p, key)+'</div>'
+  +   '<div class="sc-fade" aria-hidden="true"></div>'
+  +   '<div class="sc-tabs">'+tabs+'</div>'
+  + '</div>';
+}
+function setScreen(k){
+  state.screen = k;
+  renderPhone($('result-phone'), state.profile, k, true);
+  var pk = $('screenpick');
+  if (pk) Array.prototype.forEach.call(pk.children, function(b){ b.classList.toggle('on', b.dataset.k === k); });
+}
+function renderScreenPicker(){
+  var pk = $('screenpick'); if (!pk || !state.profile) return;
+  pk.innerHTML = '';
+  SCREEN_KEYS.forEach(function(k){
+    var b = document.createElement('button');
+    b.type='button'; b.className='spb'+(k===state.screen?' on':''); b.dataset.k = k;
+    b.textContent = screenLabel(state.profile, k);
+    b.onclick = function(){ setScreen(k); };
+    pk.appendChild(b);
+  });
+}
+function renderSwatches(){
+  var box = $('swatches'); if (!box) return;
+  box.innerHTML = '';
+  ACCENTS.forEach(function(a, i){
+    var b = document.createElement('button');
+    b.type='button'; b.className='sw'+(i===state.accent?' on':'');
+    b.style.background = grad(a);
+    b.setAttribute('aria-label', a.n);
+    b.title = a.n;
+    b.onclick = function(){
+      state.accent = i;
+      renderSwatches();
+      renderPhone($('result-phone'), state.profile, state.screen, true);
+      saveDesign();
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ---------------- hero demo phone ---------------- */
+(function(){
+  var demo = buildProfile({ name:'Riverside Plumbing', cat:'trade', city:'Dover, DE', phone:'(555) 555-5555',
+    desc:'Emergency repairs, water heaters, drain cleaning, bathroom remodels' });
+  var el = $('hero-phone'); if (!el) return;
+  var keys = ['home','list','money','offers'], i = 0;
+  var savedAccent = state.accent;
+  state.accent = 0;
+  renderPhone(el, demo, keys[0]);
+  state.accent = savedAccent;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(function(){
+    i = (i+1) % keys.length;
+    var sa = state.accent; state.accent = 0;
+    renderPhone(el, demo, keys[i]);
+    state.accent = sa;
+  }, 3600);
+})();
+
+/* ---------------- step 2: the design run ---------------- */
+var DESIGN_MSGS = ['Reading your business…','Choosing your app\'s five tabs…','Laying out your home screen…','Writing your services screen…','Building booking &amp; ordering…','Setting up offers and rewards…','Designing your icon…','Polishing every screen…'];
+var buildTimer=null, buildIdx=-1, buildStart=0, DESIGN_MS = 11000, finishFn=null;
+
+function renderSteps(){
+  var box=$('b-steps'); if(!box) return;
+  var html='';
+  DESIGN_MSGS.forEach(function(m,i){
+    var cls='bstep'+(i<=buildIdx?' show':'')+(i<buildIdx?' done':(i===buildIdx?' active':''));
+    html += '<div class="'+cls+'"><div class="bdot">'+(i<buildIdx?CHECK:'')+'</div><div>'+m+'</div></div>';
+  });
+  box.innerHTML = html;
+}
+function tickBuild(){
+  var elapsed = Date.now() - buildStart;
+  var frac = Math.min(1, elapsed / DESIGN_MS);
+  var idx = Math.min(DESIGN_MSGS.length-1, Math.floor(frac * DESIGN_MSGS.length));
+  if (idx !== buildIdx){ buildIdx = idx; renderSteps(); }
+  var pct = Math.min(99, Math.round(frac*99));
+  $('b-progfill').style.width = pct+'%';
+  $('b-progpct').textContent = 'Designing your app — '+pct+'%';
+  if (frac >= 1){ buildStepsStop(); if (finishFn) { var f=finishFn; finishFn=null; f(); } }
+}
+function buildStepsStart(done){
+  buildIdx = -1; buildStart = Date.now(); finishFn = done;
+  if (buildTimer) clearInterval(buildTimer);
+  tickBuild();
+  buildTimer = setInterval(tickBuild, 260);
+}
+function buildStepsStop(){ if (buildTimer){ clearInterval(buildTimer); buildTimer=null; } }
+function showLoading(on){
+  $('b-ask').style.display = on?'none':'block';
+  $('b-loading').style.display = on?'block':'none';
+  if (!on){ buildStepsStop(); finishFn=null; }
+}
+function cancelBuild(){
+  showLoading(false);
+  var box=$('b-err');
+  box.textContent = "Stopped — nothing you typed was lost. Change whatever you like, then design it again.";
+  box.style.display='block';
+}
+
+/* ---------------- step 1 ---------------- */
+function build(){
+  $('b-err').style.display='none';
+  ['in-email','in-name','in-cat','in-phone','in-desc'].forEach(function(id){ var e=$(id); if(e) e.classList.remove('errfield'); });
+  var email = $('in-email').value.trim();
+  if (!validEmail(email)) { $('in-email').classList.add('errfield'); return err('b-err','Enter a valid email so we can save your design.'); }
+  var name = $('in-name').value.trim();
+  if (!name) { $('in-name').classList.add('errfield'); return err('b-err','Add your business name — that\'s what goes on the app.'); }
+  var cat = $('in-cat').value;
+  if (!cat) { $('in-cat').classList.add('errfield'); return err('b-err','Pick the kind of business you run — it decides which screens your app gets.'); }
+  var phone = $('in-phone').value.trim();
+  if (!phone) { $('in-phone').classList.add('errfield'); return err('b-err','Add a phone number so customers can reach you from the app.'); }
+  var desc = $('in-desc').value.trim();
+  if (!desc) { $('in-desc').classList.add('errfield'); return err('b-err','Tell us what you do — that\'s what the app is built from.'); }
+
+  state.email = email;
+  state.profile = buildProfile({ name:name, cat:cat, city:$('in-city').value.trim(), phone:phone, desc:desc });
+  state.screen = 'home';
+  saveDesign();
+
+  /* capture the lead the moment a design is made — best effort, never blocks the UI */
+  try {
+    fetch(API+'/api/oneapp-request', { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ name:name, email:email, phone:phone, company:name,
+        features:['OneApp — free app design'],
+        notes:'OneApp designer · '+cat+' · '+($('in-city').value.trim()||'no city')+' · '+desc }) }).catch(function(){});
+  } catch(e){}
+
+  showLoading(true);
+  buildStepsStart(function(){ setTimeout(showResult, 420); });
+}
+
+function showResult(){
+  showLoading(false);
+  $('b-ask').style.display='none';
+  $('b-result').style.display='block';
+  renderPhone($('result-phone'), state.profile, state.screen, true);
+  renderScreenPicker();
+  renderSwatches();
+  var mf = $('madefor');
+  if (mf) mf.innerHTML = 'Built for <b>'+esc(state.profile.name)+'</b>'+(state.profile.city?' in <b>'+esc(state.profile.city)+'</b>':'')+' — a '+esc(state.profile.c.label)+' app with '+esc(state.profile.c.tabs[2].toLowerCase())+', offers and messaging built in.';
+  if (state.email) $('in-cemail').value = state.email;
+  if (state.profile.name) $('in-ccompany').value = state.profile.name;
+  if (state.profile.phone) $('in-cphone').value = state.profile.phone;
+  pickPlan('launch');
+  var b=$('builder'); if(b) b.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ---------------- extras + plans ---------------- */
+var EXTRAS = [
+  { k:'loyalty',  t:'Loyalty / points' },
+  { k:'pay',      t:'Take payments in-app' },
+  { k:'push',     t:'Push notifications' },
+  { k:'accounts', t:'Customer logins' },
+  { k:'gallery',  t:'Photo gallery' },
+  { k:'chat',     t:'AI assistant' },
+  { k:'reviews',  t:'Review collection' },
+  { k:'staff',    t:'Staff / admin app' }
+];
+function renderExtras(boxId, sel, onToggle){
+  var box = $(boxId); if (!box) return;
+  box.innerHTML = '';
+  EXTRAS.forEach(function(x){
+    var b=document.createElement('button');
+    b.type='button'; b.className='aopt';
+    b.innerHTML='<span class="abox">'+CHECK+'</span><span>'+esc(x.t)+'</span>';
+    b.onclick=function(){ onToggle(x.k); b.classList.toggle('on', sel().indexOf(x.k)>=0); };
+    box.appendChild(b);
+  });
+}
+renderExtras('customfeat', function(){ return state.extras; }, function(k){
+  var i=state.extras.indexOf(k); if(i>=0) state.extras.splice(i,1); else state.extras.push(k);
+});
+
+function pickPlan(p){
+  state.plan = p;
+  ['launch','care','custom'].forEach(function(k){ var e=$('pp-'+k); if(e) e.classList.toggle('on', k===p); });
+  var btn=$('o-go');
+  if (p==='launch') btn.innerHTML='Launch my app — $'+PRICE_LAUNCH+' '+ARROW;
+  if (p==='care')   btn.innerHTML='Launch + Care — $'+PRICE_LAUNCH+' + $'+PRICE_CARE+'/mo '+ARROW;
+  if (p==='custom') btn.innerHTML='Continue — pick a time '+ARROW;
+}
+
+function openConfirm(){
+  $('o-err').style.display='none';
+  var c = { name:$('in-cname').value.trim(), email:$('in-cemail').value.trim() };
+  if (!c.name || !c.email) return err('o-err','Add your name and email so we know who to set the accounts up for.');
+  if (!validEmail(c.email)) return err('o-err','That email doesn\'t look right — double-check it.');
+  if (state.plan==='custom'){ claim(); return; }
+  var line = state.plan==='care'
+    ? ['Launch + Care', '$'+PRICE_LAUNCH+' one time, then $'+PRICE_CARE+'/mo', 'Both stores, accounts in your name, and we keep it current after launch. Cancel the monthly anytime.']
+    : ['Launch', '$'+PRICE_LAUNCH+' one time', 'Both store accounts opened with you, app built, listing written, submitted to Apple and Google.'];
+  $('confirm-body').innerHTML =
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;font-weight:800;font-size:16px;gap:10px"><span>'+line[0]+'</span><span style="white-space:nowrap">'+line[1]+'</span></div>'
+  + '<div style="margin-top:5px;color:var(--muted);line-height:1.5;">'+line[2]+'</div>'
+  + '<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);line-height:1.6">'
+  +   'Apple charges $99/year and Google charges $25 once, paid by you directly to them — that\'s what keeps the accounts, and the app, in your name.'
+  + '</div>';
+  $('confirmscrim').classList.add('open');
+}
+function proceedToPayment(){ closeConfirm(); claim(); }
+
+function claim(){
+  $('o-err').style.display='none';
+  var c = { name:$('in-cname').value.trim(), email:$('in-cemail').value.trim(), phone:$('in-cphone').value.trim(), company:$('in-ccompany').value.trim() };
+  if (!c.name || !c.email) return err('o-err','Add your name and email so we know who to set the accounts up for.');
+  if (!validEmail(c.email)) return err('o-err','That email doesn\'t look right — double-check it.');
+
+  var featLabels = state.extras.map(function(k){
+    var f = EXTRAS.filter(function(x){ return x.k===k; })[0]; return f ? f.t : k;
+  });
+  var planLabel = state.plan==='custom' ? 'Custom app (from $'+PRICE_CUSTOM+')'
+                : state.plan==='care'   ? 'Launch + Care ($'+PRICE_LAUNCH+' + $'+PRICE_CARE+'/mo)'
+                :                         'Launch ($'+PRICE_LAUNCH+' one time)';
+  var notes = [planLabel];
+  if (state.profile) notes.push(state.profile.c.label + (state.profile.city ? ' · '+state.profile.city : ''));
+  notes.push('Colour: ' + accent().n);
+  var n = $('in-notes').value.trim(); if (n) notes.push('Notes: '+n);
+
+  var btn=$('o-go'); btn.disabled=true; btn.textContent='One moment…';
+
+  var send = fetch(API+'/api/oneapp-request', { method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ name:c.name, email:c.email, phone:c.phone, company:c.company,
+      features: featLabels.length ? featLabels : [planLabel], notes: notes.join(' · ') }) }).catch(function(){});
+
+  if (LIVE_CHECKOUT && state.plan !== 'custom'){
+    fetch(API+'/api/oneapp-checkout', { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ product:'oneapp', tier:state.plan, contact:c, notes:notes.join(' · ') }) })
+      .then(function(r){ return r.json().then(function(j){ return { ok:r.ok, j:j }; }); })
+      .then(function(x){
+        if (!x.ok || !x.j.url) throw new Error(x.j && x.j.error || 'Checkout failed — please try again.');
+        window.location.href = x.j.url;
+      })
+      .catch(function(e){ btn.disabled=false; pickPlan(state.plan); err('o-err', e.message); });
+    return;
+  }
+
+  /* Kickoff-call path: the store accounts have to be opened with the owner on a
+     screen-share anyway, so the call is step one either way. */
+  send.then(function(){
+    btn.disabled=false; pickPlan(state.plan);
+    var parts = c.name.split(' ');
+    bookCall('claim', { first_name:parts[0]||'', last_name:parts.slice(1).join(' ')||'', email:c.email, phone:c.phone });
+  });
+}
+
+/* ---------------- custom-interest modal ---------------- */
+var pcSel = [];
+function openCustomModal(){
+  pcSel = [];
+  renderExtras('pc-customfeat', function(){ return pcSel; }, function(k){
+    var i=pcSel.indexOf(k); if(i>=0) pcSel.splice(i,1); else pcSel.push(k);
+  });
+  $('pc-err').style.display = 'none';
+  $('pcscrim').classList.add('open');
+}
+function submitCustomInterest(){
+  var name=$('pc-name').value.trim(), email=$('pc-email').value.trim(), phone=$('pc-phone').value.trim();
+  if (!name || !validEmail(email) || !phone) return err('pc-err','Please add your name, a valid email, and a phone number.');
+  $('pc-err').style.display='none';
+  var labels = pcSel.map(function(k){ var f=EXTRAS.filter(function(x){return x.k===k;})[0]; return f?f.t:k; });
+  fetch(API+'/api/oneapp-request', { method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ name:name, email:email, phone:phone, company:'',
+      features: labels.length?labels:['Custom app'], notes:'OneApp — custom build interest (from $'+PRICE_CUSTOM+').' }) }).catch(function(){});
+  closeCustomModal();
+  var parts = name.split(' ');
+  bookCall('pricing-custom', { first_name:parts[0]||'', last_name:parts.slice(1).join(' ')||'', email:email, phone:phone });
+}
+
+/* ---------------- save / restore the DESIGN (configuration only — never
+     name, email or phone of a person; a shared device must not leak them) ---- */
+function saveDesign(){
+  if (!state.profile) return;
+  try {
+    localStorage.setItem('oapp_design', JSON.stringify({
+      name:state.profile.name, cat:state.profile.cat, city:state.profile.city,
+      desc:state.profile.desc, accent:state.accent, ts:Date.now()
+    }));
+  } catch(e){}
+}
+function dismissPaid(){
+  var box=$('b-paid'); if (box) box.style.display='none';
+  try {
+    var u = new URL(window.location.href);
+    u.searchParams.delete('paid'); u.searchParams.delete('session_id');
+    window.history.replaceState({}, '', u.toString());
+  } catch(e){}
+}
+(function(){
+  var q = new URLSearchParams(window.location.search);
+  if (q.get('paid')){
+    $('b-paid').style.display='block'; $('b-panel').style.display='none';
+    setTimeout(function(){ var b=$('builder'); if(b) b.scrollIntoView(); }, 2300);
+    return;
+  }
+  try {
+    var saved = JSON.parse(localStorage.getItem('oapp_design')||'null');
+    if (saved && saved.name && (Date.now()-saved.ts) < 48*3600*1000){
+      var ask=$('b-ask');
+      var banner=document.createElement('div');
+      banner.style.cssText='margin-bottom:14px;padding:12px 14px;border:1.5px solid var(--state2);border-radius:12px;background:rgba(21,194,178,.08);font-size:13.5px;font-weight:600;text-align:center;color:var(--ink);';
+      banner.innerHTML = 'Pick up the app you designed earlier? <button type="button" class="retrylink">Show it →</button>';
+      banner.querySelector('button').onclick = function(){
+        banner.remove();
+        state.profile = buildProfile(saved);
+        state.accent = saved.accent||0; state.screen='home';
+        showResult();
+      };
+      ask.insertBefore(banner, ask.firstChild);
+    }
+  } catch(e){}
+})();
+
+/* ---------------- reveal on scroll ---------------- */
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold:.12 });
+    Array.prototype.forEach.call(els, function(el){ io.observe(el); });
+  } else {
+    Array.prototype.forEach.call(els, function(el){ el.classList.add('in'); });
+  }
+})();
+
+/* ---------------- overlay behaviour: scroll lock, focus, escape ---------------- */
+(function(){
+  var body=document.body, lockN=0, savedY=0;
+  function lock(on){
+    if(on){ if(lockN++===0){ savedY=window.pageYOffset; body.style.position='fixed'; body.style.top=(-savedY)+'px'; body.style.left='0'; body.style.right='0'; body.style.width='100%'; } }
+    else if(lockN>0 && --lockN===0){ body.style.position=''; body.style.top=''; body.style.left=''; body.style.right=''; body.style.width=''; window.scrollTo(0,savedY); }
+  }
+  function watch(el,cls,onO,onC){ if(!el) return; var was=el.classList.contains(cls);
+    new MutationObserver(function(){ var is=el.classList.contains(cls); if(is===was) return; was=is; is?(onO&&onO()):(onC&&onC()); }).observe(el,{attributes:true,attributeFilter:['class']}); }
+  var drawer=$('drawer');
+  var hamb=document.querySelector('.nav .ctrl .iconbtn[aria-label="Menu"]');
+  watch(drawer,'open',function(){ lock(true); var f=drawer.querySelector('a,button'); if(f) f.focus(); }, function(){ lock(false); if(hamb) hamb.focus(); });
+  ['mscrim','pcscrim','confirmscrim'].forEach(function(id){ watch($(id),'open',function(){lock(true);},function(){lock(false);}); });
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape') return;
+    var ms=$('mscrim'), pc=$('pcscrim'), cf=$('confirmscrim');
+    if(ms&&ms.classList.contains('open')){ closeBooking(); return; }
+    if(cf&&cf.classList.contains('open')){ closeConfirm(); return; }
+    if(pc&&pc.classList.contains('open')){ closeCustomModal(); return; }
+    if(drawer&&drawer.classList.contains('open')){ openDrawer(false); }
+  });
+  window.addEventListener('hashchange',function(){ if(drawer&&drawer.classList.contains('open')) openDrawer(false); });
+  var nav=document.querySelector('.nav');
+  if(nav){ var f=function(){ nav.classList.toggle('scrolled', window.pageYOffset>40); }; window.addEventListener('scroll',f,{passive:true}); f(); }
+})();
+</script>
+
+<!-- ======================= PRE-SALE CHAT WIDGET (GHL LeadConnector) ======================= -->
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a55ac3cc40835bdcdee59d9"></script>
+<div data-chat-widget data-widget-id="6a55ac3cc40835bdcdee59d9" data-location-id="9AHrSPtp1aptBzN06ZdE"></div>
+
+</body>
+</html>
