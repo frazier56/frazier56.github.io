@@ -12,10 +12,10 @@
 - Full menu: https://www.oneworldlabs.ai/services/
 
 ## The Platform (apps, one login)
-- [OneJob](https://onejob.oneworldlabs.ai/): jobs marketplace — get hired and get paid, with verified reviews and contracts.
-- [OneScore](https://onescore.oneworldlabs.ai/): a free, verified professional credibility score — like a credit score for your work reputation.
-- [OneEvent](https://oneevent.oneworldlabs.ai/): create events, sell tickets, QR check-in.
-- [OneSocial](https://onesocial.oneworldlabs.ai/): all your platforms, one professional identity.
+- [OneJob](https://app.oneworldlabs.ai/jobs): jobs marketplace — get hired and get paid, with verified reviews and contracts.
+- [OneScore](https://app.oneworldlabs.ai/onescore): a free, verified professional credibility score — like a credit score for your work reputation.
+- [OneEvent](https://app.oneworldlabs.ai/events): create events, sell tickets, QR check-in.
+- [OneSocial](https://app.oneworldlabs.ai/social): all your platforms, one professional identity.
 - OneAgent: an AI workforce for professionals — coming soon.
 - Overview: https://www.oneworldlabs.ai/apps/
 
