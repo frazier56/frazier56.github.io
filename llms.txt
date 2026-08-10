@@ -1,0 +1,30 @@
+# One World Labs
+
+> One World Labs (oneworldlabs.ai) is an AI agency and app platform for small businesses and
+> freelancers. Two divisions: The Agency — done-for-you AI services our team builds and runs —
+> and The Platform — five apps that share one login (One ID).
+
+## The Agency (done-for-you AI services)
+- [OneVoice](https://onevoice.oneworldlabs.ai/): AI answering, scheduling & booking — an AI receptionist that answers every call 24/7, qualifies leads, and books appointments.
+- [OnePage](https://onepage.oneworldlabs.ai/): AI websites — built with AI, then hosted, updated, and managed for the client.
+- [OneApp](https://oneapp.oneworldlabs.ai/): a business's own mobile app, designed free, launched on the App Store and Google Play.
+- Reputation & review management, Search & AI visibility (SEO + AI-assistant visibility), customer win-back campaigns, missed-call text-back, AI chat for web & social, marketing & follow-up automation, custom AI agents & integrations.
+- Full menu: https://www.oneworldlabs.ai/services/
+
+## The Platform (apps, one login)
+- [OneJob](https://onejob.oneworldlabs.ai/): jobs marketplace — get hired and get paid, with verified reviews and contracts.
+- [OneScore](https://onescore.oneworldlabs.ai/): a free, verified professional credibility score — like a credit score for your work reputation.
+- [OneEvent](https://oneevent.oneworldlabs.ai/): create events, sell tickets, QR check-in.
+- [OneSocial](https://onesocial.oneworldlabs.ai/): all your platforms, one professional identity.
+- OneAgent: an AI workforce for professionals — coming soon.
+- Overview: https://www.oneworldlabs.ai/apps/
+
+## Guides
+- Blog: https://www.oneworldlabs.ai/blog/
+- What is a OneScore: https://www.oneworldlabs.ai/blog/what-is-onescore/
+- AI answering for small business: https://www.oneworldlabs.ai/blog/ai-answering-service-small-business/
+- Getting more five-star reviews: https://www.oneworldlabs.ai/blog/get-more-five-star-reviews/
+
+## Company
+- Contact: contact@oneworldlabs.ai
+- Languages: English, Spanish (Colombia + Spain), German, Russian, Chinese, Portuguese (Brazil)
