@@ -10,6 +10,14 @@
   var h = location.hash || "", q = location.search || "";
   if (/access_token|refresh_token|error_description|type=recovery/.test(h) || /[?&]code=/.test(q)) {
     location.replace("https://onejob.oneworldlabs.ai/" + q + h);
+    return;
+  }
+  var productHost = {
+    "oneagent.oneworldlabs.ai": "https://app.oneworldlabs.ai/agent",
+    "onesocial.oneworldlabs.ai": "https://app.oneworldlabs.ai/social"
+  }[location.hostname.toLowerCase()];
+  if (productHost) {
+    location.replace(productHost + (location.pathname === "/" ? "" : location.pathname) + q + h);
   }
 })();
 </script>
