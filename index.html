@@ -355,7 +355,7 @@
     .vaia-mic.on{background:#ff4d4d;color:#fff}
     .vaia-textin{flex:1;min-width:0;background:var(--color-secondary);border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--color-fg)}
 
-    /* ---------- the OneWorld lockup (mark + neWorld + SMALL BUSINESS SOLUTIONS) ---------- */
+    /* ---------- the OneWorld lockup (mark + neWorld + LABS, INC.) ---------- */
     .wm-name{display:block;font-weight:800;letter-spacing:-.02em;line-height:1;}
     .wm-ne{color:var(--color-fg);}
     .wm-world{color:var(--ow-primary);}
@@ -385,6 +385,27 @@
     .swipe-hint .dot.on{opacity:1;background:#15C2B2;}
 
     /* app cards: 2-up on phones, compact type; roomier from md up */
+
+    /* ── NO ICONS ON THE APP CARDS ────────────────────────────────────────────────────────────
+       Lee, 11 Aug 2026: *"remove all the icons from the top left. Keep them somewhere because I
+       may need them again, but I wanna see how it looks just with the dots… and that means you're
+       gonna be able to slide the text up a lot more."*
+
+       The icons were also the thing that made OneHome look wrong: five cards carried a 56px
+       `hue-tile` and OneHome carried a bare 40px glyph with no dot at all, so one card in six had
+       a different head. Removing the row removes the inconsistency AND buys back ~76px, which is
+       what pays for the longer descriptions.
+
+       The dot is now absolutely positioned rather than sitting in a flex row with the icon, so
+       the heading starts at the very top of the card's padding box. */
+    .app-card{position:relative;}
+    .app-dot{position:absolute;top:18px;right:18px;}
+    .app-learn{border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;}
+    .app-card:hover .app-learn{opacity:.9;}
+    @media (max-width:639px){
+        .app-card .app-dot{top:14px;right:14px;width:8px;height:8px;}
+        .app-card .app-learn{font-size:11px !important;}
+    }
     .app-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
     @media (min-width:1024px){ .app-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;} }
     @media (min-width:640px) and (max-width:1023px){ .app-grid{gap:16px;} }
@@ -394,7 +415,6 @@
         .app-card h4{font-size:9px !important;letter-spacing:.14em !important;}
         .app-card p{font-size:12px !important;line-height:1.5 !important;
             display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
-        .app-card .hue-tile{width:40px !important;height:40px !important;border-radius:12px !important;}
         .app-card .app-open{font-size:13px !important;}
     }
 
@@ -404,7 +424,11 @@
     @media (min-width:768px){ .step-card{display:block;padding:40px;} .step-card .idx{font-size:48px;margin-bottom:24px;} }
 
     /* hero CTAs: two-up on phones instead of a full-width stack */
-    .hero-ctas{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:420px;margin:0 auto 32px;}
+    /* ONE control, not three. Lee, 11 Aug 2026: the espresso "Explore the services" wrapped
+       onto two lines beside a bright "Open the apps" that did not, so services read as the dominant
+       choice when the two are equals — and both pointed at sections already visible further down
+       the same page. Removing them leaves Sign in as the only thing to decide here. */
+    .hero-ctas{display:grid;grid-template-columns:1fr;gap:10px;max-width:420px;margin:0 auto 32px;}
     .hero-ctas .cta-signin{grid-column:1 / -1;}
     @media (min-width:640px){ .hero-ctas{display:flex;max-width:none;justify-content:center;gap:16px;} .hero-ctas .cta-signin{grid-column:auto;} }
 
@@ -634,7 +658,7 @@
                 <span id="wm-o" class="hidden font-extrabold text-xl tracking-tight text-primary">O</span>
                 <span class="text-left">
                     <span class="wm-name text-[20px]"><span class="wm-ne">ne</span><span class="wm-world">World</span></span>
-                    <span class="wm-tag text-[7.5px]">SMALL BUSINESS SOLUTIONS</span>
+                    <span class="wm-tag text-[7.5px]">LABS, INC.</span>
                 </span>
             </a>
             <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary">
@@ -686,7 +710,7 @@
                     <img src="/mark-oneworld.png" alt="" class="h-7 w-auto shrink-0 -mr-[2px]">
                     <span class="min-w-0 text-left">
                         <span class="wm-name text-[15px] truncate"><span class="wm-ne">ne</span><span class="wm-world">World</span></span>
-                        <span class="wm-tag text-[6.5px]">SMALL BUSINESS SOLUTIONS</span>
+                        <span class="wm-tag text-[6.5px]">LABS, INC.</span>
                     </span>
                 </div>
                 <div id="hb-signedin-id" class="hidden items-center gap-2.5 min-w-0">
@@ -774,9 +798,9 @@
             <!-- the multicolor OneWorld mark — GHL/_BRAND-ASSETS/OneWorld_multicolor-mark master, transparent -->
             <img src="/mark-oneworld.png" alt="OneWorld" class="fade-up h-20 md:h-24 w-auto mx-auto mb-8 drop-shadow-[0_10px_24px_rgba(27,73,184,0.25)]">
             <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-5 py-2.5 rounded-full frost mb-10 text-[10.5px] sm:text-[12.5px] font-medium">
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">5</strong> <span class="text-muted-foreground" data-i18n="s_apps">apps</span></span>
-                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
                 <span class="flex items-center gap-1.5"><strong class="text-foreground">10</strong> <span class="text-muted-foreground" data-i18n="s_svcs">services</span></span>
+                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">6</strong> <span class="text-muted-foreground" data-i18n="s_apps">apps</span></span>
                 <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
                 <span class="flex items-center gap-1.5"><strong class="text-foreground">7</strong> <span class="text-muted-foreground" data-i18n="s_langs">languages</span></span>
                 <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
@@ -788,7 +812,7 @@
             </h1>
 
             <p class="text-xl sm:text-2xl md:text-[28px] font-semibold tracking-tight max-w-3xl mx-auto mb-5 leading-snug" data-i18n="ow_head">
-                AI that runs the boring but profitable half of your business.
+                AI that runs the boring but profitable side of your business.
             </p>
 
             <p class="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed" data-i18n="ow_sub">
@@ -796,12 +820,6 @@
             </p>
 
             <div id="signedout-cta" class="hero-ctas items-center">
-                <a href="#services" class="btn-clay w-full sm:w-auto h-12 px-4 sm:px-8 text-sm sm:text-base">
-                    <span data-i18n="cta_services">Explore the services</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                </a>
-                <a href="#apps" class="btn-ghost w-full sm:w-auto h-12 px-4 sm:px-8 text-sm sm:text-base">
-                    <span data-i18n="cta_apps">Open the apps</span>
-                </a>
                 <a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="cta-signin btn-ghost w-full sm:w-auto h-12 px-6 text-base">
                     <svg class="h-5 w-5 shrink-0" width="24" height="24" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
                     <span data-i18n="cta_signin">Sign in with One ID</span>
@@ -878,7 +896,7 @@
                 <a href="#apps" class="division-card frost hue-top rounded-3xl p-8 md:p-12 block group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8B3DEA">
                     <div class="eyebrow mb-6" data-i18n="div_pl_tag">Apps you use</div>
                     <h3 class="text-3xl md:text-4xl font-bold mb-4"><span class="text-primary" data-i18n="div_pl_h">The Platform</span></h3>
-                    <p class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8" data-i18n="div_pl_p">Six apps for small businesses and freelancers — get hired and paid, sell tickets, build verified credibility, find representation, and rent or buy a home — all under one login.</p>
+                    <p class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8" data-i18n="div_pl_p">Six apps for small businesses and freelancers — get hired and paid, sell tickets, build verified credibility — all under one login.</p>
                     <span class="inline-flex items-center gap-2 font-semibold text-primary"><span data-i18n="div_pl_cta">Explore the apps</span> <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
                 </a>
             </div>
@@ -997,63 +1015,54 @@
             </div>
 
             <div class="app-grid">
-                <a href="https://app.oneworldlabs.ai/jobs" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#17A45C;--hd:#0E8248;--hl:#5FD79B">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14 p-1.5"><img src="/ic-onesocial.png" alt="" class="w-full h-full object-contain"></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
+                <div id="onejob" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#17A45C;--hd:#0E8248;--hl:#5FD79B">
+                    <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onejob_tag">The jobs marketplace</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="onejob_desc">Get hired and get paid in 60 seconds — verified reviews, contracts, and payments held safely until the job is done.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onejob_cta">Open OneJob</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://app.oneworldlabs.ai/onescore" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E0A21F;--hd:#96690A;--hl:#F3C969">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14 p-1.5"><img src="/ic-onescore.png" alt="" class="w-full h-full object-contain"></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onejob_desc">Get hired and get paid in 60 seconds. Every contract is signed in the app and the money is held safely until the work is actually done. Reviews come from real completed jobs, so a good reputation is one you earned.</p>
+                    <a href="https://app.oneworldlabs.ai/jobs" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onejob_cta">Open OneJob</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#onejob" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneJob</a>
+                </div>
+                <div id="onescore" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E0A21F;--hd:#96690A;--hl:#F3C969">
+                    <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onescore_tag">Professional credibility</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="onescore_desc">Your whole reputation — reviews, real work, social proof — in one verified number you can post anywhere. Free forever.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onescore_cta">Open OneScore</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://app.oneworldlabs.ai/events" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E2711D;--hd:#9C4A0C;--hl:#F5A468">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14 p-1.5"><img src="/ic-oneevents.png" alt="" class="w-full h-full object-contain"></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onescore_desc">Your whole reputation as one verified number you can post anywhere. It reads your reviews, your completed work and your social proof, then shows you exactly what would move it. Free forever.</p>
+                    <a href="https://app.oneworldlabs.ai/onescore" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onescore_cta">Open OneScore</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#onescore" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneScore</a>
+                </div>
+                <div id="oneevent" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E2711D;--hd:#9C4A0C;--hl:#F5A468">
+                    <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneevent_tag">Events &amp; tickets</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="oneevent_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneevent_cta">Open OneEvent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://app.oneworldlabs.ai/social" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8B3DEA;--hd:#5B21B6;--hl:#C4A9FA">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--hb)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="4.5" cy="6" r="2"/><circle cx="19.5" cy="6" r="2"/><circle cx="4.5" cy="18" r="2"/><circle cx="19.5" cy="18" r="2"/><path d="M6.3 7.2 9.8 10M17.7 7.2 14.2 10M6.3 16.8 9.8 14M17.7 16.8 14.2 14"/></svg></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
+                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneevent_tag">Events & tickets</h4>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneevent_desc">Create an event, sell tickets and check guests in with a QR code, live in minutes. Take payment in your own currency and see who is actually coming. Free events cost nothing to run.</p>
+                    <a href="https://app.oneworldlabs.ai/events" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneevent_cta">Open OneEvent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#oneevent" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneEvent</a>
+                </div>
+                <div id="onesocial" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8B3DEA;--hd:#5B21B6;--hl:#C4A9FA">
+                    <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onesocial_tag">Your connected platforms</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="onesocial_desc">All your platforms, one professional identity — connect your accounts and turn your following into verified credibility.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onesocial_cta">Open OneSocial</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://app.oneworldlabs.ai/agent" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#7B2D3B;--hd:#6B2331;--hl:#E0919E">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--hb)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3.5 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9.5" r="2.5"/><path d="M15.5 20c0-2.2 1.4-3.8 3.4-4.3M20.5 13.5 22 15l-1.5 1.5"/></svg></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onesocial_desc">All your platforms behind one professional identity. Connect the accounts you already have and turn a following into credibility that can be checked. What you post here reaches every app in the family.</p>
+                    <a href="https://app.oneworldlabs.ai/social" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onesocial_cta">Open OneSocial</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#onesocial" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneSocial</a>
+                </div>
+                <div id="oneagent" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#7B2D3B;--hd:#6B2331;--hl:#E0919E">
+                    <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneagent_tag">Agents &amp; representation</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="oneagent_desc">Represent other people’s work and get credit for the deals you close — or find an agent to represent yours.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneagent_cta">Open OneAgent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://app.oneworldlabs.ai/home" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#0EA5E9;--hd:#0369A1;--hl:#7DD3FC">
-                    <div class="app-ico mb-5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5"/></svg></div>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Rental</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onerental_tag">Renting and buying in Colombia</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="onerental_desc">Medellín, Bogotá, Cali, Cartagena. To rent: a signed lease, a deposit held safely, and move-in photos both sides agreed to. To buy: sale history and an estimated value range Colombia has never had.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onerental_cta">Open OneHome</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
+                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneagent_tag">Agents & representation</h4>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneagent_desc">Represent other people's work and get paid for the deals you close, with your commission written into the contract before anyone signs. Or find an agent to represent yours. Real people, not AI.</p>
+                    <a href="https://app.oneworldlabs.ai/agent" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneagent_cta">Open OneAgent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#oneagent" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneAgent</a>
+                </div>
+                <div id="onehome" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#0D9488;--hd:#0F766E;--hl:#5EEAD4">
+                    <span class="hue-dot app-dot" aria-hidden="true"></span>
+                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Home</h3>
+                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onehome_tag">Rent or buy a home</h4>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onehome_desc">Rent or buy a place with a real contract instead of a chat thread. To rent: a signed lease, a deposit held safely and move-in photos both sides agreed to. To buy: the sale history and a value range Colombia has never had.</p>
+                    <a href="https://app.oneworldlabs.ai/home" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onehome_cta">Open OneHome</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#onehome" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneHome</a>
+                </div>
             </div>
         </section>
 
@@ -1217,7 +1226,7 @@
                 </div>
                 <div class="text-center md:text-right text-xs text-muted-foreground space-y-1">
                     <p class="font-medium">© 2026 One World Labs, Inc. · OneJob · OneScore · OneEvent · OneSocial · OneAgent · OneHome · OneVoice · OnePage · OneApp</p>
-                    <p data-i18n="ftr_tagline">Built for small businesses and freelancers, everywhere.</p>
+                    <p data-i18n="ftr_tagline">The AI ecosystem for today's small businesses.</p>
                 </div>
             </div>
         </div>
@@ -1299,7 +1308,7 @@
             cta_jump:'Entrar a una app', cta_signin:'Iniciar sesión con One ID', microtrust:'Un inicio de sesión para cada app · Gratis para empezar · Sin tarjeta de crédito',
             apps_eyebrow:'Las apps', apps_h2:'Entra a tu app favorita', apps_sub:'Seis apps, un solo inicio de sesión — todas disponibles hoy.',
             onescore_tag:'Credibilidad profesional', onescore_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado que puedes publicar donde quieras. Gratis para siempre.', onescore_cta:'Abrir OneScore',
-            onejob_tag:'El mercado de trabajos', onejob_desc:'Consigue trabajo y cobra en 60 segundos — reseñas verificadas, contratos y pagos retenidos de forma segura hasta terminar.', onejob_cta:'Abrir OneJob', onesocial_tag:'Tus plataformas conectadas', onesocial_desc:'Todas tus plataformas, una identidad profesional — conecta tus cuentas y convierte tus seguidores en credibilidad verificada.', onesocial_cta:'Abrir OneSocial', onerental_tag:'Arriendo y venta en Colombia', onerental_desc:'Medellín, Bogotá, Cali, Cartagena. Para arrendar: contrato firmado, depósito protegido y fotos de entrada que ambas partes aceptaron. Para comprar: historial de ventas y un rango de valor estimado que Colombia nunca ha tenido.', onerental_cta:'Abrir OneHome',
+            app_learn:'Más sobre esta app', onejob_tag:'El mercado de trabajos', onejob_desc:'Consigue trabajo y cobra en 60 segundos — reseñas verificadas, contratos y pagos retenidos de forma segura hasta terminar.', onejob_cta:'Abrir OneJob', onesocial_tag:'Tus plataformas conectadas', onesocial_desc:'Todas tus plataformas, una identidad profesional — conecta tus cuentas y convierte tus seguidores en credibilidad verificada.', onesocial_cta:'Abrir OneSocial', onehome_tag:'Arriendo y venta en Colombia', onehome_desc:'Medellín, Bogotá, Cali, Cartagena. Para arrendar: contrato firmado, depósito protegido y fotos de entrada que ambas partes aceptaron. Para comprar: historial de ventas y un rango de valor estimado que Colombia nunca ha tenido.', onehome_cta:'Abrir OneHome',
             oneagent_tag:'Agentes y representación', oneagent_desc:'Represente el trabajo de otros y reciba crédito por los negocios que cierre — o encuentre un agente que lo represente.', coming_soon:'Muy pronto',
             oneevent_tag:'Eventos y boletos', oneevent_desc:'Crea un evento, vende boletos y registra invitados con QR — en minutos.', oneevent_cta:'Abrir OneEvent',
             preview_loading:'Cargando vista previa…', live_preview:'Vista previa en vivo', open_arrow:'Abrir ↗',
@@ -1316,7 +1325,7 @@
             plat1_h:'Agrégalo a tu teléfono', plat1_p:'Abre cualquier app de One World en tu navegador móvil, toca Compartir y elige "Agregar a pantalla de inicio". Instala un icono y se abre a pantalla completa — sin tienda de apps.', plat1_badge:'APPS NATIVAS PRÓXIMAMENTE',
             plat2_h:'Úsalo en escritorio', plat2_p:'Todo funciona en tu navegador en cualquier ordenador — nada que instalar, nada que actualizar. Guarda oneworldlabs.ai en favoritos y estás a un clic de cada app.',
             faq_eyebrow:'Bueno saberlo', faq_h2:'¿Sabías que…?',
-            q1_q:'One World Labs son apps que usas más servicios que gestionamos', q1_a:'Seis apps con un solo inicio de sesión — OneJob para conseguir trabajo y cobrar, OneScore para credibilidad, OneEvent para boletos, OneSocial para sus plataformas conectadas, OneAgent para representación y OneHome para arrendar o comprar — más dos servicios que nuestro equipo gestiona: OneVoice contesta sus llamadas y OnePage crea y administra su sitio web. Todo comparte un inicio de sesión y un perfil.',
+            q1_q:'One World Labs son apps que usas más servicios que gestionamos', q1_a:'Seis apps con un solo inicio de sesión — OneJob para conseguir trabajo y cobrar, OneScore para credibilidad, OneEvent para boletos, OneSocial para sus plataformas conectadas, OneAgent para representación y OneHome para arrendar o comprar — más tres servicios que nuestro equipo gestiona: OneVoice contesta sus llamadas, OnePage crea y administra su sitio web y OneApp le da su propia app. Todo comparte un inicio de sesión y un perfil.',
             q2_q:'Puedes empezar gratis — sin tarjeta de crédito', q2_a:'OneScore es gratis para siempre, y cada app te permite empezar sin pagar por adelantado. Nuestros servicios gestionados son de pago — solo mejoras cuando una herramienta ya te está dando resultado.',
             q3_q:'Un inicio de sesión te da acceso a todo', q3_a:'Inicia sesión una vez con One ID y estarás en cada app y servicio de One World — sin cuentas separadas, sin volver a ingresar tus datos, sin hacer malabares con contraseñas.',
             q4_q:'Construido con la credibilidad primero — tú tienes el control', q4_a:'Ningún algoritmo decide quién ve tu negocio, y tu reputación no está dispersa en diez plataformas. Tu prueba está verificada, es tuya y es portátil — tú decides dónde aparece.',
@@ -1331,7 +1340,7 @@
             cta_jump:'Entrar a una app', cta_signin:'Iniciar sesión con One ID', microtrust:'Un inicio de sesión para cada app · Gratis para empezar · Sin tarjeta de crédito',
             apps_eyebrow:'Las apps', apps_h2:'Entra a tu app favorita', apps_sub:'Seis apps, un solo inicio de sesión — todas disponibles hoy.',
             onescore_tag:'Credibilidad profesional', onescore_desc:'Toda tu reputación — reseñas, trabajo real, prueba social — en un número verificado que puedes publicar donde quieras. Gratis para siempre.', onescore_cta:'Abrir OneScore',
-            onejob_tag:'El mercado de trabajos', onejob_desc:'Consigue trabajo y cobra en 60 segundos — reseñas verificadas, contratos y pagos retenidos de forma segura hasta terminar.', onejob_cta:'Abrir OneJob', onesocial_tag:'Tus plataformas conectadas', onesocial_desc:'Todas tus plataformas, una identidad profesional — conecta tus cuentas y convierte tus seguidores en credibilidad verificada.', onesocial_cta:'Abrir OneSocial', onerental_tag:'Arriendo y venta en Colombia', onerental_desc:'Medellín, Bogotá, Cali, Cartagena. Para arrendar: contrato firmado, depósito protegido y fotos de entrada que ambas partes aceptaron. Para comprar: historial de ventas y un rango de valor estimado que Colombia nunca ha tenido.', onerental_cta:'Abrir OneHome',
+            app_learn:'Más sobre esta app', onejob_tag:'El mercado de trabajos', onejob_desc:'Consigue trabajo y cobra en 60 segundos — reseñas verificadas, contratos y pagos retenidos de forma segura hasta terminar.', onejob_cta:'Abrir OneJob', onesocial_tag:'Tus plataformas conectadas', onesocial_desc:'Todas tus plataformas, una identidad profesional — conecta tus cuentas y convierte tus seguidores en credibilidad verificada.', onesocial_cta:'Abrir OneSocial', onehome_tag:'Arriendo y venta en Colombia', onehome_desc:'Medellín, Bogotá, Cali, Cartagena. Para arrendar: contrato firmado, depósito protegido y fotos de entrada que ambas partes aceptaron. Para comprar: historial de ventas y un rango de valor estimado que Colombia nunca ha tenido.', onehome_cta:'Abrir OneHome',
             oneagent_tag:'Agentes y representación', oneagent_desc:'Represente el trabajo de otros y reciba crédito por los negocios que cierre — o encuentre un agente que lo represente.', coming_soon:'Muy pronto',
             oneevent_tag:'Eventos y boletas', oneevent_desc:'Crea un evento, vende boletas y registra invitados con QR — en minutos.', oneevent_cta:'Abrir OneEvent',
             preview_loading:'Cargando vista previa…', live_preview:'Vista previa en vivo', open_arrow:'Abrir ↗',
@@ -1348,7 +1357,7 @@
             plat1_h:'Agrégalo a tu celular', plat1_p:'Abre cualquier app de One World en tu navegador móvil, toca Compartir y elige "Agregar a pantalla de inicio". Instala un ícono y se abre a pantalla completa — sin tienda de apps.', plat1_badge:'APPS NATIVAS PRÓXIMAMENTE',
             plat2_h:'Úsalo en el computador', plat2_p:'Todo funciona en tu navegador en cualquier computador — nada que instalar, nada que actualizar. Guarda oneworldlabs.ai en favoritos y estás a un clic de cada app.',
             faq_eyebrow:'Bueno saberlo', faq_h2:'¿Sabías que…?',
-            q1_q:'One World Labs son apps que usas más servicios que gestionamos', q1_a:'Seis apps con un solo inicio de sesión — OneJob para conseguir trabajo y cobrar, OneScore para credibilidad, OneEvent para boletas, OneSocial para tus plataformas conectadas, OneAgent para representación y OneHome para alquilar o comprar — más dos servicios que nuestro equipo gestiona: OneVoice contesta tus llamadas y OnePage crea y administra tu página web. Todo comparte un inicio de sesión y un perfil.',
+            q1_q:'One World Labs son apps que usas más servicios que gestionamos', q1_a:'Seis apps con un solo inicio de sesión — OneJob para conseguir trabajo y cobrar, OneScore para credibilidad, OneEvent para boletas, OneSocial para tus plataformas conectadas, OneAgent para representación y OneHome para alquilar o comprar — más tres servicios que nuestro equipo gestiona: OneVoice contesta tus llamadas, OnePage crea y administra tu página web y OneApp te da tu propia app. Todo comparte un inicio de sesión y un perfil.',
             q2_q:'Puedes empezar gratis — sin tarjeta de crédito', q2_a:'OneScore es gratis para siempre, y cada app te permite empezar sin pagar por adelantado. Nuestros servicios gestionados son de pago — solo mejoras cuando una herramienta ya te está dando resultado.',
             q3_q:'Un inicio de sesión te da acceso a todo', q3_a:'Inicia sesión una vez con One ID y estarás en cada app y servicio de One World — sin cuentas separadas, sin volver a ingresar tus datos, sin hacer malabares con contraseñas.',
             q4_q:'Construido con la credibilidad primero — tú tienes el control', q4_a:'Ningún algoritmo decide quién ve tu negocio, y tu reputación no está dispersa en diez plataformas. Tu prueba está verificada, es tuya y es portátil — tú decides dónde aparece.',
@@ -1363,7 +1372,7 @@
             cta_jump:'Zu einer App', cta_signin:'Mit One ID anmelden', microtrust:'Ein Login für jede App · Kostenlos starten · Keine Kreditkarte',
             apps_eyebrow:'Die Apps', apps_h2:'Starte deine Lieblings-App', apps_sub:'Sechs Apps, ein Login — alle heute schon live.',
             onescore_tag:'Berufliche Glaubwürdigkeit', onescore_desc:'Dein gesamter Ruf — Bewertungen, echte Arbeit, sozialer Beweis — in einer verifizierten Zahl, die du überall posten kannst. Für immer kostenlos.', onescore_cta:'OneScore öffnen',
-            onejob_tag:'Der Job-Marktplatz', onejob_desc:'In 60 Sekunden einen Job bekommen und bezahlt werden — verifizierte Bewertungen, Verträge und sicher gehaltene Zahlungen bis zur Fertigstellung.', onejob_cta:'OneJob öffnen',
+            app_learn:'Mehr über diese App', onejob_tag:'Der Job-Marktplatz', onejob_desc:'In 60 Sekunden einen Job bekommen und bezahlt werden — verifizierte Bewertungen, Verträge und sicher gehaltene Zahlungen bis zur Fertigstellung.', onejob_cta:'OneJob öffnen',
             onesocial_tag:'Deine verbundenen Plattformen', onesocial_desc:'Alle deine Plattformen, eine berufliche Identität — verbinde deine Konten und verwandle deine Follower in verifizierte Glaubwürdigkeit.', onesocial_cta:'OneSocial öffnen',
             oneagent_tag:'Agenten &amp; Vertretung', oneagent_desc:'Vertritt die Arbeit anderer und erhalte Anerkennung für die Abschlüsse — oder finde einen Agenten für dich.', coming_soon:'Demnächst',
             oneevent_tag:'Events & Tickets', oneevent_desc:'Erstelle ein Event, verkaufe Tickets und checke Gäste per QR-Code ein — in Minuten.', oneevent_cta:'OneEvent öffnen',
@@ -1396,7 +1405,7 @@
             cta_jump:'Открыть приложение', cta_signin:'Войти через One ID', microtrust:'Один вход для всех приложений · Бесплатно · Без карты',
             apps_eyebrow:'Приложения', apps_h2:'Откройте любимое приложение', apps_sub:'Шесть приложений, один вход — все доступны уже сегодня.',
             onescore_tag:'Профессиональная репутация', onescore_desc:'Вся твоя репутация — отзывы, реальная работа, социальные доказательства — в одном проверенном числе, которое можно опубликовать где угодно. Бесплатно навсегда.', onescore_cta:'Открыть OneScore',
-            onejob_tag:'Маркетплейс работы', onejob_desc:'Получи работу и оплату за 60 секунд — проверенные отзывы, контракты и безопасно удерживаемые платежи до завершения работы.', onejob_cta:'Открыть OneJob',
+            app_learn:'Подробнее о приложении', onejob_tag:'Маркетплейс работы', onejob_desc:'Получи работу и оплату за 60 секунд — проверенные отзывы, контракты и безопасно удерживаемые платежи до завершения работы.', onejob_cta:'Открыть OneJob',
             onesocial_tag:'Твои подключённые платформы', onesocial_desc:'Все твои платформы, одна профессиональная личность — подключи свои аккаунты и преврати подписчиков в проверенную репутацию.', onesocial_cta:'Открыть OneSocial',
             oneagent_tag:'Агенты и представительство', oneagent_desc:'Представляйте работу других и получайте вознаграждение за закрытые сделки — или найдите агента для себя.', coming_soon:'Скоро',
             oneevent_tag:'События и билеты', oneevent_desc:'Создай событие, продавай билеты и регистрируй гостей по QR-коду — за считанные минуты.', oneevent_cta:'Открыть OneEvent',
@@ -1429,7 +1438,7 @@
             cta_jump:'进入应用', cta_signin:'使用 One ID 登录', microtrust:'一次登录畅用所有应用 · 免费开始 · 无需信用卡',
             apps_eyebrow:'应用', apps_h2:'进入你喜欢的应用', apps_sub:'六款应用，一次登录——全部已上线。',
             onescore_tag:'职业信誉', onescore_desc:'你的全部声誉——评价、真实工作、社交证明——汇聚成一个可随处发布的认证分数。永久免费。', onescore_cta:'打开 OneScore',
-            onejob_tag:'求职市场', onejob_desc:'60秒内获得工作并获得报酬——认证评价、合同，付款在工作完成前安全托管。', onejob_cta:'打开 OneJob',
+            app_learn:'了解此应用', onejob_tag:'求职市场', onejob_desc:'60秒内获得工作并获得报酬——认证评价、合同，付款在工作完成前安全托管。', onejob_cta:'打开 OneJob',
             onesocial_tag:'你的互联平台', onesocial_desc:'所有平台，一个职业身份——连接你的账户，把粉丝转化为经过认证的信誉。', onesocial_cta:'打开 OneSocial',
             oneagent_tag:'经纪与代理', oneagent_desc:'代理他人的作品并从成交中获得回报，或为自己找一位经纪人。', coming_soon:'即将推出',
             oneevent_tag:'活动与门票', oneevent_desc:'创建活动、销售门票，并通过二维码为宾客签到——几分钟内即可上线。', oneevent_cta:'打开 OneEvent',
@@ -1462,7 +1471,7 @@
             cta_jump:'Entrar em um app', cta_signin:'Entrar com One ID', microtrust:'Um login para cada app · Grátis para começar · Sem cartão de crédito',
             apps_eyebrow:'Os apps', apps_h2:'Entre no seu app favorito', apps_sub:'Seis apps, um único login — todas disponíveis hoje.',
             onescore_tag:'Credibilidade profissional', onescore_desc:'Toda a sua reputação — avaliações, trabalho real, prova social — em um número verificado que você pode publicar em qualquer lugar. Grátis para sempre.', onescore_cta:'Abrir OneScore',
-            onejob_tag:'O mercado de empregos', onejob_desc:'Seja contratado e receba pagamento em 60 segundos — avaliações verificadas, contratos e pagamentos retidos com segurança até a conclusão.', onejob_cta:'Abrir OneJob',
+            app_learn:'Saiba mais sobre este app', onejob_tag:'O mercado de empregos', onejob_desc:'Seja contratado e receba pagamento em 60 segundos — avaliações verificadas, contratos e pagamentos retidos com segurança até a conclusão.', onejob_cta:'Abrir OneJob',
             onesocial_tag:'Suas plataformas conectadas', onesocial_desc:'Todas as suas plataformas, uma identidade profissional — conecte suas contas e transforme seus seguidores em credibilidade verificada.', onesocial_cta:'Abrir OneSocial',
             oneagent_tag:'Agentes e representação', oneagent_desc:'Represente o trabalho de outros e receba crédito pelos negócios que fechar — ou encontre um agente para você.', coming_soon:'Em breve',
             oneevent_tag:'Eventos e ingressos', oneevent_desc:'Crie um evento, venda ingressos e faça check-in dos convidados com QR — em minutos.', oneevent_cta:'Abrir OneEvent',
@@ -1480,7 +1489,7 @@
             plat1_h:'Adicione ao celular', plat1_p:'Abra qualquer app One World no navegador do celular, toque em Compartilhar e escolha "Adicionar à Tela de Início". Instala um ícone e abre em tela cheia — sem precisar de App Store.', plat1_badge:'APPS NATIVOS EM BREVE',
             plat2_h:'Use no computador', plat2_p:'Tudo roda no seu navegador em qualquer computador — nada para instalar, nada para atualizar. Salve oneworldlabs.ai nos favoritos e você está a um clique de cada app.',
             faq_eyebrow:'Bom saber', faq_h2:'Você sabia?',
-            q1_q:'One World Labs são apps que você usa, além de serviços que operamos', q1_a:'Seis apps com um único login — OneJob para conseguir emprego e receber pagamento, OneScore para credibilidade, OneEvent para ingressos, OneSocial para suas plataformas conectadas, OneAgent para representação e OneHome para alugar ou comprar — além de dois serviços que nossa equipe opera: OneVoice atende suas chamadas e OnePage constrói e gerencia seu site. Tudo compartilha um login e um perfil.',
+            q1_q:'One World Labs são apps que você usa, além de serviços que operamos', q1_a:'Seis apps com um único login — OneJob para conseguir emprego e receber pagamento, OneScore para credibilidade, OneEvent para ingressos, OneSocial para suas plataformas conectadas, OneAgent para representação e OneHome para alugar ou comprar — além de três serviços que nossa equipe opera: OneVoice atende suas chamadas, OnePage constrói e gerencia seu site e OneApp dá a você seu próprio aplicativo. Tudo compartilha um login e um perfil.',
             q2_q:'Você pode começar de graça — sem cartão de crédito', q2_a:'OneScore é grátis para sempre, e todo app permite que você comece sem pagar antecipadamente. Nossos serviços gerenciados são pagos — você só faz upgrade quando a ferramenta já está funcionando para você.',
             q3_q:'Um login te dá acesso a tudo', q3_a:'Entre uma vez com o One ID e você está em todo app e serviço One World — sem contas separadas, sem reinserir seus dados, sem gerenciar senhas entre ferramentas.',
             q4_q:'Construído com credibilidade em primeiro lugar — você mantém o controle', q4_a:'Nenhum algoritmo decide quem vê seu negócio, e sua reputação não fica espalhada em dez plataformas. Sua prova é verificada, é sua e é portátil — você decide onde ela aparece.',
@@ -1506,7 +1515,7 @@
             div_ag_p:'Construimos y operamos la IA que contesta sus llamadas, agenda sus citas, cuida su reputación y hace volver a sus clientes — para que usted se dedique a lo que solo usted sabe hacer.',
             div_ag_cta:'Ver los diez servicios',
             div_pl_tag:'Apps que usted usa', div_pl_h:'La Plataforma',
-            div_pl_p:'Cinco apps para pequeños negocios e independientes: consiga trabajo y cobre, venda boletas, construya credibilidad verificada — todo con un solo acceso.',
+            div_pl_p:'Seis apps para pequeños negocios e independientes: consiga trabajo y cobre, venda boletas, construya credibilidad verificada — todo con un solo acceso.',
             div_pl_cta:'Explorar las apps',
             agency_eyebrow:'One World Agency', agency_h2:'Una agencia de IA para pequeños negocios',
             agency_sub:'No somos una agencia de mercadeo: somos una agencia de IA. La misma ventaja que tienen las grandes empresas, montada y operada por nuestro equipo para usted.',
@@ -1545,7 +1554,7 @@
             div_ag_p:'Construimos y gestionamos la IA que contesta tus llamadas, llena tu agenda, cuida tu reputación y hace volver a tus clientes — para que tú hagas el trabajo que solo tú sabes hacer.',
             div_ag_cta:'Ver los diez servicios',
             div_pl_tag:'Apps que usas', div_pl_h:'La Plataforma',
-            div_pl_p:'Cinco apps para pequeñas empresas y autónomos: consigue trabajo y cobra, vende entradas, construye credibilidad verificada — todo con un solo inicio de sesión.',
+            div_pl_p:'Seis apps para pequeñas empresas y autónomos: consigue trabajo y cobra, vende entradas, construye credibilidad verificada — todo con un solo inicio de sesión.',
             div_pl_cta:'Explorar las apps',
             agency_eyebrow:'One World Agency', agency_h2:'Una agencia de IA para pequeñas empresas',
             agency_sub:'No somos una agencia de marketing: somos una agencia de IA. La misma ventaja que tienen las grandes empresas, montada y gestionada por nuestro equipo para ti.',
@@ -1575,7 +1584,7 @@
             mkt_eyebrow:'KI verändert alles', mkt_line:'Die klügsten kleinen Unternehmen der Welt arbeiten mit One World zusammen, um ihr Wachstum zu beschleunigen.', mkt_soon:'Mobile Apps kommen bald — im Browser funktioniert heute schon alles.', swipe_hint:'Wischen für alle drei',
             s_langs:'Sprachen',
             nav_services:'Leistungen', nav_apps:'Apps', nav_how:'So arbeiten wir', nav_faq:'FAQ',
-            ow_head:'KI für die langweilige — aber lukrative — Hälfte Ihres Geschäfts.',
+            ow_head:'KI für die langweilige — aber lukrative — Seite Ihres Geschäfts.',
             ow_sub:'One World Labs entwickelt KI für kleine Unternehmen und Selbstständige: Apps, die Sie selbst nutzen, und Dienste, die wir für Sie betreiben — damit Aufträge gefunden, Kunden beantwortet und Rechnungen bezahlt werden.',
             cta_services:'Leistungen entdecken', cta_apps:'Apps öffnen',
             div_eyebrow:'Ein Unternehmen · Zwei Bereiche', div_h2:'Zwei Wege, wie wir Sie voranbringen',
@@ -1614,7 +1623,7 @@
             mkt_eyebrow:'ИИ меняет всё', mkt_line:'Самые умные малые бизнесы мира становятся партнёрами One World, чтобы ускорить свой рост.', mkt_soon:'Мобильные приложения скоро — уже сегодня всё работает в браузере.', swipe_hint:'Листайте, чтобы увидеть все три',
             s_langs:'языков',
             nav_services:'Услуги', nav_apps:'Приложения', nav_how:'Как мы работаем', nav_faq:'Вопросы',
-            ow_head:'ИИ для скучной — но прибыльной — половины вашего дела.',
+            ow_head:'ИИ для скучной — но прибыльной — стороны вашего дела.',
             ow_sub:'One World Labs создаёт технологии ИИ для малого бизнеса и фрилансеров: приложения, которыми вы пользуетесь сами, и сервисы, которые мы ведём за вас — чтобы заказы находились, клиенты получали ответ, а деньги действительно приходили.',
             cta_services:'Посмотреть услуги', cta_apps:'Открыть приложения',
             div_eyebrow:'Одна компания · Два направления', div_h2:'Два способа помочь вам выигрывать',
@@ -1653,7 +1662,7 @@
             mkt_eyebrow:'AI 正在改变一切', mkt_line:'全球最精明的小微企业正与 One World 携手，加速自己的增长。', mkt_soon:'手机应用即将上线——今天在浏览器里就能使用全部功能。', swipe_hint:'左右滑动查看全部三项',
             s_langs:'种语言',
             nav_services:'服务', nav_apps:'应用', nav_how:'合作方式', nav_faq:'常见问题',
-            ow_head:'用 AI 处理生意里枯燥却赚钱的那一半。',
+            ow_head:'用 AI 处理生意里枯燥却赚钱的那一面。',
             ow_sub:'One World Labs 为小微企业和自由职业者打造 AI 技术：既有你自己使用的应用，也有我们替你运营的服务——让活儿找得到、客户有人应、钱真的到账。',
             cta_services:'了解服务', cta_apps:'打开应用',
             div_eyebrow:'一家公司 · 两大业务', div_h2:'两种方式，助你赢下生意',
@@ -1701,7 +1710,7 @@
             div_ag_p:'Construímos e operamos a IA que atende suas ligações, agenda seus compromissos, cuida da sua reputação e traz clientes de volta — para você fazer o trabalho que só você sabe fazer.',
             div_ag_cta:'Ver os dez serviços',
             div_pl_tag:'Apps que você usa', div_pl_h:'A Plataforma',
-            div_pl_p:'Cinco apps para pequenos negócios e autônomos: seja contratado e receba, venda ingressos, construa credibilidade verificada — tudo com um único login.',
+            div_pl_p:'Seis apps para pequenos negócios e autônomos: seja contratado e receba, venda ingressos, construa credibilidade verificada — tudo com um único login.',
             div_pl_cta:'Explorar os apps',
             agency_eyebrow:'One World Agency', agency_h2:'Uma agência de IA para pequenos negócios',
             agency_sub:'Não somos uma agência de marketing — somos uma agência de IA. A mesma vantagem que as grandes empresas têm, montada e operada pela nossa equipe para você.',
