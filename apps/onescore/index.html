@@ -2,33 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script>
-/* One ID / OAuth redirect-catcher — MUST stay at the very top of index.html and 404.html.
-   Supabase returns tokens in the hash (#access_token=…) or ?code= for PKCE. Hand the
-   whole thing off to the OneSocial v2 app with tokens intact, or Google sign-in breaks. */
-(function () {
-  var h = location.hash || "", q = location.search || "";
-  if (/access_token|refresh_token|error_description|type=recovery/.test(h) || /[?&]code=/.test(q)) {
-    location.replace("https://onejob.oneworldlabs.ai/" + q + h);
-  }
-})();
-</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>One World Labs — The AI agency and app platform for small business</title>
-<meta name="description" content="One World Labs is two things in one: an AI agency that answers your calls, builds your website, and runs your marketing for you — and a platform of six apps (OneJob, OneScore, OneEvent, OneSocial, OneAgent, OneHome) under one login.">
+<title>OneScore — Professional credibility | One World Labs</title>
+<meta name="description" content="OneScore turns everything you have already done — the jobs you finished, the reviews you earned, the platforms you are on, the identity you verified — into one number you can put a">
 <link rel="manifest" href="/owl-manifest.webmanifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#FAFAF8" id="theme-color-meta">
-<link rel="canonical" href="https://www.oneworldlabs.ai/">
+<link rel="canonical" href="https://www.oneworldlabs.ai/apps/onescore/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="One World Labs">
-<meta property="og:title" content="One World Labs — The AI agency and app platform for small business">
-<meta property="og:description" content="An AI agency that answers your calls, builds your website, and runs your marketing — plus six apps for freelancers and small businesses, under one login.">
-<meta property="og:url" content="https://www.oneworldlabs.ai/">
+<meta property="og:title" content="OneScore — Professional credibility | One World Labs">
+<meta property="og:description" content="OneScore turns everything you have already done — the jobs you finished, the reviews you earned, the platforms you are on, the identity you verified — into one number you can put a">
+<meta property="og:url" content="https://www.oneworldlabs.ai/apps/onescore/">
 <meta property="og:image" content="https://www.oneworldlabs.ai/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="One World Labs — The AI agency and app platform for small business">
-<meta name="twitter:description" content="An AI agency that answers your calls, builds your website, and runs your marketing — plus six apps under one login.">
+<meta name="twitter:title" content="OneScore — Professional credibility | One World Labs">
+<meta name="twitter:description" content="OneScore turns everything you have already done — the jobs you finished, the reviews you earned, the platforms you are on, the identity you verified — into one number you can put a">
 <meta name="twitter:image" content="https://www.oneworldlabs.ai/og-cover.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -643,8 +633,29 @@
   var t = setInterval(function () { sync(); if (++ticks > 20) clearInterval(t); }, 1500);
 })();
 </script>
-</head>
-<body>
+
+<style>
+  .apx{--hb:#E0A21F;--hd:#96690A;--hl:#F3C969;}
+  .apx .hue-text{color:var(--hd);}
+  .dark .apx .hue-text{color:var(--hl);}
+  .apx-hero{background:
+     radial-gradient(120% 100% at 15% 0%, color-mix(in srgb,var(--hb) 16%,transparent), transparent 62%),
+     radial-gradient(90% 80% at 95% 20%, color-mix(in srgb,var(--hb) 10%,transparent), transparent 60%);}
+  .apx-num{font-variant-numeric:tabular-nums;font-weight:800;color:var(--hb);opacity:.95;}
+  .apx-step{position:relative;padding-left:56px;}
+  .apx-step::before{content:attr(data-n);position:absolute;left:0;top:-2px;width:38px;height:38px;
+     border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:15px;
+     color:#fff;background:linear-gradient(180deg,var(--hb),var(--hd));}
+  /* The step spine. It stops at the LAST step rather than running past it — a rule that continues
+     under the final item reads as a list that lost its last row. */
+  .apx-step:not(:last-child)::after{content:"";position:absolute;left:18px;top:44px;bottom:-26px;
+     width:2px;background:color-mix(in srgb,var(--hb) 30%,transparent);}
+  .apx-tick{position:relative;padding-left:30px;}
+  .apx-tick::before{content:"";position:absolute;left:2px;top:9px;width:9px;height:9px;border-radius:3px;
+     background:var(--hb);}
+  @media (max-width:639px){ .apx-step{padding-left:48px;} .apx-step::before{width:32px;height:32px;font-size:13px;}
+     .apx-step:not(:last-child)::after{left:15px;top:38px;} }
+</style></head><body>
 <div class="min-h-screen bg-background text-foreground font-sans overflow-x-hidden">
 
     <!-- The aurora — One World Labs is the ONLY surface that runs the multi-colour field -->
@@ -794,382 +805,77 @@
         </div>
     </div>
 
-    <main class="relative z-10 pt-24 md:pt-32 pb-16 md:pb-20">
-
-        <!-- ================= HERO ================= -->
-        <section class="container mx-auto px-4 text-center max-w-5xl mb-24 md:mb-36">
-            <!-- the multicolor OneWorld mark — GHL/_BRAND-ASSETS/OneWorld_multicolor-mark master, transparent -->
-            <img src="/mark-oneworld.png" alt="OneWorld" class="fade-up h-20 md:h-24 w-auto mx-auto mb-8 drop-shadow-[0_10px_24px_rgba(27,73,184,0.25)]">
-            <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-5 py-2.5 rounded-full frost mb-10 text-[10.5px] sm:text-[12.5px] font-medium">
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">10</strong> <span class="text-muted-foreground" data-i18n="s_svcs">services</span></span>
-                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">6</strong> <span class="text-muted-foreground" data-i18n="s_apps">apps</span></span>
-                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">7</strong> <span class="text-muted-foreground" data-i18n="s_langs">languages</span></span>
-                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">1</strong> <span class="text-muted-foreground" data-i18n="s_login">login</span></span>
-            </div>
-
-            <h1 class="fade-up text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.04] mb-6">
-                One World.<br><span class="text-primary">Your World.</span>
-            </h1>
-
-            <p class="text-xl sm:text-2xl md:text-[28px] font-semibold tracking-tight max-w-3xl mx-auto mb-5 leading-snug" data-i18n="ow_head">
-                AI that runs the boring but profitable side of your business.
-            </p>
-
-            <p class="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed" data-i18n="ow_sub">
-                One World Labs builds AI technology for small businesses and freelancers — an ecosystem of apps you use and services we run for you, so the work gets found, the customers get answered and the money actually arrives.
-            </p>
-
-            <div id="signedout-cta" class="hero-ctas items-center">
-                <a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="cta-signin btn-ghost w-full sm:w-auto h-12 px-6 text-base">
-                    <svg class="h-5 w-5 shrink-0" width="24" height="24" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
-                    <span data-i18n="cta_signin">Sign in with One ID</span>
-                </a>
-            </div>
-
-            <div id="signedin-cta" class="hidden flex-col items-center justify-center gap-1.5 mb-8">
-                <span class="w-full sm:w-auto h-12 px-6 text-base font-semibold rounded-full frost inline-flex items-center justify-center gap-2">
-                    <svg class="h-5 w-5 shrink-0" width="24" height="24" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
-                    <span id="welcomeMsg">Signed in — Welcome, there!</span>
-                </span>
-                <button id="signOutBtn" type="button" class="text-sm font-semibold text-muted-foreground hover:text-foreground hover:underline underline-offset-4 transition-colors" data-i18n="signout">Sign out</button>
-                <p class="text-muted-foreground text-sm sm:text-base mt-2" data-i18n="signedin_hint">Pick your favorite app below to jump back in — you're already signed in everywhere.</p>
-                <div class="scroll-cue mt-1" aria-hidden="true">
-                    <svg class="sc-chev" style="animation-delay:0s" viewBox="0 0 24 12"><path d="M2 2l10 8 10-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <svg class="sc-chev" style="animation-delay:.18s" viewBox="0 0 24 12"><path d="M2 2l10 8 10-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <svg class="sc-chev" style="animation-delay:.36s" viewBox="0 0 24 12"><path d="M2 2l10 8 10-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-            </div>
-
-            <p class="text-xs sm:text-sm text-muted-foreground/80" data-i18n="microtrust">
-                One login for every app · Free to start · No credit card
-            </p>
-        </section>
-
-        <!-- ================= AI IS CHANGING EVERYTHING + STORE BADGES ================= -->
-        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
-            <div class="mkt-grid">
-                <div>
-                    <h3 class="eyebrow mb-4" data-i18n="mkt_eyebrow">AI is changing everything</h3>
-                    <p class="text-2xl sm:text-3xl md:text-[38px] font-bold tracking-tight leading-snug md:leading-tight" data-i18n="mkt_line">The world's smartest small businesses are partnering with One World to accelerate their growth.</p>
-                    <!-- store badges — visual placeholders until the App Store / Google Play listings are live -->
-                    <div class="mkt-ctas flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-8">
-                        <a href="#" class="store-badge" aria-label="Download on the App Store — coming soon" onclick="return false;">
-                            <svg width="26" height="30" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.7-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-                            <span class="sb-lines"><span class="sb-top">Download on the</span><span class="sb-bottom">App Store</span></span>
-                        </a>
-                        <a href="#" class="store-badge" aria-label="Get it on Google Play — coming soon" onclick="return false;">
-                            <svg width="24" height="27" viewBox="0 0 512 512" aria-hidden="true"><path fill="#00D7FE" d="M48 32c-6 5.5-10 14-10 25v398c0 11 4 19.5 10 25l3 2.8L294 240v-6L51 29.2 48 32z"/><path fill="#FFC900" d="M375 321l-81-81v-6l81-81 1.8 1L473 208c27 15.3 27 40.4 0 55.8l-96.2 54.2-1.8 3z"/><path fill="#FF3A44" d="M376.8 318L294 237 48 480c9 9.5 23.8 10.7 40.5 1.2L376.8 318z"/><path fill="#00F076" d="M376.8 156L88.5 30.8C71.8 21.3 57 22.5 48 32l246 205 82.8-81z"/></svg>
-                            <span class="sb-lines"><span class="sb-top">GET IT ON</span><span class="sb-bottom">Google Play</span></span>
-                        </a>
-                    </div>
-                    <p class="text-xs sm:text-sm text-muted-foreground mt-4" data-i18n="mkt_soon">Mobile apps coming soon — everything already works in your browser today.</p>
-                </div>
-                <div>
-                    <div class="collage" aria-hidden="true">
-                        <img src="/blog/img/freelancer.jpg" alt="" loading="lazy" class="c1">
-                        <img src="/blog/img/ecosystem.jpg" alt="" loading="lazy" class="c2">
-                    </div>
-                    <div class="collage-sm" aria-hidden="true">
-                        <img src="/blog/img/freelancer.jpg" alt="" loading="lazy">
-                        <img src="/blog/img/ecosystem.jpg" alt="" loading="lazy">
-                        <img src="/blog/img/badges.jpg" alt="" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= THE TWO DIVISIONS ================= -->
-        <section id="divisions" class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36">
-            <div class="text-center mb-10 md:mb-14">
-                <h3 class="eyebrow mb-3" data-i18n="div_eyebrow">One company · Two divisions</h3>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="div_h2">Two ways we help you win</h2>
-                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="div_sub">A done-for-you AI agency on one side. A platform of apps you run yourself on the other. One login across everything.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <a href="#services" class="division-card frost hue-top rounded-3xl p-8 md:p-12 block group transition-transform duration-300 hover:-translate-y-1" style="--hb:#2E6BE6">
-                    <div class="eyebrow mb-6" data-i18n="div_ag_tag">Done-for-you AI services</div>
-                    <h3 class="text-3xl md:text-4xl font-bold mb-4"><span class="text-primary" data-i18n="div_ag_h">The Agency</span></h3>
-                    <p class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8" data-i18n="div_ag_p">We build and run the AI that answers your phones, books your calendar, manages your reputation, and brings customers back — so you can do the work only you can do.</p>
-                    <span class="inline-flex items-center gap-2 font-semibold text-primary"><span data-i18n="div_ag_cta">See all ten services</span> <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
-                </a>
-                <a href="#apps" class="division-card frost hue-top rounded-3xl p-8 md:p-12 block group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8B3DEA">
-                    <div class="eyebrow mb-6" data-i18n="div_pl_tag">Apps you use</div>
-                    <h3 class="text-3xl md:text-4xl font-bold mb-4"><span class="text-primary" data-i18n="div_pl_h">The Platform</span></h3>
-                    <p class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8" data-i18n="div_pl_p">Six apps for small businesses and freelancers — get hired and paid, sell tickets, build verified credibility — all under one login.</p>
-                    <span class="inline-flex items-center gap-2 font-semibold text-primary"><span data-i18n="div_pl_cta">Explore the apps</span> <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
-                </a>
-            </div>
-        </section>
-
-        <!-- ================= THE AGENCY — SERVICES ================= -->
-        <section id="services" class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
-            <div class="text-center mb-10 md:mb-16">
-                <h3 class="eyebrow mb-3" data-i18n="agency_eyebrow">One World Agency</h3>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="agency_h2">An AI agency for small businesses</h2>
-                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="agency_sub">Not a marketing agency — an AI agency. The same AI advantage big companies have, set up and run for you by our team.</p>
-            </div>
-
-            <!-- flagship programs -->
-            <div class="flex items-end justify-between gap-4 mb-6">
-                <div>
-                    <h3 class="text-xl md:text-2xl font-bold" data-i18n="flag_h">Flagship programs</h3>
-                    <p class="text-muted-foreground text-sm md:text-base mt-1" data-i18n="flag_sub">Our three productized services — each with its own home.</p>
-                </div>
-            </div>
-            <div class="flagship-row mb-3 md:mb-16">
-                <a href="https://onevoice.oneworldlabs.ai/" class="frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#2E6BE6;--hd:#1D4ED8;--hl:#93B4F8">
-                    <div class="hue-tile w-16 h-16 mb-6 p-2"><img src="/ic-onevoice.png" alt="" class="w-full h-full object-contain"></div>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Voice</h3>
-                    <div class="text-xs font-bold tracking-widest uppercase hue-text mb-4" data-i18n="svc01_h">AI answering, scheduling &amp; booking</div>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="onevoice_desc">An AI receptionist that answers every call 24/7, qualifies the lead, and books the appointment — so a missed call is never a missed customer. We set it up and run it for you.</p>
-                    <div class="inline-flex items-center font-semibold hue-text"><span data-i18n="onevoice_cta">Get OneVoice</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://onepage.oneworldlabs.ai/" class="frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#D6338B;--hd:#A3126A;--hl:#F49BC9">
-                    <div class="hue-tile w-16 h-16 mb-6 p-2"><img src="/ic-onepage.png" alt="" class="w-full h-full object-contain"></div>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Page</h3>
-                    <div class="text-xs font-bold tracking-widest uppercase hue-text mb-4" data-i18n="svc02_h">AI websites, built &amp; managed</div>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="oneapp_desc">We build your website with AI, then handle the hosting, domain, email, and ongoing updates for you — a real web presence without the hassle.</p>
-                    <div class="inline-flex items-center font-semibold hue-text"><span data-i18n="oneapp_cta">Get OnePage</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://oneapp.oneworldlabs.ai/" class="frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8E2F6B;--hd:#7A2159;--hl:#E29CC7">
-                    <div class="hue-tile w-16 h-16 mb-6 p-2"><img src="/ic-oneapp.png" alt="" class="w-full h-full object-contain"></div>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>App</h3>
-                    <div class="text-xs font-bold tracking-widest uppercase hue-text mb-4" data-i18n="svc03_h">Your own mobile app</div>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="oneapp_new_desc">We design your business its own mobile app — free — then launch it on the Apple App Store and Google Play for a one-time $499. The store accounts are in your name, so the app is permanently yours.</p>
-                    <div class="inline-flex items-center font-semibold hue-text"><span data-i18n="oneapp_new_cta">Design my free app</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-            </div>
-
-            <div class="swipe-hint mb-12" aria-hidden="true"><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span data-i18n="swipe_hint">Swipe to see all three</span></div>
-
-            <!-- ── THE SERVICE MENU IS A LINK, NOT A LIST ────────────────────────────────────────────
-             Lee, 10 Aug 2026: *"at the bottom it says 'open the full service menu' — to me that's
-             redundant or contradictory. What we should do on that main page is say menu, and it
-             just takes you to the full service menu, instead of showing the full service menu and
-             then having a full service menu button at the bottom of it."*
-
-             He is right twice over. The page was showing all ten services AND then offering to
-             show them — and the offer was `hidden sm:inline-flex`, so on a phone (three quarters
-             of the traffic) there was no way out of the accordion at all. Ten collapsed rows also
-             sat between the reader and the rest of the home page for no gain: somebody scanning a
-             homepage wants to know a menu exists, not to read it there.
-
-             So the home page now states that the menu exists and links to it. The interface Lee
-             likes lives on /services/, where it can have the filters and the room. -->
-        <a href="/services/" class="frost rounded-3xl p-6 sm:p-8 md:p-10 flex items-center gap-5 group transition-transform duration-300 hover:-translate-y-1">
-          <div class="hue-tile w-14 h-14 shrink-0 grid place-items-center" style="--hb:#2C6FE8;--hd:#1740A8;--hl:#93B4F8">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--hb)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 6h16M4 12h16M4 18h10"/>
-            </svg>
-          </div>
-          <div class="min-w-0 flex-1">
-            <h3 class="text-xl md:text-2xl font-bold" data-i18n="menu_h">The full service menu</h3>
-            <p class="text-muted-foreground text-sm md:text-base mt-1" data-i18n="menu_sub">Ten ways we put AI to work in your business.</p>
-          </div>
-          <svg class="h-5 w-5 shrink-0 text-primary transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        </a>
-        </section>
-
-        <!-- ================= HOW WE WORK ================= -->
-        <section id="how" class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
-            <div class="text-center mb-10 md:mb-14">
-                <h3 class="eyebrow mb-3" data-i18n="how_eyebrow">How we work</h3>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="how_h2">White-glove, from day one</h2>
-                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="how_sub">You never have to touch the technology unless you want to.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="step-card frost rounded-3xl">
-                    <div class="idx opacity-90">1</div>
-                    <div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-3" data-i18n="st1_h">Talk to us</h3>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed" data-i18n="st1_p">A short conversation about how your business runs today — what's slipping through, and what it's costing you.</p>
-                    </div>
-                </div>
-                <div class="step-card frost rounded-3xl">
-                    <div class="idx opacity-90">2</div>
-                    <div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-3" data-i18n="st2_h">We build it</h3>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed" data-i18n="st2_p">Your AI receptionist, website, campaigns, or custom agents — configured for your business, in your voice, in up to seven languages.</p>
-                    </div>
-                </div>
-                <div class="step-card frost rounded-3xl">
-                    <div class="idx opacity-90">3</div>
-                    <div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-3" data-i18n="st3_h">We run it</h3>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed" data-i18n="st3_p">Our team monitors, tunes, and reports. You see the results — calls answered, appointments booked, customers back.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-10">
-                <a href="mailto:contact@oneworldlabs.ai?subject=One%20World%20Agency" class="btn-clay h-12 px-8 text-base"><span data-i18n="how_cta">Start the conversation</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-            </div>
-        </section>
-
-        <!-- ================= THE PLATFORM — APPS ================= -->
-        <section id="apps" class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
-            <div class="text-center mb-10 md:mb-16">
-                <h3 class="eyebrow mb-3" data-i18n="platform_eyebrow">One World Platform</h3>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="apps_h2">Jump into your favorite app</h2>
-                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="apps_sub">Six apps, one login — all live today.</p>
-            </div>
-
-            <div class="app-grid">
-                <div id="onejob" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#17A45C;--hd:#0E8248;--hl:#5FD79B">
-                    <span class="hue-dot app-dot" aria-hidden="true"></span>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onejob_tag">The jobs marketplace</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onejob_desc">Get hired and get paid in 60 seconds. Every contract is signed in the app and the money is held safely until the work is actually done. Reviews come from real completed jobs, so a good reputation is one you earned. <a href="/apps/onejob/" class="app-more hue-text" data-i18n="app_more">more</a></p>
-                    <a href="https://app.oneworldlabs.ai/jobs" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onejob_cta">Open OneJob</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                </div>
-                <div id="onescore" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E0A21F;--hd:#96690A;--hl:#F3C969">
-                    <span class="hue-dot app-dot" aria-hidden="true"></span>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onescore_tag">Professional credibility</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onescore_desc">Your whole reputation as one verified number you can post anywhere. It reads your reviews, your completed work and your social proof, then shows you exactly what would move it. Free forever. <a href="/apps/onescore/" class="app-more hue-text" data-i18n="app_more">more</a></p>
-                    <a href="https://app.oneworldlabs.ai/onescore" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onescore_cta">Open OneScore</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                </div>
-                <div id="oneevent" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E2711D;--hd:#9C4A0C;--hl:#F5A468">
-                    <span class="hue-dot app-dot" aria-hidden="true"></span>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneevent_tag">Events & tickets</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneevent_desc">Create an event, sell tickets and check guests in with a QR code, live in minutes. Take payment in your own currency and see who is actually coming. Free events cost nothing to run. <a href="/apps/oneevent/" class="app-more hue-text" data-i18n="app_more">more</a></p>
-                    <a href="https://app.oneworldlabs.ai/events" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneevent_cta">Open OneEvent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                </div>
-                <div id="onesocial" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8B3DEA;--hd:#5B21B6;--hl:#C4A9FA">
-                    <span class="hue-dot app-dot" aria-hidden="true"></span>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onesocial_tag">Your connected platforms</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onesocial_desc">All your platforms behind one professional identity. Connect the accounts you already have and turn a following into credibility that can be checked. What you post here reaches every app in the family. <a href="/apps/onesocial/" class="app-more hue-text" data-i18n="app_more">more</a></p>
-                    <a href="https://app.oneworldlabs.ai/social" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onesocial_cta">Open OneSocial</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                </div>
-                <div id="oneagent" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#7B2D3B;--hd:#6B2331;--hl:#E0919E">
-                    <span class="hue-dot app-dot" aria-hidden="true"></span>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneagent_tag">Agents & representation</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneagent_desc">Represent other people's work and get paid for the deals you close, with your commission written into the contract before anyone signs. Or find an agent to represent yours. Real people, not AI. <a href="/apps/oneagent/" class="app-more hue-text" data-i18n="app_more">more</a></p>
-                    <a href="https://app.oneworldlabs.ai/agent" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneagent_cta">Open OneAgent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                </div>
-                <div id="onehome" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#0D9488;--hd:#0F766E;--hl:#5EEAD4">
-                    <span class="hue-dot app-dot" aria-hidden="true"></span>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Home</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onehome_tag">Rent or buy a home</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onehome_desc">Rent or buy a place with a real contract instead of a chat thread. To rent: a signed lease, a deposit held safely and move-in photos both sides agreed to. To buy: the sale history and a value range Colombia has never had. <a href="/apps/onehome/" class="app-more hue-text" data-i18n="app_more">more</a></p>
-                    <a href="https://app.oneworldlabs.ai/home" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onehome_cta">Open OneHome</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= USE IT ANYWHERE ================= -->
-        <section class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36">
-            <div class="text-center mb-10 md:mb-16">
-                <h3 class="eyebrow mb-3" data-i18n="plat_eyebrow">Use it anywhere</h3>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="plat_h2">Works on any phone or computer</h2>
-                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="plat_sub">No download required. Open it in your browser today — and add it to your home screen so it opens like an app.</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="frost rounded-3xl p-6 md:p-10">
-                    <div class="w-14 h-14 rounded-2xl btn-clay mb-8">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4" data-i18n="plat1_h">Add to your phone</h3>
-                    <p class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8" data-i18n="plat1_p">Open any One World app in your mobile browser, tap Share, and choose "Add to Home Screen." It installs an icon and opens full-screen — no App Store needed.</p>
-                    <div class="inline-block px-4 py-2 rounded-full border border-border/50 text-xs font-bold tracking-wider text-muted-foreground" data-i18n="plat1_badge">NATIVE APPS COMING SOON</div>
-                </div>
-                <div class="frost rounded-3xl p-6 md:p-10">
-                    <div class="w-14 h-14 rounded-2xl btn-clay mb-8">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4" data-i18n="plat2_h">Use it on desktop</h3>
-                    <p class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8" data-i18n="plat2_p">Everything runs in your browser on any computer — nothing to install, nothing to update. Bookmark oneworldlabs.ai and you're one click from every app.</p>
-                    <a href="#apps" class="btn-ghost h-10 px-6"><span data-i18n="cta_jump">Jump into an app</span> <svg class="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= FROM THE BLOG ================= -->
-        <section class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36">
-            <div class="text-center mb-10 md:mb-14">
-                <h3 class="eyebrow mb-3" data-i18n="blog_eyebrow">Guides</h3>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="blog_h1">Guides for small businesses &amp; freelancers</h2>
-                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="blog_sub">Practical advice on reviews, calls, credibility, and getting hired — published regularly.</p>
-            </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-                <a href="/blog/get-more-five-star-reviews/" class="post-card frost rounded-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-                    <img src="/blog/img/reviews.jpg" alt="Small business owner celebrating positive customer feedback" loading="lazy">
-                    <div class="p-5 md:p-6 flex flex-col flex-grow">
-                        <h3 class="font-bold text-base md:text-lg leading-snug mb-2">How to Get More Five-Star Reviews for Your Small Business</h3>
-                        <p class="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow">When to ask, how to ask, and how to turn scattered reviews into one visible credibility number.</p>
-                        <span class="inline-flex items-center gap-1 text-sm font-bold text-primary"><span data-i18n="blog_read">Read article</span> <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
-                    </div>
-                </a>
-                <a href="/blog/ai-answering-service-small-business/" class="post-card frost rounded-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-                    <img src="/blog/img/ai-answering.jpg" alt="Laptop showing an AI assistant dashboard" loading="lazy">
-                    <div class="p-5 md:p-6 flex flex-col flex-grow">
-                        <h3 class="font-bold text-base md:text-lg leading-snug mb-2">AI Answering Services: How to Never Miss Another Call</h3>
-                        <p class="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow">What an AI receptionist actually does, and how it compares to voicemail and human answering services.</p>
-                        <span class="inline-flex items-center gap-1 text-sm font-bold text-primary"><span data-i18n="blog_read">Read article</span> <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
-                    </div>
-                </a>
-                <a href="/blog/what-is-onescore/" class="post-card frost rounded-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-                    <img src="/blog/img/onescore.jpg" alt="Professional checking a credibility score on a phone" loading="lazy">
-                    <div class="p-5 md:p-6 flex flex-col flex-grow">
-                        <h3 class="font-bold text-base md:text-lg leading-snug mb-2">What Is a OneScore? The Credibility Number That Gets You Hired</h3>
-                        <p class="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow">One portable, verified reputation number — how it works and why it wins clients.</p>
-                        <span class="inline-flex items-center gap-1 text-sm font-bold text-primary"><span data-i18n="blog_read">Read article</span> <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
-                    </div>
-                </a>
-            </div>
-            <div class="text-center mt-8">
-                <a href="/blog/" class="btn-ghost h-11 px-7 text-sm sm:text-base"><span data-i18n="blog_soon">New guides published regularly.</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-            </div>
-        </section>
-
-        <!-- ================= FAQ ================= -->
-        <section id="faqsec" class="container mx-auto px-4 max-w-3xl mb-20 scroll-mt-24">
-            <div class="text-center mb-12">
-                <h3 class="eyebrow mb-3" data-i18n="faq_eyebrow">Good to know</h3>
-                <h2 class="text-3xl md:text-4xl font-bold" data-i18n="faq_h2">Did you know?</h2>
-            </div>
-
-            <div id="faq" data-acc>
-                <div class="qa frost px-6 rounded-2xl mb-4">
-                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
-                        <span class="flex items-center gap-4"><span class="idx text-sm">01 /</span><span data-i18n="q1_q">One World Labs is apps you use plus services we run</span></span>
-                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-                    </button>
-                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14" data-i18n="q1_a">Six apps under one login — OneJob to get hired and paid, OneScore for credibility, OneEvent for tickets, OneSocial for your connected platforms, OneAgent for representation, and OneHome to rent or buy a place — plus two done-for-you services our team runs: OneVoice answers your calls and OnePage builds and manages your website. Everything shares one login and one profile.</p></div>
-                </div>
-                <div class="qa frost px-6 rounded-2xl mb-4">
-                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
-                        <span class="flex items-center gap-4"><span class="idx text-sm">02 /</span><span data-i18n="q2_q">You can start free — no credit card</span></span>
-                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-                    </button>
-                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14" data-i18n="q2_a">OneScore is free forever, and every app lets you get started without paying up front. Our done-for-you services are paid — you only upgrade when a tool is earning its keep.</p></div>
-                </div>
-                <div class="qa frost px-6 rounded-2xl mb-4">
-                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
-                        <span class="flex items-center gap-4"><span class="idx text-sm">03 /</span><span data-i18n="q3_q">One login gets you into everything</span></span>
-                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-                    </button>
-                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14" data-i18n="q3_a">Sign in once with One ID and you're in every One World app and service — no separate accounts, no re-entering your details, no juggling passwords across tools.</p></div>
-                </div>
-                <div class="qa frost px-6 rounded-2xl mb-4">
-                    <button class="qa-trigger w-full flex items-center justify-between gap-4 text-left font-medium text-lg py-6">
-                        <span class="flex items-center gap-4"><span class="idx text-sm">04 /</span><span data-i18n="q4_q">Built credibility-first — you stay in control</span></span>
-                        <svg class="qa-chev flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-                    </button>
-                    <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14" data-i18n="q4_a">No algorithm decides who sees your business, and your reputation isn't scattered across ten platforms. Your proof is verified, yours, and portable — you decide where it shows up.</p></div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="relative z-10 border-t border-border/50 pt-12 md:pt-20 pb-8 md:pb-10" style="background:color-mix(in srgb,var(--color-bg) 78%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);">
+    <main class="apx relative z-10 pt-24 md:pt-28">
+<section class="apx-hero">
+ <div class="container mx-auto px-4 max-w-6xl py-10 md:py-20">
+  <a href="/apps/" class="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-foreground mb-6">
+    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    All apps</a>
+  <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+   <div>
+    <h3 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Professional credibility</h3>
+    <h1 class="text-4xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-5">
+      <span class="text-primary">One</span>Score — Your credibility, in one number people can actually check.</h1>
+    <p class="text-muted-foreground text-base md:text-xl leading-relaxed mb-8 max-w-xl">OneScore turns everything you have already done — the jobs you finished, the reviews you earned, the platforms you are on, the identity you verified — into one number you can put anywhere. It is free, forever.</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="https://app.oneworldlabs.ai/onescore" class="btn-clay h-12 px-7 text-base">Open OneScore
+        <svg class="ml-1.5 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+      <a href="#how" class="btn-ghost h-12 px-6 text-base">How it works</a>
+    </div>
+    <p class="text-xs text-muted-foreground mt-4">Free to join · one login across every One World app · no credit card</p>
+   </div>
+   <div class="frost rounded-3xl p-5 md:p-8"><svg viewBox="0 0 420 240" class="w-full h-auto" role="img" aria-label="Completed work, reviews, connected accounts and verified identity combine into one score">
+  <g font-size="11" font-weight="700" fill="currentColor" opacity=".5">
+    <text x="14" y="52">COMPLETED WORK</text><text x="14" y="96">REVIEWS</text>
+    <text x="14" y="140">CONNECTED ACCOUNTS</text><text x="14" y="184">VERIFIED IDENTITY</text></g>
+  <g stroke="#E0A21F" stroke-width="2" fill="none" opacity=".5">
+    <path d="M150 48C210 48 210 118 250 118"/><path d="M150 92C200 92 210 112 250 116"/>
+    <path d="M150 136C200 136 210 122 250 120"/><path d="M150 180C210 180 210 126 250 122"/></g>
+  <circle cx="322" cy="120" r="58" fill="none" stroke="currentColor" stroke-width="9" opacity=".12"/>
+  <circle cx="322" cy="120" r="58" fill="none" stroke="#E0A21F" stroke-width="9" stroke-linecap="round"
+          stroke-dasharray="292 365" transform="rotate(-90 322 120)"/>
+  <text x="322" y="126" text-anchor="middle" font-size="34" font-weight="800" fill="currentColor">84</text>
+  <text x="322" y="146" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.4" fill="#E0A21F">ONESCORE</text>
+</svg></div>
+  </div>
+ </div>
+</section>
+<section class="container mx-auto px-4 max-w-5xl py-12 md:py-20">
+ <h2 class="text-2xl md:text-4xl font-bold mb-8 md:mb-10">Reputation does not travel, and that is the problem</h2>
+ <div class="grid md:grid-cols-2 gap-5"><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">You start from zero on every platform</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">Eleven years of five-star reviews on one site are worth nothing on the next. Every new platform makes you prove yourself from scratch, and the platform keeps the proof.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">Anyone can say anything about themselves</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">A profile is a claim. “Trusted”, “top-rated”, “award-winning” — none of it is checkable, which is exactly why nobody believes any of it.</p></div></div>
+</section>
+<section id="how" class="container mx-auto px-4 max-w-4xl py-12 md:py-20">
+ <div class="frost rounded-3xl p-6 md:p-10">
+  <h2 class="text-2xl md:text-4xl font-bold mb-8 md:mb-10">How the number is built</h2>
+  <div class="space-y-7 md:space-y-9"><div class="apx-step" data-n="1"><h3 class="font-bold text-lg md:text-xl mb-1.5">It reads evidence, not adjectives</h3><p class="text-muted-foreground text-sm md:text-base leading-relaxed">Completed work, real reviews, connected accounts, verified identity, media you actually published. Things that happened, not things you typed.</p></div><div class="apx-step" data-n="2"><h3 class="font-bold text-lg md:text-xl mb-1.5">Two halves — momentum and history</h3><p class="text-muted-foreground text-sm md:text-base leading-relaxed">FireScore is what you have done recently. Ice Score is the reputation you built over years and it decays slowly. A good year does not erase a bad month, and one quiet month does not erase a decade.</p></div><div class="apx-step" data-n="3"><h3 class="font-bold text-lg md:text-xl mb-1.5">It is published, and it is portable</h3><p class="text-muted-foreground text-sm md:text-base leading-relaxed">One number, one profile page, shareable anywhere — including outside One World. Your Reputation Passport travels with you.</p></div></div>
+ </div>
+</section>
+<section class="container mx-auto px-4 max-w-6xl py-12 md:py-20">
+ <h2 class="text-2xl md:text-4xl font-bold mb-8 md:mb-10">What you get</h2>
+ <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5"><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">Free forever</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">Not a trial, not a teaser tier. The score is the front door to everything else, so charging for it would be charging people to be believed.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">The Reputation Passport</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">One page that shows a stranger who you are, what you have done, and what other people said about it.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">Connect what you already have</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">Google reviews, marketplaces, social platforms, portfolios. Bring the reputation you already earned somewhere else.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">The simulator</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">See what a given action would do to your score before you do it. No mystery, no black box.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">Badge tiers</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">Member, Verified, Trusted, Authority — earned, not bought, and shown as a ring around your score.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">Nothing private feeds it</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">Call recordings and payment details never affect your score. Completed work does, and that is the product.</p></div></div>
+</section>
+<section class="container mx-auto px-4 max-w-4xl py-12 md:py-20">
+ <div class="frost rounded-3xl p-6 md:p-10">
+  <h2 class="text-2xl md:text-4xl font-bold mb-7">Who it is for</h2>
+  <ul class="text-sm md:text-[17px] leading-relaxed"><li class="apx-tick mb-4"><span class="font-bold">Anyone who has to be trusted by strangers</span> — <span class="text-muted-foreground">If your next job depends on somebody believing you, this is the thing that makes them believe you faster.</span></li><li class="apx-tick mb-4"><span class="font-bold">People starting over somewhere new</span> — <span class="text-muted-foreground">New city, new country, new platform — bring the proof with you.</span></li><li class="apx-tick mb-4"><span class="font-bold">Businesses checking somebody out</span> — <span class="text-muted-foreground">One number, one page, one minute, instead of five tabs and a guess.</span></li></ul>
+ </div>
+</section>
+<section class="container mx-auto px-4 max-w-3xl py-12 md:py-20">
+ <h2 class="text-2xl md:text-4xl font-bold mb-8">Questions</h2>
+ <details class="frost rounded-2xl px-5 md:px-6 py-4 mb-3 group"><summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4"><span>Is it really free?</span><svg class="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></summary><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed mt-3">Yes. OneScore costs nothing and always will.</p></details><details class="frost rounded-2xl px-5 md:px-6 py-4 mb-3 group"><summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4"><span>Can I game it?</span><svg class="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></summary><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed mt-3">The inputs are evidence — completed jobs, real reviews, verified identity. You can raise your score by doing more real work. That is the only route, and it is the intended one.</p></details><details class="frost rounded-2xl px-5 md:px-6 py-4 mb-3 group"><summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4"><span>What is FireScore versus Ice Score?</span><svg class="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></summary><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed mt-3">FireScore is your recent momentum on a rolling window. Ice Score is your long-run reputation, which decays slowly rather than vanishing.</p></details><details class="frost rounded-2xl px-5 md:px-6 py-4 mb-3 group"><summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4"><span>Who can see it?</span><svg class="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></summary><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed mt-3">You choose. Your public profile shows what you switch on.</p></details>
+</section>
+<section class="apx-hero">
+ <div class="container mx-auto px-4 max-w-4xl py-14 md:py-24 text-center">
+  <h2 class="text-3xl md:text-5xl font-bold mb-4">Ready when you are.</h2>
+  <p class="text-muted-foreground text-base md:text-lg mb-8 max-w-xl mx-auto">
+    One login covers every One World app. Open OneScore and your profile, your score and your
+    messages are already there.</p>
+  <a href="https://app.oneworldlabs.ai/onescore" class="btn-clay h-12 px-8 text-base">Open OneScore
+    <svg class="ml-1.5 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+  <p class="text-xs font-bold tracking-widest uppercase text-muted-foreground mt-14 mb-4">The rest of One World</p>
+  <div class="flex flex-wrap justify-center gap-2"><a href="/apps/onejob/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full frost text-sm font-semibold"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#17A45C"></span>OneJob</a><a href="/apps/oneevent/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full frost text-sm font-semibold"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#E2711D"></span>OneEvent</a><a href="/apps/onesocial/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full frost text-sm font-semibold"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#8B3DEA"></span>OneSocial</a><a href="/apps/oneagent/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full frost text-sm font-semibold"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#7B2D3B"></span>OneAgent</a><a href="/apps/onehome/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full frost text-sm font-semibold"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#0EA5E9"></span>OneHome</a></div>
+ </div>
+</section></main><footer class="relative z-10 border-t border-border/50 pt-12 md:pt-20 pb-8 md:pb-10" style="background:color-mix(in srgb,var(--color-bg) 78%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);">
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
                 <div>

@@ -234,9 +234,8 @@
     .dark .hue-tile{background:radial-gradient(120% 120% at 30% 20%,color-mix(in srgb,var(--hb,#2E6BE6) 30%,transparent),transparent 70%),
                    linear-gradient(152deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
         border-color:rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.12);}
-    .hue-top{position:relative;}
-    .hue-top::before{content:"";position:absolute;top:0;left:14%;right:14%;height:2px;border-radius:2px;
-        background:linear-gradient(90deg,transparent,var(--hb,#2E6BE6),transparent);opacity:.85;}
+    /* Top hairline removed 11 Aug 2026 (Lee) — see index.html. */
+        .hue-top{position:relative;}
     .hue-dot{width:9px;height:9px;border-radius:50%;background:var(--hb,#2E6BE6);box-shadow:0 0 10px color-mix(in srgb,var(--hb,#2E6BE6) 60%,transparent);}
 
     /* ---------- numbered service menu rows ---------- */
@@ -392,11 +391,11 @@
        the heading starts at the very top of the card's padding box. */
     .app-card{position:relative;}
     .app-dot{position:absolute;top:18px;right:18px;}
-    .app-learn{border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;}
-    .app-card:hover .app-learn{opacity:.9;}
+    .app-more{font-weight:700;white-space:nowrap;border-bottom:1px solid currentColor;padding-bottom:1px;}
+    .app-card:hover .app-more{opacity:.9;}
     @media (max-width:639px){
         .app-card .app-dot{top:14px;right:14px;width:8px;height:8px;}
-        .app-card .app-learn{font-size:11px !important;}
+        .app-card .app-more{font-size:inherit;}
     }
     .app-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
     @media (min-width:1024px){ .app-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;} }
@@ -792,49 +791,43 @@
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onejob_tag">The jobs marketplace</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onejob_desc">Get hired and get paid in 60 seconds. Every contract is signed in the app and the money is held safely until the work is actually done. Reviews come from real completed jobs, so a good reputation is one you earned.</p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onejob_desc">Get hired and get paid in 60 seconds. Every contract is signed in the app and the money is held safely until the work is actually done. Reviews come from real completed jobs, so a good reputation is one you earned. <a href="/apps/onejob/" class="app-more hue-text" data-i18n="app_more">more</a></p>
                     <a href="https://app.oneworldlabs.ai/jobs" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onejob_cta">Open OneJob</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                    <a href="/apps/#onejob" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneJob</a>
                 </div>
                 <div id="onescore" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E0A21F;--hd:#96690A;--hl:#F3C969">
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onescore_tag">Professional credibility</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onescore_desc">Your whole reputation as one verified number you can post anywhere. It reads your reviews, your completed work and your social proof, then shows you exactly what would move it. Free forever.</p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onescore_desc">Your whole reputation as one verified number you can post anywhere. It reads your reviews, your completed work and your social proof, then shows you exactly what would move it. Free forever. <a href="/apps/onescore/" class="app-more hue-text" data-i18n="app_more">more</a></p>
                     <a href="https://app.oneworldlabs.ai/onescore" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onescore_cta">Open OneScore</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                    <a href="/apps/#onescore" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneScore</a>
                 </div>
                 <div id="oneevent" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E2711D;--hd:#9C4A0C;--hl:#F5A468">
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneevent_tag">Events & tickets</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneevent_desc">Create an event, sell tickets and check guests in with a QR code, live in minutes. Take payment in your own currency and see who is actually coming. Free events cost nothing to run.</p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneevent_desc">Create an event, sell tickets and check guests in with a QR code, live in minutes. Take payment in your own currency and see who is actually coming. Free events cost nothing to run. <a href="/apps/oneevent/" class="app-more hue-text" data-i18n="app_more">more</a></p>
                     <a href="https://app.oneworldlabs.ai/events" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneevent_cta">Open OneEvent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                    <a href="/apps/#oneevent" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneEvent</a>
                 </div>
                 <div id="onesocial" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8B3DEA;--hd:#5B21B6;--hl:#C4A9FA">
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onesocial_tag">Your connected platforms</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onesocial_desc">All your platforms behind one professional identity. Connect the accounts you already have and turn a following into credibility that can be checked. What you post here reaches every app in the family.</p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onesocial_desc">All your platforms behind one professional identity. Connect the accounts you already have and turn a following into credibility that can be checked. What you post here reaches every app in the family. <a href="/apps/onesocial/" class="app-more hue-text" data-i18n="app_more">more</a></p>
                     <a href="https://app.oneworldlabs.ai/social" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onesocial_cta">Open OneSocial</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                    <a href="/apps/#onesocial" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneSocial</a>
                 </div>
                 <div id="oneagent" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#7B2D3B;--hd:#6B2331;--hl:#E0919E">
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneagent_tag">Agents & representation</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneagent_desc">Represent other people's work and get paid for the deals you close, with your commission written into the contract before anyone signs. Or find an agent to represent yours. Real people, not AI.</p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneagent_desc">Represent other people's work and get paid for the deals you close, with your commission written into the contract before anyone signs. Or find an agent to represent yours. Real people, not AI. <a href="/apps/oneagent/" class="app-more hue-text" data-i18n="app_more">more</a></p>
                     <a href="https://app.oneworldlabs.ai/agent" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneagent_cta">Open OneAgent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                    <a href="/apps/#oneagent" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneAgent</a>
                 </div>
                 <div id="onehome" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#0D9488;--hd:#0F766E;--hl:#5EEAD4">
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Home</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onehome_tag">Rent or buy a home</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onehome_desc">Rent or buy a place with a real contract instead of a chat thread. To rent: a signed lease, a deposit held safely and move-in photos both sides agreed to. To buy: the sale history and a value range Colombia has never had.</p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onehome_desc">Rent or buy a place with a real contract instead of a chat thread. To rent: a signed lease, a deposit held safely and move-in photos both sides agreed to. To buy: the sale history and a value range Colombia has never had. <a href="/apps/onehome/" class="app-more hue-text" data-i18n="app_more">more</a></p>
                     <a href="https://app.oneworldlabs.ai/home" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onehome_cta">Open OneHome</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-                    <a href="/apps/#onehome" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneHome</a>
                 </div>
             </div>
         </section>
