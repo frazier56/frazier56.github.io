@@ -10,14 +10,6 @@
   var h = location.hash || "", q = location.search || "";
   if (/access_token|refresh_token|error_description|type=recovery/.test(h) || /[?&]code=/.test(q)) {
     location.replace("https://onejob.oneworldlabs.ai/" + q + h);
-    return;
-  }
-  var productHost = {
-    "oneagent.oneworldlabs.ai": "https://app.oneworldlabs.ai/agent",
-    "onesocial.oneworldlabs.ai": "https://app.oneworldlabs.ai/social"
-  }[location.hostname.toLowerCase()];
-  if (productHost) {
-    location.replace(productHost + (location.pathname === "/" ? "" : location.pathname) + q + h);
   }
 })();
 </script>
@@ -409,6 +401,19 @@
     @media (min-width:640px){ .hero-ctas{display:flex;max-width:none;justify-content:center;gap:16px;} .hero-ctas .cta-signin{grid-column:auto;} }
 
     /* ---------- service category chips ---------- */
+        .svc-panel .svc-item + .svc-item{border-top:1px solid var(--color-border);}
+        .svc-panel .svc-item.is-first{border-top:0;}
+        .svc-rail{display:flex;gap:8px;overflow-x:auto;padding:2px 16px 2px 16px;margin:0 -16px;
+            scroll-snap-type:x proximity;scrollbar-width:none;-ms-overflow-style:none;
+            -webkit-mask-image:linear-gradient(to right,transparent 0,#000 16px,#000 calc(100% - 34px),transparent 100%);
+            mask-image:linear-gradient(to right,transparent 0,#000 16px,#000 calc(100% - 34px),transparent 100%);}
+        .svc-rail::-webkit-scrollbar{display:none;width:0;height:0;}
+        .svc-rail .svc-chip{flex:0 0 auto;scroll-snap-align:start;}
+        @media (min-width:640px){
+            /* Wide enough for all six: a plain left-aligned wrap, no mask, no scroll, no drift. */
+            .svc-rail{flex-wrap:wrap;overflow-x:visible;padding:0;margin:0;
+                -webkit-mask-image:none;mask-image:none;}
+        }
     .svc-chip{border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;border:1px solid var(--color-border);
         color:var(--color-muted);background:linear-gradient(152deg,rgba(255,255,255,.45),rgba(255,255,255,.25));
         -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:all .18s ease;font-family:inherit;}
@@ -777,6 +782,19 @@
 
         <!-- flagship trio -->
         <section class="container mx-auto px-4 max-w-6xl mb-14 md:mb-20">
+            <!-- ── THE THREE FLAGSHIPS, SAID OUT LOUD ─────────────────────────────────────────────
+                 Lee, 10 Aug 2026: *"on the actual page where you have the full service menu, you
+                 have your three main options there, which should indicate — hey, these are our
+                 flagship services. And then below that, you have services."*
+
+                 The three cards were already first on the page and were the only thing that did
+                 not say what it was. Ten more services follow immediately underneath, so without
+                 this the reader has no way to tell the three from the ten. -->
+            <div class="text-center mb-8 md:mb-12">
+                <h3 class="eyebrow mb-3" data-i18n="flag_eyebrow">Flagship services</h3>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="flag_h2">The three we are known for</h2>
+                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="flag_sub">Most businesses start with one of these. The full menu is below.</p>
+            </div>
             <div class="flagship-row mb-3 md:mb-0">
                 <a href="https://onevoice.oneworldlabs.ai/" class="frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#2E6BE6;--hd:#1D4ED8;--hl:#93B4F8">
                     <div class="hue-tile w-14 h-14 mb-5 p-2"><img src="/ic-onevoice.png" alt="" class="w-full h-full object-contain"></div>
@@ -806,7 +824,22 @@
         <!-- ================= INTERACTIVE MENU ================= -->
         <section class="container mx-auto px-4 max-w-4xl mb-20 md:mb-28">
             <!-- category chips -->
-            <div id="svc-chips" class="flex flex-wrap justify-center gap-2 mb-8">
+            <!-- ── THE FILTERS. Lee, 10 Aug 2026: *"those filters don't look good on the mobile app —
+                     you have to do a better job displaying that from a UI perspective."*
+
+                     The problem was `flex-wrap justify-center`: six chips of six different widths
+                     centred and wrapped produce a different ragged shape at every screen width —
+                     on his phone, 2 / 1 / 2 / 1, with the odd ones floating in the middle. It
+                     reads as broken rather than as a control.
+
+                     Below 640px this is now ONE ROW that scrolls sideways with snap points — the
+                     idiom every phone user already knows from a filter bar — with a fade at the
+                     right edge so it is obvious there is more. The scrollbar is hidden because a
+                     bar on a six-item strip is noise, and the fade is what carries the message.
+                     From 640px up it is a plain left-aligned wrap: on a wide screen all six fit
+                     on one line anyway, and left-aligned means they line up with everything else
+                     on the page instead of drifting to the middle. -->
+                <div id="svc-chips" class="svc-rail mb-8">
                 <button data-cat="all" class="svc-chip on" data-i18n="cat_all">All</button>
                 <button data-cat="found" class="svc-chip" data-i18n="cat_found">Get found</button>
                 <button data-cat="calls" class="svc-chip" data-i18n="cat_calls">Never miss a customer</button>
@@ -815,9 +848,19 @@
                 <button data-cat="custom" class="svc-chip" data-i18n="cat_custom">Custom AI</button>
             </div>
 
-            <div data-acc id="svclist" class="space-y-3">
+            <!-- ── ONE PANEL, TEN ROWS. Lee: *"I like the interface you have on the main page about
+                     the full service menu — you just have to move that to the dedicated page."*
+                     The home page grouped the ten inside a single frosted panel with hairline
+                     dividers; this page had ten separate frosted cards, which at 390px is ten
+                     floating boxes and a lot of vertical noise. Same panel here now — with the
+                     filters, which is the thing the dedicated page has and the home page did not.
+
+                     `svc-panel` rather than `space-y-3`: the gap becomes a divider, and the
+                     divider is drawn on the TOP of each row so hiding a row with a filter can
+                     never leave a stranded line at the bottom of the panel. -->
+                <div data-acc id="svclist" class="svc-panel frost rounded-3xl p-2 sm:p-4 md:p-6">
                 <!-- 01 -->
-                <div class="qa frost rounded-2xl px-5 svc-item" data-cats="calls" id="s01">
+                <div class="qa svc-item px-2 sm:px-3" data-cats="calls" id="s01">
                     <button class="qa-trigger w-full flex items-center justify-between gap-3 text-left py-5">
                         <span class="flex items-center gap-4 min-w-0"><span class="idx text-sm">01</span><span class="font-bold min-w-0" data-i18n="svc01_h">AI answering, scheduling &amp; booking</span></span>
                         <svg class="qa-chev flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -828,7 +871,7 @@
                     </div></div>
                 </div>
                 <!-- 02 -->
-                <div class="qa frost rounded-2xl px-5 svc-item" data-cats="web found" id="s02">
+                <div class="qa svc-item px-2 sm:px-3" data-cats="web found" id="s02">
                     <button class="qa-trigger w-full flex items-center justify-between gap-3 text-left py-5">
                         <span class="flex items-center gap-4 min-w-0"><span class="idx text-sm">02</span><span class="font-bold min-w-0" data-i18n="svc02_h">AI websites, built &amp; managed</span></span>
                         <svg class="qa-chev flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -839,7 +882,7 @@
                     </div></div>
                 </div>
                 <!-- 03 -->
-                <div class="qa frost rounded-2xl px-5 svc-item" data-cats="web" id="s03">
+                <div class="qa svc-item px-2 sm:px-3" data-cats="web" id="s03">
                     <button class="qa-trigger w-full flex items-center justify-between gap-3 text-left py-5">
                         <span class="flex items-center gap-4 min-w-0"><span class="idx text-sm">03</span><span class="font-bold min-w-0" data-i18n="svc03_h">Your own mobile app</span></span>
                         <svg class="qa-chev flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -850,7 +893,7 @@
                     </div></div>
                 </div>
                 <!-- 04 -->
-                <div class="qa frost rounded-2xl px-5 svc-item" data-cats="found" id="s04">
+                <div class="qa svc-item px-2 sm:px-3" data-cats="found" id="s04">
                     <button class="qa-trigger w-full flex items-center justify-between gap-3 text-left py-5">
                         <span class="flex items-center gap-4 min-w-0"><span class="idx text-sm">04</span><span class="font-bold min-w-0" data-i18n="svc04_h">Reputation &amp; review management</span></span>
                         <svg class="qa-chev flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -861,7 +904,7 @@
                     </div></div>
                 </div>
                 <!-- 05 -->
-                <div class="qa frost rounded-2xl px-5 svc-item" data-cats="found" id="s05">
+                <div class="qa svc-item px-2 sm:px-3" data-cats="found" id="s05">
                     <button class="qa-trigger w-full flex items-center justify-between gap-3 text-left py-5">
                         <span class="flex items-center gap-4 min-w-0"><span class="idx text-sm">05</span><span class="font-bold min-w-0" data-i18n="svc05_h">Search &amp; AI visibility</span></span>
                         <svg class="qa-chev flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -872,7 +915,7 @@
                     </div></div>
                 </div>
                 <!-- 06 -->
-                <div class="qa frost rounded-2xl px-5 svc-item" data-cats="back" id="s06">
+                <div class="qa svc-item px-2 sm:px-3" data-cats="back" id="s06">
                     <button class="qa-trigger w-full flex items-center justify-between gap-3 text-left py-5">
                         <span class="flex items-center gap-4 min-w-0"><span class="idx text-sm">06</span><span class="font-bold min-w-0" data-i18n="svc06_h">Customer win-back campaigns</span></span>
                         <svg class="qa-chev flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -883,7 +926,7 @@
                     </div></div>
                 </div>
                 <!-- 07 -->
-                <div class="qa frost rounded-2xl px-5 svc-item" data-cats="calls" id="s07">
+                <div class="qa svc-item px-2 sm:px-3" data-cats="calls" id="s07">
                     <button class="qa-trigger w-full flex items-center justify-between gap-3 text-left py-5">
                         <span class="flex items-center gap-4 min-w-0"><span class="idx text-sm">07</span><span class="font-bold min-w-0" data-i18n="svc07_h">Missed-call text-back</span></span>
                         <svg class="qa-chev flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -894,7 +937,7 @@
                     </div></div>
                 </div>
                 <!-- 08 -->
-                <div class="qa frost rounded-2xl px-5 svc-item" data-cats="calls web" id="s08">
+                <div class="qa svc-item px-2 sm:px-3" data-cats="calls web" id="s08">
                     <button class="qa-trigger w-full flex items-center justify-between gap-3 text-left py-5">
                         <span class="flex items-center gap-4 min-w-0"><span class="idx text-sm">08</span><span class="font-bold min-w-0" data-i18n="svc08_h">AI chat for web &amp; social</span></span>
                         <svg class="qa-chev flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -905,7 +948,7 @@
                     </div></div>
                 </div>
                 <!-- 09 -->
-                <div class="qa frost rounded-2xl px-5 svc-item" data-cats="back" id="s09">
+                <div class="qa svc-item px-2 sm:px-3" data-cats="back" id="s09">
                     <button class="qa-trigger w-full flex items-center justify-between gap-3 text-left py-5">
                         <span class="flex items-center gap-4 min-w-0"><span class="idx text-sm">09</span><span class="font-bold min-w-0" data-i18n="svc09_h">Marketing &amp; follow-up automation</span></span>
                         <svg class="qa-chev flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -916,7 +959,7 @@
                     </div></div>
                 </div>
                 <!-- 10 -->
-                <div class="qa frost rounded-2xl px-5 svc-item" data-cats="custom" id="s10">
+                <div class="qa svc-item px-2 sm:px-3" data-cats="custom" id="s10">
                     <button class="qa-trigger w-full flex items-center justify-between gap-3 text-left py-5">
                         <span class="flex items-center gap-4 min-w-0"><span class="idx text-sm">10</span><span class="font-bold min-w-0" data-i18n="svc10_h">Custom AI agents &amp; integrations</span></span>
                         <svg class="qa-chev flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -965,20 +1008,34 @@
         </section>
     </main>
     <script>
-    /* category chip filter — pure show/hide, deep links (#s04) auto-open */
+    /* Category chip filter — show/hide, deep links (#s04) auto-open.
+       Two things the panel layout added, and both are one line each:
+         · the divider is drawn on the TOP of every row, so after filtering the FIRST VISIBLE row
+           must lose it — otherwise the panel opens with a hairline floating above its first item.
+           CSS adjacency cannot express "first visible" (`display:none` still matches `+`), so the
+           class is set here, where the visibility is already known.
+         · the chip that is on is scrolled into view on a phone, because the rail scrolls and a
+           tapped chip near the right edge would otherwise sit half under the fade. */
     (function(){
         var chips = document.querySelectorAll('#svc-chips .svc-chip');
         var items = document.querySelectorAll('#svclist .svc-item');
+        function apply(cat){
+            var first = true;
+            items.forEach(function(it){
+                var show = cat==='all' || (it.getAttribute('data-cats')||'').split(' ').indexOf(cat) > -1;
+                it.style.display = show ? '' : 'none';
+                it.classList.toggle('is-first', show && first);
+                if (show) first = false;
+            });
+        }
         chips.forEach(function(c){
             c.addEventListener('click', function(){
                 chips.forEach(function(x){ x.classList.toggle('on', x===c); });
-                var cat = c.getAttribute('data-cat');
-                items.forEach(function(it){
-                    var show = cat==='all' || (it.getAttribute('data-cats')||'').split(' ').indexOf(cat) > -1;
-                    it.style.display = show ? '' : 'none';
-                });
+                apply(c.getAttribute('data-cat'));
+                if (c.scrollIntoView) c.scrollIntoView({block:'nearest', inline:'nearest', behavior:'smooth'});
             });
         });
+        apply('all');
         if (location.hash) {
             var el = document.querySelector(location.hash);
             if (el && el.classList.contains('svc-item')) { el.classList.add('open'); el.scrollIntoView({block:'center'}); }
@@ -1316,7 +1373,7 @@
        original dictionaries stay untouched; EN comes from the HTML as always. ---------- */
     var I18N_EXT = {
         co: {
-            nav_blog:'Blog', svc_seeall:'Abrir el menú completo de servicios', cat_all:'Todos', cat_found:'Que lo encuentren', cat_calls:'No pierda clientes', cat_web:'Web, apps y sitios', cat_back:'Clientes que vuelven', cat_custom:'IA a la medida', blog_eyebrow:'Guías', blog_h1:'Guías para pequeños negocios e independientes', blog_sub:'Consejos prácticos sobre reseñas, llamadas, credibilidad y cómo conseguir más trabajo — publicados regularmente.', blog_read:'Leer el artículo', blog_soon:'Nuevas guías cada semana.', bc_back:'Volver al blog',
+            nav_blog:'Blog', svc_seeall:'Abrir el menú completo de servicios', cat_all:'Todos', flag_eyebrow:'Servicios insignia', flag_h2:'Los tres por los que nos conocen', flag_sub:'La mayoría empieza por uno de estos. El menú completo está más abajo.', cat_found:'Que lo encuentren', cat_calls:'No pierda clientes', cat_web:'Web, apps y sitios', cat_back:'Clientes que vuelven', cat_custom:'IA a la medida', blog_eyebrow:'Guías', blog_h1:'Guías para pequeños negocios e independientes', blog_sub:'Consejos prácticos sobre reseñas, llamadas, credibilidad y cómo conseguir más trabajo — publicados regularmente.', blog_read:'Leer el artículo', blog_soon:'Nuevas guías cada semana.', bc_back:'Volver al blog',
             mkt_eyebrow:'La IA lo está cambiando todo', mkt_line:'Los pequeños negocios más inteligentes del mundo se están asociando con One World para acelerar su crecimiento.', mkt_soon:'Apps móviles muy pronto — hoy ya todo funciona desde su navegador.', swipe_hint:'Deslice para ver los tres',
             s_langs:'idiomas',
             nav_services:'Servicios', nav_apps:'Apps', nav_how:'Cómo trabajamos', nav_faq:'Preguntas',
@@ -1355,7 +1412,7 @@
             ftr_agency:'Servicios de agencia', ftr_allsvcs:'Los diez servicios'
         },
         es: {
-            nav_blog:'Blog', svc_seeall:'Abrir la carta completa de servicios', cat_all:'Todos', cat_found:'Que te encuentren', cat_calls:'No pierdas clientes', cat_web:'Web, apps y sitios', cat_back:'Clientes que repiten', cat_custom:'IA a medida', blog_eyebrow:'Guías', blog_h1:'Guías para pequeñas empresas y autónomos', blog_sub:'Consejos prácticos sobre reseñas, llamadas, credibilidad y cómo conseguir más trabajo — publicados regularmente.', blog_read:'Leer el artículo', blog_soon:'Nuevas guías cada semana.', bc_back:'Volver al blog',
+            nav_blog:'Blog', svc_seeall:'Abrir la carta completa de servicios', cat_all:'Todos', flag_eyebrow:'Servicios insignia', flag_h2:'Los tres por los que nos conocen', flag_sub:'La mayoría empieza por uno de estos. El menú completo está más abajo.', cat_found:'Que te encuentren', cat_calls:'No pierdas clientes', cat_web:'Web, apps y sitios', cat_back:'Clientes que repiten', cat_custom:'IA a medida', blog_eyebrow:'Guías', blog_h1:'Guías para pequeñas empresas y autónomos', blog_sub:'Consejos prácticos sobre reseñas, llamadas, credibilidad y cómo conseguir más trabajo — publicados regularmente.', blog_read:'Leer el artículo', blog_soon:'Nuevas guías cada semana.', bc_back:'Volver al blog',
             mkt_eyebrow:'La IA lo está cambiando todo', mkt_line:'Las pequeñas empresas más inteligentes del mundo se están asociando con One World para acelerar su crecimiento.', mkt_soon:'Apps móviles muy pronto — hoy ya todo funciona desde tu navegador.', swipe_hint:'Desliza para ver los tres',
             s_langs:'idiomas',
             nav_services:'Servicios', nav_apps:'Apps', nav_how:'Cómo trabajamos', nav_faq:'Preguntas',
@@ -1394,7 +1451,7 @@
             ftr_agency:'Servicios de agencia', ftr_allsvcs:'Los diez servicios'
         },
         de: {
-            nav_blog:'Blog', svc_seeall:'Das komplette Leistungsmenü öffnen', cat_all:'Alle', cat_found:'Gefunden werden', cat_calls:'Keine Kunden verpassen', cat_web:'Web, Apps & Websites', cat_back:'Kunden, die wiederkommen', cat_custom:'Individuelle KI', blog_eyebrow:'Ratgeber', blog_h1:'Ratgeber für kleine Unternehmen und Selbstständige', blog_sub:'Praktische Tipps zu Bewertungen, Anrufen, Glaubwürdigkeit und mehr Aufträgen — regelmäßig veröffentlicht.', blog_read:'Artikel lesen', blog_soon:'Regelmäßig neue Ratgeber.', bc_back:'Zurück zum Blog',
+            nav_blog:'Blog', svc_seeall:'Das komplette Leistungsmenü öffnen', cat_all:'Alle', flag_eyebrow:'Flaggschiff-Dienste', flag_h2:'Die drei, für die wir bekannt sind', flag_sub:'Die meisten starten mit einem davon. Das vollständige Menü steht darunter.', cat_found:'Gefunden werden', cat_calls:'Keine Kunden verpassen', cat_web:'Web, Apps & Websites', cat_back:'Kunden, die wiederkommen', cat_custom:'Individuelle KI', blog_eyebrow:'Ratgeber', blog_h1:'Ratgeber für kleine Unternehmen und Selbstständige', blog_sub:'Praktische Tipps zu Bewertungen, Anrufen, Glaubwürdigkeit und mehr Aufträgen — regelmäßig veröffentlicht.', blog_read:'Artikel lesen', blog_soon:'Regelmäßig neue Ratgeber.', bc_back:'Zurück zum Blog',
             mkt_eyebrow:'KI verändert alles', mkt_line:'Die klügsten kleinen Unternehmen der Welt arbeiten mit One World zusammen, um ihr Wachstum zu beschleunigen.', mkt_soon:'Mobile Apps kommen bald — im Browser funktioniert heute schon alles.', swipe_hint:'Wischen für alle drei',
             s_langs:'Sprachen',
             nav_services:'Leistungen', nav_apps:'Apps', nav_how:'So arbeiten wir', nav_faq:'FAQ',
@@ -1433,7 +1490,7 @@
             ftr_agency:'Agentur-Leistungen', ftr_allsvcs:'Alle zehn Leistungen'
         },
         ru: {
-            nav_blog:'Блог', svc_seeall:'Открыть полное меню услуг', cat_all:'Все', cat_found:'Чтобы вас находили', cat_calls:'Не терять клиентов', cat_web:'Сайты и приложения', cat_back:'Возвращение клиентов', cat_custom:'ИИ под задачу', blog_eyebrow:'Гайды', blog_h1:'Гайды для малого бизнеса и фрилансеров', blog_sub:'Практические советы об отзывах, звонках, репутации и поиске заказов — публикуем регулярно.', blog_read:'Читать статью', blog_soon:'Новые материалы регулярно.', bc_back:'Назад в блог',
+            nav_blog:'Блог', svc_seeall:'Открыть полное меню услуг', cat_all:'Все', flag_eyebrow:'Флагманские сервисы', flag_h2:'Три, которыми мы известны', flag_sub:'Большинство начинает с одного из них. Полное меню — ниже.', cat_found:'Чтобы вас находили', cat_calls:'Не терять клиентов', cat_web:'Сайты и приложения', cat_back:'Возвращение клиентов', cat_custom:'ИИ под задачу', blog_eyebrow:'Гайды', blog_h1:'Гайды для малого бизнеса и фрилансеров', blog_sub:'Практические советы об отзывах, звонках, репутации и поиске заказов — публикуем регулярно.', blog_read:'Читать статью', blog_soon:'Новые материалы регулярно.', bc_back:'Назад в блог',
             mkt_eyebrow:'ИИ меняет всё', mkt_line:'Самые умные малые бизнесы мира становятся партнёрами One World, чтобы ускорить свой рост.', mkt_soon:'Мобильные приложения скоро — уже сегодня всё работает в браузере.', swipe_hint:'Листайте, чтобы увидеть все три',
             s_langs:'языков',
             nav_services:'Услуги', nav_apps:'Приложения', nav_how:'Как мы работаем', nav_faq:'Вопросы',
@@ -1472,7 +1529,7 @@
             ftr_agency:'Услуги агентства', ftr_allsvcs:'Все десять услуг'
         },
         zh: {
-            nav_blog:'博客', svc_seeall:'查看完整服务清单', cat_all:'全部', cat_found:'被客户找到', cat_calls:'不漏接客户', cat_web:'网站与应用', cat_back:'让客户回头', cat_custom:'定制 AI', blog_eyebrow:'指南', blog_h1:'写给小微企业和自由职业者的指南', blog_sub:'关于评价、来电、信誉与接单的实用建议——定期更新。', blog_read:'阅读文章', blog_soon:'新指南定期发布。', bc_back:'返回博客',
+            nav_blog:'博客', svc_seeall:'查看完整服务清单', cat_all:'全部', flag_eyebrow:'旗舰服务', flag_h2:'我们最知名的三项服务', flag_sub:'大多数企业从其中一项开始。完整菜单见下方。', cat_found:'被客户找到', cat_calls:'不漏接客户', cat_web:'网站与应用', cat_back:'让客户回头', cat_custom:'定制 AI', blog_eyebrow:'指南', blog_h1:'写给小微企业和自由职业者的指南', blog_sub:'关于评价、来电、信誉与接单的实用建议——定期更新。', blog_read:'阅读文章', blog_soon:'新指南定期发布。', bc_back:'返回博客',
             mkt_eyebrow:'AI 正在改变一切', mkt_line:'全球最精明的小微企业正与 One World 携手，加速自己的增长。', mkt_soon:'手机应用即将上线——今天在浏览器里就能使用全部功能。', swipe_hint:'左右滑动查看全部三项',
             s_langs:'种语言',
             nav_services:'服务', nav_apps:'应用', nav_how:'合作方式', nav_faq:'常见问题',
@@ -1511,7 +1568,7 @@
             ftr_agency:'代理服务', ftr_allsvcs:'全部十项服务'
         },
         pt: {
-            nav_blog:'Blog', svc_seeall:'Abrir o menu completo de serviços', cat_all:'Todos', cat_found:'Ser encontrado', cat_calls:'Não perder clientes', cat_web:'Web, apps e sites', cat_back:'Clientes que voltam', cat_custom:'IA sob medida', blog_eyebrow:'Guias', blog_h1:'Guias para pequenos negócios e autônomos', blog_sub:'Dicas práticas sobre avaliações, ligações, credibilidade e como conseguir mais trabalho — publicadas regularmente.', blog_read:'Ler o artigo', blog_soon:'Novos guias regularmente.', bc_back:'Voltar ao blog',
+            nav_blog:'Blog', svc_seeall:'Abrir o menu completo de serviços', cat_all:'Todos', flag_eyebrow:'Serviços principais', flag_h2:'Os três pelos quais somos conhecidos', flag_sub:'A maioria começa por um destes. O menu completo está abaixo.', cat_found:'Ser encontrado', cat_calls:'Não perder clientes', cat_web:'Web, apps e sites', cat_back:'Clientes que voltam', cat_custom:'IA sob medida', blog_eyebrow:'Guias', blog_h1:'Guias para pequenos negócios e autônomos', blog_sub:'Dicas práticas sobre avaliações, ligações, credibilidade e como conseguir mais trabalho — publicadas regularmente.', blog_read:'Ler o artigo', blog_soon:'Novos guias regularmente.', bc_back:'Voltar ao blog',
             mkt_eyebrow:'A IA está mudando tudo', mkt_line:'Os pequenos negócios mais inteligentes do mundo estão se unindo à One World para acelerar seu crescimento.', mkt_soon:'Apps móveis em breve — hoje tudo já funciona no seu navegador.', swipe_hint:'Deslize para ver os três',
             s_langs:'idiomas',
             nav_services:'Serviços', nav_apps:'Apps', nav_how:'Como trabalhamos', nav_faq:'Dúvidas',
