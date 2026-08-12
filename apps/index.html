@@ -933,6 +933,12 @@
                 </div>
                 <div class="text-center md:text-right text-xs text-muted-foreground space-y-1">
                     <p class="font-medium">© 2026 One World Labs, Inc. · OneJob · OneScore · OneEvent · OneSocial · OneAgent · OneHome · OneVoice · OnePage · OneApp</p>
+                    <!-- Brand identity + legal links. Required for A2P 10DLC brand verification:
+                         the reviewer looks for a postal address, a working support number, a business
+                         email and reachable terms/privacy. Added 2026-08-12. -->
+                    <p>One World Labs, Inc. &middot; 1111B South Governors Avenue, STE 48311, Dover, DE 19904</p>
+                    <p><a href="tel:+18557700200" class="hover:text-foreground transition-colors">(855) 770-0200</a> &middot; <a href="mailto:contact@oneworldlabs.ai" class="hover:text-foreground transition-colors">contact@oneworldlabs.ai</a></p>
+                    <p><a href="https://app.oneworldlabs.ai/terms" class="hover:text-foreground transition-colors">Terms of Service</a> &middot; <a href="https://app.oneworldlabs.ai/privacy" class="hover:text-foreground transition-colors">Privacy Policy</a></p>
                     <p data-i18n="ftr_tagline">The AI ecosystem for today's small businesses.</p>
                 </div>
             </div>
@@ -2024,5 +2030,14 @@
         };
     })();
 </script>
+
+
+
+<!-- Keep the A2P footer readable when the LeadConnector mobile bubble is open. Added 2026-08-12. -->
+<style id="a2p-widget-footer-safe">
+@media (max-width: 640px) { footer { padding-bottom: 17rem !important; } }
+</style>
+<!-- One World Labs - text opt-in chat widget (A2P compliance). Added 2026-08-12. -->
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a7c4aa007e4c1b0f2cc720b" data-source="WEB_USER"></script>
 </body>
 </html>
