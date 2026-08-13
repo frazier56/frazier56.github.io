@@ -388,6 +388,47 @@
     .wm-world{color:var(--ow-primary);}
     .wm-tag{display:block;font-weight:800;letter-spacing:.18em;color:var(--ow-primary);line-height:1;margin-top:3px;white-space:nowrap;}
 
+
+
+    /* ---------- app cards: two tap targets, no icons (Lee, 13 Aug) ----------
+       The top of the card explains the app and links to its own page; the strip at the bottom
+       opens the app. The <a> around the text must inherit the card's typography — left to the
+       browser it renders as a blue underlined link and the card stops looking like a card. */
+    .app-card .app-learn{color:inherit;text-decoration:none;display:flex;flex-direction:column;flex-grow:1;}
+    .app-card .app-learn:hover h3{text-decoration:underline;text-underline-offset:3px;}
+    .app-card .app-foot{border-top:1px solid var(--border,rgba(255,255,255,.14));}
+    .app-card .app-open-strip{font-size:15px;}
+    .app-card .app-open-strip svg{width:16px;height:16px;flex:0 0 auto;margin-left:4px;
+        transition:transform .25s ease;}
+    .app-card .app-open-strip:hover svg{transform:translateX(3px);}
+    .app-card{transition:transform .3s ease;}
+    .app-card:hover{transform:translateY(-2px);}
+    /* ---------- slide to choose (Lee, 13 Aug) ----------
+       Replaces two buttons of unequal weight. No default, no recommendation: the handle rests in
+       the centre and both destinations are set identically. Dragging past 38% of the way commits;
+       releasing short of that springs back. Touch and mouse both drive the same handler, and the
+       handle captures the pointer only AFTER the threshold so a plain tap still works. */
+    .slide-pick{position:relative;width:100%;max-width:440px;margin:0 auto;user-select:none;touch-action:pan-y;}
+    .slide-rail{position:relative;display:flex;align-items:center;justify-content:space-between;
+        height:60px;padding:0 18px;border-radius:999px;overflow:hidden;
+        background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.04));
+        border:1px solid var(--border,rgba(255,255,255,.18));
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 26px -18px rgba(10,14,28,.7);
+        backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+    html.dark .slide-rail{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.03));}
+    .slide-rail .side{font-size:13.5px;font-weight:700;letter-spacing:-.01em;opacity:.62;
+        transition:opacity .2s ease,transform .2s ease;white-space:nowrap;pointer-events:none;}
+    .slide-rail .side.hot{opacity:1;transform:scale(1.04);}
+    .slide-knob{position:absolute;left:50%;top:50%;width:48px;height:48px;margin:-24px 0 0 -24px;
+        border-radius:999px;display:grid;place-items:center;cursor:grab;
+        background:linear-gradient(180deg,#fff,#e9e6ff);color:#221a3a;
+        box-shadow:0 8px 20px -8px rgba(10,14,28,.75),inset 0 1px 0 #fff;
+        transition:transform .28s cubic-bezier(.2,.9,.3,1.2);}
+    .slide-knob.dragging{cursor:grabbing;transition:none;}
+    .slide-hint{margin-top:9px;text-align:center;font-size:11px;letter-spacing:.02em;opacity:.55;}
+    .slide-fallback{display:flex;gap:14px;justify-content:center;margin-top:10px;}
+    .slide-fallback a{font-size:12.5px;font-weight:600;text-decoration:underline;opacity:.7;}
+    @media (hover:none){.slide-hint{opacity:.7;}}
     /* ---------- store badges (visual only until the store listings exist) ---------- */
     .store-badge{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 18px 0 14px;border-radius:12px;
         background:linear-gradient(180deg,#1b1b1f,#000);color:#fff;border:1px solid rgba(255,255,255,.28);
@@ -811,21 +852,28 @@
                  At the top it was four numbers with no referent, before the reader knew what
                  the company was. Here it answers the question the sign-in button raises. -->
             <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-5 py-2.5 rounded-full frost mb-6 text-[10.5px] sm:text-[12.5px] font-medium">
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">5</strong> <span class="text-muted-foreground" data-i18n="s_apps">apps</span></span>
-                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
                 <span class="flex items-center gap-1.5"><strong class="text-foreground">10</strong> <span class="text-muted-foreground" data-i18n="s_svcs">services</span></span>
                 <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">7</strong> <span class="text-muted-foreground" data-i18n="s_langs">languages</span></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">6</strong> <span class="text-muted-foreground" data-i18n="s_apps">apps</span></span>
                 <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
                 <span class="flex items-center gap-1.5"><strong class="text-foreground">1</strong> <span class="text-muted-foreground" data-i18n="s_login">login</span></span>
             </div>
             <div id="signedout-cta" class="hero-ctas items-center">
-                <a href="#services" class="btn-clay w-full sm:w-auto h-12 px-4 sm:px-8 text-sm sm:text-base">
-                    <span data-i18n="cta_services">Explore the services</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                </a>
-                <a href="#apps" class="btn-ghost w-full sm:w-auto h-12 px-4 sm:px-8 text-sm sm:text-base">
-                    <span data-i18n="cta_apps">Open the apps</span>
-                </a>
+                <div class="slide-pick" id="slidePick">
+                    <div class="slide-rail" id="slideRail">
+                        <span class="side" id="sideLeft" data-i18n="cta_services">Explore the services</span>
+                        <span class="side" id="sideRight" data-i18n="cta_apps">Open the apps</span>
+                        <button type="button" class="slide-knob" id="slideKnob"
+                                aria-label="Slide left for services, right for apps">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6-4 6 4 6M15 6l4 6-4 6"/></svg>
+                        </button>
+                    </div>
+                    <p class="slide-hint" data-i18n="slide_hint">Slide either way to choose</p>
+                    <div class="slide-fallback">
+                        <a href="#services" data-i18n="cta_services">Explore the services</a>
+                        <a href="#apps" data-i18n="cta_apps">Open the apps</a>
+                    </div>
+                </div>
                 <a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="cta-signin btn-ghost w-full sm:w-auto h-12 px-6 text-base">
                     <svg class="h-5 w-5 shrink-0" width="24" height="24" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
                     <span data-i18n="cta_signin">Sign in with One ID</span>
@@ -1076,62 +1124,60 @@
             <div class="text-center mb-10 md:mb-16">
                 <h3 class="eyebrow mb-3" data-i18n="platform_eyebrow">One World Platform</h3>
                 <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="apps_h2">Jump into your favorite app</h2>
-                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="apps_sub">Five apps, one login — four live today, one on the way.</p>
+                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="apps_sub">Six apps, one login — five live today, one on the way.</p>
             </div>
 
             <div class="app-grid">
-                <a href="https://onejob.oneworldlabs.ai/" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#17A45C;--hd:#0E8248;--hl:#5FD79B">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14 p-1.5"><img src="/ic-onesocial.png" alt="" class="w-full h-full object-contain"></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onejob_tag">The jobs marketplace</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="onejob_desc">Get hired and get paid in 60 seconds — verified reviews, contracts, and payments held safely until the job is done.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onejob_cta">Open OneJob</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://onescore.oneworldlabs.ai/" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E0A21F;--hd:#96690A;--hl:#F3C969">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14 p-1.5"><img src="/ic-onescore.png" alt="" class="w-full h-full object-contain"></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onescore_tag">Professional credibility</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="onescore_desc">Your whole reputation — reviews, real work, social proof — in one verified number you can post anywhere. Free forever.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onescore_cta">Open OneScore</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://oneevent.oneworldlabs.ai/" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E2711D;--hd:#9C4A0C;--hl:#F5A468">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14 p-1.5"><img src="/ic-oneevents.png" alt="" class="w-full h-full object-contain"></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneevent_tag">Events &amp; tickets</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="oneevent_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneevent_cta">Open OneEvent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://onesocial.oneworldlabs.ai/" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8B3DEA;--hd:#5B21B6;--hl:#C4A9FA">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--hb)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="4.5" cy="6" r="2"/><circle cx="19.5" cy="6" r="2"/><circle cx="4.5" cy="18" r="2"/><circle cx="19.5" cy="18" r="2"/><path d="M6.3 7.2 9.8 10M17.7 7.2 14.2 10M6.3 16.8 9.8 14M17.7 16.8 14.2 14"/></svg></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onesocial_tag">Your connected platforms</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="onesocial_desc">All your platforms, one professional identity — connect your accounts and turn your following into verified credibility.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onesocial_cta">Open OneSocial</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <div class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#7B2D3B;--hd:#6B2331;--hl:#E0919E">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--hb)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3.5 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9.5" r="2.5"/><path d="M15.5 20c0-2.2 1.4-3.8 3.4-4.3M20.5 13.5 22 15l-1.5 1.5"/></svg></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
-                    <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneagent_tag">Your AI workforce</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="oneagent_desc">AI agents that find work, pitch clients, and handle the busywork for you — while you do the job.</p>
-                    <div class="inline-flex items-center font-semibold text-muted-foreground text-sm"><span class="inline-block px-3 py-1 rounded-full border border-border font-bold tracking-wider uppercase text-xs" data-i18n="coming_soon">Coming soon</span></div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#7C3AED;--hd:#5B21B6;--hl:#C4B5FD">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/onescore/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Credibility you own</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Your whole reputation — real work, verified credentials and reviews — in one number you can show anybody. Free forever.</p>
+                    </a>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/onescore"><span>Open OneScore</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                </div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#16A34A;--hd:#0E8248;--hl:#5FD79B">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/onejob/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">The work marketplace</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Get hired and get paid, without chasing anybody for the money. A signed agreement on every job and the payment held until it is done.</p>
+                    </a>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/jobs"><span>Open OneJob</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                </div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#0D9488;--hd:#0F766E;--hl:#5EEAD4">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/onehome/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Home</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Rent or buy a home</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">A home with a real contract behind it — a signed lease, photos both sides agreed, and the property's real registered sale history.</p>
+                    </a>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/home"><span>Open OneHome</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                </div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#DB2777;--hd:#BE185D;--hl:#F9A8D4">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/oneevent/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Events and tickets</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Run an event and keep what you sell. The page, the tickets, the door and the money, all in one place.</p>
+                    </a>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/events"><span>Open OneEvent</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                </div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#0891B2;--hd:#0E7490;--hl:#67E8F9">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/onesocial/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your platforms, connected</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Every account you already have, adding up to one professional identity somebody can verify.</p>
+                    </a>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/social"><span>Open OneSocial</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                </div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#B91C1C;--hd:#991B1B;--hl:#FCA5A5">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/oneagent/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your middleman</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Somebody in your corner finding and negotiating the work, who takes a share only when you get paid.</p>
+                    </a>
+                    <div class="app-foot pt-3"><span class="inline-block px-3 py-1 rounded-full border border-border font-bold tracking-wider uppercase text-xs">Coming soon</span></div>
                 </div>
                 <!-- One ID card completes the grid -->
-                <div class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#2E6BE6">
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#2E6BE6">
                     <div class="mb-5"><span class="oneid-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg> <span data-i18n="oneid_label">One ID</span></span></div>
                     <h3 class="text-2xl font-bold mb-3" data-i18n="oneid_h">One account. Every product.</h3>
                     <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="q3_a">Sign in once with One ID and you're in every One World app and service — no separate accounts, no re-entering your details, no juggling passwords across tools.</p>
@@ -2398,5 +2444,53 @@
 
 <!-- One World Labs - text opt-in chat widget (A2P compliance). Added 2026-08-12. -->
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a7c71062d25c2c3668fa947" data-source="WEB_USER"></script>
+
+<script>
+/* SLIDE TO CHOOSE. Pointer events so touch, mouse and pen all take one path. The knob captures
+   the pointer only once the drag passes a few pixels, so a plain tap is still a tap and does not
+   get swallowed. Past 38% of the travel it commits; short of that it springs back to centre —
+   and it always returns to centre afterwards, because a control that remembers where it was left
+   is making a recommendation, which is the thing this replaced. */
+(function(){
+  var pick=document.getElementById('slidePick'); if(!pick) return;
+  var rail=document.getElementById('slideRail'), knob=document.getElementById('slideKnob');
+  var L=document.getElementById('sideLeft'), R=document.getElementById('sideRight');
+  var startX=0, dx=0, live=false, max=0, THRESH=0.38, MOVED=4;
+  function centre(){ dx=0; knob.style.transform='translateX(0)'; L.classList.remove('hot'); R.classList.remove('hot'); }
+  function go(dir){ location.hash = dir<0 ? '#services' : '#apps'; setTimeout(centre,180); }
+  function down(e){ live=true; startX=e.clientX; max=(rail.clientWidth/2)-34; knob.classList.add('dragging'); }
+  function move(e){
+    if(!live) return;
+    dx=Math.max(-max,Math.min(max,e.clientX-startX));
+    if(Math.abs(dx)>MOVED && knob.setPointerCapture && e.pointerId!=null){ try{knob.setPointerCapture(e.pointerId);}catch(_){} }
+    knob.style.transform='translateX('+dx+'px)';
+    L.classList.toggle('hot', dx<-max*THRESH); R.classList.toggle('hot', dx>max*THRESH);
+  }
+  function up(){
+    if(!live) return; live=false; knob.classList.remove('dragging');
+    var hit=Math.abs(dx)>max*THRESH; var dir=dx;
+    centre();
+    if(hit) go(dir);
+  }
+  knob.addEventListener('pointerdown',down);
+  window.addEventListener('pointermove',move);
+  window.addEventListener('pointerup',up);
+  window.addEventListener('pointercancel',up);
+  /* A tap on the knob with no drag should not be a dead end — send them to the apps, the side the
+     old layout under-sold. Keyboard users get the two links below instead. */
+  knob.addEventListener('click',function(){ if(Math.abs(dx)<=MOVED) go(1); });
+})();
+</script>
+
+<script>
+/* TWO TARGETS ON ONE CARD. Lee: the top of the card explains the app; the strip at the bottom
+   opens it. Nesting a link inside a link is invalid HTML, so the bottom strip is a span that
+   navigates on click and the whole card stays one keyboard stop through the <a> that wraps the
+   text. stopPropagation keeps a tap on the strip from also following the learn-more link. */
+document.querySelectorAll('.app-open-strip').forEach(function(el){
+  el.style.cursor='pointer';
+  el.addEventListener('click',function(e){ e.stopPropagation(); e.preventDefault(); location.href=el.dataset.open; });
+});
+</script>
 </body>
 </html>

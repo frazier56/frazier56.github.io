@@ -6,13 +6,12 @@
 <title>Lee Frazier — One World Labs</title>
 <meta name="description" content="Personal contact page for Lee Frazier, Founder & Chief Executive of One World Labs, Inc. Call, text, WhatsApp, email, or save my details to your phone.">
 <link rel="canonical" href="https://www.oneworldlabs.ai/founder/">
-<link rel="icon" href="/favicon.ico">
+<link rel="icon" href="https://www.oneworldlabs.ai/favicon.ico">
 <meta property="og:title" content="Lee Frazier — One World Labs">
 <meta property="og:description" content="Founder & Chief Executive, One World Labs, Inc.">
 <meta property="og:url" content="https://www.oneworldlabs.ai/founder/">
 <meta property="og:image" content="https://www.oneworldlabs.ai/founder/founder-lee.webp">
 <meta name="theme-color" content="#07070a">
-<!-- v27c founder page rebuild marker: 2026-08-13 -->
 <script>
 /* FOUC guard: theme + language before first paint, with failsafe (kit lesson B3) */
 (function(){try{
@@ -189,6 +188,35 @@
   .carlabel{margin:2px 0 -2px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
     color:var(--dim);text-align:center}
   .car-wrap{position:relative}
+
+  /* ---- the company's website: a wide row, not a tenth square ---- */
+  .site-row{display:flex;align-items:center;gap:12px;width:100%;margin-top:14px;padding:12px 14px;
+    border-radius:16px;text-decoration:none;
+    background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.05) 40%),rgba(255,255,255,.06);
+    border:1px solid var(--card-border);box-shadow:inset 0 1px 0 rgba(255,255,255,.30);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    transition:transform .18s cubic-bezier(.2,.8,.3,1)}
+  html[data-theme="light"] .site-row{background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.45))}
+  .site-row:active{transform:scale(.985)}
+  .site-row:hover{transform:translateY(-1px)}
+  .site-row img{width:34px;height:34px;object-fit:contain;flex:0 0 auto}
+  .site-row .sr-t{display:block;font-size:13px;font-weight:800;color:var(--ink);line-height:1.2}
+  .site-row .sr-s{display:block;margin-top:2px;font-size:10.5px;font-weight:600;color:var(--dim)}
+  .site-row .sr-go{margin-left:auto;flex:0 0 auto;color:var(--dim)}
+
+  /* ---- store buttons: the SAME object as the one on the home page ----
+     Copied rather than re-designed on purpose. Somebody who sees the card and then the site
+     should meet the same button twice, not two designs of the same idea. They are inert until
+     the listings exist — a dead link on a business card is worse than an honest "coming soon". */
+  .stores{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:16px}
+  .store-badge{display:inline-flex;align-items:center;gap:9px;height:48px;padding:0 16px 0 12px;border-radius:12px;
+    background:linear-gradient(180deg,#1b1b1f,#000);color:#fff;border:1px solid rgba(255,255,255,.28);
+    box-shadow:0 10px 24px -12px rgba(0,0,0,.55);text-decoration:none;transition:transform .18s ease;cursor:default}
+  .store-badge:hover{transform:translateY(-1px)}
+  .store-badge .sb-lines{display:flex;flex-direction:column;align-items:flex-start;line-height:1.12}
+  .store-badge .sb-top{font-size:9.5px;font-weight:500;letter-spacing:.02em;opacity:.92}
+  .store-badge .sb-bottom{font-size:15.5px;font-weight:600;letter-spacing:-.01em}
+  .stores-note{margin-top:9px;font-size:10.5px;line-height:1.4;color:var(--dim);text-align:center}
   /* ---- app shelf (see the note at the top of build) ---- */
   .car{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 6px;padding:12px 2px 14px}
   a.app{width:100%;display:flex;flex-direction:column;align-items:center;gap:7px;
@@ -284,19 +312,39 @@
               <div class="panel-in">
                   <p class="carlabel">Six apps</p>
                   <div class="car-wrap"><div class="car" aria-label="One World Labs apps">
-                    <a class="app" style="--h:var(--hue-job)" href="/apps/onejob/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M4 13h16"/></svg></span><span class="n">OneJob</span><span class="s" data-i="d_job">Get hired, get paid</span></a>
-                    <a class="app" style="--h:var(--hue-score)" href="/apps/onescore/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6.5v5c0 4.6 3.3 8.5 8 9.5 4.7-1 8-4.9 8-9.5v-5z"/><path d="m8.6 12 2.3 2.3 4.5-4.6"/></svg></span><span class="n">OneScore</span><span class="s" data-i="d_score">Credibility you own</span></a>
-                    <a class="app" style="--h:var(--hue-event)" href="/apps/oneevent/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 14v3"/></svg></span><span class="n">OneEvent</span><span class="s" data-i="d_event">Events and tickets</span></a>
-                    <a class="app" style="--h:var(--hue-social)" href="/apps/onesocial/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><circle cx="5.5" cy="17" r="2.6"/><circle cx="18.5" cy="17" r="2.6"/><path d="m9.7 9.3-2 5M14.3 9.3l2 5M8.1 17h7.8"/></svg></span><span class="n">OneSocial</span><span class="s" data-i="d_social">Your platforms, connected</span></a>
-                    <a class="app" style="--h:var(--hue-home)" href="/apps/onehome/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10.5 9-7 9 7"/><path d="M5.5 9.4V20h13V9.4"/><path d="M10 20v-5.2h4V20"/></svg></span><span class="n">OneHome</span><span class="s" data-i="d_home">Rent or buy a home</span></a>
-                    <a class="app soon" style="--h:var(--hue-agent)" href="/apps/oneagent/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V7a4 4 0 0 1 4-4Z"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/><path d="m18 5 1.6-1.6M20 9h2"/></svg></span><span class="n">OneAgent</span><span class="s" data-i="d_soon">Coming soon</span></a>
+                    <a class="app" style="--h:var(--hue-job)" href="https://www.oneworldlabs.ai/apps/onejob/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M4 13h16"/></svg></span><span class="n">OneJob</span><span class="s" data-i="d_job">Get hired, get paid</span></a>
+                    <a class="app" style="--h:var(--hue-score)" href="https://www.oneworldlabs.ai/apps/onescore/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6.5v5c0 4.6 3.3 8.5 8 9.5 4.7-1 8-4.9 8-9.5v-5z"/><path d="m8.6 12 2.3 2.3 4.5-4.6"/></svg></span><span class="n">OneScore</span><span class="s" data-i="d_score">Credibility you own</span></a>
+                    <a class="app" style="--h:var(--hue-event)" href="https://www.oneworldlabs.ai/apps/oneevent/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 14v3"/></svg></span><span class="n">OneEvent</span><span class="s" data-i="d_event">Events and tickets</span></a>
+                    <a class="app" style="--h:var(--hue-social)" href="https://www.oneworldlabs.ai/apps/onesocial/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><circle cx="5.5" cy="17" r="2.6"/><circle cx="18.5" cy="17" r="2.6"/><path d="m9.7 9.3-2 5M14.3 9.3l2 5M8.1 17h7.8"/></svg></span><span class="n">OneSocial</span><span class="s" data-i="d_social">Your platforms, connected</span></a>
+                    <a class="app" style="--h:var(--hue-home)" href="https://www.oneworldlabs.ai/apps/onehome/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10.5 9-7 9 7"/><path d="M5.5 9.4V20h13V9.4"/><path d="M10 20v-5.2h4V20"/></svg></span><span class="n">OneHome</span><span class="s" data-i="d_home">Rent or buy a home</span></a>
+                    <a class="app soon" style="--h:var(--hue-agent)" href="https://www.oneworldlabs.ai/apps/oneagent/"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V7a4 4 0 0 1 4-4Z"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/><path d="m18 5 1.6-1.6M20 9h2"/></svg></span><span class="n">OneAgent</span><span class="s" data-i="d_soon">Coming soon</span></a>
                   </div></div>
                   <p class="carlabel">Services we run for you</p>
                   <div class="car-wrap"><div class="car" aria-label="One World Labs services">
-                    <a class="app" style="--h:var(--hue-voice)" href="/services/#onevoice"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21M9 21h6"/></svg></span><span class="n">OneVoice</span><span class="s" data-i="d_voice">AI receptionist</span></a>
-                    <a class="app" style="--h:var(--hue-page)" href="/services/#onepage"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8.5h18"/><path d="M6.5 12h6M6.5 15.5h9"/></svg></span><span class="n">OnePage</span><span class="s" data-i="d_page">AI websites</span></a>
-                    <a class="app soon" style="--h:var(--hue-app)" href="/services/#oneapp"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.6"/><path d="M10.5 5.5h3"/><path d="M12 18.2h.01"/></svg></span><span class="n">OneApp</span><span class="s" data-i="d_soon2">Coming soon</span></a>
+                    <a class="app" style="--h:var(--hue-voice)" href="https://www.oneworldlabs.ai/services/#onevoice"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3Z"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21M9 21h6"/></svg></span><span class="n">OneVoice</span><span class="s" data-i="d_voice">AI receptionist</span></a>
+                    <a class="app" style="--h:var(--hue-page)" href="https://www.oneworldlabs.ai/services/#onepage"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8.5h18"/><path d="M6.5 12h6M6.5 15.5h9"/></svg></span><span class="n">OnePage</span><span class="s" data-i="d_page">AI websites</span></a>
+                    <a class="app soon" style="--h:var(--hue-app)" href="https://www.oneworldlabs.ai/services/#oneapp"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.6"/><path d="M10.5 5.5h3"/><path d="M12 18.2h.01"/></svg></span><span class="n">OneApp</span><span class="s" data-i="d_soon2">Coming soon</span></a>
                   </div></div>
+
+                  <a class="site-row" href="https://www.oneworldlabs.ai/">
+                    <img src="owl-logo.png" alt="" width="34" height="34">
+                    <span>
+                      <span class="sr-t" data-i18n="site_t">oneworldlabs.ai</span>
+                      <span class="sr-s" data-i18n="site_s">The company — what we build and who it is for</span>
+                    </span>
+                    <svg class="sr-go" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                  </a>
+
+                  <div class="stores">
+                    <span class="store-badge" role="img" aria-label="Download on the App Store — coming soon">
+                      <svg width="24" height="28" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.7-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span class="sb-lines"><span class="sb-top">Download on the</span><span class="sb-bottom">App Store</span></span>
+                    </span>
+                    <span class="store-badge" role="img" aria-label="Get it on Google Play — coming soon">
+                      <svg width="22" height="25" viewBox="0 0 512 512" aria-hidden="true"><path fill="#00D7FE" d="M48 32c-6 5.5-10 14-10 25v398c0 11 4 19.5 10 25l3 2.8L294 240v-6L51 29.2 48 32z"/><path fill="#FFC900" d="M375 321l-81-81v-6l81-81 1.8 1L473 208c27 15.3 27 40.4 0 55.8l-96.2 54.2-1.8 3z"/><path fill="#FF3A44" d="M376.8 318L294 237 48 480c9 9.5 23.8 10.7 40.5 1.2L376.8 318z"/><path fill="#00F076" d="M376.8 156L88.5 30.8C71.8 21.3 57 22.5 48 32l246 205 82.8-81z"/></svg><span class="sb-lines"><span class="sb-top">GET IT ON</span><span class="sb-bottom">Google Play</span></span>
+                    </span>
+                  </div>
+                  <p class="stores-note" data-i18n="stores_note">Mobile apps coming soon — everything already works in your browser today.</p>
+
                 <p class="gift"><span data-i="gift_line">Founder discount — 30 days of free VIP subscription service</span><br>
                 <span class="code" id="giftCode" role="button" tabindex="0" aria-label="Copy founder discount code">FOUNDER0001</span></p>
               </div>
