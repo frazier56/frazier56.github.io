@@ -2,34 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
+<script>
+/* One ID / OAuth redirect-catcher — MUST stay at the very top of index.html and 404.html.
+   Supabase returns tokens in the hash (#access_token=…) or ?code= for PKCE. Hand the
+   whole thing off to the OneSocial v2 app with tokens intact, or Google sign-in breaks. */
+(function () {
+  var h = location.hash || "", q = location.search || "";
+  if (/access_token|refresh_token|error_description|type=recovery/.test(h) || /[?&]code=/.test(q)) {
+    location.replace("https://onejob.oneworldlabs.ai/" + q + h);
+  }
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OneAgent — Agents & representation | One World Labs</title>
-<meta name="description" content="OneAgent is for the human middle — the managers, bookers and representatives who already match talent to work and take a cut for it. It gives that relationship a contract, a pipeli">
+<title>OneAgent — Your middleman | One World Labs</title>
+<meta name="description" content="Somebody in your corner, finding and negotiating the work. OneAgent is representation for people who have never had any — a real middleman who brings you opportunities, …">
 <link rel="manifest" href="/owl-manifest.webmanifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#FAFAF8" id="theme-color-meta">
-<link rel="canonical" href="https://www.oneworldlabs.ai/apps/oneagent/">
+<link rel="canonical" href="https://www.oneworldlabs.ai/apps/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="One World Labs">
-<meta property="og:title" content="OneAgent — Agents & representation | One World Labs">
-<meta property="og:description" content="OneAgent is for the human middle — the managers, bookers and representatives who already match talent to work and take a cut for it. It gives that relationship a contract, a pipeli">
-<meta property="og:url" content="https://www.oneworldlabs.ai/apps/oneagent/">
+<meta property="og:title" content="Six Apps, One Login — OneJob, OneScore, OneEvent, OneSocial, OneAgent, OneHome">
+<meta property="og:description" content="The One World Platform: OneJob to get hired and paid, OneScore for free verified credibility, OneEvent for tickets, OneSocial for your connected platforms, and OneAgent — all under One ID.">
+<meta property="og:url" content="https://www.oneworldlabs.ai/apps/">
 <meta property="og:image" content="https://www.oneworldlabs.ai/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="OneAgent — Agents & representation | One World Labs">
-<meta name="twitter:description" content="OneAgent is for the human middle — the managers, bookers and representatives who already match talent to work and take a cut for it. It gives that relationship a contract, a pipeli">
+<meta name="twitter:title" content="Six Apps, One Login — OneJob, OneScore, OneEvent, OneSocial, OneAgent, OneHome">
+<meta name="twitter:description" content="The One World Platform: OneJob to get hired and paid, OneScore for free verified credibility, OneEvent for tickets, OneSocial for your connected platforms, and OneAgent — all under One ID.">
 <meta name="twitter:image" content="https://www.oneworldlabs.ai/og-cover.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
-{"@type":"Organization","@id":"https://www.oneworldlabs.ai/#org","name":"One World Labs","alternateName":["OneWorld","One World Labs, Inc.","OneWorld Small Business Solutions"],"url":"https://www.oneworldlabs.ai/","logo":"https://www.oneworldlabs.ai/mark-oneworld.png","description":"One World Labs is an AI agency and app platform for small businesses and freelancers: done-for-you AI services (AI answering, AI websites, reputation management, marketing automation) and six apps — OneJob, OneScore, OneEvent, OneSocial, OneAgent, OneHome — under one login (One ID).","email":"contact@oneworldlabs.ai","brand":[{"@type":"Brand","name":"OneVoice"},{"@type":"Brand","name":"OnePage"},{"@type":"Brand","name":"OneApp"},{"@type":"Brand","name":"OneJob"},{"@type":"Brand","name":"OneScore"},{"@type":"Brand","name":"OneEvent"},{"@type":"Brand","name":"OneSocial"},{"@type":"Brand","name":"OneAgent"},{"@type":"Brand","name":"OneHome"}]},
-{"@type":"WebSite","@id":"https://www.oneworldlabs.ai/#site","url":"https://www.oneworldlabs.ai/","name":"One World Labs","publisher":{"@id":"https://www.oneworldlabs.ai/#org"},"inLanguage":"en"},
-{"@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What is One World Labs?","acceptedAnswer":{"@type":"Answer","text":"One World Labs is two things in one: an AI agency that runs done-for-you services for small businesses (AI call answering through OneVoice, AI-built websites through OnePage, your own mobile app through OneApp, reputation management, search and AI visibility, win-back campaigns and marketing automation) and a platform of six apps for freelancers and small businesses — OneJob, OneScore, OneEvent, OneSocial, OneAgent and OneHome — that share one login called One ID."}},
-{"@type":"Question","name":"Can I start free?","acceptedAnswer":{"@type":"Answer","text":"Yes. OneScore is free forever and every One World app lets you get started without paying up front. The done-for-you agency services are paid."}},
-{"@type":"Question","name":"What is One ID?","acceptedAnswer":{"@type":"Answer","text":"One ID is one account for every One World product. Sign in once and you are in every One World app and service — no separate accounts and no re-entering your details."}},
-{"@type":"Question","name":"Do the One World apps work on any phone?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every One World app runs in the browser on any phone or computer, and can be added to your home screen so it opens like an app. Native App Store and Google Play apps are coming soon."}}]}
-]}
+{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.oneworldlabs.ai/"}, {"@type": "ListItem", "position": 2, "name": "Apps", "item": "https://www.oneworldlabs.ai/apps/"}]}, {"@type": "ItemList", "name": "One World Platform apps", "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@type": "SoftwareApplication", "name": "OneJob", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://app.oneworldlabs.ai/jobs", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@id": "https://www.oneworldlabs.ai/#org"}, "description": "The jobs marketplace — get hired and get paid, with verified reviews, contracts, and protected payments."}}, {"@type": "ListItem", "position": 2, "item": {"@type": "SoftwareApplication", "name": "OneScore", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://app.oneworldlabs.ai/onescore", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@id": "https://www.oneworldlabs.ai/#org"}, "description": "A free, verified professional credibility score you can post anywhere."}}, {"@type": "ListItem", "position": 3, "item": {"@type": "SoftwareApplication", "name": "OneEvent", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://app.oneworldlabs.ai/events", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@id": "https://www.oneworldlabs.ai/#org"}, "description": "Create events, sell tickets, and check guests in with QR."}}, {"@type": "ListItem", "position": 4, "item": {"@type": "SoftwareApplication", "name": "OneSocial", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://app.oneworldlabs.ai/social", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@id": "https://www.oneworldlabs.ai/#org"}, "description": "All your platforms, one professional identity."}}, {"@type": "ListItem", "position": 5, "item": {"@type": "SoftwareApplication", "name": "OneAgent", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://app.oneworldlabs.ai/agent", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@id": "https://www.oneworldlabs.ai/#org"}, "description": "Represent other people’s work and get credit for the deals you close."}}]}]}
 </script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -95,77 +97,93 @@
     .fade-up{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease-out forwards}
     @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
-    /* ---------- THE AURORA — parent-only. Two counter-drifting layers, 46s/58s. ---------- */
-    .ow-field{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
-        background:linear-gradient(172deg,#FBF3F6 0%,#F6EDF8 28%,#EFE8FA 58%,#F7EEF0 100%);}
-    .ow-field::before,.ow-field::after{content:"";position:absolute;inset:-12%;}
-    .ow-field::before{background:
-        radial-gradient(46% 38% at 18% 20%,rgba(146,88,232,.62),transparent 66%),
-        radial-gradient(42% 34% at 80% 12%,rgba(243,118,92,.56),transparent 64%),
-        radial-gradient(52% 42% at 64% 78%,rgba(88,132,242,.52),transparent 66%);
-        filter:blur(60px);animation:auroraA 46s ease-in-out infinite alternate;}
-    .ow-field::after{background:
-        radial-gradient(40% 32% at 84% 54%,rgba(252,176,74,.54),transparent 64%),
-        radial-gradient(44% 36% at 10% 72%,rgba(233,96,168,.50),transparent 66%),
-        radial-gradient(38% 30% at 44% 6%,rgba(96,224,206,.44),transparent 64%);
-        filter:blur(66px);animation:auroraB 58s ease-in-out infinite alternate;}
-    @keyframes auroraA{from{transform:translate3d(-2%,-1%,0) rotate(0deg)}to{transform:translate3d(2%,2%,0) rotate(4deg)}}
-    @keyframes auroraB{from{transform:translate3d(2%,1%,0) rotate(0deg)}to{transform:translate3d(-2%,-2%,0) rotate(-4deg)}}
-    .dark .ow-field{background:linear-gradient(172deg,#0B0F1A 0%,#0C1020 46%,#0B0F1A 100%);}
-    .dark .ow-field::before{background:
-        radial-gradient(46% 38% at 18% 20%,rgba(146,88,232,.28),transparent 66%),
-        radial-gradient(42% 34% at 80% 12%,rgba(243,118,92,.20),transparent 64%),
-        radial-gradient(52% 42% at 64% 78%,rgba(88,132,242,.24),transparent 66%);}
-    .dark .ow-field::after{background:
-        radial-gradient(40% 32% at 84% 54%,rgba(252,176,74,.16),transparent 64%),
-        radial-gradient(44% 36% at 10% 72%,rgba(233,96,168,.18),transparent 66%),
-        radial-gradient(38% 30% at 44% 6%,rgba(96,224,206,.16),transparent 64%);}
-    .ow-field::before,.ow-field::after{will-change:transform;}
-    @media (max-width:640px){ .ow-field::before{filter:blur(34px)} .ow-field::after{filter:blur(38px)} }
-    @media (prefers-reduced-motion: reduce){ .ow-field::before,.ow-field::after{animation:none} }
+    /* ══════════════════════════════════════════════════════════════════════════════════════
+       THE WOVEN FIELD — chosen by Lee, 13 Aug 2026, after four rounds of proofs.
+       ══════════════════════════════════════════════════════════════════════════════════════
+       What it replaces: a six-colour aurora with magenta, coral, amber and pink in it, drifting
+       on two 46s/58s animations. Lee's ruling across the round: *"take away the reds and the
+       oranges… keep it more like violet, green, purple, teal, dark blue,"* then *"I like the
+       woven fibre grain,"* then *"I want the grid to be multicolour,"* then *"tone down the
+       magenta lines a bit."* The settled answer is 3px pitch, violet at 45%.
 
-    /* ---- per-page aurora moods — same fixed field (colour persists the whole scroll),
-           the hub keeps the full rainbow; each inner page leans into 2–3 hues of it ---- */
+       ── THREE LAYERS, AND EACH ONE HAS ONE JOB ────────────────────────────────────────────
+       1. The base gradient — the paper.
+       2. `::before` — THE WASH. Blue at the top right, violet at the bottom left. Two colours
+          only. Teal used to live here as a third blob in the middle and Lee cut it: it read as
+          a third thing rather than as a transition, so teal moved into the threads instead.
+       3. `::after` — THE WEAVE. Threads of violet, blue and teal crossing at 90°.
+
+       ── HOW A THREE-COLOUR WEAVE IS BUILT ─────────────────────────────────────────────────
+       A repeating gradient repeats one PERIOD. Three thread colours at a 3px pitch means a 9px
+       period carrying 1px threads at 0, 3 and 6. The vertical run STARTS ON A DIFFERENT COLOUR
+       from the horizontal one, so the crossings are never the same pair twice running — that is
+       the difference between something woven and a printed grid.
+
+       ── THE VIOLET IS AN INDIGO, DELIBERATELY ─────────────────────────────────────────────
+       It was rgb(110,74,220) and read as magenta. A faint red-violet on near-white resolves as
+       pink, the same way a hairline red line on white looks orange — at 7% opacity the eye has
+       nothing to judge the hue against. It is now rgb(92,86,196): less red, more blue, so it
+       sits beside the blue thread rather than in front of it. Do not warm it back up.
+
+       ── NO ANIMATION ──────────────────────────────────────────────────────────────────────
+       The old field drifted. A weave cannot: a 1px thread moving sub-pixel shimmers, and on the
+       phones this is read on it reads as the screen flickering. The field is now still. */
+    .ow-field{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+        background:linear-gradient(196deg,#EAF0FB 0%,#EDEBFA 52%,#EEEDFB 100%);}
+    .ow-field::before,.ow-field::after{content:"";position:absolute;inset:0;}
+    .ow-field::before{background:
+        radial-gradient(60% 48% at 90% 4%,rgba(46,107,230,.44),transparent 68%),
+        radial-gradient(62% 50% at 4% 94%,rgba(110,74,220,.42),transparent 70%);
+        filter:blur(46px);}
+    .ow-field::after{background:
+        repeating-linear-gradient(90deg,
+            rgba(92,86,196,.072) 0 1px,transparent 1px 3px,
+            rgba(46,107,230,.16) 3px 4px,transparent 4px 6px,
+            rgba(21,194,178,.15) 6px 7px,transparent 7px 9px),
+        repeating-linear-gradient(0deg,
+            rgba(46,107,230,.16) 0 1px,transparent 1px 3px,
+            rgba(21,194,178,.15) 3px 4px,transparent 4px 6px,
+            rgba(92,86,196,.072) 6px 7px,transparent 7px 9px);}
+    .dark .ow-field{background:linear-gradient(196deg,#0A0F1C 0%,#0B0B1D 52%,#0C0B1E 100%);}
+    .dark .ow-field::before{background:
+        radial-gradient(60% 48% at 90% 4%,rgba(46,107,230,.38),transparent 68%),
+        radial-gradient(62% 50% at 4% 94%,rgba(124,84,232,.36),transparent 70%);
+        filter:blur(46px);}
+    .dark .ow-field::after{background:
+        repeating-linear-gradient(90deg,
+            rgba(150,142,255,.07) 0 1px,transparent 1px 3px,
+            rgba(120,170,255,.15) 3px 4px,transparent 4px 6px,
+            rgba(90,225,210,.13) 6px 7px,transparent 7px 9px),
+        repeating-linear-gradient(0deg,
+            rgba(120,170,255,.15) 0 1px,transparent 1px 3px,
+            rgba(90,225,210,.13) 3px 4px,transparent 4px 6px,
+            rgba(150,142,255,.07) 6px 7px,transparent 7px 9px);}
+
+    /* ── PER-PAGE MOODS — the WASH only ───────────────────────────────────────────────────
+       These used to override ::before AND ::after, which would now wipe the weave off every
+       page except the home page. They move the two wash blobs around and nothing else, so the
+       fabric is identical site-wide and only the light through it changes.
+
+       `ow-var-warm` is deliberately no longer warm. It kept the amber and coral Lee removed;
+       the class name survives because three pages reference it, and the colours do not. */
     .ow-var-cool::before{background:
-        radial-gradient(48% 40% at 16% 22%,rgba(146,88,232,.60),transparent 66%),
-        radial-gradient(44% 36% at 82% 14%,rgba(88,132,242,.55),transparent 64%),
-        radial-gradient(52% 42% at 62% 80%,rgba(96,224,206,.40),transparent 66%);}
-    .ow-var-cool::after{background:
-        radial-gradient(42% 34% at 86% 58%,rgba(146,88,232,.38),transparent 64%),
-        radial-gradient(44% 36% at 8% 76%,rgba(88,132,242,.44),transparent 66%);}
+        radial-gradient(60% 48% at 86% 8%,rgba(46,107,230,.46),transparent 68%),
+        radial-gradient(60% 48% at 8% 92%,rgba(110,74,220,.36),transparent 70%);}
     .dark .ow-var-cool::before{background:
-        radial-gradient(48% 40% at 16% 22%,rgba(146,88,232,.30),transparent 66%),
-        radial-gradient(44% 36% at 82% 14%,rgba(88,132,242,.26),transparent 64%),
-        radial-gradient(52% 42% at 62% 80%,rgba(96,224,206,.16),transparent 66%);}
-    .dark .ow-var-cool::after{background:
-        radial-gradient(42% 34% at 86% 58%,rgba(146,88,232,.18),transparent 64%),
-        radial-gradient(44% 36% at 8% 76%,rgba(88,132,242,.20),transparent 66%);}
+        radial-gradient(60% 48% at 86% 8%,rgba(46,107,230,.40),transparent 68%),
+        radial-gradient(60% 48% at 8% 92%,rgba(124,84,232,.30),transparent 70%);}
     .ow-var-warm::before{background:
-        radial-gradient(48% 40% at 18% 20%,rgba(233,96,168,.52),transparent 66%),
-        radial-gradient(44% 36% at 82% 16%,rgba(252,176,74,.52),transparent 64%),
-        radial-gradient(50% 42% at 60% 82%,rgba(243,118,92,.42),transparent 66%);}
-    .ow-var-warm::after{background:
-        radial-gradient(40% 34% at 88% 60%,rgba(233,96,168,.36),transparent 64%),
-        radial-gradient(42% 36% at 10% 78%,rgba(252,176,74,.38),transparent 66%);}
+        radial-gradient(60% 48% at 92% 6%,rgba(110,74,220,.42),transparent 68%),
+        radial-gradient(60% 48% at 6% 92%,rgba(46,107,230,.40),transparent 70%);}
     .dark .ow-var-warm::before{background:
-        radial-gradient(48% 40% at 18% 20%,rgba(233,96,168,.24),transparent 66%),
-        radial-gradient(44% 36% at 82% 16%,rgba(252,176,74,.18),transparent 64%),
-        radial-gradient(50% 42% at 60% 82%,rgba(243,118,92,.16),transparent 66%);}
-    .dark .ow-var-warm::after{background:
-        radial-gradient(40% 34% at 88% 60%,rgba(233,96,168,.14),transparent 64%),
-        radial-gradient(42% 36% at 10% 78%,rgba(252,176,74,.14),transparent 66%);}
+        radial-gradient(60% 48% at 92% 6%,rgba(124,84,232,.36),transparent 68%),
+        radial-gradient(60% 48% at 6% 92%,rgba(46,107,230,.34),transparent 70%);}
     .ow-var-soft::before{background:
-        radial-gradient(48% 40% at 16% 24%,rgba(96,224,206,.46),transparent 66%),
-        radial-gradient(44% 36% at 84% 14%,rgba(88,132,242,.46),transparent 64%);}
-    .ow-var-soft::after{background:
-        radial-gradient(42% 34% at 88% 62%,rgba(96,224,206,.30),transparent 64%),
-        radial-gradient(42% 36% at 8% 80%,rgba(88,132,242,.34),transparent 66%);}
+        radial-gradient(58% 46% at 88% 10%,rgba(46,107,230,.34),transparent 68%),
+        radial-gradient(58% 46% at 10% 90%,rgba(110,74,220,.30),transparent 70%);}
     .dark .ow-var-soft::before{background:
-        radial-gradient(48% 40% at 16% 24%,rgba(96,224,206,.18),transparent 66%),
-        radial-gradient(44% 36% at 84% 14%,rgba(88,132,242,.22),transparent 64%);}
-    .dark .ow-var-soft::after{background:
-        radial-gradient(42% 34% at 88% 62%,rgba(96,224,206,.12),transparent 64%),
-        radial-gradient(42% 36% at 8% 80%,rgba(88,132,242,.16),transparent 66%);}
+        radial-gradient(58% 46% at 88% 10%,rgba(46,107,230,.30),transparent 68%),
+        radial-gradient(58% 46% at 10% 90%,rgba(124,84,232,.26),transparent 70%);}
 
     /* marketing band photo collage (desktop) */
     .mkt-grid{display:grid;gap:32px;align-items:center;text-align:center;}
@@ -232,10 +250,9 @@
     .dark .hue-tile{background:radial-gradient(120% 120% at 30% 20%,color-mix(in srgb,var(--hb,#2E6BE6) 30%,transparent),transparent 70%),
                    linear-gradient(152deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
         border-color:rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.12);}
-    /* The top hairline was REMOVED 11 Aug 2026 (Lee): with the hue dot in the card's upper right,
-   a rule across the top read as unbalanced — "if it's at the top it should be at the bottom
-   too." The class is left in place on the cards so the decision is one line to reverse. */
-        .hue-top{position:relative;}
+    .hue-top{position:relative;}
+    .hue-top::before{content:"";position:absolute;top:0;left:14%;right:14%;height:2px;border-radius:2px;
+        background:linear-gradient(90deg,transparent,var(--hb,#2E6BE6),transparent);opacity:.85;}
     .hue-dot{width:9px;height:9px;border-radius:50%;background:var(--hb,#2E6BE6);box-shadow:0 0 10px color-mix(in srgb,var(--hb,#2E6BE6) 60%,transparent);}
 
     /* ---------- numbered service menu rows ---------- */
@@ -346,7 +363,15 @@
     .vaia-mic.on{background:#ff4d4d;color:#fff}
     .vaia-textin{flex:1;min-width:0;background:var(--color-secondary);border:1px solid var(--color-border);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--color-fg)}
 
-    /* ---------- the OneWorld lockup (mark + neWorld + LABS, INC.) ---------- */
+    /* The v10-1 lockup. Two files swapped in PLAIN CSS, not Tailwind's dark: variant — that
+       variant needs a class-based build config and these are hand-written static pages, so it
+       silently rendered BOTH files stacked on top of each other. Caught by a screenshot. */
+    .ow-lockup{height:48px;width:auto;display:block}
+    .ow-lockup-dark{display:none}
+    .dark .ow-lockup-light{display:none}
+    .dark .ow-lockup-dark{display:block}
+    @media (max-width:380px){ .ow-lockup{height:42px} }
+    /* ---------- the OLD text lockup — still used by the slide-out menu ---------- */
     .wm-name{display:block;font-weight:800;letter-spacing:-.02em;line-height:1;}
     .wm-ne{color:var(--color-fg);}
     .wm-world{color:var(--ow-primary);}
@@ -391,13 +416,11 @@
        the heading starts at the very top of the card's padding box. */
     .app-card{position:relative;}
     .app-dot{position:absolute;top:18px;right:18px;}
-    /* `more` closes the clamped description and opens that app's own page. Inline, so it reads
-   as the end of the sentence rather than as a competing second button. */
-        .app-more{font-weight:700;white-space:nowrap;border-bottom:1px solid currentColor;padding-bottom:1px;}
-    .app-card:hover .app-more{opacity:.9;}
+    .app-learn{border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;}
+    .app-card:hover .app-learn{opacity:.9;}
     @media (max-width:639px){
         .app-card .app-dot{top:14px;right:14px;width:8px;height:8px;}
-        .app-card .app-more{font-size:inherit;}
+        .app-card .app-learn{font-size:11px !important;}
     }
     .app-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
     @media (min-width:1024px){ .app-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;} }
@@ -417,11 +440,7 @@
     @media (min-width:768px){ .step-card{display:block;padding:40px;} .step-card .idx{font-size:48px;margin-bottom:24px;} }
 
     /* hero CTAs: two-up on phones instead of a full-width stack */
-    /* ONE control, not three. Lee, 11 Aug 2026: the espresso "Explore the services" wrapped
-       onto two lines beside a bright "Open the apps" that did not, so services read as the dominant
-       choice when the two are equals — and both pointed at sections already visible further down
-       the same page. Removing them leaves Sign in as the only thing to decide here. */
-    .hero-ctas{display:grid;grid-template-columns:1fr;gap:10px;max-width:420px;margin:0 auto 32px;}
+    .hero-ctas{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:420px;margin:0 auto 32px;}
     .hero-ctas .cta-signin{grid-column:1 / -1;}
     @media (min-width:640px){ .hero-ctas{display:flex;max-width:none;justify-content:center;gap:16px;} .hero-ctas .cta-signin{grid-column:auto;} }
 
@@ -633,29 +652,9 @@
   var t = setInterval(function () { sync(); if (++ticks > 20) clearInterval(t); }, 1500);
 })();
 </script>
-
-<style>
-  .apx{--hb:#7B2D3B;--hd:#6B2331;--hl:#E0919E;}
-  .apx .hue-text{color:var(--hd);}
-  .dark .apx .hue-text{color:var(--hl);}
-  .apx-hero{background:
-     radial-gradient(120% 100% at 15% 0%, color-mix(in srgb,var(--hb) 16%,transparent), transparent 62%),
-     radial-gradient(90% 80% at 95% 20%, color-mix(in srgb,var(--hb) 10%,transparent), transparent 60%);}
-  .apx-num{font-variant-numeric:tabular-nums;font-weight:800;color:var(--hb);opacity:.95;}
-  .apx-step{position:relative;padding-left:56px;}
-  .apx-step::before{content:attr(data-n);position:absolute;left:0;top:-2px;width:38px;height:38px;
-     border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:15px;
-     color:#fff;background:linear-gradient(180deg,var(--hb),var(--hd));}
-  /* The step spine. It stops at the LAST step rather than running past it — a rule that continues
-     under the final item reads as a list that lost its last row. */
-  .apx-step:not(:last-child)::after{content:"";position:absolute;left:18px;top:44px;bottom:-26px;
-     width:2px;background:color-mix(in srgb,var(--hb) 30%,transparent);}
-  .apx-tick{position:relative;padding-left:30px;}
-  .apx-tick::before{content:"";position:absolute;left:2px;top:9px;width:9px;height:9px;border-radius:3px;
-     background:var(--hb);}
-  @media (max-width:639px){ .apx-step{padding-left:48px;} .apx-step::before{width:32px;height:32px;font-size:13px;}
-     .apx-step:not(:last-child)::after{left:15px;top:38px;} }
-</style></head><body>
+<link rel="canonical" href="https://www.oneworldlabs.ai/apps/oneagent/">
+</head>
+<body style="--hb:#B91C1C;--hd:#991B1B;--hl:#FCA5A5">
 <div class="min-h-screen bg-background text-foreground font-sans overflow-x-hidden">
 
     <!-- The aurora — One World Labs is the ONLY surface that runs the multi-colour field -->
@@ -667,13 +666,9 @@
             <!-- the OneWorld lockup: transparent multicolor mark = the "O", text is live HTML so it
                  stays crisp at any resolution and follows the theme (matches the SMALL BUSINESS
                  SOLUTIONS lockup in GHL/_BRAND-ASSETS/OneWorld_multicolor-mark) -->
-            <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center gap-[4px]">
-                <img src="/mark-oneworld.png" alt="" class="h-9 w-auto -mr-[3px] -mt-[2px]" onerror="this.style.display='none';var o=document.getElementById('wm-o');if(o)o.classList.remove('hidden');">
-                <span id="wm-o" class="hidden font-extrabold text-xl tracking-tight text-primary">O</span>
-                <span class="text-left">
-                    <span class="wm-name text-[20px]"><span class="wm-ne">ne</span><span class="wm-world">World</span></span>
-                    <span class="wm-tag text-[7.5px]">LABS, INC.</span>
-                </span>
+<a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center">
+                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-light">
+                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-dark">
             </a>
             <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary">
                 <a href="/services/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="nav_services">Services</a>
@@ -709,174 +704,50 @@
             </div>
         </div>
     </header>
+    <main class="relative z-10 pt-24 md:pt-28">
+      <section class="container mx-auto px-4 max-w-3xl text-center mb-16 md:mb-20">
+        <p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#B91C1C">Your middleman</p>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-5">OneAgent<span class="align-middle ml-3 rounded-full border-2 px-3 py-1 text-[13px] font-black uppercase tracking-widest" style="border-color:#B91C1C;color:#B91C1C">Coming soon</span></h1>
+        <p class="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight max-w-2xl mx-auto mb-8 leading-snug">Somebody in your corner, finding and negotiating the work.</p>
 
-    <!-- Mobile / full menu overlay — drawer style + glass tint matched to OneEvent's GlassDrawer
-         (see oneevents-delta/src/components/GlassDrawer.tsx). Also now One-ID-aware: shows a
-         "Sign in with One ID" row when signed out, or an identity row + red Sign Out row when
-         signed in (previously always showed "Sign in" regardless of session — no way to sign out
-         from here at all). -->
-    <div id="menu-overlay" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
-        <div class="menu-panel absolute right-3 top-[74px] flex max-h-[calc(100vh-90px)] w-[300px] max-w-[88vw] flex-col overflow-y-auto rounded-3xl border shadow-2xl p-4 sm:p-5">
-
-            <!-- identity row: One World Labs mark when signed out, avatar + name when signed in -->
-            <div class="mb-1 flex items-center justify-between gap-2">
-                <div id="hb-signedout-id" class="flex items-center gap-1.5 min-w-0">
-                    <img src="/mark-oneworld.png" alt="" class="h-7 w-auto shrink-0 -mr-[2px]">
-                    <span class="min-w-0 text-left">
-                        <span class="wm-name text-[15px] truncate"><span class="wm-ne">ne</span><span class="wm-world">World</span></span>
-                        <span class="wm-tag text-[6.5px]">LABS, INC.</span>
-                    </span>
-                </div>
-                <div id="hb-signedin-id" class="hidden items-center gap-2.5 min-w-0">
-                    <span id="hbAvatarLetter" class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary/15 text-sm font-bold text-primary">·</span>
-                    <span class="min-w-0">
-                        <span id="hbNameLine" class="block truncate text-sm font-bold leading-tight">Signed in</span>
-                        <span class="block truncate text-xs text-muted-foreground" data-i18n="oneid_label">One ID</span>
-                    </span>
-                </div>
-                <button id="menu-close-x" type="button" class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-lg leading-none" aria-label="Close menu">&times;</button>
-            </div>
-
-            <div class="mt-3 space-y-3">
-                <div>
-                    <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1 px-1" data-i18n="ftr_apps">Apps</h4>
-                    <a href="https://app.oneworldlabs.ai/jobs" class="menu-navitem"><span><span class="menu-one">One</span>Job</span></a>
-                    <a href="https://app.oneworldlabs.ai/onescore" class="menu-navitem"><span><span class="menu-one">One</span>Score</span></a>
-                    <a href="https://app.oneworldlabs.ai/events" class="menu-navitem"><span><span class="menu-one">One</span>Event</span></a>
-                    <a href="https://app.oneworldlabs.ai/social" class="menu-navitem"><span><span class="menu-one">One</span>Social</span></a>
-                    <a href="https://app.oneworldlabs.ai/agent" class="menu-navitem"><span><span class="menu-one">One</span>Agent</span></a>
-                </div>
-                <div>
-                    <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1 px-1" data-i18n="ftr_svcs">Services</h4>
-                    <a href="https://onevoice.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Voice</span></a>
-                    <a href="https://onepage.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Page</span></a>
-                    <a href="https://oneapp.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>App</span></a>
-                </div>
-                <div>
-                    <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1 px-1" data-i18n="ftr_agency">Agency services</h4>
-                    <a href="/services/" class="menu-navitem"><span data-i18n="ftr_allsvcs">All ten services</span></a>
-                    <a href="/blog/" class="menu-navitem"><span data-i18n="nav_blog">Blog</span></a>
-                </div>
-            </div>
-
-            <div class="menu-divider"></div>
-
-            <!-- signed-out: One ID sign-in -->
-            <div id="hb-signedout-cta" class="flex flex-col gap-2">
-                <a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="w-full text-center h-11 px-6 inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-primary-foreground font-semibold" data-i18n="cta_signin">
-                    <svg class="h-5 w-5 shrink-0" width="24" height="24" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 36 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
-                    <span data-i18n="cta_signin">Sign in with One ID</span>
-                </a>
-                <a href="#apps" class="menu-close-link w-full text-center h-11 px-6 inline-flex items-center justify-center rounded-xl border border-border font-medium hover:bg-secondary/50 transition-colors" data-i18n="cta_jump">Jump into an app</a>
-            </div>
-
-            <!-- signed-in: sign out (red row, matches OneEvent's GlassDrawer sign-out styling) -->
-            <div id="hb-signedin-cta" class="hidden flex-col">
-                <button id="hbSignOutBtn" type="button" class="menu-signout">
-                    <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
-                    <span data-i18n="signout">Sign out</span>
-                </button>
-            </div>
-
+        <!-- THE CALL TO ACTION, AT THE TOP. Lee asked for it here specifically, and somebody who
+             followed an advert for this app has already decided — making them scroll past prose
+             before they can act taxes the most valuable visitor on the page. -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="https://app.oneworldlabs.ai/agent" class="btn-clay w-full sm:w-auto h-12 px-7 text-base inline-flex items-center justify-center rounded-full font-bold text-white">
+            Read about it
+          </a>
+          <a href="/apps/" class="w-full sm:w-auto h-12 px-6 inline-flex items-center justify-center rounded-full font-semibold text-muted-foreground hover:text-foreground transition-colors">
+            See all six apps
+          </a>
         </div>
-    </div>
+        <p class="text-xs sm:text-sm text-muted-foreground/80 mt-4">One login for every app · Free to start · No credit card</p>
+      </section>
 
-    <!-- VAIA floating voice assistant -->
-    <div id="vaia-widget">
-        <div class="vaia-panel">
-            <div class="vaia-panel-inner">
-                <div class="vaia-head">
-                    <span class="font-heading font-bold text-sm flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary"></span> VAIA</span>
-                    <button id="vaia-close" class="h-7 w-7 inline-flex items-center justify-center rounded-md hover:bg-secondary/50" aria-label="Close VAIA">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                    </button>
-                </div>
-                <div id="vaia-log" class="vaia-log"></div>
-                <div class="vaia-controls">
-                    <input id="vaia-text" class="vaia-textin" type="text" placeholder="Type to VAIA (or just talk to her)…">
-                </div>
-            </div>
+      <section class="container mx-auto px-4 max-w-3xl mb-16 md:mb-20">
+        <div class="frost rounded-3xl p-6 md:p-9">
+          <p class="text-base md:text-lg leading-relaxed text-muted-foreground">OneAgent is representation for people who have never had any — a real middleman who brings you opportunities, handles the awkward conversation about money, and takes a share only when you get paid. It is being built now.</p>
+          <ul class="mt-7 grid gap-3 sm:grid-cols-2">
+            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#B91C1C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>Work brought to you instead of hunted down</span></li>
+            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#B91C1C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>Somebody else has the money conversation</span></li>
+            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#B91C1C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>Paid on your results, never up front</span></li>
+            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#B91C1C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>Built on the same One ID as everything else</span></li>
+          </ul>
         </div>
-        <div class="vaia-orb" id="vaia-orb" role="button" tabindex="0" aria-label="Tap to talk to VAIA">
-            <div class="vaia-ring"></div><div class="vaia-ring"></div><div class="vaia-ring"></div>
-            <div class="vaia-bars"><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="vaia-think">Thinking</div>
-            <div class="vaia-listen">Listening</div>
-        </div>
-    </div>
+      </section>
 
-    <main class="apx relative z-10 pt-24 md:pt-28">
-<section class="apx-hero">
- <div class="container mx-auto px-4 max-w-6xl py-10 md:py-20">
-  <a href="/apps/" class="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-foreground mb-6">
-    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-    All apps</a>
-  <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-   <div>
-    <h3 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Agents & representation</h3>
-    <h1 class="text-4xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-5">
-      <span class="text-primary">One</span>Agent — Represent people. Get credit for the deals you close.</h1>
-    <p class="text-muted-foreground text-base md:text-xl leading-relaxed mb-8 max-w-xl">OneAgent is for the human middle — the managers, bookers and representatives who already match talent to work and take a cut for it. It gives that relationship a contract, a pipeline, and an automatic split when the money moves.</p>
-    <div class="flex flex-wrap gap-3">
-      <a href="https://app.oneworldlabs.ai/agent" class="btn-clay h-12 px-7 text-base">Open OneAgent
-        <svg class="ml-1.5 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-      <a href="#how" class="btn-ghost h-12 px-6 text-base">How it works</a>
-    </div>
-    <p class="text-xs text-muted-foreground mt-4">Free to join · one login across every One World app · no credit card</p>
-   </div>
-   <div class="frost rounded-3xl p-5 md:p-8"><svg viewBox="0 0 420 240" class="w-full h-auto" role="img" aria-label="One client payment splits automatically between the professional and the agent">
-  <text x="64" y="34" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.3" fill="currentColor" opacity=".45">CLIENT PAYS ONCE</text>
-  <rect x="26" y="52" width="76" height="52" rx="14" fill="#7B2D3B" fill-opacity=".16" stroke="#7B2D3B" stroke-width="2"/>
-  <text x="64" y="85" text-anchor="middle" font-size="19" font-weight="800" fill="#7B2D3B">$</text>
-  <path d="M106 78h56c14 0 14 -22 28 -22h34" fill="none" stroke="#7B2D3B" stroke-width="2.4"/>
-  <path d="M106 78h56c14 0 14 62 28 62h34" fill="none" stroke="#7B2D3B" stroke-width="2.4"/>
-  <g fill="none" stroke="#7B2D3B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M218 50l7 6-7 6"/><path d="M218 134l7 6-7 6"/></g>
-  <g><rect x="234" y="32" width="160" height="50" rx="14" fill="none" stroke="currentColor" stroke-width="2" opacity=".4"/>
-     <text x="252" y="63" font-size="13" font-weight="700" fill="currentColor" opacity=".75">The professional</text></g>
-  <g><rect x="234" y="116" width="160" height="50" rx="14" fill="#7B2D3B" fill-opacity=".12" stroke="#7B2D3B" stroke-width="2"/>
-     <text x="252" y="147" font-size="13" font-weight="700" fill="#7B2D3B">You, the agent</text></g>
-  <text x="210" y="212" text-anchor="middle" font-size="12" fill="currentColor" opacity=".55">Your commission is not an invoice you have to chase.</text>
-</svg></div>
-  </div>
- </div>
-</section>
-<section class="container mx-auto px-4 max-w-5xl py-12 md:py-20">
- <h2 class="text-2xl md:text-4xl font-bold mb-8 md:mb-10">Agents run on trust and spreadsheets</h2>
- <div class="grid md:grid-cols-2 gap-5"><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">The commission is a promise</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">You find the work, you negotiate it, and then you wait to be paid your share by the person you just got paid. It works until it does not.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">Your book lives in your phone</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">Who you represent, on what terms, until when, at what percentage. It is in messages, in your head, and in a spreadsheet that is out of date.</p></div></div>
-</section>
-<section id="how" class="container mx-auto px-4 max-w-4xl py-12 md:py-20">
- <div class="frost rounded-3xl p-6 md:p-10">
-  <h2 class="text-2xl md:text-4xl font-bold mb-8 md:mb-10">How OneAgent works</h2>
-  <div class="space-y-7 md:space-y-9"><div class="apx-step" data-n="1"><h3 class="font-bold text-lg md:text-xl mb-1.5">Build your book</h3><p class="text-muted-foreground text-sm md:text-base leading-relaxed">Invite people you already represent, or bring in new ones with a link or a QR code. Nobody becomes a client by accident — invite, connect, then a representation agreement.</p></div><div class="apx-step" data-n="2"><h3 class="font-bold text-lg md:text-xl mb-1.5">Work deals on their behalf</h3><p class="text-muted-foreground text-sm md:text-base leading-relaxed">Reach out as the agent, acting for a named client. Contracts are secured for either side, and the pipeline is visible in one place.</p></div><div class="apx-step" data-n="3"><h3 class="font-bold text-lg md:text-xl mb-1.5">Get paid automatically</h3><p class="text-muted-foreground text-sm md:text-base leading-relaxed">When a deal completes, the payment splits — the professional and the agent are both paid out of the client’s single payment. No invoice to your own client.</p></div></div>
- </div>
-</section>
-<section class="container mx-auto px-4 max-w-6xl py-12 md:py-20">
- <h2 class="text-2xl md:text-4xl font-bold mb-8 md:mb-10">What you get</h2>
- <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5"><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">A real representation agreement</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">Start date, end date, commission percentage, adjustable per deal. Held on the profile, not in a chat.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">The ladder, with no rung skippable</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">Invited, connected, then partnered. You cannot send a representation contract to a stranger.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">Automatic commission</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">Your cut sits inside the talent’s rate. The client sees one total; you and your client see the split. The 5.99% platform fee is separate and stated.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">A roster you can see</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">Who you represent, what state each relationship is in, what is live right now.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">Anyone can walk away</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">A represented person can disconnect at any time, and that ends the active contract. An agreement people cannot leave is not an agreement.</p></div><div class="frost rounded-2xl p-5 md:p-6"><h3 class="font-bold text-base md:text-lg mb-1.5">Your own score grows</h3><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed">OneAgent counts the deals you closed for other people. Being good for your roster is the thing that compounds.</p></div></div>
-</section>
-<section class="container mx-auto px-4 max-w-4xl py-12 md:py-20">
- <div class="frost rounded-3xl p-6 md:p-10">
-  <h2 class="text-2xl md:text-4xl font-bold mb-7">Who it is for</h2>
-  <ul class="text-sm md:text-[17px] leading-relaxed"><li class="apx-tick mb-4"><span class="font-bold">Talent and booking agents</span> — <span class="text-muted-foreground">Models, performers, crew, creators — anyone whose work you already place.</span></li><li class="apx-tick mb-4"><span class="font-bold">Property and sales agents</span> — <span class="text-muted-foreground">Represent the seller or the buyer and have the commission handled by the same rail as the deal.</span></li><li class="apx-tick mb-4"><span class="font-bold">Anyone who brings work to others</span> — <span class="text-muted-foreground">If you are the reason a job happened, this is how you get paid for being that reason.</span></li></ul>
- </div>
-</section>
-<section class="container mx-auto px-4 max-w-3xl py-12 md:py-20">
- <h2 class="text-2xl md:text-4xl font-bold mb-8">Questions</h2>
- <details class="frost rounded-2xl px-5 md:px-6 py-4 mb-3 group"><summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4"><span>Is OneAgent an AI?</span><svg class="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></summary><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed mt-3">No. OneAgent is for human agents representing real people. It is not an assistant and it is not a bot.</p></details><details class="frost rounded-2xl px-5 md:px-6 py-4 mb-3 group"><summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4"><span>How is the commission taken?</span><svg class="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></summary><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed mt-3">It is a percentage inside the rate. When the client pays once, the professional and the agent are both paid from it.</p></details><details class="frost rounded-2xl px-5 md:px-6 py-4 mb-3 group"><summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4"><span>Can I represent somebody who is not on the platform?</span><svg class="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></summary><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed mt-3">Invite them. They join, connect to you, and then you can propose representation.</p></details><details class="frost rounded-2xl px-5 md:px-6 py-4 mb-3 group"><summary class="font-bold cursor-pointer list-none flex items-center justify-between gap-4"><span>Who sees my percentage?</span><svg class="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></summary><p class="text-muted-foreground text-sm md:text-[15px] leading-relaxed mt-3">You and the person you represent. The client sees one total.</p></details>
-</section>
-<section class="apx-hero">
- <div class="container mx-auto px-4 max-w-4xl py-14 md:py-24 text-center">
-  <h2 class="text-3xl md:text-5xl font-bold mb-4">Ready when you are.</h2>
-  <p class="text-muted-foreground text-base md:text-lg mb-8 max-w-xl mx-auto">
-    One login covers every One World app. Open OneAgent and your profile, your score and your
-    messages are already there.</p>
-  <a href="https://app.oneworldlabs.ai/agent" class="btn-clay h-12 px-8 text-base">Open OneAgent
-    <svg class="ml-1.5 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
-  <p class="text-xs font-bold tracking-widest uppercase text-muted-foreground mt-14 mb-4">The rest of One World</p>
-  <div class="flex flex-wrap justify-center gap-2"><a href="/apps/onejob/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full frost text-sm font-semibold"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#17A45C"></span>OneJob</a><a href="/apps/onescore/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full frost text-sm font-semibold"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#E0A21F"></span>OneScore</a><a href="/apps/oneevent/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full frost text-sm font-semibold"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#E2711D"></span>OneEvent</a><a href="/apps/onesocial/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full frost text-sm font-semibold"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#8B3DEA"></span>OneSocial</a><a href="/apps/onehome/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full frost text-sm font-semibold"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#0EA5E9"></span>OneHome</a></div>
- </div>
-</section></main><footer class="relative z-10 border-t border-border/50 pt-12 md:pt-20 pb-8 md:pb-10" style="background:color-mix(in srgb,var(--color-bg) 78%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);">
+      <section class="container mx-auto px-4 max-w-3xl text-center mb-24 md:mb-32">
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">Not open yet — but your One ID already is.</h2>
+        <p class="text-muted-foreground max-w-xl mx-auto mb-7 leading-relaxed">
+          Your One ID works across all six apps and the services we run for you. Set it up once
+          on OneAgent and you are already signed in everywhere else.
+        </p>
+        <a href="https://app.oneworldlabs.ai/agent" class="btn-clay h-12 px-7 inline-flex items-center justify-center rounded-full font-bold text-white">
+          Read about it
+        </a>
+      </section>
+    </main>
+<footer class="relative z-10 border-t border-border/50 pt-12 md:pt-20 pb-8 md:pb-10" style="background:color-mix(in srgb,var(--color-bg) 78%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);">
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
                 <div>

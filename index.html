@@ -105,77 +105,110 @@
     .fade-up{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease-out forwards}
     @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
-    /* ---------- THE AURORA — parent-only. Two counter-drifting layers, 46s/58s. ---------- */
-    .ow-field{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
-        background:linear-gradient(172deg,#FBF3F6 0%,#F6EDF8 28%,#EFE8FA 58%,#F7EEF0 100%);}
-    .ow-field::before,.ow-field::after{content:"";position:absolute;inset:-12%;}
-    .ow-field::before{background:
-        radial-gradient(46% 38% at 18% 20%,rgba(146,88,232,.62),transparent 66%),
-        radial-gradient(42% 34% at 80% 12%,rgba(243,118,92,.56),transparent 64%),
-        radial-gradient(52% 42% at 64% 78%,rgba(88,132,242,.52),transparent 66%);
-        filter:blur(60px);animation:auroraA 46s ease-in-out infinite alternate;}
-    .ow-field::after{background:
-        radial-gradient(40% 32% at 84% 54%,rgba(252,176,74,.54),transparent 64%),
-        radial-gradient(44% 36% at 10% 72%,rgba(233,96,168,.50),transparent 66%),
-        radial-gradient(38% 30% at 44% 6%,rgba(96,224,206,.44),transparent 64%);
-        filter:blur(66px);animation:auroraB 58s ease-in-out infinite alternate;}
-    @keyframes auroraA{from{transform:translate3d(-2%,-1%,0) rotate(0deg)}to{transform:translate3d(2%,2%,0) rotate(4deg)}}
-    @keyframes auroraB{from{transform:translate3d(2%,1%,0) rotate(0deg)}to{transform:translate3d(-2%,-2%,0) rotate(-4deg)}}
-    .dark .ow-field{background:linear-gradient(172deg,#0B0F1A 0%,#0C1020 46%,#0B0F1A 100%);}
-    .dark .ow-field::before{background:
-        radial-gradient(46% 38% at 18% 20%,rgba(146,88,232,.28),transparent 66%),
-        radial-gradient(42% 34% at 80% 12%,rgba(243,118,92,.20),transparent 64%),
-        radial-gradient(52% 42% at 64% 78%,rgba(88,132,242,.24),transparent 66%);}
-    .dark .ow-field::after{background:
-        radial-gradient(40% 32% at 84% 54%,rgba(252,176,74,.16),transparent 64%),
-        radial-gradient(44% 36% at 10% 72%,rgba(233,96,168,.18),transparent 66%),
-        radial-gradient(38% 30% at 44% 6%,rgba(96,224,206,.16),transparent 64%);}
-    .ow-field::before,.ow-field::after{will-change:transform;}
-    @media (max-width:640px){ .ow-field::before{filter:blur(34px)} .ow-field::after{filter:blur(38px)} }
-    @media (prefers-reduced-motion: reduce){ .ow-field::before,.ow-field::after{animation:none} }
+    /* ── THE HEADER LOCKUP, AND WHY THE SWAP IS PLAIN CSS ─────────────────────────────────
+       The first version of this used Tailwind's `dark:hidden` / `hidden dark:block`, and a
+       screenshot at phone width showed BOTH files stacked on top of each other — the header was
+       the logo twice, once in each theme. Tailwind's `dark:` variant only fires when the build
+       is configured for class-based dark mode, and this page is a hand-written static file that
+       toggles `.dark` on <html> itself. Two rules, no build step, no assumption.
 
-    /* ---- per-page aurora moods — same fixed field (colour persists the whole scroll),
-           the hub keeps the full rainbow; each inner page leans into 2–3 hues of it ---- */
+       48px rather than 40px: the long-form lockup carries "AI SOLUTIONS FOR SMALL BUSINESSES"
+       under the name, and that tagline is about 8% of the artwork's height. At 40px it renders
+       around 3px tall, which is a grey smudge. At 48 it is readable and the header still fits
+       inside its 64px bar. */
+    .ow-lockup{height:48px;width:auto;display:block}
+    .ow-lockup-dark{display:none}
+    .dark .ow-lockup-light{display:none}
+    .dark .ow-lockup-dark{display:block}
+    @media (max-width:380px){ .ow-lockup{height:42px} }
+
+    /* ══════════════════════════════════════════════════════════════════════════════════════
+       THE WOVEN FIELD — chosen by Lee, 13 Aug 2026, after four rounds of proofs.
+       ══════════════════════════════════════════════════════════════════════════════════════
+       What it replaces: a six-colour aurora with magenta, coral, amber and pink in it, drifting
+       on two 46s/58s animations. Lee's ruling across the round: *"take away the reds and the
+       oranges… keep it more like violet, green, purple, teal, dark blue,"* then *"I like the
+       woven fibre grain,"* then *"I want the grid to be multicolour,"* then *"tone down the
+       magenta lines a bit."* The settled answer is 3px pitch, violet at 45%.
+
+       ── THREE LAYERS, AND EACH ONE HAS ONE JOB ────────────────────────────────────────────
+       1. The base gradient — the paper.
+       2. `::before` — THE WASH. Blue at the top right, violet at the bottom left. Two colours
+          only. Teal used to live here as a third blob in the middle and Lee cut it: it read as
+          a third thing rather than as a transition, so teal moved into the threads instead.
+       3. `::after` — THE WEAVE. Threads of violet, blue and teal crossing at 90°.
+
+       ── HOW A THREE-COLOUR WEAVE IS BUILT ─────────────────────────────────────────────────
+       A repeating gradient repeats one PERIOD. Three thread colours at a 3px pitch means a 9px
+       period carrying 1px threads at 0, 3 and 6. The vertical run STARTS ON A DIFFERENT COLOUR
+       from the horizontal one, so the crossings are never the same pair twice running — that is
+       the difference between something woven and a printed grid.
+
+       ── THE VIOLET IS AN INDIGO, DELIBERATELY ─────────────────────────────────────────────
+       It was rgb(110,74,220) and read as magenta. A faint red-violet on near-white resolves as
+       pink, the same way a hairline red line on white looks orange — at 7% opacity the eye has
+       nothing to judge the hue against. It is now rgb(92,86,196): less red, more blue, so it
+       sits beside the blue thread rather than in front of it. Do not warm it back up.
+
+       ── NO ANIMATION ──────────────────────────────────────────────────────────────────────
+       The old field drifted. A weave cannot: a 1px thread moving sub-pixel shimmers, and on the
+       phones this is read on it reads as the screen flickering. The field is now still. */
+    .ow-field{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+        background:linear-gradient(196deg,#EAF0FB 0%,#EDEBFA 52%,#EEEDFB 100%);}
+    .ow-field::before,.ow-field::after{content:"";position:absolute;inset:0;}
+    .ow-field::before{background:
+        radial-gradient(60% 48% at 90% 4%,rgba(46,107,230,.44),transparent 68%),
+        radial-gradient(62% 50% at 4% 94%,rgba(110,74,220,.42),transparent 70%);
+        filter:blur(46px);}
+    .ow-field::after{background:
+        repeating-linear-gradient(90deg,
+            rgba(92,86,196,.072) 0 1px,transparent 1px 3px,
+            rgba(46,107,230,.16) 3px 4px,transparent 4px 6px,
+            rgba(21,194,178,.15) 6px 7px,transparent 7px 9px),
+        repeating-linear-gradient(0deg,
+            rgba(46,107,230,.16) 0 1px,transparent 1px 3px,
+            rgba(21,194,178,.15) 3px 4px,transparent 4px 6px,
+            rgba(92,86,196,.072) 6px 7px,transparent 7px 9px);}
+    .dark .ow-field{background:linear-gradient(196deg,#0A0F1C 0%,#0B0B1D 52%,#0C0B1E 100%);}
+    .dark .ow-field::before{background:
+        radial-gradient(60% 48% at 90% 4%,rgba(46,107,230,.38),transparent 68%),
+        radial-gradient(62% 50% at 4% 94%,rgba(124,84,232,.36),transparent 70%);
+        filter:blur(46px);}
+    .dark .ow-field::after{background:
+        repeating-linear-gradient(90deg,
+            rgba(150,142,255,.07) 0 1px,transparent 1px 3px,
+            rgba(120,170,255,.15) 3px 4px,transparent 4px 6px,
+            rgba(90,225,210,.13) 6px 7px,transparent 7px 9px),
+        repeating-linear-gradient(0deg,
+            rgba(120,170,255,.15) 0 1px,transparent 1px 3px,
+            rgba(90,225,210,.13) 3px 4px,transparent 4px 6px,
+            rgba(150,142,255,.07) 6px 7px,transparent 7px 9px);}
+
+    /* ── PER-PAGE MOODS — the WASH only ───────────────────────────────────────────────────
+       These used to override ::before AND ::after, which would now wipe the weave off every
+       page except the home page. They move the two wash blobs around and nothing else, so the
+       fabric is identical site-wide and only the light through it changes.
+
+       `ow-var-warm` is deliberately no longer warm. It kept the amber and coral Lee removed;
+       the class name survives because three pages reference it, and the colours do not. */
     .ow-var-cool::before{background:
-        radial-gradient(48% 40% at 16% 22%,rgba(146,88,232,.60),transparent 66%),
-        radial-gradient(44% 36% at 82% 14%,rgba(88,132,242,.55),transparent 64%),
-        radial-gradient(52% 42% at 62% 80%,rgba(96,224,206,.40),transparent 66%);}
-    .ow-var-cool::after{background:
-        radial-gradient(42% 34% at 86% 58%,rgba(146,88,232,.38),transparent 64%),
-        radial-gradient(44% 36% at 8% 76%,rgba(88,132,242,.44),transparent 66%);}
+        radial-gradient(60% 48% at 86% 8%,rgba(46,107,230,.46),transparent 68%),
+        radial-gradient(60% 48% at 8% 92%,rgba(110,74,220,.36),transparent 70%);}
     .dark .ow-var-cool::before{background:
-        radial-gradient(48% 40% at 16% 22%,rgba(146,88,232,.30),transparent 66%),
-        radial-gradient(44% 36% at 82% 14%,rgba(88,132,242,.26),transparent 64%),
-        radial-gradient(52% 42% at 62% 80%,rgba(96,224,206,.16),transparent 66%);}
-    .dark .ow-var-cool::after{background:
-        radial-gradient(42% 34% at 86% 58%,rgba(146,88,232,.18),transparent 64%),
-        radial-gradient(44% 36% at 8% 76%,rgba(88,132,242,.20),transparent 66%);}
+        radial-gradient(60% 48% at 86% 8%,rgba(46,107,230,.40),transparent 68%),
+        radial-gradient(60% 48% at 8% 92%,rgba(124,84,232,.30),transparent 70%);}
     .ow-var-warm::before{background:
-        radial-gradient(48% 40% at 18% 20%,rgba(233,96,168,.52),transparent 66%),
-        radial-gradient(44% 36% at 82% 16%,rgba(252,176,74,.52),transparent 64%),
-        radial-gradient(50% 42% at 60% 82%,rgba(243,118,92,.42),transparent 66%);}
-    .ow-var-warm::after{background:
-        radial-gradient(40% 34% at 88% 60%,rgba(233,96,168,.36),transparent 64%),
-        radial-gradient(42% 36% at 10% 78%,rgba(252,176,74,.38),transparent 66%);}
+        radial-gradient(60% 48% at 92% 6%,rgba(110,74,220,.42),transparent 68%),
+        radial-gradient(60% 48% at 6% 92%,rgba(46,107,230,.40),transparent 70%);}
     .dark .ow-var-warm::before{background:
-        radial-gradient(48% 40% at 18% 20%,rgba(233,96,168,.24),transparent 66%),
-        radial-gradient(44% 36% at 82% 16%,rgba(252,176,74,.18),transparent 64%),
-        radial-gradient(50% 42% at 60% 82%,rgba(243,118,92,.16),transparent 66%);}
-    .dark .ow-var-warm::after{background:
-        radial-gradient(40% 34% at 88% 60%,rgba(233,96,168,.14),transparent 64%),
-        radial-gradient(42% 36% at 10% 78%,rgba(252,176,74,.14),transparent 66%);}
+        radial-gradient(60% 48% at 92% 6%,rgba(124,84,232,.36),transparent 68%),
+        radial-gradient(60% 48% at 6% 92%,rgba(46,107,230,.34),transparent 70%);}
     .ow-var-soft::before{background:
-        radial-gradient(48% 40% at 16% 24%,rgba(96,224,206,.46),transparent 66%),
-        radial-gradient(44% 36% at 84% 14%,rgba(88,132,242,.46),transparent 64%);}
-    .ow-var-soft::after{background:
-        radial-gradient(42% 34% at 88% 62%,rgba(96,224,206,.30),transparent 64%),
-        radial-gradient(42% 36% at 8% 80%,rgba(88,132,242,.34),transparent 66%);}
+        radial-gradient(58% 46% at 88% 10%,rgba(46,107,230,.34),transparent 68%),
+        radial-gradient(58% 46% at 10% 90%,rgba(110,74,220,.30),transparent 70%);}
     .dark .ow-var-soft::before{background:
-        radial-gradient(48% 40% at 16% 24%,rgba(96,224,206,.18),transparent 66%),
-        radial-gradient(44% 36% at 84% 14%,rgba(88,132,242,.22),transparent 64%);}
-    .dark .ow-var-soft::after{background:
-        radial-gradient(42% 34% at 88% 62%,rgba(96,224,206,.12),transparent 64%),
-        radial-gradient(42% 36% at 8% 80%,rgba(88,132,242,.16),transparent 66%);}
+        radial-gradient(58% 46% at 88% 10%,rgba(46,107,230,.30),transparent 68%),
+        radial-gradient(58% 46% at 10% 90%,rgba(124,84,232,.26),transparent 70%);}
 
     /* marketing band photo collage (desktop) */
     .mkt-grid{display:grid;gap:32px;align-items:center;text-align:center;}
@@ -242,10 +275,9 @@
     .dark .hue-tile{background:radial-gradient(120% 120% at 30% 20%,color-mix(in srgb,var(--hb,#2E6BE6) 30%,transparent),transparent 70%),
                    linear-gradient(152deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
         border-color:rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.12);}
-    /* The top hairline was REMOVED 11 Aug 2026 (Lee): with the hue dot in the card's upper right,
-   a rule across the top read as unbalanced — "if it's at the top it should be at the bottom
-   too." The class is left in place on the cards so the decision is one line to reverse. */
-        .hue-top{position:relative;}
+    .hue-top{position:relative;}
+    .hue-top::before{content:"";position:absolute;top:0;left:14%;right:14%;height:2px;border-radius:2px;
+        background:linear-gradient(90deg,transparent,var(--hb,#2E6BE6),transparent);opacity:.85;}
     .hue-dot{width:9px;height:9px;border-radius:50%;background:var(--hb,#2E6BE6);box-shadow:0 0 10px color-mix(in srgb,var(--hb,#2E6BE6) 60%,transparent);}
 
     /* ---------- numbered service menu rows ---------- */
@@ -401,31 +433,11 @@
        the heading starts at the very top of the card's padding box. */
     .app-card{position:relative;}
     .app-dot{position:absolute;top:18px;right:18px;}
-    /* `more` closes the clamped description and opens that app's own page. Inline, so it reads
-   as the end of the sentence rather than as a competing second button. */
-        .app-more{font-weight:700;white-space:nowrap;border-bottom:1px solid currentColor;}
-        /* ── THE WHOLE PANEL IS THE TAP TARGET (Lee, 11 Aug 2026) ─────────────────────────
-           "When you tap on the panel, nothing works except going to the app directly. You
-           should be able to tap on the text and learn more, but that option doesn't exist."
-           He is right, and the cause was mine: `more` shipped as a 40x22px word at the end of
-           a paragraph. Apple's minimum tap target is 44x44 — it was technically a link and
-           practically invisible. You cannot tap what you cannot find.
-           Stretched-link pattern: the `more` anchor spreads an invisible ::after across the
-           whole card, so tapping ANYWHERE on the panel opens that app's page. No JavaScript,
-           and still ONE anchor, so a screen reader announces one destination rather than a
-           card full of them. */
-        .app-card{position:relative;}
-        .app-more::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;}
-        /* "Open <App>" is raised ABOVE the stretched area so the two destinations never fight. */
-        .app-card .app-open{position:relative;z-index:2;}
-        .app-card{cursor:pointer;}
-        /* A real 44px-tall tap target for the word itself, with negative margin so the line it
-           sits on does not grow. */
-        .app-more{display:inline-block;padding:13px 9px;margin:-13px -5px;}
-    .app-card:hover .app-more{opacity:.9;}
+    .app-learn{border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;}
+    .app-card:hover .app-learn{opacity:.9;}
     @media (max-width:639px){
         .app-card .app-dot{top:14px;right:14px;width:8px;height:8px;}
-        .app-card .app-more{font-size:inherit;}
+        .app-card .app-learn{font-size:11px !important;}
     }
     .app-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
     @media (min-width:1024px){ .app-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;} }
@@ -674,13 +686,32 @@
             <!-- the OneWorld lockup: transparent multicolor mark = the "O", text is live HTML so it
                  stays crisp at any resolution and follows the theme (matches the SMALL BUSINESS
                  SOLUTIONS lockup in GHL/_BRAND-ASSETS/OneWorld_multicolor-mark) -->
-            <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center gap-[4px]">
-                <img src="/mark-oneworld.png" alt="" class="h-9 w-auto -mr-[3px] -mt-[2px]" onerror="this.style.display='none';var o=document.getElementById('wm-o');if(o)o.classList.remove('hidden');">
-                <span id="wm-o" class="hidden font-extrabold text-xl tracking-tight text-primary">O</span>
-                <span class="text-left">
-                    <span class="wm-name text-[20px]"><span class="wm-ne">ne</span><span class="wm-world">World</span></span>
-                    <span class="wm-tag text-[7.5px]">LABS, INC.</span>
-                </span>
+            <!-- ── THE v10-1 LOCKUP, 13 Aug 2026 ────────────────────────────────────────────
+                 Lee: *"we're supposed to be replacing the logo in the actual header with the
+                 updated logo… the one that says AI for small businesses instead of One World
+                 Labs, Inc. It's gonna be the one that has the black in it — the O that has the
+                 black in it."*
+
+                 So this is now ONE IMAGE rather than a mark plus live HTML text. That is a
+                 deliberate reversal of the old approach and the reason is the mark itself: the
+                 "O" is a rendered crescent whose black-to-teal gradient and its silver glare
+                 cannot be reproduced by CSS beside a web font, and the previous lockup could
+                 therefore never match the printed card or the brand kit. Kerning the logotype
+                 against the mark also stops being a per-screen argument — see the long note in
+                 shell/components/Wordmark.tsx for how much of that there has been.
+
+                 Two files, swapped on theme, because a PNG cannot recolour itself: the LIGHT
+                 file carries the black "O" for a light background, the DARK file carries the
+                 white one. Both are cropped to their alpha bounds and downscaled to 120px tall,
+                 which is 3× the 40px it renders at.
+
+                 The alt text is the company name, so a failed image still says who this is —
+                 the old "nePage" incident is in that same Wordmark note. -->
+            <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center">
+                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses"
+                     class="ow-lockup ow-lockup-light">
+                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses"
+                     class="ow-lockup ow-lockup-dark">
             </a>
             <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary">
                 <a href="/services/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="nav_services">Services</a>
@@ -752,11 +783,6 @@
                     <a href="https://app.oneworldlabs.ai/events" class="menu-navitem"><span><span class="menu-one">One</span>Event</span></a>
                     <a href="https://app.oneworldlabs.ai/social" class="menu-navitem"><span><span class="menu-one">One</span>Social</span></a>
                     <a href="https://app.oneworldlabs.ai/agent" class="menu-navitem"><span><span class="menu-one">One</span>Agent</span></a>
-                            <!-- OneHome was missing from this menu entirely (Lee, 11 Aug 2026). -->
-                            <a href="https://app.oneworldlabs.ai/home" class="menu-navitem"><span><span class="menu-one">One</span>Home</span></a>
-                            <!-- Nothing in the mobile menu led to the six explainer pages — the
-                                 desktop nav had an Apps entry, the hamburger did not. -->
-                            <a href="/apps/" class="menu-navitem text-muted-foreground" data-i18n="menu_whatapps"><span>What each app does &rarr;</span></a>
                 </div>
                 <div>
                     <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1 px-1" data-i18n="ftr_svcs">Services</h4>
@@ -821,17 +847,16 @@
 
         <!-- ================= HERO ================= -->
         <section class="container mx-auto px-4 text-center max-w-5xl mb-24 md:mb-36">
-            <!-- the multicolor OneWorld mark — GHL/_BRAND-ASSETS/OneWorld_multicolor-mark master, transparent -->
-            <img src="/mark-oneworld.png" alt="OneWorld" class="fade-up h-20 md:h-24 w-auto mx-auto mb-8 drop-shadow-[0_10px_24px_rgba(27,73,184,0.25)]">
-            <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-5 py-2.5 rounded-full frost mb-10 text-[10.5px] sm:text-[12.5px] font-medium">
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">10</strong> <span class="text-muted-foreground" data-i18n="s_svcs">services</span></span>
-                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">6</strong> <span class="text-muted-foreground" data-i18n="s_apps">apps</span></span>
-                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">7</strong> <span class="text-muted-foreground" data-i18n="s_langs">languages</span></span>
-                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
-                <span class="flex items-center gap-1.5"><strong class="text-foreground">1</strong> <span class="text-muted-foreground" data-i18n="s_login">login</span></span>
-            </div>
+            <!-- ── THE HERO MARK IS GONE, 13 Aug 2026 ───────────────────────────────────────
+                 Lee crossed it out on the screenshot and had asked once before: *"remove that
+                 logo from there."*
+
+                 He is right, and it is not only repetition. The same mark was already in the
+                 header 80px above it, so the first thing on the page was the logo twice — and it
+                 pushed "One World. Your World." — the only line that says what this company is —
+                 below the fold on a phone. The headline is now the first thing on the page,
+                 which is what he asked for: *"the first thing on the page is gonna say One
+                 World, Your World."* -->
 
             <h1 class="fade-up text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.04] mb-6">
                 One World.<br><span class="text-primary">Your World.</span>
@@ -844,6 +869,26 @@
             <p class="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed" data-i18n="ow_sub">
                 One World Labs builds AI technology for small businesses and freelancers — an ecosystem of apps you use and services we run for you, so the work gets found, the customers get answered and the money actually arrives.
             </p>
+
+            <!-- ── THE COUNT STRIP, MOVED DOWN TO SIT ON THE ONE ID PANEL ───────────────────
+                 Lee: *"we're gonna take this little panel that has 10 services, 6 apps, 7
+                 languages and 1 login, and we're gonna move that down, and it's gonna sit right
+                 above the One login section."*
+
+                 It reads completely differently here. At the top it was four numbers with no
+                 referent, before the reader knew what the company was. Directly above the sign-in
+                 button it is the ANSWER to the question that button raises — what exactly am I
+                 getting one login to? — and "1 login" now sits two centimetres above the control
+                 that grants it. -->
+            <div class="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-5 py-2.5 rounded-full frost mb-6 text-[10.5px] sm:text-[12.5px] font-medium">
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">10</strong> <span class="text-muted-foreground" data-i18n="s_svcs">services</span></span>
+                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">6</strong> <span class="text-muted-foreground" data-i18n="s_apps">apps</span></span>
+                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">7</strong> <span class="text-muted-foreground" data-i18n="s_langs">languages</span></span>
+                <span class="w-1 h-1 rounded-full bg-foreground/20"></span>
+                <span class="flex items-center gap-1.5"><strong class="text-foreground">1</strong> <span class="text-muted-foreground" data-i18n="s_login">login</span></span>
+            </div>
 
             <div id="signedout-cta" class="hero-ctas items-center">
                 <a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="cta-signin btn-ghost w-full sm:w-auto h-12 px-6 text-base">
@@ -1045,43 +1090,49 @@
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onejob_tag">The jobs marketplace</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onejob_desc">Get hired and get paid in 60 seconds. Every contract is signed in the app and the money is held safely until the work is actually done. Reviews come from real completed jobs, so a good reputation is one you earned. <a href="/apps/onejob/" class="app-more hue-text" data-i18n="app_more">more</a></p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onejob_desc">Get hired and get paid in 60 seconds. Every contract is signed in the app and the money is held safely until the work is actually done. Reviews come from real completed jobs, so a good reputation is one you earned.</p>
                     <a href="https://app.oneworldlabs.ai/jobs" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onejob_cta">Open OneJob</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#onejob" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneJob</a>
                 </div>
                 <div id="onescore" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E0A21F;--hd:#96690A;--hl:#F3C969">
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onescore_tag">Professional credibility</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onescore_desc">Your whole reputation as one verified number you can post anywhere. It reads your reviews, your completed work and your social proof, then shows you exactly what would move it. Free forever. <a href="/apps/onescore/" class="app-more hue-text" data-i18n="app_more">more</a></p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onescore_desc">Your whole reputation as one verified number you can post anywhere. It reads your reviews, your completed work and your social proof, then shows you exactly what would move it. Free forever.</p>
                     <a href="https://app.oneworldlabs.ai/onescore" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onescore_cta">Open OneScore</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#onescore" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneScore</a>
                 </div>
                 <div id="oneevent" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E2711D;--hd:#9C4A0C;--hl:#F5A468">
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneevent_tag">Events & tickets</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneevent_desc">Create an event, sell tickets and check guests in with a QR code, live in minutes. Take payment in your own currency and see who is actually coming. Free events cost nothing to run. <a href="/apps/oneevent/" class="app-more hue-text" data-i18n="app_more">more</a></p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneevent_desc">Create an event, sell tickets and check guests in with a QR code, live in minutes. Take payment in your own currency and see who is actually coming. Free events cost nothing to run.</p>
                     <a href="https://app.oneworldlabs.ai/events" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneevent_cta">Open OneEvent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#oneevent" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneEvent</a>
                 </div>
                 <div id="onesocial" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8B3DEA;--hd:#5B21B6;--hl:#C4A9FA">
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onesocial_tag">Your connected platforms</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onesocial_desc">All your platforms behind one professional identity. Connect the accounts you already have and turn a following into credibility that can be checked. What you post here reaches every app in the family. <a href="/apps/onesocial/" class="app-more hue-text" data-i18n="app_more">more</a></p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onesocial_desc">All your platforms behind one professional identity. Connect the accounts you already have and turn a following into credibility that can be checked. What you post here reaches every app in the family.</p>
                     <a href="https://app.oneworldlabs.ai/social" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onesocial_cta">Open OneSocial</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#onesocial" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneSocial</a>
                 </div>
                 <div id="oneagent" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#7B2D3B;--hd:#6B2331;--hl:#E0919E">
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneagent_tag">Agents & representation</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneagent_desc">Represent other people's work and get paid for the deals you close, with your commission written into the contract before anyone signs. Or find an agent to represent yours. Real people, not AI. <a href="/apps/oneagent/" class="app-more hue-text" data-i18n="app_more">more</a></p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneagent_desc">Represent other people's work and get paid for the deals you close, with your commission written into the contract before anyone signs. Or find an agent to represent yours. Real people, not AI.</p>
                     <a href="https://app.oneworldlabs.ai/agent" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneagent_cta">Open OneAgent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#oneagent" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneAgent</a>
                 </div>
                 <div id="onehome" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#0D9488;--hd:#0F766E;--hl:#5EEAD4">
                     <span class="hue-dot app-dot" aria-hidden="true"></span>
                     <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Home</h3>
                     <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onehome_tag">Rent or buy a home</h4>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onehome_desc">Rent or buy a place with a real contract instead of a chat thread. To rent: a signed lease, a deposit held safely and move-in photos both sides agreed to. To buy: the sale history and a value range Colombia has never had. <a href="/apps/onehome/" class="app-more hue-text" data-i18n="app_more">more</a></p>
+                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onehome_desc">Rent or buy a place with a real contract instead of a chat thread. To rent: a signed lease, a deposit held safely and move-in photos both sides agreed to. To buy: the sale history and a value range Colombia has never had.</p>
                     <a href="https://app.oneworldlabs.ai/home" class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onehome_cta">Open OneHome</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                    <a href="/apps/#onehome" class="app-learn mt-2 inline-flex items-center text-[12.5px] font-semibold opacity-55" data-i18n="app_learn">Learn more about OneHome</a>
                 </div>
             </div>
         </section>
@@ -1246,12 +1297,6 @@
                 </div>
                 <div class="text-center md:text-right text-xs text-muted-foreground space-y-1">
                     <p class="font-medium">© 2026 One World Labs, Inc. · OneJob · OneScore · OneEvent · OneSocial · OneAgent · OneHome · OneVoice · OnePage · OneApp</p>
-                    <!-- Brand identity + legal links. Required for A2P 10DLC brand verification:
-                         the reviewer looks for a postal address, a working support number, a business
-                         email and reachable terms/privacy. Added 2026-08-12. -->
-                    <p>One World Labs, Inc. &middot; 1111B South Governors Avenue, STE 48311, Dover, DE 19904</p>
-                    <p><a href="tel:+18557700200" class="hover:text-foreground transition-colors">(855) 770-0200</a> &middot; <a href="mailto:contact@oneworldlabs.ai" class="hover:text-foreground transition-colors">contact@oneworldlabs.ai</a></p>
-                    <p><a href="https://app.oneworldlabs.ai/terms" class="hover:text-foreground transition-colors">Terms of Service</a> &middot; <a href="https://app.oneworldlabs.ai/privacy" class="hover:text-foreground transition-colors">Privacy Policy</a></p>
                     <p data-i18n="ftr_tagline">The AI ecosystem for today's small businesses.</p>
                 </div>
             </div>
@@ -2343,14 +2388,5 @@
         };
     })();
 </script>
-
-
-
-<!-- Keep the A2P footer readable when the LeadConnector mobile bubble is open. Added 2026-08-12. -->
-<style id="a2p-widget-footer-safe">
-@media (max-width: 640px) { footer { padding-bottom: 17rem !important; } }
-</style>
-<!-- One World Labs - text opt-in chat widget (A2P compliance). Added 2026-08-12. -->
-<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a7c71062d25c2c3668fa947" data-source="WEB_USER"></script>
 </body>
 </html>
