@@ -10,4 +10,13 @@
   <url><loc>https://www.oneworldlabs.ai/blog/event-planning-tips/</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-08-10</lastmod></url>
   <url><loc>https://www.oneworldlabs.ai/blog/how-djs-book-more-gigs/</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-08-10</lastmod></url>
   <url><loc>https://www.oneworldlabs.ai/blog/freelance-contracts-protected-payments/</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-08-10</lastmod></url>
+
+  <url><loc>https://www.oneworldlabs.ai/apps/onehome/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/apps/onejob/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/apps/onescore/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/apps/oneevent/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/apps/onesocial/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/apps/oneagent/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <url><loc>https://www.oneworldlabs.ai/founder/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
