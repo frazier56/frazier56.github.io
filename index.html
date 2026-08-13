@@ -429,6 +429,35 @@
     .slide-fallback{display:flex;gap:14px;justify-content:center;margin-top:10px;}
     .slide-fallback a{font-size:12.5px;font-weight:600;text-decoration:underline;opacity:.7;}
     @media (hover:none){.slide-hint{opacity:.7;}}
+
+    .app-card .app-more{display:inline-block;margin-top:-8px;margin-bottom:14px;font-size:13px;
+        font-weight:700;color:var(--hb,#2E6BE6);text-decoration:underline;text-underline-offset:3px;}
+    /* the slider, fixed: centred in the page, wide enough that the knob never covers a word */
+    .slide-pick{grid-column:1 / -1;width:100%;max-width:min(520px,92vw);
+        margin-left:auto !important;margin-right:auto !important;justify-self:center;}
+    .hero-ctas{max-width:min(520px,92vw);}
+    @media (min-width:640px){ .slide-pick{flex:1 0 100%;} }
+    .slide-rail{padding:0 26px;justify-content:space-between;}
+    .slide-rail .side{font-size:15px;font-weight:800;opacity:.55;}
+    /* committing turns the destination green, so the thumb knows before it lets go */
+    .slide-rail .side.hot{opacity:1;color:#16A34A;transform:scale(1.06);}
+    .slide-knob{width:44px;height:44px;margin:-22px 0 0 -22px;}
+    .slide-knob.armed{background:linear-gradient(180deg,#dcfce7,#86efac);}
+
+    /* ---------- the service menu collapses as a whole (Lee, 13 Aug) ----------
+       Each of the ten already opens on its own; this is the outer one, so ten closed rows are
+       not paid for in vertical space by someone who never wanted them. Native <details>: works
+       with JavaScript off and the keyboard gets it for free. */
+    .svc-menu > .svc-summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+        justify-content:space-between;gap:12px;padding:16px 14px;border-radius:16px;
+        background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.04));
+        border:1px solid var(--border,rgba(255,255,255,.16));}
+    .svc-menu > .svc-summary::-webkit-details-marker{display:none}
+    .svc-summary-t{display:block;font-size:16px;font-weight:800;letter-spacing:-.01em}
+    .svc-summary-s{display:block;margin-top:2px;font-size:12.5px;opacity:.6}
+    .svc-summary-c{flex:0 0 auto;transition:transform .25s ease}
+    .svc-menu[open] > .svc-summary > .svc-summary-c{transform:rotate(180deg)}
+    .svc-menu[open] > .svc-summary{margin-bottom:8px}
     /* ---------- store badges (visual only until the store listings exist) ---------- */
     .store-badge{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 18px 0 14px;border-radius:12px;
         background:linear-gradient(180deg,#1b1b1f,#000);color:#fff;border:1px solid rgba(255,255,255,.28);
@@ -475,6 +504,21 @@
     .hero-ctas{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:420px;margin:0 auto 32px;}
     .hero-ctas .cta-signin{grid-column:1 / -1;}
     @media (min-width:640px){ .hero-ctas{display:flex;max-width:none;justify-content:center;gap:16px;} .hero-ctas .cta-signin{grid-column:auto;} }
+
+    /* ---- the hero choice, centred at EVERY width (Lee's desktop screenshot, 13 Aug) ----
+       One column, three centred bands: the slider, its hint, then sign-in. Overrides the row
+       above for this block only, at all breakpoints, so there is no width where they line up
+       side by side and the slider drifts off centre. */
+    .hero-ctas:has(.slide-pick){display:flex !important;flex-direction:column;align-items:center;
+        max-width:min(560px,92vw) !important;margin-left:auto;margin-right:auto;gap:14px;}
+    .hero-ctas:has(.slide-pick) .slide-pick{width:100%;max-width:min(520px,92vw);margin:0 auto;}
+    .hero-ctas:has(.slide-pick) .cta-signin{width:auto;margin:0 auto;}
+    /* :has() is well supported now, but a browser without it must not end up with the old row —
+       so the same shape is asserted without it as a floor. */
+    @supports not selector(:has(*)) {
+      .hero-ctas{display:flex !important;flex-direction:column;align-items:center;
+        max-width:min(560px,92vw) !important;margin-left:auto;margin-right:auto;}
+    }
 
     /* ---------- service category chips ---------- */
     .svc-chip{border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;border:1px solid var(--color-border);
@@ -861,8 +905,8 @@
             <div id="signedout-cta" class="hero-ctas items-center">
                 <div class="slide-pick" id="slidePick">
                     <div class="slide-rail" id="slideRail">
-                        <span class="side" id="sideLeft" data-i18n="cta_services">Explore the services</span>
-                        <span class="side" id="sideRight" data-i18n="cta_apps">Open the apps</span>
+                        <span class="side" id="sideLeft" data-i18n="s_svcs">Services</span>
+                        <span class="side" id="sideRight" data-i18n="s_apps">Apps</span>
                         <button type="button" class="slide-knob" id="slideKnob"
                                 aria-label="Slide left for services, right for apps">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6-4 6 4 6M15 6l4 6-4 6"/></svg>
@@ -1006,7 +1050,15 @@
                     </div>
                     <a href="/services/" class="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold text-primary"><span data-i18n="svc_seeall">Open the full service menu</span> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
                 </div>
-                <div data-acc id="svcacc">
+                <details class="svc-menu group">
+                  <summary class="svc-summary">
+                    <span>
+                      <span class="svc-summary-t" data-i18n="svc_menu_t">Full service menu</span>
+                      <span class="svc-summary-s" data-i18n="svc_menu_s">Ten ways to put AI to work in your business</span>
+                    </span>
+                    <svg class="svc-summary-c" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                  </summary>
+                  <div data-acc id="svcacc">
                     <div class="qa border-b border-border/40 last:border-b-0">
                         <button class="qa-trigger w-full flex items-center justify-between gap-3 text-left py-4 px-2">
                             <span class="flex items-center gap-4 min-w-0"><span class="idx text-sm">01</span><span class="font-bold text-[15px] md:text-base truncate" data-i18n="svc01_h">AI answering, scheduling &amp; booking</span></span>
@@ -1077,6 +1129,8 @@
                         </button>
                         <div class="qa-content"><div class="pb-4 pl-12 pr-2"><p class="text-muted-foreground text-sm leading-relaxed" data-i18n="svc10_p">Have a workflow of your own? We design custom AI employees around how your business already works.</p><a href="/services/#s10" class="inline-flex items-center gap-1 text-sm font-bold text-primary mt-2"><span data-i18n="svc_ask">Ask about this</span> <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></div></div>
                     </div>
+                
+                </details>
                 </div>
                 <div class="text-center mt-6">
                     <a href="/services/" class="btn-clay h-11 px-7 text-sm sm:text-base"><span data-i18n="svc_seeall">Open the full service menu</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
@@ -1133,46 +1187,52 @@
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Credibility you own</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Your whole reputation — real work, verified credentials and reviews — in one number you can show anybody. Free forever.</p>
+                        <span class="app-more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/onescore"><span>Open OneScore</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/onescore"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#16A34A;--hd:#0E8248;--hl:#5FD79B">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/onejob/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">The work marketplace</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Get hired and get paid, without chasing anybody for the money. A signed agreement on every job and the payment held until it is done.</p>
+                        <span class="app-more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/jobs"><span>Open OneJob</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/jobs"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#0D9488;--hd:#0F766E;--hl:#5EEAD4">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/onehome/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Home</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Rent or buy a home</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">A home with a real contract behind it — a signed lease, photos both sides agreed, and the property's real registered sale history.</p>
+                        <span class="app-more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/home"><span>Open OneHome</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/home"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#DB2777;--hd:#BE185D;--hl:#F9A8D4">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/oneevent/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Events and tickets</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Run an event and keep what you sell. The page, the tickets, the door and the money, all in one place.</p>
+                        <span class="app-more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/events"><span>Open OneEvent</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/events"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#0891B2;--hd:#0E7490;--hl:#67E8F9">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/onesocial/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your platforms, connected</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Every account you already have, adding up to one professional identity somebody can verify.</p>
+                        <span class="app-more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/social"><span>Open OneSocial</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/social"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#B91C1C;--hd:#991B1B;--hl:#FCA5A5">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/oneagent/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your middleman</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Somebody in your corner finding and negotiating the work, who takes a share only when you get paid.</p>
+                        <span class="app-more">more</span>
                     </a>
                     <div class="app-foot pt-3"><span class="inline-block px-3 py-1 rounded-full border border-border font-bold tracking-wider uppercase text-xs">Coming soon</span></div>
                 </div>
@@ -2464,11 +2524,14 @@
     dx=Math.max(-max,Math.min(max,e.clientX-startX));
     if(Math.abs(dx)>MOVED && knob.setPointerCapture && e.pointerId!=null){ try{knob.setPointerCapture(e.pointerId);}catch(_){} }
     knob.style.transform='translateX('+dx+'px)';
+    var armed=Math.abs(dx)>max*THRESH;
     L.classList.toggle('hot', dx<-max*THRESH); R.classList.toggle('hot', dx>max*THRESH);
+    knob.classList.toggle('armed', armed);
   }
   function up(){
     if(!live) return; live=false; knob.classList.remove('dragging');
     var hit=Math.abs(dx)>max*THRESH; var dir=dx;
+    knob.classList.remove('armed');
     centre();
     if(hit) go(dir);
   }
