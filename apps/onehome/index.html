@@ -877,15 +877,18 @@
     var menuBtn = document.getElementById('menu-btn'), overlay = document.getElementById('menu-overlay');
     var iconMenu = document.getElementById('icon-menu'), iconX = document.getElementById('icon-x');
     function setMenu(open){
+        if (!overlay || !menuBtn) return;
         overlay.classList.toggle('show', open);
         iconMenu.classList.toggle('hidden', open);
         iconX.classList.toggle('hidden', !open);
         menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     }
-    menuBtn.addEventListener('click', function(){ setMenu(!overlay.classList.contains('show')); });
-    overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
-    overlay.addEventListener('click', function(e){ if (e.target === overlay) setMenu(false); });
-    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && overlay.classList.contains('show')) setMenu(false); });
+    if (menuBtn && overlay) {
+        menuBtn.addEventListener('click', function(){ setMenu(!overlay.classList.contains('show')); });
+        overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+        overlay.addEventListener('click', function(e){ if (e.target === overlay) setMenu(false); });
+        document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && overlay.classList.contains('show')) setMenu(false); });
+    }
     var menuCloseX = document.getElementById('menu-close-x');
     if (menuCloseX) menuCloseX.addEventListener('click', function(){ setMenu(false); });
     var hbSignOutBtnForClose = document.getElementById('hbSignOutBtn');
@@ -1605,6 +1608,7 @@
         var closeBtn = document.getElementById('vaia-close');
         var log = document.getElementById('vaia-log');
         var textIn = document.getElementById('vaia-text');
+        if (!widget || !orb || !closeBtn || !log || !textIn) return;
         var history = [];
         var busy = false, voiceMode = false, asleep = false, everSlept = false, currentAudio = null, pendingResolve = null, abortCtl = null;
         /* tracks consecutive listen cycles that ended with nothing heard, so she can announce
