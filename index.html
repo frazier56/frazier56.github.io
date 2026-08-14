@@ -415,6 +415,10 @@
         border:1px solid var(--border,rgba(255,255,255,.18));
         box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 26px -18px rgba(10,14,28,.7);
         backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+    .hero-ctas + p[data-i18n="microtrust"],
+    p[data-i18n="microtrust"]{padding-right:clamp(0px,18vw,86px);}
+    @media (min-width:900px){ p[data-i18n="microtrust"]{padding-right:0;} }
+    body{padding-bottom:env(safe-area-inset-bottom);}
     html.dark .slide-rail{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.03));}
     .slide-rail .side{font-size:13.5px;font-weight:700;letter-spacing:-.01em;opacity:.62;
         transition:opacity .2s ease,transform .2s ease;white-space:nowrap;pointer-events:none;}
@@ -428,6 +432,18 @@
     .slide-hint{margin-top:9px;text-align:center;font-size:11px;letter-spacing:.02em;opacity:.55;}
     .slide-fallback{display:flex;gap:14px;justify-content:center;margin-top:10px;}
     .slide-fallback a{font-size:12.5px;font-weight:600;text-decoration:underline;opacity:.7;}
+    /* Lee, 14 Aug: the slider, the hint and these two links all said the same thing — the same
+       choice offered three times in a row.
+       They cannot simply be deleted. The knob is a drag control, and a drag control is unusable
+       with a keyboard, so these links ARE the keyboard route to both destinations. Removing them
+       would trade a visual problem for a real one.
+       So: once JavaScript is running they are taken out of the visual stack but left in the page,
+       and they come straight back the moment anything inside the control is focused by keyboard.
+       Mouse and thumb see one control. Tab-key users see two links. Nobody is stranded. */
+    html.js-ready .slide-fallback{position:absolute;width:1px;height:1px;overflow:hidden;
+        clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;}
+    html.js-ready .slide-pick:focus-within .slide-fallback{position:static;width:auto;height:auto;
+        overflow:visible;clip:auto;clip-path:none;white-space:normal;}
     @media (hover:none){.slide-hint{opacity:.7;}}
 
     .app-card .app-more{display:inline-block;margin-top:-8px;margin-bottom:14px;font-size:13px;
@@ -1235,13 +1251,6 @@
                         <span class="app-more">more</span>
                     </a>
                     <div class="app-foot pt-3"><span class="inline-block px-3 py-1 rounded-full border border-border font-bold tracking-wider uppercase text-xs">Coming soon</span></div>
-                </div>
-                <!-- One ID card completes the grid -->
-                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#2E6BE6">
-                    <div class="mb-5"><span class="oneid-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg> <span data-i18n="oneid_label">One ID</span></span></div>
-                    <h3 class="text-2xl font-bold mb-3" data-i18n="oneid_h">One account. Every product.</h3>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="q3_a">Sign in once with One ID and you're in every One World app and service — no separate accounts, no re-entering your details, no juggling passwords across tools.</p>
-                    <a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="inline-flex items-center font-semibold text-primary"><span data-i18n="cta_signin">Sign in with One ID</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
                 </div>
             </div>
         </section>
@@ -2513,6 +2522,20 @@
    is making a recommendation, which is the thing this replaced. */
 (function(){
   var pick=document.getElementById('slidePick'); if(!pick) return;
+  /* The two underlined links below the rail are the no-JavaScript fallback. We are demonstrably
+     running JavaScript, so mark the document and let the stylesheet hide them — otherwise the
+     same choice is offered three times in a row (Lee, 14 Aug). */
+  document.documentElement.classList.add('js-ready');
+  /* And make the knob answer to a keyboard directly: left/right arrows commit either way, so a
+     Tab-key user is not forced down to the fallback links to get anywhere. */
+  knobKeys();
+  function knobKeys(){
+    var k=document.getElementById('slideKnob'); if(!k) return;
+    k.addEventListener('keydown', function(e){
+      if(e.key==='ArrowLeft'){ e.preventDefault(); location.hash='#services'; }
+      if(e.key==='ArrowRight'){ e.preventDefault(); location.hash='#apps'; }
+    });
+  }
   var rail=document.getElementById('slideRail'), knob=document.getElementById('slideKnob');
   var L=document.getElementById('sideLeft'), R=document.getElementById('sideRight');
   var startX=0, dx=0, live=false, max=0, THRESH=0.38, MOVED=4;

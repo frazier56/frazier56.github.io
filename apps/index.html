@@ -15,7 +15,7 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Five Apps, One Login — OneJob, OneScore, OneEvent, OneSocial, OneAgent</title>
-<meta name="description" content="The One World Platform: OneJob to get hired and paid, OneScore for free verified credibility, OneEvent for tickets, OneSocial for your connected platforms, and OneAgent — all under One ID.">
+<meta name="description" content="The One World Platform: OneScore for credibility you own, OneJob to get hired and paid, OneHome to rent or buy, OneEvent for tickets, OneSocial for your connected platforms, and OneAgent — all under One ID.">
 <link rel="manifest" href="/owl-manifest.webmanifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#FAFAF8" id="theme-color-meta">
@@ -23,12 +23,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="One World Labs">
 <meta property="og:title" content="Five Apps, One Login — OneJob, OneScore, OneEvent, OneSocial, OneAgent">
-<meta property="og:description" content="The One World Platform: OneJob to get hired and paid, OneScore for free verified credibility, OneEvent for tickets, OneSocial for your connected platforms, and OneAgent — all under One ID.">
+<meta property="og:description" content="The One World Platform: OneScore for credibility you own, OneJob to get hired and paid, OneHome to rent or buy, OneEvent for tickets, OneSocial for your connected platforms, and OneAgent — all under One ID.">
 <meta property="og:url" content="https://www.oneworldlabs.ai/apps/">
 <meta property="og:image" content="https://www.oneworldlabs.ai/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Five Apps, One Login — OneJob, OneScore, OneEvent, OneSocial, OneAgent">
-<meta name="twitter:description" content="The One World Platform: OneJob to get hired and paid, OneScore for free verified credibility, OneEvent for tickets, OneSocial for your connected platforms, and OneAgent — all under One ID.">
+<meta name="twitter:description" content="The One World Platform: OneScore for credibility you own, OneJob to get hired and paid, OneHome to rent or buy, OneEvent for tickets, OneSocial for your connected platforms, and OneAgent — all under One ID.">
 <meta name="twitter:image" content="https://www.oneworldlabs.ai/og-cover.png">
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.oneworldlabs.ai/"}, {"@type": "ListItem", "position": 2, "name": "Apps", "item": "https://www.oneworldlabs.ai/apps/"}]}, {"@type": "ItemList", "name": "One World Platform apps", "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@type": "SoftwareApplication", "name": "OneJob", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://onejob.oneworldlabs.ai/", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@id": "https://www.oneworldlabs.ai/#org"}, "description": "The jobs marketplace — get hired and get paid, with verified reviews, contracts, and protected payments."}}, {"@type": "ListItem", "position": 2, "item": {"@type": "SoftwareApplication", "name": "OneScore", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://onescore.oneworldlabs.ai/", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@id": "https://www.oneworldlabs.ai/#org"}, "description": "A free, verified professional credibility score you can post anywhere."}}, {"@type": "ListItem", "position": 3, "item": {"@type": "SoftwareApplication", "name": "OneEvent", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://oneevent.oneworldlabs.ai/", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@id": "https://www.oneworldlabs.ai/#org"}, "description": "Create events, sell tickets, and check guests in with QR."}}, {"@type": "ListItem", "position": 4, "item": {"@type": "SoftwareApplication", "name": "OneSocial", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://onesocial.oneworldlabs.ai/", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@id": "https://www.oneworldlabs.ai/#org"}, "description": "All your platforms, one professional identity."}}, {"@type": "ListItem", "position": 5, "item": {"@type": "SoftwareApplication", "name": "OneAgent", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://www.oneworldlabs.ai/apps/", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@id": "https://www.oneworldlabs.ai/#org"}, "description": "Your AI workforce — coming soon."}}]}]}
@@ -404,6 +404,25 @@
     .swipe-hint .dot.on{opacity:1;background:#15C2B2;}
 
     /* app cards: 2-up on phones, compact type; roomier from md up */
+
+    /* ---------- app cards: identical to the home page (Lee, 14 Aug) ----------
+       This page had drifted badly — five apps with no OneHome, the old icon tiles, the coloured
+       hairline across the top, and the amber OneScore that was ruled out. The grid is now lifted
+       from index.html verbatim, so the two pages cannot drift apart again by hand-editing one. */
+    .app-card .app-learn{color:inherit;text-decoration:none;display:flex;flex-direction:column;flex-grow:1;}
+    .app-card .app-learn:hover h3{text-decoration:underline;text-underline-offset:3px;}
+    .app-card .app-foot{border-top:1px solid var(--border,rgba(255,255,255,.14));}
+    .app-card .app-open-strip{font-size:15px;}
+    .app-card .app-open-strip svg{width:16px;height:16px;flex:0 0 auto;margin-left:4px;
+        transition:transform .25s ease;}
+    .app-card .app-open-strip:hover svg{transform:translateX(3px);}
+    .app-card{transition:transform .3s ease;}
+    .app-card:hover{transform:translateY(-2px);}
+    .app-card .app-more{display:inline-block;margin-top:-8px;margin-bottom:14px;font-size:13px;
+        font-weight:700;color:var(--hb,#2E6BE6);text-decoration:underline;text-underline-offset:3px;}
+    /* the old card chrome, explicitly switched off rather than left to chance */
+    .app-card.hue-top::before,.app-card .hue-tile,.app-card .hue-dot{display:none !important;}
+
     .app-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
     @media (min-width:1024px){ .app-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;} }
     @media (min-width:640px) and (max-width:1023px){ .app-grid{gap:16px;} }
@@ -791,61 +810,59 @@
 
         <section id="apps" class="container mx-auto px-4 max-w-6xl mb-20 md:mb-28">
             <div class="app-grid">
-                <a href="https://onejob.oneworldlabs.ai/" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#17A45C;--hd:#0E8248;--hl:#5FD79B">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14 p-1.5"><img src="/ic-onesocial.png" alt="" class="w-full h-full object-contain"></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h2>
-                    <h3 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onejob_tag">The jobs marketplace</h3>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="onejob_desc">Get hired and get paid in 60 seconds — verified reviews, contracts, and payments held safely until the job is done.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onejob_cta">Open OneJob</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://onescore.oneworldlabs.ai/" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E0A21F;--hd:#96690A;--hl:#F3C969">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14 p-1.5"><img src="/ic-onescore.png" alt="" class="w-full h-full object-contain"></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h2>
-                    <h3 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onescore_tag">Professional credibility</h3>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="onescore_desc">Your whole reputation — reviews, real work, social proof — in one verified number you can post anywhere. Free forever.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onescore_cta">Open OneScore</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://oneevent.oneworldlabs.ai/" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#E2711D;--hd:#9C4A0C;--hl:#F5A468">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14 p-1.5"><img src="/ic-oneevents.png" alt="" class="w-full h-full object-contain"></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h2>
-                    <h3 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneevent_tag">Events &amp; tickets</h3>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="oneevent_desc">Create an event, sell tickets, and check guests in with QR — live in minutes.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="oneevent_cta">Open OneEvent</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <a href="https://onesocial.oneworldlabs.ai/" class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8B3DEA;--hd:#5B21B6;--hl:#C4A9FA">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--hb)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="4.5" cy="6" r="2"/><circle cx="19.5" cy="6" r="2"/><circle cx="4.5" cy="18" r="2"/><circle cx="19.5" cy="18" r="2"/><path d="M6.3 7.2 9.8 10M17.7 7.2 14.2 10M6.3 16.8 9.8 14M17.7 16.8 14.2 14"/></svg></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h2>
-                    <h3 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onesocial_tag">Your connected platforms</h3>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="onesocial_desc">All your platforms, one professional identity — connect your accounts and turn your following into verified credibility.</p>
-                    <div class="app-open inline-flex items-center font-semibold hue-text"><span data-i18n="onesocial_cta">Open OneSocial</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
-                </a>
-                <div class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#7B2D3B;--hd:#6B2331;--hl:#E0919E">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="hue-tile w-14 h-14"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--hb)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3.5 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9.5" r="2.5"/><path d="M15.5 20c0-2.2 1.4-3.8 3.4-4.3M20.5 13.5 22 15l-1.5 1.5"/></svg></div>
-                        <span class="hue-dot mt-1"></span>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h2>
-                    <h3 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneagent_tag">Your AI workforce</h3>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="oneagent_desc">AI agents that find work, pitch clients, and handle the busywork for you — while you do the job.</p>
-                    <div class="inline-flex items-center font-semibold text-muted-foreground text-sm"><span class="inline-block px-3 py-1 rounded-full border border-border font-bold tracking-wider uppercase text-xs" data-i18n="coming_soon">Coming soon</span></div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#7C3AED;--hd:#5B21B6;--hl:#C4B5FD">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/onescore/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Credibility you own</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Your whole reputation — real work, verified credentials and reviews — in one number you can show anybody. Free forever.</p>
+                        <span class="app-more">more</span>
+                    </a>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/onescore"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
                 </div>
-                <div class="app-card frost hue-top rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#2E6BE6">
-                    <div class="mb-5"><span class="oneid-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg> <span data-i18n="oneid_label">One ID</span></span></div>
-                    <h2 class="text-2xl font-bold mb-3" data-i18n="oneid_h">One account. Every product.</h2>
-                    <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow" data-i18n="q3_a">Sign in once with One ID and you're in every One World app and service — no separate accounts, no re-entering your details, no juggling passwords across tools.</p>
-                    <a href="https://wseblryyqxawvbjmylbo.supabase.co/auth/v1/authorize?provider=google&amp;redirect_to=https%3A%2F%2Fwww.oneworldlabs.ai%2F" class="inline-flex items-center font-semibold text-primary"><span data-i18n="cta_signin">Sign in with One ID</span> <svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#16A34A;--hd:#0E8248;--hl:#5FD79B">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/onejob/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">The work marketplace</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Get hired and get paid, without chasing anybody for the money. A signed agreement on every job and the payment held until it is done.</p>
+                        <span class="app-more">more</span>
+                    </a>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/jobs"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                </div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#0D9488;--hd:#0F766E;--hl:#5EEAD4">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/onehome/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Home</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Rent or buy a home</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">A home with a real contract behind it — a signed lease, photos both sides agreed, and the property's real registered sale history.</p>
+                        <span class="app-more">more</span>
+                    </a>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/home"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                </div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#DB2777;--hd:#BE185D;--hl:#F9A8D4">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/oneevent/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Events and tickets</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Run an event and keep what you sell. The page, the tickets, the door and the money, all in one place.</p>
+                        <span class="app-more">more</span>
+                    </a>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/events"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                </div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#0891B2;--hd:#0E7490;--hl:#67E8F9">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/onesocial/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your platforms, connected</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Every account you already have, adding up to one professional identity somebody can verify.</p>
+                        <span class="app-more">more</span>
+                    </a>
+                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/social"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                </div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#B91C1C;--hd:#991B1B;--hl:#FCA5A5">
+                    <a class="app-learn flex flex-col flex-grow" href="/apps/oneagent/">
+                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your middleman</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Somebody in your corner finding and negotiating the work, who takes a share only when you get paid.</p>
+                        <span class="app-more">more</span>
+                    </a>
+                    <div class="app-foot pt-3"><span class="inline-block px-3 py-1 rounded-full border border-border font-bold tracking-wider uppercase text-xs">Coming soon</span></div>
                 </div>
             </div>
         </section>
@@ -2026,5 +2043,14 @@
 
 <!-- One World Labs - text opt-in chat widget (A2P compliance). Added 2026-08-12. -->
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a7c71062d25c2c3668fa947" data-source="WEB_USER"></script>
+<script>
+/* TWO TARGETS ON ONE CARD — same handler as the home page. The top of the card explains the app,
+   the strip at the foot opens it. A link inside a link is invalid HTML, so the strip is a span
+   that navigates on click. */
+document.querySelectorAll('.app-open-strip').forEach(function(el){
+  el.style.cursor='pointer';
+  el.addEventListener('click',function(e){ e.stopPropagation(); e.preventDefault(); location.href=el.dataset.open; });
+});
+</script>
 </body>
 </html>
