@@ -329,8 +329,23 @@
     .qa-chev{transition:transform .25s ease}
 
     /* ---------- VAIA floating voice orb (teal, shared across the family) ---------- */
-    #vaia-widget{position:fixed;top:74px;left:14px;right:auto;z-index:45;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-    @media (min-width:640px){ #vaia-widget{top:26vh;left:64px} }
+    /* ⚠️ 15 Aug 2026 — VAIA WAS SITTING ON TOP OF THE PAGE'S CONTENT ON A PHONE.
+       Pinned at top 74px / left 14px she is 290 wide by 146 tall on a 390-wide screen. When the
+       header slider jumps to the Apps section, that section's heading lands at exactly 96 to 262
+       pixels — directly underneath her. Lee, twice: *"there's this big empty space there… it seems
+       like there is no title to this section."* There IS a title — "One World Platform / Jump into
+       your favourite app / Six apps, one login" — she was covering it.
+       Two fixes, and the second matters as much as the first:
+       1. On a phone she moves to the BOTTOM, which is where this widget was designed to live
+          anyway — the panel is stacked ABOVE the orb in the markup, so it opens upward from a
+          bottom anchor and downward-from-the-top was always fighting its own layout.
+       2. `pointer-events` on the wrapper is OFF. A 290 by 146 invisible column was swallowing taps
+          across a quarter of the screen even with the panel shut. Only the orb and the open panel
+          take input now. */
+    #vaia-widget{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom));left:14px;top:auto;right:auto;
+        z-index:45;display:flex;flex-direction:column;align-items:flex-start;gap:12px;pointer-events:none}
+    #vaia-widget > *{pointer-events:auto}
+    @media (min-width:640px){ #vaia-widget{top:26vh;bottom:auto;left:64px} }
     .vaia-orb{position:relative;width:132px;height:132px;border-radius:50%;background:transparent;border:none;box-shadow:0 0 34px rgba(21,194,178,.16);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:vaiaGlow 4.5s ease-in-out infinite;transition:opacity .4s ease,filter .4s ease,box-shadow .4s ease;opacity:.85}
     @media (min-width:640px){ .vaia-orb{width:152px;height:152px} }
     @keyframes vaiaGlow{0%,100%{box-shadow:0 0 34px rgba(21,194,178,.16)}50%{box-shadow:0 0 56px rgba(21,194,178,.36)}}
