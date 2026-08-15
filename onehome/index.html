@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>OneHome - One World Labs</title>
+    <link rel="canonical" href="https://app.oneworldlabs.ai/home" />
+    <meta http-equiv="refresh" content="0; url=https://app.oneworldlabs.ai/home" />
+    <script>
+      (function () {
+        var base = "https://app.oneworldlabs.ai/home";
+        var prefix = "home";
+        var path = window.location.pathname.replace(/^\/+/, "").replace(/\/index\.html$/, "");
+        if (path === prefix) path = "";
+        if (path.indexOf(prefix + "/") === 0) path = path.slice(prefix.length + 1);
+        var suffix = path ? "/" + path : "";
+        window.location.replace(base + suffix + window.location.search + window.location.hash);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Opening <a href="https://app.oneworldlabs.ai/home">OneHome</a>.</p>
+  </body>
+</html>
