@@ -277,15 +277,26 @@
     /* glass menu window — drawer style matched to the product shell's glass drawer */
     #menu-overlay{opacity:0;pointer-events:none;transition:opacity .25s ease;}
     #menu-overlay.show{opacity:1;pointer-events:auto;}
-    .menu-panel{transform:scale(.96) translateY(10px);opacity:0;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .3s ease;background:rgba(250,250,248,.6);border-color:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(28px) saturate(180%);backdrop-filter:blur(28px) saturate(180%);box-shadow:0 20px 60px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.6);}
-    .dark .menu-panel{background:rgba(11,15,26,.56);border-color:rgba(255,255,255,.16);box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);}
+    /* Frosted, matched to the product shell's drawer (Drawer.tsx `drawerGlass`). A flat tint at
+       56-60% over a dark aurora reads brown-grey; what makes glass look frosted is the white
+       sheen falling away across the panel, over a *more opaque* surface. Lee, 14 Aug. */
+    .menu-panel{transform:scale(.96) translateY(10px);opacity:0;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .3s ease;
+        background:linear-gradient(152deg,rgba(255,255,255,.58) 0%,rgba(255,255,255,0) 46%),rgba(250,250,248,.72);
+        border-color:rgba(255,255,255,.60);-webkit-backdrop-filter:blur(28px) saturate(180%);backdrop-filter:blur(28px) saturate(180%);
+        box-shadow:0 26px 70px rgba(7,12,20,.30),inset 0 1px 0 rgba(255,255,255,.70);}
+    .dark .menu-panel{background:linear-gradient(152deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,0) 46%),rgba(11,15,26,.62);
+        border-color:rgba(255,255,255,.16);box-shadow:0 26px 70px rgba(7,12,20,.50),inset 0 1px 0 rgba(255,255,255,.10);}
     #menu-overlay.show .menu-panel{transform:none;opacity:1;}
     .menu-navitem{display:flex;align-items:center;gap:10px;border-radius:14px;padding:10px 12px;font-size:15px;font-weight:600;color:var(--color-fg);transition:background-color .15s ease;}
     .menu-navitem:hover{background:rgba(27,73,184,.08);}
     .dark .menu-navitem:hover{background:rgba(157,188,250,.10);}
     /* the "One" prefix wears the parent's navy ink — never a product hue */
     .menu-one{font-weight:800;color:var(--ow-primary);}
-    .menu-soon{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--color-muted);border:1px solid var(--color-border);border-radius:999px;padding:2px 8px;}
+    .menu-soon{margin-left:auto;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex:0 0 auto;color:var(--color-muted);border:1px solid var(--color-border);border-radius:999px;padding:2px 6px;}
+    .menu-navitem{white-space:nowrap;}
+    /* the two drawer buttons: one line at 218px */
+    #hb-signedout-cta a,#hb-signedin-cta a,#hb-signedin-cta button{font-size:14px;white-space:nowrap;}
+    #hb-signedout-cta a{padding-left:12px;padding-right:12px;gap:8px;}
     .menu-divider{height:1px;margin:12px 0;background:var(--color-border);}
     .menu-signout{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border-radius:14px;padding:10px 12px;font-size:15px;font-weight:600;color:#ef4444;transition:background-color .15s ease;border:0;background:none;cursor:pointer;font-family:inherit;}
     .menu-signout:hover{background:rgba(239,68,68,.1);}
@@ -421,13 +432,14 @@
     body{padding-bottom:env(safe-area-inset-bottom);}
     html.dark .slide-rail{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.03));}
     .slide-rail .side{font-size:13.5px;font-weight:700;letter-spacing:-.01em;opacity:.62;
-        transition:opacity .2s ease,transform .2s ease;white-space:nowrap;pointer-events:none;}
+        transition:opacity .22s ease,transform .22s ease,color .22s ease;white-space:nowrap;pointer-events:none;}
     .slide-rail .side.hot{opacity:1;transform:scale(1.04);}
     .slide-knob{position:absolute;left:50%;top:50%;width:48px;height:48px;margin:-24px 0 0 -24px;
         border-radius:999px;display:grid;place-items:center;cursor:grab;
         background:linear-gradient(180deg,#fff,#e9e6ff);color:#221a3a;
         box-shadow:0 8px 20px -8px rgba(10,14,28,.75),inset 0 1px 0 #fff;
-        transition:transform .28s cubic-bezier(.2,.9,.3,1.2);}
+        touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+        transition:transform .28s cubic-bezier(.2,.9,.3,1.2),background .22s ease,box-shadow .22s ease;}
     .slide-knob.dragging{cursor:grabbing;transition:none;}
     .slide-hint{margin-top:9px;text-align:center;font-size:11px;letter-spacing:.02em;opacity:.55;}
     .slide-fallback{display:flex;gap:14px;justify-content:center;margin-top:10px;}
@@ -458,7 +470,21 @@
     /* committing turns the destination green, so the thumb knows before it lets go */
     .slide-rail .side.hot{opacity:1;color:#16A34A;transform:scale(1.06);}
     .slide-knob{width:44px;height:44px;margin:-22px 0 0 -22px;}
-    .slide-knob.armed{background:linear-gradient(180deg,#dcfce7,#86efac);}
+    /* Armed FADES to green — the transition on .slide-knob above carries the background.
+       Then, the moment the thumb lets go on a committed drag, it FLASHES fast for a quarter of a
+       second before the page moves, so the person sees the control fire rather than the page
+       simply jumping. Lee, 14 Aug. */
+    .slide-knob.armed{background:linear-gradient(180deg,#dcfce7,#86efac);
+        box-shadow:0 8px 20px -8px rgba(22,163,74,.55),0 0 0 6px rgba(34,197,94,.16),inset 0 1px 0 #fff;}
+    .slide-knob.committing{animation:knobFlash .085s steps(1,end) 3;}
+    .slide-rail .side.committing{animation:sideFlash .085s steps(1,end) 3;}
+    @keyframes knobFlash{
+        0%{background:linear-gradient(180deg,#fff,#f0fdf4);box-shadow:0 0 0 10px rgba(34,197,94,.30),inset 0 1px 0 #fff;}
+        50%{background:linear-gradient(180deg,#bbf7d0,#22c55e);box-shadow:0 0 0 2px rgba(34,197,94,.10),inset 0 1px 0 #fff;}
+        100%{background:linear-gradient(180deg,#fff,#f0fdf4);box-shadow:0 0 0 10px rgba(34,197,94,.30),inset 0 1px 0 #fff;}}
+    @keyframes sideFlash{0%{opacity:1;color:#16A34A}50%{opacity:.35;color:#16A34A}100%{opacity:1;color:#16A34A}}
+    @media (prefers-reduced-motion:reduce){
+        .slide-knob.committing,.slide-rail .side.committing{animation:none;}}
 
     /* ---------- the service menu collapses as a whole (Lee, 13 Aug) ----------
        Each of the ten already opens on its own; this is the outer one, so ten closed rows are
@@ -802,7 +828,7 @@
          signed in (previously always showed "Sign in" regardless of session — no way to sign out
          from here at all). -->
     <div id="menu-overlay" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
-        <div class="menu-panel absolute right-3 top-[74px] flex max-h-[calc(100vh-90px)] w-[300px] max-w-[88vw] flex-col overflow-y-auto rounded-3xl border shadow-2xl p-4 sm:p-5">
+        <div class="menu-panel absolute right-3 top-[74px] flex max-h-[calc(100vh-90px)] w-[218px] max-w-[76vw] flex-col overflow-y-auto rounded-3xl border shadow-2xl p-3 sm:p-4">
 
             <!-- identity row: One World Labs mark when signed out, avatar + name when signed in -->
             <div class="mb-1 flex items-center justify-between gap-2">
@@ -2532,20 +2558,51 @@
   function knobKeys(){
     var k=document.getElementById('slideKnob'); if(!k) return;
     k.addEventListener('keydown', function(e){
-      if(e.key==='ArrowLeft'){ e.preventDefault(); location.hash='#services'; }
-      if(e.key==='ArrowRight'){ e.preventDefault(); location.hash='#apps'; }
+      if(e.key==='ArrowLeft'){ e.preventDefault(); go(-1); }
+      if(e.key==='ArrowRight'){ e.preventDefault(); go(1); }
     });
   }
   var rail=document.getElementById('slideRail'), knob=document.getElementById('slideKnob');
   var L=document.getElementById('sideLeft'), R=document.getElementById('sideRight');
-  var startX=0, dx=0, live=false, max=0, THRESH=0.38, MOVED=4;
-  function centre(){ dx=0; knob.style.transform='translateX(0)'; L.classList.remove('hot'); R.classList.remove('hot'); }
-  function go(dir){ location.hash = dir<0 ? '#services' : '#apps'; setTimeout(centre,180); }
-  function down(e){ live=true; startX=e.clientX; max=(rail.clientWidth/2)-34; knob.classList.add('dragging'); }
+  var startX=0, dx=0, live=false, max=0, moved=false, eatClick=false, THRESH=0.34, MOVED=4;
+
+  /* ── THREE DEFECTS FIXED HERE, 14 Aug 2026 (Lee: "it goes to services but not apps") ──────
+     1. EVERY interaction landed on #apps and Services was unreachable. `up()` called `centre()`,
+        which zeroes `dx`, BEFORE the browser fired the button's `click`. The click handler then
+        read dx as 0, decided "this was a tap", and re-navigated to #apps — silently overriding
+        the direction the drag had just committed to. Reproduced on desktop AND mobile: a left
+        drag lit the Services label green and then went to Apps. `eatClick` now swallows the
+        synthetic click that follows a real drag.
+     2. Once the hash was already #apps, assigning it again did nothing, so the control looked
+        dead on the second try. We now scroll explicitly and keep the address bar in step with
+        replaceState, so the same destination twice in a row still moves the page.
+     3. `max` was only computed on pointerdown, so a window resize between grabs left the
+        threshold wrong. It is now recomputed on grab and on resize. ─────────────────────────*/
+
+  function target(dir){ return document.getElementById(dir<0 ? 'services' : 'apps'); }
+  function disarm(){ knob.classList.remove('armed'); L.classList.remove('hot'); R.classList.remove('hot'); }
+  function centre(){ dx=0; knob.style.transform='translateX(0)'; disarm(); }
+  function measure(){ max=Math.max(40,(rail.clientWidth/2)-34); }
+
+  /* Commit: flash fast so the person sees the control fire, THEN move the page. */
+  function go(dir){
+    var side = dir<0 ? L : R, el = target(dir);
+    knob.classList.add('committing'); side.classList.add('committing');
+    setTimeout(function(){
+      knob.classList.remove('committing'); side.classList.remove('committing');
+      centre();
+      if(el){ el.scrollIntoView({behavior:'smooth',block:'start'});
+              try{ history.replaceState(null,'',dir<0?'#services':'#apps'); }catch(_){ location.hash = dir<0?'#services':'#apps'; } }
+      else  { location.hash = dir<0 ? '#services' : '#apps'; }
+    }, 260);
+  }
+
+  function down(e){ live=true; moved=false; startX=e.clientX; measure(); knob.classList.add('dragging');
+                    if(knob.setPointerCapture && e.pointerId!=null){ try{knob.setPointerCapture(e.pointerId);}catch(_){} } }
   function move(e){
     if(!live) return;
     dx=Math.max(-max,Math.min(max,e.clientX-startX));
-    if(Math.abs(dx)>MOVED && knob.setPointerCapture && e.pointerId!=null){ try{knob.setPointerCapture(e.pointerId);}catch(_){} }
+    if(Math.abs(dx)>MOVED) moved=true;
     knob.style.transform='translateX('+dx+'px)';
     var armed=Math.abs(dx)>max*THRESH;
     L.classList.toggle('hot', dx<-max*THRESH); R.classList.toggle('hot', dx>max*THRESH);
@@ -2553,18 +2610,24 @@
   }
   function up(){
     if(!live) return; live=false; knob.classList.remove('dragging');
-    var hit=Math.abs(dx)>max*THRESH; var dir=dx;
-    knob.classList.remove('armed');
-    centre();
-    if(hit) go(dir);
+    var hit=Math.abs(dx)>max*THRESH, dir=dx;
+    eatClick = moved;              /* a real drag must not also fire the tap shortcut */
+    if(hit){ dx=0; knob.style.transform='translateX(0)'; go(dir); }
+    else   { centre(); }
   }
-  knob.addEventListener('pointerdown',down);
+  /* Grabbing the RAIL works too, not just the 44px knob — that thin a target is most of why this
+     felt unresponsive with a mouse. */
+  rail.addEventListener('pointerdown',function(e){ if(e.target!==knob) { knob.focus&&knob.focus(); } down(e); });
+  knob.addEventListener('pointerdown',function(e){ e.stopPropagation(); down(e); });
+  knob.addEventListener('dragstart',function(e){ e.preventDefault(); });
   window.addEventListener('pointermove',move);
   window.addEventListener('pointerup',up);
   window.addEventListener('pointercancel',up);
-  /* A tap on the knob with no drag should not be a dead end — send them to the apps, the side the
-     old layout under-sold. Keyboard users get the two links below instead. */
-  knob.addEventListener('click',function(){ if(Math.abs(dx)<=MOVED) go(1); });
+  window.addEventListener('resize',measure);
+  measure();
+  /* A tap with no drag should not be a dead end — send them to the apps, the side the old layout
+     under-sold. Keyboard users get the two links below instead. */
+  knob.addEventListener('click',function(){ if(eatClick){ eatClick=false; return; } if(!moved) go(1); });
 })();
 </script>
 
