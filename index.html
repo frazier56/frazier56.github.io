@@ -935,7 +935,7 @@
     <main class="relative z-10 pt-24 md:pt-32 pb-16 md:pb-20">
 
         <!-- ================= HERO ================= -->
-        <section class="container mx-auto px-4 text-center max-w-5xl mb-24 md:mb-36">
+        <section class="relative z-10 container mx-auto px-4 text-center max-w-5xl mb-24 md:mb-36">
 
             <h1 class="fade-up text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.04] mb-6">
                 One World.<br><span class="text-primary">Your World.</span>
@@ -1001,7 +1001,7 @@
         </section>
 
         <!-- ================= AI IS CHANGING EVERYTHING + STORE BADGES ================= -->
-        <section class="container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
+        <section class="relative z-10 container mx-auto px-4 max-w-6xl mb-20 md:mb-32">
             <div class="mkt-grid">
                 <div>
                     <h3 class="eyebrow mb-4" data-i18n="mkt_eyebrow">AI is changing everything</h3>
@@ -1034,7 +1034,7 @@
         </section>
 
         <!-- ================= THE TWO DIVISIONS ================= -->
-        <section id="divisions" class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36">
+        <section id="divisions" class="relative z-10 container mx-auto px-4 max-w-6xl mb-24 md:mb-36">
             <div class="text-center mb-10 md:mb-14">
                 <h3 class="eyebrow mb-3" data-i18n="div_eyebrow">One company · Two divisions</h3>
                 <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="div_h2">Two ways we help you win</h2>
@@ -1058,7 +1058,7 @@
         </section>
 
         <!-- ================= THE AGENCY — SERVICES ================= -->
-        <section id="services" class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
+        <section id="services" class="relative z-10 container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
             <div class="text-center mb-10 md:mb-16">
                 <h3 class="eyebrow mb-3" data-i18n="agency_eyebrow">One World Agency</h3>
                 <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="agency_h2">An AI agency for small businesses</h2>
@@ -1195,8 +1195,24 @@
             </div>
         </section>
 
+        <!-- ⚠️ 15 Aug 2026 — WHY EVERY CONTENT SECTION CARRIES `relative z-10`.
+     Lee reported three times that the Apps section had "a big empty space and no title". It has a
+     title — "One World Platform / Jump into your favourite app / Six apps, one login". It was
+     painting BENEATH the page's background layer.
+     Proved on the live page: nothing covered the heading, `elementsFromPoint` returned the h2
+     itself, `caretRangeFromPoint` landed inside the words, and the computed colour was the normal
+     dark ink — yet it did not appear in a screenshot, on desktop or on a phone. The tell was the
+     ancestor chain: sections that DO render sit inside `<main class="relative z-10">`; the ones
+     that do not were direct children of <body>, outside that stacking context. Their CARDS still
+     showed, because each frosted card creates its own stacking context and floats clear — which is
+     exactly why the section looked like an untitled grid of cards.
+     Setting `relative z-10` on the section fixes it, verified live by injecting it and screenshotting.
+     ⚠️ Open question for Max, with the repo in hand: the SOURCE markup has these sections inside
+     <main> and its tags balance, yet the parsed DOM reparents them to <body>. Something is closing
+     <main> early. This change makes the symptom impossible either way, but the cause is worth
+     finding. -->
         <!-- ================= HOW WE WORK ================= -->
-        <section id="how" class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
+        <section id="how" class="relative z-10 container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
             <div class="text-center mb-10 md:mb-14">
                 <h3 class="eyebrow mb-3" data-i18n="how_eyebrow">How we work</h3>
                 <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="how_h2">White-glove, from day one</h2>
@@ -1231,7 +1247,7 @@
         </section>
 
         <!-- ================= THE PLATFORM — APPS ================= -->
-        <section id="apps" class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
+        <section id="apps" class="relative z-10 container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
             <div class="text-center mb-10 md:mb-16">
                 <h3 class="eyebrow mb-3" data-i18n="platform_eyebrow">One World Platform</h3>
                 <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="apps_h2">Jump into your favorite app</h2>
@@ -1297,7 +1313,7 @@
         </section>
 
         <!-- ================= USE IT ANYWHERE ================= -->
-        <section class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36">
+        <section class="relative z-10 container mx-auto px-4 max-w-6xl mb-24 md:mb-36">
             <div class="text-center mb-10 md:mb-16">
                 <h3 class="eyebrow mb-3" data-i18n="plat_eyebrow">Use it anywhere</h3>
                 <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="plat_h2">Works on any phone or computer</h2>
@@ -1324,7 +1340,7 @@
         </section>
 
         <!-- ================= FROM THE BLOG ================= -->
-        <section class="container mx-auto px-4 max-w-6xl mb-24 md:mb-36">
+        <section class="relative z-10 container mx-auto px-4 max-w-6xl mb-24 md:mb-36">
             <div class="text-center mb-10 md:mb-14">
                 <h3 class="eyebrow mb-3" data-i18n="blog_eyebrow">Guides</h3>
                 <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="blog_h1">Guides for small businesses &amp; freelancers</h2>
@@ -1362,7 +1378,7 @@
         </section>
 
         <!-- ================= FAQ ================= -->
-        <section id="faqsec" class="container mx-auto px-4 max-w-3xl mb-20 scroll-mt-24">
+        <section id="faqsec" class="relative z-10 container mx-auto px-4 max-w-3xl mb-20 scroll-mt-24">
             <div class="text-center mb-12">
                 <h3 class="eyebrow mb-3" data-i18n="faq_eyebrow">Good to know</h3>
                 <h2 class="text-3xl md:text-4xl font-bold" data-i18n="faq_h2">Did you know?</h2>
