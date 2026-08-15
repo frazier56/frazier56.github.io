@@ -713,26 +713,104 @@
         <!-- THE CALL TO ACTION, AT THE TOP. Lee asked for it here specifically, and somebody who
              followed an advert for this app has already decided — making them scroll past prose
              before they can act taxes the most valuable visitor on the page. -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a href="https://app.oneworldlabs.ai/home" class="btn-clay w-full sm:w-auto h-12 px-7 text-base inline-flex items-center justify-center rounded-full font-bold text-white">
+        <!-- ⚠️ THE BUTTON STANDS ALONE, CENTRED. 15 Aug 2026.
+             Lee: *"OneHome should be centered horizontally, and see all six apps should be below
+             it… you have it sitting to the right of the espresso button when the espresso button
+             should be centered."* He is right, and there is a reason beyond symmetry: those two
+             links are not peers. One is the whole point of the page; the other is a way back to
+             where you came from. Sitting them side by side asked the visitor to choose between
+             them, and a real choice next to a back button is a choice half of them get wrong.
+             So: the action alone on its line, the reassurance under it, and the way back last and
+             quiet — the order somebody actually reads in. -->
+        <div class="flex justify-center">
+          <a href="https://app.oneworldlabs.ai/home" class="btn-clay h-13 px-9 inline-flex items-center justify-center rounded-full font-bold text-white text-base sm:text-lg shadow-lg" style="min-height:52px">
             Open OneHome
-          </a>
-          <a href="/apps/" class="w-full sm:w-auto h-12 px-6 inline-flex items-center justify-center rounded-full font-semibold text-muted-foreground hover:text-foreground transition-colors">
-            See all six apps
           </a>
         </div>
         <p class="text-xs sm:text-sm text-muted-foreground/80 mt-4">One login for every app · Free to start · No credit card</p>
+        <div class="mt-5 flex justify-center">
+          <a href="/apps/" class="group inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:-translate-x-0.5"><path d="m15 18-6-6 6-6"/></svg>
+            See all six apps
+          </a>
+        </div>
       </section>
 
-      <section class="container mx-auto px-4 max-w-3xl mb-16 md:mb-20">
-        <div class="frost rounded-3xl p-6 md:p-9">
-          <p class="text-base md:text-lg leading-relaxed text-muted-foreground">OneHome is renting and buying in Colombia, done properly. To rent: a signed lease, a deposit that never passes through us if a host asks for one at all, and move-in photographs both sides agreed to. To buy: the registered sale history of the property — what it genuinely last sold for, from the national registry — which nobody in the country has been able to show a buyer before.</p>
-          <ul class="mt-7 grid gap-3 sm:grid-cols-2">
-            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#0D9488"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>A signed lease and move-in photos both sides accepted</span></li>
-            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#0D9488"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>The property's real registered sale prices, from the registry</span></li>
-            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#0D9488"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>Filter on things listings never state — the bed, the AC, the view</span></li>
-            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#0D9488"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>Prices in pesos or dollars at the official daily rate</span></li>
-          </ul>
+      <section class="container mx-auto px-4 max-w-5xl mb-16 md:mb-20">
+        <!-- ⚠️ REBUILT 15 Aug 2026. Lee: *"you got this big block of text and these bullets, and
+             that's not our style… you could break that text up, you could put it in several
+             separate boxes."*
+
+             He is right, and the paragraph was hiding the actual structure of the sentence. The
+             copy was already TWO products in one breath — "To rent: … To buy: …" — and a reader
+             renting a flat had to wade through the buying half to find their own. So the layout
+             now IS the sentence: two panels, one per intent, each answering only its own reader.
+             Nobody reads about sale registries while looking for somewhere to live.
+
+             The two things that are true for BOTH sit underneath as a quiet strip, because they
+             are qualifiers, not headlines, and giving them the same weight as the products was
+             what made six identical ticks in the first place. -->
+        <p class="text-center text-lg md:text-xl font-semibold tracking-tight max-w-2xl mx-auto mb-9 leading-snug">
+          Renting and buying in Colombia, done properly.
+        </p>
+
+        <div class="grid gap-5 md:grid-cols-2">
+
+          <!-- ── TO RENT ────────────────────────────────────────────────────────────────── -->
+          <div class="frost rounded-3xl p-6 md:p-8 flex flex-col">
+            <div class="flex items-center gap-2.5 mb-4">
+              <span class="inline-flex h-9 w-9 items-center justify-center rounded-full" style="background:#0D948814;color:#0D9488">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg>
+              </span>
+              <p class="text-xs font-bold tracking-widest uppercase" style="color:#0D9488">To rent</p>
+            </div>
+            <h3 class="text-2xl md:text-[28px] font-extrabold tracking-tight leading-tight mb-3">A lease, not a chat thread.</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground mb-5">Both sides sign the same plain-language contract, and both can open the signed copy any time.</p>
+            <dl class="mt-auto space-y-3.5 border-t border-border/60 pt-5">
+              <div>
+                <dt class="text-[14px] font-bold">Your deposit never passes through us</dt>
+                <dd class="text-[13.5px] leading-snug text-muted-foreground">Most homes here ask for none. Where a host does, you pay them directly — and on a lease of thirty days or more, Colombian law does not allow one to be required at all.</dd>
+              </div>
+              <div>
+                <dt class="text-[14px] font-bold">You both agree the photos before you move in</dt>
+                <dd class="text-[13.5px] leading-snug text-muted-foreground">If a mark is not in those photos, it cannot be charged to you at the end.</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- ── TO BUY ─────────────────────────────────────────────────────────────────── -->
+          <div class="frost rounded-3xl p-6 md:p-8 flex flex-col">
+            <div class="flex items-center gap-2.5 mb-4">
+              <span class="inline-flex h-9 w-9 items-center justify-center rounded-full" style="background:#0D948814;color:#0D9488">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg>
+              </span>
+              <p class="text-xs font-bold tracking-widest uppercase" style="color:#0D9488">To buy</p>
+            </div>
+            <h3 class="text-2xl md:text-[28px] font-extrabold tracking-tight leading-tight mb-3">What it actually sold for.</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground mb-5">Every other listing in Colombia shows what somebody is asking today. We show what the property genuinely changed hands for.</p>
+            <dl class="mt-auto space-y-3.5 border-t border-border/60 pt-5">
+              <div>
+                <dt class="text-[14px] font-bold">Straight from the national registry</dt>
+                <dd class="text-[13.5px] leading-snug text-muted-foreground">The registered price, the deed number and the notaría — recorded before a notary, not estimated by us.</dd>
+              </div>
+              <div>
+                <dt class="text-[14px] font-bold">And every price it has been asked for</dt>
+                <dd class="text-[13.5px] leading-snug text-muted-foreground">So you can see a listing that has been sitting, and quietly dropping.</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <!-- True on both sides, so neither panel owns them. A strip, not a headline. -->
+        <div class="mt-5 frost rounded-2xl px-5 py-4 sm:px-7 sm:py-5 grid gap-4 sm:grid-cols-2">
+          <div class="flex items-start gap-3">
+            <span class="mt-0.5 shrink-0" style="color:#0D9488"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M7 12h10M11 18h2"/></svg></span>
+            <p class="text-[13.5px] leading-snug"><span class="font-bold">Filter on what listings never state.</span> <span class="text-muted-foreground">The bed, the air conditioning in the master, the open view.</span></p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="mt-0.5 shrink-0" style="color:#0D9488"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 6.5C17 4.6 14.8 3.5 12 3.5S7 4.6 7 6.5s2.2 2.8 5 3.5 5 1.6 5 3.5-2.2 3-5 3-5-1.1-5-3"/></svg></span>
+            <p class="text-[13.5px] leading-snug"><span class="font-bold">Pesos or dollars, at the official daily rate.</span> <span class="text-muted-foreground">Never a guessed conversion.</span></p>
+          </div>
         </div>
       </section>
 

@@ -713,15 +713,27 @@
         <!-- THE CALL TO ACTION, AT THE TOP. Lee asked for it here specifically, and somebody who
              followed an advert for this app has already decided — making them scroll past prose
              before they can act taxes the most valuable visitor on the page. -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a href="https://app.oneworldlabs.ai/events" class="btn-clay w-full sm:w-auto h-12 px-7 text-base inline-flex items-center justify-center rounded-full font-bold text-white">
+        <!-- ⚠️ THE BUTTON STANDS ALONE, CENTRED. 15 Aug 2026.
+             Lee: *"OneEvent should be centered horizontally, and see all six apps should be below
+             it… you have it sitting to the right of the espresso button when the espresso button
+             should be centered."* He is right, and there is a reason beyond symmetry: those two
+             links are not peers. One is the whole point of the page; the other is a way back to
+             where you came from. Sitting them side by side asked the visitor to choose between
+             them, and a real choice next to a back button is a choice half of them get wrong.
+             So: the action alone on its line, the reassurance under it, and the way back last and
+             quiet — the order somebody actually reads in. -->
+        <div class="flex justify-center">
+          <a href="https://app.oneworldlabs.ai/events" class="btn-clay h-13 px-9 inline-flex items-center justify-center rounded-full font-bold text-white text-base sm:text-lg shadow-lg" style="min-height:52px">
             Open OneEvent
-          </a>
-          <a href="/apps/" class="w-full sm:w-auto h-12 px-6 inline-flex items-center justify-center rounded-full font-semibold text-muted-foreground hover:text-foreground transition-colors">
-            See all six apps
           </a>
         </div>
         <p class="text-xs sm:text-sm text-muted-foreground/80 mt-4">One login for every app · Free to start · No credit card</p>
+        <div class="mt-5 flex justify-center">
+          <a href="/apps/" class="group inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:-translate-x-0.5"><path d="m15 18-6-6 6-6"/></svg>
+            See all six apps
+          </a>
+        </div>
       </section>
 
       <section class="container mx-auto px-4 max-w-3xl mb-16 md:mb-20">
