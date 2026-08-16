@@ -447,7 +447,14 @@
     body{padding-bottom:env(safe-area-inset-bottom);}
     html.dark .slide-rail{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.03));}
     .slide-rail .side{font-size:13.5px;font-weight:700;letter-spacing:-.01em;opacity:.62;
-        transition:opacity .22s ease,transform .22s ease,color .22s ease;white-space:nowrap;pointer-events:none;}
+        transition:opacity .22s ease,transform .22s ease,color .22s ease;white-space:nowrap;}
+    /* v67.1: `pointer-events:none` used to be on the line above. It was right when these two
+       words were decorative text lying on top of a rail you drag — a label that swallowed the
+       pointer would have broken the drag. v67 made them real buttons and left it in place, so
+       the markup said role="button", a click handler was attached, the static gate went 13/13,
+       and a thumb still could not touch either word: elementFromPoint at both label centres
+       returned #slideRail. Removed here, and re-stated as `auto` below so that restoring this
+       rule from an old copy cannot silently make the control inert a second time. */
     .slide-rail .side.hot{opacity:1;transform:scale(1.04);}
     .slide-knob{position:absolute;left:50%;top:50%;width:48px;height:48px;margin:-24px 0 0 -24px;
         border-radius:999px;display:grid;place-items:center;cursor:grab;
@@ -459,7 +466,7 @@
     /* ── v67 · the two words are controls now, and have to read as controls ────────────────────
        Padding to the 44px thumb floor: the labels were ~18px tall, which is under the height a
        thumb reliably hits on a 390px viewport, so even a reader who knew to tap would miss. */
-    .slide-rail .side{cursor:pointer;padding:13px 4px;border-radius:12px;
+    .slide-rail .side{pointer-events:auto;position:relative;cursor:pointer;padding:13px 4px;border-radius:12px;
                       -webkit-tap-highlight-color:transparent;}
     .slide-rail .side:hover{opacity:.9;}
     .slide-rail .side:focus-visible{outline:2px solid currentColor;outline-offset:2px;}
