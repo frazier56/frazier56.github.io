@@ -456,6 +456,19 @@
         touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
         transition:transform .28s cubic-bezier(.2,.9,.3,1.2),background .22s ease,box-shadow .22s ease;}
     .slide-knob.dragging{cursor:grabbing;transition:none;}
+    /* ── v67 · the two words are controls now, and have to read as controls ────────────────────
+       Padding to the 44px thumb floor: the labels were ~18px tall, which is under the height a
+       thumb reliably hits on a 390px viewport, so even a reader who knew to tap would miss. */
+    .slide-rail .side{cursor:pointer;padding:13px 4px;border-radius:12px;
+                      -webkit-tap-highlight-color:transparent;}
+    .slide-rail .side:hover{opacity:.9;}
+    .slide-rail .side:focus-visible{outline:2px solid currentColor;outline-offset:2px;}
+    /* The nudge — Lee asked for the slider to hint that it moves. Small, twice, then done. */
+    @keyframes owKnobNudge{0%,100%{transform:translateX(0)}
+      20%{transform:translateX(-9px)}40%{transform:translateX(9px)}
+      60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+    .slide-knob.nudge{animation:owKnobNudge .9s ease-in-out 2;}
+    @media (prefers-reduced-motion:reduce){ .slide-knob.nudge{animation:none;} }
     .slide-hint{margin-top:9px;text-align:center;font-size:11px;letter-spacing:.02em;opacity:.55;}
     .slide-fallback{display:flex;gap:14px;justify-content:center;margin-top:10px;}
     .slide-fallback a{font-size:12.5px;font-weight:600;text-decoration:underline;opacity:.7;}
@@ -962,8 +975,8 @@
             <div id="signedout-cta" class="hero-ctas items-center">
                 <div class="slide-pick" id="slidePick">
                     <div class="slide-rail" id="slideRail">
-                        <span class="side" id="sideLeft" data-i18n="s_svcs">Services</span>
-                        <span class="side" id="sideRight" data-i18n="s_apps">Apps</span>
+                        <span class="side" id="sideLeft" data-i18n="s_svcs" role="button" tabindex="0">Services</span>
+                        <span class="side" id="sideRight" data-i18n="s_apps" role="button" tabindex="0">Apps</span>
                         <button type="button" class="slide-knob" id="slideKnob"
                                 aria-label="Slide left for services, right for apps">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6-4 6 4 6M15 6l4 6-4 6"/></svg>
@@ -2664,7 +2677,13 @@
   }
   /* Grabbing the RAIL works too, not just the 44px knob — that thin a target is most of why this
      felt unresponsive with a mouse. */
-  rail.addEventListener('pointerdown',function(e){ if(e.target!==knob) { knob.focus&&knob.focus(); } down(e); });
+  rail.addEventListener('pointerdown',function(e){
+    /* v67: a pointer that went down on one of the two words is a TAP on that word, not a grab of
+       the rail. Starting a drag here is what swallowed it. */
+    if(e.target===L || e.target===R) return;
+    if(e.target!==knob) { knob.focus&&knob.focus(); }
+    down(e);
+  });
   knob.addEventListener('pointerdown',function(e){ e.stopPropagation(); down(e); });
   knob.addEventListener('dragstart',function(e){ e.preventDefault(); });
   window.addEventListener('pointermove',move);
@@ -2674,7 +2693,41 @@
   measure();
   /* A tap with no drag should not be a dead end — send them to the apps, the side the old layout
      under-sold. Keyboard users get the two links below instead. */
-  knob.addEventListener('click',function(){ if(eatClick){ eatClick=false; return; } if(!moved) go(1); });
+  /* ── v67 · owSidePick — tapping a word goes to THAT word's section ────────────────────────
+     Lee, 16 Aug 2026: "if they tap on services, ultimately they need to go to services, and if
+     they tap on apps, they should go to apps." Both platforms, one path: pointer taps and the
+     keyboard land in the same function, so they cannot drift apart later. */
+  function owSidePick(dir){ return function(e){ e.preventDefault(); e.stopPropagation(); go(dir); }; }
+  L.addEventListener('click', owSidePick(-1));
+  R.addEventListener('click', owSidePick(1));
+  function owSideKey(dir){ return function(e){
+    if(e.key===' '||e.key==='Enter'||e.key==='Spacebar'){ e.preventDefault(); go(dir); }
+  }; }
+  L.addEventListener('keydown', owSideKey(-1));
+  R.addEventListener('keydown', owSideKey(1));
+
+  /* ⚠️ A BARE TAP ON THE KNOB NO LONGER MEANS "APPS".
+     It used to send an undragged click straight to `go(+1)`. That is the desktop half of Lee's
+     report — a click anywhere on the knob reached Apps regardless of which word you were aiming
+     at. The knob is the handle
+     of a two-way control and has no business picking a side on the reader's behalf. It nudges
+     instead, which says "I slide" and commits to nothing. The two words are now the way to
+     choose without dragging. */
+  function owNudge(){
+    knob.classList.remove('nudge');
+    void knob.offsetWidth;               /* restart the animation if it is already running */
+    knob.classList.add('nudge');
+    setTimeout(function(){ knob.classList.remove('nudge'); }, 2000);
+  }
+  knob.addEventListener('click',function(){ if(eatClick){ eatClick=false; return; } if(!moved) owNudge(); });
+
+  /* One unprompted nudge per page view, so the control announces that it moves — and never for
+     a reader who has already touched it, which would be nagging rather than teaching. */
+  var owTouched=false;
+  ['pointerdown','keydown'].forEach(function(ev){
+    rail.addEventListener(ev, function(){ owTouched=true; }, {once:true});
+  });
+  setTimeout(function(){ if(!owTouched) owNudge(); }, 1400);
 })();
 </script>
 
