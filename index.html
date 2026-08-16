@@ -2640,6 +2640,24 @@
      the knob travels to the end it was sent to, stays there lit green, flashes in place for
      about a second, and only after the page has moved does it quietly return to the middle. */
   var committing = false;
+  /* ── v69 · SCROLL THE WINDOW, NOT "THE NEAREST SCROLLABLE ANCESTOR" ──────────────────────
+     `el.scrollIntoView()` walks up to the nearest scrollable ancestor. On this page `body` has
+     `overflow-y: auto`, which makes it one, while the element the viewport actually scrolls is
+     `documentElement` — so scrollIntoView scrolled the wrong box and the page never moved. The
+     address bar updated and nothing else did, which reads to a user as "tapping does nothing".
+
+     Measured on live production at desktop width: scrollIntoView left scrollY at 0;
+     window.scrollTo({top: 2114}) moved it to 2114. So: scroll the window, explicitly.
+
+     The header is sticky, so its height comes off the target — read at call time rather than
+     hard-coded, because it differs between mobile and desktop and between signed-in states. */
+  function owScrollToSection(el){
+    var header = document.querySelector('header');
+    var offset = header ? header.getBoundingClientRect().height : 0;
+    var top = el.getBoundingClientRect().top + (window.scrollY || document.documentElement.scrollTop || 0) - offset - 8;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+
   function go(dir){
     if(committing) return; committing = true;
     var side = dir<0 ? L : R, el = target(dir);
@@ -2654,7 +2672,7 @@
       knob.classList.add('committing'); side.classList.add('committing');
       setTimeout(function(){
         /* 3 · jump */
-        if(el){ el.scrollIntoView({behavior:'smooth',block:'start'});
+        if(el){ owScrollToSection(el);
                 try{ history.replaceState(null,'',dir<0?'#services':'#apps'); }catch(_){ location.hash = dir<0?'#services':'#apps'; } }
         else  { location.hash = dir<0 ? '#services' : '#apps'; }
         knob.classList.remove('committing'); side.classList.remove('committing');
