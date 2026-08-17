@@ -6,7 +6,14 @@
     <meta name="robots" content="noindex" />
     <title>OneHome - One World Labs</title>
     <link rel="canonical" href="https://app.oneworldlabs.ai/home" />
-    <meta http-equiv="refresh" content="0; url=https://app.oneworldlabs.ai/home" />
+    <noscript>
+      <!-- v101 · This meta refresh used to sit in the <head> unconditionally and race the
+           script below on every load — two navigations, one page, and they disagreed: this
+           one drops the deep path, the query and the hash, and the script exists to carry
+           them. A deep address is somebody following a shared link. Behind <noscript> it
+           is a fallback instead of a competitor. -->
+      <meta http-equiv="refresh" content="0; url=https://app.oneworldlabs.ai/home" />
+    </noscript>
     <script>
       (function () {
         var base = "https://app.oneworldlabs.ai/home";

@@ -3,14 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <script>
-/* One ID / OAuth redirect-catcher — MUST stay at the very top of index.html and 404.html.
-   Supabase returns tokens in the hash (#access_token=…) or ?code= for PKCE. Hand the
-   whole thing off to the OneSocial v2 app with tokens intact, or Google sign-in breaks. */
+/* One ID / OAuth redirect-catcher — MUST stay at the very top of every page that can be
+   returned to after sign-in. Supabase returns tokens in the hash (#access_token=…) or ?code=
+   for PKCE. Hand the whole thing off to the APP ORIGIN with the tokens intact, or Google
+   sign-in breaks. Nothing may run before this block: anything that rewrites the URL first
+   destroys the only copy of the token. */
 (function () {
+  /* v101 · P0 · THIS USED TO POINT AT `onejob.oneworldlabs.ai` AND THAT CLOSED A RING.
+     The doorway there lands on this very site (since 15 Aug), and both hops carried the
+     fragment, so the test below never stopped being true and the address bar flashed between
+     the two hosts until the tab was closed. Lee: "the URL keeps blinking, flashing back and
+     forth."  `app.oneworldlabs.ai` is the ONE origin that owns the session, so the handoff
+     goes straight there and never through a doorway — a doorway is free to change where it
+     lands, a token handoff must not depend on that.
+     The host check is belt and braces: a catcher that can reach its own page is how this
+     started, so it must never redirect to itself. */
   var h = location.hash || "", q = location.search || "";
-  if (/access_token|refresh_token|error_description|type=recovery/.test(h) || /[?&]code=/.test(q)) {
-    location.replace("https://onejob.oneworldlabs.ai/" + q + h);
-  }
+  if (!/access_token|refresh_token|error_description|type=recovery/.test(h) && !/[?&]code=/.test(q)) return;
+  if (location.hostname === "app.oneworldlabs.ai") return;
+  location.replace("https://app.oneworldlabs.ai/" + q + h);
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
