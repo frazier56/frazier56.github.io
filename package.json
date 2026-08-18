@@ -1,0 +1,12 @@
+{
+  "name": "oneworldlabs-www",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Build the marketing site's stylesheet. Replaces the Tailwind Play CDN.",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./assets/ow.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./assets/ow.css --watch",
+    "verify:css": "npm run build:css && git diff --exit-code --stat -- assets/ow.css"
+  },
+  "devDependencies": { "tailwindcss": "3.4.17" }
+}
