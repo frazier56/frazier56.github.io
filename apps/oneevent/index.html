@@ -45,17 +45,26 @@ tailwind.config = {
 </head>
 <body class="text-ink antialiased">
 
-<!-- Top bar -->
+<!-- Top bar — v4 (Lee): the SITE's standard header pattern (same as /apps/onesocial/ etc.),
+     with the real OneEvent mark asset and a Home link. Product wears its own name (15 Aug rule). -->
 <header class="sticky top-0 z-40 glass">
-  <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
-    <a href="https://www.oneworldlabs.ai/" class="flex items-center gap-2">
-      <img src="https://www.oneworldlabs.ai/logo-clean.png" alt="One World Labs" class="h-8 w-auto" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
-      <span style="display:none" class="display font-bold text-lg">One World Labs</span>
+  <div class="w-full px-3 sm:px-5 h-16 flex items-center justify-between max-w-6xl mx-auto relative">
+    <a href="https://www.oneworldlabs.ai/apps/oneevent/" class="relative z-10 flex items-center gap-2.5 transition-opacity hover:opacity-80" aria-label="OneEvent — part of One World Labs">
+      <img src="https://www.oneworldlabs.ai/marks/mark-oneevent.png" alt="" width="30" height="30" class="h-[30px] w-auto shrink-0" loading="eager" decoding="async">
+      <span class="flex flex-col leading-none">
+        <span class="text-[19px] font-extrabold tracking-tight" style="color:#E2711D">OneEvent</span>
+        <span class="mt-0.5 text-[8.5px] font-bold uppercase tracking-[0.14em] text-ink/55">part of One World Labs</span>
+      </span>
     </a>
-    <nav class="flex items-center gap-3">
-      <a href="https://www.oneworldlabs.ai/" class="hidden sm:inline text-sm font-semibold text-ink/70 hover:text-ink">All apps</a>
-      <a href="https://oneevent.oneworldlabs.ai/" class="btn-action px-4 py-2 text-sm font-bold">Open OneEvent</a>
+    <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary">
+      <a href="https://www.oneworldlabs.ai/" class="px-4 py-2 rounded-full text-sm font-semibold text-ink/60 hover:text-ink hover:bg-ink/5 transition-colors">Home</a>
+      <a href="https://www.oneworldlabs.ai/services/" class="px-4 py-2 rounded-full text-sm font-semibold text-ink/60 hover:text-ink hover:bg-ink/5 transition-colors">Services</a>
+      <a href="https://www.oneworldlabs.ai/apps/" class="px-4 py-2 rounded-full text-sm font-semibold text-ink/60 hover:text-ink hover:bg-ink/5 transition-colors">Apps</a>
+      <a href="https://www.oneworldlabs.ai/#how" class="px-4 py-2 rounded-full text-sm font-semibold text-ink/60 hover:text-ink hover:bg-ink/5 transition-colors">How we work</a>
+      <a href="https://www.oneworldlabs.ai/blog/" class="px-4 py-2 rounded-full text-sm font-semibold text-ink/60 hover:text-ink hover:bg-ink/5 transition-colors">Blog</a>
+      <a href="https://www.oneworldlabs.ai/#faqsec" class="px-4 py-2 rounded-full text-sm font-semibold text-ink/60 hover:text-ink hover:bg-ink/5 transition-colors">FAQ</a>
     </nav>
+    <a href="https://app.oneworldlabs.ai/events" class="btn-action px-4 py-2 text-sm font-bold shrink-0">Open OneEvent</a>
   </div>
 </header>
 
@@ -71,7 +80,7 @@ tailwind.config = {
       one flat <strong class="text-ink">5.99%</strong> added at checkout. You keep <strong class="text-ink">100% of your ticket price</strong>.
     </p>
     <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-      <a href="https://oneevent.oneworldlabs.ai/" class="btn-action px-7 py-3.5 text-base font-bold">Create your event — free</a>
+      <a href="https://app.oneworldlabs.ai/events" class="btn-action px-7 py-3.5 text-base font-bold">Create your event — free</a>
       <a href="#money" class="px-6 py-3.5 rounded-2xl border border-ink/15 bg-white font-bold text-sm hover:border-ink/30">See how the money moves</a>
     </div>
     <p class="mt-4 text-xs text-ink/50">Free events cost nothing. Paid events: hosts pay $0 — the flat fee is added at checkout.</p>
@@ -212,7 +221,7 @@ tailwind.config = {
 <section class="max-w-6xl mx-auto px-5 py-14 text-center">
   <h2 class="text-3xl font-extrabold">Your next event, done right.</h2>
   <p class="text-ink/65 mt-3 max-w-xl mx-auto">Six months of building, testing and real events went into this. Create yours in the next ten minutes.</p>
-  <a href="https://oneevent.oneworldlabs.ai/" class="btn-action inline-block mt-7 px-8 py-4 text-base font-bold">Open OneEvent</a>
+  <a href="https://app.oneworldlabs.ai/events" class="btn-action inline-block mt-7 px-8 py-4 text-base font-bold">Open OneEvent</a>
   <p class="mt-4 text-xs text-ink/50">A One World Labs company · onevent is part of the One World ecosystem — OneScore, OneJob, OneSocial and more.</p>
 </section>
 
@@ -221,7 +230,7 @@ tailwind.config = {
     <p>© 2026 One World Labs, Inc. All rights reserved.</p>
     <div class="flex gap-4">
       <a href="https://www.oneworldlabs.ai/" class="hover:text-ink">oneworldlabs.ai</a>
-      <a href="https://oneevent.oneworldlabs.ai/" class="hover:text-ink">Open the app</a>
+      <a href="https://app.oneworldlabs.ai/events" class="hover:text-ink">Open the app</a>
     </div>
   </div>
 </footer>
