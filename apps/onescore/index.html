@@ -272,6 +272,24 @@
     .menu-one{font-weight:800;color:var(--ow-primary);}
     .menu-soon{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--color-muted);border:1px solid var(--color-border);border-radius:999px;padding:2px 8px;}
     .menu-divider{height:1px;margin:12px 0;background:var(--color-border);}
+
+    /* ── v105 (Lee, 19 Aug): the drawer wears the APP SHELL's look — near-opaque frosted
+       white (tokens.css --overlay-bg = rgba(255,255,255,.97) + the 152° sheen from
+       Drawer.tsx) instead of the 60%-alpha tint that read grey-brown over the dimmed
+       page, and every app/service row carries its product DOT (colors from the shell's
+       PRODUCT_BRAND / hues.ts — not freehand). */
+    .menu-panel{background:linear-gradient(152deg,rgba(255,255,255,.58) 0%,rgba(255,255,255,0) 46%),rgba(255,255,255,.97);border-color:rgba(255,255,255,.55);}
+    .dark .menu-panel{background:linear-gradient(152deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,0) 46%),rgba(11,15,26,.97);border-color:rgba(255,255,255,.16);}
+    .menu-navitem::before{content:"";width:10px;height:10px;border-radius:9999px;flex:0 0 auto;background:transparent;border:1.5px solid currentColor;opacity:.45;}
+    a.menu-navitem[href*="onejob"]::before{background:#17A45C;border:0;opacity:1}
+    a.menu-navitem[href*="onescore"]::before{background:#E0A21F;border:0;opacity:1}
+    a.menu-navitem[href*="oneevent"]::before{background:#E2711D;border:0;opacity:1}
+    a.menu-navitem[href*="onesocial"]::before{background:#8B3DEA;border:0;opacity:1}
+    a.menu-navitem[href*="onehome"]::before{background:#0D9488;border:0;opacity:1}
+    span.menu-navitem.cursor-default::before{background:#7B2D3B;border:0;opacity:.8}
+    a.menu-navitem[href*="onevoice"]::before{background:#2E6BE6;border:0;opacity:1}
+    a.menu-navitem[href*="onepage"]::before{background:#D6338B;border:0;opacity:1}
+    a.menu-navitem[href*="oneapp"]::before{background:#8E2F6B;border:0;opacity:1}
     .menu-signout{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border-radius:14px;padding:10px 12px;font-size:15px;font-weight:600;color:#ef4444;transition:background-color .15s ease;border:0;background:none;cursor:pointer;font-family:inherit;}
     .menu-signout:hover{background:rgba(239,68,68,.1);}
 
@@ -649,9 +667,9 @@
                  They were reading the chrome, not the content, which is exactly what a person does.
                  The mark IS the letter O, per every One World wordmark. Live SVG + text so it stays
                  crisp at any resolution, follows light and dark, and adds no image request. -->
-            <a href="/apps/onescore/" class="relative z-10 flex items-center gap-1 transition-opacity hover:opacity-80" aria-label="OneScore — part of One World Labs">
+            <a href="/apps/onescore/" class="relative z-10 flex items-end transition-opacity hover:opacity-80" aria-label="OneScore — part of One World Labs">
                 <img src="/marks/mark-onescore.png" alt="" width="30" height="30" class="h-[30px] w-auto shrink-0" loading="eager" decoding="async">
-                <span class="flex flex-col leading-none">
+                <span class="flex flex-col leading-none text-left" style="margin-left:-0.9px;margin-bottom:2.3px">
                     <span class="text-[19px] font-extrabold tracking-tight" style="color:#E0A21F">neScore</span>
                     <span class="mt-0.5 text-[8.5px] font-bold uppercase tracking-[0.14em] text-muted-foreground">part of One World Labs</span>
                 </span>
@@ -842,6 +860,7 @@
                     <a href="https://onescore.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Score</span></a>
                     <a href="https://oneevent.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Event</span></a>
                     <a href="https://onesocial.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Social</span></a>
+                    <a href="https://onehome.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Home</span></a>
                     <span class="menu-navitem opacity-70 cursor-default"><span><span class="menu-one">One</span>Agent</span><span class="menu-soon" data-i18n="coming_soon">Coming soon</span></span>
                 </div>
                 <div>
