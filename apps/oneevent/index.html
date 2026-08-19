@@ -701,8 +701,10 @@
 @media(min-width:1024px){.ev-grid{grid-template-columns:1fr 1fr 1fr}}
 .ev-chip{display:inline-flex;align-items:center;gap:.4rem;border-radius:9999px;padding:.35rem .85rem;font-weight:600;font-size:.74rem;border:1px solid var(--color-border);background:var(--color-card)}
 .ev-chip.hot{border-color:rgba(226,113,29,.45);background:rgba(226,113,29,.12);color:#E2711D}
-.ev-tabs{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;text-align:center;margin-top:1rem}
-@media(min-width:640px){.ev-tabs{grid-template-columns:repeat(5,1fr)}}
+.ev-tabs{display:flex;gap:.5rem;text-align:center;margin-top:1rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:6px 2px 10px}
+.ev-tabs::-webkit-scrollbar{display:none}
+.ev-tabs .phase-tab{flex:0 0 auto;white-space:nowrap;padding:.75rem 1rem}
+@media(min-width:640px){.ev-tabs{display:grid;grid-template-columns:repeat(5,1fr);overflow:visible;padding:0}.ev-tabs .phase-tab{white-space:normal;padding:.75rem .25rem}}
 .phase-tab{background:var(--color-card);border:2px solid var(--color-border);border-radius:1rem;padding:.75rem .25rem;font-weight:700;font-size:.85rem;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;color:var(--color-fg)}
 .phase-tab:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(0,0,0,.10)}
 .phase-tab.active{transform:scale(1.07);border-color:#E2711D;box-shadow:0 10px 26px rgba(226,113,29,.20)}
@@ -718,7 +720,7 @@
 </style>
 
       <!-- HERO — sister-page pattern: eyebrow, name, tagline, ONE centred CTA, reassurance, way back -->
-      <section class="container mx-auto px-4 max-w-3xl text-center mb-14 md:mb-16">
+      <section class="container mx-auto px-4 max-w-3xl text-center mb-8 md:mb-12">
         <p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#E2711D">Show up · Sell out</p>
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-5">OneEvent</h1>
         <p class="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight max-w-2xl mx-auto mb-8 leading-snug">Run the whole event. Keep the whole ticket.</p>
@@ -736,21 +738,11 @@
         </div>
       </section>
 
-      <section class="container mx-auto px-4 max-w-3xl mb-14 md:mb-16">
-        <div class="frost rounded-3xl p-6 md:p-9">
-          <p class="text-base md:text-lg leading-relaxed text-muted-foreground">OneEvent runs your whole event — the page, the flyer, the applications, the door and the money. One app, six languages, one flat <strong class="text-foreground">5.99%</strong> added at checkout. You keep <strong class="text-foreground">100% of your ticket price</strong>, and card processing is included.</p>
-          <ul class="mt-7 grid gap-3 sm:grid-cols-2">
-            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#E2711D"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>A designed flyer with a working QR code, included</span></li>
-            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#E2711D"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>Application-gated tickets: cards held, charged only when you approve</span></li>
-            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#E2711D"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>QR check-in, live door list, food &amp; drink vouchers</span></li>
-            <li class="flex items-start gap-2.5 text-[15px] leading-snug"><span class="mt-1 shrink-0" style="color:#E2711D"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></span><span>A Rolodex that builds itself from every registration</span></li>
-          </ul>
-        </div>
-      </section>
+
 
       <!-- PHASE TABS -->
       <section class="container mx-auto px-4 max-w-6xl mb-4">
-        <p class="text-center text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">Every event has five phases — creating it, promoting it, selling it, running the door, and what happens after. OneEvent covers all five.</p>
+        <p class="text-center text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">One app for the page, the flyer, the applications, the door and the money — one flat <strong class="text-foreground">5.99%</strong> added at checkout, so you keep <strong class="text-foreground">100% of your ticket price</strong>. Every event has five phases, and OneEvent covers all five — tap one:</p>
         <div class="ev-tabs" id="phaseTabs">
           <button data-panel="ph-create" class="phase-tab active"><span class="tab-num">1</span> · Create</button>
           <button data-panel="ph-promote" class="phase-tab"><span class="tab-num">2</span> · Promote</button>
@@ -758,7 +750,7 @@
           <button data-panel="ph-door" class="phase-tab"><span class="tab-num">4</span> · The door</button>
           <button data-panel="ph-after" class="phase-tab"><span class="tab-num">5</span> · After</button>
         </div>
-        <p class="text-center text-xs text-muted-foreground/80 mt-2">☝️ Tap a phase to see everything included — it opens right below.</p>
+        <p class="text-center text-xs text-muted-foreground/80 mt-2">☝️ Scroll the row · tap a phase — it opens right below.</p>
       </section>
 
       <section id="ph-create" class="phase-panel active container mx-auto px-4 max-w-6xl py-8">
