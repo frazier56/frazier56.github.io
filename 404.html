@@ -408,6 +408,15 @@
     .store-badge .sb-lines{display:flex;flex-direction:column;align-items:flex-start;line-height:1.12;}
     .store-badge .sb-top{font-size:10px;font-weight:500;letter-spacing:.02em;opacity:.92;}
     .store-badge .sb-bottom{font-size:17px;font-weight:600;letter-spacing:-.01em;}
+    @keyframes storeSoonShake{
+        0%,100%{transform:translateX(0);}
+        18%{transform:translateX(-5px);}
+        36%{transform:translateX(5px);}
+        54%{transform:translateX(-3px);}
+        72%{transform:translateX(3px);}
+    }
+    .store-soon-shake{animation:storeSoonShake .42s ease both;color:var(--color-primary);}
+    @media (prefers-reduced-motion:reduce){.store-soon-shake{animation:none;text-decoration:underline;text-underline-offset:3px;}}
     @media (max-width:380px){ .store-badge{height:46px;padding:0 12px 0 10px;} .store-badge .sb-bottom{font-size:15px;} }
 
     /* ---------- mobile-first layout upgrades ---------- */
@@ -873,16 +882,16 @@
                     <p class="text-2xl sm:text-3xl md:text-[38px] font-bold tracking-tight leading-snug md:leading-tight" data-i18n="mkt_line">The world's smartest small businesses are partnering with One World to accelerate their growth.</p>
                     <!-- store badges — visual placeholders until the App Store / Google Play listings are live -->
                     <div class="mkt-ctas flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-8">
-                        <a href="#" class="store-badge" aria-label="Download on the App Store — coming soon" onclick="return false;">
+                        <a href="#" class="store-badge" data-store-badge aria-label="Download on the App Store — coming soon">
                             <svg width="26" height="30" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.7-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
                             <span class="sb-lines"><span class="sb-top">Download on the</span><span class="sb-bottom">App Store</span></span>
                         </a>
-                        <a href="#" class="store-badge" aria-label="Get it on Google Play — coming soon" onclick="return false;">
+                        <a href="#" class="store-badge" data-store-badge aria-label="Get it on Google Play — coming soon">
                             <svg width="24" height="27" viewBox="0 0 512 512" aria-hidden="true"><path fill="#00D7FE" d="M48 32c-6 5.5-10 14-10 25v398c0 11 4 19.5 10 25l3 2.8L294 240v-6L51 29.2 48 32z"/><path fill="#FFC900" d="M375 321l-81-81v-6l81-81 1.8 1L473 208c27 15.3 27 40.4 0 55.8l-96.2 54.2-1.8 3z"/><path fill="#FF3A44" d="M376.8 318L294 237 48 480c9 9.5 23.8 10.7 40.5 1.2L376.8 318z"/><path fill="#00F076" d="M376.8 156L88.5 30.8C71.8 21.3 57 22.5 48 32l246 205 82.8-81z"/></svg>
                             <span class="sb-lines"><span class="sb-top">GET IT ON</span><span class="sb-bottom">Google Play</span></span>
                         </a>
                     </div>
-                    <p class="text-xs sm:text-sm text-muted-foreground mt-4" data-i18n="mkt_soon">Mobile apps coming soon — everything already works in your browser today.</p>
+                    <p class="text-xs sm:text-sm text-muted-foreground mt-4" data-store-soon data-i18n="mkt_soon">Mobile apps coming soon — everything already works in your browser today.</p>
                 </div>
                 <div>
                     <div class="collage" aria-hidden="true">
@@ -1359,6 +1368,20 @@
     if (menuCloseX) menuCloseX.addEventListener('click', function(){ setMenu(false); });
     var hbSignOutBtnForClose = document.getElementById('hbSignOutBtn');
     if (hbSignOutBtnForClose) hbSignOutBtnForClose.addEventListener('click', function(){ setMenu(false); });
+
+    /* ---------- app store placeholders ---------- */
+    (function(){
+        var soon = document.querySelector('[data-store-soon]');
+        document.querySelectorAll('[data-store-badge]').forEach(function(badge){
+            badge.addEventListener('click', function(e){
+                e.preventDefault();
+                if (!soon) return;
+                soon.classList.remove('store-soon-shake');
+                void soon.offsetWidth;
+                soon.classList.add('store-soon-shake');
+            });
+        });
+    })();
 
     /* ---------- hero name rotator (fade, ~1s per word) ---------- */
     (function(){
