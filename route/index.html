@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B0F1A">
+<title>Flyer Route — Jackson Metro</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+:root{--bg:#0B0F1A;--panel:#141B2B;--line:#243046;--ink:#EAF0F8;--dim:#93A3BC;
+      --teal:#15C2B2;--amber:#E0A21F;--red:#F0554B;--green:#3FBF7F}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);
+     font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+header{position:sticky;top:0;z-index:600;background:var(--bg);
+       border-bottom:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-top))}
+.row{display:flex;gap:8px;align-items:center}
+h1{margin:0;font-size:17px;letter-spacing:-.2px;flex:1}
+.pill{border:1px solid var(--line);background:var(--panel);color:var(--dim);
+      border-radius:999px;padding:8px 13px;font-size:14px;font-weight:600}
+.pill.on{background:var(--teal);border-color:var(--teal);color:#04231f}
+.loc{margin-top:9px;font-size:13.5px;color:var(--dim);min-height:19px}
+.loc b{color:var(--teal)}
+.bar{display:flex;gap:8px;margin-top:9px}
+.bar button{flex:1;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+            border-radius:11px;padding:11px;font-size:14.5px;font-weight:600}
+.bar button:active{background:var(--line)}
+#map{height:44vh;display:none}
+main{padding:10px 12px 90px}
+.card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);
+      border-radius:13px;padding:12px 13px;margin-bottom:9px}
+.card.done{opacity:.4;border-left-color:var(--dim)}
+.card h2{margin:0;font-size:16.5px;font-weight:650;letter-spacing:-.2px}
+.meta{color:var(--dim);font-size:13.5px;margin-top:3px}
+.tags{margin-top:7px;display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+     border-radius:6px;padding:3px 7px;background:#1B2438;color:var(--dim)}
+.tag.hot{background:#3A1F1D;color:#FF9A93}
+.tag.dist{background:#0E2E2B;color:var(--teal)}
+.acts{display:flex;gap:7px;margin-top:10px}
+.acts a,.acts button{flex:1;text-align:center;text-decoration:none;border:1px solid var(--line);
+     background:#0E1626;color:var(--ink);border-radius:10px;padding:11px 6px;font-size:13.5px;font-weight:650}
+.acts .go{background:var(--teal);border-color:var(--teal);color:#04231f}
+.acts .here{background:#1B2438}
+.acts .tick{background:#12291D;border-color:#1E4630;color:var(--green)}
+.empty{color:var(--dim);text-align:center;padding:30px 10px;font-size:14.5px}
+footer{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--line);
+       padding:9px 12px calc(9px + env(safe-area-inset-bottom));display:flex;gap:8px;z-index:600}
+footer button{flex:1;border:1px solid var(--line);background:var(--panel);color:var(--dim);
+              border-radius:11px;padding:11px;font-size:14px;font-weight:600}
+footer button.on{background:var(--teal);border-color:var(--teal);color:#04231f}
+.note{color:var(--dim);font-size:12.5px;margin:14px 2px 0;line-height:1.5}
+</style></head><body>
+
+<header>
+  <div class="row">
+    <h1>Flyer route</h1>
+    <button class="pill on" id="d1">Today 37</button>
+    <button class="pill" id="d2">Fri 51</button>
+  </div>
+  <div class="loc" id="loc">Finding you&hellip;</div>
+  <div class="bar">
+    <button id="gps">Use my location</button>
+    <button id="toggle">Show map</button>
+  </div>
+</header>
+
+<div id="map"></div>
+<main id="list"></main>
+
+<footer>
+  <button id="mNear" class="on">Nearest first</button>
+  <button id="mPlan">Planned order</button>
+  <button id="mLeft">Hide done</button>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const STOPS=[{"d":1,"n":"S & S Landscape Management","a":"218 Patton Village Cv","c":"Jackson","p":"(601) 383-3835","cat":"landscaping","s":73.0,"r":"","rv":"","v":"High","lat":32.26988,"lon":-90.11976,"eta":8},{"d":1,"n":"Windham & Lacey PLLC","a":"2708 Old Brandon Rd","c":"Pearl","p":"(601) 939-8676","cat":"Accounting - CPA Firm","s":73.0,"r":"","rv":"","v":"Medium","lat":32.2785,"lon":-90.12221,"eta":16},{"d":1,"n":"Jason Thomas Zebert, Attorney","a":"406 N Bierdeman Rd","c":"Pearl","p":"(601) 939-2932","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27872,"lon":-90.12984,"eta":24},{"d":1,"n":"Reeder's Automotive","a":"615 N Bierdeman Rd","c":"Pearl","p":"(601) 932-7190","cat":"auto repair","s":73.0,"r":"","rv":"","v":"High","lat":32.28269,"lon":-90.13011,"eta":31},{"d":1,"n":"Lucid Ink","a":"413 Roberts St","c":"Pearl","p":"(601) 884-0002","cat":"Printing / Screen Printing","s":63.0,"r":"","rv":"","v":"Medium","lat":32.27954,"lon":-90.131,"eta":37},{"d":1,"n":"All About Cats","a":"2104 Old Brandon Rd","c":"Pearl","p":"(601) 420-2286","cat":"veterinary","s":68.0,"r":"4.6","rv":"95","v":"High","lat":32.2747,"lon":-90.13614,"eta":45},{"d":1,"n":"Thomas Lee Zebert, Attorney","a":"115 Loyd St","c":"Pearl","p":"(601) 939-3166","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27424,"lon":-90.14082,"eta":52},{"d":1,"n":"Baptist Medical Group - Pearl Primary Care","a":"110 S Pearson Rd","c":"Pearl","p":"(601) 968-1237","cat":"family/primary care","s":60.0,"r":"4.7","rv":"250","v":"High","lat":32.27505,"lon":-90.13701,"eta":59},{"d":1,"n":"The Grand at Pearl","a":"200 Colony Park Dr","c":"Pearl","p":"(601) 936-3660","cat":"Apartment Leasing Office","s":73.0,"r":"","rv":"","v":"High","lat":32.26105,"lon":-90.13311,"eta":68},{"d":1,"n":"Leo's Painting","a":"102 Riverpointe Pl","c":"Pearl","p":"(601) 317-3192","cat":"painting","s":73.0,"r":"","rv":"","v":"High","lat":32.25868,"lon":-90.12908,"eta":75},{"d":1,"n":"Richland Wrecker Service","a":"2651 Highway 468","c":"Pearl","p":"(601) 936-0003","cat":"towing","s":73.0,"r":"","rv":"","v":"High","lat":32.24718,"lon":-90.12302,"eta":84},{"d":1,"n":"Wiley Vision Care","a":"200 Marketplace Dr","c":"Richland","p":"(601) 420-2101","cat":"optometry/optical","s":94.0,"r":"4.4","rv":"22","v":"High","lat":32.21986,"lon":-90.15136,"eta":96},{"d":1,"n":"Spotswood Law Firm P.A.","a":"368 Scarborough St","c":"Richland","p":"(601) 936-6003","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.21394,"lon":-90.16227,"eta":105},{"d":1,"n":"Superior Gutter Flashing & Roofing","a":"355 Scarbrough Cir","c":"Richland","p":"(601) 291-1418","cat":"gutters","s":63.0,"r":"","rv":"","v":"High","lat":32.21454,"lon":-90.15873,"eta":111},{"d":1,"n":"Dennis Meek & Company P.A.","a":"627 Hwy 49 S Ste A","c":"Richland","p":"(601) 939-1305","cat":"Accounting - CPA Firm","s":73.0,"r":"","rv":"","v":"Medium","lat":32.23558,"lon":-90.16387,"eta":122},{"d":1,"n":"Thurman Transportation Inc","a":"44 Highway 49","c":"Richland","p":"(601) 439-0617","cat":"towing","s":73.0,"r":"","rv":"","v":"High","lat":32.27778,"lon":-90.16799,"eta":136},{"d":1,"n":"H P Mechanical Inc","a":"38 Old Highway 49 S","c":"Flowood","p":"(601) 420-2010","cat":"HVAC","s":73.0,"r":"","rv":"","v":"High","lat":32.27971,"lon":-90.16711,"eta":142},{"d":1,"n":"Hermetic Rush Services","a":"38 Old Highway 49 S","c":"Flowood","p":"(601) 939-9949","cat":"HVAC","s":73.0,"r":"","rv":"","v":"High","lat":32.27971,"lon":-90.16711,"eta":148},{"d":1,"n":"Graves & Stoddard Inc","a":"722 Highway 80 E","c":"Flowood","p":"(601) 664-0020","cat":"auto repair","s":73.0,"r":"","rv":"","v":"High","lat":32.27826,"lon":-90.15531,"eta":157},{"d":1,"n":"Smith Plumbing Co of MS","a":"222 Fannin Rd","c":"Flowood","p":"(601) 941-6977","cat":"plumbing","s":73.0,"r":"","rv":"","v":"High","lat":32.28439,"lon":-90.15619,"eta":164},{"d":1,"n":"Ranco Automatic Transmission Service","a":"1460 Old Brandon Rd","c":"Flowood","p":"(601) 939-9184","cat":"transmission","s":63.0,"r":"","rv":"","v":"High","lat":32.28075,"lon":-90.15478,"eta":171},{"d":1,"n":"Lacey's Digging Service","a":"1128 Flowood Dr","c":"Flowood","p":"(601) 939-6511","cat":"septic","s":63.0,"r":"","rv":"","v":"High","lat":32.29161,"lon":-90.14586,"eta":180},{"d":1,"n":"Belhaven Senior Care","a":"1004 North St","c":"Jackson","p":"(601) 355-0763","cat":"senior services","s":80.0,"r":"3.8","rv":"62","v":"High","lat":32.31225,"lon":-90.17652,"eta":192},{"d":1,"n":"Hallmark Cleaners","a":"824 E Fortification St","c":"Jackson","p":"(601) 956-9295","cat":"Commercial / Retail Cleaning","s":63.0,"r":"","rv":"","v":"High","lat":32.31223,"lon":-90.17627,"eta":198},{"d":1,"n":"Vesica Real Estate","a":"814 N Jefferson St","c":"Jackson","p":"(601) 948-3460","cat":"Real Estate Brokerage","s":73.0,"r":"","rv":"","v":"Medium","lat":32.30792,"lon":-90.17603,"eta":205},{"d":1,"n":"Matt Newman / Newman & Newman","a":"640 N State St","c":"Jackson","p":"(601) 949-5080","cat":"Law Firm - Personal Injury/Nursing Home","s":73.0,"r":"","rv":"","v":"Medium","lat":32.30565,"lon":-90.17912,"eta":212},{"d":1,"n":"Khalaf & Nguyen PLLC","a":"500 N State St","c":"Jackson","p":"(601) 288-6763","cat":"Law Firm - Criminal/Personal Injury","s":73.0,"r":"","rv":"","v":"Medium","lat":32.30351,"lon":-90.17954,"eta":218},{"d":1,"n":"Mary Jacq Easley, Attorney","a":"450 High St","c":"Jackson","p":"(601) 359-1858","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.30505,"lon":-90.1825,"eta":225},{"d":1,"n":"Shaun Yurtkuran, Attorney","a":"771 N Congress St","c":"Jackson","p":"(601) 862-1320","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.30847,"lon":-90.18128,"eta":232},{"d":1,"n":"Joel F. Dillard P.A.","a":"775 N Congress St","c":"Jackson","p":"(601) 509-1372","cat":"Law Firm - Employment","s":73.0,"r":"","rv":"","v":"Medium","lat":32.30856,"lon":-90.18126,"eta":238},{"d":1,"n":"Aloha Lock & Key Shop","a":"354 E Fortification St","c":"Jackson","p":"(601) 355-5397","cat":"locksmith","s":73.0,"r":"","rv":"","v":"High","lat":32.31228,"lon":-90.18231,"eta":245},{"d":1,"n":"Lowry Roofing","a":"108 E Davis St","c":"Jackson","p":"(769) 208-2017","cat":"roofing","s":73.0,"r":"","rv":"","v":"High","lat":32.31134,"lon":-90.18774,"eta":252},{"d":1,"n":"Peoples Funeral Home of Jackson","a":"886 N Farish St","c":"Jackson","p":"(601) 353-4491","cat":"Funeral Home","s":73.0,"r":"","rv":"","v":"Medium","lat":32.31013,"lon":-90.18862,"eta":258},{"d":1,"n":"Patrick Wooten, Attorney (Nash & Wooten)","a":"162 E Amite St","c":"Jackson","p":"(601) 353-1215","cat":"Law Firm - Personal Injury","s":73.0,"r":"","rv":"","v":"Medium","lat":32.30151,"lon":-90.1867,"eta":266},{"d":1,"n":"Lindsey A. Boyd, Attorney","a":"190 E Capitol St Ste 460","c":"Jackson","p":"(601) 960-9949","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.30013,"lon":-90.1863,"eta":272},{"d":1,"n":"Robert Gordon Jr, Attorney","a":"210 E Capitol St","c":"Jackson","p":"(601) 965-4754","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.30004,"lon":-90.18579,"eta":279},{"d":1,"n":"Rob Lunsford, Attorney","a":"317 E Capitol St Ste 600","c":"Jackson","p":"(601) 488-3975","cat":"Law Firm - Personal Injury/Workers Comp","s":73.0,"r":"","rv":"","v":"Medium","lat":32.29971,"lon":-90.18393,"eta":285},{"d":2,"n":"Baldwin Lee Funeral Home","a":"240 Old Brandon Rd","c":"Pearl","p":"(601) 939-1111","cat":"Funeral Home","s":73.0,"r":"","rv":"","v":"Medium","lat":32.28721,"lon":-90.09772,"eta":10},{"d":2,"n":"Mary Libby Payne, Attorney","a":"3617 Wilcox Dr","c":"Pearl","p":"(601) 939-3194","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.28954,"lon":-90.09922,"eta":17},{"d":2,"n":"Mosley Roofing","a":"3627 Highway 80 E Ste B","c":"Pearl","p":"(601) 932-4095","cat":"roofing","s":73.0,"r":"","rv":"","v":"High","lat":32.28352,"lon":-90.08656,"eta":26},{"d":2,"n":"Cameron Benton, Attorney","a":"109B Westside Cove","c":"Pearl","p":"(601) 414-4100","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.28463,"lon":-90.04447,"eta":38},{"d":2,"n":"Crosswinds Apartments","a":"440 Cross Park Dr","c":"Pearl","p":"(601) 932-4001","cat":"Apartment Leasing Office","s":73.0,"r":"","rv":"","v":"High","lat":32.28464,"lon":-90.04238,"eta":44},{"d":2,"n":"Katheryn Kolodny, Attorney","a":"220 Cross Park Dr","c":"Pearl","p":"(601) 932-2779","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.28668,"lon":-90.04233,"eta":51},{"d":2,"n":"Specialty Gutter Inc","a":"427 Walnut Grove Dr","c":"Pearl","p":"(601) 214-0443","cat":"gutters","s":63.0,"r":"","rv":"","v":"High","lat":32.28071,"lon":-90.04725,"eta":58},{"d":2,"n":"Peninger Body Shop","a":"5022 Highway 80 E","c":"Pearl","p":"(601) 932-2218","cat":"collision","s":63.0,"r":"","rv":"","v":"High","lat":32.28384,"lon":-90.05585,"eta":66},{"d":2,"n":"Polk's Discount Drugs","a":"335 Crossgates Blvd","c":"Brandon","p":"(601) 825-8660","cat":"independent pharmacy","s":58.0,"r":"4.5","rv":"84","v":"High","lat":32.28587,"lon":-90.03622,"eta":76},{"d":2,"n":"Scott Pitts CPA PLLC","a":"190 Gateway Dr Ste B","c":"Brandon","p":"(601) 373-1220","cat":"Accounting - CPA Firm","s":73.0,"r":"","rv":"","v":"Medium","lat":32.28702,"lon":-90.02148,"eta":85},{"d":2,"n":"Rankin County Chamber of Commerce","a":"101 Service Dr","c":"Brandon","p":"(601) 825-2268","cat":"Chamber / Association Office","s":63.0,"r":"","rv":"","v":"Low","lat":32.28346,"lon":-90.02525,"eta":92},{"d":2,"n":"Akers Law Group PLLC","a":"20 Eastgate Dr Ste D","c":"Brandon","p":"(601) 825-4566","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.28863,"lon":-90.00987,"eta":101},{"d":2,"n":"Mel Coxwell P.A.","a":"20 Eastgate Dr Ste E","c":"Brandon","p":"(601) 825-3124","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.28863,"lon":-90.00987,"eta":107},{"d":2,"n":"Pool Guy of MS Inc","a":"161 Pear Orchard Dr","c":"Brandon","p":"(601) 900-8082","cat":"pool cleaning","s":73.0,"r":"","rv":"","v":"High","lat":32.29206,"lon":-90.00281,"eta":115},{"d":2,"n":"Charles Herbert Keeton, Attorney","a":"1038 Hwy 471","c":"Brandon","p":"(601) 825-4162","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.29662,"lon":-89.99628,"eta":123},{"d":2,"n":"Samuel Dennis Joiner Jr, Attorney","a":"105 N College St","c":"Brandon","p":"(601) 706-4004","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.28611,"lon":-89.99507,"eta":131},{"d":2,"n":"Upton Technologies LLC","a":"201 N College St Ste 201","c":"Brandon","p":"(601) 208-0251","cat":"IT / Managed Services","s":63.0,"r":"","rv":"","v":"Low","lat":32.28597,"lon":-89.99499,"eta":137},{"d":2,"n":"Robinson & Ward PC","a":"235 Old Hwy 80","c":"Brandon","p":"(601) 842-4213","cat":"Accounting - CPA Firm","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27835,"lon":-89.99822,"eta":145},{"d":2,"n":"Highpointe at Crossgates","a":"1296 W Government St","c":"Brandon","p":"(601) 824-1501","cat":"Apartment Leasing Office","s":73.0,"r":"","rv":"","v":"High","lat":32.27841,"lon":-90.00047,"eta":152},{"d":2,"n":"Lake Forest Apartments","a":"410 Lake Forest Dr","c":"Brandon","p":"(601) 825-3838","cat":"Apartment Leasing Office","s":73.0,"r":"","rv":"","v":"High","lat":32.27513,"lon":-90.00162,"eta":158},{"d":2,"n":"Bennett Law Office PLLC","a":"404 Section St Ste D","c":"Brandon","p":"(601) 868-1273","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27421,"lon":-89.99378,"eta":166},{"d":2,"n":"John Robert Elliott Jr, Attorney","a":"200 E Government St","c":"Brandon","p":"(601) 824-5040","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27305,"lon":-89.98617,"eta":173},{"d":2,"n":"McCrory Law Firm PC","a":"200 E Government St","c":"Brandon","p":"(601) 397-1064","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27305,"lon":-89.98617,"eta":179},{"d":2,"n":"McQuirter & Rogers-Hasie","a":"200 E Government St Ste 300","c":"Brandon","p":"(769) 241-9967","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27305,"lon":-89.98617,"eta":185},{"d":2,"n":"Woods Law Firm PLLC","a":"98 S Timber St Ste A","c":"Brandon","p":"(601) 706-9757","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27284,"lon":-89.98618,"eta":191},{"d":2,"n":"James Kelly, Attorney","a":"202 E Government St","c":"Brandon","p":"(601) 825-6455","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27304,"lon":-89.98568,"eta":198},{"d":2,"n":"Harrell & Rester / Fred Harrell Jr","a":"306 E Government St","c":"Brandon","p":"(601) 825-7236","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27302,"lon":-89.98344,"eta":204},{"d":2,"n":"Gary Lee Williams, Attorney","a":"2006 Courtside Dr","c":"Brandon","p":"(601) 720-1062","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27358,"lon":-89.98311,"eta":210},{"d":2,"n":"J. Edward Rainer / Rainer & Williams","a":"2006 Courtside Dr","c":"Brandon","p":"(601) 825-0212","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27358,"lon":-89.98311,"eta":216},{"d":2,"n":"Lemuel Garner Adams III, Attorney","a":"2101 Courtside Cove","c":"Brandon","p":"(601) 825-9505","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.27368,"lon":-89.98323,"eta":222},{"d":2,"n":"Rankin County News","a":"207 E Government St","c":"Brandon","p":"(601) 825-8333","cat":"Publishing / Advertising","s":63.0,"r":"","rv":"","v":"Medium","lat":32.27315,"lon":-89.9858,"eta":229},{"d":2,"n":"Hometown Magazines","a":"200 Felicity St","c":"Brandon","p":"(601) 706-4059","cat":"Publishing / Advertising","s":63.0,"r":"","rv":"","v":"Medium","lat":32.2732,"lon":-89.98802,"eta":235},{"d":2,"n":"Brandon Main Street Association","a":"137 W Government St","c":"Brandon","p":"(601) 803-2425","cat":"Nonprofit - Office","s":63.0,"r":"","rv":"","v":"Low","lat":32.27309,"lon":-89.98973,"eta":241},{"d":2,"n":"Arnold Fincher Water Well Services","a":"102 Beth St","c":"Brandon","p":"(601) 825-3915","cat":"well service","s":63.0,"r":"","rv":"","v":"Low","lat":32.27514,"lon":-89.98096,"eta":249},{"d":2,"n":"M2 Leadership Consulting LLC","a":"310 Loring Cir","c":"Brandon","p":"(601) 906-3550","cat":"Business Consulting","s":63.0,"r":"","rv":"","v":"Medium","lat":32.26119,"lon":-89.98588,"eta":259},{"d":2,"n":"Sartin Law Firm PLLC","a":"2151 Hwy 18","c":"Brandon","p":"(601) 591-2713","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.25674,"lon":-89.99789,"eta":267},{"d":2,"n":"Common Fence Company","a":"261 August Dr","c":"Brandon","p":"(601) 953-6900","cat":"fencing","s":73.0,"r":"","rv":"","v":"High","lat":32.25462,"lon":-90.00702,"eta":275},{"d":2,"n":"Roberts Door Service","a":"5010 Glenridge Dr","c":"Brandon","p":"(601) 540-1074","cat":"garage doors","s":73.0,"r":"","rv":"","v":"High","lat":32.24668,"lon":-90.00807,"eta":283},{"d":2,"n":"Alpha Property Management","a":"410 Oaklawn Dr","c":"Pearl","p":"(601) 809-9494","cat":"Property Management","s":63.0,"r":"","rv":"","v":"Medium","lat":32.23192,"lon":-90.04334,"eta":295},{"d":2,"n":"Amanda Renee Lingold, Attorney","a":"3350 Hwy 468 W","c":"Pearl","p":"(601) 932-5766","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.238,"lon":-90.09317,"eta":308},{"d":2,"n":"Pearl Chamber of Commerce","a":"110 George Wallace Dr","c":"Pearl","p":"(601) 939-3338","cat":"Chamber / Association Office","s":63.0,"r":"","rv":"","v":"Low","lat":32.2842,"lon":-90.11565,"eta":323},{"d":2,"n":"Tutor Family Dentistry- Heather Tutor DMD","a":"2815 Old Brandon Rd","c":"Pearl","p":"(601) 292-9772","cat":"dental","s":48.0,"r":"5","rv":"433","v":"High","lat":32.27954,"lon":-90.11946,"eta":330},{"d":2,"n":"Lott's Plumbing Inc","a":"1424 Flowood Dr","c":"Flowood","p":"(601) 932-7604","cat":"plumbing","s":73.0,"r":"","rv":"","v":"High","lat":32.31557,"lon":-90.13609,"eta":343},{"d":2,"n":"Jordan Ash, Attorney","a":"1818 Crane Ridge Dr Ste 100","c":"Jackson","p":"(601) 981-5600","cat":"Law Firm - Bankruptcy","s":73.0,"r":"","rv":"","v":"Medium","lat":32.33089,"lon":-90.14109,"eta":353},{"d":2,"n":"Reid Plumbing","a":"1775 Lelia Dr Ste A","c":"Jackson","p":"(601) 808-5156","cat":"plumbing","s":73.0,"r":"5","rv":"50","v":"High","lat":32.33298,"lon":-90.14213,"eta":359},{"d":2,"n":"William Matthew Burch, Attorney","a":"1755 Lelia Dr Ste 301","c":"Jackson","p":"(601) 790-0175","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.33299,"lon":-90.14234,"eta":365},{"d":2,"n":"Kevin Camp, Attorney","a":"1764 Lelia Dr","c":"Jackson","p":"(888) 775-5868","cat":"Law Firm - Criminal Defence/DUI","s":73.0,"r":"","rv":"","v":"Medium","lat":32.33313,"lon":-90.14291,"eta":371},{"d":2,"n":"Michael Pond / Pond Law Firm","a":"1650 Lelia Dr Ste 101","c":"Jackson","p":"(601) 948-4878","cat":"Law Firm - Bankruptcy","s":73.0,"r":"","rv":"","v":"Medium","lat":32.33314,"lon":-90.14479,"eta":378},{"d":2,"n":"Robert B. Ogletree, Attorney","a":"1640 Lelia Dr Ste 105","c":"Jackson","p":"(601) 345-2900","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.33313,"lon":-90.14501,"eta":384},{"d":2,"n":"John Hunter Stevens, Attorney","a":"1535 Lelia Dr","c":"Jackson","p":"(601) 366-1900","cat":"Law Firm - General Practice","s":73.0,"r":"","rv":"","v":"Medium","lat":32.33294,"lon":-90.14737,"eta":390},{"d":2,"n":"Stevens & Ward P.A. (Lance Stevens)","a":"1855 Lakeland Dr","c":"Jackson","p":"(601) 366-7777","cat":"Law Firm - Personal Injury","s":73.0,"r":"","rv":"","v":"Medium","lat":32.33403,"lon":-90.13911,"eta":398}];
+let day=1, mode='near', hideDone=false, me=null, map=null, layer=null;
+
+/* Visited stops survive a refresh and a phone going to sleep. If storage is
+   unavailable the object below just holds them for the session instead of
+   throwing, because losing the tick list mid-afternoon is worse than losing it
+   overnight. */
+const store={
+  k:'owl-flyer-done', mem:{},
+  get(){ try{return JSON.parse(localStorage.getItem(this.k)||'{}')}catch(e){return this.mem} },
+  set(v){ this.mem=v; try{localStorage.setItem(this.k,JSON.stringify(v))}catch(e){} }
+};
+let done=store.get();
+
+const mi=(a,b)=>{const R=3958.8,p=Math.PI/180,
+  dla=(b[0]-a[0])*p,dlo=(b[1]-a[1])*p,
+  h=Math.sin(dla/2)**2+Math.cos(a[0]*p)*Math.cos(b[0]*p)*Math.sin(dlo/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));};
+
+const dirUrl=(s,travel)=>{
+  const dest=encodeURIComponent(s.a+', '+s.c+', MS');
+  const from=me?`&origin=${me[0]},${me[1]}`:'';
+  return `https://www.google.com/maps/dir/?api=1${from}&destination=${dest}&travelmode=${travel}`;
+};
+
+function setMe(lat,lon,how){
+  me=[lat,lon];
+  document.getElementById('loc').innerHTML=
+    'You are at <b>'+lat.toFixed(4)+', '+lon.toFixed(4)+'</b> &middot; '+how;
+  draw();
+}
+
+document.getElementById('gps').onclick=()=>{
+  const el=document.getElementById('loc');
+  if(!navigator.geolocation){ el.textContent='This phone will not share location. Tap "I am here" on whichever stop you are standing at.'; return; }
+  el.textContent='Finding you\u2026';
+  navigator.geolocation.getCurrentPosition(
+    p=>setMe(p.coords.latitude,p.coords.longitude,'live'),
+    e=>{ el.innerHTML='Location blocked. <b>Tap "I am here"</b> on the stop you are standing at and the list will re-sort around you.'; },
+    {enableHighAccuracy:true,timeout:9000,maximumAge:30000});
+};
+
+function rows(){
+  let r=STOPS.filter(s=>s.d===day);
+  if(hideDone) r=r.filter(s=>!done[s.n]);
+  if(mode==='near'&&me) r=r.map(s=>({...s,_m:mi(me,[s.lat,s.lon])})).sort((a,b)=>a._m-b._m);
+  else r=r.slice().sort((a,b)=>a.eta-b.eta);
+  return r;
+}
+
+function draw(){
+  const list=document.getElementById('list'), r=rows();
+  if(!r.length){ list.innerHTML='<div class="empty">Nothing left here. Well done.</div>'; return; }
+  list.innerHTML=r.map(s=>{
+    const d=done[s.n]?' done':'';
+    const dist=s._m!==undefined?`<span class="tag dist">${s._m.toFixed(1)} mi away</span>`:'';
+    const hot=s.s>=70?'<span class="tag hot">high need</span>':'';
+    const rev=s.r?`${s.r}\u2605 &middot; ${s.rv} reviews`:'no rating';
+    return `<div class="card${d}">
+      <h2>${s.n}</h2>
+      <div class="meta">${s.a}, ${s.c} &middot; ${s.cat}</div>
+      <div class="meta">${rev}</div>
+      <div class="tags">${dist}${hot}<span class="tag">score ${s.s.toFixed(0)}</span>${s.v?`<span class="tag">${s.v} call volume</span>`:''}</div>
+      <div class="acts">
+        <a class="go" href="${dirUrl(s,'driving')}" target="_blank" rel="noopener">Drive</a>
+        <a href="${dirUrl(s,'walking')}" target="_blank" rel="noopener">Walk</a>
+        ${s.p?`<a href="tel:${s.p.replace(/[^0-9+]/g,'')}">Call</a>`:''}
+        <button class="here" data-here="${encodeURIComponent(s.n)}">I am here</button>
+        <button class="tick" data-tick="${encodeURIComponent(s.n)}">${done[s.n]?'Undo':'Done'}</button>
+      </div></div>`;
+  }).join('');
+
+  list.querySelectorAll('[data-tick]').forEach(b=>b.onclick=()=>{
+    const n=decodeURIComponent(b.dataset.tick);
+    done[n]?delete done[n]:done[n]=1; store.set(done); draw();
+  });
+  /* "I am here" is the whole trick: standing at a known stop IS a location fix,
+     so the list can re-sort around you with no location permission and no
+     mapping API at all. */
+  list.querySelectorAll('[data-here]').forEach(b=>b.onclick=()=>{
+    const n=decodeURIComponent(b.dataset.here), s=STOPS.find(x=>x.n===n);
+    setMe(s.lat,s.lon,'set from '+s.n);
+  });
+  if(map) plot(r);
+}
+
+function plot(r){
+  if(layer) layer.remove();
+  layer=L.layerGroup().addTo(map);
+  r.forEach((s,i)=>L.circleMarker([s.lat,s.lon],{radius:9,weight:2,color:'#0B0F1A',
+      fillColor:done[s.n]?'#93A3BC':(s.s>=70?'#F0554B':'#15C2B2'),fillOpacity:1})
+    .bindPopup('<b>'+s.n+'</b><br>'+s.a+'<br><a href="'+dirUrl(s,'driving')+'" target="_blank">Directions</a>')
+    .addTo(layer));
+  if(me) L.circleMarker(me,{radius:11,weight:3,color:'#fff',fillColor:'#E0A21F',fillOpacity:1})
+          .bindPopup('You are here').addTo(layer);
+  const pts=r.map(s=>[s.lat,s.lon]); if(me) pts.push(me);
+  if(pts.length) map.fitBounds(pts,{padding:[35,35]});
+}
+
+document.getElementById('toggle').onclick=e=>{
+  const m=document.getElementById('map'), open=m.style.display==='block';
+  m.style.display=open?'none':'block'; e.target.textContent=open?'Show map':'Hide map';
+  if(!open&&!map){ map=L.map('map').setView([32.30,-90.15],11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map); }
+  if(!open) setTimeout(()=>{map.invalidateSize();draw();},60);
+};
+
+const setDay=n=>{day=n;
+  document.getElementById('d1').className='pill'+(n===1?' on':'');
+  document.getElementById('d2').className='pill'+(n===2?' on':'');
+  draw();};
+document.getElementById('d1').onclick=()=>setDay(1);
+document.getElementById('d2').onclick=()=>setDay(2);
+
+const setMode=m=>{mode=m;
+  document.getElementById('mNear').className=m==='near'?'on':'';
+  document.getElementById('mPlan').className=m==='plan'?'on':'';
+  draw();};
+document.getElementById('mNear').onclick=()=>setMode('near');
+document.getElementById('mPlan').onclick=()=>setMode('plan');
+document.getElementById('mLeft').onclick=e=>{hideDone=!hideDone;
+  e.target.className=hideDone?'on':''; e.target.textContent=hideDone?'Showing left':'Hide done'; draw();};
+
+draw();
+document.getElementById('gps').click();
+</script></body></html>
