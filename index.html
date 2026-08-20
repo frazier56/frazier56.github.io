@@ -2805,6 +2805,51 @@
 </script>
 
 <script>
+/* ---------- reliable same-page anchor scroll ----------
+   Browser-native hash jumps fire before this long page has fully settled, which can leave
+   /#contact parked around the services/how-work area instead of the contact form. Use the
+   same explicit window scroll discipline as the Services/Apps slider for every local anchor. */
+(function(){
+    function targetFromHash(hash){
+        if (!hash || hash === '#') return null;
+        try { return document.getElementById(decodeURIComponent(hash.slice(1))); }
+        catch (_) { return document.getElementById(hash.slice(1)); }
+    }
+    function topFor(el){
+        var header = document.querySelector('header');
+        var offset = header ? header.getBoundingClientRect().height : 0;
+        return Math.max(0, el.getBoundingClientRect().top + (window.scrollY || document.documentElement.scrollTop || 0) - offset - 8);
+    }
+    function scrollToHash(hash, behavior){
+        var el = targetFromHash(hash || location.hash);
+        if (!el) return false;
+        window.scrollTo({ top: topFor(el), behavior: behavior || 'smooth' });
+        return true;
+    }
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor){
+        var hash = anchor.getAttribute('href');
+        if (!targetFromHash(hash)) return;
+        anchor.addEventListener('click', function(e){
+            e.preventDefault();
+            if (location.hash !== hash) history.pushState(null, '', hash);
+            scrollToHash(hash, 'smooth');
+        });
+    });
+    window.addEventListener('hashchange', function(){ scrollToHash(location.hash, 'smooth'); });
+    if (location.hash) {
+        var settle = function(){ scrollToHash(location.hash, 'auto'); };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', settle, { once: true });
+        else settle();
+        window.addEventListener('load', function(){
+            settle();
+            setTimeout(settle, 250);
+            setTimeout(settle, 900);
+        }, { once: true });
+    }
+})();
+</script>
+
+<script>
 /* TWO TARGETS ON ONE CARD. Lee: the top of the card explains the app; the strip at the bottom
    opens it. Nesting a link inside a link is invalid HTML, so the bottom strip is a span that
    navigates on click and the whole card stays one keyboard stop through the <a> that wraps the
