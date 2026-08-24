@@ -6,7 +6,8 @@
   "scripts": {
     "build:css": "tailwindcss -i ./src/input.css -o ./assets/ow.css --minify",
     "watch:css": "tailwindcss -i ./src/input.css -o ./assets/ow.css --watch",
-    "verify:css": "npm run build:css && git diff --exit-code --stat -- assets/ow.css"
+    "verify:css": "npm run build:css && git diff --exit-code --stat -- assets/ow.css",
+    "verify:onevoice-pricing": "node _proofs/verify-onevoice-pricing-v8.mjs"
   },
   "devDependencies": { "tailwindcss": "3.4.17" }
 }
