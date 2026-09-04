@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Compare AI Receptionists to the Alternatives | OneVoice</title>
+<meta content="Honest side-by-side comparisons of an AI receptionist against a traditional answering service, voicemail, and hiring a front-desk person." name="description"/>
+<link href="https://www.oneworldlabs.ai/onevoice/compare/" rel="canonical"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<meta content="website" property="og:type"/><meta content="https://www.oneworldlabs.ai/onevoice/compare/" property="og:url"/>
+<meta content="OneVoice" property="og:site_name"/><meta content="Compare AI Receptionists to the Alternatives | OneVoice" property="og:title"/>
+<meta content="Honest side-by-side comparisons of an AI receptionist against a traditional answering service, voicemail, and hiring a front-desk person." property="og:description"/><meta content="summary_large_image" name="twitter:card"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.oneworldlabs.ai/onevoice/#org","name":"OneVoice","legalName":"OneSocial AI, LLC","url":"https://www.oneworldlabs.ai/onevoice/","parentOrganization":{"@type":"Organization","name":"One World Labs"},"telephone":"+1-855-770-0200","email":"support.onevoice@onesocial.ai","description":"OneVoice is an AI front-office platform that answers business phone calls 24/7, books appointments, sends reminders and text follow-ups, and syncs into a customer's CRM or system of record."},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which comparison should I read first?","acceptedAnswer":{"@type":"Answer","text":"If you currently use voicemail, start there &mdash; it&rsquo;s where the biggest gap is. If you already pay an answering service, that one has the clearest cost story."}},{"@type":"Question","name":"Are these comparisons biased?","acceptedAnswer":{"@type":"Answer","text":"We sell one of the options, so read them with that in mind. We&rsquo;ve tried to be specific about where each alternative genuinely wins, because a comparison that says we win everything is worth nothing to you."}},{"@type":"Question","name":"Can I use more than one?","acceptedAnswer":{"@type":"Answer","text":"Yes, and many businesses should. AI for volume and after-hours, a person for complexity and the lobby."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.oneworldlabs.ai/onevoice/"},{"@type":"ListItem","position":2,"name":"Compare","item":"https://www.oneworldlabs.ai/onevoice/compare/"}]}]}</script>
+<style>
+:root{
+  --cream:#FDFBF7;--white:#FFFFFF;--sand:#F7F1E7;--sand2:#EFE5D5;--line:#E7DDCB;--line2:#DCCFB8;
+  /* BLUE is OneVoice's primary. One hue per product; the rainbow belongs to
+     One World Labs, the parent brand. */
+  --blue:#2C6FE8;--blue2:#1B4FBF;--blue3:#12356F;--blue4:#0C2447;
+  --bluelt:#5A93F5;--bluetint:#E8F0FE;--blueline:#BFD4F7;
+  /* TEAL is the secondary: selected, recommended, confirmed. Same job it had. */
+  --teal:#15C2B2;--teal2:#0B8C80;--teal3:#124A4C;--teal4:#0E3A3C;--tealtint:#E6F7F4;--tealline:#BFE9E2;
+  /* ACTION. #332C26 -- espresso, read off the OneJob primary button.
+     --clay below is NOT the action colour: it is a decorative warm accent used
+     on italic heading highlights and eyebrows only. Never put it on a control.
+     Shared across every One World product so "the thing you click" never moves. */
+  --clay:#8E2E1D;--clay2:#241E19;--claytint:#FBEDE9;--clayline:#E8C4BB;
+  --txt:#2C2622;--txt2:#6E6559;--txt3:#9C9284;--maxw:1340px;
+  --glass:rgba(255,255,255,.47);--glass2:rgba(255,255,255,.59);--glassline:rgba(255,255,255,.70);
+  --frost:blur(40px) saturate(192%);
+  --frostedge:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(255,255,255,.30);
+  --blur:blur(30px) saturate(178%);
+  --shadow-s:0 2px 8px rgba(44,38,34,.05),0 8px 24px rgba(44,38,34,.05);
+  --shadow-m:0 4px 14px rgba(44,38,34,.06),0 16px 44px rgba(44,38,34,.08);
+  --shadow-l:0 8px 24px rgba(44,38,34,.09),0 30px 70px rgba(44,38,34,.13);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',-apple-system,'Segoe UI',sans-serif;color:var(--txt);line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;background:#E3ECFB;}
+.field{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+  background:linear-gradient(172deg,#E3ECFB 0%,#D5E4FA 30%,#CFE0F8 60%,#DEEBFC 100%);}
+.field::before,.field::after{content:'';position:absolute;inset:-30%;will-change:transform;}
+/* Blue family only — deep blue, mid blue, and a teal that ties to the
+   secondary. No violet, coral, amber or rose: those live on One World Labs. */
+.field::before{background:
+  radial-gradient(50% 42% at 14% 16%,rgba(18,53,111,.62),transparent 66%),
+  radial-gradient(46% 38% at 84% 12%,rgba(44,111,232,.60),transparent 64%),
+  radial-gradient(56% 46% at 60% 82%,rgba(90,147,245,.56),transparent 66%);
+  filter:blur(60px);animation:auroraA 46s ease-in-out infinite alternate;}
+.field::after{background:
+  radial-gradient(44% 36% at 88% 50%,rgba(21,194,178,.42),transparent 64%),
+  radial-gradient(48% 40% at 6% 76%,rgba(18,53,111,.50),transparent 66%),
+  radial-gradient(42% 34% at 48% 2%,rgba(120,170,250,.52),transparent 64%);
+  filter:blur(66px);animation:auroraB 58s ease-in-out infinite alternate;}
+@keyframes auroraA{0%{transform:translate3d(-3%,-2%,0) scale(1) rotate(0deg)}
+  50%{transform:translate3d(4%,3%,0) scale(1.12) rotate(6deg)}
+  100%{transform:translate3d(-2%,4%,0) scale(1.05) rotate(-5deg)}}
+@keyframes auroraB{0%{transform:translate3d(3%,2%,0) scale(1.06) rotate(0deg)}
+  50%{transform:translate3d(-4%,-3%,0) scale(1) rotate(-7deg)}
+  100%{transform:translate3d(2%,-4%,0) scale(1.1) rotate(5deg)}}
+@media(prefers-reduced-motion:reduce){.field::before,.field::after{animation:none;}}
+/* promo strip now carries the phone number on the right */
+.promo{display:flex;align-items:center;justify-content:center;gap:22px;}
+.promo .promomsg{flex:0 1 auto;}
+.promo .promotel{font-weight:800;letter-spacing:.01em;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  padding:3px 12px;border-radius:999px;background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.34);}
+.promo .promotel:hover{background:rgba(255,255,255,.28);}
+.promo .promotel svg{width:14px;height:14px;flex:0 0 14px;opacity:.85;}
+/* The demo number gets its own line at every width -- it is a call to action,
+   not a footnote to the sentence next to it. */
+.promo{flex-direction:column;gap:8px;}
+.promo .promomsg{flex:0 0 auto;}
+/* language / flag picker — same affordance as the checkout page */
+.ovlang{position:relative;}
+.ovlangbtn{display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-family:inherit;
+  font-size:14px;font-weight:700;color:var(--txt2);padding:8px 12px;border-radius:12px;
+  background:linear-gradient(140deg,rgba(255,255,255,.52),rgba(255,255,255,.30));
+  backdrop-filter:var(--frost);-webkit-backdrop-filter:var(--frost);
+  border:1px solid rgba(255,255,255,.62);box-shadow:var(--frostedge);}
+.ovlangbtn svg{width:14px;height:14px;transition:transform .2s;}
+.ovlang.open .ovlangbtn svg{transform:rotate(180deg);}
+.ovlangbtn .flag{font-size:17px;line-height:1;}
+/* A menu is a legibility surface, not a decorative pane -- same reasoning as a
+   form input. At .72/.54 the headline behind it read straight through the
+   option labels. Fill goes up, blur stays pinned (the mobile blur reduction
+   must NOT reach this), and a deeper shadow lifts it off the page. */
+.ovlanglist{position:absolute;top:calc(100% + 8px);right:0;min-width:196px;z-index:80;
+  display:none;flex-direction:column;padding:7px;border-radius:16px;
+  background:linear-gradient(152deg,rgba(255,255,255,.66) 0%,rgba(255,255,255,0) 40%),
+             linear-gradient(150deg,rgba(255,255,255,.94),rgba(255,255,255,.88));
+  backdrop-filter:blur(34px) saturate(190%) !important;
+  -webkit-backdrop-filter:blur(34px) saturate(190%) !important;
+  border:1px solid rgba(255,255,255,.86);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 26px 56px -18px rgba(12,36,71,.44),
+             0 2px 8px -2px rgba(12,36,71,.18);}
+.ovlang.open .ovlanglist{display:flex;}
+.ovlanglist button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;
+  background:transparent;font-family:inherit;font-size:14.5px;font-weight:600;color:var(--txt);
+  padding:10px 12px;border-radius:11px;cursor:pointer;}
+.ovlanglist button:hover{background:rgba(21,194,178,.16);}
+.ovlanglist button.on{background:rgba(21,194,178,.22);color:var(--blue3);font-weight:800;}
+.ovlanglist .flag{font-size:18px;line-height:1;}
+/* PROMO STRIP OFF BELOW 820px. Two long sentences plus a phone number wrap to four or five lines on a phone and push the headline below the fold. The demo number already lives in the sticky bottom bar and the footer, so nothing is lost. Full strip still shows on desktop. */@media(max-width:820px){.promo{display:none !important;}
+  .ovlangcode{display:none;}.ovlangbtn{padding:8px 10px;}}
+/* HORIZONTAL FIT. Fixed 18px gutters look right on a 390px iPhone and waste a
+   strip of a 480px-wide Samsung. clamp() scales the gutter with the device so
+   the content always fills the screen, and box-sizing keeps the padding inside
+   the 100% width instead of pushing past it. */
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;
+  padding-left:clamp(16px,4.2vw,32px);padding-right:clamp(16px,4.2vw,32px);}
+a{text-decoration:none;color:inherit;}
+h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.08;font-weight:800;}
+section.pad{padding:92px 0;position:relative;}
+.h2{font-size:42px;margin-bottom:14px;}
+.h2 .hl{color:var(--clay);font-style:italic;}
+.h2 .ht{color:var(--blue2);font-style:italic;}
+.lead{font-size:18px;color:var(--txt2);}
+.center{text-align:center;max-width:800px;margin:0 auto;}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);}
+.eyebrow.t{color:var(--blue2);}
+.glass{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glassline);box-shadow:var(--shadow-m);}
+/* Frosted pane. Use on anything that should read as a sheet of glass sitting on
+   top of the aurora: plan cards, the segmented toggles, callouts, the trial band.
+   The ::before is the specular highlight — a glass edge catching light. Without
+   it a translucent box just looks washed out. */
+.frost{position:relative;background:linear-gradient(150deg,rgba(255,255,255,.58),rgba(255,255,255,.34));
+  backdrop-filter:var(--frost);-webkit-backdrop-filter:var(--frost);
+  border:1px solid rgba(255,255,255,.66);
+  box-shadow:var(--frostedge),0 18px 44px -18px rgba(58,40,72,.30),0 2px 8px -3px rgba(58,40,72,.14);}
+.frost::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(150deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 42%);}
+.frost>*{position:relative;z-index:1;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:800;font-size:15px;
+  padding:15px 28px;border-radius:14px;cursor:pointer;border:1px solid transparent;
+  transition:.2s cubic-bezier(.2,.7,.2,1);font-family:inherit;letter-spacing:-.01em;}
+.btn.teal{background:
+    linear-gradient(160deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.05) 44%,rgba(255,255,255,0) 62%),
+    /* was a teal fill: a second primary, competing with .btn.clay on the same
+     page. The action colour is #332C26 and there is only one of it. */
+    linear-gradient(140deg,#4A4038 0%,#332C26 52%,#241E19 100%);
+  color:#fff;border-color:rgba(255,255,255,.26);border-radius:16px;
+  box-shadow:0 1px 0 rgba(255,255,255,.4) inset,var(--shadow-s);}
+.btn.teal:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.4) inset,var(--shadow-m);}
+/* PRIMARY ACTION. #332C26 -- the espresso brown OneJob already ships.
+   Replaced the old burnt RED, which was never a brown: against a pale blue
+   page a rust button reads as a warning rather than an invitation,
+   and it now reads as a modern control rather than a flat slab -- a two-stop
+   gradient for depth, a specular sheen baked in as the first background layer,
+   and a larger radius to match the panes around it. */
+.btn.clay{background:
+    linear-gradient(160deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.06) 42%,rgba(255,255,255,0) 62%),
+    linear-gradient(140deg,#4A4038 0%,#332C26 52%,#241E19 100%);
+  color:#fff;border-color:rgba(255,255,255,.26);border-radius:16px;
+  box-shadow:0 1px 0 rgba(255,255,255,.28) inset,var(--shadow-s);}
+.btn.clay:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.28) inset,var(--shadow-m);}
+.btn.line{background:var(--glass2);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  /* neutral, not the warm sand --line2 (#DCCFB8) -- on a control that reads
+     as amber, and amber belongs to OneScore. Panels keep the sand line. */
+  color:var(--txt);border-color:rgba(11,15,26,.16);box-shadow:var(--shadow-s);}
+.btn.line:hover{border-color:var(--blue2);color:var(--blue2);transform:translateY(-2px);}
+.btn.ghost{background:rgba(255,255,255,.14);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  color:#fff;border-color:rgba(255,255,255,.34);}
+.btn.ghost:hover{background:rgba(255,255,255,.22);transform:translateY(-2px);}
+.btn.sm{padding:11px 20px;font-size:14px;border-radius:12px;}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--blue2);padding:8px 16px;border-radius:999px;
+  background:rgba(230,247,244,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--tealline);}
+.blink{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:blink 1.4s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.photo{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* PROMO + NAV */
+.promo{background:linear-gradient(100deg,#12356F,#1B4FBF 38%,#0B8C80 88%,#15C2B2 100%);color:#fff;font-size:13.5px;text-align:center;padding:11px 20px;position:relative;z-index:60;}
+.promo a{color:#6EE7DA;font-weight:800;margin-left:8px;text-decoration:underline;text-underline-offset:3px;}
+nav{position:sticky;top:0;z-index:60;
+  background:linear-gradient(180deg,rgba(255,255,255,.52),rgba(255,255,255,.34));
+  backdrop-filter:blur(30px) saturate(185%);-webkit-backdrop-filter:blur(30px) saturate(185%);
+  border-bottom:1px solid rgba(255,255,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.80),0 8px 28px -14px rgba(58,40,72,.24);}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;gap:22px;}
+nav img.logo{height:54px;width:auto;}
+.navlinks{display:flex;gap:4px;align-items:center;}
+.nvitem{position:relative;}
+.nvtop{color:var(--txt2);font-weight:600;font-size:15px;display:inline-flex;align-items:center;gap:6px;
+  padding:12px 14px;border-radius:12px;transition:.16s;}
+.nvitem:hover .nvtop,.nvtop.on{color:var(--txt);background:rgba(255,255,255,.66);}
+.nvtop svg{width:11px;height:11px;opacity:.5;transition:transform .2s;}
+.nvitem:hover .nvtop svg{transform:rotate(180deg);}
+.mega{position:absolute;top:calc(100% + 10px);left:-14px;opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:.2s cubic-bezier(.2,.8,.2,1);z-index:70;padding-top:4px;}
+.nvitem:hover .mega{opacity:1;visibility:visible;transform:none;}
+.nvitem:last-child .mega{left:auto;right:-14px;}
+.megain{padding:12px;border-radius:20px;background:rgba(253,251,247,.94);width:max-content;max-width:min(90vw,720px);
+  backdrop-filter:blur(28px) saturate(170%);-webkit-backdrop-filter:blur(28px) saturate(170%);
+  border:1px solid rgba(255,255,255,.82);box-shadow:0 22px 60px rgba(44,38,34,.18);}
+.megacols{display:grid;grid-template-columns:1fr;gap:2px;width:352px;}
+.megacols.two{grid-template-columns:1fr 1fr;width:664px;gap:2px 12px;}
+.megacols a{display:block;padding:12px 14px;border-radius:13px;transition:.14s;}
+.megacols a:hover{background:rgba(230,247,244,.85);}
+.megacols b{display:block;font-size:14.5px;font-weight:800;color:var(--txt);letter-spacing:-.01em;}
+.megacols span{display:block;font-size:12.5px;color:var(--txt2);line-height:1.45;margin-top:2px;}
+.navright{display:flex;align-items:center;gap:12px;}
+.navphone{font-size:14.5px;font-weight:800;color:var(--txt);white-space:nowrap;}
+@media(max-width:1180px){.navlinks,.navphone{display:none;}}
+
+/* MOBILE DRAWER */
+.navtoggle{display:none;width:46px;height:46px;border-radius:15px;align-items:center;justify-content:center;
+  background:linear-gradient(152deg,rgba(255,255,255,.54) 0%,rgba(255,255,255,.10) 48%),
+             linear-gradient(152deg,rgba(255,255,255,.46),rgba(255,255,255,.24));
+  backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);
+  border:1px solid rgba(255,255,255,.66);cursor:pointer;flex:0 0 46px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 10px 26px -14px rgba(12,36,71,.42);}
+.navtoggle svg{width:20px;height:20px;color:var(--txt);}
+.drawer{position:fixed;inset:0;z-index:90;display:none;}
+.drawer.open{display:block;}
+.drawer .scrim{position:absolute;inset:0;background:rgba(12,36,71,.30);
+  backdrop-filter:blur(14px) saturate(130%);-webkit-backdrop-filter:blur(14px) saturate(130%);}
+/* .96 opacity is not glass, it is a cream wall. Drop the fill, raise the blur
+   and brighten the leading edge -- the aurora has to show through. */
+.drawer .panel{position:absolute;top:0;right:0;bottom:0;width:min(88vw,360px);padding:20px;overflow-y:auto;
+  background:linear-gradient(152deg,rgba(255,255,255,.56) 0%,rgba(255,255,255,.08) 40%),
+             linear-gradient(160deg,rgba(255,255,255,.52),rgba(255,255,255,.34));
+  backdrop-filter:blur(44px) saturate(190%);-webkit-backdrop-filter:blur(44px) saturate(190%);
+  border-left:1px solid rgba(255,255,255,.72);
+  box-shadow:inset 1px 0 0 rgba(255,255,255,.85),-22px 0 70px -20px rgba(12,36,71,.44);
+  animation:slidein .26s cubic-bezier(.2,.8,.2,1);}
+@keyframes slidein{from{transform:translateX(100%)}to{transform:none}}
+.dhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.dhead img{height:44px;}
+.dclose{width:40px;height:40px;border-radius:13px;border:1px solid rgba(255,255,255,.68);
+  background:linear-gradient(150deg,rgba(255,255,255,.60),rgba(255,255,255,.30));
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--txt2);}
+.dclose svg{width:18px;height:18px;}
+.dgrp{border-bottom:1px solid var(--line);}
+.dgrp>button{width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:0;
+  font-family:inherit;font-size:16.5px;font-weight:800;color:var(--txt);padding:16px 6px;cursor:pointer;text-align:left;}
+.dgrp>button svg{width:13px;height:13px;opacity:.5;transition:transform .2s;}
+.dgrp.open>button svg{transform:rotate(180deg);}
+.dsub{display:none;padding:0 6px 12px;}
+.dgrp.open .dsub{display:block;}
+.dsub a{display:block;padding:11px 12px;border-radius:11px;font-size:14.5px;font-weight:600;color:var(--txt2);}
+.dsub a:hover{background:rgba(255,255,255,.55);color:var(--txt);}
+/* the link back up to the parent brand -- every product needs a way home */
+.dparent{display:flex;align-items:center;gap:9px;margin-top:16px;padding:13px 14px;border-radius:14px;
+  font-size:13.5px;font-weight:800;color:var(--txt2);
+  background:linear-gradient(150deg,rgba(255,255,255,.48),rgba(255,255,255,.24));
+  backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);
+  border:1px solid rgba(255,255,255,.62);box-shadow:inset 0 1px 0 rgba(255,255,255,.8);}
+.dparent:hover{color:var(--txt);}
+.dparent svg{width:15px;height:15px;flex:0 0 15px;opacity:.7;}
+.dsolo{display:block;font-size:16.5px;font-weight:800;color:var(--txt);padding:16px 6px;border-bottom:1px solid var(--line);}
+.dphone{font-size:13px;color:var(--txt2);font-weight:600;padding:14px 6px 0;}
+.dphone b{display:block;font-size:19px;color:var(--txt);font-weight:900;margin-top:3px;}
+.drawer .btn{width:100%;margin-top:10px;}
+
+/* MARQUEE */
+.mq{overflow:hidden;position:relative;padding:6px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
+.mqtrack{display:flex;width:max-content;animation:mqroll linear infinite;}
+.mq:hover .mqtrack{animation-play-state:paused;}
+.mqi{display:inline-flex;align-items:center;padding:8px 30px;font-size:20px;font-weight:800;color:var(--txt2);
+  white-space:nowrap;position:relative;transition:.22s cubic-bezier(.2,.7,.2,1);letter-spacing:-.02em;}
+.mqi:after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:22px;
+  background:var(--line2);}
+.mqi:hover{color:var(--blue2);transform:scale(1.16);}
+.mqi.f{font-size:18px;}
+.mqi.f i{font-style:normal;color:var(--teal2);margin-right:10px;display:inline-flex;}
+.mqi.f i svg{width:16px;height:16px;}
+@keyframes mqroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mqlabel{text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--txt3);margin-bottom:16px;}
+.strip{border-top:1px solid rgba(231,221,203,.7);border-bottom:1px solid rgba(231,221,203,.7);padding:26px 0;
+  background:rgba(255,255,255,.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
+
+/* HERO */
+.hero .wrap{display:grid;grid-template-columns:1.04fr 1fr;gap:60px;align-items:center;padding-top:72px;padding-bottom:80px;}
+.hero h1{font-size:56px;margin:20px 0 20px;}
+.hero h1 .hl{background:linear-gradient(100deg,var(--blue2),var(--bluelt));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p.sub{font-size:19px;color:var(--txt2);margin-bottom:30px;max-width:560px;}
+.herobtns{display:flex;gap:12px;flex-wrap:wrap;}
+.heropills{display:flex;gap:10px;margin-top:32px;flex-wrap:wrap;}
+.hpill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--txt2);
+  background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--glassline);padding:9px 15px;border-radius:999px;box-shadow:var(--shadow-s);}
+.hpill svg{width:15px;height:15px;color:var(--blue2);flex:0 0 15px;}
+@media(max-width:1040px){.hero .wrap{grid-template-columns:minmax(0,1fr);gap:44px;}}
+
+/* PAGE HERO (sub-pages) */
+.phero{padding:66px 0 8px;}
+.crumb{font-size:12.5px;font-weight:700;color:var(--txt3);margin-bottom:16px;}
+.crumb a{color:var(--blue2);}
+.phero h1{font-size:50px;margin:14px 0 18px;max-width:940px;}
+.phero h1 .ht{color:var(--blue2);font-style:italic;}
+.phero p.psub{font-size:19px;color:var(--txt2);max-width:720px;margin-bottom:28px;}
+@media(max-width:640px){.phero h1{font-size:33px;} .phero p.psub{font-size:16.5px;}}
+
+/* SIMULATOR — frosted device, blue chrome, teal for live/confirmed only */
+.simwrap{position:relative;padding:14px;border-radius:38px;
+  background:linear-gradient(155deg,rgba(255,255,255,.46),rgba(255,255,255,.18));
+  backdrop-filter:blur(30px) saturate(170%);-webkit-backdrop-filter:blur(30px) saturate(170%);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.80),0 40px 90px -30px rgba(12,36,71,.42);}
+/* the outer rim catches light like a device edge */
+.simwrap::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(155deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 34%);}
+.sim{position:relative;z-index:1;border-radius:26px;overflow:hidden;
+  background:linear-gradient(152deg,rgba(255,255,255,.58),rgba(255,255,255,.34));
+  backdrop-filter:var(--frost);-webkit-backdrop-filter:var(--frost);
+  border:1px solid rgba(255,255,255,.66);
+  box-shadow:var(--frostedge),0 20px 50px -22px rgba(12,36,71,.34);}
+.sim::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(152deg,rgba(255,255,255,.44) 0%,rgba(255,255,255,0) 36%);}
+
+.simtop{position:relative;z-index:1;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(128deg,var(--blue4),var(--blue3) 46%,var(--blue2));
+  box-shadow:inset 0 -1px 0 rgba(255,255,255,.16);}
+/* a soft blue bloom inside the header so it isn't a flat slab */
+.simtop::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(70% 120% at 12% 0%,rgba(120,170,250,.40),transparent 62%);}
+.simtop .who{position:relative;z-index:1;display:flex;align-items:center;gap:12px;}
+.simav{position:relative;width:42px;height:42px;border-radius:14px;
+  background:linear-gradient(140deg,rgba(255,255,255,.30),rgba(255,255,255,.10));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.42);
+  display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 6px 16px -6px rgba(0,0,0,.4);}
+/* soft breathing halo — signals "live" without a blinking dot */
+.simav::before{content:'';position:absolute;inset:-6px;border-radius:18px;
+  border:1px solid rgba(79,224,210,.50);animation:simpulse 2.8s ease-in-out infinite;}
+@keyframes simpulse{0%,100%{transform:scale(1);opacity:.75}50%{transform:scale(1.12);opacity:.2}}
+@media(prefers-reduced-motion:reduce){.simav::before{animation:none;}}
+.simtop b{color:#fff;font-size:15px;display:block;line-height:1.3;}
+.simtop span{color:rgba(255,255,255,.66);font-size:11.5px;font-weight:600;}
+.simlive{position:relative;z-index:1;display:inline-flex;align-items:center;gap:6px;
+  background:rgba(21,194,178,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(21,194,178,.55);color:#8CF5E7;font-size:10.5px;font-weight:900;letter-spacing:.1em;
+  padding:5px 11px;border-radius:999px;}
+.simlive.done{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.34);color:#fff;}
+
+/* industry switcher — frosted pill with a sliding indicator, same language as
+   the pricing toggles rather than the old underlined tab row */
+.simtabs{position:relative;z-index:1;display:flex;gap:0;margin:14px 14px 0;padding:5px;border-radius:999px;
+  overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;
+  scroll-behavior:smooth;-webkit-overflow-scrolling:touch;
+  background:linear-gradient(150deg,rgba(255,255,255,.52),rgba(255,255,255,.28));
+  backdrop-filter:blur(24px) saturate(174%);-webkit-backdrop-filter:blur(24px) saturate(174%);
+  border:1px solid rgba(255,255,255,.62);
+  box-shadow:var(--frostedge),0 8px 20px -14px rgba(12,36,71,.30);}
+/* flex:1 0 auto, not 1 1 0 -- the labels are nowrap, so a shrinking basis
+   just pushes the strip wider than the device and the last tab hangs off the
+   edge. In Spanish "Servicios para el hogar" is nearly three times "Legal".
+   Grow to fill when they fit, scroll when they don't. */
+.simtabs button{position:relative;z-index:2;flex:1 0 auto;min-width:0;background:transparent;border:0;
+  border-radius:999px;color:var(--txt2);font-family:inherit;font-size:12px;font-weight:800;
+  padding:10px 6px;cursor:pointer;white-space:nowrap;transition:color .26s ease;
+  display:flex;align-items:center;justify-content:center;gap:6px;}
+.simtabs button .ti{font-size:13px;line-height:1;}
+.simtabs button.on{color:#fff;}
+.simind{position:absolute;z-index:1;top:5px;bottom:5px;left:5px;width:0;border-radius:999px;
+  background:linear-gradient(100deg,var(--blue2),var(--blue) 52%,var(--bluelt));
+  box-shadow:0 8px 20px -10px rgba(27,79,191,.65);
+  transition:transform .42s cubic-bezier(.18,.9,.24,1),width .42s cubic-bezier(.18,.9,.24,1);}
+@media(prefers-reduced-motion:reduce){.simind{transition:none;}.simtabs{scroll-behavior:auto;}}
+.simtabs::-webkit-scrollbar{display:none;}
+
+.simbody{position:relative;z-index:1;padding:20px;height:268px;overflow-y:auto;display:flex;
+  flex-direction:column;gap:12px;
+  background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,.10));}
+.simbody::-webkit-scrollbar{width:5px;}
+.simbody::-webkit-scrollbar-thumb{background:rgba(44,111,232,.34);border-radius:3px;}
+.bub{max-width:85%;padding:12px 16px;border-radius:18px;font-size:14px;line-height:1.5;opacity:0;
+  transform:translateY(9px);animation:pop .4s cubic-bezier(.2,.8,.2,1) forwards;}
+.bub.them{background:linear-gradient(150deg,rgba(255,255,255,.82),rgba(255,255,255,.58));
+  backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);
+  border:1px solid rgba(255,255,255,.78);color:var(--txt);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 8px 20px -12px rgba(12,36,71,.30);
+  border-bottom-left-radius:6px;align-self:flex-start;}
+/* the AI side is the brand colour — blue, and still glassy rather than a flat fill */
+.bub.ai{background:linear-gradient(140deg,rgba(44,111,232,.94),rgba(27,79,191,.96));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.26);color:#fff;font-weight:500;
+  border-bottom-right-radius:6px;align-self:flex-end;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.34),0 10px 24px -12px rgba(27,79,191,.60);}
+.bub .lbl{display:block;font-size:9.5px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;opacity:.62;margin-bottom:3px;}
+@keyframes pop{to{opacity:1;transform:none;}}
+/* the outcome chip stays TEAL — teal is the confirmed/succeeded colour */
+.outcome{align-self:center;display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:800;
+  color:var(--teal2);background:linear-gradient(150deg,rgba(230,247,244,.86),rgba(230,247,244,.62));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(21,194,178,.46);padding:9px 16px;
+  border-radius:999px;margin-top:4px;opacity:0;animation:pop .4s forwards;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);}
+.outcome svg{width:14px;height:14px;}
+.simfoot{position:relative;z-index:1;display:flex;align-items:center;gap:13px;padding:15px 20px;
+  border-top:1px solid rgba(255,255,255,.55);
+  background:linear-gradient(180deg,rgba(255,255,255,.44),rgba(255,255,255,.26));
+  backdrop-filter:blur(20px) saturate(165%);-webkit-backdrop-filter:blur(20px) saturate(165%);}
+.wave{display:flex;align-items:center;gap:3px;height:26px;flex:1 1 auto;min-width:0;overflow:hidden;}
+.wave i{width:3px;background:var(--blue);border-radius:2px;display:block;height:5px;
+  animation:wv 1s ease-in-out infinite;animation-play-state:paused;opacity:.35;}
+@keyframes wv{0%,100%{height:5px;opacity:.35}50%{height:22px;opacity:1}}
+.simplay{width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(140deg,var(--bluelt),var(--blue2));
+  border:1px solid rgba(255,255,255,.34);cursor:pointer;color:#fff;display:flex;align-items:center;
+  justify-content:center;flex:0 0 42px;transition:.18s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.40),0 10px 22px -10px rgba(27,79,191,.62);}
+.simplay:hover{transform:scale(1.06);}
+/* The caption is longer in every other language than in English ("Real
+   recording" -> "Grabación real · audio en inglés"). nowrap pushed it straight
+   out of the device and the .sim clip cut the sentence in half on a phone. */
+.simcap{color:var(--txt3);font-size:11.5px;font-weight:700;line-height:1.35;
+  flex:0 1 auto;min-width:0;text-align:right;}
+@media(max-width:520px){
+  /* the waveform is decoration; the caption is information. Give the words the
+     room and let the wave take what's left. */
+  .wave{flex:0 1 46px;min-width:0;}
+  .simfoot{gap:10px;padding:13px 15px;}
+  .simcap{font-size:11px;}
+}
+
+/* BANDS */
+.band{display:grid;grid-template-columns:1fr 1.08fr;gap:64px;align-items:center;}
+.band.flip{grid-template-columns:1.08fr 1fr;}
+.band.flip .bcopy{order:2;}
+.band.vid{grid-template-columns:1.25fr .75fr;}
+.bimg{border-radius:26px;overflow:hidden;aspect-ratio:3/2;position:relative;box-shadow:var(--shadow-l);
+  border:1px solid rgba(255,255,255,.6);}
+.bcopy h3{font-size:36px;margin:14px 0 16px;}
+.bcopy p{font-size:17px;color:var(--txt2);margin-bottom:22px;}
+.blist{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:26px;}
+.blist li{display:flex;gap:11px;align-items:flex-start;font-size:15.5px;line-height:1.5;}
+.blist li svg{flex:0 0 19px;margin-top:2px;color:var(--teal2);}
+.floatstat{position:absolute;bottom:20px;left:20px;background:rgba(255,255,255,.82);
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  border:1px solid rgba(255,255,255,.8);border-radius:16px;padding:14px 18px;box-shadow:var(--shadow-m);}
+.floatstat b{display:block;font-size:23px;font-weight:900;color:var(--blue2);letter-spacing:-.02em;line-height:1.1;}
+.floatstat span{font-size:11.5px;color:var(--txt2);font-weight:700;}
+.vidbox{border-radius:22px;overflow:hidden;background:var(--blue4);box-shadow:var(--shadow-l);
+  border:1px solid rgba(255,255,255,.5);max-width:400px;margin-left:auto;}
+.vidbox video{width:100%;display:block;}
+@media(max-width:980px){.band,.band.flip,.band.vid{grid-template-columns:1fr;gap:34px;}
+  .band.flip .bcopy{order:0;} .vidbox{max-width:100%;margin:0 auto;}}
+
+/* DEMO BAND — 90% translucent, dark text (white can't survive at this opacity) */
+.demoband{border-radius:32px;padding:48px;margin-top:52px;display:grid;grid-template-columns:1fr 1.02fr;
+  gap:48px;align-items:center;box-shadow:var(--shadow-m);
+  background:linear-gradient(150deg,rgba(21,194,178,.10),rgba(11,140,128,.13));
+  backdrop-filter:blur(30px) saturate(175%);-webkit-backdrop-filter:blur(30px) saturate(175%);
+  border:1px solid rgba(21,194,178,.30);}
+.demoband h3{font-size:33px;color:var(--blue3);margin-bottom:12px;}
+.demoband p{color:var(--txt2);font-size:16.5px;margin-bottom:26px;}
+.dialpad{display:block;background:linear-gradient(145deg,#FFFFFF,rgba(238,251,248,.96));
+  border:1px solid rgba(21,194,178,.34);border-radius:22px;padding:22px 26px;box-shadow:var(--shadow-m);}
+.dialpad small{display:block;font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--blue2);margin-bottom:8px;}
+.dialpad a.num{display:inline-block;font-size:36px;font-weight:900;color:var(--blue3);letter-spacing:-.025em;line-height:1.05;}
+.dialpad a.num:hover{color:var(--blue2);}
+.dialnote{display:block;font-size:13px;color:var(--txt2);line-height:1.5;margin-top:11px;padding-top:11px;
+  border-top:1px solid rgba(11,140,128,.2);}
+.listenbtns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;}
+.demoband .btn.teal{background:linear-gradient(140deg,#4A4038,#241E19);color:#fff;
+  border-color:rgba(255,255,255,.26);box-shadow:0 1px 0 rgba(255,255,255,.28) inset,var(--shadow-m);}
+.demoband .btn.teal:hover{background:linear-gradient(140deg,#584C42,#2E2721);}
+.listennote{font-size:12.5px;color:var(--txt2);margin-top:14px;}
+.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:32px 28px;padding-left:8px;}
+/* No rule down the left edge. The pane IS the decoration -- a coloured bar on
+   the outside of a frosted card reads as a leftover from a flat design. */
+.stat{position:relative;}
+.statnum{font-size:38px;font-weight:900;color:var(--blue3);letter-spacing:-.035em;line-height:1;}
+.statunit{font-size:11.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--blue2);margin-top:8px;}
+.statdesc{font-size:12.5px;color:var(--txt2);line-height:1.5;margin-top:9px;}
+@media(max-width:940px){.demoband{grid-template-columns:1fr;padding:30px 24px;gap:30px;}}
+
+/* CARDS / GRIDS */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:48px;}
+.card{background:var(--glass2);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glassline);border-radius:24px;padding:30px;box-shadow:var(--shadow-m);transition:.2s;}
+a.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-l);border-color:var(--blue);}
+.card .ic{font-size:26px;margin-bottom:14px;display:block;}
+.card h4{font-size:20px;margin-bottom:10px;}
+.card p{font-size:14.5px;color:var(--txt2);line-height:1.6;}
+.card .go{font-size:13px;font-weight:800;color:var(--blue2);margin-top:16px;display:inline-block;}
+@media(max-width:1000px){.g3{grid-template-columns:1fr 1fr;}}
+@media(max-width:680px){.g3,.g2{grid-template-columns:1fr;}}
+
+/* SOLUTION PHOTO CARDS */
+.solgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+.sol{position:relative;display:block;aspect-ratio:4/5;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-l);
+  transition:.28s cubic-bezier(.2,.7,.2,1);isolation:isolate;border:1px solid rgba(255,255,255,.5);opacity:.87;}
+.sol:hover{transform:translateY(-6px);opacity:1;}
+.sol .photo{position:absolute;inset:0;transition:transform .55s cubic-bezier(.2,.7,.2,1);}
+.sol:hover .photo{transform:scale(1.06);}
+.sol .grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,12,12,.95) 0%,rgba(5,12,12,.88) 20%,
+  rgba(5,12,12,.66) 40%,rgba(5,12,12,.34) 60%,rgba(5,12,12,.10) 78%,rgba(5,12,12,0) 92%);}
+.sol .in{position:absolute;left:0;right:0;bottom:0;padding:28px 26px;text-shadow:0 1px 14px rgba(0,0,0,.55);}
+.sol .ico{display:inline-block;font-size:26px;margin-bottom:11px;line-height:1;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5));}
+.sol h4{font-size:21px;color:#fff;margin-bottom:9px;letter-spacing:-.02em;}
+.sol p{font-size:14px;color:rgba(255,255,255,.84);line-height:1.55;}
+.sol .go{font-size:13px;font-weight:800;color:#5FE3D4;margin-top:15px;display:inline-block;}
+@media(max-width:1000px){.solgrid{grid-template-columns:1fr 1fr;}}
+@media(max-width:660px){.solgrid{grid-template-columns:1fr;}}
+
+/* FAQ — two columns */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:44px;align-items:start;}
+.fq{background:var(--glass2);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glassline);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-s);}
+.fq summary{cursor:pointer;padding:19px 22px;font-weight:800;font-size:16px;list-style:none;display:flex;
+  justify-content:space-between;align-items:center;gap:14px;}
+.fq summary::-webkit-details-marker{display:none;}
+.fq summary:after{content:"+";color:var(--clay);font-size:22px;font-weight:800;}
+.fq[open] summary:after{content:"\2212";}
+.fq .a{padding:0 22px 20px;font-size:15px;color:var(--txt2);line-height:1.65;}
+@media(max-width:860px){.faq{grid-template-columns:1fr;}}
+
+/* FINAL + FOOTER */
+.final{background:linear-gradient(145deg,var(--blue3) 0%,var(--blue4) 52%,#081B36 100%);color:#fff;
+  padding:96px 32px;position:relative;overflow:hidden;}
+.final:before{content:"";position:absolute;inset:0;background:
+  radial-gradient(600px 400px at 15% 20%,rgba(21,194,178,.22),transparent 62%),
+  radial-gradient(520px 380px at 88% 84%,rgba(181,85,27,.18),transparent 62%);}
+.final .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;position:relative;}
+.final h2{font-size:42px;color:#fff;margin-bottom:16px;}
+.final p{color:rgba(255,255,255,.76);margin-bottom:28px;font-size:17.5px;}
+.finalbtns{display:flex;gap:14px;flex-wrap:wrap;}
+.finalphone{margin-top:28px;font-size:14.5px;color:rgba(255,255,255,.6);}
+.finalphone b{color:#fff;font-size:21px;font-weight:900;display:block;margin-top:4px;}
+.finalphone a.fp{color:#7FF0E2;}
+.finalimg{border-radius:26px;overflow:hidden;aspect-ratio:3/2;box-shadow:0 26px 60px rgba(0,0,0,.3);
+  border:1px solid rgba(255,255,255,.18);}
+@media(max-width:980px){.final .wrap{grid-template-columns:1fr;gap:36px;}}
+footer{background:rgba(247,241,231,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-top:1px solid var(--line);padding:62px 0 34px;}
+.fgrid{display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:38px;}
+.fgrid h5{font-size:12px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:var(--txt);margin-bottom:16px;}
+.fgrid ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.fgrid li a{font-size:13.5px;color:var(--txt2);}
+.fgrid li a:hover{color:var(--blue2);}
+.fbrand img{height:54px;margin-bottom:16px;}
+.fbrand p{font-size:14px;color:var(--txt2);line-height:1.6;max-width:300px;}
+.fbot{border-top:1px solid var(--line2);margin-top:44px;padding-top:24px;text-align:center;font-size:12.5px;color:var(--txt2);}
+.fbot a{color:var(--blue2);font-weight:700;}
+.fbot .l{margin-top:7px;}
+@media(max-width:1000px){.fgrid{grid-template-columns:1fr 1fr;}}
+
+/* MISC */
+.minband{background:linear-gradient(140deg,rgba(255,255,255,.50),rgba(255,255,255,.28));backdrop-filter:var(--frost);-webkit-backdrop-filter:var(--frost);box-shadow:var(--frostedge);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--tealline);
+  border-radius:20px;padding:26px 30px;margin-top:28px;text-align:center;font-size:15.5px;}
+.minband b{color:var(--blue2);font-weight:900;}
+.callout{background:linear-gradient(140deg,rgba(255,255,255,.50),rgba(255,255,255,.28));backdrop-filter:var(--frost);-webkit-backdrop-filter:var(--frost);box-shadow:var(--frostedge);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--clayline);
+  border-left:4px solid var(--clay);border-radius:18px;padding:22px 24px;margin-top:24px;font-size:15px;}
+.callout b{color:var(--clay);}
+.prose{max-width:760px;}
+.prose h3{font-size:26px;margin:38px 0 14px;}
+.prose h3:first-child{margin-top:0;}
+.prose p{font-size:16.5px;color:var(--txt2);line-height:1.75;margin-bottom:16px;}
+.prose ul{margin:0 0 18px 0;list-style:none;display:flex;flex-direction:column;gap:11px;}
+.prose ul li{display:flex;gap:11px;font-size:16px;line-height:1.6;color:var(--txt2);}
+.prose ul li svg{flex:0 0 18px;margin-top:4px;color:var(--teal2);}
+.prose strong{color:var(--txt);font-weight:800;}
+.artwrap{max-width:1180px;margin:0 auto;}
+.artsec{display:grid;grid-template-columns:290px 1fr;gap:20px 54px;align-items:start;padding:34px 0;border-top:1px solid rgba(231,221,203,.9);}
+.artsec:first-child{border-top:0;padding-top:8px;}
+.artsec h3{font-size:25px;line-height:1.24;margin:0;letter-spacing:-.02em;color:var(--txt);}
+.artsec .abody{max-width:760px;}
+.artsec .abody p{font-size:16.8px;color:var(--txt2);line-height:1.78;margin-bottom:15px;}
+.artsec .abody p:last-child{margin-bottom:0;}
+.artsec .abody strong,.artsec .abody b{color:var(--txt);font-weight:800;}
+.artsec .abody ul{margin:4px 0 0 0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:11px 34px;}
+.artsec .abody ul li{display:flex;gap:11px;font-size:16px;line-height:1.6;color:var(--txt2);align-items:flex-start;}
+.artsec .abody ul li svg{flex:0 0 18px;margin-top:4px;color:var(--teal2);}
+.wideprose{max-width:1100px;margin:0 auto;}
+.wideprose h3{font-size:30px;margin-bottom:10px;}
+.wideprose>p{font-size:17.5px;color:var(--txt2);line-height:1.7;margin-bottom:26px;max-width:820px;}
+ul.two{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:16px 40px;margin:0;}
+ul.two li{display:flex;gap:13px;font-size:17px;line-height:1.55;color:var(--txt);align-items:flex-start;}
+ul.two li svg{flex:0 0 20px;margin-top:4px;color:var(--teal2);}
+@media(max-width:820px){ul.two{grid-template-columns:1fr;gap:13px;}ul.two li{font-size:15.5px;}
+  .wideprose h3{font-size:23px;}.wideprose>p{font-size:16px;}.artsec{grid-template-columns:1fr;gap:12px;padding:26px 0;}.artsec h3{font-size:21px;}.artsec .abody p{font-size:15.6px;}.artsec .abody ul{grid-template-columns:1fr;}}
+@media(max-width:640px){
+  section.pad{padding:56px 0;} .wrap{padding-left:clamp(16px,4.6vw,26px);padding-right:clamp(16px,4.6vw,26px);}
+  .h2{font-size:28px;} .lead{font-size:15.5px;}
+  .hero h1{font-size:33px;} .hero p.sub{font-size:16px;}
+  .hero .wrap{padding-top:36px;padding-bottom:44px;gap:32px;}
+  .herobtns .btn,.finalbtns .btn{flex:1 1 100%;}
+  .navright .btn.line{display:none;}
+  .bcopy h3{font-size:26px;} .final h2{font-size:28px;}
+  .demoband{padding:24px 18px;} .demoband h3{font-size:24px;} .dialpad a.num{font-size:28px;}
+  .demoband p{font-size:15.5px;}
+  .statgrid{gap:20px 16px;padding-left:0;} .statnum{font-size:27px;}
+  .simtabs{overflow-x:auto;} .simtabs button{flex:0 0 auto;padding:13px 18px;}
+  .mqi{font-size:16px;padding:7px 20px;} .mqi.f{font-size:15px;}
+  .fgrid{grid-template-columns:1fr;} .final{padding:60px 18px;}
+  .prose h3{font-size:21px;} .prose p{font-size:15.5px;}
+}
+@media(max-width:1180px){.navtoggle{display:flex;}}
+
+/* ===========================================================================
+   MOBILE — a rethink, not a stack. ~75% of traffic is a phone.
+   Three deliberate changes rather than reflowing columns:
+     1. A sticky bottom action bar, so the primary CTA is always in thumb reach
+        and the hero doesn't have to carry it.
+     2. The recommended plan is ordered FIRST — on a phone almost nobody
+        scrolls past the first card, so "most popular" has to be card one.
+     3. Blur is reduced. Heavy backdrop-filter is the main cause of scroll jank
+        on mobile GPUs; the glass survives at 18px, the frame rate doesn't at 40.
+   =========================================================================== */
+/* Sticky mobile action bar. Hidden on desktop; it is the primary conversion
+   surface on a phone, which is where most of the traffic is. */
+.mobar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;gap:10px;padding:10px 14px;
+  padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  background:linear-gradient(180deg,rgba(255,255,255,.58),rgba(255,255,255,.80));
+  backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);
+  border-top:1px solid rgba(255,255,255,.70);
+  box-shadow:0 -8px 28px -14px rgba(58,40,72,.30),inset 0 1px 0 rgba(255,255,255,.9);}
+.mobar a{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  min-height:50px;border-radius:14px;font-size:15.5px;font-weight:800;white-space:nowrap;}
+.mobar a.call{color:var(--blue3);background:linear-gradient(150deg,rgba(255,255,255,.92),rgba(230,247,244,.86));
+  border:1px solid rgba(21,194,178,.42);}
+.mobar a.go{color:#fff;background:
+    linear-gradient(160deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,.05) 44%,rgba(255,255,255,0) 62%),
+    linear-gradient(140deg,#4A4038 0%,#332C26 52%,#241E19 100%);
+  border:1px solid rgba(255,255,255,.26);box-shadow:0 1px 0 rgba(255,255,255,.3) inset;}
+
+@media(max-width:640px){
+  :root{--frost:blur(18px) saturate(170%);--blur:blur(16px) saturate(160%);}
+  .field::before,.field::after{filter:blur(40px);}
+
+  /* type scales down harder than the default ladder does */
+  .hero h1{font-size:33px;line-height:1.12;margin:14px 0 14px;}
+  .hero p.sub{font-size:16.5px;margin-bottom:22px;}
+  .h2{font-size:26px !important;line-height:1.16;}
+  .hero .wrap{padding-top:30px;padding-bottom:34px;gap:30px;}
+  .wrap{padding-left:clamp(16px,4.6vw,26px);padding-right:clamp(16px,4.6vw,26px);}
+  .pad{padding-top:44px;padding-bottom:44px;}
+
+  /* full-width, thumb-sized actions — never two buttons side by side */
+  .herobtns{flex-direction:column;gap:10px;}
+  .herobtns .btn,.listenbtns .btn,.plan .btn{width:100%;justify-content:center;min-height:52px;font-size:16px;}
+  .listenbtns{flex-direction:column;gap:10px;}
+
+  /* toggles: split the full width evenly so both options are equally tappable */
+  .seg{width:100%;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;}
+  .seg button{min-width:0;padding:13px 8px;font-size:14px;}
+  .segwrap{width:100%;}
+
+  /* the recommended plan leads */
+  .pgrid{gap:16px;}
+  .pgrid.three,.pgrid.four{grid-template-columns:1fr;max-width:none;}
+  .plan{padding:24px 20px;border-radius:22px;}
+  /* Do NOT reorder the plans on mobile. Lifting the recommended card to the
+     top removes the $149 anchor, so the first price a phone visitor sees is
+     $349 and the ladder reads as more expensive than it is. The "Most popular"
+     badge does that job without breaking the sequence. */
+  .ptag{top:-10px;font-size:10px;}
+  .price b{font-size:40px;}
+
+  /* simulator: shorter, edge to edge, tabs swipeable */
+  .sim{border-radius:22px;}
+  .simbody{height:214px;padding:16px;}
+  .bub{max-width:92%;font-size:13.5px;padding:11px 14px;}
+  .simtop{padding:14px 16px;}
+  .simav{width:38px;height:38px;}
+  .simtabs{overflow-x:auto;scrollbar-width:none;}
+  .simtabs::-webkit-scrollbar{display:none;}
+  .simtabs button{flex:0 0 auto;padding:13px 16px;}
+
+  /* bands and callouts stop pretending to be two columns */
+  .trialband{grid-template-columns:1fr;gap:22px;padding:24px 20px;border-radius:22px;}
+  .demoband{grid-template-columns:1fr !important;gap:26px;padding:26px 20px !important;}
+  .statgrid{grid-template-columns:1fr 1fr;gap:16px;}
+  .band{grid-template-columns:1fr !important;gap:24px;}
+  .finenote{font-size:13px;padding:14px 16px;text-align:left;}
+
+  /* Nav on a phone: logo, language, menu. The CTAs live in the sticky bar, so
+     repeating them in a cramped header only causes the wrapping we had. */
+  nav .wrap{height:62px;gap:10px;}
+  nav img.logo{height:38px;}
+  .navright{gap:8px;}
+  .navright .btn.sm{display:none;}
+  .navtoggle{margin-left:0;}
+  .promo{padding:8px 14px;line-height:1.45;}
+  .promo .promotel{padding:2px 10px;}
+
+  /* leave room for the sticky bar so the footer isn't trapped under it */
+  body{padding-bottom:76px;}
+  .mobar{display:flex;}
+}
+/* very small phones */
+@media(max-width:380px){
+  .hero h1{font-size:29px;}
+  .price b{font-size:36px;}
+  .seg button{font-size:13px;padding:12px 6px;}
+}
+
+
+/* ---- the device shell must never set the page's minimum width ---------- */
+.simwrap,.sim,.smswrap,.smscard{min-width:0;max-width:100%;}
+.hero .wrap>*{min-width:0;}
+
+/* ---- MORE FROSTED SURFACES ---------------------------------------------
+   Lee: "some of these panes can just be frosted panes, especially in the
+   mobile view." Anything that was carrying a flat tint or a hairline card is
+   now glass. */
+.hpill{background:linear-gradient(150deg,rgba(255,255,255,.56),rgba(255,255,255,.32));
+  backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%);
+  border:1px solid rgba(255,255,255,.68);box-shadow:var(--frostedge);}
+.badge{background:linear-gradient(150deg,rgba(255,255,255,.60),rgba(255,255,255,.34));
+  backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%);
+  border:1px solid rgba(255,255,255,.70);box-shadow:var(--frostedge);}
+.floatstat{background:linear-gradient(150deg,rgba(255,255,255,.60),rgba(255,255,255,.36));
+  backdrop-filter:var(--frost);-webkit-backdrop-filter:var(--frost);
+  border:1px solid rgba(255,255,255,.70);box-shadow:var(--frostedge),0 20px 46px -22px rgba(12,36,71,.34);}
+.stat{background:linear-gradient(150deg,rgba(255,255,255,.50),rgba(255,255,255,.26));
+  backdrop-filter:blur(26px) saturate(172%);-webkit-backdrop-filter:blur(26px) saturate(172%);
+  border:1px solid rgba(255,255,255,.62);border-radius:18px;padding:18px 20px;
+  box-shadow:var(--frostedge);}
+.minband{background:linear-gradient(150deg,rgba(255,255,255,.50),rgba(255,255,255,.28));
+  backdrop-filter:blur(26px) saturate(172%);-webkit-backdrop-filter:blur(26px) saturate(172%);
+  border:1px solid rgba(255,255,255,.64);box-shadow:var(--frostedge);}
+.bimg{background:linear-gradient(150deg,rgba(255,255,255,.30),rgba(255,255,255,.12));
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}
+.mq{background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.16));
+  backdrop-filter:blur(20px) saturate(165%);-webkit-backdrop-filter:blur(20px) saturate(165%);
+  border-top:1px solid rgba(255,255,255,.52);border-bottom:1px solid rgba(255,255,255,.52);}
+.dialpad{background:linear-gradient(150deg,rgba(255,255,255,.56),rgba(255,255,255,.32));
+  backdrop-filter:var(--frost);-webkit-backdrop-filter:var(--frost);
+  border:1px solid rgba(255,255,255,.68);box-shadow:var(--frostedge),0 22px 50px -24px rgba(12,36,71,.34);}
+
+@media(max-width:640px){
+  /* The tab labels used to set the shell's minimum width. Let the strip scroll
+     instead — the sliding indicator still measures correctly because it lives
+     inside the same scroll container. */
+  .simwrap{padding:10px;border-radius:30px;}
+  .sim{border-radius:22px;}
+  .simtabs{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;}
+  .simtabs::-webkit-scrollbar{display:none;}
+  .simtabs button{flex:0 0 auto;padding:10px 14px;font-size:12px;}
+  .simbody{height:236px;padding:16px;}
+  .smswrap{padding:10px;border-radius:28px;}
+  .smscard{padding:16px 17px;}
+  /* On a phone every card is a pane — nothing sits flat on the aurora */
+  .stat,.minband,.hpill,.badge,.floatstat{border-radius:16px;}
+  .heropills{gap:8px;}
+  .hpill{font-size:12.5px;padding:8px 13px;}
+}
+
+
+/* ============================================================
+   HORIZONTAL FIT GUARDS
+   One element wider than the viewport makes the WHOLE page slide sideways,
+   and on a phone that reads as broken rather than as a wide element. These
+   rules stop it happening at the source instead of hiding it with
+   overflow:hidden on the body.
+   ============================================================ */
+html{overflow-x:clip;}
+body{overflow-x:clip;max-width:100vw;}
+img,video,svg,canvas,iframe,table,pre{max-width:100%;}
+/* long unbroken strings -- URLs, emails, phone numbers -- are a classic cause */
+p,li,td,th,h1,h2,h3,h4,h5,dd,dt,figcaption,label,span,a{overflow-wrap:anywhere;}
+/* ...but never break a price, a phone number or a code in the middle */
+.price,.price *,.statnum,.promotel,.crow label b,.cout .big,.dphone b,.fp{overflow-wrap:normal;}
+/* any grid child is allowed to shrink below its content */
+.wrap>*,.pgrid>*,.li3>*,.band>*,.calc>*,.final .wrap>*{min-width:0;}
+
+@media(max-width:820px){
+  /* Blur is the single most expensive thing on this page and phones render it
+     on the GPU. Halve it rather than dropping the glass. */
+  :root{--frost:blur(18px) saturate(180%);--blur:blur(14px) saturate(160%);}
+  .calc,.plan,.stat,.minband,.frost,.drawer .panel{
+    backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);}
+}
+</style>
+<script>(function(){try{var c=localStorage.getItem('ov_ctry');if(c&&c!=='us'){var d=document.documentElement;d.setAttribute('data-ov-pending','1');var st=document.createElement('style');st.textContent='html[data-ov-pending] body{visibility:hidden}';(document.head||d).appendChild(st);setTimeout(function(){d.removeAttribute('data-ov-pending');},600);}}catch(e){}})();</script></head>
+<body>
+<div class="field"></div>
+<div class="promo"><span class="promomsg"><b data-i18n="k3627917b09">New:</b> <span data-i18n="k5a1027024e">OneVoice now answers, books, texts and takes payment — not just the phone.</span> <a data-i18n="k26d4b76944" href="../platform/index.html">See what it does →</a></span><a class="promotel" href="tel:2172909970"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2Z"></path></svg><span data-i18n="k4c198f42ae">Call the demo line: (217) 290-9970</span></a></div>
+<nav><div class="wrap"><a aria-label="OneVoice home" data-i18n-aria="k2d7df90e1a" href="../index.html"><img alt="OneVoice" class="logo" height="44" src="https://assets.cdn.filesafe.space/VkZwS3nGWMX06NRwLxJ8/media/6a4c98b12467f0ff08b2c1d0.png" width="168"/></a><div class="navlinks"><div class="nvitem"><a class="nvtop" href="../platform/index.html"><span data-i18n="k123a7f2fcc">Platform</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></a><div class="mega"><div class="megain"><div class="megacols"><a href="../platform/ai-reception/index.html"><b data-i18n="k6a2a8502a1">AI Reception</b><span data-i18n="k3868db56af">Every call answered, 24/7, in English or Spanish</span></a><a href="../platform/front-office/index.html"><b data-i18n="kf71fbb3c4a">Full Front Office</b><span data-i18n="kd293dc688e">Booking, reminders, texting, recall, reviews, payment</span></a><a href="../platform/connected-systems/index.html"><b data-i18n="ka74b1a6023">Connected Systems</b><span data-i18n="k92c5bd4b49">Writes back into your CRM or system of record</span></a><a href="../platform/multi-location/index.html"><b data-i18n="kf7b0ed5d13">Multi-Location</b><span data-i18n="k147f677a35">Every location its own number, one dashboard</span></a><a href="../platform/index.html"><b data-i18n="k518f99f93a">See all platform →</b><span data-i18n="k128b1bbf6e">The full overview page</span></a></div></div></div></div><div class="nvitem"><a class="nvtop" href="../solutions/index.html"><span data-i18n="k05b004a92e">Solutions</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></a><div class="mega"><div class="megain"><div class="megacols two"><a href="../solutions/healthcare/index.html"><b data-i18n="ka85c88a4cb">Healthcare &amp; dental</b><span data-i18n="k8bbd19a994">Intake, scheduling, recall and check-in</span></a><a href="../solutions/real-estate/index.html"><b data-i18n="kb27cdaf8b1">Real estate</b><span data-i18n="kb62d7e2e25">A line per listing, buyers answered at 9pm</span></a><a href="../solutions/legal/index.html"><b data-i18n="k902c91d94e">Legal</b><span data-i18n="k8fd569e0db">Screen callers, capture the matter, book consults</span></a><a href="../solutions/financial-services/index.html"><b data-i18n="kde918d9841">Financial services</b><span data-i18n="k1027499d83">Route by need, log every conversation</span></a><a href="../solutions/home-services/index.html"><b data-i18n="kade8945409">Home services</b><span data-i18n="k4a6d2dd45e">Answered, quoted and scheduled while you work</span></a><a href="../solutions/multi-location/index.html"><b data-i18n="k7582aa2557">Multi-location</b><span data-i18n="kbf05133d85">One standard across every location</span></a><a href="../solutions/index.html"><b data-i18n="keef8408ea8">See all solutions →</b><span data-i18n="k128b1bbf6e">The full overview page</span></a></div></div></div></div><div class="nvitem"><a class="nvtop" href="../integrations/index.html"><span data-i18n="ka7881cac6e">Integrations</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></a><div class="mega"><div class="megain"><div class="megacols"><a href="../integrations/calendars/index.html"><b data-i18n="k7d009382cd">Calendars &amp; scheduling</b><span data-i18n="kb8f8fe48ba">Google, Outlook, Zoom</span></a><a href="../integrations/payments/index.html"><b data-i18n="k44357ae55a">Payments</b><span data-i18n="k09869641b4">Stripe, PayPal, NMI and text-to-pay</span></a><a href="../integrations/crm/index.html"><b data-i18n="k328dfdcde6">CRM &amp; contacts</b><span data-i18n="k0040477298">Contacts, notes and transcripts flow through</span></a><a href="../integrations/practice-management/index.html"><b data-i18n="k4ea622a88d">Practice management &amp; EHR</b><span data-i18n="k05fbbedbf8">Built to your vendor’s API</span></a><a href="../integrations/accounting/index.html"><b data-i18n="k2c1de79f36">Accounting</b><span data-i18n="kcd038a32b8">QuickBooks, Xero, Wave</span></a><a href="../integrations/index.html"><b data-i18n="k85719b26df">See all integrations →</b><span data-i18n="k128b1bbf6e">The full overview page</span></a></div></div></div></div><div class="nvitem"><a class="nvtop" data-i18n="ka0d9bbad5f" href="../pricing/index.html">Pricing</a></div><div class="nvitem"><a class="nvtop" href="#faq"><span data-i18n="k87df60de33">Resources</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></a><div class="mega"><div class="megain"><div class="megacols"><a href="../learn/what-is-an-ai-receptionist/index.html"><b data-i18n="k20867077d5">What is an AI receptionist?</b><span data-i18n="k02638fdf99">Plain-English explainer</span></a><a href="../learn/missed-call-cost/index.html"><b data-i18n="k2f7b107912">What missed calls cost you</b><span data-i18n="k5901324dae">The arithmetic, plus the calculator</span></a><a href="../compare/index.html"><b data-i18n="kd60aac7c90">Compare the alternatives</b><span data-i18n="k37f9c72650">AI vs answering service, voicemail, hiring</span></a><a href="#faq"><b data-i18n="k40567a5d84">Questions, answered</b><span data-i18n="k86516c84fd">Pricing, trials, integrations, cancelling</span></a></div></div></div></div></div><div class="navright"><div class="ovlang" id="ovlang"><button aria-expanded="false" aria-haspopup="true" class="ovlangbtn" id="ovlangbtn"><span class="flag" id="ovflag">🇺🇸</span><span class="ovlangcode" id="ovlangcode">US</span><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.4" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button><div class="ovlanglist" id="ovlanglist" role="menu"></div></div><a class="btn line sm" data-i18n="kada2e9e96f" href="https://assistant.onesocial.ai/" rel="noopener" target="_blank">Sign in</a><a class="btn clay sm" data-i18n="k2366325b27" href="https://api.leadconnectorhq.com/widget/booking/TkMyWsq0YqMLbpJuP1Tn" rel="noopener" target="_blank">Get a demo</a><button aria-expanded="false" aria-label="Open menu" class="navtoggle" data-i18n-aria="k197101e9db" id="navtoggle"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div></div></nav>
+<div class="drawer" id="drawer"><div class="scrim" data-close=""></div><div class="panel"><div class="dhead"><img alt="OneVoice" src="https://assets.cdn.filesafe.space/VkZwS3nGWMX06NRwLxJ8/media/6a4c98b12467f0ff08b2c1d0.png"/><button aria-label="Close menu" class="dclose" data-close="" data-i18n-aria="k6c9fc99089"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div><div class="dgrp"><button type="button"><span data-i18n="k123a7f2fcc">Platform</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button><div class="dsub"><a data-i18n="k6a2a8502a1" href="../platform/ai-reception/index.html">AI Reception</a><a data-i18n="kf71fbb3c4a" href="../platform/front-office/index.html">Full Front Office</a><a data-i18n="ka74b1a6023" href="../platform/connected-systems/index.html">Connected Systems</a><a data-i18n="kf7b0ed5d13" href="../platform/multi-location/index.html">Multi-Location</a><a data-i18n="k518f99f93a" href="../platform/index.html">See all platform →</a></div></div><div class="dgrp"><button type="button"><span data-i18n="k05b004a92e">Solutions</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button><div class="dsub"><a data-i18n="ka85c88a4cb" href="../solutions/healthcare/index.html">Healthcare &amp; dental</a><a data-i18n="kb27cdaf8b1" href="../solutions/real-estate/index.html">Real estate</a><a data-i18n="k902c91d94e" href="../solutions/legal/index.html">Legal</a><a data-i18n="kde918d9841" href="../solutions/financial-services/index.html">Financial services</a><a data-i18n="kade8945409" href="../solutions/home-services/index.html">Home services</a><a data-i18n="k7582aa2557" href="../solutions/multi-location/index.html">Multi-location</a><a data-i18n="keef8408ea8" href="../solutions/index.html">See all solutions →</a></div></div><div class="dgrp"><button type="button"><span data-i18n="ka7881cac6e">Integrations</span> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button><div class="dsub"><a data-i18n="k7d009382cd" href="../integrations/calendars/index.html">Calendars &amp; scheduling</a><a data-i18n="k44357ae55a" href="../integrations/payments/index.html">Payments</a><a data-i18n="k328dfdcde6" href="../integrations/crm/index.html">CRM &amp; contacts</a><a data-i18n="k4ea622a88d" href="../integrations/practice-management/index.html">Practice management &amp; EHR</a><a data-i18n="k2c1de79f36" href="../integrations/accounting/index.html">Accounting</a><a data-i18n="k85719b26df" href="../integrations/index.html">See all integrations →</a></div></div><a class="dsolo" data-i18n="ka0d9bbad5f" href="../pricing/index.html">Pricing</a><div class="dphone"><span data-i18n="k90214883b6">Talk to us</span><b>(855) 770-0200</b></div><div class="dphone"><span data-i18n="k43a1190e96">Hear the AI agent</span><b>(217) 290-9970</b></div><a class="dparent" href="https://oneworldlabs.ai/"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg><span data-i18n="k4ff5e7ab73">All of One World Labs →</span></a><a class="btn line" data-i18n="ka83de8a9ca" href="https://api.leadconnectorhq.com/widget/booking/TkMyWsq0YqMLbpJuP1Tn">Book a demo</a><a class="btn clay" data-i18n="ka1db3a8070" href="/onevoice/get-started/">Get started</a></div></div>
+<style>.cmpwrap{border-radius:22px;overflow:hidden;border:1px solid var(--glassline);background:var(--glass2);backdrop-filter:var(--blur);box-shadow:var(--shadow-m);margin:34px 0;}.cmp{width:100%;border-collapse:collapse;}.cmp th,.cmp td{padding:15px 20px;text-align:left;font-size:14.5px;border-bottom:1px solid rgba(231,221,203,.85);}.cmp thead th{background:rgba(247,241,231,.8);font-size:11.5px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);}.cmp thead th.ov{color:var(--teal2);}.cmp td.you{color:var(--txt2);}.cmp td.ov{color:var(--teal2);font-weight:800;}.cmp td.lbl{font-weight:700;}.cmp tbody tr:last-child td{border-bottom:0;}@media(max-width:760px){.cmpwrap{overflow-x:auto}.cmp{min-width:560px}}.cmp5 th,.cmp5 td{padding:14px 15px;font-size:13.8px;}.cmp5 td.lbl{font-weight:700;}@media(max-width:1040px){.cmpwrap{overflow-x:auto}.cmp5{min-width:920px}}</style><header class="phero"><div class="wrap"><div class="crumb"><a data-i18n="k70f8bb9a8a" href="../index.html">Home</a> <span data-i18n="k601fb97cbe">/ Compare</span></div><span class="eyebrow" data-i18n="k8d105cf44d">Compare</span><h1><span data-i18n="k2335d3b665">How an AI receptionist stacks up against</span> <span class="ht" data-i18n="k20761b3ff1">the alternatives</span></h1><p class="psub" data-i18n="k230616d92b">Three honest side-by-sides, including the cases where the other option wins. If a comparison tells you one product beats everything on every row, it isn't a comparison — it's an ad.</p></div></header><section class="pad" style="padding-top:22px"><div class="wrap"><div class="g3"><a class="card" href="vs-answering-service/index.html"><h4 data-i18n="kbe9ae62124">AI receptionist vs answering service</h4><p data-i18n="k062aa310cc">Speed and cost against a human service</p><span class="go" data-i18n="kb84dfafd1b">Read the comparison →</span></a><a class="card" href="vs-voicemail/index.html"><h4 data-i18n="k96d82654f5">AI receptionist vs voicemail</h4><p data-i18n="kc38454cfe2">What voicemail actually costs you</p><span class="go" data-i18n="kb84dfafd1b">Read the comparison →</span></a><a class="card" href="vs-hiring-a-receptionist/index.html"><h4 data-i18n="k9305efa7ff">AI receptionist vs hiring someone</h4><p data-i18n="k26ac028f6f">The honest cost and capability comparison</p><span class="go" data-i18n="kb84dfafd1b">Read the comparison →</span></a></div><div class="cmpwrap" style="max-width:1180px;margin:44px auto 0"><table class="cmp cmp5"><thead><tr><th style="width:26%"> </th><th data-i18n="kc2fe8101d3">Answering service</th><th data-i18n="k8fbf69dc93">Voicemail</th><th data-i18n="kf2d9ebc474">Hiring a person</th><th class="ov">OneVoice</th></tr></thead><tbody><tr><td class="lbl" data-i18n="k742ca89a4f">Answers on the first ring, 24/7</td><td class="you" data-i18n="k0af8d0a680">No — business hours, and a queue</td><td class="you" data-i18n="kd3b9036631">Records only</td><td class="you" data-i18n="k81212ed429">Only when someone is at the desk</td><td class="ov" data-i18n="k5397e0583f">Yes</td></tr><tr><td class="lbl" data-i18n="k47c7ce5881">Knows your prices, hours and policies</td><td class="you" data-i18n="k2b49ae1a8b">Reads from a script</td><td class="you" data-i18n="k816c52fd2b">No</td><td class="you" data-i18n="k5397e0583f">Yes</td><td class="ov" data-i18n="k5397e0583f">Yes</td></tr><tr><td class="lbl" data-i18n="k5c5c95d048">Books straight into your calendar</td><td class="you" data-i18n="k055733692c">Sometimes, at extra cost</td><td class="you" data-i18n="k816c52fd2b">No</td><td class="you" data-i18n="k5397e0583f">Yes</td><td class="ov" data-i18n="k5397e0583f">Yes</td></tr><tr><td class="lbl" data-i18n="kf8b610f8d9">Handles two callers at once</td><td class="you" data-i18n="k08aa31ed99">Depends on staffing</td><td class="you" data-i18n="k5397e0583f">Yes</td><td class="you" data-i18n="k816c52fd2b">No</td><td class="ov" data-i18n="k5397e0583f">Yes</td></tr><tr><td class="lbl" data-i18n="k8350d25bdd">Handles a genuinely unusual situation</td><td class="you" data-i18n="kd151e51b4d">Takes a message</td><td class="you" data-i18n="k816c52fd2b">No</td><td class="you" data-i18n="k61600f6757">Yes — best in class</td><td class="ov" data-i18n="k8c4075266f">Escalates to a person</td></tr><tr><td class="lbl" data-i18n="kf705385000">Searchable transcript of every call</td><td class="you" data-i18n="k01d2aefd7f">Rarely</td><td class="you" data-i18n="k816c52fd2b">No</td><td class="you" data-i18n="k816c52fd2b">No</td><td class="ov" data-i18n="k5397e0583f">Yes</td></tr><tr><td class="lbl" data-i18n="k62c706e66d">Typical monthly cost</td><td class="you">$200–$1,500+</td><td class="you">$0</td><td class="you" data-i18n="k83e799f343">$3,000–$5,000 loaded</td><td class="ov" data-i18n="k45ccd9b300">From $149</td></tr></tbody></table></div><p data-i18n="kc363be5634" style="max-width:1180px;margin:12px auto 0;font-size:13px;color:var(--txt3);text-align:right">Loaded cost for a hired receptionist assumes salary plus payroll tax and benefits. Answering-service range reflects published per-minute and per-call plans.</p><div class="minband"><span data-i18n="k2eb1b6932c">Still weighing it up? The fastest way to judge any of these is to call the demo line and deliberately ask it something awkward.</span> <b>(217) 290-9970</b></div><div class="demoband" id="listen"><div><span class="eyebrow t" data-i18n="k5398d7115e">Hear it for yourself</span><h3 data-i18n="kab36422ce2" style="margin-top:12px">Don't take our word for it. Call it.</h3><p data-i18n="k9f290216c2">Ava is our live demo agent. Ring her from your own phone and try to trip her up — ask about hours, pricing, availability, whatever you'd throw at a real front desk.</p><div class="dialpad"><small data-i18n="kf277edab04">An AI agent is ready to talk — right now</small><a class="num" href="tel:2172909970">(217) 290-9970</a><span class="dialnote" data-i18n="k11ce9a6e0a">Ava picks up 24/7. Ask her about hours, pricing, availability — anything you'd ask a real front desk.</span></div><div class="listenbtns"><a class="btn teal" data-i18n="k0bcf2784ed" href="/onevoice/get-started/">Get started →</a><a class="btn line" data-i18n="k52a8d5d7d8" href="../pricing/index.html">See pricing</a></div><p class="listennote" data-i18n="k723baf9b2f">30-day money-back guarantee. Setup fee included.</p></div><div class="statgrid"><div class="stat"><div class="statnum">&lt;1</div><div class="statunit" data-i18n="k2a4bcae654">Second</div><div class="statdesc" data-i18n="k906dca26b3">Typical time to answer. No ringing, no hold queue.</div></div><div class="stat"><div class="statnum">24/7</div><div class="statunit" data-i18n="k0eef3f4197">365 days a year</div><div class="statdesc" data-i18n="k0b4d24995e">Day mode and after-hours mode, switched automatically.</div></div><div class="stat"><div class="statnum">2</div><div class="statunit" data-i18n="kdb07be1844">Languages</div><div class="statdesc" data-i18n="k3f3077b518">English and Spanish, answered on the same number.</div></div><div class="stat"><div class="statnum" data-i18n="k3560d90b70">Every</div><div class="statunit" data-i18n="k7449c1f1f0">Call logged</div><div class="statdesc" data-i18n="kbdec477e3a">Transcribed, scored and searchable afterwards.</div></div></div></div></div></section><section class="pad" id="faq"><div class="wrap"><div class="center"><h2 class="h2"><span data-i18n="kd439272752">Questions,</span> <span class="hl" data-i18n="k76e806bac8">answered</span></h2></div><div class="faq"><details class="fq"><summary data-i18n="kf517f5357e">Which comparison should I read first?</summary><div class="a" data-i18n="k4aaae657f4">If you currently use voicemail, start there — it’s where the biggest gap is. If you already pay an answering service, that one has the clearest cost story.</div></details><details class="fq"><summary data-i18n="k95fd6542ea">Are these comparisons biased?</summary><div class="a" data-i18n="ke64dfb1c84">We sell one of the options, so read them with that in mind. We’ve tried to be specific about where each alternative genuinely wins, because a comparison that says we win everything is worth nothing to you.</div></details><details class="fq"><summary data-i18n="kac7b423c95">Can I use more than one?</summary><div class="a" data-i18n="ka674c6654f">Yes, and many businesses should. AI for volume and after-hours, a person for complexity and the lobby.</div></details></div></div></section>
+<section class="final" id="book"><div class="wrap"><div><h2 data-i18n="k13d8e1efae">See it answer your phone</h2><p data-i18n="k949c76b1c0">A 15-minute call. We'll ask how your phone rings today, show you the same thing answering it, and tell you which plan is actually cheaper for you — even if that's the $149 one.</p><div class="finalbtns"><a class="btn teal" data-i18n="kdc4e8d5d1d" href="https://api.leadconnectorhq.com/widget/booking/TkMyWsq0YqMLbpJuP1Tn" rel="noopener" target="_blank">Book my 15 minutes →</a><a class="btn ghost" data-i18n="k6164fa1609" href="/onevoice/get-started/">Get started instead</a></div><div class="finalphone"><span data-i18n="ka06b87689a">Rather just hear it? Call Ava right now.</span><b><a class="fp" href="tel:2172909970">(217) 290-9970</a></b></div></div><div class="finalimg"><img alt="Bright professional reception area" class="photo" decoding="async" height="800" loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3DKsfvcnamC2j4ysV1YXnc9JTse/hf_20260727_075059_e61dd987-0abf-48eb-8c82-b2cb17e6004f_min.webp" width="1200"/></div></div></section>
+<footer><div class="wrap"><div class="fgrid"><div class="fbrand"><img alt="OneVoice" src="https://assets.cdn.filesafe.space/VkZwS3nGWMX06NRwLxJ8/media/6a4c98b12467f0ff08b2c1d0.png"/><p data-i18n="k3b0ebff1a4">AI that answers, books, texts and follows up — so the front desk stops being the bottleneck.</p></div><div><h5 data-i18n="k123a7f2fcc">Platform</h5><ul><li><a data-i18n="k6a2a8502a1" href="../platform/ai-reception/index.html">AI Reception</a></li><li><a data-i18n="kf71fbb3c4a" href="../platform/front-office/index.html">Full Front Office</a></li><li><a data-i18n="ka74b1a6023" href="../platform/connected-systems/index.html">Connected Systems</a></li><li><a data-i18n="kf7b0ed5d13" href="../platform/multi-location/index.html">Multi-Location</a></li><li><a data-i18n="ka7881cac6e" href="../integrations/index.html">Integrations</a></li></ul></div><div><h5 data-i18n="k05b004a92e">Solutions</h5><ul><li><a data-i18n="ka85c88a4cb" href="../solutions/healthcare/index.html">Healthcare &amp; dental</a></li><li><a data-i18n="kb27cdaf8b1" href="../solutions/real-estate/index.html">Real estate</a></li><li><a data-i18n="k902c91d94e" href="../solutions/legal/index.html">Legal</a></li><li><a data-i18n="kde918d9841" href="../solutions/financial-services/index.html">Financial services</a></li><li><a data-i18n="kade8945409" href="../solutions/home-services/index.html">Home services</a></li><li><a data-i18n="k7582aa2557" href="../solutions/multi-location/index.html">Multi-location</a></li></ul></div><div><h5 data-i18n="ka7881cac6e">Integrations</h5><ul><li><a data-i18n="k7d009382cd" href="../integrations/calendars/index.html">Calendars &amp; scheduling</a></li><li><a data-i18n="k44357ae55a" href="../integrations/payments/index.html">Payments</a></li><li><a data-i18n="k328dfdcde6" href="../integrations/crm/index.html">CRM &amp; contacts</a></li><li><a data-i18n="k4ea622a88d" href="../integrations/practice-management/index.html">Practice management &amp; EHR</a></li><li><a data-i18n="k2c1de79f36" href="../integrations/accounting/index.html">Accounting</a></li></ul></div><div><h5 data-i18n="k7a1994999d">Company</h5><ul><li><a data-i18n="ka0d9bbad5f" href="../pricing/index.html">Pricing</a></li><li><a data-i18n="ka83de8a9ca" href="https://api.leadconnectorhq.com/widget/booking/TkMyWsq0YqMLbpJuP1Tn">Book a demo</a></li><li><a href="tel:8557700200">(855) 770-0200</a></li><li><a data-i18n="k46331be807" href="tel:2172909970">Demo line: (217) 290-9970</a></li><li><a data-i18n="ke5efb05125" href="mailto:support.onevoice@onesocial.ai">Email support</a></li><li><a data-i18n="k417430d34b" href="/onevoice/privacy/">Privacy &amp; Terms</a></li></ul></div></div><div class="fbot"><div><b>OneVoice</b> — a <a href="https://oneworldlabs.ai/">One World Labs</a> <span data-i18n="k63acf68c4f">brand</span></div><div class="l" data-i18n="k9b8c0c7817">OneVoice and One World Labs are trade names of OneSocial AI, LLC.</div><div class="l"><span data-i18n="k8cb5eea1bc">© 2026 OneSocial AI, LLC. All rights reserved. ·</span> <a data-i18n="k265fe4f8e2" href="/onevoice/privacy/">Privacy Policy &amp; Terms</a></div></div></div></footer>
+<div class="mobar"><a class="call" href="tel:2172909970"><svg fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" viewbox="0 0 24 24" width="17"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2Z"></path></svg><span data-i18n="kf7d3005856">Hear it</span></a><a class="go" data-i18n="ka1db3a8070" href="/onevoice/get-started/">Get started</a></div>
+<script>
+(function(){
+  var dr=document.getElementById('drawer'),tg=document.getElementById('navtoggle');
+  function set(o){dr.classList.toggle('open',o);tg.setAttribute('aria-expanded',o?'true':'false');document.body.style.overflow=o?'hidden':'';}
+  tg.addEventListener('click',function(){set(!dr.classList.contains('open'));});
+  dr.querySelectorAll('[data-close]').forEach(function(e){e.addEventListener('click',function(){set(false);});});
+  dr.querySelectorAll('.dgrp>button').forEach(function(b){b.addEventListener('click',function(){b.parentNode.classList.toggle('open');});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+})();
+/* ---- language / flag picker. Mirrors the seven locales the checkout page
+   already ships, and remembers the choice in the same storage key so the two
+   pages agree. Copy translation is a separate pass; this wires the control. --- */
+(function(){
+  var LOCALES=[
+    {code:'us',flag:'\uD83C\uDDFA\uD83C\uDDF8',label:'United States',short:'US'},
+    {code:'es',flag:'\uD83C\uDDEA\uD83C\uDDF8',label:'Espa\u00f1a',short:'ES'},
+    {code:'co',flag:'\uD83C\uDDE8\uD83C\uDDF4',label:'Colombia',short:'CO'},
+    {code:'de',flag:'\uD83C\uDDE9\uD83C\uDDEA',label:'Deutschland',short:'DE'},
+    {code:'ru',flag:'\uD83C\uDDF7\uD83C\uDDFA',label:'\u0420\u043e\u0441\u0441\u0438\u044f',short:'RU'},
+    {code:'cn',flag:'\uD83C\uDDE8\uD83C\uDDF3',label:'\u4e2d\u56fd',short:'CN'},
+    {code:'br',flag:'\uD83C\uDDE7\uD83C\uDDF7',label:'Brasil',short:'BR'}
+  ];
+  var wrap=document.getElementById('ovlang'); if(!wrap) return;
+  var btn=document.getElementById('ovlangbtn'), list=document.getElementById('ovlanglist');
+  var flagEl=document.getElementById('ovflag'), codeEl=document.getElementById('ovlangcode');
+  var cur='us'; try{ cur=localStorage.getItem('ov_ctry')||'us'; }catch(e){}
+  function paint(){
+    var l=LOCALES.filter(function(x){return x.code===cur;})[0]||LOCALES[0];
+    flagEl.innerHTML=l.flag; codeEl.textContent=l.short;
+    list.innerHTML=LOCALES.map(function(x){
+      return '<button type="button" data-code="'+x.code+'" class="'+(x.code===cur?'on':'')+'">'+
+        '<span class="flag">'+x.flag+'</span>'+x.label+'</button>';}).join('');
+  }
+  paint();
+  btn.addEventListener('click',function(e){e.stopPropagation();
+    var o=!wrap.classList.contains('open'); wrap.classList.toggle('open',o);
+    btn.setAttribute('aria-expanded',o?'true':'false');});
+  list.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-code]'); if(!b) return;
+    cur=b.getAttribute('data-code');
+    try{ localStorage.setItem('ov_ctry',cur); }catch(e){}
+    paint(); wrap.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+    if(window.OV_SET_LOCALE) window.OV_SET_LOCALE(cur);
+  });
+  document.addEventListener('click',function(e){ if(!wrap.contains(e.target)){
+    wrap.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }});
+})();</script>
+<script>window.OV_DICT={"k4ea622a88d":{"us":"Practice management &amp; EHR","es":"Gestión de consultas y HCE","co":"Gestión de consultas y HCE","de":"Praxisverwaltung &amp; EPA","ru":"Управление практикой и ЭМК","cn":"诊所管理与电子病历","br":"Gestão de clínica e prontuário"},"kc2fe8101d3":{"us":"Answering service","es":"Servicio de contestación","co":"Servicio de contestación","de":"Telefonservice","ru":"Служба приёма звонков","cn":"人工代接服务","br":"Serviço de atendimento"},"k9305efa7ff":{"us":"AI receptionist vs hiring someone","es":"Recepcionista con IA vs contratar a alguien","co":"Recepcionista con IA vs contratar a alguien","de":"KI-Rezeptionist vs. jemanden einstellen","ru":"ИИ-секретарь против найма сотрудника","cn":"AI 前台 vs 招人","br":"Recepcionista de IA vs. contratar alguém"},"ke64dfb1c84":{"us":"We sell one of the options, so read them with that in mind. We’ve tried to be specific about where each alternative genuinely wins, because a comparison that says we win everything is worth nothing to you.","es":"Nosotros vendemos una de las opciones, así que léalas con eso en mente. Tratamos de ser específicos sobre dónde gana de verdad cada alternativa, porque una comparación que dice que ganamos en todo no le sirve de nada.","co":"Nosotros vendemos una de las opciones, así que léalas con eso en mente. Tratamos de ser específicos sobre dónde gana de verdad cada alternativa, porque una comparación que dice que ganamos en todo no le sirve de nada.","de":"Wir verkaufen eine dieser Optionen, lesen Sie mit diesem Wissen. Wir haben versucht, genau zu benennen, wo jede Alternative wirklich gewinnt – denn ein Vergleich, in dem wir überall gewinnen, ist für Sie wertlos.","ru":"Мы продаём один из этих вариантов, читайте с поправкой на это. Мы старались конкретно показать, где каждая альтернатива действительно выигрывает, потому что сравнение, в котором мы побеждаем во всём, для вас ничего не стоит.","cn":"我们卖的正是其中一个选项，请带着这一点来读。我们尽量写清每个替代方案真正胜出的地方，因为一份说我们样样都赢的对比，对你毫无价值。","br":"Nós vendemos uma das opções, então leia com isso em mente. Tentamos ser específicos sobre onde cada alternativa realmente vence, porque uma comparação que diz que ganhamos em tudo não vale nada para você."},"k26d4b76944":{"us":"See what it does &rarr;","es":"Ver qué hace &rarr;","co":"Ver qué hace &rarr;","de":"Was sie kann &rarr;","ru":"Что она умеет &rarr;","cn":"看看它能做什么 &rarr;","br":"Veja o que ela faz &rarr;"},"kcd038a32b8":{"us":"QuickBooks, Xero, Wave","es":"QuickBooks, Xero, Wave","co":"QuickBooks, Xero, Wave","de":"QuickBooks, Xero, Wave","ru":"QuickBooks, Xero, Wave","cn":"QuickBooks、Xero、Wave","br":"QuickBooks, Xero, Wave"},"kbf05133d85":{"us":"One standard across every location","es":"Un mismo estándar en todas las sedes","co":"Un mismo estándar en todas las sedes","de":"Ein Standard für alle Standorte","ru":"Единый стандарт во всех филиалах","cn":"所有门店统一标准","br":"Um só padrão em todas as unidades"},"k8fd569e0db":{"us":"Screen callers, capture the matter, book consults","es":"Filtra llamadas, registra el caso y agenda consultas","co":"Filtra llamadas, registra el caso y agenda consultas","de":"Anrufer prüfen, Sachverhalt erfassen, Beratung buchen","ru":"Фильтрует звонки, фиксирует суть дела, назначает консультации","cn":"筛选来电、记录案由、预约咨询","br":"Filtra chamadas, registra o caso e agenda consultas"},"k742ca89a4f":{"us":"Answers on the first ring, 24/7","es":"Contesta al primer timbre, 24/7","co":"Contesta al primer timbre, 24/7","de":"Nimmt beim ersten Klingeln ab, 24/7","ru":"Отвечает с первого гудка, 24/7","cn":"第一声铃响就接，24/7","br":"Atende no primeiro toque, 24 horas por dia"},"k5a1027024e":{"us":"OneVoice now answers, books, texts and takes payment &mdash; not just the phone.","es":"OneVoice ahora responde, agenda, envía SMS y cobra &mdash; no solo el teléfono.","co":"OneVoice ahora responde, agenda, envía SMS y cobra &mdash; no solo el teléfono.","de":"OneVoice nimmt jetzt Anrufe an, bucht, textet und kassiert &mdash; nicht nur Telefon.","ru":"OneVoice теперь отвечает, записывает, пишет SMS и принимает оплату — не только телефон.","cn":"OneVoice 现在不只是接电话——还能预约、发短信、收款。","br":"O OneVoice agora atende, agenda, envia SMS e cobra &mdash; não só o telefone."},"k3868db56af":{"us":"Every call answered, 24/7, in English or Spanish","es":"Todas las llamadas atendidas, 24/7, en inglés o español","co":"Todas las llamadas atendidas, 24/7, en inglés o español","de":"Jeder Anruf angenommen, rund um die Uhr, auf Englisch oder Spanisch","ru":"Каждый звонок принят, круглосуточно, на английском или испанском","cn":"全天候接听每一通电话，支持英语或西班牙语","br":"Todas as chamadas atendidas, 24/7, em inglês ou espanhol"},"kdc4e8d5d1d":{"us":"Book my 15 minutes &rarr;","es":"Reservar mis 15 minutos &rarr;","co":"Reservar mis 15 minutos &rarr;","de":"Meine 15 Minuten buchen &rarr;","ru":"Забронировать 15 минут &rarr;","cn":"预约我的 15 分钟 &rarr;","br":"Agendar meus 15 minutos &rarr;"},"k44357ae55a":{"us":"Payments","es":"Pagos","co":"Pagos","de":"Zahlungen","ru":"Платежи","cn":"支付","br":"Pagamentos"},"kb27cdaf8b1":{"us":"Real estate","es":"Inmobiliaria","co":"Bienes raíces","de":"Immobilien","ru":"Недвижимость","cn":"房地产","br":"Imobiliário"},"k4a6d2dd45e":{"us":"Answered, quoted and scheduled while you work","es":"Atendido, presupuestado y agendado mientras trabajas","co":"Atendido, cotizado y agendado mientras trabajas","de":"Angenommen, kalkuliert und terminiert, während Sie arbeiten","ru":"Ответили, назвали цену и записали, пока вы работаете","cn":"您在忙的时候，已应答、报价并预约好了","br":"Atendido, orçado e agendado enquanto você trabalha"},"kd3b9036631":{"us":"Records only","es":"Solo graba","co":"Solo graba","de":"Zeichnet nur auf","ru":"Только записывает","cn":"只做录音","br":"Só grava"},"k8d105cf44d":{"us":"Compare","es":"Comparar","co":"Comparar","de":"Vergleich","ru":"Сравнение","cn":"对比","br":"Comparar"},"kc363be5634":{"us":"Loaded cost for a hired receptionist assumes salary plus payroll tax and benefits. Answering-service range reflects published per-minute and per-call plans.","es":"El costo total de una recepcionista contratada asume salario más aportes de nómina y prestaciones. El rango del servicio de contestación refleja los planes publicados por minuto y por llamada.","co":"El costo total de una recepcionista contratada asume salario más aportes de nómina y prestaciones. El rango del servicio de contestación refleja los planes publicados por minuto y por llamada.","de":"Die Vollkosten einer eingestellten Empfangskraft umfassen Gehalt plus Lohnnebenkosten und Sozialleistungen. Die Spanne beim Telefonservice beruht auf veröffentlichten Minuten- und Anrufpreisen.","ru":"Полная стоимость нанятого секретаря включает зарплату плюс зарплатные налоги и льготы. Диапазон для службы приёма звонков отражает опубликованные тарифы за минуту и за звонок.","cn":"招聘前台的成本按工资加工薪税和福利计算。人工代接服务的区间取自其公开的按分钟和按通计费方案。","br":"O custo total de uma recepcionista contratada considera salário mais encargos e benefícios. A faixa do serviço de atendimento reflete os planos publicados por minuto e por chamada."},"k02638fdf99":{"us":"Plain-English explainer","es":"Explicación en lenguaje claro","co":"Explicación en lenguaje claro","de":"Erklärung in klaren Worten","ru":"Объяснение простым языком","cn":"通俗易懂的说明","br":"Explicação em linguagem simples"},"ka1db3a8070":{"us":"Get started","es":"Empezar prueba gratis","co":"Empezar prueba gratis","de":"Kostenlos testen","ru":"Начать пробный период","cn":"开始免费试用","br":"Iniciar teste grátis"},"k3f3077b518":{"us":"English and Spanish, answered on the same number.","es":"Inglés y español, atendidos en el mismo número.","co":"Inglés y español, atendidos en el mismo número.","de":"Englisch und Spanisch, auf derselben Nummer beantwortet.","ru":"Английский и испанский на одном номере.","cn":"同一个号码支持英语和西班牙语应答。","br":"Inglês e espanhol, atendidos no mesmo número."},"k40567a5d84":{"us":"Questions, answered","es":"Preguntas, respondidas","co":"Preguntas, respondidas","de":"Fragen, beantwortet","ru":"Вопросы и ответы","cn":"常见问题解答","br":"Perguntas, respondidas"},"k8350d25bdd":{"us":"Handles a genuinely unusual situation","es":"Maneja una situación realmente inusual","co":"Maneja una situación realmente inusual","de":"Meistert eine wirklich ungewöhnliche Situation","ru":"Справляется с по-настоящему нестандартной ситуацией","cn":"应对真正罕见的情况","br":"Lida com uma situação realmente fora do comum"},"k7d009382cd":{"us":"Calendars &amp; scheduling","es":"Calendarios y agenda","co":"Calendarios y agenda","de":"Kalender &amp; Terminplanung","ru":"Календари и расписание","cn":"日历与排程","br":"Calendários e agendamento"},"k062aa310cc":{"us":"Speed and cost against a human service","es":"Velocidad y costo frente a un servicio humano","co":"Velocidad y costo frente a un servicio humano","de":"Tempo und Kosten vs. menschlicher Telefonservice","ru":"Скорость и стоимость против живой службы","cn":"与人工服务比速度和成本","br":"Velocidade e custo frente a um serviço humano"},"k4c198f42ae":{"us":"Call the demo line: (217) 290-9970","es":"Llama a la línea de demo: (217) 290-9970","co":"Llame a la línea de demostración: (217) 290-9970","de":"Demo-Linie anrufen: (217) 290-9970","ru":"Позвоните на демо-линию: (217) 290-9970","cn":"拨打演示专线：(217) 290-9970","br":"Ligue para a linha de demonstração: (217) 290-9970"},"k265fe4f8e2":{"us":"Privacy Policy &amp; Terms","es":"Política de privacidad y términos","co":"Política de privacidad y términos","de":"Datenschutzerklärung &amp; AGB","ru":"Политика конфиденциальности и условия","cn":"隐私政策与条款","br":"Política de privacidade e termos"},"kb8f8fe48ba":{"us":"Google, Outlook, Zoom","es":"Google, Outlook, Zoom","co":"Google, Outlook, Zoom","de":"Google, Outlook, Zoom","ru":"Google, Outlook, Zoom","cn":"Google、Outlook、Zoom","br":"Google, Outlook, Zoom"},"k8c4075266f":{"us":"Escalates to a person","es":"Escala a una persona","co":"Escala a una persona","de":"Übergibt an einen Menschen","ru":"Передаёт человеку","cn":"升级转给人工","br":"Transfere para uma pessoa"},"k3560d90b70":{"us":"Every","es":"Cada","co":"Cada","de":"Jeder","ru":"Каждый","cn":"每一通","br":"Cada"},"k123a7f2fcc":{"us":"Platform","es":"Plataforma","co":"Plataforma","de":"Plattform","ru":"Платформа","cn":"平台","br":"Plataforma"},"k45ccd9b300":{"us":"From $149","es":"Desde $149","co":"Desde $149","de":"Ab $149","ru":"От $149","cn":"$149 起","br":"A partir de $149"},"k2366325b27":{"us":"Get a demo","es":"Ver una demo","co":"Ver una demo","de":"Demo ansehen","ru":"Получить демо","cn":"获取演示","br":"Ver uma demo"},"k7a1994999d":{"us":"Company","es":"Empresa","co":"Empresa","de":"Unternehmen","ru":"Компания","cn":"公司","br":"Empresa"},"k2c1de79f36":{"us":"Accounting","es":"Contabilidad","co":"Contabilidad","de":"Buchhaltung","ru":"Бухгалтерия","cn":"会计","br":"Contabilidade"},"k95fd6542ea":{"us":"Are these comparisons biased?","es":"¿Estas comparaciones son sesgadas?","co":"¿Estas comparaciones son sesgadas?","de":"Sind diese Vergleiche voreingenommen?","ru":"Эти сравнения предвзяты?","cn":"这些对比有偏向吗？","br":"Essas comparações são tendenciosas?"},"k63acf68c4f":{"us":"brand","es":"marca","co":"marca","de":"Marke","ru":"бренд","cn":"旗下品牌","br":"marca"},"k2a4bcae654":{"us":"Second","es":"Segundo","co":"Segundo","de":"Sekunde","ru":"Секунда","cn":"秒","br":"Segundo"},"kf71fbb3c4a":{"us":"Full Front Office","es":"Recepción completa","co":"Recepción completa","de":"Komplettes Front Office","ru":"Полный фронт-офис","cn":"完整前台","br":"Recepção completa"},"kde918d9841":{"us":"Financial services","es":"Servicios financieros","co":"Servicios financieros","de":"Finanzdienstleistungen","ru":"Финансовые услуги","cn":"金融服务","br":"Serviços financeiros"},"kd293dc688e":{"us":"Booking, reminders, texting, recall, reviews, payment","es":"Reservas, recordatorios, SMS, seguimiento, reseñas y pagos","co":"Reservas, recordatorios, SMS, seguimiento, reseñas y pagos","de":"Buchung, Erinnerungen, SMS, Recall, Bewertungen, Zahlung","ru":"Запись, напоминания, SMS, возвраты, отзывы, оплата","cn":"预约、提醒、短信、复访、评价、收款","br":"Agendamento, lembretes, SMS, retorno, avaliações, pagamento"},"k902c91d94e":{"us":"Legal","es":"Legal","co":"Legal","de":"Recht","ru":"Юридические услуги","cn":"法律","br":"Jurídico"},"k055733692c":{"us":"Sometimes, at extra cost","es":"A veces, con costo adicional","co":"A veces, con costo adicional","de":"Manchmal, gegen Aufpreis","ru":"Иногда, за доплату","cn":"有时可以，需额外付费","br":"Às vezes, com custo extra"},"k147f677a35":{"us":"Every location its own number, one dashboard","es":"Cada sede con su número, un solo panel","co":"Cada sede con su número, un solo panel","de":"Jeder Standort mit eigener Nummer, ein Dashboard","ru":"У каждого филиала свой номер, одна панель","cn":"每个门店有自己的号码，共用一个后台","br":"Cada unidade com seu número, um só painel"},"k6c9fc99089":{"us":"Close menu","es":"Cerrar menú","co":"Cerrar menú","de":"Menü schließen","ru":"Закрыть меню","cn":"关闭菜单","br":"Fechar menu"},"k5c5c95d048":{"us":"Books straight into your calendar","es":"Agenda directo en su calendario","co":"Agenda directo en su calendario","de":"Bucht direkt in Ihren Kalender","ru":"Записывает прямо в ваш календарь","cn":"直接写进你的日历","br":"Agenda direto na sua agenda"},"k9b8c0c7817":{"us":"OneVoice and One World Labs are trade names of OneSocial AI, LLC.","es":"OneVoice y One World Labs son nombres comerciales de OneSocial AI, LLC.","co":"OneVoice y One World Labs son nombres comerciales de OneSocial AI, LLC.","de":"OneVoice und One World Labs sind Handelsnamen von OneSocial AI, LLC.","ru":"OneVoice и One World Labs — торговые наименования OneSocial AI, LLC.","cn":"OneVoice 和 One World Labs 是 OneSocial AI, LLC 的商号。","br":"OneVoice e One World Labs são nomes comerciais da OneSocial AI, LLC."},"kf277edab04":{"us":"An AI agent is ready to talk &mdash; right now","es":"Un agente de IA está listo para hablar, ahora mismo","co":"Un agente de IA está listo para hablar, ahora mismo","de":"Ein KI-Agent ist jetzt sprechbereit","ru":"ИИ-агент готов говорить прямо сейчас","cn":"AI 客服现在就能接听","br":"Um agente de IA está pronto para falar, agora"},"kbe9ae62124":{"us":"AI receptionist vs answering service","es":"Recepcionista con IA vs servicio de contestación","co":"Recepcionista con IA vs servicio de contestación","de":"KI-Rezeptionist vs. Telefonservice","ru":"ИИ-секретарь против службы приёма звонков","cn":"AI 前台 vs 人工代接服务","br":"Recepcionista de IA vs. serviço de atendimento"},"kf7d3005856":{"us":"Hear it","es":"Escúchalo","co":"Escúchalo","de":"Anhören","ru":"Послушать","cn":"听一听","br":"Ouça"},"k0040477298":{"us":"Contacts, notes and transcripts flow through","es":"Contactos, notas y transcripciones fluyen solos","co":"Contactos, notas y transcripciones fluyen solos","de":"Kontakte, Notizen und Transkripte fließen durch","ru":"Контакты, заметки и расшифровки передаются автоматически","cn":"联系人、备注和通话记录自动同步","br":"Contatos, notas e transcrições fluem direto"},"k816c52fd2b":{"us":"No","es":"No","co":"No","de":"Nein","ru":"Нет","cn":"否","br":"Não"},"k0eef3f4197":{"us":"365 days a year","es":"365 días al año","co":"365 días al año","de":"365 Tage im Jahr","ru":"365 дней в году","cn":"全年 365 天","br":"365 dias por ano"},"k5901324dae":{"us":"The arithmetic, plus the calculator","es":"Las cuentas, más la calculadora","co":"Las cuentas, más la calculadora","de":"Die Rechnung, plus der Rechner","ru":"Расчёт и калькулятор","cn":"算一算，还有计算器","br":"As contas, mais a calculadora"},"kada2e9e96f":{"us":"Sign in","es":"Iniciar sesión","co":"Iniciar sesión","de":"Anmelden","ru":"Войти","cn":"登录","br":"Entrar"},"k601fb97cbe":{"us":"/ Compare","es":"/ Comparar","co":"/ Comparar","de":"/ Vergleich","ru":"/ Сравнение","cn":"/ 对比","br":"/ Comparar"},"ka7881cac6e":{"us":"Integrations","es":"Integraciones","co":"Integraciones","de":"Integrationen","ru":"Интеграции","cn":"集成","br":"Integrações"},"k8cb5eea1bc":{"us":"&copy; 2026 OneSocial AI, LLC. All rights reserved. &middot;","es":"&copy; 2026 OneSocial AI, LLC. Todos los derechos reservados. &middot;","co":"&copy; 2026 OneSocial AI, LLC. Todos los derechos reservados. &middot;","de":"&copy; 2026 OneSocial AI, LLC. Alle Rechte vorbehalten. &middot;","ru":"&copy; 2026 OneSocial AI, LLC. Все права защищены. &middot;","cn":"&copy; 2026 OneSocial AI, LLC. 保留所有权利。&middot;","br":"&copy; 2026 OneSocial AI, LLC. Todos os direitos reservados. &middot;"},"k46331be807":{"us":"Demo line: (217) 290-9970","es":"Línea de demo: (217) 290-9970","co":"Línea de demo: (217) 290-9970","de":"Demo-Leitung: (217) 290-9970","ru":"Демо-линия: (217) 290-9970","cn":"演示专线：(217) 290-9970","br":"Linha de demo: (217) 290-9970"},"k0b4d24995e":{"us":"Day mode and after-hours mode, switched automatically.","es":"Modo diurno y modo fuera de horario, cambiados automáticamente.","co":"Modo diurno y modo fuera de horario, cambiados automáticamente.","de":"Tag- und Nachtmodus, automatisch umgeschaltet.","ru":"Дневной и внерабочий режим переключаются автоматически.","cn":"白天模式与非工作时间模式，自动切换。","br":"Modo diurno e fora do horário, alternados automaticamente."},"k01d2aefd7f":{"us":"Rarely","es":"Rara vez","co":"Rara vez","de":"Selten","ru":"Редко","cn":"很少","br":"Raramente"},"kade8945409":{"us":"Home services","es":"Servicios para el hogar","co":"Servicios para el hogar","de":"Handwerk & Hausservice","ru":"Бытовые услуги","cn":"家庭服务","br":"Serviços residenciais"},"k90214883b6":{"us":"Talk to us","es":"Habla con nosotros","co":"Habla con nosotros","de":"Sprechen Sie mit uns","ru":"Свяжитесь с нами","cn":"联系我们","br":"Fale com a gente"},"ka0d9bbad5f":{"us":"Pricing","es":"Precios","co":"Precios","de":"Preise","ru":"Тарифы","cn":"价格","br":"Preços"},"k7449c1f1f0":{"us":"Call logged","es":"Llamada registrada","co":"Llamada registrada","de":"Anruf protokolliert","ru":"Звонок записан","cn":"通话已记录","br":"Chamada registrada"},"k76e806bac8":{"us":"answered","es":"respondida","co":"respondida","de":"beantwortet","ru":"отвечен","cn":"已应答","br":"atendida"},"k5397e0583f":{"us":"Yes","es":"Sí","co":"Sí","de":"Ja","ru":"Да","cn":"是","br":"Sim"},"kf2d9ebc474":{"us":"Hiring a person","es":"Contratar a una persona","co":"Contratar a una persona","de":"Eine Person einstellen","ru":"Наём сотрудника","cn":"招一个人","br":"Contratar uma pessoa"},"k85719b26df":{"us":"See all integrations &rarr;","es":"Ver todas las integraciones &rarr;","co":"Ver todas las integraciones &rarr;","de":"Alle Integrationen &rarr;","ru":"Все интеграции &rarr;","cn":"查看全部集成 &rarr;","br":"Ver todas as integrações &rarr;"},"k61600f6757":{"us":"Yes — best in class","es":"Sí — el mejor de su categoría","co":"Sí — el mejor de su categoría","de":"Ja – branchenführend","ru":"Да — лучший в классе","cn":"是 — 同类最佳","br":"Sim — melhor da categoria"},"k13d8e1efae":{"us":"See it answer your phone","es":"Míralo responder tu teléfono","co":"Míralo responder tu teléfono","de":"Sehen, wie sie Ihr Telefon annimmt","ru":"Посмотрите, как она отвечает на ваши звонки","cn":"看它接您的电话","br":"Veja atendendo o seu telefone"},"ka85c88a4cb":{"us":"Healthcare &amp; dental","es":"Salud y odontología","co":"Salud y odontología","de":"Gesundheit &amp; Zahnmedizin","ru":"Медицина и стоматология","cn":"医疗与牙科","br":"Saúde e odontologia"},"kdb07be1844":{"us":"Languages","es":"Idiomas","co":"Idiomas","de":"Sprachen","ru":"Языки","cn":"语言","br":"Idiomas"},"kac7b423c95":{"us":"Can I use more than one?","es":"¿Puedo usar más de una opción?","co":"¿Puedo usar más de una opción?","de":"Kann ich mehrere kombinieren?","ru":"Можно использовать несколько сразу?","cn":"可以同时用多个吗？","br":"Posso usar mais de uma?"},"k08aa31ed99":{"us":"Depends on staffing","es":"Depende del personal","co":"Depende del personal","de":"Hängt von der Besetzung ab","ru":"Зависит от персонала","cn":"取决于人手安排","br":"Depende da equipe"},"kf705385000":{"us":"Searchable transcript of every call","es":"Transcripción consultable de cada llamada","co":"Transcripción consultable de cada llamada","de":"Durchsuchbares Transkript jedes Anrufs","ru":"Расшифровка каждого звонка с поиском","cn":"每通电话都有可检索的文字记录","br":"Transcrição pesquisável de cada chamada"},"k43a1190e96":{"us":"Hear the AI agent","es":"Escucha al agente de IA","co":"Escucha al agente de IA","de":"KI-Agent anhören","ru":"Послушать ИИ-агента","cn":"听听 AI 客服","br":"Ouça o agente de IA"},"k417430d34b":{"us":"Privacy &amp; Terms","es":"Privacidad y términos","co":"Privacidad y términos","de":"Datenschutz &amp; AGB","ru":"Конфиденциальность и условия","cn":"隐私与条款","br":"Privacidade e termos"},"k197101e9db":{"us":"Open menu","es":"Abrir menú","co":"Abrir menú","de":"Menü öffnen","ru":"Открыть меню","cn":"打开菜单","br":"Abrir menu"},"kd151e51b4d":{"us":"Takes a message","es":"Toma un mensaje","co":"Toma un mensaje","de":"Nimmt eine Nachricht auf","ru":"Принимает сообщение","cn":"记下留言","br":"Anota um recado"},"k52a8d5d7d8":{"us":"See pricing","es":"Ver precios","co":"Ver precios","de":"Preise ansehen","ru":"Смотреть тарифы","cn":"查看价格","br":"Ver preços"},"k518f99f93a":{"us":"See all platform &rarr;","es":"Ver toda la plataforma &rarr;","co":"Ver toda la plataforma &rarr;","de":"Gesamte Plattform &rarr;","ru":"Вся платформа &rarr;","cn":"查看全部平台功能 &rarr;","br":"Ver toda a plataforma &rarr;"},"ka674c6654f":{"us":"Yes, and many businesses should. AI for volume and after-hours, a person for complexity and the lobby.","es":"Sí, y a muchas empresas les conviene. IA para el volumen y lo que entra fuera de horario, una persona para lo complejo y para el mostrador.","co":"Sí, y a muchas empresas les conviene. IA para el volumen y lo que entra fuera de horario, una persona para lo complejo y para el mostrador.","de":"Ja, und viele Unternehmen sollten das tun. KI für Masse und Randzeiten, ein Mensch für komplexe Fälle und den Empfangsbereich.","ru":"Да, и многим компаниям стоит. ИИ — на объём и нерабочее время, человек — на сложные случаи и приём в офисе.","cn":"可以，而且很多企业本该如此。AI 负责话务量和非工作时间，人负责复杂情况和前厅接待。","br":"Sim, e muitos negócios deveriam. IA para o volume e o fora de horário, uma pessoa para a complexidade e o balcão."},"k230616d92b":{"us":"Three honest side-by-sides, including the cases where the other option wins. If a comparison tells you one product beats everything on every row, it isn't a comparison — it's an ad.","es":"Tres comparaciones honestas, incluidos los casos en que gana la otra opción. Si una comparación le dice que un producto le gana a todo en todas las filas, no es una comparación: es un anuncio.","co":"Tres comparaciones honestas, incluidos los casos en que gana la otra opción. Si una comparación le dice que un producto le gana a todo en todas las filas, no es una comparación: es un anuncio.","de":"Drei ehrliche Gegenüberstellungen, inklusive der Fälle, in denen die andere Option gewinnt. Wenn ein Vergleich behauptet, ein Produkt gewinne in jeder Zeile, ist es kein Vergleich – es ist Werbung.","ru":"Три честных сравнения, включая случаи, когда выигрывает другой вариант. Если сравнение показывает, что один продукт побеждает в каждой строке, это не сравнение, а реклама.","cn":"三组诚实的横向对比，也包括对方胜出的情形。如果一份对比说某个产品每一项都赢，那它不是对比，是广告。","br":"Três comparações honestas, incluindo os casos em que a outra opção vence. Se uma comparação diz que um produto ganha em todas as linhas, não é uma comparação — é um anúncio."},"k2f7b107912":{"us":"What missed calls cost you","es":"Lo que te cuestan las llamadas perdidas","co":"Lo que te cuestan las llamadas perdidas","de":"Was verpasste Anrufe kosten","ru":"Сколько стоят пропущенные звонки","cn":"漏接电话的代价","br":"O que as chamadas perdidas custam"},"k0af8d0a680":{"us":"No — business hours, and a queue","es":"No — horario laboral, y con fila de espera","co":"No — horario laboral, y con fila de espera","de":"Nein – Geschäftszeiten, plus Warteschlange","ru":"Нет — рабочие часы и очередь","cn":"不行 — 只在营业时间，还要排队","br":"Não — horário comercial, e com fila"},"k4ff5e7ab73":{"us":"All of One World Labs →","es":"Todo One World Labs →","co":"Todo One World Labs →","de":"Alles von One World Labs →","ru":"Весь One World Labs →","cn":"One World Labs 全部产品 →","br":"Tudo da One World Labs →"},"kf7b0ed5d13":{"us":"Multi-Location","es":"Multisede","co":"Multisede","de":"Mehrere Standorte","ru":"Несколько филиалов","cn":"多门店","br":"Multiunidades"},"k83e799f343":{"us":"$3,000–$5,000 loaded","es":"$3,000–$5,000 con carga prestacional","co":"$3,000–$5,000 con carga prestacional","de":"$3,000–$5,000 mit Nebenkosten","ru":"$3,000–$5,000 с учётом всех расходов","cn":"$3,000–$5,000（含用工总成本）","br":"$3,000–$5,000 com encargos"},"ka74b1a6023":{"us":"Connected Systems","es":"Sistemas conectados","co":"Sistemas conectados","de":"Verbundene Systeme","ru":"Подключённые системы","cn":"已连接系统","br":"Sistemas conectados"},"k3b0ebff1a4":{"us":"AI that answers, books, texts and follows up &mdash; so the front desk stops being the bottleneck.","es":"IA que responde, agenda, envía SMS y da seguimiento, para que la recepción deje de ser el cuello de botella.","co":"IA que responde, agenda, envía SMS y da seguimiento, para que la recepción deje de ser el cuello de botella.","de":"KI, die annimmt, bucht, textet und nachfasst &mdash; damit der Empfang nicht mehr der Engpass ist.","ru":"ИИ, который отвечает, записывает, пишет и напоминает, — чтобы стойка ресепшн перестала быть узким местом.","cn":"AI 负责接听、预约、发短信和跟进——前台不再成为瓶颈。","br":"IA que atende, agenda, envia SMS e faz o follow-up &mdash; para a recepção deixar de ser o gargalo."},"k2b49ae1a8b":{"us":"Reads from a script","es":"Lee un guion","co":"Lee un guion","de":"Liest ein Skript ab","ru":"Читает по скрипту","cn":"照着话术脚本念","br":"Lê um roteiro pronto"},"k1027499d83":{"us":"Route by need, log every conversation","es":"Enruta según la necesidad y registra cada conversación","co":"Enruta según la necesidad y registra cada conversación","de":"Nach Bedarf weiterleiten, jedes Gespräch protokollieren","ru":"Маршрутизация по запросу, запись каждого разговора","cn":"按需转接，记录每次通话","br":"Encaminha por necessidade e registra cada conversa"},"k37f9c72650":{"us":"AI vs answering service, voicemail, hiring","es":"IA frente a call center, buzón de voz o contratar","co":"IA frente a call center, buzón de voz o contratar","de":"KI vs. Telefonservice, Voicemail, Einstellung","ru":"ИИ против диспетчерской, автоответчика и найма","cn":"AI 与人工代接、语音留言、招人对比","br":"IA versus call center, caixa postal e contratar"},"k328dfdcde6":{"us":"CRM &amp; contacts","es":"CRM y contactos","co":"CRM y contactos","de":"CRM &amp; Kontakte","ru":"CRM и контакты","cn":"CRM 与联系人","br":"CRM e contatos"},"k2eb1b6932c":{"us":"Still weighing it up? The fastest way to judge any of these is to call the demo line and deliberately ask it something awkward.","es":"¿Todavía lo está evaluando? La forma más rápida de juzgar cualquiera de estas opciones es llamar a la línea de demostración y preguntarle algo incómodo a propósito.","co":"¿Todavía lo está evaluando? La forma más rápida de juzgar cualquiera de estas opciones es llamar a la línea de demostración y preguntarle algo incómodo a propósito.","de":"Noch unentschieden? Am schnellsten urteilen Sie, wenn Sie die Demo-Nummer anrufen und bewusst etwas Unangenehmes fragen.","ru":"Всё ещё взвешиваете? Быстрее всего оценить любой из вариантов — позвонить на демо-линию и намеренно задать неудобный вопрос.","cn":"还在权衡？判断这些方案最快的办法，是打演示电话，故意问它一个刁钻的问题。","br":"Ainda em dúvida? A forma mais rápida de avaliar qualquer uma delas é ligar para a linha de demonstração e fazer de propósito uma pergunta complicada."},"k2d7df90e1a":{"us":"OneVoice home","es":"Inicio de OneVoice","co":"Inicio de OneVoice","de":"OneVoice Startseite","ru":"Главная OneVoice","cn":"OneVoice 首页","br":"Início do OneVoice"},"k09869641b4":{"us":"Stripe, PayPal, NMI and text-to-pay","es":"Stripe, PayPal, NMI y pago por SMS","co":"Stripe, PayPal, NMI y pago por SMS","de":"Stripe, PayPal, NMI und Zahlung per SMS","ru":"Stripe, PayPal, NMI и оплата по SMS","cn":"Stripe、PayPal、NMI 及短信支付","br":"Stripe, PayPal, NMI e pagamento por SMS"},"k05b004a92e":{"us":"Solutions","es":"Soluciones","co":"Soluciones","de":"Lösungen","ru":"Решения","cn":"解决方案","br":"Soluções"},"k7582aa2557":{"us":"Multi-location","es":"Multisede","co":"Multisede","de":"Mehrere Standorte","ru":"Несколько филиалов","cn":"多门店","br":"Multiunidades"},"k20761b3ff1":{"us":"the alternatives","es":"las alternativas","co":"las alternativas","de":"die Alternativen","ru":"альтернатив","cn":"其他方案","br":"as alternativas"},"k6164fa1609":{"us":"Get started instead","es":"Mejor empezar la prueba gratis","co":"Mejor empezar la prueba gratis","de":"Lieber kostenlos testen","ru":"Лучше начать пробный период","cn":"改为开始免费试用","br":"Prefiro iniciar o teste grátis"},"kc38454cfe2":{"us":"What voicemail actually costs you","es":"Lo que el buzón de voz realmente le cuesta","co":"Lo que el buzón de voz realmente le cuesta","de":"Was die Mailbox Sie wirklich kostet","ru":"Во что вам на самом деле обходится автоответчик","cn":"语音信箱到底让你付出多少","br":"O que a caixa postal custa de verdade"},"kf8b610f8d9":{"us":"Handles two callers at once","es":"Atiende dos llamadas al tiempo","co":"Atiende dos llamadas al tiempo","de":"Nimmt zwei Anrufer gleichzeitig an","ru":"Принимает двух звонящих сразу","cn":"同时接两个来电","br":"Atende dois clientes ao mesmo tempo"},"k62c706e66d":{"us":"Typical monthly cost","es":"Costo mensual típico","co":"Costo mensual típico","de":"Typische Monatskosten","ru":"Типичная стоимость в месяц","cn":"典型月度成本","br":"Custo mensal típico"},"k4aaae657f4":{"us":"If you currently use voicemail, start there — it’s where the biggest gap is. If you already pay an answering service, that one has the clearest cost story.","es":"Si hoy usa buzón de voz, empiece por ahí: es donde está la mayor brecha. Si ya paga un servicio de contestación, esa comparación tiene la historia de costos más clara.","co":"Si hoy usa buzón de voz, empiece por ahí: es donde está la mayor brecha. Si ya paga un servicio de contestación, esa comparación tiene la historia de costos más clara.","de":"Wenn Sie heute eine Mailbox nutzen, fangen Sie dort an – dort ist die Lücke am größten. Zahlen Sie bereits für einen Telefonservice, ist dort die Kostenrechnung am klarsten.","ru":"Если сейчас у вас автоответчик, начните с него — там самый большой разрыв. Если вы уже платите службе приёма звонков, у этого сравнения самая ясная история по деньгам.","cn":"如果你现在用语音信箱，就从这篇看起 — 差距最大。如果你已经在付人工代接服务的钱，那一篇的成本账最清楚。","br":"Se você usa caixa postal hoje, comece por aí — é onde está a maior lacuna. Se você já paga um serviço de atendimento, essa é a comparação com a conta mais clara."},"k8fbf69dc93":{"us":"Voicemail","es":"Buzón de voz","co":"Buzón de voz","de":"Mailbox","ru":"Автоответчик","cn":"语音留言","br":"Caixa postal"},"k3627917b09":{"us":"New:","es":"Nuevo:","co":"Nuevo:","de":"Neu:","ru":"Новое:","cn":"新功能：","br":"Novo:"},"k20867077d5":{"us":"What is an AI receptionist?","es":"¿Qué es una recepcionista con IA?","co":"¿Qué es una recepcionista con IA?","de":"Was ist eine KI-Empfangskraft?","ru":"Что такое ИИ-администратор?","cn":"什么是 AI 前台？","br":"O que é uma recepcionista de IA?"},"keef8408ea8":{"us":"See all solutions &rarr;","es":"Ver todas las soluciones &rarr;","co":"Ver todas las soluciones &rarr;","de":"Alle Lösungen &rarr;","ru":"Все решения &rarr;","cn":"查看全部解决方案 &rarr;","br":"Ver todas as soluções &rarr;"},"k0bcf2784ed":{"us":"Get started &rarr;","es":"Empieza tu prueba gratis &rarr;","co":"Empieza tu prueba gratis &rarr;","de":"Kostenlos testen &rarr;","ru":"Начать пробный период &rarr;","cn":"开始免费试用 &rarr;","br":"Comece seu teste grátis &rarr;"},"k723baf9b2f":{"us":"30-day money-back guarantee. Setup fee included.","es":"7 días gratis en tu plan. La instalación se cobra al registrarte.","co":"7 días gratis en tu plan. La instalación se cobra al registrarte.","de":"7 Tage kostenlos im Tarif. Die Einrichtung wird bei Anmeldung berechnet.","ru":"7 дней бесплатно по тарифу. Настройка оплачивается при регистрации.","cn":"套餐含 7 天免费试用。安装费在注册时收取。","br":"7 dias grátis no seu plano. A instalação é cobrada na assinatura."},"k05fbbedbf8":{"us":"Built to your vendor&rsquo;s API","es":"Construido con la API de tu proveedor","co":"Construido con la API de tu proveedor","de":"Auf die API Ihres Anbieters gebaut","ru":"Разработано под API вашего поставщика","cn":"基于您供应商的 API 构建","br":"Construído com a API do seu fornecedor"},"k5398d7115e":{"us":"Hear it for yourself","es":"Escúchalo tú mismo","co":"Escúchalo tú mismo","de":"Hören Sie selbst","ru":"Убедитесь сами","cn":"亲自听一听","br":"Ouça você mesmo"},"kf517f5357e":{"us":"Which comparison should I read first?","es":"¿Cuál comparación debería leer primero?","co":"¿Cuál comparación debería leer primero?","de":"Welchen Vergleich lese ich zuerst?","ru":"С какого сравнения начать?","cn":"我该先看哪一篇对比？","br":"Qual comparação devo ler primeiro?"},"kd60aac7c90":{"us":"Compare the alternatives","es":"Compara las alternativas","co":"Compara las alternativas","de":"Alternativen vergleichen","ru":"Сравните альтернативы","cn":"对比其他方案","br":"Compare as alternativas"},"k26ac028f6f":{"us":"The honest cost and capability comparison","es":"La comparación honesta de costos y capacidades","co":"La comparación honesta de costos y capacidades","de":"Der ehrliche Vergleich von Kosten und Leistung","ru":"Честное сравнение стоимости и возможностей","cn":"关于成本和能力的诚实对比","br":"A comparação honesta de custo e capacidade"},"kd439272752":{"us":"Questions,","es":"Preguntas,","co":"Preguntas,","de":"Fragen,","ru":"Вопросы,","cn":"常见问题，","br":"Perguntas,"},"kb84dfafd1b":{"us":"Read the comparison →","es":"Ver la comparación →","co":"Ver la comparación →","de":"Zum Vergleich →","ru":"Читать сравнение →","cn":"阅读对比 →","br":"Ler a comparação →"},"k949c76b1c0":{"us":"A 15-minute call. We'll ask how your phone rings today, show you the same thing answering it, and tell you which plan is actually cheaper for you &mdash; even if that's the $149 one.","es":"Una llamada de 15 minutos. Te preguntamos cómo suena tu teléfono hoy, te mostramos lo mismo pero atendido y te decimos qué plan te sale realmente más barato, aunque sea el de $149.","co":"Una llamada de 15 minutos. Te preguntamos cómo suena tu teléfono hoy, te mostramos lo mismo pero atendido y te decimos qué plan te sale realmente más barato, aunque sea el de $149.","de":"Ein 15-Minuten-Gespräch. Wir fragen, wie Ihr Telefon heute klingelt, zeigen dasselbe mit Annahme und sagen Ihnen, welcher Tarif für Sie wirklich günstiger ist &mdash; auch wenn es der für $149 ist.","ru":"Разговор на 15 минут. Спросим, как сейчас звонит ваш телефон, покажем то же самое с ответом и скажем, какой тариф вам реально дешевле — даже если это тариф за $149.","cn":"15 分钟通话。我们会问您现在电话是怎么响的，演示同样的场景由 AI 接听，然后告诉您哪个套餐对您真的更划算——哪怕是 149 美元那个。","br":"Uma ligação de 15 minutos. Perguntamos como seu telefone toca hoje, mostramos a mesma coisa sendo atendida e dizemos qual plano é realmente mais barato para você &mdash; mesmo que seja o de $149."},"k96d82654f5":{"us":"AI receptionist vs voicemail","es":"Recepcionista con IA vs buzón de voz","co":"Recepcionista con IA vs buzón de voz","de":"KI-Rezeptionist vs. Mailbox","ru":"ИИ-секретарь против автоответчика","cn":"AI 前台 vs 语音信箱","br":"Recepcionista de IA vs. caixa postal"},"k47c7ce5881":{"us":"Knows your prices, hours and policies","es":"Conoce sus precios, horarios y políticas","co":"Conoce sus precios, horarios y políticas","de":"Kennt Ihre Preise, Zeiten und Regeln","ru":"Знает ваши цены, часы работы и правила","cn":"清楚你的价格、营业时间和规定","br":"Conhece seus preços, horários e políticas"},"ke5efb05125":{"us":"Email support","es":"Soporte por correo","co":"Soporte por correo","de":"E-Mail-Support","ru":"Поддержка по эл. почте","cn":"邮件支持","br":"Suporte por e-mail"},"ka83de8a9ca":{"us":"Book a demo","es":"Reservar una demo","co":"Reservar una demo","de":"Demo buchen","ru":"Записаться на демо","cn":"预约演示","br":"Agendar uma demo"},"kab36422ce2":{"us":"Don't take our word for it. Call it.","es":"No nos creas a nosotros. Llámalo.","co":"No nos creas a nosotros. Llámalo.","de":"Glauben Sie es nicht uns. Rufen Sie an.","ru":"Не верьте нам на слово. Позвоните.","cn":"别听我们说，打个电话试试。","br":"Não acredite em nós. Ligue."},"ka06b87689a":{"us":"Rather just hear it? Call Ava right now.","es":"¿Prefieres escucharlo? Llama a Ava ahora mismo.","co":"¿Prefieres escucharlo? Llama a Ava ahora mismo.","de":"Lieber selbst hören? Rufen Sie Ava jetzt an.","ru":"Хотите просто послушать? Позвоните Ava прямо сейчас.","cn":"想直接听听？现在就给 Ava 打电话。","br":"Prefere ouvir? Ligue para a Ava agora."},"kb62d7e2e25":{"us":"A line per listing, buyers answered at 9pm","es":"Una línea por propiedad, compradores atendidos a las 9 de la noche","co":"Una línea por propiedad, compradores atendidos a las 9 de la noche","de":"Eine Leitung pro Objekt, Interessenten auch um 21 Uhr","ru":"Отдельная линия на объект, покупателям отвечают в 21:00","cn":"每个房源一条线，晚上 9 点也有人接","br":"Uma linha por imóvel, compradores atendidos às 21h"},"kbdec477e3a":{"us":"Transcribed, scored and searchable afterwards.","es":"Transcrita, puntuada y consultable después.","co":"Transcrita, puntuada y consultable después.","de":"Danach transkribiert, bewertet und durchsuchbar.","ru":"После звонка: расшифровка, оценка и поиск.","cn":"通话后自动转写、评分，可搜索。","br":"Transcrita, pontuada e pesquisável depois."},"k11ce9a6e0a":{"us":"Ava picks up 24/7. Ask her about hours, pricing, availability &mdash; anything you'd ask a real front desk.","es":"Ava contesta 24/7. Pregúntale por horarios, precios o disponibilidad: lo que le preguntarías a una recepción real.","co":"Ava contesta 24/7. Pregúntale por horarios, precios o disponibilidad: lo que le preguntarías a una recepción real.","de":"Ava nimmt rund um die Uhr ab. Fragen Sie nach Öffnungszeiten, Preisen, Verfügbarkeit &mdash; wie an einem echten Empfang.","ru":"Ava отвечает круглосуточно. Спросите про часы работы, цены, свободное время — что угодно.","cn":"Ava 全天候接听。问她营业时间、价格、有没有空位——就像问真人前台一样。","br":"A Ava atende 24/7. Pergunte sobre horários, preços, disponibilidade &mdash; o que você perguntaria a uma recepção de verdade."},"k8bbd19a994":{"us":"Intake, scheduling, recall and check-in","es":"Admisión, citas, seguimiento y registro","co":"Admisión, citas, seguimiento y registro","de":"Aufnahme, Terminierung, Recall und Check-in","ru":"Приём, расписание, напоминания и регистрация","cn":"接诊、预约、复诊提醒与签到","br":"Triagem, agendamento, retorno e check-in"},"k70f8bb9a8a":{"us":"Home","es":"Inicio","co":"Inicio","de":"Startseite","ru":"Главная","cn":"首页","br":"Início"},"k86516c84fd":{"us":"Pricing, trials, integrations, cancelling","es":"Precios, pruebas, integraciones y cancelación","co":"Precios, pruebas, integraciones y cancelación","de":"Preise, Testphase, Integrationen, Kündigung","ru":"Тарифы, пробный период, интеграции, отмена","cn":"价格、试用、集成、取消","br":"Preços, testes, integrações, cancelamento"},"k128b1bbf6e":{"us":"The full overview page","es":"La página general completa","co":"La página general completa","de":"Die komplette Übersichtsseite","ru":"Полная обзорная страница","cn":"完整概览页面","br":"A página completa de visão geral"},"k92c5bd4b49":{"us":"Writes back into your CRM or system of record","es":"Escribe de vuelta en tu CRM o sistema principal","co":"Escribe de vuelta en tu CRM o sistema principal","de":"Schreibt zurück in Ihr CRM oder Kernsystem","ru":"Записывает обратно в ваш CRM или основную систему","cn":"回写到您的 CRM 或核心系统","br":"Grava de volta no seu CRM ou sistema principal"},"k81212ed429":{"us":"Only when someone is at the desk","es":"Solo cuando hay alguien en la recepción","co":"Solo cuando hay alguien en la recepción","de":"Nur wenn jemand am Empfang ist","ru":"Только когда кто-то на месте","cn":"只有前台有人时才行","br":"Só quando alguém está na recepção"},"k87df60de33":{"us":"Resources","es":"Recursos","co":"Recursos","de":"Ressourcen","ru":"Материалы","cn":"资源","br":"Recursos"},"k9f290216c2":{"us":"Ava is our live demo agent. Ring her from your own phone and try to trip her up &mdash; ask about hours, pricing, availability, whatever you'd throw at a real front desk.","es":"Ava es nuestra agente de demo en vivo. Llámala desde tu teléfono e intenta hacerla fallar: pregúntale por horarios, precios, disponibilidad, lo que le lanzarías a una recepción real.","co":"Ava es nuestra agente de demo en vivo. Llámala desde tu teléfono e intenta hacerla fallar: pregúntale por horarios, precios, disponibilidad, lo que le lanzarías a una recepción real.","de":"Ava ist unser Live-Demo-Agent. Rufen Sie sie von Ihrem Telefon an und versuchen Sie, sie aus der Fassung zu bringen &mdash; Öffnungszeiten, Preise, Verfügbarkeit, alles.","ru":"Ava — наш демо-агент. Позвоните ей со своего телефона и попробуйте её запутать: спросите про часы, цены, свободное время — что угодно.","cn":"Ava 是我们的实时演示客服。用您自己的手机打给她，尽管刁难她——营业时间、价格、有没有空位，随便问。","br":"A Ava é nossa agente de demonstração ao vivo. Ligue do seu telefone e tente confundi-la &mdash; horários, preços, disponibilidade, o que quiser."},"k2335d3b665":{"us":"How an AI receptionist stacks up against","es":"Cómo se compara una recepcionista con IA frente a","co":"Cómo se compara una recepcionista con IA frente a","de":"Wie sich ein KI-Rezeptionist schlägt gegen","ru":"Как ИИ-секретарь выглядит на фоне","cn":"AI 前台对比","br":"Como uma recepcionista de IA se compara a"},"k906dca26b3":{"us":"Typical time to answer. No ringing, no hold queue.","es":"Tiempo típico de respuesta. Sin timbres ni colas de espera.","co":"Tiempo típico de respuesta. Sin timbres ni colas de espera.","de":"Typische Antwortzeit. Kein Klingeln, keine Warteschleife.","ru":"Обычное время ответа. Без гудков и очереди ожидания.","cn":"典型应答时间。不用等铃声，也没有排队。","br":"Tempo típico de atendimento. Sem toques nem fila de espera."},"k6a2a8502a1":{"us":"AI Reception","es":"Recepción con IA","co":"Recepción con IA","de":"KI-Empfang","ru":"ИИ-приём звонков","cn":"AI 前台","br":"Recepção com IA"}};window.OV_JSMAP={};</script><script src="/onevoice/pricing-v8-copy.js"></script>
+<script>
+/* ---- OneVoice site i18n -------------------------------------------------
+   Keys are hashes of the English source string, so a copy edit invalidates its
+   own translation and falls back to English rather than silently showing stale
+   text in another language. OV_DICT is injected per page with only the strings
+   that page uses. */
+(function(){
+  var DICT = window.OV_DICT || {};
+  var cur = 'us';
+  try { cur = localStorage.getItem('ov_ctry') || 'us'; } catch(e){}
+
+  function t(key){
+    var d = DICT[key];
+    if(!d) return null;
+    if(cur === 'us') return d.us != null ? d.us : null;
+    return d[cur] != null ? d[cur] : (d.us != null ? d.us : null);
+  }
+  function apply(root){
+    root = root || document;
+    root.querySelectorAll('[data-i18n]').forEach(function(el){
+      var v = t(el.getAttribute('data-i18n'));
+      if(v != null) el.innerHTML = v;
+    });
+    root.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      var v = t(el.getAttribute('data-i18n-ph'));
+      if(v != null) el.setAttribute('placeholder', v);
+    });
+    root.querySelectorAll('[data-i18n-aria]').forEach(function(el){
+      var v = t(el.getAttribute('data-i18n-aria'));
+      if(v != null) el.setAttribute('aria-label', v);
+    });
+    document.documentElement.setAttribute('lang', LANGTAG[cur] || 'en');
+  }
+  var LANGTAG = {us:'en', es:'es', co:'es-CO', de:'de', ru:'ru', cn:'zh', br:'pt-BR'};
+
+  window.OV_SET_LOCALE = function(code){
+    cur = code || 'us';
+    try { localStorage.setItem('ov_ctry', cur); } catch(e){}
+    apply(document);
+    if(window.OV_SEG_MOVE) window.OV_SEG_MOVE(document.getElementById('segAudience'));
+    if(window.OV_SEG_MOVE) window.OV_SEG_MOVE(document.getElementById('segTerm'));
+    /* The simulator's transcript is drawn by JS, so apply() cannot reach it,
+       and its tab labels just changed width under the sliding indicator. */
+    if(window.OV_SIM_RERENDER) window.OV_SIM_RERENDER();
+    else if(window.OV_SIM_MOVE) window.OV_SIM_MOVE();
+  };
+  /* Strings that live in page JavaScript (the call simulator transcript) are
+     looked up by their English source rather than by a key, so the script file
+     never has to carry hashes. */
+  window.OV_TJS = function(en){
+    var m = window.OV_JSMAP || {};
+    var k = m[en];
+    if(!k) return en;
+    var v = t(k);
+    return v == null ? en : v;
+  };
+  /* reveal the page now that it says the right thing */
+  function reveal(){ document.documentElement.removeAttribute('data-ov-pending'); }
+  window.OV_APPLY_I18N = apply;
+  window.OV_LANG = function(){ return cur; };
+  if(cur !== 'us'){
+    apply(document);
+    reveal();
+    /* the simulator boots after us; give it a beat, then repaint in-language */
+    setTimeout(function(){ if(window.OV_SIM_RERENDER) window.OV_SIM_RERENDER(); }, 0);
+  } else {
+    reveal();
+  }
+})();
+</script>
+</body>
+</html>

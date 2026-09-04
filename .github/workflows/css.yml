@@ -1,0 +1,21 @@
+name: css
+# The one real cost of leaving the Play CDN behind: a NEW page's utility classes are only in the
+# stylesheet if somebody rebuilt it. This makes that impossible to forget — the build runs on
+# every push and the job FAILS if the committed assets/ow.css is not what the sources produce.
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci || npm install
+      - run: npm run build:css
+      - name: assets/ow.css must be up to date
+        run: |
+          if ! git diff --quiet -- assets/ow.css; then
+            echo "::error::assets/ow.css is stale. Run 'npm run build:css' and commit the result."
+            git diff --stat -- assets/ow.css
+            exit 1
+          fi
