@@ -565,14 +565,15 @@
 
     /* All eight apps share one grid: two columns on phones and four on desktop.
        No app gets a special full-width row, so products 7 and 8 complete two equal rows. */
-    .app-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
-    @media (min-width:1024px){ .app-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;} }
+    .app-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;}
+    @media (min-width:640px){ .app-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+    @media (min-width:1024px){ .app-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:1fr;gap:24px;} }
     @media (min-width:640px) and (max-width:1023px){ .app-grid{gap:16px;} }
     @media (max-width:639px){
         .app-card{padding:16px !important;border-radius:20px !important;}
-        .app-card h3{font-size:17px !important;}
-        .app-card h4{font-size:9px !important;letter-spacing:.14em !important;}
-        .app-card p{font-size:12px !important;line-height:1.5 !important;
+        .app-card h3{font-size:22px !important;}
+        .app-card h4{font-size:11px !important;letter-spacing:.14em !important;}
+        .app-card p{font-size:14px !important;line-height:1.5 !important;
             display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
         .app-card .hue-tile{width:40px !important;height:40px !important;border-radius:12px !important;}
         .app-card .app-open{font-size:13px !important;}
@@ -660,7 +661,7 @@
     #apps .coming-label{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:14px;background:rgba(15,118,110,.09);color:#115E59;font-size:13px;font-weight:700;}
     .dark #apps .coming-label{color:#99F6E4;background:rgba(20,184,166,.12);}
     @media (hover:hover){#apps .app-card:not(.app-coming):hover{transform:translateY(-3px);}}
-    @media (max-width:479px){.app-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}#apps .app-card{padding:16px !important;}#apps .app-card h3{font-size:17px !important;}#apps .app-card h4{font-size:9px !important;}#apps .app-card p{font-size:12px !important;line-height:1.5 !important;}}
+    @media (max-width:479px){.app-grid{grid-template-columns:minmax(0,1fr);gap:16px;}#apps .app-card{padding:16px !important;}#apps .app-card h3{font-size:22px !important;}#apps .app-card h4{font-size:11px !important;}#apps .app-card p{font-size:14px !important;line-height:1.5 !important;}}
     @media (prefers-reduced-motion:reduce){#apps .app-card,#apps .app-learn svg{transition:none;}#apps .app-card:hover,#apps .app-learn:hover svg{transform:none;}}
     @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.frost{background:#F0F3FA;}.dark .frost{background:#182237;}}
 </style>
@@ -1278,6 +1279,17 @@
                         <a class="app-learn" href="/apps/oneevent/" aria-label="Learn about OneEvent" title="Learn about OneEvent" data-app-name="OneEvent" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
                     </div>
                 </div>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#1F4E79;--hd:#173C5E;--hl:#9DBBDA">
+                    <div class="app-copy">
+                        <h3 class="text-2xl font-bold mb-1" data-no-translate><span class="text-primary">One</span>Business</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onebusiness_tag">Every service, one account</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onebusiness_desc">The calls, the website, the leads and the results from every service you buy from us, in one place.</p>
+                    </div>
+                    <div class="app-actions">
+                        <a class="app-open" href="/apps/onebusiness/" aria-label="Explore One Business" data-app-name="One Business" data-app-action="learn"><span data-i18n="onebusiness_explore">Explore app</span></a>
+                        <a class="app-learn" href="/apps/onebusiness/" aria-label="Learn about One Business" title="Learn about One Business" data-app-name="One Business" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+                    </div>
+                </div>
                 <div class="app-card app-coming frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#8B3DEA;--hd:#6D17D5;--hl:#D3B5F7">
                     <div class="app-copy">
                         <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
@@ -1287,17 +1299,6 @@
                     <div class="app-actions">
                         <span class="coming-label" data-i18n="coming_soon">Coming soon</span>
                         <a class="app-learn" href="/apps/onesocial/" aria-label="Learn about OneSocial" title="Learn about OneSocial" data-app-name="OneSocial" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
-                    </div>
-                </div>
-                <div class="app-card app-coming frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#7B2D3B;--hd:#62242F;--hl:#DCA0AB">
-                    <div class="app-copy">
-                        <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your middleman</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Somebody in your corner finding and negotiating the work, who takes a share only when you get paid.</p>
-                    </div>
-                    <div class="app-actions">
-                        <span class="coming-label" data-i18n="coming_soon">Coming soon</span>
-                        <a class="app-learn" href="/apps/oneagent/" aria-label="Learn about OneAgent" title="Learn about OneAgent" data-app-name="OneAgent" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
                     </div>
                 </div>
                 <div class="app-card app-coming frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#C24A32;--hd:#9E3A27;--hl:#F9B4A5">
@@ -1311,15 +1312,15 @@
                         <a class="app-learn" href="/apps/onepay/" aria-label="Learn about OnePay" title="Learn about OnePay" data-app-name="OnePay" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
                     </div>
                 </div>
-                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#1F4E79;--hd:#173C5E;--hl:#9DBBDA">
+                <div class="app-card app-coming frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#7B2D3B;--hd:#62242F;--hl:#DCA0AB">
                     <div class="app-copy">
-                        <h3 class="text-2xl font-bold mb-1" data-no-translate><span class="text-primary">One</span>Business</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onebusiness_tag">Every service, one account</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onebusiness_desc">The calls, the website, the leads and the results from every service you buy from us, in one place.</p>
+                        <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your middleman</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Somebody in your corner finding and negotiating the work, who takes a share only when you get paid.</p>
                     </div>
                     <div class="app-actions">
-                        <a class="app-open" href="/apps/onebusiness/" aria-label="Explore One Business" data-app-name="One Business" data-app-action="learn"><span data-i18n="onebusiness_explore">Explore app</span></a>
-                        <a class="app-learn" href="/apps/onebusiness/" aria-label="Learn about One Business" title="Learn about One Business" data-app-name="One Business" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+                        <span class="coming-label" data-i18n="coming_soon">Coming soon</span>
+                        <a class="app-learn" href="/apps/oneagent/" aria-label="Learn about OneAgent" title="Learn about OneAgent" data-app-name="OneAgent" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
                     </div>
                 </div>
             </div>
