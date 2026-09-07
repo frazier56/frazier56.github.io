@@ -427,19 +427,6 @@
 
 
 
-    /* ---------- app cards: two tap targets, no icons (Lee, 13 Aug) ----------
-       The top of the card explains the app and links to its own page; the strip at the bottom
-       opens the app. The <a> around the text must inherit the card's typography — left to the
-       browser it renders as a blue underlined link and the card stops looking like a card. */
-    .app-card .app-learn{color:inherit;text-decoration:none;display:flex;flex-direction:column;flex-grow:1;}
-    .app-card .app-learn:hover h3{text-decoration:underline;text-underline-offset:3px;}
-    .app-card .app-foot{border-top:1px solid var(--border,rgba(255,255,255,.14));}
-    .app-card .app-open-strip{font-size:15px;}
-    .app-card .app-open-strip svg{width:16px;height:16px;flex:0 0 auto;margin-left:4px;
-        transition:transform .25s ease;}
-    .app-card .app-open-strip:hover svg{transform:translateX(3px);}
-    .app-card{transition:transform .3s ease;}
-    .app-card:hover{transform:translateY(-2px);}
     /* ---------- slide to choose (Lee, 13 Aug) ----------
        Replaces two buttons of unequal weight. No default, no recommendation: the handle rests in
        the centre and both destinations are set identically. Dragging past 38% of the way commits;
@@ -504,8 +491,6 @@
         overflow:visible;clip:auto;clip-path:none;white-space:normal;}
     @media (hover:none){.slide-hint{opacity:.7;}}
 
-    .app-card .app-more{display:inline-block;margin-top:-8px;margin-bottom:14px;font-size:13px;
-        font-weight:700;color:var(--hb,#2E6BE6);text-decoration:underline;text-underline-offset:3px;}
     /* the slider, fixed: centred in the page, wide enough that the knob never covers a word */
     .slide-pick{grid-column:1 / -1;width:100%;max-width:min(520px,92vw);
         margin-left:auto !important;margin-right:auto !important;justify-self:center;}
@@ -650,6 +635,34 @@
         .svc-row{padding:14px 10px;}
         .svc-row .svc-desc{font-size:12.5px;}
     }
+
+    /* Homepage refresh 2026-09-06: glass surfaces and independent native links. */
+    .frost{background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(255,255,255,.28) 55%,rgba(235,246,255,.5));
+        border:1px solid rgba(255,255,255,.86);box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 rgba(255,255,255,.4),0 16px 40px -24px rgba(24,49,99,.45),0 2px 8px rgba(24,49,99,.05);
+        -webkit-backdrop-filter:blur(28px) saturate(165%);backdrop-filter:blur(28px) saturate(165%);}
+    .dark .frost{background:linear-gradient(135deg,rgba(83,106,148,.24),rgba(20,28,48,.70) 60%,rgba(31,54,70,.55));
+        border-color:rgba(188,211,242,.25);box-shadow:inset 0 1px 0 rgba(229,242,255,.28),inset 0 -1px 0 rgba(156,189,231,.07),0 18px 44px -22px rgba(0,0,0,.7);}
+    #apps .app-card{min-width:0;transition:transform .2s ease,box-shadow .2s ease;border-radius:24px;}
+    #apps .app-copy{display:flex;flex-direction:column;flex:1;}
+    #apps .app-copy p{display:block;-webkit-line-clamp:unset;overflow:visible;}
+    #apps .app-actions{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:auto;padding-top:16px;border-top:1px solid var(--color-border);}
+    #apps .app-open{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:76px;padding:0 18px;border-radius:14px;border:1px solid rgba(15,118,110,.36);background:rgba(255,255,255,.55);color:#115E59;font-size:14px;font-weight:700;text-decoration:none;}
+    #apps .app-learn{display:flex;flex:0 0 44px;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(27,73,184,.18);border-radius:50%;background:rgba(255,255,255,.35);color:var(--ow-primary);text-decoration:none;}
+    #apps .app-learn svg{transition:transform .2s ease;}
+    #apps .app-learn:hover svg{transform:translateX(3px);}
+    #apps .app-open:hover,#apps .app-learn:hover{background:rgba(255,255,255,.8);border-color:currentColor;}
+    .dark #apps .app-open{color:#99F6E4;background:rgba(20,184,166,.12);border-color:rgba(94,234,212,.4);}
+    .dark #apps .app-learn{background:rgba(157,188,250,.08);border-color:rgba(157,188,250,.3);}
+    .dark #apps .app-open:hover,.dark #apps .app-learn:hover{background:rgba(157,188,250,.18);}
+    #apps a:focus-visible{outline:3px solid var(--ow-primary);outline-offset:4px;}
+    #apps .app-coming{grid-column:1 / -1;}
+    #apps .app-coming .app-copy{max-width:640px;}
+    #apps .coming-label{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:14px;background:rgba(15,118,110,.09);color:#115E59;font-size:13px;font-weight:700;}
+    .dark #apps .coming-label{color:#99F6E4;background:rgba(20,184,166,.12);}
+    @media (hover:hover){#apps .app-card:not(.app-coming):hover{transform:translateY(-3px);}}
+    @media (max-width:479px){.app-grid{grid-template-columns:minmax(0,1fr);gap:16px;}#apps .app-card{padding:22px !important;}#apps .app-card h3{font-size:22px !important;}#apps .app-card h4{font-size:10px !important;}#apps .app-card p{font-size:14px !important;line-height:1.65 !important;}}
+    @media (prefers-reduced-motion:reduce){#apps .app-card,#apps .app-learn svg{transition:none;}#apps .app-card:hover,#apps .app-learn:hover svg{transform:none;}}
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.frost{background:#F0F3FA;}.dark .frost{background:#182237;}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- One World session bridge — keeps this origin's session in step with the
@@ -1211,128 +1224,89 @@
             </div>
         </section>
 
-        <!-- ================= CONTACT ================= -->
-        <section id="contact" class="relative z-10 container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
-            <div class="grid lg:grid-cols-[.92fr_1.08fr] gap-6 lg:gap-8 items-stretch">
-                <div class="frost hue-top rounded-3xl p-8 md:p-10" style="--hb:#15C2B2;--hd:#0D9488;--hl:#99F6E4">
-                    <h3 class="eyebrow mb-4">Contact One World Labs</h3>
-                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-5">Need help choosing the right app or service?</h2>
-                    <p class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">Tell us what you are trying to build, automate, sell, or fix. Your message goes to support, and urgent calls route through our front desk line.</p>
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-1 gap-3">
-                        <a href="mailto:support@oneworldlabs.ai" class="rounded-2xl border border-border/70 bg-card/60 px-5 py-4 transition-colors hover:border-primary/45">
-                            <span class="block text-xs font-bold uppercase tracking-[.18em] text-muted-foreground">Email</span>
-                            <span class="mt-1 block font-semibold text-foreground">support@oneworldlabs.ai</span>
-                        </a>
-                        <a href="tel:+18557700200" class="rounded-2xl border border-border/70 bg-card/60 px-5 py-4 transition-colors hover:border-primary/45">
-                            <span class="block text-xs font-bold uppercase tracking-[.18em] text-muted-foreground">Call</span>
-                            <span class="mt-1 block font-semibold text-foreground">(855) 770-0200</span>
-                        </a>
-                    </div>
-                </div>
-
-                <form class="frost rounded-3xl p-6 md:p-8 space-y-5" action="mailto:support@oneworldlabs.ai" method="post" enctype="text/plain" data-contact-form>
-                    <div class="grid sm:grid-cols-2 gap-4">
-                        <label class="block">
-                            <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground">Name</span>
-                            <input name="name" autocomplete="name" required class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="Your name">
-                        </label>
-                        <label class="block">
-                            <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground">Email</span>
-                            <input name="email" type="email" autocomplete="email" required class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="you@example.com">
-                        </label>
-                    </div>
-                    <div class="grid sm:grid-cols-2 gap-4">
-                        <label class="block">
-                            <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground">Phone</span>
-                            <input name="phone" type="tel" autocomplete="tel" class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="Optional">
-                        </label>
-                        <label class="block">
-                            <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground">What do you need?</span>
-                            <select name="topic" class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60">
-                                <option>OneVoice call answering</option>
-                                <option>OnePage website upgrade</option>
-                                <option>OneApp mobile app</option>
-                                <option>OneEvent tickets and events</option>
-                                <option>OneHome rentals or sales</option>
-                                <option>OneJob, OneScore, or OneSocial</option>
-                                <option>Something else</option>
-                            </select>
-                        </label>
-                    </div>
-                    <label class="block">
-                        <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground">Message</span>
-                        <textarea name="message" rows="5" required class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="A few details help us route this quickly."></textarea>
-                    </label>
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                        <p class="text-xs text-muted-foreground max-w-md">Submitting opens your email app with the details filled in. For urgent help, call the front desk.</p>
-                        <button type="submit" class="btn-clay h-12 px-6 text-base gap-2">Send <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg></button>
-                    </div>
-                </form>
-            </div>
-        </section>
 
         <!-- ================= THE PLATFORM — APPS ================= -->
         <section id="apps" class="relative z-10 container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
             <div class="text-center mb-10 md:mb-16">
                 <h3 class="eyebrow mb-3" data-i18n="platform_eyebrow">One World Platform</h3>
                 <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="apps_h2">Jump into your favorite app</h2>
-                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="apps_sub">Six apps, one login — five live today, one on the way.</p>
+                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="apps_sub">Six apps, one login — with OnePay coming soon.</p>
             </div>
 
             <div class="app-grid">
-                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#E0A21F;--hd:#B38219;--hl:#F3DCAA">
-                    <a class="app-learn flex flex-col flex-grow" href="/apps/onescore/">
-                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#E0A21F;--hd:#79560E;--hl:#F3DCAA">
+                    <div class="app-copy">
+                        <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Credibility you own</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Your whole reputation — real work, verified credentials and reviews — in one number you can show anybody. Free forever.</p>
-                        <span class="app-more">more</span>
-                    </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/onescore"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    </div>
+                    <div class="app-actions">
+                        <a class="app-open" href="https://app.oneworldlabs.ai/onescore" aria-label="Open app: OneScore" data-app-name="OneScore" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
+                        <a class="app-learn" href="/apps/onescore/" aria-label="Learn about OneScore" title="Learn about OneScore" data-app-name="OneScore" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+                    </div>
                 </div>
-                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#17A45C;--hd:#12834A;--hl:#93F0C1">
-                    <a class="app-learn flex flex-col flex-grow" href="/apps/onejob/">
-                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#17A45C;--hd:#10673C;--hl:#93F0C1">
+                    <div class="app-copy">
+                        <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">The work marketplace</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Get hired and get paid, without chasing anybody for the money. A signed agreement on every job and the payment held until it is done.</p>
-                        <span class="app-more">more</span>
-                    </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/jobs"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    </div>
+                    <div class="app-actions">
+                        <a class="app-open" href="https://app.oneworldlabs.ai/jobs" aria-label="Open app: OneJob" data-app-name="OneJob" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
+                        <a class="app-learn" href="/apps/onejob/" aria-label="Learn about OneJob" title="Learn about OneJob" data-app-name="OneJob" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+                    </div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#0D9488;--hd:#0F766E;--hl:#5EEAD4">
-                    <a class="app-learn flex flex-col flex-grow" href="/apps/onehome/">
-                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Home</h3>
+                    <div class="app-copy">
+                        <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Home</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Rent or buy a home</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">A home with a real contract behind it — a signed lease, photos both sides agreed, and the property's real registered sale history.</p>
-                        <span class="app-more">more</span>
-                    </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/home"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    </div>
+                    <div class="app-actions">
+                        <a class="app-open" href="https://app.oneworldlabs.ai/home" aria-label="Open app: OneHome" data-app-name="OneHome" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
+                        <a class="app-learn" href="/apps/onehome/" aria-label="Learn about OneHome" title="Learn about OneHome" data-app-name="OneHome" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+                    </div>
                 </div>
-                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#E2711D;--hd:#B55A17;--hl:#F4C9A9">
-                    <a class="app-learn flex flex-col flex-grow" href="/apps/oneevent/">
-                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#E2711D;--hd:#873F0D;--hl:#F4C9A9">
+                    <div class="app-copy">
+                        <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Events and tickets</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Run an event and keep what you sell. The page, the tickets, the door and the money, all in one place.</p>
-                        <span class="app-more">more</span>
-                    </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/events"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    </div>
+                    <div class="app-actions">
+                        <a class="app-open" href="https://app.oneworldlabs.ai/events" aria-label="Open app: OneEvent" data-app-name="OneEvent" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
+                        <a class="app-learn" href="/apps/oneevent/" aria-label="Learn about OneEvent" title="Learn about OneEvent" data-app-name="OneEvent" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+                    </div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#8B3DEA;--hd:#6D17D5;--hl:#D3B5F7">
-                    <a class="app-learn flex flex-col flex-grow" href="/apps/onesocial/">
-                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
+                    <div class="app-copy">
+                        <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your platforms, connected</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Every account you already have, adding up to one professional identity somebody can verify.</p>
-                        <span class="app-more">more</span>
-                    </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/social"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    </div>
+                    <div class="app-actions">
+                        <a class="app-open" href="https://app.oneworldlabs.ai/social" aria-label="Open app: OneSocial" data-app-name="OneSocial" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
+                        <a class="app-learn" href="/apps/onesocial/" aria-label="Learn about OneSocial" title="Learn about OneSocial" data-app-name="OneSocial" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+                    </div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#7B2D3B;--hd:#62242F;--hl:#DCA0AB">
-                    <a class="app-learn flex flex-col flex-grow" href="/apps/oneagent/">
-                        <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
+                    <div class="app-copy">
+                        <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your middleman</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Somebody in your corner finding and negotiating the work, who takes a share only when you get paid.</p>
-                        <span class="app-more">more</span>
-                    </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/agent"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    </div>
+                    <div class="app-actions">
+                        <a class="app-open" href="https://app.oneworldlabs.ai/agent" aria-label="Open app: OneAgent" data-app-name="OneAgent" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
+                        <a class="app-learn" href="/apps/oneagent/" aria-label="Learn about OneAgent" title="Learn about OneAgent" data-app-name="OneAgent" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+                    </div>
+                </div>
+                <div class="app-card app-coming frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#0D9488;--hd:#0F766E;--hl:#5EEAD4">
+                    <div class="app-copy">
+                        <h3 class="text-2xl font-bold mb-1" data-no-translate><span class="text-primary">One</span>Pay</h3>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onepay_tag">Payments, made simpler</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onepay_desc">A simpler way to accept payments is on the way. OnePay is in development and is not yet available.</p>
+                    </div>
+                    <div class="app-actions"><span class="coming-label" data-i18n="onepay_soon">Coming soon</span></div>
                 </div>
             </div>
         </section>
@@ -1438,6 +1412,65 @@
                     </button>
                     <div class="qa-content"><p class="text-muted-foreground text-base leading-relaxed pb-6 pl-14" data-i18n="q4_a">No algorithm decides who sees your business, and your reputation isn't scattered across ten platforms. Your proof is verified, yours, and portable — you decide where it shows up.</p></div>
                 </div>
+            </div>
+        </section>
+        <!-- ================= CONTACT ================= -->
+        <section id="contact" class="relative z-10 container mx-auto px-4 max-w-6xl mb-24 md:mb-36 scroll-mt-24">
+            <div class="grid lg:grid-cols-[.92fr_1.08fr] gap-6 lg:gap-8 items-stretch">
+                <div class="frost hue-top rounded-3xl p-8 md:p-10" style="--hb:#15C2B2;--hd:#0D9488;--hl:#99F6E4">
+                    <h3 class="eyebrow mb-4">Contact One World Labs</h3>
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-5">Need help choosing the right app or service?</h2>
+                    <p class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">Tell us what you are trying to build, automate, sell, or fix. Your message goes to support, and urgent calls route through our front desk line.</p>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-1 gap-3">
+                        <a href="mailto:support@oneworldlabs.ai" class="rounded-2xl border border-border/70 bg-card/60 px-5 py-4 transition-colors hover:border-primary/45">
+                            <span class="block text-xs font-bold uppercase tracking-[.18em] text-muted-foreground">Email</span>
+                            <span class="mt-1 block font-semibold text-foreground">support@oneworldlabs.ai</span>
+                        </a>
+                        <a href="tel:+18557700200" class="rounded-2xl border border-border/70 bg-card/60 px-5 py-4 transition-colors hover:border-primary/45">
+                            <span class="block text-xs font-bold uppercase tracking-[.18em] text-muted-foreground">Call</span>
+                            <span class="mt-1 block font-semibold text-foreground">(855) 770-0200</span>
+                        </a>
+                    </div>
+                </div>
+
+                <form class="frost rounded-3xl p-6 md:p-8 space-y-5" action="mailto:support@oneworldlabs.ai" method="post" enctype="text/plain" data-contact-form>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <label class="block">
+                            <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground">Name</span>
+                            <input name="name" autocomplete="name" required class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="Your name">
+                        </label>
+                        <label class="block">
+                            <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground">Email</span>
+                            <input name="email" type="email" autocomplete="email" required class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="you@example.com">
+                        </label>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <label class="block">
+                            <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground">Phone</span>
+                            <input name="phone" type="tel" autocomplete="tel" class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="Optional">
+                        </label>
+                        <label class="block">
+                            <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground">What do you need?</span>
+                            <select name="topic" class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60">
+                                <option>OneVoice call answering</option>
+                                <option>OnePage website upgrade</option>
+                                <option>OneApp mobile app</option>
+                                <option>OneEvent tickets and events</option>
+                                <option>OneHome rentals or sales</option>
+                                <option>OneJob, OneScore, or OneSocial</option>
+                                <option>Something else</option>
+                            </select>
+                        </label>
+                    </div>
+                    <label class="block">
+                        <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground">Message</span>
+                        <textarea name="message" rows="5" required class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="A few details help us route this quickly."></textarea>
+                    </label>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <p class="text-xs text-muted-foreground max-w-md">Submitting opens your email app with the details filled in. For urgent help, call the front desk.</p>
+                        <button type="submit" class="btn-clay h-12 px-6 text-base gap-2">Send <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg></button>
+                    </div>
+                </form>
             </div>
         </section>
     </main>
@@ -1819,7 +1852,14 @@
     Object.keys(I18N_EXT).forEach(function(l){
         I18N[l] = Object.assign({}, I18N[l] || {}, I18N_EXT[l]);
     });
+    var CARD_I18N = {"en": {"apps_sub": "Six apps, one login — with OnePay coming soon.", "card_open": "Open app", "card_learn": "Learn about", "onepay_tag": "Payments, made simpler", "onepay_desc": "A simpler way to accept payments is on the way. OnePay is in development and is not yet available.", "onepay_soon": "Coming soon"}, "es": {"apps_sub": "Seis apps, un solo inicio de sesión — OnePay llegará pronto.", "card_open": "Abrir app", "card_learn": "Conoce", "onepay_tag": "Pagos más sencillos", "onepay_desc": "Una forma más sencilla de aceptar pagos está en camino. OnePay está en desarrollo y aún no está disponible.", "onepay_soon": "Próximamente"}, "co": {"apps_sub": "Seis apps, un solo inicio de sesión — OnePay llegará pronto.", "card_open": "Abrir app", "card_learn": "Conoce", "onepay_tag": "Pagos más sencillos", "onepay_desc": "Una forma más sencilla de aceptar pagos está en camino. OnePay está en desarrollo y aún no está disponible.", "onepay_soon": "Próximamente"}, "de": {"apps_sub": "Sechs Apps, ein Login — OnePay kommt bald.", "card_open": "App öffnen", "card_learn": "Mehr über", "onepay_tag": "Einfacher bezahlen", "onepay_desc": "Eine einfachere Möglichkeit, Zahlungen anzunehmen, ist in Arbeit. OnePay wird entwickelt und ist noch nicht verfügbar.", "onepay_soon": "Demnächst"}, "ru": {"apps_sub": "Шесть приложений, один вход — скоро OnePay.", "card_open": "Открыть приложение", "card_learn": "Подробнее о", "onepay_tag": "Платежи проще", "onepay_desc": "Мы готовим более простой способ принимать платежи. OnePay находится в разработке и пока недоступен.", "onepay_soon": "Скоро"}, "zh": {"apps_sub": "六款应用，一次登录 — OnePay 即将推出。", "card_open": "打开应用", "card_learn": "了解", "onepay_tag": "让支付更简单", "onepay_desc": "更简单的收款方式即将到来。OnePay 正在开发中，尚未上线。", "onepay_soon": "即将推出"}, "pt": {"apps_sub": "Seis apps, um login — OnePay em breve.", "card_open": "Abrir app", "card_learn": "Conheça", "onepay_tag": "Pagamentos mais simples", "onepay_desc": "Uma forma mais simples de aceitar pagamentos está a caminho. O OnePay está em desenvolvimento e ainda não está disponível.", "onepay_soon": "Em breve"}};
+    Object.keys(CARD_I18N).forEach(function(l){I18N[l]=Object.assign({},I18N[l]||{},CARD_I18N[l]);});
     function applyLang(lang){
+        var cardCopy = CARD_I18N[lang] || CARD_I18N.en;
+        document.querySelectorAll('[data-app-action]').forEach(function(el){
+            var label=(el.dataset.appAction==='open'?cardCopy.card_open:cardCopy.card_learn)+' '+el.dataset.appName;
+            el.setAttribute('aria-label',label);el.setAttribute('title',label);
+        });
         document.querySelectorAll('[data-i18n]').forEach(function(el){
             var key = el.getAttribute('data-i18n');
             if (!el.hasAttribute('data-i18n-en')) el.setAttribute('data-i18n-en', el.textContent);
@@ -2611,15 +2651,6 @@
 })();
 </script>
 
-<script>
-/* TWO TARGETS ON ONE CARD. Lee: the top of the card explains the app; the strip at the bottom
-   opens it. Nesting a link inside a link is invalid HTML, so the bottom strip is a span that
-   navigates on click and the whole card stays one keyboard stop through the <a> that wraps the
-   text. stopPropagation keeps a tap on the strip from also following the learn-more link. */
-document.querySelectorAll('.app-open-strip').forEach(function(el){
-  el.style.cursor='pointer';
-  el.addEventListener('click',function(e){ e.stopPropagation(); e.preventDefault(); location.href=el.dataset.open; });
-});
-</script>
+
 </body>
 </html>
