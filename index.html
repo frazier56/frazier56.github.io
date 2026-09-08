@@ -563,8 +563,8 @@
     .swipe-hint .dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.4;}
     .swipe-hint .dot.on{opacity:1;background:#15C2B2;}
 
-    /* All eight apps share one grid: two columns on phones and four on desktop.
-       No app gets a special full-width row, so products 7 and 8 complete two equal rows. */
+    /* All eight apps stack one per row on phones, two on tablets, four on desktop.
+       Desktop products share two equal rows; phones retain a readable full-width card. */
     .app-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;}
     @media (min-width:640px){ .app-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
     @media (min-width:1024px){ .app-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:1fr;gap:24px;} }
