@@ -329,6 +329,7 @@
     .dark .langmenu{background:rgba(16,20,32,.9);border-color:rgba(255,255,255,.1);box-shadow:0 12px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06)}
     .langmenu.open{display:block}
     .langmenu button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;background:none;border:0;border-radius:9px;color:var(--color-fg);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;text-align:left}
+    .langmenu button:focus-visible{outline:2px solid var(--ow-primary);outline-offset:-2px;}
     .langmenu button:hover{background:var(--color-secondary)}
     .langmenu button .chk{margin-left:auto;color:#15C2B2;font-weight:900;opacity:0}
     .langmenu button.active .chk{opacity:1}
@@ -866,7 +867,7 @@
             </nav>
             <div class="flex items-center gap-2 sm:gap-4">
                 <div class="relative">
-                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="true" aria-label="Language">
+                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="menu" aria-controls="lang-menu" aria-expanded="false" aria-label="Language">
                         <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="EN" class="h-4 w-6 rounded-sm object-cover">
                         <span id="lang-code" class="font-medium text-sm hidden sm:inline">EN</span>
                     </button>
@@ -897,7 +898,7 @@
          "Sign in with One ID" row when signed out, or an identity row + red Sign Out row when
          signed in (previously always showed "Sign in" regardless of session — no way to sign out
          from here at all). -->
-    <div id="menu-overlay" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
+    <div id="menu-overlay" inert aria-hidden="true" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
         <div class="menu-panel absolute right-3 top-[74px] flex max-h-[calc(100vh-90px)] w-[218px] max-w-[76vw] flex-col overflow-y-auto rounded-3xl border shadow-2xl p-3 sm:p-4">
 
             <!-- identity row: One World Labs mark when signed out, avatar + name when signed in -->
@@ -934,8 +935,10 @@
                     <a href="https://onejob.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Job</span></a>
                     <a href="https://onehome.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Home</span></a>
                     <a href="https://oneevent.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Event</span></a>
-                    <a href="https://onesocial.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Social</span></a>
-                    <a href="https://oneagent.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Agent</span></a>
+                    <a href="/apps/onebusiness/" class="menu-navitem"><span><span class="menu-one">One</span>Business</span></a>
+                    <a href="/apps/onesocial/" class="menu-navitem"><span><span class="menu-one">One</span>Social</span><small data-i18n="coming_soon">Coming soon</small></a>
+                    <a href="/apps/onepay/" class="menu-navitem"><span><span class="menu-one">One</span>Pay</span><small data-i18n="coming_soon">Coming soon</small></a>
+                    <a href="/apps/oneagent/" class="menu-navitem"><span><span class="menu-one">One</span>Agent</span><small data-i18n="coming_soon">Coming soon</small></a>
                 </div>
                 <div>
                     <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1 px-1" data-i18n="ftr_svcs">Services</h4>
@@ -1238,8 +1241,8 @@
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#E0A21F;--hd:#79560E;--hl:#F3DCAA">
                     <div class="app-copy">
                         <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Credibility you own</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Your whole reputation — real work, verified credentials and reviews — in one number you can show anybody. Free forever.</p>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onescore_tag">Credibility you own</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onescore_desc">Your whole reputation — real work, verified credentials and reviews — in one number you can show anybody. Free forever.</p>
                     </div>
                     <div class="app-actions">
                         <a class="app-open" href="https://app.oneworldlabs.ai/onescore" aria-label="Open app: OneScore" data-app-name="OneScore" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
@@ -1249,8 +1252,8 @@
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#17A45C;--hd:#10673C;--hl:#93F0C1">
                     <div class="app-copy">
                         <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">The work marketplace</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Get hired and get paid, without chasing anybody for the money. A signed agreement on every job and the payment held until it is done.</p>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onejob_tag">The work marketplace</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onejob_desc">Get hired and get paid, without chasing anybody for the money. A signed agreement on every job and the payment held until it is done.</p>
                     </div>
                     <div class="app-actions">
                         <a class="app-open" href="https://app.oneworldlabs.ai/jobs" aria-label="Open app: OneJob" data-app-name="OneJob" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
@@ -1260,8 +1263,8 @@
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#0D9488;--hd:#0F766E;--hl:#5EEAD4">
                     <div class="app-copy">
                         <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Home</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Rent or buy a home</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">A home with a real contract behind it — a signed lease, photos both sides agreed, and the property's real registered sale history.</p>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onehome_tag">Rent or buy a home</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onehome_desc">A home with a real contract behind it — a signed lease, photos both sides agreed, and the property's real registered sale history.</p>
                     </div>
                     <div class="app-actions">
                         <a class="app-open" href="https://app.oneworldlabs.ai/home" aria-label="Open app: OneHome" data-app-name="OneHome" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
@@ -1271,8 +1274,8 @@
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#E2711D;--hd:#873F0D;--hl:#F4C9A9">
                     <div class="app-copy">
                         <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Events and tickets</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Run an event and keep what you sell. The page, the tickets, the door and the money, all in one place.</p>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneevent_tag">Events and tickets</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneevent_desc">Run an event and keep what you sell. The page, the tickets, the door and the money, all in one place.</p>
                     </div>
                     <div class="app-actions">
                         <a class="app-open" href="https://app.oneworldlabs.ai/events" aria-label="Open app: OneEvent" data-app-name="OneEvent" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
@@ -1293,8 +1296,8 @@
                 <div class="app-card app-coming frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#8B3DEA;--hd:#6D17D5;--hl:#D3B5F7">
                     <div class="app-copy">
                         <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your platforms, connected</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Every account you already have, adding up to one professional identity somebody can verify.</p>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onesocial_tag">Your platforms, connected</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onesocial_desc">Every account you already have, adding up to one professional identity somebody can verify.</p>
                     </div>
                     <div class="app-actions">
                         <span class="coming-label" data-i18n="coming_soon">Coming soon</span>
@@ -1315,8 +1318,8 @@
                 <div class="app-card app-coming frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#7B2D3B;--hd:#62242F;--hl:#DCA0AB">
                     <div class="app-copy">
                         <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your middleman</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Somebody in your corner finding and negotiating the work, who takes a share only when you get paid.</p>
+                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneagent_tag">Your middleman</h4>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneagent_desc">Somebody in your corner finding and negotiating the work, who takes a share only when you get paid.</p>
                     </div>
                     <div class="app-actions">
                         <span class="coming-label" data-i18n="coming_soon">Coming soon</span>
@@ -1514,8 +1517,10 @@
                         <li><a href="https://onejob.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Job</a></li>
                         <li><a href="https://onehome.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Home</a></li>
                         <li><a href="https://oneevent.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Event</a></li>
-                        <li><a href="https://onesocial.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Social</a></li>
-                        <li><a href="https://oneagent.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Agent</a></li>
+                        <li><a href="/apps/onebusiness/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Business</a></li>
+                        <li><a href="/apps/onesocial/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Social · <small data-i18n="coming_soon">Coming soon</small></a></li>
+                        <li><a href="/apps/onepay/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Pay · <small data-i18n="coming_soon">Coming soon</small></a></li>
+                        <li><a href="/apps/oneagent/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Agent · <small data-i18n="coming_soon">Coming soon</small></a></li>
                     </ul>
                 </div>
                 <div>
@@ -1579,10 +1584,24 @@
     var iconMenu = document.getElementById('icon-menu'), iconX = document.getElementById('icon-x');
     function setMenu(open){
         overlay.classList.toggle('show', open);
+        overlay.inert = !open;
+        overlay.setAttribute('aria-hidden', String(!open));
+        menuBtn.setAttribute('aria-expanded', String(open));
+        if (open) overlay.querySelector('button, a').focus();
+        else menuBtn.focus();
         iconMenu.classList.toggle('hidden', open);
         iconX.classList.toggle('hidden', !open);
         menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     }
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-controls', 'menu-overlay');
+    overlay.addEventListener('keydown', function(e){
+        if(e.key!=='Tab') return;
+        var items=Array.from(overlay.querySelectorAll('a,button')).filter(function(el){return el.getClientRects().length && !el.disabled;});
+        var first=items[0],last=items[items.length-1];
+        if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+    });
     menuBtn.addEventListener('click', function(){ setMenu(!overlay.classList.contains('show')); });
     overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
     overlay.addEventListener('click', function(e){ if (e.target === overlay) setMenu(false); });
@@ -1876,6 +1895,95 @@
       "zh": {"apps_sub":"八款应用，一次登录 — OneSocial、OneAgent 与 OnePay 即将推出。","div_pl_p":"面向小企业和自由职业者的八款应用：五款现已可用，三款清楚标注为即将推出；只需一次登录。","card_open":"打开应用","card_learn":"了解","onepay_tag":"让支付更简单","onepay_desc":"用手机收款，记录每一笔销售、收据和退款。开发中。","onepay_soon":"即将推出","onebusiness_tag":"所有服务，一个账户","onebusiness_desc":"您向我们购买的每项服务的来电、网站、线索和成果，尽在一处。","onebusiness_explore":"了解应用"},
       "pt": {"apps_sub":"Oito apps, um login — OneSocial, OneAgent e OnePay em breve.","div_pl_p":"Oito apps para pequenas empresas e autônomos: cinco disponíveis e três claramente marcados como próximos, tudo com um único login.","card_open":"Abrir app","card_learn":"Conheça","onepay_tag":"Pagamentos mais simples","onepay_desc":"Receba pagamentos e acompanhe cada venda, recibo e reembolso — pelo celular. Em desenvolvimento.","onepay_soon":"Em breve","onebusiness_tag":"Todos os serviços, uma conta","onebusiness_desc":"As ligações, o site, os contatos e os resultados de cada serviço que você contrata conosco, em um só lugar.","onebusiness_explore":"Explorar app"}
     };
+    var CARD_DESCRIPTIONS = {
+  "es": {
+    "onescore_tag": "Tu credibilidad, en tus manos",
+    "onescore_desc": "Toda tu reputación — trabajo real, credenciales verificadas y reseñas — en un número que puedes mostrar a cualquiera. Gratis para siempre.",
+    "onejob_tag": "El mercado de trabajo",
+    "onejob_desc": "Consigue trabajo y cobra sin perseguir a nadie. Un acuerdo firmado en cada trabajo y el pago retenido hasta que esté terminado.",
+    "onehome_tag": "Alquila o compra una vivienda",
+    "onehome_desc": "Una vivienda respaldada por un contrato real: un alquiler firmado, fotos acordadas por ambas partes y el historial de ventas registrado del inmueble.",
+    "oneevent_tag": "Eventos y entradas",
+    "oneevent_desc": "Organiza un evento y conserva lo que vendes. La página, las entradas, el acceso y el dinero, todo en un solo lugar.",
+    "onesocial_tag": "Tus plataformas, conectadas",
+    "onesocial_desc": "Las cuentas que ya tienes, reunidas en una identidad profesional que otras personas pueden verificar.",
+    "oneagent_tag": "Tu intermediario",
+    "oneagent_desc": "Alguien de tu lado que encuentra y negocia trabajo, y solo recibe una parte cuando tú cobras."
+  },
+  "de": {
+    "onescore_tag": "Ihre Glaubwürdigkeit gehört Ihnen",
+    "onescore_desc": "Ihr gesamter Ruf — echte Arbeit, geprüfte Qualifikationen und Bewertungen — in einer Zahl, die Sie überall vorzeigen können. Dauerhaft kostenlos.",
+    "onejob_tag": "Der Marktplatz für Arbeit",
+    "onejob_desc": "Aufträge bekommen und bezahlt werden, ohne dem Geld hinterherzulaufen. Jeder Auftrag mit unterschriebener Vereinbarung; die Zahlung wird bis zum Abschluss einbehalten.",
+    "onehome_tag": "Ein Zuhause mieten oder kaufen",
+    "onehome_desc": "Ein Zuhause mit echtem Vertrag: ein unterschriebener Mietvertrag, beidseitig vereinbarte Fotos und die registrierte Verkaufshistorie der Immobilie.",
+    "oneevent_tag": "Veranstaltungen und Tickets",
+    "oneevent_desc": "Veranstalten Sie ein Event und behalten Sie Ihre Verkaufserlöse. Seite, Tickets, Einlass und Geld an einem Ort.",
+    "onesocial_tag": "Ihre Plattformen, verbunden",
+    "onesocial_desc": "Ihre bestehenden Konten ergeben eine berufliche Identität, die andere überprüfen können.",
+    "oneagent_tag": "Ihr Vermittler",
+    "oneagent_desc": "Jemand an Ihrer Seite, der Arbeit findet und verhandelt und erst einen Anteil erhält, wenn Sie bezahlt werden."
+  },
+  "ru": {
+    "onescore_tag": "Ваша репутация принадлежит вам",
+    "onescore_desc": "Вся ваша репутация — реальная работа, проверенные квалификации и отзывы — в одном показателе, который можно показать кому угодно. Бесплатно навсегда.",
+    "onejob_tag": "Площадка для работы",
+    "onejob_desc": "Находите работу и получайте оплату без погони за деньгами. По каждому заказу — подписанное соглашение, а оплата удерживается до завершения работы.",
+    "onehome_tag": "Аренда или покупка жилья",
+    "onehome_desc": "Жильё с настоящим договором: подписанный договор аренды, согласованные обеими сторонами фотографии и официальная история продаж объекта.",
+    "oneevent_tag": "Мероприятия и билеты",
+    "oneevent_desc": "Проводите мероприятия и сохраняйте выручку. Страница, билеты, вход и деньги — в одном месте.",
+    "onesocial_tag": "Ваши платформы связаны",
+    "onesocial_desc": "Все ваши существующие аккаунты складываются в единый профессиональный профиль, который можно проверить.",
+    "oneagent_tag": "Ваш посредник",
+    "oneagent_desc": "Помощник на вашей стороне: находит работу, ведёт переговоры и получает долю только после вашей оплаты."
+  },
+  "zh": {
+    "onescore_tag": "属于您的信誉",
+    "onescore_desc": "将真实工作、已验证资质和评价汇成一个信誉分数，随时向他人展示。永久免费。",
+    "onejob_tag": "工作交易平台",
+    "onejob_desc": "找到工作并获得报酬，无需追款。每份工作都有签署的协议，款项保留至工作完成。",
+    "onehome_tag": "租房或买房",
+    "onehome_desc": "有真实合同保障的住房：已签署的租约、双方认可的照片，以及房产的正式销售记录。",
+    "oneevent_tag": "活动与门票",
+    "oneevent_desc": "举办活动并保留销售收入。页面、门票、入场和款项，一处管理。",
+    "onesocial_tag": "连接您的平台",
+    "onesocial_desc": "将您已有的账号汇成一个可供他人验证的职业身份。",
+    "oneagent_tag": "您的中间人",
+    "oneagent_desc": "站在您这边，寻找工作并协商条件，只有您收到报酬后才收取分成。"
+  },
+  "pt": {
+    "onescore_tag": "Sua credibilidade é sua",
+    "onescore_desc": "Toda a sua reputação — trabalho real, qualificações verificadas e avaliações — em um número que você pode mostrar a qualquer pessoa. Grátis para sempre.",
+    "onejob_tag": "O mercado de trabalho",
+    "onejob_desc": "Consiga trabalho e receba sem correr atrás do dinheiro. Um acordo assinado em cada serviço, com o pagamento retido até a conclusão.",
+    "onehome_tag": "Alugue ou compre uma casa",
+    "onehome_desc": "Uma casa com um contrato real: aluguel assinado, fotos acordadas pelas duas partes e o histórico registrado de vendas do imóvel.",
+    "oneevent_tag": "Eventos e ingressos",
+    "oneevent_desc": "Organize um evento e fique com o que vender. A página, os ingressos, a entrada e o dinheiro, tudo em um só lugar.",
+    "onesocial_tag": "Suas plataformas, conectadas",
+    "onesocial_desc": "As contas que você já tem, reunidas em uma identidade profissional que outras pessoas podem verificar.",
+    "oneagent_tag": "Seu intermediário",
+    "oneagent_desc": "Alguém ao seu lado que encontra e negocia trabalho e só recebe uma parte quando você recebe."
+  },
+  "co": {
+    "onescore_tag": "Tu credibilidad, en tus manos",
+    "onescore_desc": "Toda tu reputación — trabajo real, credenciales verificadas y reseñas — en un número que puedes mostrar a cualquiera. Gratis para siempre.",
+    "onejob_tag": "El mercado de trabajo",
+    "onejob_desc": "Consigue trabajo y cobra sin perseguir a nadie. Un acuerdo firmado en cada trabajo y el pago retenido hasta que esté terminado.",
+    "onehome_tag": "Alquila o compra una vivienda",
+    "onehome_desc": "Una vivienda respaldada por un contrato real: un alquiler firmado, fotos acordadas por ambas partes y el historial de ventas registrado del inmueble.",
+    "oneevent_tag": "Eventos y entradas",
+    "oneevent_desc": "Organiza un evento y conserva lo que vendes. La página, las entradas, el acceso y el dinero, todo en un solo lugar.",
+    "onesocial_tag": "Tus plataformas, conectadas",
+    "onesocial_desc": "Las cuentas que ya tienes, reunidas en una identidad profesional que otras personas pueden verificar.",
+    "oneagent_tag": "Tu intermediario",
+    "oneagent_desc": "Alguien de tu lado que encuentra y negocia trabajo, y solo recibe una parte cuando tú cobras."
+  }
+};
+    var APP_FAQ = {"es":"Ocho apps con un solo inicio de sesión: OneScore, OneJob, OneHome, OneEvent y OneBusiness están disponibles; OneSocial, OnePay y OneAgent llegarán pronto. OneVoice, OnePage y OneApp son servicios que nuestro equipo presta para tu negocio.","de":"Acht Apps mit einem Login: OneScore, OneJob, OneHome, OneEvent und OneBusiness sind verfügbar; OneSocial, OnePay und OneAgent kommen bald. OneVoice, OnePage und OneApp sind Dienstleistungen, die unser Team für Ihr Unternehmen erbringt.","ru":"Восемь приложений с одним входом: OneScore, OneJob, OneHome, OneEvent и OneBusiness доступны; OneSocial, OnePay и OneAgent появятся позже. OneVoice, OnePage и OneApp — услуги нашей команды для вашего бизнеса.","zh":"八款应用，一次登录：OneScore、OneJob、OneHome、OneEvent 和 OneBusiness 现已可用；OneSocial、OnePay 和 OneAgent 即将推出。OneVoice、OnePage 和 OneApp 是我们团队为您的企业提供的服务。","pt":"Oito apps com um único login: OneScore, OneJob, OneHome, OneEvent e OneBusiness estão disponíveis; OneSocial, OnePay e OneAgent chegam em breve. OneVoice, OnePage e OneApp são serviços que nossa equipe presta para o seu negócio.","co":"Ocho apps con un solo inicio de sesión: OneScore, OneJob, OneHome, OneEvent y OneBusiness están disponibles; OneSocial, OnePay y OneAgent llegarán pronto. OneVoice, OnePage y OneApp son servicios que nuestro equipo presta para tu negocio."};
+    Object.keys(APP_FAQ).forEach(function(l){CARD_I18N[l].q1_a=APP_FAQ[l];});
+    Object.keys(CARD_DESCRIPTIONS).forEach(function(l){Object.assign(CARD_I18N[l],CARD_DESCRIPTIONS[l]);});
     Object.keys(CARD_I18N).forEach(function(l){I18N[l]=Object.assign({},I18N[l]||{},CARD_I18N[l]);});
     function applyLang(lang){
         var cardCopy = CARD_I18N[lang] || CARD_I18N.en;
@@ -1894,16 +2002,33 @@
     }
     var langBtn = document.getElementById('lang-btn'), langMenu = document.getElementById('lang-menu');
     if (langBtn) {
-        langBtn.addEventListener('click', function(e){ e.stopPropagation(); langMenu.classList.toggle('open'); });
-        document.addEventListener('click', function(){ langMenu.classList.remove('open'); });
+        function setLanguageMenu(open, focus){
+            langMenu.classList.toggle('open',open);
+            langBtn.setAttribute('aria-expanded',String(open));
+            if(focus) (open ? langMenu.querySelector('button.active') || langMenu.querySelector('button') : langBtn).focus();
+        }
+        langBtn.addEventListener('click', function(e){e.stopPropagation();setLanguageMenu(!langMenu.classList.contains('open'),true);});
+        langBtn.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();setLanguageMenu(true,true);}});
+        document.addEventListener('click',function(){setLanguageMenu(false,false);});
+        langMenu.addEventListener('keydown',function(e){
+            var buttons=Array.from(langMenu.querySelectorAll('button')),index=buttons.indexOf(document.activeElement);
+            if(e.key==='Escape'){e.preventDefault();setLanguageMenu(false,true);}
+            else if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();buttons[(index+(e.key==='ArrowDown'?1:buttons.length-1))%buttons.length].focus();}
+            else if(e.key==='Home'||e.key==='End'){e.preventDefault();buttons[e.key==='Home'?0:buttons.length-1].focus();}
+            else if(e.key==='Tab'){setLanguageMenu(false,true);}
+        });
         langMenu.querySelectorAll('button').forEach(function(b){
+            b.setAttribute('role','menuitemradio');
+            b.setAttribute('aria-checked',String(b.classList.contains('active')));
+            b.querySelector('.chk').setAttribute('aria-hidden','true');
             b.addEventListener('click', function(){
                 var lang = b.getAttribute('data-lang');
                 document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N_META[lang].flag + '.png';
                 document.getElementById('lang-code').textContent = I18N_META[lang].code;
-                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); });
-                document.documentElement.lang = lang;
-                langMenu.classList.remove('open');
+                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); x.setAttribute('aria-checked',String(x===b)); });
+                document.documentElement.lang = ({co:'es-CO',es:'es-ES',pt:'pt-BR',zh:'zh-CN'})[lang] || lang;
+                document.getElementById('lang-flag').alt = I18N_META[lang].code;
+                setLanguageMenu(false,document.activeElement===b);
                 window.OWL_LANG = lang;
                 applyLang(lang);
                 /* re-render any JS-built text (the signed-in welcome message splices in the
