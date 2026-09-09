@@ -668,6 +668,7 @@
   var t = setInterval(function () { sync(); if (++ticks > 20) clearInterval(t); }, 1500);
 })();
 </script>
+<script src="/public-directory-copy.js?v=20260909-languages1"></script>
 </head>
 <body>
 <div class="min-h-screen bg-background text-foreground font-sans overflow-x-hidden">
@@ -682,8 +683,8 @@
                  stays crisp at any resolution and follows the theme (matches the SMALL BUSINESS
                  SOLUTIONS lockup in GHL/_BRAND-ASSETS/OneWorld_multicolor-mark) -->
             <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center">
-                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses" data-public-alt-co="One World Labs — Soluciones de IA para pequeños negocios" class="ow-lockup ow-lockup-light">
-                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses" data-public-alt-co="One World Labs — Soluciones de IA para pequeños negocios" class="ow-lockup ow-lockup-dark">
+                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses" data-public-alt-source="One World Labs — AI Solutions for Small Businesses" data-public-alt-co="One World Labs — Soluciones de IA para pequeños negocios" class="ow-lockup ow-lockup-light">
+                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses" data-public-alt-source="One World Labs — AI Solutions for Small Businesses" data-public-alt-co="One World Labs — Soluciones de IA para pequeños negocios" class="ow-lockup ow-lockup-dark">
             </a>
             <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary" data-public-aria-co="Navegación principal">
                 <a href="/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="owl_nav_home">Home</a>
@@ -1023,7 +1024,7 @@
         else menuBtn.focus();
         iconMenu.classList.toggle('hidden', open);
         iconX.classList.toggle('hidden', !open);
-        menuBtn.setAttribute('aria-label', window.OWL_LANG==='co' ? (open ? 'Cerrar menú' : 'Abrir menú') : (open ? 'Close menu' : 'Open menu'));
+        menuBtn.setAttribute('aria-label', (window.OWL_PUBLIC_MENU_LABEL ? window.OWL_PUBLIC_MENU_LABEL(window.OWL_LANG,open) : (window.OWL_LANG==='co' ? (open?'Cerrar menú':'Abrir menú') : (open?'Close menu':'Open menu'))));
     }
     menuBtn.setAttribute('aria-expanded', 'false');
     menuBtn.setAttribute('aria-controls', 'menu-overlay');
@@ -1291,6 +1292,7 @@
     Object.keys(APPS_LIVE_COPY).forEach(function(l){ I18N[l] = Object.assign({}, I18N[l] || {}, { apps_sub: APPS_LIVE_COPY[l] }); });
     Object.assign(I18N.co,{"directory_more":"Más información","directory_open":"Abrir app","platform_eyebrow":"Plataforma One World","directory_onescore_tag":"Credibilidad que te pertenece","directory_onescore_desc":"Toda tu reputación — trabajo real, credenciales verificadas y reseñas — en un número que puedes mostrar a cualquiera. Gratis para siempre.","directory_onejob_tag":"El mercado del trabajo","directory_onejob_desc":"Consigue trabajo y cobra sin perseguir a nadie por el dinero. Un acuerdo firmado en cada trabajo y el pago retenido hasta que esté terminado.","directory_onehome_tag":"Arrienda o compra vivienda","directory_onehome_desc":"Una vivienda con un contrato real que la respalda: un contrato de arriendo firmado, fotos acordadas por ambas partes y el historial de ventas registrado del inmueble.","directory_oneevent_tag":"Eventos y boletas","directory_oneevent_desc":"Organiza un evento y conserva lo que vendes. La página, las boletas, el ingreso y el dinero, todo en un solo lugar.","directory_onesocial_tag":"Tus plataformas, conectadas","directory_onesocial_desc":"Todas las cuentas que ya tienes, reunidas en una identidad profesional que otros pueden verificar.","directory_oneagent_tag":"Tu intermediario","directory_oneagent_desc":"Alguien de tu lado que busca y negocia el trabajo, y recibe una parte solo cuando te pagan.","directory_onepay_tag":"Pagos más sencillos","directory_onepay_desc":"Administra ventas, recibos, reembolsos y cierre diario desde tu teléfono. Efectivo y transferencias ya funcionan; el pago sin contacto se activará al conectar un proveedor certificado.","directory_onebusiness_tag":"Todos los servicios, una cuenta","directory_onebusiness_desc":"Consulta las llamadas, el sitio web, los prospectos y los resultados de cada servicio de One World que usa tu negocio, todo en un solo lugar."});
     I18N.co.public_copyright="© 2026 One World Labs, Inc. · Ocho apps · One ID";
+    Object.keys(window.OWL_PUBLIC_COPY || {}).forEach(function(lang){I18N[lang]=Object.assign({},I18N[lang]||{},window.OWL_PUBLIC_COPY[lang].text);});
     var publicEnglishTitle = document.title;
     function applyPublicLabels(lang){
         document.title = lang==='co' ? "Apps de One World — Ocho apps, un solo inicio de sesión | One World Labs" : publicEnglishTitle;
@@ -1307,7 +1309,8 @@
     }
     function applyLang(lang){
         applyPublicLabels(lang);
-        document.querySelectorAll("[data-directory-name]").forEach(function(el){el.setAttribute("aria-label",(lang==="co"?"Abrir app ":"Open ")+el.dataset.directoryName);});
+        if(window.OWL_APPLY_PUBLIC_LOCALE) window.OWL_APPLY_PUBLIC_LOCALE(lang,true);
+        document.querySelectorAll("[data-directory-name]").forEach(function(el){el.setAttribute("aria-label",(window.OWL_PUBLIC_COPY&&window.OWL_PUBLIC_COPY[lang]?window.OWL_PUBLIC_COPY[lang].text.directory_open+" ":lang==="co"?"Abrir app ":"Open ")+el.dataset.directoryName);});
         document.querySelectorAll('[data-i18n]').forEach(function(el){
             var key = el.getAttribute('data-i18n');
             if (!el.hasAttribute('data-i18n-en')) el.setAttribute('data-i18n-en', el.textContent);

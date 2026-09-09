@@ -1,0 +1,391 @@
+/* Page-owned public homepage/directory translations. No account or provider behavior. */
+window.OWL_PUBLIC_COPY = {
+  "es": {
+    "titles": [
+      "One World Labs — Agencia de IA y plataforma de apps para pequeñas empresas",
+      "Apps de One World — Ocho apps, un solo inicio de sesión | One World Labs"
+    ],
+    "text": {
+      "public_blog1_title": "Cómo conseguir más reseñas de cinco estrellas para tu pequeña empresa",
+      "public_blog1_desc": "Cuándo pedirlas, cómo hacerlo y cómo reunir reseñas dispersas en una puntuación de credibilidad visible.",
+      "public_blog2_title": "Servicios de atención telefónica con IA: cómo no perder ninguna llamada",
+      "public_blog2_desc": "Qué hace realmente una recepcionista de IA y cómo se compara con el buzón de voz y la atención telefónica humana.",
+      "public_blog3_title": "¿Qué es OneScore? La puntuación de credibilidad que te ayuda a conseguir trabajo",
+      "public_blog3_desc": "Una puntuación de reputación verificada y portátil: cómo funciona y por qué ayuda a ganar clientes.",
+      "public_contact_eyebrow": "Contacta con One World Labs",
+      "public_contact_title": "¿Necesitas ayuda para elegir la app o el servicio adecuado?",
+      "public_contact_desc": "Cuéntanos qué quieres crear, automatizar, vender o solucionar. Tu mensaje llega a soporte y las llamadas urgentes se atienden en nuestra línea de recepción.",
+      "public_contact_email": "Correo electrónico",
+      "public_contact_call": "Llamar",
+      "public_contact_name": "Nombre",
+      "public_contact_phone": "Teléfono",
+      "public_contact_topic": "¿Qué necesitas?",
+      "public_contact_opt_voice": "Atención de llamadas con OneVoice",
+      "public_contact_opt_page": "Mejora de sitio web con OnePage",
+      "public_contact_opt_app": "App móvil con OneApp",
+      "public_contact_opt_event": "Entradas y eventos con OneEvent",
+      "public_contact_opt_home": "Alquileres o ventas con OneHome",
+      "public_contact_opt_social": "OneJob, OneScore o OneSocial",
+      "public_contact_opt_other": "Otra consulta",
+      "public_contact_message": "Mensaje",
+      "public_contact_note": "Al enviar, se abre tu aplicación de correo con los datos rellenados. Para ayuda urgente, llama a recepción.",
+      "public_contact_send": "Enviar",
+      "platform_eyebrow": "Plataforma One World",
+      "public_copyright": "© 2026 One World Labs, Inc. · Ocho apps · One ID",
+      "directory_more": "Más información",
+      "directory_open": "Abrir app",
+      "directory_onescore_tag": "Tu credibilidad, en tus manos",
+      "directory_onescore_desc": "Toda tu reputación — trabajo real, credenciales verificadas y reseñas — en un número que puedes mostrar a cualquiera. Gratis para siempre.",
+      "directory_onejob_tag": "El mercado de trabajo",
+      "directory_onejob_desc": "Consigue trabajo y cobra sin perseguir a nadie. Un acuerdo firmado en cada trabajo y el pago retenido hasta que esté terminado.",
+      "directory_onehome_tag": "Alquila o compra una vivienda",
+      "directory_onehome_desc": "Una vivienda respaldada por un contrato real: un alquiler firmado, fotos acordadas por ambas partes y el historial de ventas registrado del inmueble.",
+      "directory_oneevent_tag": "Eventos y entradas",
+      "directory_oneevent_desc": "Organiza un evento y conserva lo que vendes. La página, las entradas, el acceso y el dinero, todo en un solo lugar.",
+      "directory_onesocial_tag": "Tus plataformas, conectadas",
+      "directory_onesocial_desc": "Las cuentas que ya tienes, reunidas en una identidad profesional que otras personas pueden verificar.",
+      "directory_oneagent_tag": "Tu intermediario",
+      "directory_oneagent_desc": "Alguien de tu lado que encuentra y negocia trabajo, y solo recibe una parte cuando tú cobras.",
+      "directory_onepay_tag": "Pagos más sencillos",
+      "directory_onepay_desc": "Administra ventas, recibos, reembolsos y cierre diario desde tu teléfono. Efectivo y transferencias ya funcionan; el pago sin contacto se activará al conectar un proveedor certificado.",
+      "directory_onebusiness_tag": "Todos los servicios, una cuenta",
+      "directory_onebusiness_desc": "Las llamadas, el sitio web, los prospectos y los resultados de cada servicio que nos contratas, en un solo lugar."
+    },
+    "aria": {
+      "Primary": "Navegación principal",
+      "Language": "Idioma y país",
+      "Toggle theme": "Cambiar tema",
+      "Open menu": "Abrir menú",
+      "Close menu": "Cerrar menú",
+      "Close VAIA": "Cerrar VAIA",
+      "Tap to talk to VAIA": "Toca para hablar con VAIA",
+      "Slide left for services, right for apps": "Desliza a la izquierda para servicios y a la derecha para apps",
+      "Download on the App Store — coming soon": "Descargar en App Store — próximamente",
+      "Get it on Google Play — coming soon": "Disponible en Google Play — próximamente"
+    },
+    "alts": {
+      "One World Labs — AI Solutions for Small Businesses": "One World Labs — Soluciones de IA para pequeñas empresas",
+      "Small business owner celebrating positive customer feedback": "Propietario de una pequeña empresa celebrando comentarios positivos de sus clientes",
+      "Laptop showing an AI assistant dashboard": "Portátil con un panel de un asistente de IA",
+      "Professional checking a credibility score on a phone": "Profesional consultando una puntuación de credibilidad en un teléfono"
+    },
+    "placeholders": {
+      "Your name": "Tu nombre",
+      "Optional": "Opcional",
+      "A few details help us route this quickly.": "Unos detalles nos ayudan a dirigir tu consulta rápidamente."
+    }
+  },
+  "de": {
+    "titles": [
+      "One World Labs — KI-Agentur und App-Plattform für kleine Unternehmen",
+      "One World Apps — Acht Apps, ein Login | One World Labs"
+    ],
+    "text": {
+      "public_blog1_title": "So erhält Ihr kleines Unternehmen mehr Fünf-Sterne-Bewertungen",
+      "public_blog1_desc": "Wann und wie Sie nach Bewertungen fragen und verstreute Rezensionen zu einem sichtbaren Glaubwürdigkeitswert zusammenführen.",
+      "public_blog2_title": "KI-Telefonservice: So verpassen Sie keinen Anruf mehr",
+      "public_blog2_desc": "Was eine KI-Rezeption tatsächlich leistet und wie sie sich mit Voicemail und menschlichem Telefonservice vergleichen lässt.",
+      "public_blog3_title": "Was ist ein OneScore? Der Glaubwürdigkeitswert, der Ihnen Aufträge bringt",
+      "public_blog3_desc": "Ein übertragbarer, verifizierter Reputationswert: wie er funktioniert und warum er Kunden überzeugt.",
+      "public_contact_eyebrow": "Kontakt zu One World Labs",
+      "public_contact_title": "Brauchen Sie Hilfe bei der Wahl der passenden App oder Dienstleistung?",
+      "public_contact_desc": "Sagen Sie uns, was Sie aufbauen, automatisieren, verkaufen oder lösen möchten. Ihre Nachricht geht an den Support; dringende Anrufe nimmt unsere Rezeption entgegen.",
+      "public_contact_email": "E-Mail",
+      "public_contact_call": "Anrufen",
+      "public_contact_name": "Name",
+      "public_contact_phone": "Telefon",
+      "public_contact_topic": "Was benötigen Sie?",
+      "public_contact_opt_voice": "Anrufannahme mit OneVoice",
+      "public_contact_opt_page": "Website-Upgrade mit OnePage",
+      "public_contact_opt_app": "Mobile App mit OneApp",
+      "public_contact_opt_event": "Tickets und Veranstaltungen mit OneEvent",
+      "public_contact_opt_home": "Vermietung oder Verkauf mit OneHome",
+      "public_contact_opt_social": "OneJob, OneScore oder OneSocial",
+      "public_contact_opt_other": "Etwas anderes",
+      "public_contact_message": "Nachricht",
+      "public_contact_note": "Beim Senden öffnet sich Ihr E-Mail-Programm mit den eingetragenen Angaben. Für dringende Hilfe rufen Sie die Rezeption an.",
+      "public_contact_send": "Senden",
+      "platform_eyebrow": "One World Plattform",
+      "public_copyright": "© 2026 One World Labs, Inc. · Acht Apps · One ID",
+      "directory_more": "Mehr erfahren",
+      "directory_open": "App öffnen",
+      "directory_onescore_tag": "Ihre Glaubwürdigkeit gehört Ihnen",
+      "directory_onescore_desc": "Ihr gesamter Ruf — echte Arbeit, geprüfte Qualifikationen und Bewertungen — in einer Zahl, die Sie überall vorzeigen können. Dauerhaft kostenlos.",
+      "directory_onejob_tag": "Der Marktplatz für Arbeit",
+      "directory_onejob_desc": "Aufträge bekommen und bezahlt werden, ohne dem Geld hinterherzulaufen. Jeder Auftrag mit unterschriebener Vereinbarung; die Zahlung wird bis zum Abschluss einbehalten.",
+      "directory_onehome_tag": "Ein Zuhause mieten oder kaufen",
+      "directory_onehome_desc": "Ein Zuhause mit echtem Vertrag: ein unterschriebener Mietvertrag, beidseitig vereinbarte Fotos und die registrierte Verkaufshistorie der Immobilie.",
+      "directory_oneevent_tag": "Veranstaltungen und Tickets",
+      "directory_oneevent_desc": "Veranstalten Sie ein Event und behalten Sie Ihre Verkaufserlöse. Seite, Tickets, Einlass und Geld an einem Ort.",
+      "directory_onesocial_tag": "Ihre Plattformen, verbunden",
+      "directory_onesocial_desc": "Ihre bestehenden Konten ergeben eine berufliche Identität, die andere überprüfen können.",
+      "directory_oneagent_tag": "Ihr Vermittler",
+      "directory_oneagent_desc": "Jemand an Ihrer Seite, der Arbeit findet und verhandelt und erst einen Anteil erhält, wenn Sie bezahlt werden.",
+      "directory_onepay_tag": "Einfacher bezahlen",
+      "directory_onepay_desc": "Verwalten Sie Verkäufe, Belege, Erstattungen und den Tagesabschluss per Handy. Bargeld und Überweisungen funktionieren jetzt; kontaktloses Bezahlen folgt nach Anbindung eines zertifizierten Anbieters.",
+      "directory_onebusiness_tag": "Jede Leistung, ein Konto",
+      "directory_onebusiness_desc": "Anrufe, Website, Anfragen und Ergebnisse jeder Leistung, die Sie bei uns buchen — an einem Ort."
+    },
+    "aria": {
+      "Primary": "Hauptnavigation",
+      "Language": "Sprache und Land",
+      "Toggle theme": "Darstellung wechseln",
+      "Open menu": "Menü öffnen",
+      "Close menu": "Menü schließen",
+      "Close VAIA": "VAIA schließen",
+      "Tap to talk to VAIA": "Tippen, um mit VAIA zu sprechen",
+      "Slide left for services, right for apps": "Nach links für Dienstleistungen, nach rechts für Apps schieben",
+      "Download on the App Store — coming soon": "Im App Store laden — demnächst",
+      "Get it on Google Play — coming soon": "Bei Google Play erhältlich — demnächst"
+    },
+    "alts": {
+      "One World Labs — AI Solutions for Small Businesses": "One World Labs — KI-Lösungen für kleine Unternehmen",
+      "Small business owner celebrating positive customer feedback": "Inhaber eines kleinen Unternehmens freut sich über positives Kundenfeedback",
+      "Laptop showing an AI assistant dashboard": "Laptop mit dem Dashboard eines KI-Assistenten",
+      "Professional checking a credibility score on a phone": "Fachkraft prüft einen Glaubwürdigkeitswert auf dem Smartphone"
+    },
+    "placeholders": {
+      "Your name": "Ihr Name",
+      "Optional": "Optional",
+      "A few details help us route this quickly.": "Ein paar Details helfen uns, Ihre Anfrage schnell zuzuordnen."
+    }
+  },
+  "ru": {
+    "titles": [
+      "One World Labs — ИИ-агентство и платформа приложений для малого бизнеса",
+      "Приложения One World — Восемь приложений, один вход | One World Labs"
+    ],
+    "text": {
+      "public_blog1_title": "Как малому бизнесу получать больше пятизвёздочных отзывов",
+      "public_blog1_desc": "Когда и как просить об отзывах и как объединить разрозненные отзывы в один наглядный показатель доверия.",
+      "public_blog2_title": "ИИ-сервисы ответа на звонки: как больше не пропускать звонки",
+      "public_blog2_desc": "Что на самом деле делает ИИ-администратор и чем он отличается от голосовой почты и операторов-людей.",
+      "public_blog3_title": "Что такое OneScore? Показатель доверия, который помогает получать заказы",
+      "public_blog3_desc": "Единый подтверждённый показатель репутации, который можно использовать везде: как он работает и почему привлекает клиентов.",
+      "public_contact_eyebrow": "Связаться с One World Labs",
+      "public_contact_title": "Нужна помощь с выбором приложения или услуги?",
+      "public_contact_desc": "Расскажите, что вы хотите создать, автоматизировать, продать или исправить. Сообщение поступит в поддержку, а срочные звонки принимает наша приёмная.",
+      "public_contact_email": "Электронная почта",
+      "public_contact_call": "Позвонить",
+      "public_contact_name": "Имя",
+      "public_contact_phone": "Телефон",
+      "public_contact_topic": "Что вам нужно?",
+      "public_contact_opt_voice": "Ответы на звонки с OneVoice",
+      "public_contact_opt_page": "Обновление сайта с OnePage",
+      "public_contact_opt_app": "Мобильное приложение с OneApp",
+      "public_contact_opt_event": "Билеты и мероприятия с OneEvent",
+      "public_contact_opt_home": "Аренда или продажа с OneHome",
+      "public_contact_opt_social": "OneJob, OneScore или OneSocial",
+      "public_contact_opt_other": "Другое",
+      "public_contact_message": "Сообщение",
+      "public_contact_note": "При отправке откроется ваше почтовое приложение с заполненными данными. Для срочной помощи позвоните в приёмную.",
+      "public_contact_send": "Отправить",
+      "platform_eyebrow": "Платформа One World",
+      "public_copyright": "© 2026 One World Labs, Inc. · Восемь приложений · One ID",
+      "directory_more": "Подробнее",
+      "directory_open": "Открыть приложение",
+      "directory_onescore_tag": "Ваша репутация принадлежит вам",
+      "directory_onescore_desc": "Вся ваша репутация — реальная работа, проверенные квалификации и отзывы — в одном показателе, который можно показать кому угодно. Бесплатно навсегда.",
+      "directory_onejob_tag": "Площадка для работы",
+      "directory_onejob_desc": "Находите работу и получайте оплату без погони за деньгами. По каждому заказу — подписанное соглашение, а оплата удерживается до завершения работы.",
+      "directory_onehome_tag": "Аренда или покупка жилья",
+      "directory_onehome_desc": "Жильё с настоящим договором: подписанный договор аренды, согласованные обеими сторонами фотографии и официальная история продаж объекта.",
+      "directory_oneevent_tag": "Мероприятия и билеты",
+      "directory_oneevent_desc": "Проводите мероприятия и сохраняйте выручку. Страница, билеты, вход и деньги — в одном месте.",
+      "directory_onesocial_tag": "Ваши платформы связаны",
+      "directory_onesocial_desc": "Все ваши существующие аккаунты складываются в единый профессиональный профиль, который можно проверить.",
+      "directory_oneagent_tag": "Ваш посредник",
+      "directory_oneagent_desc": "Помощник на вашей стороне: находит работу, ведёт переговоры и получает долю только после вашей оплаты.",
+      "directory_onepay_tag": "Платежи проще",
+      "directory_onepay_desc": "Управляйте продажами, чеками, возвратами и закрытием дня с телефона. Наличные и переводы уже работают; бесконтактная оплата включится после подключения сертифицированного провайдера.",
+      "directory_onebusiness_tag": "Все услуги, один аккаунт",
+      "directory_onebusiness_desc": "Звонки, сайт, обращения и результаты каждой услуги, которую вы у нас заказываете, — в одном месте."
+    },
+    "aria": {
+      "Primary": "Основная навигация",
+      "Language": "Язык и страна",
+      "Toggle theme": "Сменить тему",
+      "Open menu": "Открыть меню",
+      "Close menu": "Закрыть меню",
+      "Close VAIA": "Закрыть VAIA",
+      "Tap to talk to VAIA": "Нажмите, чтобы поговорить с VAIA",
+      "Slide left for services, right for apps": "Сдвиньте влево для услуг или вправо для приложений",
+      "Download on the App Store — coming soon": "Скачать в App Store — скоро",
+      "Get it on Google Play — coming soon": "Скачать в Google Play — скоро"
+    },
+    "alts": {
+      "One World Labs — AI Solutions for Small Businesses": "One World Labs — ИИ-решения для малого бизнеса",
+      "Small business owner celebrating positive customer feedback": "Владелец малого бизнеса радуется положительным отзывам клиентов",
+      "Laptop showing an AI assistant dashboard": "Ноутбук с панелью управления ИИ-помощником",
+      "Professional checking a credibility score on a phone": "Специалист проверяет показатель доверия на телефоне"
+    },
+    "placeholders": {
+      "Your name": "Ваше имя",
+      "Optional": "Необязательно",
+      "A few details help us route this quickly.": "Несколько деталей помогут нам быстро направить ваш запрос."
+    }
+  },
+  "zh": {
+    "titles": [
+      "One World Labs — 面向小企业的 AI 服务机构与应用平台",
+      "One World 应用 — 八款应用，一次登录 | One World Labs"
+    ],
+    "text": {
+      "public_blog1_title": "如何为您的小企业获得更多五星好评",
+      "public_blog1_desc": "何时邀请客户评价、如何邀请，以及如何将分散的评价汇总为直观的信誉评分。",
+      "public_blog2_title": "AI 电话接听服务：如何不错过任何来电",
+      "public_blog2_desc": "AI 接待员实际能做什么，以及它与语音信箱和人工接听服务的区别。",
+      "public_blog3_title": "什么是 OneScore？帮您获得工作机会的信誉评分",
+      "public_blog3_desc": "一个经过验证、可随处展示的信誉评分：它如何运作，以及为何能赢得客户。",
+      "public_contact_eyebrow": "联系 One World Labs",
+      "public_contact_title": "需要帮助选择合适的应用或服务吗？",
+      "public_contact_desc": "告诉我们您想构建、自动化、销售或解决什么。消息将发送给客服，紧急来电由我们的前台热线接听。",
+      "public_contact_email": "电子邮件",
+      "public_contact_call": "致电",
+      "public_contact_name": "姓名",
+      "public_contact_phone": "电话",
+      "public_contact_topic": "您需要什么？",
+      "public_contact_opt_voice": "OneVoice 来电接听",
+      "public_contact_opt_page": "OnePage 网站升级",
+      "public_contact_opt_app": "OneApp 移动应用",
+      "public_contact_opt_event": "OneEvent 票务与活动",
+      "public_contact_opt_home": "OneHome 租赁或销售",
+      "public_contact_opt_social": "OneJob、OneScore 或 OneSocial",
+      "public_contact_opt_other": "其他事项",
+      "public_contact_message": "消息",
+      "public_contact_note": "提交后将打开您的邮件应用，并填入相关信息。如需紧急帮助，请致电前台。",
+      "public_contact_send": "发送",
+      "platform_eyebrow": "One World 平台",
+      "public_copyright": "© 2026 One World Labs, Inc. · 八款应用 · One ID",
+      "directory_more": "了解更多",
+      "directory_open": "打开应用",
+      "directory_onescore_tag": "属于您的信誉",
+      "directory_onescore_desc": "将真实工作、已验证资质和评价汇成一个信誉分数，随时向他人展示。永久免费。",
+      "directory_onejob_tag": "工作交易平台",
+      "directory_onejob_desc": "找到工作并获得报酬，无需追款。每份工作都有签署的协议，款项保留至工作完成。",
+      "directory_onehome_tag": "租房或买房",
+      "directory_onehome_desc": "有真实合同保障的住房：已签署的租约、双方认可的照片，以及房产的正式销售记录。",
+      "directory_oneevent_tag": "活动与门票",
+      "directory_oneevent_desc": "举办活动并保留销售收入。页面、门票、入场和款项，一处管理。",
+      "directory_onesocial_tag": "连接您的平台",
+      "directory_onesocial_desc": "将您已有的账号汇成一个可供他人验证的职业身份。",
+      "directory_oneagent_tag": "您的中间人",
+      "directory_oneagent_desc": "站在您这边，寻找工作并协商条件，只有您收到报酬后才收取分成。",
+      "directory_onepay_tag": "让支付更简单",
+      "directory_onepay_desc": "用手机管理销售、收据、退款和每日结算。现金和转账现已可用；接入认证服务商后将启用非接触式支付。",
+      "directory_onebusiness_tag": "所有服务，一个账户",
+      "directory_onebusiness_desc": "您向我们购买的每项服务的来电、网站、线索和成果，尽在一处。"
+    },
+    "aria": {
+      "Primary": "主导航",
+      "Language": "语言和国家",
+      "Toggle theme": "切换主题",
+      "Open menu": "打开菜单",
+      "Close menu": "关闭菜单",
+      "Close VAIA": "关闭 VAIA",
+      "Tap to talk to VAIA": "点击与 VAIA 交谈",
+      "Slide left for services, right for apps": "向左滑动查看服务，向右滑动查看应用",
+      "Download on the App Store — coming soon": "在 App Store 下载 — 即将推出",
+      "Get it on Google Play — coming soon": "在 Google Play 下载 — 即将推出"
+    },
+    "alts": {
+      "One World Labs — AI Solutions for Small Businesses": "One World Labs — 面向小企业的 AI 解决方案",
+      "Small business owner celebrating positive customer feedback": "小企业主庆祝收到客户的好评",
+      "Laptop showing an AI assistant dashboard": "笔记本电脑上显示 AI 助手控制面板",
+      "Professional checking a credibility score on a phone": "专业人士在手机上查看信誉评分"
+    },
+    "placeholders": {
+      "Your name": "您的姓名",
+      "Optional": "选填",
+      "A few details help us route this quickly.": "提供一些详细信息，便于我们快速处理您的咨询。"
+    }
+  },
+  "pt": {
+    "titles": [
+      "One World Labs — Agência de IA e plataforma de apps para pequenos negócios",
+      "Apps One World — Oito apps, um login | One World Labs"
+    ],
+    "text": {
+      "public_blog1_title": "Como conseguir mais avaliações de cinco estrelas para seu pequeno negócio",
+      "public_blog1_desc": "Quando pedir, como pedir e como reunir avaliações dispersas em uma pontuação de credibilidade visível.",
+      "public_blog2_title": "Atendimento telefônico com IA: como nunca mais perder uma ligação",
+      "public_blog2_desc": "O que uma recepcionista de IA realmente faz e como se compara ao correio de voz e ao atendimento humano.",
+      "public_blog3_title": "O que é um OneScore? A pontuação de credibilidade que ajuda você a conseguir trabalho",
+      "public_blog3_desc": "Uma pontuação de reputação verificada e portátil: como funciona e por que conquista clientes.",
+      "public_contact_eyebrow": "Entre em contato com a One World Labs",
+      "public_contact_title": "Precisa de ajuda para escolher o app ou serviço certo?",
+      "public_contact_desc": "Conte o que você quer criar, automatizar, vender ou resolver. Sua mensagem vai para o suporte, e as ligações urgentes são atendidas pela nossa recepção.",
+      "public_contact_email": "E-mail",
+      "public_contact_call": "Ligar",
+      "public_contact_name": "Nome",
+      "public_contact_phone": "Telefone",
+      "public_contact_topic": "Do que você precisa?",
+      "public_contact_opt_voice": "Atendimento de chamadas com OneVoice",
+      "public_contact_opt_page": "Atualização de site com OnePage",
+      "public_contact_opt_app": "App móvel com OneApp",
+      "public_contact_opt_event": "Ingressos e eventos com OneEvent",
+      "public_contact_opt_home": "Aluguel ou venda com OneHome",
+      "public_contact_opt_social": "OneJob, OneScore ou OneSocial",
+      "public_contact_opt_other": "Outro assunto",
+      "public_contact_message": "Mensagem",
+      "public_contact_note": "Ao enviar, seu aplicativo de e-mail será aberto com os dados preenchidos. Para ajuda urgente, ligue para a recepção.",
+      "public_contact_send": "Enviar",
+      "platform_eyebrow": "Plataforma One World",
+      "public_copyright": "© 2026 One World Labs, Inc. · Oito apps · One ID",
+      "directory_more": "Saiba mais",
+      "directory_open": "Abrir app",
+      "directory_onescore_tag": "Sua credibilidade é sua",
+      "directory_onescore_desc": "Toda a sua reputação — trabalho real, qualificações verificadas e avaliações — em um número que você pode mostrar a qualquer pessoa. Grátis para sempre.",
+      "directory_onejob_tag": "O mercado de trabalho",
+      "directory_onejob_desc": "Consiga trabalho e receba sem correr atrás do dinheiro. Um acordo assinado em cada serviço, com o pagamento retido até a conclusão.",
+      "directory_onehome_tag": "Alugue ou compre uma casa",
+      "directory_onehome_desc": "Uma casa com um contrato real: aluguel assinado, fotos acordadas pelas duas partes e o histórico registrado de vendas do imóvel.",
+      "directory_oneevent_tag": "Eventos e ingressos",
+      "directory_oneevent_desc": "Organize um evento e fique com o que vender. A página, os ingressos, a entrada e o dinheiro, tudo em um só lugar.",
+      "directory_onesocial_tag": "Suas plataformas, conectadas",
+      "directory_onesocial_desc": "As contas que você já tem, reunidas em uma identidade profissional que outras pessoas podem verificar.",
+      "directory_oneagent_tag": "Seu intermediário",
+      "directory_oneagent_desc": "Alguém ao seu lado que encontra e negocia trabalho e só recebe uma parte quando você recebe.",
+      "directory_onepay_tag": "Pagamentos mais simples",
+      "directory_onepay_desc": "Gerencie vendas, recibos, reembolsos e fechamento diário pelo celular. Dinheiro e transferências já funcionam; o pagamento por aproximação será ativado após conectar um provedor certificado.",
+      "directory_onebusiness_tag": "Todos os serviços, uma conta",
+      "directory_onebusiness_desc": "As ligações, o site, os contatos e os resultados de cada serviço que você contrata conosco, em um só lugar."
+    },
+    "aria": {
+      "Primary": "Navegação principal",
+      "Language": "Idioma e país",
+      "Toggle theme": "Alternar tema",
+      "Open menu": "Abrir menu",
+      "Close menu": "Fechar menu",
+      "Close VAIA": "Fechar VAIA",
+      "Tap to talk to VAIA": "Toque para falar com a VAIA",
+      "Slide left for services, right for apps": "Deslize à esquerda para serviços ou à direita para apps",
+      "Download on the App Store — coming soon": "Baixar na App Store — em breve",
+      "Get it on Google Play — coming soon": "Disponível no Google Play — em breve"
+    },
+    "alts": {
+      "One World Labs — AI Solutions for Small Businesses": "One World Labs — Soluções de IA para pequenos negócios",
+      "Small business owner celebrating positive customer feedback": "Dono de um pequeno negócio comemorando avaliações positivas dos clientes",
+      "Laptop showing an AI assistant dashboard": "Notebook exibindo o painel de um assistente de IA",
+      "Professional checking a credibility score on a phone": "Profissional consultando uma pontuação de credibilidade no celular"
+    },
+    "placeholders": {
+      "Your name": "Seu nome",
+      "Optional": "Opcional",
+      "A few details help us route this quickly.": "Alguns detalhes nos ajudam a encaminhar sua solicitação rapidamente."
+    }
+  }
+};
+window.OWL_PUBLIC_MENU_LABEL = function(lang,open){
+  var p=window.OWL_PUBLIC_COPY[lang];
+  return p ? p.aria[open?'Close menu':'Open menu'] : lang==='co' ? (open?'Cerrar menú':'Abrir menú') : (open?'Close menu':'Open menu');
+};
+window.OWL_APPLY_PUBLIC_LOCALE = function(lang,directory){
+  var p=window.OWL_PUBLIC_COPY[lang];
+  if(p) document.title=p.titles[directory?1:0];
+  document.querySelectorAll('[data-public-aria-en]').forEach(function(el){var key=el.getAttribute('data-public-aria-en');if(p&&p.aria[key])el.setAttribute('aria-label',p.aria[key]);});
+  document.querySelectorAll('[data-public-alt-source]').forEach(function(el){var key=el.getAttribute('data-public-alt-source');el.setAttribute('alt',p&&p.alts[key]?p.alts[key]:(lang==='co'&&el.hasAttribute('data-public-alt-co')?el.getAttribute('data-public-alt-co'):key));});
+  document.querySelectorAll('[data-public-placeholder-source]').forEach(function(el){var key=el.getAttribute('data-public-placeholder-source');el.setAttribute('placeholder',p&&p.placeholders[key]?p.placeholders[key]:key);});
+  var trigger=document.getElementById('menu-btn'), drawer=document.getElementById('menu-overlay');
+  if(trigger&&drawer)trigger.setAttribute('aria-label',window.OWL_PUBLIC_MENU_LABEL(lang,drawer.classList.contains('show')));
+};
