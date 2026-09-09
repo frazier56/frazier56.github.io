@@ -660,10 +660,10 @@
                  stays crisp at any resolution and follows the theme (matches the SMALL BUSINESS
                  SOLUTIONS lockup in GHL/_BRAND-ASSETS/OneWorld_multicolor-mark) -->
             <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center">
-                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-light">
-                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-dark">
+                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses" data-score-alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-light">
+                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses" data-score-alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-dark">
             </a>
-            <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary">
+            <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary" data-score-aria="Primary">
                 <a href="/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="owl_nav_home">Home</a>
                 <a href="/services/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="nav_services">Services</a>
                 <a href="/apps/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="nav_apps">Apps</a>
@@ -673,7 +673,7 @@
             </nav>
             <div class="flex items-center gap-2 sm:gap-4">
                 <div class="relative">
-                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="true" aria-label="Language">
+                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="menu" aria-controls="lang-menu" aria-expanded="false" aria-label="Language and country" data-score-aria="Language">
                         <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="" aria-hidden="true" class="h-4 w-6 rounded-sm object-cover">
                     </button>
                     <div class="langmenu" id="lang-menu" role="menu">
@@ -686,11 +686,11 @@
                         <button data-lang="pt"><img src="https://flagcdn.com/w40/br.png" width="20" height="14" class="rounded-sm" alt="">Brasil<span class="chk">✓</span></button>
                     </div>
                 </div>
-                <button id="theme-toggle" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Toggle theme">
+                <button id="theme-toggle" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Toggle theme" data-score-aria="Toggle theme">
                     <svg id="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
                     <svg id="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
                 </button>
-                <button id="menu-btn" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Open menu">
+                <button id="menu-btn" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Open menu" data-score-aria="Open menu">
                     <svg id="icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
                     <svg id="icon-x" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
@@ -703,7 +703,7 @@
          "Sign in with One ID" row when signed out, or an identity row + red Sign Out row when
          signed in (previously always showed "Sign in" regardless of session — no way to sign out
          from here at all). -->
-    <div id="menu-overlay" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
+    <div id="menu-overlay" inert aria-hidden="true" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
         <div class="menu-panel absolute right-3 top-[74px] flex max-h-[calc(100vh-90px)] w-[300px] max-w-[88vw] flex-col overflow-y-auto rounded-3xl border shadow-2xl p-4 sm:p-5">
 
             <!-- identity row: One World Labs mark when signed out, avatar + name when signed in -->
@@ -722,7 +722,7 @@
                         <span class="block truncate text-xs text-muted-foreground" data-i18n="oneid_label">One ID</span>
                     </span>
                 </div>
-                <button id="menu-close-x" type="button" class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-lg leading-none" aria-label="Close menu">&times;</button>
+                <button id="menu-close-x" type="button" class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-lg leading-none" aria-label="Close menu" data-score-aria="Close menu">&times;</button>
             </div>
 
             <div class="mt-3 space-y-3">
@@ -778,17 +778,17 @@
             <div class="vaia-panel-inner">
                 <div class="vaia-head">
                     <span class="font-heading font-bold text-sm flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary"></span> VAIA</span>
-                    <button id="vaia-close" class="h-7 w-7 inline-flex items-center justify-center rounded-md hover:bg-secondary/50" aria-label="Close VAIA">
+                    <button id="vaia-close" class="h-7 w-7 inline-flex items-center justify-center rounded-md hover:bg-secondary/50" aria-label="Close VAIA" data-score-aria="Close VAIA">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                     </button>
                 </div>
                 <div id="vaia-log" class="vaia-log"></div>
                 <div class="vaia-controls">
-                    <input id="vaia-text" class="vaia-textin" type="text" placeholder="Type to VAIA (or just talk to her)…">
+                    <input id="vaia-text" class="vaia-textin" type="text" placeholder="Type to VAIA (or just talk to her)…" data-score-placeholder="Type to VAIA (or just talk to her)…">
                 </div>
             </div>
         </div>
-        <div class="vaia-orb" id="vaia-orb" role="button" tabindex="0" aria-label="Tap to talk to VAIA">
+        <div class="vaia-orb" id="vaia-orb" role="button" tabindex="0" aria-label="Tap to talk to VAIA" data-score-aria="Tap to talk to VAIA">
             <div class="vaia-ring"></div><div class="vaia-ring"></div><div class="vaia-ring"></div>
             <div class="vaia-bars"><span></span><span></span><span></span><span></span><span></span></div>
             <div class="vaia-think" data-i18n="owl_vaia_thinking">Thinking</div>
@@ -799,73 +799,73 @@
     <main class="relative z-10 pt-24 md:pt-32 pb-16 md:pb-20">
         <article class="container mx-auto px-4 max-w-3xl">
             <nav class="mb-6"><a href="/blog/" class="inline-flex items-center gap-1.5 text-sm font-bold text-primary"><svg class="h-3.5 w-3.5 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> <span data-i18n="bc_back">Back to the blog</span></a></nav>
-            <div class="text-[11px] font-bold tracking-widest uppercase text-primary mb-3">OneScore · 7 min · <time datetime="2026-08-09">2026-08-09</time></div>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight mb-6">What Is a OneScore? The Credibility Number That Gets Freelancers Hired</h1>
-            <p class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">Learn what a OneScore credibility score is, how it works, and why freelancers and small businesses use one portable, verified reputation number to win more clients.</p>
-            <img src="/blog/img/onescore.jpg" alt="Professional checking a credibility score on a phone" class="w-full rounded-2xl mb-10 shadow-lg" style="aspect-ratio:16/9;object-fit:cover;">
+            <div class="text-[11px] font-bold tracking-widest uppercase text-primary mb-3"><span data-score-copy="meta">OneScore · 7 min · </span><time datetime="2026-08-09">2026-08-09</time></div>
+            <h1 data-score-copy="title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight mb-6">What Is a OneScore? The Credibility Number That Gets Freelancers Hired</h1>
+            <p data-score-copy="intro" class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">Learn what a OneScore credibility score is, how it works, and why freelancers and small businesses use one portable, verified reputation number to win more clients.</p>
+            <img src="/blog/img/onescore.jpg" alt="Professional checking a credibility score on a phone" data-score-alt="Professional checking a credibility score on a phone" class="w-full rounded-2xl mb-10 shadow-lg" style="aspect-ratio:16/9;object-fit:cover;">
             <div class="prose-ow frost rounded-3xl p-6 sm:p-10 md:p-12">
 
-<p>If you're a working professional — a photographer, DJ, event planner, barber, contractor, or any kind of freelancer — your reputation is probably spread across five or more platforms. You have reviews on Google, ratings on Yelp, endorsements on LinkedIn, followers on Instagram, and testimonials buried in Facebook comments.</p>
-<p>None of them talk to each other. A client considering hiring you has to piece together your credibility from scratch every single time. Most won't bother — they'll hire whoever shows up first with enough stars.</p>
-<p><strong>This is the problem OneScore was built to solve.</strong></p>
+<p data-score-copy="body_0">If you're a working professional — a photographer, DJ, event planner, barber, contractor, or any kind of freelancer — your reputation is probably spread across five or more platforms. You have reviews on Google, ratings on Yelp, endorsements on LinkedIn, followers on Instagram, and testimonials buried in Facebook comments.</p>
+<p data-score-copy="body_1">None of them talk to each other. A client considering hiring you has to piece together your credibility from scratch every single time. Most won't bother — they'll hire whoever shows up first with enough stars.</p>
+<p data-score-copy="body_2"><strong>This is the problem OneScore was built to solve.</strong></p>
 
-<h2>What exactly is a OneScore?</h2>
-<p>Think of OneScore as a <strong>credit score for your professional reputation</strong>. The same way a credit score condenses your financial history into a single number a lender can trust, OneScore condenses your professional history — reviews, completed jobs, response times, social proof, endorsements, and verified credentials — into a single credibility number.</p>
-<blockquote>The higher your score, the more visible you become, the more trust you command, and the stronger your position when you quote a price.</blockquote>
-<p>OneScore is a free app from <a href="https://www.oneworldlabs.ai/">One World Labs</a>. You connect your platforms and your work history, and it produces one verified number you can post anywhere — your website, your Instagram bio, your email signature.</p>
+<h2 data-score-copy="body_3">What exactly is a OneScore?</h2>
+<p data-score-copy="body_4">Think of OneScore as a <strong>credit score for your professional reputation</strong>. The same way a credit score condenses your financial history into a single number a lender can trust, OneScore condenses your professional history — reviews, completed jobs, response times, social proof, endorsements, and verified credentials — into a single credibility number.</p>
+<blockquote data-score-copy="body_5">The higher your score, the more visible you become, the more trust you command, and the stronger your position when you quote a price.</blockquote>
+<p data-score-copy="body_6">OneScore is a free app from <a href="https://www.oneworldlabs.ai/">One World Labs</a>. You connect your platforms and your work history, and it produces one verified number you can post anywhere — your website, your Instagram bio, your email signature.</p>
 
-<h2>What goes into the score</h2>
-<p>OneScore looks at the dimensions clients actually care about when they decide who to hire:</p>
+<h2 data-score-copy="body_7">What goes into the score</h2>
+<p data-score-copy="body_8">OneScore looks at the dimensions clients actually care about when they decide who to hire:</p>
 <ul>
-<li><strong>Social proof</strong> — connected platforms, follower authenticity, and engagement quality (not raw follower counts).</li>
-<li><strong>Reviews &amp; ratings</strong> — aggregated feedback from real, completed work.</li>
-<li><strong>Completed jobs</strong> — a track record of finishing what you were hired to do.</li>
-<li><strong>Responsiveness</strong> — how quickly you reply when someone reaches out.</li>
-<li><strong>Profile quality</strong> — a complete, professional presentation of who you are and what you do.</li>
-<li><strong>Endorsements</strong> — vouches from other verified professionals.</li>
+<li data-score-copy="body_9"><strong>Social proof</strong> — connected platforms, follower authenticity, and engagement quality (not raw follower counts).</li>
+<li data-score-copy="body_10"><strong>Reviews &amp; ratings</strong> — aggregated feedback from real, completed work.</li>
+<li data-score-copy="body_11"><strong>Completed jobs</strong> — a track record of finishing what you were hired to do.</li>
+<li data-score-copy="body_12"><strong>Responsiveness</strong> — how quickly you reply when someone reaches out.</li>
+<li data-score-copy="body_13"><strong>Profile quality</strong> — a complete, professional presentation of who you are and what you do.</li>
+<li data-score-copy="body_14"><strong>Endorsements</strong> — vouches from other verified professionals.</li>
 </ul>
-<p>The system rewards <strong>quality over quantity</strong>. A thoughtful bio outscores a long generic one. Three genuine reviews outweigh twenty suspicious ones.</p>
+<p data-score-copy="body_15">The system rewards <strong>quality over quantity</strong>. A thoughtful bio outscores a long generic one. Three genuine reviews outweigh twenty suspicious ones.</p>
 
-<h2>Why it matters for your career</h2>
-<h3>Clients can trust you instantly</h3>
-<p>When a hirer sees a strong OneScore, they know at a glance that you're reliable, professional, and vetted. No guesswork, no digging through five platforms. One number tells the story.</p>
-<h3>You carry your reputation everywhere</h3>
-<p>Your OneScore travels with you. Embed it on your personal website, share it in your bio, add it to proposals. Your reputation isn't locked inside any single platform.</p>
-<h3>Protection against platform risk</h3>
-<p>If a marketplace changes its algorithm tomorrow and your ranking drops, you can lose years of accumulated trust overnight. A portable score is <strong>yours</strong> — persistent and platform-independent.</p>
-<h3>Stronger pricing conversations</h3>
-<p>Visible, verified credibility changes the conversation from "why do you charge that much?" to "when can you start?" Professionals with proof behind them negotiate from a very different position than professionals with promises.</p>
+<h2 data-score-copy="body_16">Why it matters for your career</h2>
+<h3 data-score-copy="body_17">Clients can trust you instantly</h3>
+<p data-score-copy="body_18">When a hirer sees a strong OneScore, they know at a glance that you're reliable, professional, and vetted. No guesswork, no digging through five platforms. One number tells the story.</p>
+<h3 data-score-copy="body_19">You carry your reputation everywhere</h3>
+<p data-score-copy="body_20">Your OneScore travels with you. Embed it on your personal website, share it in your bio, add it to proposals. Your reputation isn't locked inside any single platform.</p>
+<h3 data-score-copy="body_21">Protection against platform risk</h3>
+<p data-score-copy="body_22">If a marketplace changes its algorithm tomorrow and your ranking drops, you can lose years of accumulated trust overnight. A portable score is <strong>yours</strong> — persistent and platform-independent.</p>
+<h3 data-score-copy="body_23">Stronger pricing conversations</h3>
+<p data-score-copy="body_24">Visible, verified credibility changes the conversation from "why do you charge that much?" to "when can you start?" Professionals with proof behind them negotiate from a very different position than professionals with promises.</p>
 
-<h2>How to improve your OneScore</h2>
+<h2 data-score-copy="body_25">How to improve your OneScore</h2>
 <ol>
-<li><strong>Connect your platforms</strong> — the more real signal the score can analyze, the more accurate and favorable it gets.</li>
-<li><strong>Complete your profile fully</strong> — photo, bio, media, location, and skills.</li>
-<li><strong>Ask for reviews after every job</strong> — consistent feedback compounds over time. (Our guide on <a href="/blog/get-more-five-star-reviews/">getting more five-star reviews</a> walks through exactly how to ask.)</li>
-<li><strong>Respond quickly</strong> — response time is a trust signal clients feel immediately.</li>
-<li><strong>Get endorsed by peers</strong> — vouches between verified professionals carry real weight.</li>
+<li data-score-copy="body_26"><strong>Connect your platforms</strong> — the more real signal the score can analyze, the more accurate and favorable it gets.</li>
+<li data-score-copy="body_27"><strong>Complete your profile fully</strong> — photo, bio, media, location, and skills.</li>
+<li data-score-copy="body_28"><strong>Ask for reviews after every job</strong> — consistent feedback compounds over time. (Our guide on <a href="/blog/get-more-five-star-reviews/">getting more five-star reviews</a> walks through exactly how to ask.)</li>
+<li data-score-copy="body_29"><strong>Respond quickly</strong> — response time is a trust signal clients feel immediately.</li>
+<li data-score-copy="body_30"><strong>Get endorsed by peers</strong> — vouches between verified professionals carry real weight.</li>
 </ol>
 
-<h2>The bottom line</h2>
-<p>In the gig economy, trust is the currency — and most professionals still have no way to prove their trustworthiness outside one platform's own rating system.</p>
-<p>OneScore changes that: a single, verifiable, portable credibility number that works across every client interaction. It's free, and it's part of the One World ecosystem — so the same account also gets you <a href="https://onejob.oneworldlabs.ai/">OneJob</a> for getting hired and paid, and <a href="https://oneevent.oneworldlabs.ai/">OneEvent</a> for hosting events and selling tickets.</p>
-<p><a href="https://onescore.oneworldlabs.ai/"><strong>Get your free OneScore →</strong></a></p>
+<h2 data-score-copy="body_31">The bottom line</h2>
+<p data-score-copy="body_32">In the gig economy, trust is the currency — and most professionals still have no way to prove their trustworthiness outside one platform's own rating system.</p>
+<p data-score-copy="body_33">OneScore changes that: a single, verifiable, portable credibility number that works across every client interaction. It's free, and it's part of the One World ecosystem — so the same account also gets you <a href="https://onejob.oneworldlabs.ai/">OneJob</a> for getting hired and paid, and <a href="https://oneevent.oneworldlabs.ai/">OneEvent</a> for hosting events and selling tickets.</p>
+<p data-score-copy="body_34"><a href="https://onescore.oneworldlabs.ai/"><strong>Get your free OneScore →</strong></a></p>
 
             </div>
         </article>
         <section class="container mx-auto px-4 max-w-3xl mt-14">
-            <h2 class="text-xl font-bold mb-5" data-i18n="blog_soon">New guides published regularly.</h2>
+            <h2 class="text-xl font-bold mb-5" data-score-copy="related_heading">New guides published regularly.</h2>
             <div class="grid sm:grid-cols-2 gap-5">
                 <a href="/blog/ai-answering-service-small-business/" class="post-card frost rounded-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-                    <img src="/blog/img/ai-answering.jpg" alt="Laptop showing an AI assistant dashboard" loading="lazy">
+                    <img src="/blog/img/ai-answering.jpg" alt="Laptop showing an AI assistant dashboard" data-score-alt="Laptop showing an AI assistant dashboard" loading="lazy">
                     <div class="p-5 flex flex-col flex-grow">
-                        <h3 class="font-bold text-base leading-snug mb-3">AI Answering Services for Small Business: How to Never Miss Another Call</h3>
+                        <h3 class="font-bold text-base leading-snug mb-3" data-score-copy="related_voice">AI Answering Services for Small Business: How to Never Miss Another Call</h3>
                         <span class="inline-flex items-center gap-1 text-sm font-bold text-primary mt-auto"><span data-i18n="blog_read">Read article</span> <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
                     </div>
                 </a>
                 <a href="/blog/get-more-five-star-reviews/" class="post-card frost rounded-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-                    <img src="/blog/img/reviews.jpg" alt="Small business owner celebrating positive customer feedback" loading="lazy">
+                    <img src="/blog/img/reviews.jpg" alt="Small business owner celebrating positive customer feedback" data-score-alt="Small business owner celebrating positive customer feedback" loading="lazy">
                     <div class="p-5 flex flex-col flex-grow">
-                        <h3 class="font-bold text-base leading-snug mb-3">How to Get More Five-Star Reviews for Your Small Business (2026 Guide)</h3>
+                        <h3 class="font-bold text-base leading-snug mb-3" data-score-copy="related_reviews">How to Get More Five-Star Reviews for Your Small Business (2026 Guide)</h3>
                         <span class="inline-flex items-center gap-1 text-sm font-bold text-primary mt-auto"><span data-i18n="blog_read">Read article</span> <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
                     </div>
                 </a>
@@ -944,6 +944,7 @@
     </footer>
 </div>
 
+<script src="/blog/what-is-onescore/copy.js"></script>
 <script>
     /* ---------- theme toggle ---------- */
     var themeColorMeta = document.getElementById('theme-color-meta');
@@ -964,10 +965,24 @@
     var iconMenu = document.getElementById('icon-menu'), iconX = document.getElementById('icon-x');
     function setMenu(open){
         overlay.classList.toggle('show', open);
+        overlay.inert = !open;
+        overlay.setAttribute('aria-hidden', String(!open));
+        menuBtn.setAttribute('aria-expanded', String(open));
+        if (open) overlay.querySelector('button, a').focus();
+        else menuBtn.focus();
         iconMenu.classList.toggle('hidden', open);
         iconX.classList.toggle('hidden', !open);
-        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        menuBtn.setAttribute('aria-label', (window.OWL_SCORE_MENU_LABEL ? window.OWL_SCORE_MENU_LABEL(window.OWL_LANG,open) : (window.OWL_LANG==='co' ? (open?'Cerrar menú':'Abrir menú') : (open?'Close menu':'Open menu'))));
     }
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-controls', 'menu-overlay');
+    overlay.addEventListener('keydown', function(e){
+        if(e.key!=='Tab') return;
+        var items=Array.from(overlay.querySelectorAll('a,button')).filter(function(el){return el.getClientRects().length && !el.disabled;});
+        var first=items[0],last=items[items.length-1];
+        if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+    });
     menuBtn.addEventListener('click', function(){ setMenu(!overlay.classList.contains('show')); });
     overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
     overlay.addEventListener('click', function(e){ if (e.target === overlay) setMenu(false); });
@@ -1214,6 +1229,7 @@
         I18N[l] = Object.assign({}, I18N[l] || {}, I18N_EXT[l]);
     });
     function applyLang(lang){
+        if(window.OWL_SCORE_APPLY) window.OWL_SCORE_APPLY(lang);
         document.querySelectorAll('[data-i18n]').forEach(function(el){
             var key = el.getAttribute('data-i18n');
             if (!el.hasAttribute('data-i18n-en')) el.setAttribute('data-i18n-en', el.textContent);
@@ -1225,15 +1241,31 @@
     }
     var langBtn = document.getElementById('lang-btn'), langMenu = document.getElementById('lang-menu');
     if (langBtn) {
-        langBtn.addEventListener('click', function(e){ e.stopPropagation(); langMenu.classList.toggle('open'); });
-        document.addEventListener('click', function(){ langMenu.classList.remove('open'); });
+        function setLanguageMenu(open, focus){
+            langMenu.classList.toggle('open',open);
+            langBtn.setAttribute('aria-expanded',String(open));
+            if(focus) (open ? langMenu.querySelector('button.active') || langMenu.querySelector('button') : langBtn).focus();
+        }
+        langBtn.addEventListener('click', function(e){e.stopPropagation();setLanguageMenu(!langMenu.classList.contains('open'),true);});
+        langBtn.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();setLanguageMenu(true,true);}});
+        document.addEventListener('click',function(){setLanguageMenu(false,false);});
+        langMenu.addEventListener('keydown',function(e){
+            var buttons=Array.from(langMenu.querySelectorAll('button')),index=buttons.indexOf(document.activeElement);
+            if(e.key==='Escape'){e.preventDefault();setLanguageMenu(false,true);}
+            else if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();buttons[(index+(e.key==='ArrowDown'?1:buttons.length-1))%buttons.length].focus();}
+            else if(e.key==='Home'||e.key==='End'){e.preventDefault();buttons[e.key==='Home'?0:buttons.length-1].focus();}
+            else if(e.key==='Tab'){setLanguageMenu(false,true);}
+        });
         langMenu.querySelectorAll('button').forEach(function(b){
+            b.setAttribute('role','menuitemradio');
+            b.setAttribute('aria-checked',String(b.classList.contains('active')));
+            b.querySelector('.chk').setAttribute('aria-hidden','true');
             b.addEventListener('click', function(){
                 var lang = b.getAttribute('data-lang');
                 document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N_META[lang].flag + '.png';
-                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); });
-                document.documentElement.lang = lang;
-                langMenu.classList.remove('open');
+                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); x.setAttribute('aria-checked',String(x===b)); });
+                document.documentElement.lang = ({co:'es-CO',es:'es-ES',pt:'pt-BR',zh:'zh-CN'})[lang] || lang;
+                setLanguageMenu(false,document.activeElement===b);
                 window.OWL_LANG = lang;
                 applyLang(lang);
                 /* re-render any JS-built text (the signed-in welcome message splices in the

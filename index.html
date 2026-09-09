@@ -1987,6 +1987,9 @@
     Object.keys(CARD_I18N).forEach(function(l){I18N[l]=Object.assign({},I18N[l]||{},CARD_I18N[l]);});
     I18N.co.public_copyright="© 2026 One World Labs, Inc. · Ocho apps · One ID";
     Object.keys(window.OWL_PUBLIC_COPY || {}).forEach(function(lang){I18N[lang]=Object.assign({},I18N[lang]||{},window.OWL_PUBLIC_COPY[lang].text);});
+    /* CO article preview gaps */
+    Object.assign(I18N.co, {"public_blog1_title":"Cómo conseguir más reseñas de cinco estrellas para tu pequeño negocio","public_blog1_desc":"Cuándo pedirlas, cómo hacerlo y cómo convertir reseñas dispersas en una puntuación de credibilidad visible.","public_blog3_title":"¿Qué es OneScore? La puntuación de credibilidad que te ayuda a conseguir trabajo","public_blog3_desc":"Una puntuación de reputación verificada y portátil: cómo funciona y por qué ayuda a ganar clientes."});
+    /* End CO article preview gaps */
     var publicEnglishTitle = document.title;
     function applyPublicLabels(lang){
         document.title = lang==='co' ? "One World Labs — Agencia de IA y plataforma de apps para pequeños negocios" : publicEnglishTitle;
