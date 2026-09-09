@@ -1030,12 +1030,13 @@
         document.body.classList.toggle('dark', isDark);
         if (themeColorMeta) themeColorMeta.setAttribute('content', isDark ? '#0B0F1A' : '#FAFAF8');
     }
-    var savedTheme = localStorage.getItem('color-theme');
+    var savedTheme = null;
+    try { savedTheme = localStorage.getItem('color-theme'); } catch(e){}
     applyTheme(savedTheme === 'dark'); /* default = light unless the visitor explicitly chose dark before */
     document.getElementById('theme-toggle').addEventListener('click', function(){
         var isDark = !document.body.classList.contains('dark');
         applyTheme(isDark);
-        localStorage.setItem('color-theme', isDark ? 'dark' : 'light');
+        try { localStorage.setItem('color-theme', isDark ? 'dark' : 'light'); } catch(e){}
     });
 
     /* ---------- mobile / full menu overlay ---------- */
@@ -1347,6 +1348,14 @@
   "onehome_52": "Abrir OneHome"
 });
     function applyLang(lang){
+        // Pass only the selected display language across the app origin.
+        document.querySelectorAll('a[href^="https://app.oneworldlabs.ai/home"]').forEach(function(link){
+            var url = new URL(link.href);
+            if (url.pathname !== '/home' && url.pathname !== '/home/') return;
+            if (lang === 'en' || lang === 'co') url.searchParams.set('home_lang', lang);
+            else url.searchParams.delete('home_lang');
+            link.href = url.href;
+        });
         var co = lang === "co";
         document.title = co ? 'OneHome — Arriende o compre una vivienda | One World Labs' : 'OneHome — Rent or buy a home | One World Labs';
         var nav=document.querySelector('nav[aria-label]');if(nav)nav.setAttribute('aria-label',co?'Principal':'Primary');
