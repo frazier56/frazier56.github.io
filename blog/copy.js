@@ -19,8 +19,8 @@ var packs={
     "card_4_title": "Cómo consiguen los DJs más contrataciones: convierte tu talento en una trayectoria",
     "card_4_desc": "Una guía práctica para DJs que quieren contrataciones constantes: por qué fallan los mensajes directos de Instagram, cómo una puntuación de credibilidad verificada ayuda a conseguir presentaciones y cómo los contratos protegen tu actuación y tu pago.",
     "card_4_meta": "Independientes · 6 min",
-    "card_5_title": "Contratos para independientes y pagos protegidos: no vuelvas a perseguir una factura",
-    "card_5_desc": "Cómo los contratos digitales con pagos protegidos resuelven el problema de confianza del trabajo independiente: alcance, firmas, pago retenido hasta terminar y liberación automática cuando ambas partes confirman.",
+    "card_5_title": "Contratos y pagos para independientes: qué revisar antes de empezar",
+    "card_5_desc": "Entiende los acuerdos por escrito, los pagos elegibles con tarjeta, los límites de los pagos directos, las confirmaciones de finalización y el estado de liberación del pago en OneJob.",
     "card_5_meta": "Independientes · 6 min"
   },
   "es": {
@@ -40,8 +40,8 @@ var packs={
     "card_4_title": "Cómo consiguen los DJs más contrataciones: convierte tu talento en una trayectoria",
     "card_4_desc": "Una guía práctica para DJs que quieren contrataciones constantes: por qué fallan los mensajes directos de Instagram, cómo una puntuación de credibilidad verificada ayuda a conseguir presentaciones y cómo los contratos protegen tu actuación y tu pago.",
     "card_4_meta": "Independientes · 6 min",
-    "card_5_title": "Contratos para independientes y pagos protegidos: no vuelvas a perseguir una factura",
-    "card_5_desc": "Cómo los contratos digitales con pagos protegidos resuelven el problema de confianza del trabajo independiente: alcance, firmas, pago retenido hasta terminar y liberación automática cuando ambas partes confirman.",
+    "card_5_title": "Contratos y pagos para independientes: qué revisar antes de empezar",
+    "card_5_desc": "Entiende los acuerdos por escrito, los pagos elegibles con tarjeta, los límites de los pagos directos, las confirmaciones de finalización y el estado de liberación del pago en OneJob.",
     "card_5_meta": "Independientes · 6 min"
   },
   "de": {
@@ -61,8 +61,8 @@ var packs={
     "card_4_title": "So werden DJs häufiger gebucht: Talent in nachweisbare Erfolge verwandeln",
     "card_4_desc": "Ein praktischer Leitfaden für DJs, die regelmäßig gebucht werden möchten: warum Instagram-Direktnachrichten scheitern, wie ein verifizierter Glaubwürdigkeitswert Auftritte bringt und wie Verträge Ihr Set und Ihre Bezahlung schützen.",
     "card_4_meta": "Freelancer · 6 Min.",
-    "card_5_title": "Verträge und geschützte Zahlungen für Freelancer: Nie wieder Rechnungen hinterherlaufen",
-    "card_5_desc": "Wie digitale Verträge mit geschützten Zahlungen das Vertrauensproblem im Freelancing lösen: Leistungsumfang, Unterschriften, bis zum Abschluss zurückgehaltene Zahlung und automatische Freigabe, sobald beide Seiten bestätigen.",
+    "card_5_title": "Verträge und Zahlungen für Freelancer: Was Sie vor dem Start prüfen sollten",
+    "card_5_desc": "Verstehen Sie schriftliche Vereinbarungen, dafür geeignete kartengezahlte Verträge, die Grenzen direkter Zahlungen, Abschlussbestätigungen und den Freigabestatus auf OneJob.",
     "card_5_meta": "Freelancer · 6 Min."
   },
   "ru": {
@@ -82,8 +82,8 @@ var packs={
     "card_4_title": "Как диджеям получать больше заказов: превращаем талант в подтверждённый опыт",
     "card_4_desc": "Практическое руководство для диджеев, которые хотят регулярно получать заказы: почему личные сообщения в Instagram не срабатывают, как проверенный показатель доверия помогает получать выступления и как договоры защищают ваш сет и оплату.",
     "card_4_meta": "Фрилансеры · 6 мин",
-    "card_5_title": "Договоры для фрилансеров и защищённые платежи: больше не добивайтесь оплаты счетов",
-    "card_5_desc": "Как цифровые договоры с защищёнными платежами решают проблему доверия во фрилансе: объём работ, подписи, удержание платежа до завершения и автоматическое перечисление после подтверждения обеими сторонами.",
+    "card_5_title": "Договоры и платежи для фрилансеров: что проверить до начала работы",
+    "card_5_desc": "Разберитесь в письменных соглашениях, платежах по подходящим договорам с оплатой картой, ограничениях прямой оплаты, подтверждениях завершения и статусе перечисления средств на OneJob.",
     "card_5_meta": "Фрилансеры · 6 мин"
   },
   "zh": {
@@ -103,8 +103,8 @@ var packs={
     "card_4_title": "DJ 如何获得更多演出邀约：让才华变成有据可查的成绩",
     "card_4_desc": "为希望持续获得演出邀约的 DJ 提供实用指南：为什么 Instagram 私信不奏效，经过验证的信誉分如何帮助赢得演出，以及合同如何保护你的演出和报酬。",
     "card_4_meta": "自由职业者 · 6 分钟",
-    "card_5_title": "自由职业合同与受保护的付款：不再追着客户催款",
-    "card_5_desc": "数字合同与受保护的付款如何解决自由职业中的信任问题：明确工作范围、签署合同、在完成前暂存款项，并在双方确认后自动放款。",
+    "card_5_title": "自由职业合同与付款：开始前应检查什么",
+    "card_5_desc": "了解 OneJob 上的书面协议、符合条件的银行卡付款、直接付款的限制、完成确认和放款状态。",
     "card_5_meta": "自由职业者 · 6 分钟"
   },
   "pt": {
@@ -124,8 +124,8 @@ var packs={
     "card_4_title": "Como DJs conseguem mais trabalhos: transformando talento em um histórico comprovado",
     "card_4_desc": "Um guia prático para DJs que querem contratações frequentes: por que as mensagens diretas no Instagram falham, como uma pontuação de credibilidade verificada conquista apresentações e como os contratos protegem seu set e seu pagamento.",
     "card_4_meta": "Freelancers · 6 min",
-    "card_5_title": "Contratos para freelancers e pagamentos protegidos: nunca mais corra atrás de uma fatura",
-    "card_5_desc": "Como contratos digitais com pagamentos protegidos resolvem o problema de confiança no trabalho freelancer: escopo, assinaturas, pagamento retido até a conclusão e liberação automática quando os dois lados confirmam.",
+    "card_5_title": "Contratos e pagamentos para freelancers: o que verificar antes de começar",
+    "card_5_desc": "Entenda os acordos por escrito, os pagamentos com cartão elegíveis, os limites dos pagamentos diretos, as confirmações de conclusão e o status de liberação no OneJob.",
     "card_5_meta": "Freelancers · 6 min"
   }
 };
