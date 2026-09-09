@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Get started — OneVoice</title>
+<title data-i18n="co_access_title">Get started — OneVoice</title>
 <link rel="canonical" href="https://www.oneworldlabs.ai/onevoice/get-started/">
 <style>html,body{margin:0;padding:0;background:#E3ECFB;}</style>
 <script>(function(){try{var c=localStorage.getItem('ov_ctry');if(c&&c!=='us'){var d=document.documentElement;d.setAttribute('data-ov-pending','1');var st=document.createElement('style');st.textContent='html[data-ov-pending] body{visibility:hidden}';(document.head||d).appendChild(st);setTimeout(function(){d.removeAttribute('data-ov-pending');},600);}}catch(e){}})();</script></head>
@@ -179,7 +179,7 @@
             <div class="ov-field ov-phonefield"><label data-i18n="co_lbl_mobile">Mobile</label>
               <div class="ov-phonerow">
                 <div class="ovsel ovsel-dial" id="dialSel" data-value="us">
-                  <button type="button" class="ovsel-btn" id="dialBtn" aria-haspopup="listbox" aria-label="Country dialling code">
+                  <button type="button" class="ovsel-btn" id="dialBtn" aria-haspopup="listbox" aria-label="Country dialling code" data-i18n-aria="co_access_dial">
                     <span class="dial-flag" id="dialFlag">&#127482;&#127480;</span><span id="dialVal">+1</span>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5a6677" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
                   </button>
@@ -316,9 +316,9 @@
             <div class="ov-field">
               <label id="countLbl" data-i18n="co_count_numbers">How many phone numbers?</label>
               <div class="ovstep">
-                <button type="button" class="ovstep-btn" id="cntMinus" aria-label="Decrease">&minus;</button>
-                <input id="count" class="ovstep-in" type="text" inputmode="numeric" value="1" aria-label="How many">
-                <button type="button" class="ovstep-btn" id="cntPlus" aria-label="Increase">+</button>
+                <button type="button" class="ovstep-btn" id="cntMinus" aria-label="Decrease" data-i18n-aria="co_access_less">&minus;</button>
+                <input id="count" class="ovstep-in" type="text" inputmode="numeric" value="1" aria-label="How many" data-i18n-aria="co_access_count">
+                <button type="button" class="ovstep-btn" id="cntPlus" aria-label="Increase" data-i18n-aria="co_access_more">+</button>
               </div>
               <div class="ov-mini" id="countHint">Every plan includes one local number. Each extra number gets its own AI receptionist.</div>
             </div>
@@ -1526,6 +1526,8 @@
   if(!window.OV_SET_LOCALE) window.OV_SET_LOCALE = function(code){ setLang(code); };
 
   /* ---------- text swap ---------- */
+  Object.assign(STR.us,{co_access_title:"Get started — OneVoice",co_access_dial:"Country dialling code",co_access_less:"Decrease",co_access_count:"How many",co_access_more:"Increase"});
+  Object.assign(STR.co,{co_access_title:"Comenzar — OneVoice",co_access_dial:"Código de país",co_access_less:"Disminuir",co_access_count:"Cantidad de números",co_access_more:"Aumentar"});
   function applyText(root){
     root = root || document;
     if(!root.querySelector || root===document){ setTimeout(function(){ if(window.OV_SYNC_TERMS) window.OV_SYNC_TERMS(); },0); }
