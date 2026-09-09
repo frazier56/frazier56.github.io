@@ -434,7 +434,10 @@
     /* the old card chrome, explicitly switched off rather than left to chance */
     .app-card.hue-top::before,.app-card .hue-tile,.app-card .hue-dot{display:none !important;}
 
-    .app-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+    .app-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;}
+    @media (min-width:640px){.app-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+    #apps a:focus-visible{outline:3px solid var(--ow-primary);outline-offset:4px;}
+    .app-open-strip{min-height:44px;}
     @media (min-width:1024px){ .app-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;} }
     @media (min-width:640px) and (max-width:1023px){ .app-grid{gap:16px;} }
     @media (max-width:639px){
@@ -679,10 +682,10 @@
                  stays crisp at any resolution and follows the theme (matches the SMALL BUSINESS
                  SOLUTIONS lockup in GHL/_BRAND-ASSETS/OneWorld_multicolor-mark) -->
             <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center">
-                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-light">
-                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-dark">
+                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses" data-public-alt-co="One World Labs — Soluciones de IA para pequeños negocios" class="ow-lockup ow-lockup-light">
+                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses" data-public-alt-co="One World Labs — Soluciones de IA para pequeños negocios" class="ow-lockup ow-lockup-dark">
             </a>
-            <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary">
+            <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary" data-public-aria-co="Navegación principal">
                 <a href="/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="owl_nav_home">Home</a>
                 <a href="/services/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="nav_services">Services</a>
                 <a href="/apps/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="nav_apps">Apps</a>
@@ -692,7 +695,7 @@
             </nav>
             <div class="flex items-center gap-2 sm:gap-4">
                 <div class="relative">
-                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="true" aria-label="Language">
+                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="menu" aria-controls="lang-menu" aria-expanded="false" aria-label="Language" data-public-aria-co="Idioma y país">
                         <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="" aria-hidden="true" class="h-4 w-6 rounded-sm object-cover">
                     </button>
                     <div class="langmenu" id="lang-menu" role="menu">
@@ -705,11 +708,11 @@
                         <button data-lang="pt"><img src="https://flagcdn.com/w40/br.png" width="20" height="14" class="rounded-sm" alt="">Brasil<span class="chk">✓</span></button>
                     </div>
                 </div>
-                <button id="theme-toggle" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Toggle theme">
+                <button id="theme-toggle" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Toggle theme" data-public-aria-co="Cambiar tema">
                     <svg id="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
                     <svg id="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
                 </button>
-                <button id="menu-btn" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Open menu">
+                <button id="menu-btn" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Open menu" data-public-aria-co="Abrir menú">
                     <svg id="icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
                     <svg id="icon-x" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
@@ -722,7 +725,7 @@
          "Sign in with One ID" row when signed out, or an identity row + red Sign Out row when
          signed in (previously always showed "Sign in" regardless of session — no way to sign out
          from here at all). -->
-    <div id="menu-overlay" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
+    <div id="menu-overlay" inert aria-hidden="true" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
         <div class="menu-panel absolute right-3 top-[74px] flex max-h-[calc(100vh-90px)] w-[300px] max-w-[88vw] flex-col overflow-y-auto rounded-3xl border shadow-2xl p-4 sm:p-5">
 
             <!-- identity row: One World Labs mark when signed out, avatar + name when signed in -->
@@ -741,7 +744,7 @@
                         <span class="block truncate text-xs text-muted-foreground" data-i18n="oneid_label">One ID</span>
                     </span>
                 </div>
-                <button id="menu-close-x" type="button" class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-lg leading-none" aria-label="Close menu">&times;</button>
+                <button id="menu-close-x" type="button" class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-lg leading-none" aria-label="Close menu" data-public-aria-co="Cerrar menú">&times;</button>
             </div>
 
             <div class="mt-3 space-y-3">
@@ -797,7 +800,7 @@
             <div class="vaia-panel-inner">
                 <div class="vaia-head">
                     <span class="font-heading font-bold text-sm flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary"></span> VAIA</span>
-                    <button id="vaia-close" class="h-7 w-7 inline-flex items-center justify-center rounded-md hover:bg-secondary/50" aria-label="Close VAIA">
+                    <button id="vaia-close" class="h-7 w-7 inline-flex items-center justify-center rounded-md hover:bg-secondary/50" aria-label="Close VAIA" data-public-aria-co="Cerrar VAIA">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                     </button>
                 </div>
@@ -807,7 +810,7 @@
                 </div>
             </div>
         </div>
-        <div class="vaia-orb" id="vaia-orb" role="button" tabindex="0" aria-label="Tap to talk to VAIA">
+        <div class="vaia-orb" id="vaia-orb" role="button" tabindex="0" aria-label="Tap to talk to VAIA" data-public-aria-co="Toca para hablar con VAIA">
             <div class="vaia-ring"></div><div class="vaia-ring"></div><div class="vaia-ring"></div>
             <div class="vaia-bars"><span></span><span></span><span></span><span></span><span></span></div>
             <div class="vaia-think" data-i18n="owl_vaia_thinking">Thinking</div>
@@ -827,74 +830,74 @@
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#E0A21F;--hd:#B38219;--hl:#F3DCAA">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/onescore/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Score</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Credibility you own</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Your whole reputation — real work, verified credentials and reviews — in one number you can show anybody. Free forever.</p>
-                        <span class="app-more">more</span>
+                        <h4 data-i18n="directory_onescore_tag" class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Credibility you own</h4>
+                        <p data-i18n="directory_onescore_desc" class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Your whole reputation — real work, verified credentials and reviews — in one number you can show anybody. Free forever.</p>
+                        <span class="app-more" data-i18n="directory_more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/onescore"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><a class="app-open-strip inline-flex items-center font-semibold hue-text" href="https://app.oneworldlabs.ai/onescore" data-directory-name="OneScore" aria-label="Open OneScore"><span data-i18n="directory_open">Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#17A45C;--hd:#12834A;--hl:#93F0C1">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/onejob/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Job</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">The work marketplace</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Get hired and get paid, without chasing anybody for the money. A signed agreement on every job and the payment held until it is done.</p>
-                        <span class="app-more">more</span>
+                        <h4 data-i18n="directory_onejob_tag" class="text-xs font-bold tracking-widest uppercase hue-text mb-3">The work marketplace</h4>
+                        <p data-i18n="directory_onejob_desc" class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Get hired and get paid, without chasing anybody for the money. A signed agreement on every job and the payment held until it is done.</p>
+                        <span class="app-more" data-i18n="directory_more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/jobs"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><a class="app-open-strip inline-flex items-center font-semibold hue-text" href="https://app.oneworldlabs.ai/jobs" data-directory-name="OneJob" aria-label="Open OneJob"><span data-i18n="directory_open">Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#0D9488;--hd:#0F766E;--hl:#5EEAD4">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/onehome/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Home</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Rent or buy a home</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">A home with a real contract behind it — a signed lease, photos both sides agreed, and the property's real registered sale history.</p>
-                        <span class="app-more">more</span>
+                        <h4 data-i18n="directory_onehome_tag" class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Rent or buy a home</h4>
+                        <p data-i18n="directory_onehome_desc" class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">A home with a real contract behind it — a signed lease, photos both sides agreed, and the property's real registered sale history.</p>
+                        <span class="app-more" data-i18n="directory_more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/home"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><a class="app-open-strip inline-flex items-center font-semibold hue-text" href="https://app.oneworldlabs.ai/home" data-directory-name="OneHome" aria-label="Open OneHome"><span data-i18n="directory_open">Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#E2711D;--hd:#B55A17;--hl:#F4C9A9">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/oneevent/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Event</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Events and tickets</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Run an event and keep what you sell. The page, the tickets, the door and the money, all in one place.</p>
-                        <span class="app-more">more</span>
+                        <h4 data-i18n="directory_oneevent_tag" class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Events and tickets</h4>
+                        <p data-i18n="directory_oneevent_desc" class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Run an event and keep what you sell. The page, the tickets, the door and the money, all in one place.</p>
+                        <span class="app-more" data-i18n="directory_more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/events"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><a class="app-open-strip inline-flex items-center font-semibold hue-text" href="https://app.oneworldlabs.ai/events" data-directory-name="OneEvent" aria-label="Open OneEvent"><span data-i18n="directory_open">Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#8B3DEA;--hd:#6D17D5;--hl:#D3B5F7">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/onesocial/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your platforms, connected</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Every account you already have, adding up to one professional identity somebody can verify.</p>
-                        <span class="app-more">more</span>
+                        <h4 data-i18n="directory_onesocial_tag" class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your platforms, connected</h4>
+                        <p data-i18n="directory_onesocial_desc" class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Every account you already have, adding up to one professional identity somebody can verify.</p>
+                        <span class="app-more" data-i18n="directory_more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/social"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><a class="app-open-strip inline-flex items-center font-semibold hue-text" href="https://app.oneworldlabs.ai/social" data-directory-name="OneSocial" aria-label="Open OneSocial"><span data-i18n="directory_open">Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#7B2D3B;--hd:#62242F;--hl:#DCA0AB">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/oneagent/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your middleman</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Somebody in your corner finding and negotiating the work, who takes a share only when you get paid.</p>
-                        <span class="app-more">more</span>
+                        <h4 data-i18n="directory_oneagent_tag" class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Your middleman</h4>
+                        <p data-i18n="directory_oneagent_desc" class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Somebody in your corner finding and negotiating the work, who takes a share only when you get paid.</p>
+                        <span class="app-more" data-i18n="directory_more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/agent"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><a class="app-open-strip inline-flex items-center font-semibold hue-text" href="https://app.oneworldlabs.ai/agent" data-directory-name="OneAgent" aria-label="Open OneAgent"><span data-i18n="directory_open">Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#C24A32;--hd:#9E3A27;--hl:#F9B4A5">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/onepay/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Pay</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Payments, made simpler</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Run sales, receipts, refunds and daily closeout from your phone. Cash and transfers work now; tap-to-pay lights up after a certified provider is connected.</p>
-                        <span class="app-more">more</span>
+                        <h4 data-i18n="directory_onepay_tag" class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Payments, made simpler</h4>
+                        <p data-i18n="directory_onepay_desc" class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">Run sales, receipts, refunds and daily closeout from your phone. Cash and transfers work now; tap-to-pay lights up after a certified provider is connected.</p>
+                        <span class="app-more" data-i18n="directory_more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/pay"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><a class="app-open-strip inline-flex items-center font-semibold hue-text" href="https://app.oneworldlabs.ai/pay" data-directory-name="OnePay" aria-label="Open OnePay"><span data-i18n="directory_open">Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></div>
                 </div>
                 <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#1F4E79;--hd:#173C5E;--hl:#9DBBDA">
                     <a class="app-learn flex flex-col flex-grow" href="/apps/onebusiness/">
                         <h3 class="text-2xl font-bold mb-1"><span class="text-primary">One</span> Business</h3>
-                        <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Every service, one account</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">See the calls, website, leads and results from every One World service your business uses, all in one place.</p>
-                        <span class="app-more">more</span>
+                        <h4 data-i18n="directory_onebusiness_tag" class="text-xs font-bold tracking-widest uppercase hue-text mb-3">Every service, one account</h4>
+                        <p data-i18n="directory_onebusiness_desc" class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow">See the calls, website, leads and results from every One World service your business uses, all in one place.</p>
+                        <span class="app-more" data-i18n="directory_more">more</span>
                     </a>
-                    <div class="app-foot pt-3"><span class="app-open-strip inline-flex items-center font-semibold hue-text" data-open="https://app.oneworldlabs.ai/business"><span>Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></div>
+                    <div class="app-foot pt-3"><a class="app-open-strip inline-flex items-center font-semibold hue-text" href="https://app.oneworldlabs.ai/business" data-directory-name="One Business" aria-label="Open One Business"><span data-i18n="directory_open">Open</span><svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a></div>
                 </div>
             </div>
         </section>
@@ -979,7 +982,7 @@
                     <a href="#" aria-label="X" class="h-9 w-9 inline-flex items-center justify-center rounded-full border border-border/60 text-muted-foreground hover:text-foreground transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.9l-5.4-7-6.2 7H1.4l8-9.2L1 2h7l4.9 6.5L18.9 2zm-1.2 18h1.9L7.1 4H5.1l12.6 16z"/></svg></a>
                 </div>
                 <div class="text-center md:text-right text-xs text-muted-foreground space-y-1">
-                    <p class="font-medium">© 2026 One World Labs, Inc. · Eight apps · One ID</p>
+                    <p class="font-medium" data-i18n="public_copyright">© 2026 One World Labs, Inc. · Eight apps · One ID</p>
                     <p data-i18n="ftr_tagline">Built for small businesses and freelancers, everywhere.</p>
                     <!-- Brand identity + legal links. Required for A2P 10DLC brand verification:
                          the reviewer looks for a postal address, a working support number, a business
@@ -1013,10 +1016,24 @@
     var iconMenu = document.getElementById('icon-menu'), iconX = document.getElementById('icon-x');
     function setMenu(open){
         overlay.classList.toggle('show', open);
+        overlay.inert = !open;
+        overlay.setAttribute('aria-hidden', String(!open));
+        menuBtn.setAttribute('aria-expanded', String(open));
+        if (open) overlay.querySelector('button, a').focus();
+        else menuBtn.focus();
         iconMenu.classList.toggle('hidden', open);
         iconX.classList.toggle('hidden', !open);
-        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        menuBtn.setAttribute('aria-label', window.OWL_LANG==='co' ? (open ? 'Cerrar menú' : 'Abrir menú') : (open ? 'Close menu' : 'Open menu'));
     }
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-controls', 'menu-overlay');
+    overlay.addEventListener('keydown', function(e){
+        if(e.key!=='Tab') return;
+        var items=Array.from(overlay.querySelectorAll('a,button')).filter(function(el){return el.getClientRects().length && !el.disabled;});
+        var first=items[0],last=items[items.length-1];
+        if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+    });
     menuBtn.addEventListener('click', function(){ setMenu(!overlay.classList.contains('show')); });
     overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
     overlay.addEventListener('click', function(e){ if (e.target === overlay) setMenu(false); });
@@ -1272,7 +1289,25 @@
         pt:'Oito apps, um login — abra qualquer um com seu One ID.'
     };
     Object.keys(APPS_LIVE_COPY).forEach(function(l){ I18N[l] = Object.assign({}, I18N[l] || {}, { apps_sub: APPS_LIVE_COPY[l] }); });
+    Object.assign(I18N.co,{"directory_more":"Más información","directory_open":"Abrir app","platform_eyebrow":"Plataforma One World","directory_onescore_tag":"Credibilidad que te pertenece","directory_onescore_desc":"Toda tu reputación — trabajo real, credenciales verificadas y reseñas — en un número que puedes mostrar a cualquiera. Gratis para siempre.","directory_onejob_tag":"El mercado del trabajo","directory_onejob_desc":"Consigue trabajo y cobra sin perseguir a nadie por el dinero. Un acuerdo firmado en cada trabajo y el pago retenido hasta que esté terminado.","directory_onehome_tag":"Arrienda o compra vivienda","directory_onehome_desc":"Una vivienda con un contrato real que la respalda: un contrato de arriendo firmado, fotos acordadas por ambas partes y el historial de ventas registrado del inmueble.","directory_oneevent_tag":"Eventos y boletas","directory_oneevent_desc":"Organiza un evento y conserva lo que vendes. La página, las boletas, el ingreso y el dinero, todo en un solo lugar.","directory_onesocial_tag":"Tus plataformas, conectadas","directory_onesocial_desc":"Todas las cuentas que ya tienes, reunidas en una identidad profesional que otros pueden verificar.","directory_oneagent_tag":"Tu intermediario","directory_oneagent_desc":"Alguien de tu lado que busca y negocia el trabajo, y recibe una parte solo cuando te pagan.","directory_onepay_tag":"Pagos más sencillos","directory_onepay_desc":"Administra ventas, recibos, reembolsos y cierre diario desde tu teléfono. Efectivo y transferencias ya funcionan; el pago sin contacto se activará al conectar un proveedor certificado.","directory_onebusiness_tag":"Todos los servicios, una cuenta","directory_onebusiness_desc":"Consulta las llamadas, el sitio web, los prospectos y los resultados de cada servicio de One World que usa tu negocio, todo en un solo lugar."});
+    I18N.co.public_copyright="© 2026 One World Labs, Inc. · Ocho apps · One ID";
+    var publicEnglishTitle = document.title;
+    function applyPublicLabels(lang){
+        document.title = lang==='co' ? "Apps de One World — Ocho apps, un solo inicio de sesión | One World Labs" : publicEnglishTitle;
+        document.querySelectorAll('[data-public-aria-co]').forEach(function(el){
+            if(!el.hasAttribute('data-public-aria-en')) el.setAttribute('data-public-aria-en',el.getAttribute('aria-label'));
+            el.setAttribute('aria-label',lang==='co'?el.getAttribute('data-public-aria-co'):el.getAttribute('data-public-aria-en'));
+        });
+        document.querySelectorAll('[data-public-alt-co]').forEach(function(el){
+            if(!el.hasAttribute('data-public-alt-en')) el.setAttribute('data-public-alt-en',el.getAttribute('alt'));
+            el.setAttribute('alt',lang==='co'?el.getAttribute('data-public-alt-co'):el.getAttribute('data-public-alt-en'));
+        });
+        var trigger=document.getElementById('menu-btn'), drawer=document.getElementById('menu-overlay');
+        trigger.setAttribute('aria-label',lang==='co'?(drawer.classList.contains('show')?'Cerrar menú':'Abrir menú'):(drawer.classList.contains('show')?'Close menu':'Open menu'));
+    }
     function applyLang(lang){
+        applyPublicLabels(lang);
+        document.querySelectorAll("[data-directory-name]").forEach(function(el){el.setAttribute("aria-label",(lang==="co"?"Abrir app ":"Open ")+el.dataset.directoryName);});
         document.querySelectorAll('[data-i18n]').forEach(function(el){
             var key = el.getAttribute('data-i18n');
             if (!el.hasAttribute('data-i18n-en')) el.setAttribute('data-i18n-en', el.textContent);
@@ -1284,15 +1319,31 @@
     }
     var langBtn = document.getElementById('lang-btn'), langMenu = document.getElementById('lang-menu');
     if (langBtn) {
-        langBtn.addEventListener('click', function(e){ e.stopPropagation(); langMenu.classList.toggle('open'); });
-        document.addEventListener('click', function(){ langMenu.classList.remove('open'); });
+        function setLanguageMenu(open, focus){
+            langMenu.classList.toggle('open',open);
+            langBtn.setAttribute('aria-expanded',String(open));
+            if(focus) (open ? langMenu.querySelector('button.active') || langMenu.querySelector('button') : langBtn).focus();
+        }
+        langBtn.addEventListener('click', function(e){e.stopPropagation();setLanguageMenu(!langMenu.classList.contains('open'),true);});
+        langBtn.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();setLanguageMenu(true,true);}});
+        document.addEventListener('click',function(){setLanguageMenu(false,false);});
+        langMenu.addEventListener('keydown',function(e){
+            var buttons=Array.from(langMenu.querySelectorAll('button')),index=buttons.indexOf(document.activeElement);
+            if(e.key==='Escape'){e.preventDefault();setLanguageMenu(false,true);}
+            else if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();buttons[(index+(e.key==='ArrowDown'?1:buttons.length-1))%buttons.length].focus();}
+            else if(e.key==='Home'||e.key==='End'){e.preventDefault();buttons[e.key==='Home'?0:buttons.length-1].focus();}
+            else if(e.key==='Tab'){setLanguageMenu(false,true);}
+        });
         langMenu.querySelectorAll('button').forEach(function(b){
+            b.setAttribute('role','menuitemradio');
+            b.setAttribute('aria-checked',String(b.classList.contains('active')));
+            b.querySelector('.chk').setAttribute('aria-hidden','true');
             b.addEventListener('click', function(){
                 var lang = b.getAttribute('data-lang');
                 document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N_META[lang].flag + '.png';
-                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); });
-                document.documentElement.lang = lang;
-                langMenu.classList.remove('open');
+                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); x.setAttribute('aria-checked',String(x===b)); });
+                document.documentElement.lang = ({co:'es-CO',es:'es-ES',pt:'pt-BR',zh:'zh-CN'})[lang] || lang;
+                setLanguageMenu(false,document.activeElement===b);
                 window.OWL_LANG = lang;
                 applyLang(lang);
                 /* re-render any JS-built text (the signed-in welcome message splices in the
@@ -1852,14 +1903,6 @@
 
 <!-- One World Labs - text opt-in chat widget (A2P compliance). Added 2026-08-12. -->
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a7c71062d25c2c3668fa947" data-source="WEB_USER"></script>
-<script>
-/* TWO TARGETS ON ONE CARD — same handler as the home page. The top of the card explains the app,
-   the strip at the foot opens it. A link inside a link is invalid HTML, so the strip is a span
-   that navigates on click. */
-document.querySelectorAll('.app-open-strip').forEach(function(el){
-  el.style.cursor='pointer';
-  el.addEventListener('click',function(e){ e.stopPropagation(); e.preventDefault(); location.href=el.dataset.open; });
-});
-</script>
+
 </body>
 </html>
