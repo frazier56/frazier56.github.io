@@ -530,7 +530,7 @@
     document.getElementById('sumPlan').innerHTML=PRICE[tier].name+' &middot; '+n+' '+(n>1?T('co_word_numbers','numbers'):T('co_word_number','number'));
     document.getElementById('sumMonthly').textContent=money(monthly)+T('co_slash_mo','/mo');
     document.getElementById('sumSetup').innerHTML=(!isFounderTest && PROMO_SETUP[tier]) ? ('<s style="color:#d8382f;">'+money(setupReg)+'</s> '+money(setup)) : money(setup);
-    document.getElementById('sumTotal').textContent=money(setup+termTotal);
+    document.getElementById('sumTotal').textContent=window.OV_MONEY_SUM ? window.OV_MONEY_SUM([Math.round(setup*100),Math.round(termTotal*100)]) : money(setup+termTotal);
     var tr=document.getElementById('sumTermRow');
     if(state.term==='monthly'){ tr.style.display='none'; }
     else { tr.style.display='flex'; document.getElementById('sumTermLbl').textContent=T('co_prepay','Prepay')+' '+termWord(state.term); document.getElementById('sumTermAmt').textContent=money(termTotal); }
@@ -1509,6 +1509,16 @@
     var ccy=activeCcy(), c=CCY[ccy]||CCY.USD, val=Math.round(localNum);
     var s=group(String(val), c.grp), sym=c.sym, sp=c.space?' ':'';
     return c.pos==='after' ? (s+sp+sym) : (sym+sp+s);
+  };
+
+  // COP quote components are displayed after clean rounding. Add those same
+  // displayed amounts so the summary reconciles; USD billing inputs stay intact.
+  window.OV_MONEY_SUM = function(usdParts){
+    if(activeCcy() !== 'COP') return window.OV_MONEY(usdParts.reduce(function(sum,n){ return sum+n; },0));
+    var total = usdParts.reduce(function(sum,n){
+      return sum + Math.round(roundClean((n/100) * rate('COP') * FX_MARKUP));
+    },0);
+    return window.OV_FMT_LOCAL(total);
   };
 
   function applyPrices(root){
