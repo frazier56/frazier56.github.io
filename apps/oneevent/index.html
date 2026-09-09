@@ -730,7 +730,7 @@
 .phase-panel{display:none}
 .phase-panel.active{display:block;animation:evPanelIn .25s ease}
 @keyframes evPanelIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.ev-tbl{width:100%;font-size:.875rem;border-collapse:collapse}
+.ev-tbl{width:100%;font-size:.875rem;border-collapse:collapse;table-layout:fixed;overflow-wrap:anywhere}
 .ev-tbl th,.ev-tbl td{padding:1rem;text-align:left;border-bottom:1px solid var(--color-border)}
 .ev-tbl tr:last-child td{border-bottom:0}
 #evTop{position:fixed;right:1.1rem;bottom:1.1rem;z-index:50;display:none}
