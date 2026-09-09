@@ -69,6 +69,21 @@ check(override.includes('30-day money-back guarantee'), 'Canonical pricing copy 
 check(override.includes("copy('Front Desk'"), 'Canonical pricing copy module is missing Front Desk.');
 check(override.includes('$449/mo minimum'), 'Canonical pricing copy module is missing the Custom floor.');
 
+
+// The Front Desk card must agree with checkout's one-included-local-number rule.
+const frontDeskFallback = pricing.match(/data-i18n="kc600c5716f">([^<]+)</)?.[1] || '';
+check(/^One number, 500 minutes,/.test(frontDeskFallback), 'Front Desk fallback must promise one included number with 500 minutes.');
+check(!/Two numbers, 500 minutes/i.test(visibleAndStructuredSource(pricing)), 'Front Desk customer copy must not promise two included numbers.');
+check(/Every plan includes\s+one phone number/.test(visibleAndStructuredSource(pricing).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')), 'Pricing must retain its one-included-number disclosure.');
+check(checkout.includes('Every plan includes one local number'), 'Checkout must retain its one-included-local-number disclosure.');
+const numberCopyContext = { window: { OV_DICT: { kc600c5716f: {} } } };
+vm.runInNewContext(override, numberCopyContext);
+const singleNumberPrefixes = { us: /^One number,/, es: /^Un número,/, co: /^Un número,/, de: /^Eine Nummer,/, ru: /^Один номер,/, cn: /^一个号码、/, br: /^Um número,/ };
+for (const [locale, prefix] of Object.entries(singleNumberPrefixes)) {
+  const text = numberCopyContext.window.OV_DICT.kc600c5716f[locale] || '';
+  check(prefix.test(text) && /500/.test(text), 'Front Desk translated entitlement disagrees with one number / 500 minutes: ' + locale);
+}
+
 const dictPages = htmlFiles.filter((file) => fs.readFileSync(file, 'utf8').includes('window.OV_DICT='));
 for (const file of dictPages) {
   const source = fs.readFileSync(file, 'utf8');
