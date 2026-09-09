@@ -471,6 +471,8 @@
         .svc-row{padding:14px 10px;}
         .svc-row .svc-desc{font-size:12.5px;}
     }
+/* Keep long translated article titles inside narrow screens. */
+h1[data-contracts-copy="title"] { overflow-wrap: anywhere; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- One World session bridge — keeps this origin's session in step with the
@@ -660,10 +662,10 @@
                  stays crisp at any resolution and follows the theme (matches the SMALL BUSINESS
                  SOLUTIONS lockup in GHL/_BRAND-ASSETS/OneWorld_multicolor-mark) -->
             <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center">
-                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-light">
-                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-dark">
+                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses" data-contracts-alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-light">
+                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses" data-contracts-alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-dark">
             </a>
-            <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary">
+            <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary" data-contracts-aria="Primary">
                 <a href="/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="owl_nav_home">Home</a>
                 <a href="/services/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="nav_services">Services</a>
                 <a href="/apps/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="nav_apps">Apps</a>
@@ -673,7 +675,7 @@
             </nav>
             <div class="flex items-center gap-2 sm:gap-4">
                 <div class="relative">
-                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="true" aria-label="Language">
+                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="menu" aria-controls="lang-menu" aria-expanded="false" aria-label="Language and country" data-contracts-aria="Language">
                         <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="" aria-hidden="true" class="h-4 w-6 rounded-sm object-cover">
                     </button>
                     <div class="langmenu" id="lang-menu" role="menu">
@@ -686,11 +688,11 @@
                         <button data-lang="pt"><img src="https://flagcdn.com/w40/br.png" width="20" height="14" class="rounded-sm" alt="">Brasil<span class="chk">✓</span></button>
                     </div>
                 </div>
-                <button id="theme-toggle" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Toggle theme">
+                <button id="theme-toggle" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Toggle theme" data-contracts-aria="Toggle theme">
                     <svg id="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
                     <svg id="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
                 </button>
-                <button id="menu-btn" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Open menu">
+                <button id="menu-btn" class="h-10 w-10 inline-flex items-center justify-center rounded-md hover:bg-secondary/50 transition-colors" aria-label="Open menu" data-contracts-aria="Open menu">
                     <svg id="icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
                     <svg id="icon-x" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
@@ -703,7 +705,7 @@
          "Sign in with One ID" row when signed out, or an identity row + red Sign Out row when
          signed in (previously always showed "Sign in" regardless of session — no way to sign out
          from here at all). -->
-    <div id="menu-overlay" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
+    <div id="menu-overlay" inert aria-hidden="true" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
         <div class="menu-panel absolute right-3 top-[74px] flex max-h-[calc(100vh-90px)] w-[300px] max-w-[88vw] flex-col overflow-y-auto rounded-3xl border shadow-2xl p-4 sm:p-5">
 
             <!-- identity row: One World Labs mark when signed out, avatar + name when signed in -->
@@ -722,7 +724,7 @@
                         <span class="block truncate text-xs text-muted-foreground" data-i18n="oneid_label">One ID</span>
                     </span>
                 </div>
-                <button id="menu-close-x" type="button" class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-lg leading-none" aria-label="Close menu">&times;</button>
+                <button id="menu-close-x" type="button" class="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-lg leading-none" aria-label="Close menu" data-contracts-aria="Close menu">&times;</button>
             </div>
 
             <div class="mt-3 space-y-3">
@@ -778,17 +780,17 @@
             <div class="vaia-panel-inner">
                 <div class="vaia-head">
                     <span class="font-heading font-bold text-sm flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary"></span> VAIA</span>
-                    <button id="vaia-close" class="h-7 w-7 inline-flex items-center justify-center rounded-md hover:bg-secondary/50" aria-label="Close VAIA">
+                    <button id="vaia-close" class="h-7 w-7 inline-flex items-center justify-center rounded-md hover:bg-secondary/50" aria-label="Close VAIA" data-contracts-aria="Close VAIA">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                     </button>
                 </div>
                 <div id="vaia-log" class="vaia-log"></div>
                 <div class="vaia-controls">
-                    <input id="vaia-text" class="vaia-textin" type="text" placeholder="Type to VAIA (or just talk to her)…">
+                    <input id="vaia-text" class="vaia-textin" type="text" placeholder="Type to VAIA (or just talk to her)…" data-contracts-placeholder="Type to VAIA (or just talk to her)…">
                 </div>
             </div>
         </div>
-        <div class="vaia-orb" id="vaia-orb" role="button" tabindex="0" aria-label="Tap to talk to VAIA">
+        <div class="vaia-orb" id="vaia-orb" role="button" tabindex="0" aria-label="Tap to talk to VAIA" data-contracts-aria="Tap to talk to VAIA">
             <div class="vaia-ring"></div><div class="vaia-ring"></div><div class="vaia-ring"></div>
             <div class="vaia-bars"><span></span><span></span><span></span><span></span><span></span></div>
             <div class="vaia-think" data-i18n="owl_vaia_thinking">Thinking</div>
@@ -799,60 +801,60 @@
     <main class="relative z-10 pt-24 md:pt-32 pb-16 md:pb-20">
         <article class="container mx-auto px-4 max-w-3xl">
             <nav class="mb-6"><a href="/blog/" class="inline-flex items-center gap-1.5 text-sm font-bold text-primary"><svg class="h-3.5 w-3.5 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> <span data-i18n="bc_back">Back to the blog</span></a></nav>
-            <div class="text-[11px] font-bold tracking-widest uppercase text-primary mb-3">Freelancers · 6 min · <time datetime="2026-08-10">2026-08-10</time></div>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight mb-6">Freelance Contracts and Protected Payments: Never Chase an Invoice Again</h1>
-            <p class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">How digital contracts with protected payments fix freelancing&#x27;s trust problem: scope, signatures, payment held until completion, and automatic release when both sides confirm.</p>
-            <img src="/blog/img/contracts.jpg" alt="Two people reviewing a digital agreement on a laptop" class="w-full rounded-2xl mb-10 shadow-lg" style="aspect-ratio:16/9;object-fit:cover;">
+            <div class="text-[11px] font-bold tracking-widest uppercase text-primary mb-3"><span data-contracts-copy="meta">Freelancers · 6 min · </span><time datetime="2026-08-10">2026-08-10</time></div>
+            <h1 data-contracts-copy="title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight mb-6">Freelance Contracts and Protected Payments: Never Chase an Invoice Again</h1>
+            <p data-contracts-copy="intro" class="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">How digital contracts with protected payments fix freelancing&#x27;s trust problem: scope, signatures, payment held until completion, and automatic release when both sides confirm.</p>
+            <img src="/blog/img/contracts.jpg" alt="Two people reviewing a digital agreement on a laptop" data-contracts-alt="Two people reviewing a digital agreement on a laptop" class="w-full rounded-2xl mb-10 shadow-lg" style="aspect-ratio:16/9;object-fit:cover;">
             <div class="prose-ow frost rounded-3xl p-6 sm:p-10 md:p-12">
 
-<p>Ask any freelancer about their worst professional experience and you'll hear a variation of the same story: <em>"I did the work and never got paid."</em></p>
-<p>Ask any client, and you'll hear the flip side: <em>"I paid upfront and the work was never delivered."</em></p>
-<p>Both sides have legitimate concerns. And without a system that protects both, every new engagement starts with suspicion instead of trust.</p>
+<p data-contracts-copy="body_0">Ask any freelancer about their worst professional experience and you'll hear a variation of the same story: <em>"I did the work and never got paid."</em></p>
+<p data-contracts-copy="body_1">Ask any client, and you'll hear the flip side: <em>"I paid upfront and the work was never delivered."</em></p>
+<p data-contracts-copy="body_2">Both sides have legitimate concerns. And without a system that protects both, every new engagement starts with suspicion instead of trust.</p>
 
-<h2>The fix: a contract and the money in the same place</h2>
-<p>The reason handshake deals go wrong isn't that people are bad — it's that memory is soft and money is emotional. A process that writes everything down and locks the payment to the work removes the argument before it starts. Here's what that looks like on <a href="https://onejob.oneworldlabs.ai/">OneJob</a>:</p>
+<h2 data-contracts-copy="body_3">The fix: a contract and the money in the same place</h2>
+<p data-contracts-copy="body_4">The reason handshake deals go wrong isn't that people are bad — it's that memory is soft and money is emotional. A process that writes everything down and locks the payment to the work removes the argument before it starts. Here's what that looks like on <a href="https://onejob.oneworldlabs.ai/">OneJob</a>:</p>
 
-<h3>1. Create the agreement</h3>
-<p>The hirer creates a digital contract right in the conversation: scope of work, fixed price or hourly rate, timeline and milestones, and the terms — cancellation policy, revision limits, the details people usually "remember differently" later.</p>
+<h3 data-contracts-copy="body_5">1. Create the agreement</h3>
+<p data-contracts-copy="body_6">The hirer creates a digital contract right in the conversation: scope of work, fixed price or hourly rate, timeline and milestones, and the terms — cancellation policy, revision limits, the details people usually "remember differently" later.</p>
 
-<h3>2. Both parties sign</h3>
-<p>Explicit acceptance from both sides — a timestamped, digitally signed document, not a verbal agreement reconstructed from memory.</p>
+<h3 data-contracts-copy="body_7">2. Both parties sign</h3>
+<p data-contracts-copy="body_8">Explicit acceptance from both sides — a timestamped, digitally signed document, not a verbal agreement reconstructed from memory.</p>
 
-<h3>3. The payment is secured up front</h3>
-<p>When the client accepts, the payment is captured and held safely — real, committed money — and it isn't released until the job is done. The freelancer knows the money exists. The client knows it won't move until the work does.</p>
+<h3 data-contracts-copy="body_9">3. The payment is secured up front</h3>
+<p data-contracts-copy="body_10">When the client accepts, the payment is captured and held safely — real, committed money — and it isn't released until the job is done. The freelancer knows the money exists. The client knows it won't move until the work does.</p>
 
-<h3>4. Verified check-in</h3>
-<p>On the day of the job, the professional checks in with a QR scan — a verified timestamp that the work happened, where and when it was supposed to.</p>
+<h3 data-contracts-copy="body_11">4. Verified check-in</h3>
+<p data-contracts-copy="body_12">On the day of the job, the professional checks in with a QR scan — a verified timestamp that the work happened, where and when it was supposed to.</p>
 
-<h3>5. Both sides confirm, payment releases</h3>
-<p>Completion takes confirmation from both parties, and then the payment releases automatically. No invoice, no chasing, no "the check is in the mail."</p>
+<h3 data-contracts-copy="body_13">5. Both sides confirm, payment releases</h3>
+<p data-contracts-copy="body_14">Completion takes confirmation from both parties, and then the payment releases automatically. No invoice, no chasing, no "the check is in the mail."</p>
 
-<h2>What this changes in practice</h2>
+<h2 data-contracts-copy="body_15">What this changes in practice</h2>
 <ul>
-<li><strong>For freelancers</strong> — you stop pricing in the risk of not getting paid, which means you stop underquoting to win nervous clients.</li>
-<li><strong>For clients</strong> — you stop gambling deposits on strangers, because the money only moves when the work is confirmed done.</li>
-<li><strong>For both</strong> — every completed contract becomes verified history that feeds your <a href="/blog/what-is-onescore/">credibility score</a>, so your next engagement starts from trust instead of zero.</li>
+<li data-contracts-copy="body_16"><strong>For freelancers</strong> — you stop pricing in the risk of not getting paid, which means you stop underquoting to win nervous clients.</li>
+<li data-contracts-copy="body_17"><strong>For clients</strong> — you stop gambling deposits on strangers, because the money only moves when the work is confirmed done.</li>
+<li data-contracts-copy="body_18"><strong>For both</strong> — every completed contract becomes verified history that feeds your <a href="/blog/what-is-onescore/">credibility score</a>, so your next engagement starts from trust instead of zero.</li>
 </ul>
 
-<h2>The bottom line</h2>
-<p>Trust isn't a personality trait — it's a process. Put a real contract and protected payment under every job, even the small ones, and the awkward money conversation disappears from your work life. <a href="https://onejob.oneworldlabs.ai/"><strong>See how contracts work on OneJob →</strong></a></p>
+<h2 data-contracts-copy="body_19">The bottom line</h2>
+<p data-contracts-copy="body_20">Trust isn't a personality trait — it's a process. Put a real contract and protected payment under every job, even the small ones, and the awkward money conversation disappears from your work life. <a href="https://onejob.oneworldlabs.ai/"><strong>See how contracts work on OneJob →</strong></a></p>
 
             </div>
         </article>
         <section class="container mx-auto px-4 max-w-3xl mt-14">
-            <h2 class="text-xl font-bold mb-5" data-i18n="blog_soon">New guides published regularly.</h2>
+            <h2 class="text-xl font-bold mb-5" data-contracts-copy="related_heading">New guides published regularly.</h2>
             <div class="grid sm:grid-cols-2 gap-5">
                 <a href="/blog/what-is-onescore/" class="post-card frost rounded-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-                    <img src="/blog/img/onescore.jpg" alt="Professional checking a credibility score on a phone" loading="lazy">
+                    <img src="/blog/img/onescore.jpg" alt="Professional checking a credibility score on a phone" data-contracts-alt="Professional checking a credibility score on a phone" loading="lazy">
                     <div class="p-5 flex flex-col flex-grow">
-                        <h3 class="font-bold text-base leading-snug mb-3">What Is a OneScore? The Credibility Number That Gets Freelancers Hired</h3>
+                        <h3 class="font-bold text-base leading-snug mb-3" data-contracts-copy="related_score">What Is a OneScore? The Credibility Number That Gets Freelancers Hired</h3>
                         <span class="inline-flex items-center gap-1 text-sm font-bold text-primary mt-auto"><span data-i18n="blog_read">Read article</span> <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
                     </div>
                 </a>
                 <a href="/blog/ai-answering-service-small-business/" class="post-card frost rounded-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-                    <img src="/blog/img/ai-answering.jpg" alt="Laptop showing an AI assistant dashboard" loading="lazy">
+                    <img src="/blog/img/ai-answering.jpg" alt="Laptop showing an AI assistant dashboard" data-contracts-alt="Laptop showing an AI assistant dashboard" loading="lazy">
                     <div class="p-5 flex flex-col flex-grow">
-                        <h3 class="font-bold text-base leading-snug mb-3">AI Answering Services for Small Business: How to Never Miss Another Call</h3>
+                        <h3 class="font-bold text-base leading-snug mb-3" data-contracts-copy="related_answer">AI Answering Services for Small Business: How to Never Miss Another Call</h3>
                         <span class="inline-flex items-center gap-1 text-sm font-bold text-primary mt-auto"><span data-i18n="blog_read">Read article</span> <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
                     </div>
                 </a>
@@ -931,6 +933,7 @@
     </footer>
 </div>
 
+<script src="/blog/freelance-contracts-protected-payments/copy.js"></script>
 <script>
     /* ---------- theme toggle ---------- */
     var themeColorMeta = document.getElementById('theme-color-meta');
@@ -951,10 +954,24 @@
     var iconMenu = document.getElementById('icon-menu'), iconX = document.getElementById('icon-x');
     function setMenu(open){
         overlay.classList.toggle('show', open);
+        overlay.inert = !open;
+        overlay.setAttribute('aria-hidden', String(!open));
+        menuBtn.setAttribute('aria-expanded', String(open));
+        if (open) overlay.querySelector('button, a').focus();
+        else menuBtn.focus();
         iconMenu.classList.toggle('hidden', open);
         iconX.classList.toggle('hidden', !open);
-        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        menuBtn.setAttribute('aria-label', (window.OWL_CONTRACTS_MENU_LABEL ? window.OWL_CONTRACTS_MENU_LABEL(window.OWL_LANG,open) : (window.OWL_LANG==='co' ? (open?'Cerrar menú':'Abrir menú') : (open?'Close menu':'Open menu'))));
     }
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-controls', 'menu-overlay');
+    overlay.addEventListener('keydown', function(e){
+        if(e.key!=='Tab') return;
+        var items=Array.from(overlay.querySelectorAll('a,button')).filter(function(el){return el.getClientRects().length && !el.disabled;});
+        var first=items[0],last=items[items.length-1];
+        if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+    });
     menuBtn.addEventListener('click', function(){ setMenu(!overlay.classList.contains('show')); });
     overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
     overlay.addEventListener('click', function(e){ if (e.target === overlay) setMenu(false); });
@@ -1201,6 +1218,7 @@
         I18N[l] = Object.assign({}, I18N[l] || {}, I18N_EXT[l]);
     });
     function applyLang(lang){
+        if(window.OWL_CONTRACTS_APPLY) window.OWL_CONTRACTS_APPLY(lang);
         document.querySelectorAll('[data-i18n]').forEach(function(el){
             var key = el.getAttribute('data-i18n');
             if (!el.hasAttribute('data-i18n-en')) el.setAttribute('data-i18n-en', el.textContent);
@@ -1212,15 +1230,31 @@
     }
     var langBtn = document.getElementById('lang-btn'), langMenu = document.getElementById('lang-menu');
     if (langBtn) {
-        langBtn.addEventListener('click', function(e){ e.stopPropagation(); langMenu.classList.toggle('open'); });
-        document.addEventListener('click', function(){ langMenu.classList.remove('open'); });
+        function setLanguageMenu(open, focus){
+            langMenu.classList.toggle('open',open);
+            langBtn.setAttribute('aria-expanded',String(open));
+            if(focus) (open ? langMenu.querySelector('button.active') || langMenu.querySelector('button') : langBtn).focus();
+        }
+        langBtn.addEventListener('click', function(e){e.stopPropagation();setLanguageMenu(!langMenu.classList.contains('open'),true);});
+        langBtn.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();setLanguageMenu(true,true);}});
+        document.addEventListener('click',function(){setLanguageMenu(false,false);});
+        langMenu.addEventListener('keydown',function(e){
+            var buttons=Array.from(langMenu.querySelectorAll('button')),index=buttons.indexOf(document.activeElement);
+            if(e.key==='Escape'){e.preventDefault();setLanguageMenu(false,true);}
+            else if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();buttons[(index+(e.key==='ArrowDown'?1:buttons.length-1))%buttons.length].focus();}
+            else if(e.key==='Home'||e.key==='End'){e.preventDefault();buttons[e.key==='Home'?0:buttons.length-1].focus();}
+            else if(e.key==='Tab'){setLanguageMenu(false,true);}
+        });
         langMenu.querySelectorAll('button').forEach(function(b){
+            b.setAttribute('role','menuitemradio');
+            b.setAttribute('aria-checked',String(b.classList.contains('active')));
+            b.querySelector('.chk').setAttribute('aria-hidden','true');
             b.addEventListener('click', function(){
                 var lang = b.getAttribute('data-lang');
                 document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N_META[lang].flag + '.png';
-                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); });
-                document.documentElement.lang = lang;
-                langMenu.classList.remove('open');
+                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); x.setAttribute('aria-checked',String(x===b)); });
+                document.documentElement.lang = ({co:'es-CO',es:'es-ES',pt:'pt-BR',zh:'zh-CN'})[lang] || lang;
+                setLanguageMenu(false,document.activeElement===b);
                 window.OWL_LANG = lang;
                 applyLang(lang);
                 /* re-render any JS-built text (the signed-in welcome message splices in the
