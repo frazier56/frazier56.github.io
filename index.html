@@ -868,8 +868,7 @@
             <div class="flex items-center gap-2 sm:gap-4">
                 <div class="relative">
                     <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="menu" aria-controls="lang-menu" aria-expanded="false" aria-label="Language">
-                        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="EN" class="h-4 w-6 rounded-sm object-cover">
-                        <span id="lang-code" class="font-medium text-sm hidden sm:inline">EN</span>
+                        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="" aria-hidden="true" class="h-4 w-6 rounded-sm object-cover">
                     </button>
                     <div class="langmenu" id="lang-menu" role="menu">
                         <button data-lang="en" class="active"><img src="https://flagcdn.com/w40/us.png" width="20" height="14" class="rounded-sm" alt="">USA<span class="chk">✓</span></button>
@@ -935,10 +934,10 @@
                     <a href="https://onejob.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Job</span></a>
                     <a href="https://onehome.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Home</span></a>
                     <a href="https://oneevent.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Event</span></a>
-                    <a href="/apps/onebusiness/" class="menu-navitem"><span><span class="menu-one">One</span>Business</span></a>
-                    <a href="/apps/onesocial/" class="menu-navitem"><span><span class="menu-one">One</span>Social</span><small data-i18n="coming_soon">Coming soon</small></a>
-                    <a href="/apps/onepay/" class="menu-navitem"><span><span class="menu-one">One</span>Pay</span><small data-i18n="coming_soon">Coming soon</small></a>
-                    <a href="/apps/oneagent/" class="menu-navitem"><span><span class="menu-one">One</span>Agent</span><small data-i18n="coming_soon">Coming soon</small></a>
+                    <a href="https://app.oneworldlabs.ai/business" class="menu-navitem"><span><span class="menu-one">One</span> Business</span></a>
+                    <a href="https://app.oneworldlabs.ai/social" class="menu-navitem"><span><span class="menu-one">One</span>Social</span></a>
+                    <a href="https://app.oneworldlabs.ai/pay" class="menu-navitem"><span><span class="menu-one">One</span>Pay</span></a>
+                    <a href="https://app.oneworldlabs.ai/agent" class="menu-navitem"><span><span class="menu-one">One</span>Agent</span></a>
                 </div>
                 <div>
                     <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1 px-1" data-i18n="ftr_svcs">Services</h4>
@@ -1234,7 +1233,7 @@
             <div class="text-center mb-10 md:mb-16">
                 <h3 class="eyebrow mb-3" data-i18n="platform_eyebrow">One World Platform</h3>
                 <h2 class="text-3xl md:text-5xl font-bold mb-4" data-i18n="apps_h2">Jump into your favorite app</h2>
-                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="apps_sub">Eight apps, one login — OneSocial, OneAgent and OnePay coming soon.</p>
+                <p class="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto" data-i18n="apps_sub">Eight apps, one login — open any app with your One ID.</p>
             </div>
 
             <div class="app-grid">
@@ -1289,40 +1288,40 @@
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onebusiness_desc">The calls, the website, the leads and the results from every service you buy from us, in one place.</p>
                     </div>
                     <div class="app-actions">
-                        <a class="app-open" href="/apps/onebusiness/" aria-label="Explore One Business" data-app-name="One Business" data-app-action="learn"><span data-i18n="onebusiness_explore">Explore app</span></a>
+                        <a class="app-open" href="https://app.oneworldlabs.ai/business" aria-label="Open app: One Business" data-app-name="One Business" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
                         <a class="app-learn" href="/apps/onebusiness/" aria-label="Learn about One Business" title="Learn about One Business" data-app-name="One Business" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
                     </div>
                 </div>
-                <div class="app-card app-coming frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#8B3DEA;--hd:#6D17D5;--hl:#D3B5F7">
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#8B3DEA;--hd:#6D17D5;--hl:#D3B5F7">
                     <div class="app-copy">
                         <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Social</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onesocial_tag">Your platforms, connected</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onesocial_desc">Every account you already have, adding up to one professional identity somebody can verify.</p>
                     </div>
                     <div class="app-actions">
-                        <span class="coming-label" data-i18n="coming_soon">Coming soon</span>
+                        <a class="app-open" href="https://app.oneworldlabs.ai/social" aria-label="Open app: OneSocial" data-app-name="OneSocial" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
                         <a class="app-learn" href="/apps/onesocial/" aria-label="Learn about OneSocial" title="Learn about OneSocial" data-app-name="OneSocial" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
                     </div>
                 </div>
-                <div class="app-card app-coming frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#C24A32;--hd:#9E3A27;--hl:#F9B4A5">
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#C24A32;--hd:#9E3A27;--hl:#F9B4A5">
                     <div class="app-copy">
                         <h3 class="text-2xl font-bold mb-1" data-no-translate><span class="text-primary">One</span>Pay</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="onepay_tag">Payments, made simpler</h4>
-                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onepay_desc">Take payments and keep track of every sale, receipt and refund — from your phone. In development.</p>
+                        <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="onepay_desc">Run sales, receipts, refunds and daily closeout from your phone. Cash and transfers work now; tap-to-pay activates after a certified provider is connected.</p>
                     </div>
                     <div class="app-actions">
-                        <span class="coming-label" data-i18n="onepay_soon">Coming soon</span>
+                        <a class="app-open" href="https://app.oneworldlabs.ai/pay" aria-label="Open app: OnePay" data-app-name="OnePay" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
                         <a class="app-learn" href="/apps/onepay/" aria-label="Learn about OnePay" title="Learn about OnePay" data-app-name="OnePay" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
                     </div>
                 </div>
-                <div class="app-card app-coming frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#7B2D3B;--hd:#62242F;--hl:#DCA0AB">
+                <div class="app-card frost rounded-3xl p-6 md:p-8 flex flex-col" style="--hb:#7B2D3B;--hd:#62242F;--hl:#DCA0AB">
                     <div class="app-copy">
                         <h3 data-no-translate class="text-2xl font-bold mb-1"><span class="text-primary">One</span>Agent</h3>
                         <h4 class="text-xs font-bold tracking-widest uppercase hue-text mb-3" data-i18n="oneagent_tag">Your middleman</h4>
                         <p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-5 flex-grow" data-i18n="oneagent_desc">Somebody in your corner finding and negotiating the work, who takes a share only when you get paid.</p>
                     </div>
                     <div class="app-actions">
-                        <span class="coming-label" data-i18n="coming_soon">Coming soon</span>
+                        <a class="app-open" href="https://app.oneworldlabs.ai/agent" aria-label="Open app: OneAgent" data-app-name="OneAgent" data-app-action="open"><span data-i18n="card_open">Open app</span></a>
                         <a class="app-learn" href="/apps/oneagent/" aria-label="Learn about OneAgent" title="Learn about OneAgent" data-app-name="OneAgent" data-app-action="learn"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
                     </div>
                 </div>
@@ -1517,10 +1516,10 @@
                         <li><a href="https://onejob.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Job</a></li>
                         <li><a href="https://onehome.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Home</a></li>
                         <li><a href="https://oneevent.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Event</a></li>
-                        <li><a href="/apps/onebusiness/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Business</a></li>
-                        <li><a href="/apps/onesocial/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Social · <small data-i18n="coming_soon">Coming soon</small></a></li>
-                        <li><a href="/apps/onepay/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Pay · <small data-i18n="coming_soon">Coming soon</small></a></li>
-                        <li><a href="/apps/oneagent/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Agent · <small data-i18n="coming_soon">Coming soon</small></a></li>
+                        <li><a href="https://app.oneworldlabs.ai/business" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span> Business</a></li>
+                        <li><a href="https://app.oneworldlabs.ai/social" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Social</a></li>
+                        <li><a href="https://app.oneworldlabs.ai/pay" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Pay</a></li>
+                        <li><a href="https://app.oneworldlabs.ai/agent" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Agent</a></li>
                     </ul>
                 </div>
                 <div>
@@ -1550,7 +1549,7 @@
                     <a href="#" aria-label="X" class="h-9 w-9 inline-flex items-center justify-center rounded-full border border-border/60 text-muted-foreground hover:text-foreground transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.9l-5.4-7-6.2 7H1.4l8-9.2L1 2h7l4.9 6.5L18.9 2zm-1.2 18h1.9L7.1 4H5.1l12.6 16z"/></svg></a>
                 </div>
                 <div class="text-center md:text-right text-xs text-muted-foreground space-y-1">
-                    <p class="font-medium">© 2026 One World Labs, Inc. · OneJob · OneScore · OneEvent · OneSocial · OneAgent · OneVoice · OnePage · OneApp</p>
+                    <p class="font-medium">© 2026 One World Labs, Inc. · Eight apps · One ID</p>
                     <p data-i18n="ftr_tagline">Built for small businesses and freelancers, everywhere.</p>
                     <!-- Brand identity + legal links. Required for A2P 10DLC brand verification:
                          the reviewer looks for a postal address, a working support number, a business
@@ -1887,13 +1886,13 @@
         I18N[l] = Object.assign({}, I18N[l] || {}, I18N_EXT[l]);
     });
     var CARD_I18N = {
-      "en": {"apps_sub":"Eight apps, one login — OneSocial, OneAgent and OnePay coming soon.","div_pl_p":"Eight apps for small businesses and freelancers — five available now and three clearly marked as coming soon — all under one login.","card_open":"Open app","card_learn":"Learn about","onepay_tag":"Payments, made simpler","onepay_desc":"Take payments and keep track of every sale, receipt and refund — from your phone. In development.","onepay_soon":"Coming soon","onebusiness_tag":"Every service, one account","onebusiness_desc":"The calls, the website, the leads and the results from every service you buy from us, in one place.","onebusiness_explore":"Explore app"},
-      "es": {"apps_sub":"Ocho apps, un solo inicio de sesión — OneSocial, OneAgent y OnePay llegarán pronto.","div_pl_p":"Ocho apps para pequeños negocios y trabajadores independientes: cinco disponibles y tres claramente marcadas como próximas, todo con un solo inicio de sesión.","card_open":"Abrir app","card_learn":"Conoce","onepay_tag":"Pagos más sencillos","onepay_desc":"Cobre y lleve el registro de cada venta, recibo y reembolso — desde su teléfono. En desarrollo.","onepay_soon":"Próximamente","onebusiness_tag":"Todos los servicios, una cuenta","onebusiness_desc":"Las llamadas, el sitio web, los prospectos y los resultados de cada servicio que nos contrata, en un solo lugar.","onebusiness_explore":"Explorar app"},
-      "co": {"apps_sub":"Ocho apps, un solo inicio de sesión — OneSocial, OneAgent y OnePay llegarán pronto.","div_pl_p":"Ocho apps para pequeños negocios y trabajadores independientes: cinco disponibles y tres claramente marcadas como próximas, todo con un solo inicio de sesión.","card_open":"Abrir app","card_learn":"Conoce","onepay_tag":"Pagos más sencillos","onepay_desc":"Cobre y lleve el registro de cada venta, recibo y reembolso — desde su teléfono. En desarrollo.","onepay_soon":"Próximamente","onebusiness_tag":"Todos los servicios, una cuenta","onebusiness_desc":"Las llamadas, el sitio web, los prospectos y los resultados de cada servicio que nos contrata, en un solo lugar.","onebusiness_explore":"Explorar app"},
-      "de": {"apps_sub":"Acht Apps, ein Login — OneSocial, OneAgent und OnePay kommen bald.","div_pl_p":"Acht Apps für kleine Unternehmen und Freelancer: fünf verfügbar und drei klar als demnächst gekennzeichnet — mit einem Login.","card_open":"App öffnen","card_learn":"Mehr über","onepay_tag":"Einfacher bezahlen","onepay_desc":"Zahlungen annehmen und jeden Verkauf, Beleg und jede Erstattung im Blick behalten — vom Handy aus. In Entwicklung.","onepay_soon":"Demnächst","onebusiness_tag":"Jede Leistung, ein Konto","onebusiness_desc":"Anrufe, Website, Anfragen und Ergebnisse jeder Leistung, die Sie bei uns buchen — an einem Ort.","onebusiness_explore":"App ansehen"},
-      "ru": {"apps_sub":"Восемь приложений, один вход — OneSocial, OneAgent и OnePay скоро.","div_pl_p":"Восемь приложений для малого бизнеса и фрилансеров: пять доступны, три чётко отмечены как готовящиеся — один вход для всех.","card_open":"Открыть приложение","card_learn":"Подробнее о","onepay_tag":"Платежи проще","onepay_desc":"Принимайте оплату и храните каждую продажу, чек и возврат — с телефона. В разработке.","onepay_soon":"Скоро","onebusiness_tag":"Все услуги, один аккаунт","onebusiness_desc":"Звонки, сайт, обращения и результаты каждой услуги, которую вы у нас заказываете, — в одном месте.","onebusiness_explore":"Посмотреть приложение"},
-      "zh": {"apps_sub":"八款应用，一次登录 — OneSocial、OneAgent 与 OnePay 即将推出。","div_pl_p":"面向小企业和自由职业者的八款应用：五款现已可用，三款清楚标注为即将推出；只需一次登录。","card_open":"打开应用","card_learn":"了解","onepay_tag":"让支付更简单","onepay_desc":"用手机收款，记录每一笔销售、收据和退款。开发中。","onepay_soon":"即将推出","onebusiness_tag":"所有服务，一个账户","onebusiness_desc":"您向我们购买的每项服务的来电、网站、线索和成果，尽在一处。","onebusiness_explore":"了解应用"},
-      "pt": {"apps_sub":"Oito apps, um login — OneSocial, OneAgent e OnePay em breve.","div_pl_p":"Oito apps para pequenas empresas e autônomos: cinco disponíveis e três claramente marcados como próximos, tudo com um único login.","card_open":"Abrir app","card_learn":"Conheça","onepay_tag":"Pagamentos mais simples","onepay_desc":"Receba pagamentos e acompanhe cada venda, recibo e reembolso — pelo celular. Em desenvolvimento.","onepay_soon":"Em breve","onebusiness_tag":"Todos os serviços, uma conta","onebusiness_desc":"As ligações, o site, os contatos e os resultados de cada serviço que você contrata conosco, em um só lugar.","onebusiness_explore":"Explorar app"}
+      "en": {"apps_sub":"Eight apps, one login — open any app with your One ID.","div_pl_p":"Eight connected apps for small businesses and freelancers, all under one login.","card_open":"Open app","card_learn":"Learn about","onepay_tag":"Payments, made simpler","onepay_desc":"Run sales, receipts, refunds and daily closeout from your phone. Cash and transfers work now; tap-to-pay activates after a certified provider is connected.","onepay_soon":"Coming soon","onebusiness_tag":"Every service, one account","onebusiness_desc":"The calls, the website, the leads and the results from every service you buy from us, in one place.","onebusiness_explore":"Explore app"},
+      "es": {"apps_sub":"Ocho apps, un solo inicio de sesión: abre cualquiera con tu One ID.","div_pl_p":"Ocho apps conectadas para pequeños negocios y trabajadores independientes, todas con un solo inicio de sesión.","card_open":"Abrir app","card_learn":"Conoce","onepay_tag":"Pagos más sencillos","onepay_desc":"Administra ventas, recibos, reembolsos y cierre diario desde tu teléfono. Efectivo y transferencias ya funcionan; el pago sin contacto se activará al conectar un proveedor certificado.","onepay_soon":"Próximamente","onebusiness_tag":"Todos los servicios, una cuenta","onebusiness_desc":"Las llamadas, el sitio web, los prospectos y los resultados de cada servicio que nos contratas, en un solo lugar.","onebusiness_explore":"Explorar app"},
+      "co": {"apps_sub":"Ocho apps, un solo inicio de sesión: abre cualquiera con tu One ID.","div_pl_p":"Ocho apps conectadas para pequeños negocios y trabajadores independientes, todas con un solo inicio de sesión.","card_open":"Abrir app","card_learn":"Conoce","onepay_tag":"Pagos más sencillos","onepay_desc":"Administra ventas, recibos, reembolsos y cierre diario desde tu teléfono. Efectivo y transferencias ya funcionan; el pago sin contacto se activará al conectar un proveedor certificado.","onepay_soon":"Próximamente","onebusiness_tag":"Todos los servicios, una cuenta","onebusiness_desc":"Las llamadas, el sitio web, los prospectos y los resultados de cada servicio que nos contratas, en un solo lugar.","onebusiness_explore":"Explorar app"},
+      "de": {"apps_sub":"Acht Apps, ein Login — öffnen Sie jede App mit Ihrer One ID.","div_pl_p":"Acht verbundene Apps für kleine Unternehmen und Freelancer, alle mit einem Login.","card_open":"App öffnen","card_learn":"Mehr über","onepay_tag":"Einfacher bezahlen","onepay_desc":"Verwalten Sie Verkäufe, Belege, Erstattungen und den Tagesabschluss per Handy. Bargeld und Überweisungen funktionieren jetzt; kontaktloses Bezahlen folgt nach Anbindung eines zertifizierten Anbieters.","onepay_soon":"Demnächst","onebusiness_tag":"Jede Leistung, ein Konto","onebusiness_desc":"Anrufe, Website, Anfragen und Ergebnisse jeder Leistung, die Sie bei uns buchen — an einem Ort.","onebusiness_explore":"App ansehen"},
+      "ru": {"apps_sub":"Восемь приложений, один вход — открывайте любое с One ID.","div_pl_p":"Восемь связанных приложений для малого бизнеса и фрилансеров с единым входом.","card_open":"Открыть приложение","card_learn":"Подробнее о","onepay_tag":"Платежи проще","onepay_desc":"Управляйте продажами, чеками, возвратами и закрытием дня с телефона. Наличные и переводы уже работают; бесконтактная оплата включится после подключения сертифицированного провайдера.","onepay_soon":"Скоро","onebusiness_tag":"Все услуги, один аккаунт","onebusiness_desc":"Звонки, сайт, обращения и результаты каждой услуги, которую вы у нас заказываете, — в одном месте.","onebusiness_explore":"Посмотреть приложение"},
+      "zh": {"apps_sub":"八款应用，一次登录 — 使用 One ID 打开任意应用。","div_pl_p":"为小企业和自由职业者打造的八款互联应用，全部使用同一个账号。","card_open":"打开应用","card_learn":"了解","onepay_tag":"让支付更简单","onepay_desc":"用手机管理销售、收据、退款和每日结算。现金和转账现已可用；接入认证服务商后将启用非接触式支付。","onepay_soon":"即将推出","onebusiness_tag":"所有服务，一个账户","onebusiness_desc":"您向我们购买的每项服务的来电、网站、线索和成果，尽在一处。","onebusiness_explore":"了解应用"},
+      "pt": {"apps_sub":"Oito apps, um login — abra qualquer um com seu One ID.","div_pl_p":"Oito apps conectados para pequenas empresas e autônomos, todos com um único login.","card_open":"Abrir app","card_learn":"Conheça","onepay_tag":"Pagamentos mais simples","onepay_desc":"Gerencie vendas, recibos, reembolsos e fechamento diário pelo celular. Dinheiro e transferências já funcionam; o pagamento por aproximação será ativado após conectar um provedor certificado.","onepay_soon":"Em breve","onebusiness_tag":"Todos os serviços, uma conta","onebusiness_desc":"As ligações, o site, os contatos e os resultados de cada serviço que você contrata conosco, em um só lugar.","onebusiness_explore":"Explorar app"}
     };
     var CARD_DESCRIPTIONS = {
   "es": {
@@ -1981,7 +1980,7 @@
     "oneagent_desc": "Alguien de tu lado que encuentra y negocia trabajo, y solo recibe una parte cuando tú cobras."
   }
 };
-    var APP_FAQ = {"es":"Ocho apps con un solo inicio de sesión: OneScore, OneJob, OneHome, OneEvent y OneBusiness están disponibles; OneSocial, OnePay y OneAgent llegarán pronto. OneVoice, OnePage y OneApp son servicios que nuestro equipo presta para tu negocio.","de":"Acht Apps mit einem Login: OneScore, OneJob, OneHome, OneEvent und OneBusiness sind verfügbar; OneSocial, OnePay und OneAgent kommen bald. OneVoice, OnePage und OneApp sind Dienstleistungen, die unser Team für Ihr Unternehmen erbringt.","ru":"Восемь приложений с одним входом: OneScore, OneJob, OneHome, OneEvent и OneBusiness доступны; OneSocial, OnePay и OneAgent появятся позже. OneVoice, OnePage и OneApp — услуги нашей команды для вашего бизнеса.","zh":"八款应用，一次登录：OneScore、OneJob、OneHome、OneEvent 和 OneBusiness 现已可用；OneSocial、OnePay 和 OneAgent 即将推出。OneVoice、OnePage 和 OneApp 是我们团队为您的企业提供的服务。","pt":"Oito apps com um único login: OneScore, OneJob, OneHome, OneEvent e OneBusiness estão disponíveis; OneSocial, OnePay e OneAgent chegam em breve. OneVoice, OnePage e OneApp são serviços que nossa equipe presta para o seu negócio.","co":"Ocho apps con un solo inicio de sesión: OneScore, OneJob, OneHome, OneEvent y OneBusiness están disponibles; OneSocial, OnePay y OneAgent llegarán pronto. OneVoice, OnePage y OneApp son servicios que nuestro equipo presta para tu negocio."};
+    var APP_FAQ = {"es":"Ocho apps conectadas con un solo inicio de sesión: OneScore, OneJob, OneHome, OneEvent, OneSocial, OneAgent, OnePay y One Business. OneVoice, OnePage y OneApp son servicios que nuestro equipo presta para tu negocio.","de":"Acht verbundene Apps mit einem Login: OneScore, OneJob, OneHome, OneEvent, OneSocial, OneAgent, OnePay und One Business. OneVoice, OnePage und OneApp sind Dienstleistungen unseres Teams.","ru":"Восемь связанных приложений с единым входом: OneScore, OneJob, OneHome, OneEvent, OneSocial, OneAgent, OnePay и One Business. OneVoice, OnePage и OneApp — услуги нашей команды.","zh":"八款互联应用，一次登录：OneScore、OneJob、OneHome、OneEvent、OneSocial、OneAgent、OnePay 和 One Business。OneVoice、OnePage 和 OneApp 是我们团队提供的服务。","pt":"Oito apps conectados com um único login: OneScore, OneJob, OneHome, OneEvent, OneSocial, OneAgent, OnePay e One Business. OneVoice, OnePage e OneApp são serviços prestados pela nossa equipe.","co":"Ocho apps conectadas con un solo inicio de sesión: OneScore, OneJob, OneHome, OneEvent, OneSocial, OneAgent, OnePay y One Business. OneVoice, OnePage y OneApp son servicios que nuestro equipo presta para tu negocio."};
     Object.keys(APP_FAQ).forEach(function(l){CARD_I18N[l].q1_a=APP_FAQ[l];});
     Object.keys(CARD_DESCRIPTIONS).forEach(function(l){Object.assign(CARD_I18N[l],CARD_DESCRIPTIONS[l]);});
     Object.keys(CARD_I18N).forEach(function(l){I18N[l]=Object.assign({},I18N[l]||{},CARD_I18N[l]);});
@@ -2024,10 +2023,8 @@
             b.addEventListener('click', function(){
                 var lang = b.getAttribute('data-lang');
                 document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N_META[lang].flag + '.png';
-                document.getElementById('lang-code').textContent = I18N_META[lang].code;
                 langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); x.setAttribute('aria-checked',String(x===b)); });
                 document.documentElement.lang = ({co:'es-CO',es:'es-ES',pt:'pt-BR',zh:'zh-CN'})[lang] || lang;
-                document.getElementById('lang-flag').alt = I18N_META[lang].code;
                 setLanguageMenu(false,document.activeElement===b);
                 window.OWL_LANG = lang;
                 applyLang(lang);

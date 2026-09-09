@@ -7,7 +7,10 @@
     "build:css": "tailwindcss -i ./src/input.css -o ./assets/ow.css --minify",
     "watch:css": "tailwindcss -i ./src/input.css -o ./assets/ow.css --watch",
     "verify:css": "npm run build:css && git diff --exit-code --stat -- assets/ow.css",
-    "verify:onevoice-pricing": "node _proofs/verify-onevoice-pricing-v8.mjs"
+    "verify:onevoice-pricing": "node _proofs/verify-onevoice-pricing-v8.mjs",
+    "fix:flag-only-language-picker": "node _proofs/enforce-flag-only-language-picker.mjs",
+    "fix:apps-jsonld": "node _proofs/update-apps-jsonld.mjs",
+    "verify:onepay-public": "node _proofs/verify-onepay-public.mjs"
   },
   "devDependencies": { "tailwindcss": "3.4.17" }
 }

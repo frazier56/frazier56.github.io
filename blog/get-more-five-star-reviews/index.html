@@ -674,8 +674,7 @@
             <div class="flex items-center gap-2 sm:gap-4">
                 <div class="relative">
                     <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="true" aria-label="Language">
-                        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="EN" class="h-4 w-6 rounded-sm object-cover">
-                        <span id="lang-code" class="font-medium text-sm hidden sm:inline">EN</span>
+                        <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="" aria-hidden="true" class="h-4 w-6 rounded-sm object-cover">
                     </button>
                     <div class="langmenu" id="lang-menu" role="menu">
                         <button data-lang="en" class="active"><img src="https://flagcdn.com/w40/us.png" width="20" height="14" class="rounded-sm" alt="">USA<span class="chk">✓</span></button>
@@ -734,7 +733,9 @@
                     <a href="https://oneevent.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Event</span></a>
                     <a href="https://onesocial.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Social</span></a>
                     <a href="https://onehome.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Home</span></a>
-                    <span class="menu-navitem opacity-70 cursor-default"><span><span class="menu-one">One</span>Agent</span><span class="menu-soon" data-i18n="coming_soon">Coming soon</span></span>
+                    <a href="https://app.oneworldlabs.ai/agent" class="menu-navitem"><span><span class="menu-one">One</span>Agent</span></a>
+                    <a href="https://app.oneworldlabs.ai/pay" class="menu-navitem"><span><span class="menu-one">One</span>Pay</span></a>
+                    <a href="https://app.oneworldlabs.ai/business" class="menu-navitem"><span><span class="menu-one">One</span> Business</span></a>
                 </div>
                 <div>
                     <h4 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1 px-1" data-i18n="ftr_svcs">Services</h4>
@@ -883,7 +884,9 @@
                         <li><a href="https://onescore.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Score</a></li>
                         <li><a href="https://oneevent.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Event</a></li>
                         <li><a href="https://onesocial.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Social</a></li>
-                        <li><span class="text-muted-foreground"><span class="font-bold">One</span>Agent · <span data-i18n="coming_soon">Coming soon</span></span></li>
+                        <li><a href="https://app.oneworldlabs.ai/agent" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Agent</a></li>
+                        <li><a href="https://app.oneworldlabs.ai/pay" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Pay</a></li>
+                        <li><a href="https://app.oneworldlabs.ai/business" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span> Business</a></li>
                     </ul>
                 </div>
                 <div>
@@ -1214,7 +1217,6 @@
             b.addEventListener('click', function(){
                 var lang = b.getAttribute('data-lang');
                 document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N_META[lang].flag + '.png';
-                document.getElementById('lang-code').textContent = I18N_META[lang].code;
                 langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); });
                 document.documentElement.lang = lang;
                 langMenu.classList.remove('open');
