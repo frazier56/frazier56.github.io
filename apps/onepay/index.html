@@ -684,7 +684,7 @@
             </nav>
             <div class="flex items-center gap-2 sm:gap-4">
                 <div class="relative">
-                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="true" aria-label="Language">
+                    <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors" aria-haspopup="menu" aria-controls="lang-menu" aria-expanded="false" aria-label="Language">
                         <img id="lang-flag" src="https://flagcdn.com/w40/us.png" alt="EN" class="h-4 w-6 rounded-sm object-cover">
                         <span id="lang-code" class="font-medium text-sm hidden sm:inline">EN</span>
                     </button>
@@ -711,174 +711,174 @@
     </header>
         <main class="relative z-10 pt-24 md:pt-28">
       <section class="container mx-auto px-4 max-w-3xl text-center mb-16 md:mb-20">
-        <p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#C24A32">Payments, made simpler</p>
+        <p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#C24A32" data-i18n="op_0">Payments, made simpler</p>
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-5">OnePay</h1>
-        <p class="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight max-w-2xl mx-auto mb-8 leading-snug">Take payments. Keep track of every sale.</p>
+        <p class="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight max-w-2xl mx-auto mb-8 leading-snug" data-i18n="op_2">Take payments. Keep track of every sale.</p>
         <div class="flex justify-center">
-          <a href="#how" class="btn-clay h-13 px-9 inline-flex items-center justify-center rounded-full font-bold text-white text-base sm:text-lg shadow-lg" style="min-height:52px">Read how it will work</a>
+          <a href="#how" class="btn-clay h-13 px-9 inline-flex items-center justify-center rounded-full font-bold text-white text-base sm:text-lg shadow-lg" style="min-height:52px" data-i18n="op_3">Read how it will work</a>
         </div>
-        <p class="text-xs sm:text-sm text-muted-foreground/80 mt-4">In development · Coming soon · Part of One World</p>
+        <p class="text-xs sm:text-sm text-muted-foreground/80 mt-4" data-i18n="op_4">In development · Coming soon · Part of One World</p>
         <div class="mt-5 flex justify-center">
           <a href="/apps/" class="group inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:-translate-x-0.5"><path d="M19 12H5m7-7-7 7 7 7"/></svg>
-            See all eight apps
+            <span data-i18n="op_all_apps">See all eight apps</span>
           </a>
         </div>
       </section>
 
       <section class="container mx-auto px-4 max-w-5xl mb-16 md:mb-20">
         <div class="text-center mb-9 md:mb-12">
-          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">Three things that go wrong with getting paid</h2>
-          <p class="text-muted-foreground max-w-xl mx-auto leading-relaxed">Not features. The three moments a small business loses money or time — and what OnePay is being built to do about each.</p>
+          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3" data-i18n="op_5">Three things that go wrong with getting paid</h2>
+          <p class="text-muted-foreground max-w-xl mx-auto leading-relaxed" data-i18n="op_6">Not features. The three moments a small business loses money or time — and what OnePay is being built to do about each.</p>
         </div>
         <div class="grid gap-5 md:grid-cols-3">
           <div class="frost rounded-3xl p-6 md:p-8 flex flex-col">
             <div class="flex items-center gap-2.5 mb-4">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-full" style="background:#C24A3214;color:#C24A32"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span>
-              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32">The charge</p>
+              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32" data-i18n="op_7">The charge</p>
             </div>
-            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3">A charge that takes one screen, not three apps.</h3>
-            <p class="text-[15px] leading-relaxed text-muted-foreground">Type an amount or tap an item from your catalog, add a tip or discount, and the total is calculated on our servers — never guessed by your phone.</p>
+            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3" data-i18n="op_8">A charge that takes one screen, not three apps.</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground" data-i18n="op_9">Type an amount or tap an item from your catalog, add a tip or discount, and the total is calculated on our servers — never guessed by your phone.</p>
           </div>
           <div class="frost rounded-3xl p-6 md:p-8 flex flex-col">
             <div class="flex items-center gap-2.5 mb-4">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-full" style="background:#C24A3214;color:#C24A32"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32">The status</p>
+              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32" data-i18n="op_10">The status</p>
             </div>
-            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3">Know if you were actually paid.</h3>
-            <p class="text-[15px] leading-relaxed text-muted-foreground">Pending, paid, failed or unresolved — the real state, from the money, not from a screen that said "success" and lost the connection.</p>
+            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3" data-i18n="op_11">Know if you were actually paid.</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground" data-i18n="op_12">Pending, paid, failed or unresolved — the real state, from the money, not from a screen that said "success" and lost the connection.</p>
           </div>
           <div class="frost rounded-3xl p-6 md:p-8 flex flex-col">
             <div class="flex items-center gap-2.5 mb-4">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-full" style="background:#C24A3214;color:#C24A32"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></span>
-              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32">The record</p>
+              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32" data-i18n="op_13">The record</p>
             </div>
-            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3">A receipt that never changes.</h3>
-            <p class="text-[15px] leading-relaxed text-muted-foreground">Every paid charge writes a receipt you can share, and a ledger line you cannot edit. Refunds and voids get their own entries, forever.</p>
+            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3" data-i18n="op_14">A receipt that never changes.</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground" data-i18n="op_15">Every paid charge writes a receipt you can share, and a ledger line you cannot edit. Refunds and voids get their own entries, forever.</p>
           </div>
         </div>
       </section>
 
       <section id="how" class="container mx-auto px-4 max-w-3xl mb-16 md:mb-20">
-        <div class="text-center mb-9 md:mb-12"><h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">How it works</h2></div>
+        <div class="text-center mb-9 md:mb-12"><h2 class="text-3xl md:text-4xl font-extrabold tracking-tight" data-i18n="op_16">How it works</h2></div>
         <ol class="grid gap-4">
           <li class="frost rounded-3xl p-6 flex gap-4">
             <span class="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-extrabold" style="background:#C24A3214;color:#C24A32">1</span>
-            <div><h3 class="text-lg font-extrabold tracking-tight leading-tight mb-1">Create the charge</h3><p class="text-[14.5px] leading-relaxed text-muted-foreground">An amount, or items from your catalog. Discount and tip if you like. The order is frozen the moment it exists.</p></div>
+            <div><h3 class="text-lg font-extrabold tracking-tight leading-tight mb-1" data-i18n="op_18">Create the charge</h3><p class="text-[14.5px] leading-relaxed text-muted-foreground" data-i18n="op_19">An amount, or items from your catalog. Discount and tip if you like. The order is frozen the moment it exists.</p></div>
           </li>
           <li class="frost rounded-3xl p-6 flex gap-4">
             <span class="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-extrabold" style="background:#C24A3214;color:#C24A32">2</span>
-            <div><h3 class="text-lg font-extrabold tracking-tight leading-tight mb-1">The customer pays</h3><p class="text-[14.5px] leading-relaxed text-muted-foreground">Cash and bank transfer work from day one. Card tap on your phone switches on for your business the moment the provider approves it — the button does not exist until then.</p></div>
+            <div><h3 class="text-lg font-extrabold tracking-tight leading-tight mb-1" data-i18n="op_21">The customer pays</h3><p class="text-[14.5px] leading-relaxed text-muted-foreground" data-i18n="op_22">Cash and bank transfer work from day one. Card tap on your phone switches on for your business the moment the provider approves it — the button does not exist until then.</p></div>
           </li>
           <li class="frost rounded-3xl p-6 flex gap-4">
             <span class="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-extrabold" style="background:#C24A3214;color:#C24A32">3</span>
-            <div><h3 class="text-lg font-extrabold tracking-tight leading-tight mb-1">OnePay confirms the money</h3><p class="text-[14.5px] leading-relaxed text-muted-foreground">Cash is confirmed by the person holding it. A transfer waits until a manager sees it arrive. A card payment waits for the provider, and a lost connection can never create a second charge.</p></div>
+            <div><h3 class="text-lg font-extrabold tracking-tight leading-tight mb-1" data-i18n="op_24">OnePay confirms the money</h3><p class="text-[14.5px] leading-relaxed text-muted-foreground" data-i18n="op_25">Cash is confirmed by the person holding it. A transfer waits until a manager sees it arrive. A card payment waits for the provider, and a lost connection can never create a second charge.</p></div>
           </li>
           <li class="frost rounded-3xl p-6 flex gap-4">
             <span class="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-extrabold" style="background:#C24A3214;color:#C24A32">4</span>
-            <div><h3 class="text-lg font-extrabold tracking-tight leading-tight mb-1">Review the day</h3><p class="text-[14.5px] leading-relaxed text-muted-foreground">Sales, refunds and net by method. Close the day once nothing is pending and the totals are kept.</p></div>
+            <div><h3 class="text-lg font-extrabold tracking-tight leading-tight mb-1" data-i18n="op_27">Review the day</h3><p class="text-[14.5px] leading-relaxed text-muted-foreground" data-i18n="op_28">Sales, refunds and net by method. Close the day once nothing is pending and the totals are kept.</p></div>
           </li>
         </ol>
       </section>
 
       <section class="container mx-auto px-4 max-w-5xl mb-16 md:mb-20">
         <div class="text-center mb-9 md:mb-12">
-          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">What you get</h2>
-          <p class="text-muted-foreground max-w-xl mx-auto leading-relaxed">Every line here is built. Nothing on this page is a promise about a payment provider that has not said yes yet.</p>
+          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3" data-i18n="op_29">What you get</h2>
+          <p class="text-muted-foreground max-w-xl mx-auto leading-relaxed" data-i18n="op_30">Every line here is built. Nothing on this page is a promise about a payment provider that has not said yes yet.</p>
         </div>
         <div class="grid gap-5 md:grid-cols-2">
           <div class="frost rounded-3xl p-6 md:p-8 flex flex-col">
             <div class="flex items-center gap-2.5 mb-4">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-full" style="background:#C24A3214;color:#C24A32"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span>
-              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32">Quick charge</p>
+              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32" data-i18n="op_31">Quick charge</p>
             </div>
-            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3">Amount or catalog, tip, discount, customer name, note.</h3>
-            <p class="text-[15px] leading-relaxed text-muted-foreground">From the finished haircut or delivered order to a clear charge in seconds.</p>
+            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3" data-i18n="op_32">Amount or catalog, tip, discount, customer name, note.</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground" data-i18n="op_33">From the finished haircut or delivered order to a clear charge in seconds.</p>
           </div>
           <div class="frost rounded-3xl p-6 md:p-8 flex flex-col">
             <div class="flex items-center gap-2.5 mb-4">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-full" style="background:#C24A3214;color:#C24A32"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
-              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32">Phone-first</p>
+              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32" data-i18n="op_34">Phone-first</p>
             </div>
-            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3">Built for the phone in your pocket.</h3>
-            <p class="text-[15px] leading-relaxed text-muted-foreground">Cash and transfers now. Card acceptance on the same phone is the target, through an officially supported provider — no separate reader.</p>
+            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3" data-i18n="op_35">Built for the phone in your pocket.</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground" data-i18n="op_36">Cash and transfers now. Card acceptance on the same phone is the target, through an officially supported provider — no separate reader.</p>
           </div>
           <div class="frost rounded-3xl p-6 md:p-8 flex flex-col">
             <div class="flex items-center gap-2.5 mb-4">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-full" style="background:#C24A3214;color:#C24A32"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></span>
-              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32">Receipts and history</p>
+              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32" data-i18n="op_37">Receipts and history</p>
             </div>
-            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3">Find any payment, share a consistent record.</h3>
-            <p class="text-[15px] leading-relaxed text-muted-foreground">Every paid charge writes a numbered receipt with the merchant, the items and the method, and it never changes afterwards.</p>
+            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3" data-i18n="op_38">Find any payment, share a consistent record.</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground" data-i18n="op_39">Every paid charge writes a numbered receipt with the merchant, the items and the method, and it never changes afterwards.</p>
           </div>
           <div class="frost rounded-3xl p-6 md:p-8 flex flex-col">
             <div class="flex items-center gap-2.5 mb-4">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-full" style="background:#C24A3214;color:#C24A32"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span>
-              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32">Daily closeout</p>
+              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32" data-i18n="op_40">Daily closeout</p>
             </div>
-            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3">Sales, refunds and net by method, frozen.</h3>
-            <p class="text-[15px] leading-relaxed text-muted-foreground">Close the day once every payment is resolved. The totals are kept exactly as they were.</p>
+            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3" data-i18n="op_41">Sales, refunds and net by method, frozen.</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground" data-i18n="op_42">Close the day once every payment is resolved. The totals are kept exactly as they were.</p>
           </div>
           <div class="frost rounded-3xl p-6 md:p-8 flex flex-col">
             <div class="flex items-center gap-2.5 mb-4">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-full" style="background:#C24A3214;color:#C24A32"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="3.5"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span>
-              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32">Staff and roles</p>
+              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32" data-i18n="op_43">Staff and roles</p>
             </div>
-            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3">Owners, managers, staff.</h3>
-            <p class="text-[15px] leading-relaxed text-muted-foreground">Staff can charge. Managers can confirm transfers, refund and close the day. Everything is traced to who did it.</p>
+            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3" data-i18n="op_44">Owners, managers, staff.</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground" data-i18n="op_45">Staff can charge. Managers can confirm transfers, refund and close the day. Everything is traced to who did it.</p>
           </div>
           <div class="frost rounded-3xl p-6 md:p-8 flex flex-col">
             <div class="flex items-center gap-2.5 mb-4">
               <span class="inline-flex h-9 w-9 items-center justify-center rounded-full" style="background:#C24A3214;color:#C24A32"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32">Honest states</p>
+              <p class="text-xs font-bold tracking-widest uppercase" style="color:#C24A32" data-i18n="op_46">Honest states</p>
             </div>
-            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3">Pending, paid, failed, unresolved.</h3>
-            <p class="text-[15px] leading-relaxed text-muted-foreground">A payment is paid when the money is confirmed, not when a screen says so. Duplicate events and retries are ignored on the server.</p>
+            <h3 class="text-xl md:text-2xl font-extrabold tracking-tight leading-tight mb-3" data-i18n="op_47">Pending, paid, failed, unresolved.</h3>
+            <p class="text-[15px] leading-relaxed text-muted-foreground" data-i18n="op_48">A payment is paid when the money is confirmed, not when a screen says so. Duplicate events and retries are ignored on the server.</p>
           </div>
         </div>
       </section>
 
       <section class="container mx-auto px-4 max-w-5xl mb-16 md:mb-20">
         <div class="grid gap-5 md:grid-cols-2">
-          <div class="frost rounded-3xl p-6 md:p-8"><p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#C24A32">Part of One World</p><p class="text-[15px] leading-relaxed text-muted-foreground">One login for every One World app. Your OnePay profile, messages and settings are the same ones you use in OneJob, OneHome and the rest — nothing to set up twice.</p></div>
-          <div class="frost rounded-3xl p-6 md:p-8"><p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#C24A32">Built for Colombia</p><p class="text-[15px] leading-relaxed text-muted-foreground">Pesos, English and Spanish, and the way people actually pay here: cash, Nequi and bank transfers first. Phone-only card acceptance is the target for Colombia, and we will say which provider, which devices and which cards only once they are verified.</p></div>
+          <div class="frost rounded-3xl p-6 md:p-8"><p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#C24A32" data-i18n="op_49">Part of One World</p><p class="text-[15px] leading-relaxed text-muted-foreground" data-i18n="op_50">One login for every One World app. Your OnePay profile, messages and settings are the same ones you use in OneJob, OneHome and the rest — nothing to set up twice.</p></div>
+          <div class="frost rounded-3xl p-6 md:p-8"><p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#C24A32" data-i18n="op_51">Built for Colombia</p><p class="text-[15px] leading-relaxed text-muted-foreground" data-i18n="op_52">Pesos, English and Spanish, and the way people actually pay here: cash, Nequi and bank transfers first. Phone-only card acceptance is the target for Colombia, and we will say which provider, which devices and which cards only once they are verified.</p></div>
         </div>
       </section>
 
       <section class="container mx-auto px-4 max-w-3xl mb-16 md:mb-20">
-        <div class="text-center mb-9 md:mb-12"><h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Questions people ask</h2></div>
+        <div class="text-center mb-9 md:mb-12"><h2 class="text-3xl md:text-4xl font-extrabold tracking-tight" data-i18n="op_53">Questions people ask</h2></div>
         <div class="grid gap-3">
           <details class="frost rounded-2xl p-5 group">
-            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span>Who is OnePay for?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
-            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground">Independent professionals who charge after a service, small shops entering a quick amount or picking items, and owners who want to see what their staff took today.</p>
+            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span data-i18n="op_54">Who is OnePay for?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground" data-i18n="op_56">Independent professionals who charge after a service, small shops entering a quick amount or picking items, and owners who want to see what their staff took today.</p>
           </details>
           <details class="frost rounded-2xl p-5 group">
-            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span>Can I take card payments on my phone?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
-            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground">That is the target. It depends on an officially supported provider approving your business and your device. Until then OnePay records cash and transfers, and the card option simply does not appear.</p>
+            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span data-i18n="op_57">Can I take card payments on my phone?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground" data-i18n="op_59">That is the target. It depends on an officially supported provider approving your business and your device. Until then OnePay records cash and transfers, and the card option simply does not appear.</p>
           </details>
           <details class="frost rounded-2xl p-5 group">
-            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span>What does it cost?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
-            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground">Not set yet. There is no fee schedule on this page because none has been approved. You will see the exact terms before anything is charged.</p>
+            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span data-i18n="op_60">What does it cost?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground" data-i18n="op_62">Not set yet. There is no fee schedule on this page because none has been approved. You will see the exact terms before anything is charged.</p>
           </details>
           <details class="frost rounded-2xl p-5 group">
-            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span>When do I receive the money?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
-            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground">Cash and transfers are yours the moment they arrive — OnePay only records them. Settlement timing for card payments depends on the provider and will be shown once confirmed.</p>
+            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span data-i18n="op_63">When do I receive the money?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground" data-i18n="op_65">Cash and transfers are yours the moment they arrive — OnePay only records them. Settlement timing for card payments depends on the provider and will be shown once confirmed.</p>
           </details>
           <details class="frost rounded-2xl p-5 group">
-            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span>Does OnePay hold my money?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
-            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground">No. OnePay records charges and confirmations. It is not a bank or a wallet.</p>
+            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span data-i18n="op_66">Does OnePay hold my money?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground" data-i18n="op_68">No. OnePay records charges and confirmations. It is not a bank or a wallet.</p>
           </details>
           <details class="frost rounded-2xl p-5 group">
-            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span>When is it available?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
-            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground">It is in development inside the One World app. This page will change to "Open OnePay" when it is live.</p>
+            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-bold text-[15px]"><span data-i18n="op_69">When is it available?</span><span class="text-muted-foreground transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-[14.5px] leading-relaxed text-muted-foreground" data-i18n="op_71">It is in development inside the One World app. This page will change to "Open OnePay" when it is live.</p>
           </details>
         </div>
       </section>
 
       <section class="container mx-auto px-4 max-w-3xl text-center mb-24 md:mb-32">
-        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">Paid, and on record.</h2>
-        <p class="text-muted-foreground leading-relaxed mb-7">OnePay is being built inside One World. When it opens, this button opens the app.</p>
-        <a href="#how" class="btn-clay h-12 px-7 inline-flex items-center justify-center rounded-full font-bold text-white">Read how it will work</a>
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4" data-i18n="op_72">Paid, and on record.</h2>
+        <p class="text-muted-foreground leading-relaxed mb-7" data-i18n="op_73">OnePay is being built inside One World. When it opens, this button opens the app.</p>
+        <a href="#how" class="btn-clay h-12 px-7 inline-flex items-center justify-center rounded-full font-bold text-white" data-i18n="op_74">Read how it will work</a>
       </section>
     </main>
 <footer class="relative z-10 border-t border-border/50 pt-12 md:pt-20 pb-8 md:pb-10" style="background:color-mix(in srgb,var(--color-bg) 78%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);">
@@ -1288,7 +1288,79 @@
     Object.keys(I18N_EXT).forEach(function(l){
         I18N[l] = Object.assign({}, I18N[l] || {}, I18N_EXT[l]);
     });
+    Object.assign(I18N.co, {
+  "op_0": "Pagos más sencillos",
+  "op_2": "Reciba pagos. Lleve el registro de cada venta.",
+  "op_3": "Conozca cómo funcionará",
+  "op_4": "En desarrollo · Próximamente · Parte de One World",
+  "op_5": "Tres problemas a la hora de cobrar",
+  "op_6": "No son funciones. Son los tres momentos en que un pequeño negocio pierde dinero o tiempo, y lo que OnePay está desarrollando para resolverlos.",
+  "op_7": "El cobro",
+  "op_8": "Un cobro en una sola pantalla, no en tres apps.",
+  "op_9": "Ingrese un monto o seleccione un artículo del catálogo, agregue una propina o un descuento, y nuestros servidores calculan el total. Su celular nunca lo estima.",
+  "op_10": "El estado",
+  "op_11": "Sepa si realmente le pagaron.",
+  "op_12": "Pendiente, pagado, fallido o sin resolver: el estado real del dinero, no el de una pantalla que dijo «éxito» y perdió la conexión.",
+  "op_13": "El registro",
+  "op_14": "Un recibo que nunca cambia.",
+  "op_15": "Cada cobro pagado genera un recibo para compartir y un registro contable que no se puede editar. Los reembolsos y las anulaciones quedan en registros propios, de forma permanente.",
+  "op_16": "Cómo funciona",
+  "op_18": "Cree el cobro",
+  "op_19": "Ingrese un monto o seleccione artículos del catálogo. Agregue un descuento y una propina si quiere. La orden queda fija desde el momento en que se crea.",
+  "op_21": "El cliente paga",
+  "op_22": "El efectivo y las transferencias bancarias funcionan desde el primer día. El cobro sin contacto con tarjeta en su celular se habilita cuando el proveedor aprueba su negocio; hasta entonces, el botón no aparece.",
+  "op_24": "OnePay confirma el dinero",
+  "op_25": "El efectivo lo confirma quien lo recibe. Una transferencia espera a que un administrador compruebe su llegada. Un pago con tarjeta espera la confirmación del proveedor, y una conexión perdida nunca puede generar un segundo cobro.",
+  "op_27": "Revise el día",
+  "op_28": "Ventas, reembolsos y neto por método de pago. Cierre el día cuando no quede nada pendiente y los totales se conservarán.",
+  "op_29": "Qué incluye",
+  "op_30": "Todo lo que se describe aquí ya está construido. Esta página no promete nada sobre un proveedor de pagos que todavía no haya dado su aprobación.",
+  "op_31": "Cobro rápido",
+  "op_32": "Monto o catálogo, propina, descuento, nombre del cliente y nota.",
+  "op_33": "Del corte de cabello terminado o el pedido entregado a un cobro claro en segundos.",
+  "op_34": "Pensado para el celular",
+  "op_35": "Diseñado para el celular que lleva en el bolsillo.",
+  "op_36": "Efectivo y transferencias ahora. El objetivo es aceptar tarjetas en ese mismo celular, mediante un proveedor con soporte oficial y sin un lector aparte.",
+  "op_37": "Recibos e historial",
+  "op_38": "Encuentre cualquier pago y comparta un registro consistente.",
+  "op_39": "Cada cobro pagado genera un recibo numerado con el comercio, los artículos y el método de pago. Ese recibo no cambia después.",
+  "op_40": "Cierre diario",
+  "op_41": "Ventas, reembolsos y neto por método, sin cambios posteriores.",
+  "op_42": "Cierre el día cuando todos los pagos estén resueltos. Los totales se conservan exactamente como estaban.",
+  "op_43": "Personal y roles",
+  "op_44": "Propietarios, administradores y personal.",
+  "op_45": "El personal puede cobrar. Los administradores pueden confirmar transferencias, hacer reembolsos y cerrar el día. Cada acción queda asociada a quien la realizó.",
+  "op_46": "Estados reales",
+  "op_47": "Pendiente, pagado, fallido, sin resolver.",
+  "op_48": "Un pago se considera pagado cuando se confirma el dinero, no cuando una pantalla lo dice. El servidor ignora los eventos duplicados y los reintentos.",
+  "op_49": "Parte de One World",
+  "op_50": "Una sola cuenta para todas las apps de One World. Su perfil, sus mensajes y su configuración de OnePay son los mismos que usa en OneJob, OneHome y las demás; no tiene que configurarlos dos veces.",
+  "op_51": "Pensado para Colombia",
+  "op_52": "Pesos, inglés y español, y las formas de pago que se usan aquí: primero efectivo, Nequi y transferencias bancarias. El objetivo para Colombia es aceptar tarjetas solo con el celular. Diremos qué proveedor, dispositivos y tarjetas se admiten únicamente cuando estén verificados.",
+  "op_53": "Preguntas frecuentes",
+  "op_54": "¿Para quién es OnePay?",
+  "op_56": "Para profesionales independientes que cobran después de un servicio, pequeños comercios que ingresan un monto o seleccionan artículos, y propietarios que quieren ver cuánto cobró su personal hoy.",
+  "op_57": "¿Puedo aceptar pagos con tarjeta en mi celular?",
+  "op_59": "Ese es el objetivo. Depende de que un proveedor con soporte oficial apruebe su negocio y su dispositivo. Hasta entonces, OnePay registra efectivo y transferencias; la opción de tarjeta simplemente no aparece.",
+  "op_60": "¿Cuánto cuesta?",
+  "op_62": "Todavía no se ha definido. Esta página no muestra tarifas porque aún no se han aprobado. Verá las condiciones exactas antes de que se cobre cualquier monto.",
+  "op_63": "¿Cuándo recibo el dinero?",
+  "op_65": "El efectivo y las transferencias son suyos en cuanto llegan; OnePay solo los registra. Los plazos de liquidación de pagos con tarjeta dependen del proveedor y se mostrarán cuando estén confirmados.",
+  "op_66": "¿OnePay retiene mi dinero?",
+  "op_68": "No. OnePay registra cobros y confirmaciones. No es un banco ni una billetera.",
+  "op_69": "¿Cuándo estará disponible?",
+  "op_71": "Está en desarrollo dentro de la app de One World. Cuando esté disponible, esta página cambiará a «Abrir OnePay».",
+  "op_72": "Pagado y registrado.",
+  "op_73": "OnePay se está desarrollando dentro de One World. Cuando esté disponible, este botón abrirá la app.",
+  "op_74": "Conozca cómo funcionará",
+  "op_all_apps": "Ver las ocho apps"
+});
     function applyLang(lang){
+        var co=lang==="co";
+        document.title=co?"OnePay — Pagos más sencillos | One World Labs":"OnePay — Payments, made simpler | One World Labs";
+        [["lang-btn","Language","Idioma"],["theme-toggle","Toggle theme","Cambiar tema"],["menu-btn","Open menu","Abrir menú"],["menu-close-x","Close menu","Cerrar menú"]].forEach(function(row){var el=document.getElementById(row[0]);if(el)el.setAttribute("aria-label",co?row[2]:row[1]);});
+        var brand=document.querySelector("header a[aria-label]");if(brand)brand.setAttribute("aria-label","OnePay — "+(co?"parte de One World Labs":"part of One World Labs"));
+        var nav=document.querySelector("nav[aria-label]");if(nav)nav.setAttribute("aria-label",co?"Principal":"Primary");
         document.querySelectorAll('[data-i18n]').forEach(function(el){
             var key = el.getAttribute('data-i18n');
             if (!el.hasAttribute('data-i18n-en')) el.setAttribute('data-i18n-en', el.textContent);
@@ -1298,18 +1370,36 @@
             el.textContent = (dict && dict[key]) ? dict[key] : enText;
         });
     }
+    applyLang('en');
     var langBtn = document.getElementById('lang-btn'), langMenu = document.getElementById('lang-menu');
     if (langBtn) {
-        langBtn.addEventListener('click', function(e){ e.stopPropagation(); langMenu.classList.toggle('open'); });
-        document.addEventListener('click', function(){ langMenu.classList.remove('open'); });
+        function setLanguageMenu(open, focus){
+            langMenu.classList.toggle('open',open);
+            langBtn.setAttribute('aria-expanded',String(open));
+            if(focus) (open ? langMenu.querySelector('button.active') || langMenu.querySelector('button') : langBtn).focus();
+        }
+        langBtn.addEventListener('click', function(e){e.stopPropagation();setLanguageMenu(!langMenu.classList.contains('open'),true);});
+        langBtn.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();setLanguageMenu(true,true);}});
+        document.addEventListener('click',function(){setLanguageMenu(false,false);});
+        langMenu.addEventListener('keydown',function(e){
+            var buttons=Array.from(langMenu.querySelectorAll('button')),index=buttons.indexOf(document.activeElement);
+            if(e.key==='Escape'){e.preventDefault();setLanguageMenu(false,true);}
+            else if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();buttons[(index+(e.key==='ArrowDown'?1:buttons.length-1))%buttons.length].focus();}
+            else if(e.key==='Home'||e.key==='End'){e.preventDefault();buttons[e.key==='Home'?0:buttons.length-1].focus();}
+            else if(e.key==='Tab'){setLanguageMenu(false,true);}
+        });
         langMenu.querySelectorAll('button').forEach(function(b){
+            b.setAttribute('role','menuitemradio');
+            b.setAttribute('aria-checked',String(b.classList.contains('active')));
+            b.querySelector('.chk').setAttribute('aria-hidden','true');
             b.addEventListener('click', function(){
                 var lang = b.getAttribute('data-lang');
                 document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N_META[lang].flag + '.png';
                 document.getElementById('lang-code').textContent = I18N_META[lang].code;
-                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); });
-                document.documentElement.lang = lang;
-                langMenu.classList.remove('open');
+                langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); x.setAttribute('aria-checked',String(x===b)); });
+                document.documentElement.lang = ({co:'es-CO',es:'es-ES',pt:'pt-BR',zh:'zh-CN'})[lang] || lang;
+                document.getElementById('lang-flag').alt = I18N_META[lang].code;
+                setLanguageMenu(false,document.activeElement===b);
                 window.OWL_LANG = lang;
                 applyLang(lang);
                 /* re-render any JS-built text (the signed-in welcome message splices in the
