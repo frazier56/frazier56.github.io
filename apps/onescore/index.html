@@ -473,6 +473,13 @@
     }
     /* Keep support outside the modal menu; restore the same widget on close. */
     html.ow-menu-open chat-widget{display:none!important;}
+    /* Allow complete menu labels at narrow widths without horizontal scrolling. */
+    .menu-panel .wm-tag{white-space:normal;overflow-wrap:anywhere;}
+    .menu-panel .menu-navitem{display:grid;grid-template-columns:10px minmax(0,1fr);column-gap:10px;row-gap:3px;}
+    .menu-panel .menu-navitem > span{min-width:0;overflow-wrap:anywhere;}
+    .menu-panel .menu-navitem > [data-i18n="nav_future_soon"]{grid-column:2;}
+    .menu-panel #hb-signedout-cta > a{height:auto;min-height:44px;padding:10px 12px;white-space:normal;overflow-wrap:anywhere;}
+    @media(max-width:639px){.menu-panel{width:calc(100% - 24px);max-width:352px;}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- One World session bridge — keeps this origin's session in step with the
