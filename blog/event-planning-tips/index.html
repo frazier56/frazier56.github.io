@@ -733,10 +733,10 @@ h1[data-event-copy="title"] { overflow-wrap: anywhere; }
                     <a href="https://onejob.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Job</span></a>
                     <a href="https://onescore.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Score</span></a>
                     <a href="https://oneevent.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Event</span></a>
-                    <a href="https://onesocial.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Social</span></a>
+                    <a href="/apps/onesocial/" class="menu-navitem"><span><span class="menu-one">One</span>Social</span> <span data-i18n="nav_future_soon">Coming soon</span></a>
                     <a href="https://onehome.oneworldlabs.ai/" class="menu-navitem"><span><span class="menu-one">One</span>Home</span></a>
-                    <a href="https://app.oneworldlabs.ai/agent" class="menu-navitem"><span><span class="menu-one">One</span>Agent</span></a>
-                    <a href="https://app.oneworldlabs.ai/pay" class="menu-navitem"><span><span class="menu-one">One</span>Pay</span></a>
+                    <a href="/apps/oneagent/" class="menu-navitem"><span><span class="menu-one">One</span>Agent</span> <span data-i18n="nav_future_soon">Coming soon</span></a>
+                    <a href="/apps/onepay/" class="menu-navitem"><span><span class="menu-one">One</span>Pay</span> <span data-i18n="nav_future_soon">Coming soon</span></a>
                     <a href="https://app.oneworldlabs.ai/business" class="menu-navitem"><span><span class="menu-one">One</span> Business</span></a>
                 </div>
                 <div>
@@ -890,9 +890,9 @@ h1[data-event-copy="title"] { overflow-wrap: anywhere; }
                         <li><a href="https://onejob.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Job</a></li>
                         <li><a href="https://onescore.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Score</a></li>
                         <li><a href="https://oneevent.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Event</a></li>
-                        <li><a href="https://onesocial.oneworldlabs.ai/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Social</a></li>
-                        <li><a href="https://app.oneworldlabs.ai/agent" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Agent</a></li>
-                        <li><a href="https://app.oneworldlabs.ai/pay" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Pay</a></li>
+                        <li><a href="/apps/onesocial/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Social <span data-i18n="nav_future_soon">Coming soon</span></a></li>
+                        <li><a href="/apps/oneagent/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Agent <span data-i18n="nav_future_soon">Coming soon</span></a></li>
+                        <li><a href="/apps/onepay/" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span>Pay <span data-i18n="nav_future_soon">Coming soon</span></a></li>
                         <li><a href="https://app.oneworldlabs.ai/business" class="text-foreground hover:text-primary transition-colors"><span class="text-primary font-bold">One</span> Business</a></li>
                     </ul>
                 </div>
@@ -1221,6 +1221,13 @@ h1[data-event-copy="title"] { overflow-wrap: anywhere; }
     Object.keys(I18N_EXT).forEach(function(l){
         I18N[l] = Object.assign({}, I18N[l] || {}, I18N_EXT[l]);
     });
+    Object.assign(I18N["en"] || (I18N["en"] = {}), {"nav_future_soon":"Coming soon"});
+    Object.assign(I18N["co"] || (I18N["co"] = {}), {"nav_future_soon":"Próximamente"});
+    Object.assign(I18N["es"] || (I18N["es"] = {}), {"nav_future_soon":"Próximamente"});
+    Object.assign(I18N["de"] || (I18N["de"] = {}), {"nav_future_soon":"Demnächst"});
+    Object.assign(I18N["ru"] || (I18N["ru"] = {}), {"nav_future_soon":"Скоро"});
+    Object.assign(I18N["zh"] || (I18N["zh"] = {}), {"nav_future_soon":"即将推出"});
+    Object.assign(I18N["pt"] || (I18N["pt"] = {}), {"nav_future_soon":"Em breve"});
     function applyLang(lang){
         if(window.OWL_EVENT_APPLY) window.OWL_EVENT_APPLY(lang);
         document.querySelectorAll('[data-i18n]').forEach(function(el){
