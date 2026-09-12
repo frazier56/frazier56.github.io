@@ -1412,7 +1412,7 @@
                 var lang = b.getAttribute('data-lang');
                 document.getElementById('lang-flag').src = 'https://flagcdn.com/w40/' + I18N_META[lang].flag + '.png';
                 langMenu.querySelectorAll('button').forEach(function(x){ x.classList.toggle('active', x === b); });
-                document.documentElement.lang = lang;
+                document.documentElement.lang = ({co:'es-CO',es:'es-ES',pt:'pt-BR',zh:'zh-CN'})[lang] || lang;
                 langMenu.classList.remove('open');
                 window.OWL_LANG = lang;
                 applyLang(lang);
