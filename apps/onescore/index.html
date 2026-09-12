@@ -471,6 +471,8 @@
         .svc-row{padding:14px 10px;}
         .svc-row .svc-desc{font-size:12.5px;}
     }
+    /* Keep support outside the modal menu; restore the same widget on close. */
+    html.ow-menu-open chat-widget{display:none!important;}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- One World session bridge — keeps this origin's session in step with the
@@ -918,6 +920,7 @@
     var menuBtn = document.getElementById('menu-btn'), overlay = document.getElementById('menu-overlay');
     var iconMenu = document.getElementById('icon-menu'), iconX = document.getElementById('icon-x');
     function setMenu(open){
+        document.documentElement.classList.toggle('ow-menu-open', open);
         overlay.classList.toggle('show', open);
         iconMenu.classList.toggle('hidden', open);
         iconX.classList.toggle('hidden', !open);
