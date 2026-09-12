@@ -1200,13 +1200,15 @@
                 try { localStorage.setItem('owl-lang', lang); } catch(e){}
             });
         });
-        try {
-            var saved = localStorage.getItem('owl-lang');
-            if (saved && I18N_META[saved]) {
-                var btn = langMenu.querySelector('button[data-lang="' + saved + '"]');
-                if (btn) btn.click();
-            }
-        } catch(e){}
+        // Explicit allowlisted locale wins over this origin's saved preference.
+        var supportedLocales = ['en','co','es','de','ru','zh','pt'];
+        var requestedLocale = new URLSearchParams(window.location.search).get('owl_lang');
+        var initialLocale = supportedLocales.indexOf(requestedLocale) !== -1 ? requestedLocale : null;
+        if (!initialLocale) {
+            try { var saved = localStorage.getItem('owl-lang'); if (supportedLocales.indexOf(saved) !== -1) initialLocale = saved; } catch(e){}
+        }
+        var initialButton = langMenu.querySelector('button[data-lang="' + (initialLocale || 'en') + '"]');
+        if (initialButton) initialButton.click();
     }
 
     /* ---------- FAQ accordion (single-open) ---------- */
