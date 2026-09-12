@@ -474,6 +474,12 @@
     .flagship-row > a[id]{scroll-margin-top:6rem}
     /* Keep support outside the modal menu; restore the same widget on close. */
     html.ow-menu-open chat-widget{display:none!important;}
+    .services-brand{width:184px;max-width:calc(100vw - 154px);flex-shrink:0;gap:0;}
+    .services-brand-mark{width:38px;height:48px;object-fit:contain;flex-shrink:0;}
+    .services-brand-copy{min-width:0;}
+    .services-brand .wm-name{font-size:25px;}
+    .services-brand .wm-tag{font-size:6px;line-height:1.25;white-space:normal;overflow-wrap:anywhere;letter-spacing:.1em;}
+    @media(max-width:380px){.services-brand-mark{width:30px;height:42px;}.services-brand .wm-name{font-size:22px;}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- One World session bridge — keeps this origin's session in step with the
@@ -662,9 +668,9 @@
             <!-- the OneWorld lockup: transparent multicolor mark = the "O", text is live HTML so it
                  stays crisp at any resolution and follows the theme (matches the SMALL BUSINESS
                  SOLUTIONS lockup in GHL/_BRAND-ASSETS/OneWorld_multicolor-mark) -->
-            <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center">
-                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-light">
-                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses" class="ow-lockup ow-lockup-dark">
+            <a href="/" class="services-brand relative z-10 transition-opacity hover:opacity-80 flex items-center" aria-label="One World Labs — AI Solutions for Small Businesses">
+                <img src="/mark-oneworld.png" alt="" class="services-brand-mark">
+                <span class="services-brand-copy" aria-hidden="true"><span class="wm-name"><span class="wm-ne">ne</span><span class="wm-world">World</span></span><span class="wm-tag" data-i18n="owl_wm_tag">SMALL BUSINESS SOLUTIONS</span></span>
             </a>
             <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary">
                 <a href="/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="owl_nav_home">Home</a>
@@ -1112,7 +1118,8 @@
         overlay.classList.toggle('show', open);
         iconMenu.classList.toggle('hidden', open);
         iconX.classList.toggle('hidden', !open);
-        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        var labels=SERVICES_LABELS[window.OWL_LANG] || SERVICES_LABELS.en;
+        menuBtn.setAttribute('aria-label', open ? labels.close : labels.open);
     }
     menuBtn.addEventListener('click', function(){ setMenu(!overlay.classList.contains('show')); });
     overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
@@ -1366,7 +1373,27 @@
     Object.assign(I18N["ru"] || (I18N["ru"] = {}), {"nav_future_soon":"Скоро"});
     Object.assign(I18N["zh"] || (I18N["zh"] = {}), {"nav_future_soon":"即将推出"});
     Object.assign(I18N["pt"] || (I18N["pt"] = {}), {"nav_future_soon":"Em breve"});
+    /* Services-specific Colombian coverage; other locales retain their existing fallback. */
+    Object.assign(I18N.co, {
+        oneapp_new_desc: 'Diseñamos gratis una app móvil propia para su negocio y luego la publicamos en Apple App Store y Google Play por un pago único de $499. Las cuentas de las tiendas quedan a su nombre, así que la app es suya de forma permanente.',
+        svc02_p: 'Un sitio moderno construido con IA, que luego alojamos, actualizamos y administramos para usted — con OnePage.'
+    });
+    var SERVICES_LABELS = {
+        en: {title:'AI Agency Services for Small Business — One World Labs',logo:'One World Labs — AI Solutions for Small Businesses',primary:'Primary',language:'Language',theme:'Toggle theme',open:'Open menu',close:'Close menu',vaiaClose:'Close VAIA',vaiaTalk:'Tap to talk to VAIA',vaiaType:'Type to VAIA (or just talk to her)…'},
+        co: {title:'Servicios de agencia de IA para pequeños negocios — One World Labs',logo:'One World Labs — Soluciones de IA para pequeños negocios',primary:'Navegación principal',language:'Idioma',theme:'Cambiar tema',open:'Abrir menú',close:'Cerrar menú',vaiaClose:'Cerrar VAIA',vaiaTalk:'Toque para hablar con VAIA',vaiaType:'Escriba a VAIA (o hable con ella)…'}
+    };
+    function applyServicesLabels(lang){
+        var labels=SERVICES_LABELS[lang] || SERVICES_LABELS.en;
+        document.title=labels.title;
+        [['header nav','primary'],['#lang-btn','language'],['#theme-toggle','theme'],['#menu-close-x','close'],['#vaia-close','vaiaClose'],['#vaia-orb','vaiaTalk']].forEach(function(entry){
+            var el=document.querySelector(entry[0]);if(el)el.setAttribute('aria-label',labels[entry[1]]);
+        });
+        document.querySelector('header .services-brand').setAttribute('aria-label',labels.logo);
+        document.getElementById('vaia-text').setAttribute('placeholder',labels.vaiaType);
+        document.getElementById('menu-btn').setAttribute('aria-label',labels[document.getElementById('menu-overlay').classList.contains('show')?'close':'open']);
+    }
     function applyLang(lang){
+        applyServicesLabels(lang);
         document.querySelectorAll('[data-i18n]').forEach(function(el){
             var key = el.getAttribute('data-i18n');
             if (!el.hasAttribute('data-i18n-en')) el.setAttribute('data-i18n-en', el.textContent);
