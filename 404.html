@@ -740,7 +740,7 @@
          "Sign in with One ID" row when signed out, or an identity row + red Sign Out row when
          signed in (previously always showed "Sign in" regardless of session — no way to sign out
          from here at all). -->
-    <div id="menu-overlay" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
+    <div id="menu-overlay" inert aria-hidden="true" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
         <div class="menu-panel absolute right-3 top-[74px] flex max-h-[calc(100vh-90px)] w-[300px] max-w-[88vw] flex-col overflow-y-auto rounded-3xl border shadow-2xl p-4 sm:p-5">
 
             <!-- identity row: One World Labs mark when signed out, avatar + name when signed in -->
@@ -1394,10 +1394,24 @@
     function setMenu(open){
         document.documentElement.classList.toggle('ow-menu-open', open);
         overlay.classList.toggle('show', open);
+        if (!open) menuBtn.focus();
+        overlay.inert = !open;
+        overlay.setAttribute('aria-hidden', String(!open));
+        menuBtn.setAttribute('aria-expanded', String(open));
+        if (open) overlay.querySelector('button, a').focus();
         iconMenu.classList.toggle('hidden', open);
         iconX.classList.toggle('hidden', !open);
         menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     }
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-controls', 'menu-overlay');
+    overlay.addEventListener('keydown', function(e){
+        if(e.key!=='Tab') return;
+        var items=Array.from(overlay.querySelectorAll('a,button')).filter(function(el){return el.getClientRects().length && !el.disabled;});
+        var first=items[0],last=items[items.length-1];
+        if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+    });
     menuBtn.addEventListener('click', function(){ setMenu(!overlay.classList.contains('show')); });
     overlay.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
     overlay.addEventListener('click', function(e){ if (e.target === overlay) setMenu(false); });
