@@ -667,6 +667,12 @@
     @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.frost{background:#F0F3FA;}.dark .frost{background:#182237;}}
     /* Keep support outside the modal menu; restore the same widget on close. */
     html.ow-menu-open chat-widget{display:none!important;}
+    .services-brand{width:184px;max-width:calc(100vw - 154px);flex-shrink:0;gap:0;}
+    .services-brand-mark{width:38px;height:48px;object-fit:contain;flex-shrink:0;}
+    .services-brand-copy{min-width:0;}
+    .services-brand .wm-name{font-size:25px;}
+    .services-brand .wm-tag{font-size:6px;line-height:1.25;white-space:normal;overflow-wrap:anywhere;letter-spacing:.1em;}
+    @media(max-width:380px){.services-brand-mark{width:30px;height:42px;}.services-brand .wm-name{font-size:22px;}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- One World session bridge — keeps this origin's session in step with the
@@ -856,9 +862,9 @@
             <!-- the OneWorld lockup: transparent multicolor mark = the "O", text is live HTML so it
                  stays crisp at any resolution and follows the theme (matches the SMALL BUSINESS
                  SOLUTIONS lockup in GHL/_BRAND-ASSETS/OneWorld_multicolor-mark) -->
-            <a href="/" class="relative z-10 transition-opacity hover:opacity-80 flex items-center">
-                <img src="/lockup-long-light.png" alt="One World Labs — AI Solutions for Small Businesses" data-public-alt-source="One World Labs — AI Solutions for Small Businesses" data-public-alt-co="One World Labs — Soluciones de IA para pequeños negocios" class="ow-lockup ow-lockup-light">
-                <img src="/lockup-long-dark.png" alt="One World Labs — AI Solutions for Small Businesses" data-public-alt-source="One World Labs — AI Solutions for Small Businesses" data-public-alt-co="One World Labs — Soluciones de IA para pequeños negocios" class="ow-lockup ow-lockup-dark">
+            <a href="/" class="services-brand relative z-10 transition-opacity hover:opacity-80 flex items-center" aria-label="One World Labs — AI Solutions for Small Businesses" data-public-aria-co="One World Labs — Soluciones de IA para pequeños negocios">
+                <img src="/mark-oneworld.png" alt="" class="services-brand-mark">
+                <span class="services-brand-copy" aria-hidden="true"><span class="wm-name"><span class="wm-ne">ne</span><span class="wm-world">World</span></span><span class="wm-tag" data-i18n="owl_wm_tag">SMALL BUSINESS SOLUTIONS</span></span>
             </a>
             <nav class="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2" aria-label="Primary" data-public-aria-co="Navegación principal">
                 <a href="/" class="px-4 py-2 rounded-full text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors" data-i18n="owl_nav_home">Home</a>
@@ -989,7 +995,7 @@
                 </div>
                 <div id="vaia-log" class="vaia-log"></div>
                 <div class="vaia-controls">
-                    <input id="vaia-text" class="vaia-textin" type="text" placeholder="Type to VAIA (or just talk to her)…">
+                    <input id="vaia-text" class="vaia-textin" type="text" placeholder="Type to VAIA (or just talk to her)…" data-home-placeholder-co="Escribe a VAIA (o habla con ella)…">
                 </div>
             </div>
         </div>
@@ -1367,7 +1373,7 @@
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
                 <a href="/blog/get-more-five-star-reviews/" class="post-card frost rounded-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-                    <img src="/blog/img/reviews.jpg" alt="Small business owner celebrating positive customer feedback" data-public-alt-source="Small business owner celebrating positive customer feedback" loading="lazy">
+                    <img src="/blog/img/reviews.jpg" alt="Small business owner celebrating positive customer feedback" data-public-alt-co="Dueño de un pequeño negocio celebrando comentarios positivos de sus clientes" data-public-alt-source="Small business owner celebrating positive customer feedback" loading="lazy">
                     <div class="p-5 md:p-6 flex flex-col flex-grow">
                         <h3 class="font-bold text-base md:text-lg leading-snug mb-2" data-i18n="public_blog1_title">How to Get More Five-Star Reviews for Your Small Business</h3>
                         <p class="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow" data-i18n="public_blog1_desc">When to ask, how to ask, and how to turn scattered reviews into one visible credibility number.</p>
@@ -1375,7 +1381,7 @@
                     </div>
                 </a>
                 <a href="/blog/ai-answering-service-small-business/" class="post-card frost rounded-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-                    <img src="/blog/img/ai-answering.jpg" alt="Laptop showing an AI assistant dashboard" data-public-alt-source="Laptop showing an AI assistant dashboard" loading="lazy">
+                    <img src="/blog/img/ai-answering.jpg" alt="Laptop showing an AI assistant dashboard" data-public-alt-co="Computador portátil con el panel de un asistente de IA" data-public-alt-source="Laptop showing an AI assistant dashboard" loading="lazy">
                     <div class="p-5 md:p-6 flex flex-col flex-grow">
                         <h3 class="font-bold text-base md:text-lg leading-snug mb-2" data-i18n="public_blog2_title">AI Answering Services: How to Never Miss Another Call</h3>
                         <p class="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow" data-i18n="public_blog2_desc">What an AI receptionist actually does, and how it compares to voicemail and human answering services.</p>
@@ -1383,7 +1389,7 @@
                     </div>
                 </a>
                 <a href="/blog/what-is-onescore/" class="post-card frost rounded-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-                    <img src="/blog/img/onescore.jpg" alt="Professional checking a credibility score on a phone" data-public-alt-source="Professional checking a credibility score on a phone" loading="lazy">
+                    <img src="/blog/img/onescore.jpg" alt="Professional checking a credibility score on a phone" data-public-alt-co="Profesional consultando una puntuación de credibilidad en su celular" data-public-alt-source="Professional checking a credibility score on a phone" loading="lazy">
                     <div class="p-5 md:p-6 flex flex-col flex-grow">
                         <h3 class="font-bold text-base md:text-lg leading-snug mb-2" data-i18n="public_blog3_title">What Is a OneScore? The Credibility Number That Gets You Hired</h3>
                         <p class="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow" data-i18n="public_blog3_desc">One portable, verified reputation number — how it works and why it wins clients.</p>
@@ -1457,7 +1463,7 @@
                     <div class="grid sm:grid-cols-2 gap-4">
                         <label class="block">
                             <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground" data-i18n="public_contact_name">Name</span>
-                            <input name="name" autocomplete="name" required class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="Your name" data-public-placeholder-source="Your name">
+                            <input name="name" autocomplete="name" required class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="Your name" data-home-placeholder-co="Tu nombre" data-public-placeholder-source="Your name">
                         </label>
                         <label class="block">
                             <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground" data-i18n="public_contact_email">Email</span>
@@ -1467,7 +1473,7 @@
                     <div class="grid sm:grid-cols-2 gap-4">
                         <label class="block">
                             <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground" data-i18n="public_contact_phone">Phone</span>
-                            <input name="phone" type="tel" autocomplete="tel" class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="Optional" data-public-placeholder-source="Optional">
+                            <input name="phone" type="tel" autocomplete="tel" class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="Optional" data-home-placeholder-co="Opcional" data-public-placeholder-source="Optional">
                         </label>
                         <label class="block">
                             <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground" data-i18n="public_contact_topic">What do you need?</span>
@@ -1484,7 +1490,7 @@
                     </div>
                     <label class="block">
                         <span class="mb-2 block text-xs font-bold uppercase tracking-[.16em] text-muted-foreground" data-i18n="public_contact_message">Message</span>
-                        <textarea name="message" rows="5" required class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="A few details help us route this quickly." data-public-placeholder-source="A few details help us route this quickly."></textarea>
+                        <textarea name="message" rows="5" required class="w-full rounded-2xl border border-border/70 bg-card/70 px-4 py-3 text-foreground outline-none transition focus:border-primary/60" placeholder="A few details help us route this quickly." data-home-placeholder-co="Cuéntanos algunos detalles para dirigir tu solicitud rápidamente." data-public-placeholder-source="A few details help us route this quickly."></textarea>
                     </label>
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <p class="text-xs text-muted-foreground max-w-md" data-i18n="public_contact_note">Submitting opens your email app with the details filled in. For urgent help, call the front desk.</p>
@@ -1997,6 +2003,7 @@
     Object.assign(I18N.co, {"public_blog2_title":"Atención telefónica con IA: cómo no perder ninguna llamada","public_blog2_desc":"Qué hace realmente una recepcionista de IA y cómo se compara con el buzón de voz y la atención telefónica humana.","blog_soon":"Nuevas guías publicadas regularmente."});
     I18N.es.blog_soon = "Nuevas guías publicadas regularmente.";
     /* End AI article preview and frequency */
+    Object.assign(I18N.co, {"public_contact_eyebrow":"Contacta a One World Labs","public_contact_title":"¿Necesitas ayuda para elegir la app o el servicio adecuado?","public_contact_desc":"Cuéntanos qué quieres crear, automatizar, vender o resolver. Tu mensaje llega a soporte, y las llamadas urgentes se atienden a través de nuestra línea de recepción.","public_contact_email":"Correo electrónico","public_contact_call":"Llamar","public_contact_name":"Nombre","public_contact_phone":"Teléfono","public_contact_topic":"¿Qué necesitas?","public_contact_opt_voice":"Atención telefónica con OneVoice","public_contact_opt_page":"Mejorar mi sitio web con OnePage","public_contact_opt_app":"App móvil con OneApp","public_contact_opt_event":"Boletas y eventos con OneEvent","public_contact_opt_home":"Arriendos o ventas con OneHome","public_contact_opt_social":"OneJob, OneScore o OneSocial","public_contact_opt_other":"Otra cosa","public_contact_message":"Mensaje","public_contact_note":"Al enviar, se abre tu aplicación de correo con los datos ya incluidos. Para ayuda urgente, llama a recepción.","public_contact_send":"Enviar","oneapp_new_desc":"Diseñamos gratis una app móvil propia para tu negocio y luego la publicamos en Apple App Store y Google Play por un pago único de $499. Las cuentas de las tiendas quedan a tu nombre, así que la app es tuya de forma permanente."});
     var publicEnglishTitle = document.title;
     function applyPublicLabels(lang){
         document.title = lang==='co' ? "One World Labs — Agencia de IA y plataforma de apps para pequeños negocios" : publicEnglishTitle;
@@ -2005,16 +2012,31 @@
             el.setAttribute('aria-label',lang==='co'?el.getAttribute('data-public-aria-co'):el.getAttribute('data-public-aria-en'));
         });
         document.querySelectorAll('[data-public-alt-co]').forEach(function(el){
-            if(!el.hasAttribute('data-public-alt-en')) el.setAttribute('data-public-alt-en',el.getAttribute('alt'));
+            if(!el.hasAttribute('data-public-alt-en')) el.setAttribute('data-public-alt-en',el.getAttribute('data-public-alt-source')||el.getAttribute('alt'));
             el.setAttribute('alt',lang==='co'?el.getAttribute('data-public-alt-co'):el.getAttribute('data-public-alt-en'));
         });
+        document.querySelectorAll('[data-home-placeholder-co]').forEach(function(el){
+            if(!el.hasAttribute('data-home-placeholder-en'))el.setAttribute('data-home-placeholder-en',el.getAttribute('data-public-placeholder-source')||el.getAttribute('placeholder'));
+            el.setAttribute('placeholder',el.getAttribute(lang==='co'?'data-home-placeholder-co':'data-home-placeholder-en'));
+        });
+        document.querySelectorAll('[data-contact-form] input,[data-contact-form] textarea').forEach(function(el){el.setCustomValidity('');});
         var trigger=document.getElementById('menu-btn'), drawer=document.getElementById('menu-overlay');
         trigger.setAttribute('aria-label',lang==='co'?(drawer.classList.contains('show')?'Cerrar menú':'Abrir menú'):(drawer.classList.contains('show')?'Close menu':'Open menu'));
     }
+    document.querySelectorAll('[data-contact-form] input,[data-contact-form] textarea').forEach(function(el){
+        el.addEventListener('input',function(){el.setCustomValidity('');});
+        el.addEventListener('invalid',function(){
+            el.setCustomValidity('');
+            if(window.OWL_LANG!=='co')return;
+            if(el.validity.valueMissing)el.setCustomValidity('Completa este campo.');
+            else if(el.validity.typeMismatch&&el.type==='email')el.setCustomValidity('Ingresa un correo electrónico válido.');
+        });
+    });
     I18N.co.platform_eyebrow="Plataforma One World";
     function applyLang(lang){
         applyPublicLabels(lang);
         if(window.OWL_APPLY_PUBLIC_LOCALE) window.OWL_APPLY_PUBLIC_LOCALE(lang,false);
+        if(lang==='co')document.querySelectorAll('[data-home-placeholder-co]').forEach(function(el){el.setAttribute('placeholder',el.getAttribute('data-home-placeholder-co'));});
         var cardCopy = CARD_I18N[lang] || CARD_I18N.en;
         document.querySelectorAll('[data-app-action]').forEach(function(el){
             var label=(el.dataset.appAction==='open'?cardCopy.card_open:cardCopy.card_learn)+' '+el.dataset.appName;
