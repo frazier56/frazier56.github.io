@@ -471,6 +471,7 @@
         .svc-row{padding:14px 10px;}
         .svc-row .svc-desc{font-size:12.5px;}
     }
+    .flagship-row > a[id]{scroll-margin-top:6rem}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- One World session bridge — keeps this origin's session in step with the
@@ -807,21 +808,21 @@
         <!-- flagship trio -->
         <section class="container mx-auto px-4 max-w-6xl mb-14 md:mb-20">
             <div class="flagship-row mb-3 md:mb-0">
-                <a href="https://onevoice.oneworldlabs.ai/" class="frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#2E6BE6;--hd:#1D4ED8;--hl:#93B4F8">
+                <a id="onevoice" href="https://onevoice.oneworldlabs.ai/" class="frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#2E6BE6;--hd:#1D4ED8;--hl:#93B4F8">
                     <div class="hue-tile w-14 h-14 mb-5 p-2"><img src="/ic-onevoice.png" alt="" class="w-full h-full object-contain"></div>
                     <h2 class="text-xl font-bold mb-1"><span class="text-primary">One</span>Voice</h2>
                     <div class="text-[11px] font-bold tracking-widest uppercase hue-text mb-3" data-i18n="svc01_h">AI answering, scheduling &amp; booking</div>
                     <p class="text-muted-foreground text-sm leading-relaxed mb-5 flex-grow" data-i18n="onevoice_desc">An AI receptionist that answers every call 24/7, qualifies the lead, and books the appointment — so a missed call is never a missed customer. We set it up and run it for you.</p>
                     <div class="inline-flex items-center font-semibold hue-text text-sm"><span data-i18n="onevoice_cta">Get OneVoice</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
                 </a>
-                <a href="https://onepage.oneworldlabs.ai/" class="frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#D6338B;--hd:#A3126A;--hl:#F49BC9">
+                <a id="onepage" href="https://onepage.oneworldlabs.ai/" class="frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#D6338B;--hd:#A3126A;--hl:#F49BC9">
                     <div class="hue-tile w-14 h-14 mb-5 p-2"><img src="/ic-onepage.png" alt="" class="w-full h-full object-contain"></div>
                     <h2 class="text-xl font-bold mb-1"><span class="text-primary">One</span>Page</h2>
                     <div class="text-[11px] font-bold tracking-widest uppercase hue-text mb-3" data-i18n="svc02_h">AI websites, built &amp; managed</div>
                     <p class="text-muted-foreground text-sm leading-relaxed mb-5 flex-grow" data-i18n="oneapp_desc">We build your website with AI, then handle the hosting, domain, email, and ongoing updates for you — a real web presence without the hassle.</p>
                     <div class="inline-flex items-center font-semibold hue-text text-sm"><span data-i18n="oneapp_cta">Get OnePage</span> <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
                 </a>
-                <a href="https://oneapp.oneworldlabs.ai/" class="frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8E2F6B;--hd:#7A2159;--hl:#E29CC7">
+                <a id="oneapp" href="https://oneapp.oneworldlabs.ai/" class="frost hue-top rounded-3xl p-6 md:p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1" style="--hb:#8E2F6B;--hd:#7A2159;--hl:#E29CC7">
                     <div class="hue-tile w-14 h-14 mb-5 p-2"><img src="/ic-oneapp.png" alt="" class="w-full h-full object-contain"></div>
                     <h2 class="text-xl font-bold mb-1"><span class="text-primary">One</span>App</h2>
                     <div class="text-[11px] font-bold tracking-widest uppercase hue-text mb-3" data-i18n="svc03_h">Your own mobile app</div>
@@ -1392,13 +1393,15 @@
                 try { localStorage.setItem('owl-lang', lang); } catch(e){}
             });
         });
-        try {
-            var saved = localStorage.getItem('owl-lang');
-            if (saved && I18N_META[saved]) {
-                var btn = langMenu.querySelector('button[data-lang="' + saved + '"]');
-                if (btn) btn.click();
-            }
-        } catch(e){}
+        // Explicit allowlisted locale wins over this origin's saved preference.
+        var supportedLocales = ['en','co','es','de','ru','zh','pt'];
+        var requestedLocale = new URLSearchParams(window.location.search).get('owl_lang');
+        var initialLocale = supportedLocales.indexOf(requestedLocale) !== -1 ? requestedLocale : null;
+        if (!initialLocale) {
+            try { var saved = localStorage.getItem('owl-lang'); if (supportedLocales.indexOf(saved) !== -1) initialLocale = saved; } catch(e){}
+        }
+        var initialButton = langMenu.querySelector('button[data-lang="' + (initialLocale || 'en') + '"]');
+        if (initialButton) initialButton.click();
     }
 
     /* ---------- FAQ accordion (single-open) ---------- */
