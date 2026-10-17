@@ -270,6 +270,17 @@
   var acctOut = document.getElementById('ow-acct-out');
   var acctBtn = document.getElementById('ow-acct-btn');
   var acctMenu = document.getElementById('ow-acct-menu');
+  /* Tester badge: a browser that switched a feature flag with ?ow_flags= sees which ones, with a one-tap reset. The public never sees it. */
+  (function () {
+    var o = window.OW_FLAG_OVERRIDES || {}, keys = Object.keys(o);
+    if (!keys.length) return;
+    var b = document.createElement('a');
+    b.id = 'ow-flag-badge';
+    b.href = location.pathname + '?ow_flags=reset';
+    b.textContent = 'TEST · ' + keys.map(function (k) { return (o[k] ? '' : 'no ') + k; }).join(', ') + ' · \u2715';
+    b.setAttribute('aria-label', 'Test mode for features: ' + keys.join(', ') + '. Tap to return to the public view.');
+    document.body.appendChild(b);
+  })();
   /* Tell the page (VAIA) that the sign-in state may have changed: this-tab sign-out, other tabs, shared cookie. */
   function announceSession() { try { document.dispatchEvent(new CustomEvent('ow:session')); } catch (e) {} }
   function renderAccount() {

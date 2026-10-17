@@ -177,10 +177,24 @@
                         if (finished || g !== gen) return finish();
                         var ct = r.headers.get('content-type') || '';
                         var len = parseInt(r.headers.get('content-length') || '0', 10) || 0;
-                        if (ct.indexOf('audio') === -1 || len > MAX_TTS_BYTES) return fallback();
-                        return r.blob().then(function(blob){
+                        if (ct.indexOf('audio') === -1 || len > MAX_TTS_BYTES || !r.body) return fallback();
+                        /* stream the audio with a running byte count: stop reading (and cancel) the moment it passes 5 MB,
+                           so memory held for one line of speech never exceeds the cap */
+                        var rd = r.body.getReader(), chunks = [], total = 0;
+                        var pump = function(){
+                            return rd.read().then(function(res){
+                                if (finished || g !== gen) { try { rd.cancel(); } catch(e){} return null; }
+                                if (res.done) return new Blob(chunks, { type: ct.split(';')[0] });
+                                var v = res.value || new Uint8Array(0);
+                                total += v.byteLength;
+                                if (total > MAX_TTS_BYTES) { try { rd.cancel(); } catch(e){} chunks = []; return 'too-big'; }
+                                chunks.push(v);
+                                return pump();
+                            });
+                        };
+                        return pump().then(function(blob){
                             if (finished || g !== gen) return finish();
-                            if (!blob || blob.size > MAX_TTS_BYTES) return fallback();
+                            if (!blob || blob === 'too-big') return fallback();
                             url = URL.createObjectURL(blob);
                             audio = new Audio(url);
                             currentAudio = audio;
@@ -403,10 +417,12 @@
                             settle(lim ? 'limit' : 'error');
                         };
                         var readErr = function(){
+                            if (settled) return;
+                            if (reads >= 64) return errDone();   /* ceiling checked BEFORE the next read: at most 64 reads */
+                            reads++;
                             return reader.read().then(function(res){
                                 if (settled) return;
                                 if (res.done) return errDone();
-                                if (++reads > 64) return errDone();
                                 var v = res.value || new Uint8Array(0), room = 4096 - took;
                                 if (v.byteLength) { var part = v.subarray(0, Math.min(room, v.byteLength)); parts.push(part); took += part.byteLength; }
                                 if (took >= 4096) return errDone();

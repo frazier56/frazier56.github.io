@@ -156,6 +156,7 @@ html:not([lang="en"]) :is(h1,h2,h3,h4){overflow-wrap:anywhere}
 html:not([lang="en"]) main :is(p,li){overflow-wrap:break-word}
 /* Chinese headings: break only between phrases, never inside a word like 日常生活 */
 html[lang="zh-CN"] :is(h1,h2,h3){word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+#ow-flag-badge{position:fixed;left:12px;bottom:12px;z-index:90;background:#111827;color:#fff;font:700 11px/1 Inter,system-ui,sans-serif;letter-spacing:.04em;padding:8px 11px;border-radius:999px;text-decoration:none;box-shadow:0 6px 18px #0004}
 
 /* ---- VAIA (PUB30, 17 Oct 2026): restored from the previous homepage; placed per Lee ---- */
 #vaia-widget{--color-border:#332a491f;--color-secondary:#f4f1fa;--color-fg:#332a49;--color-bg:#fff;--color-card:#fff;
@@ -203,8 +204,11 @@ html[lang="zh-CN"] :is(h1,h2,h3){word-break:keep-all;overflow-wrap:anywhere;line
 @media(prefers-reduced-motion:reduce){.vaia-orb,.vaia-ring,.vaia-bars span,.vaia-think,.vaia-listen{animation:none!important}}
 /* keep translated hero lines from running under VAIA on phones (English already clears her) */
 /* Phones: keep the first headline line clear of VAIA (UI r6: 120 px, right 16 px), every language */
-@media(max-width:899px){.hero h1::before{content:"";float:right;width:86px;height:50px}}
-@media(max-width:360px){.hero h1::before{width:80px}}
+@media(max-width:899px){html.ow-f-vaia .hero h1::before{content:"";float:right;width:86px;height:50px}}
+@media(max-width:360px){html.ow-f-vaia .hero h1::before{width:80px}}
+
+/* feature flag vaia (Lee 17 Oct): with the flag off — or if the flag file failed to load — she is not on the page at all */
+html:not(.ow-f-vaia) #vaia-widget{display:none!important}
 #vaia-widget .vaia-orb.vaia-living-ready{width:104px;height:104px;background:transparent;border:0;box-shadow:none;animation:none;opacity:1;overflow:visible}
 #vaia-widget .vaia-living-ready>*:not(.vaia-living-canvas):not(.vaia-living-name){display:none!important}
 #vaia-widget .vaia-living-ready::after{display:none}
