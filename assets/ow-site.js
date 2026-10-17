@@ -33,7 +33,7 @@
   var UI_EN = {
     'ui.signin': 'Sign in', 'ui.signin_long': 'Sign in with One ID', 'ui.open': 'Open my apps',
     'ui.signout': 'Sign out', 'ui.hi': 'Hi, {name}', 'ui.signed_in': 'Signed in', 'ui.lang': 'Language and country',
-    'ui.account': 'Your One ID', 'ui.signout_local': 'Signed out on this device. We could not reach One ID to sign you out everywhere — try again when you are online.', 'ui.required': 'Please fill in this field.', 'ui.email_bad': 'Enter a valid email address.'
+    'ui.account': 'Your One ID', 'ui.signout_local': 'Signed out on this device. We could not confirm the sign-out on your other devices.', 'ui.required': 'Please fill in this field.', 'ui.email_bad': 'Enter a valid email address.'
   };
 
   function find(k) { for (var i = 0; i < LANGS.length; i++) if (LANGS[i].k === k) return LANGS[i]; return null; }
@@ -202,15 +202,33 @@
   var SB_URL = 'https://wseblryyqxawvbjmylbo.supabase.co';
   var SB_ANON = 'sb_publishable_hO1MOsFr6lk0XDC6gizF8g_WfBZ68Tc';
   var KEY = 'sb-wseblryyqxawvbjmylbo-auth-token';
-  function session() {
+  /* Shown as signed in ONLY for a well-formed, unexpired session. Both copies are read (this
+     page's storage and the shared parent-domain cookie the app writes) and the fresher one wins;
+     nothing is written back here. An expired or unknown session shows "Sign in" — opening the
+     app refreshes it. Display only: this is never used to authorise anything. */
+  function shape(raw) {
     try {
-      var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+      var s = JSON.parse(raw || 'null');
       if (s && s.currentSession) s = s.currentSession;
-      if (!s || typeof s.access_token !== 'string' || typeof s.refresh_token !== 'string') return null;
-      if (!s.user || typeof s.user.id !== 'string') return null;
-      if (s.expires_at != null && typeof s.expires_at !== 'number') return null;
+      if (!s || typeof s.access_token !== 'string' || !s.access_token || typeof s.refresh_token !== 'string' || !s.refresh_token) return null;
+      if (!s.user || typeof s.user.id !== 'string' || !s.user.id) return null;
+      if (typeof s.expires_at !== 'number' || !isFinite(s.expires_at)) return null;
       return s;
     } catch (e) { return null; }
+  }
+  function cookieRaw() {
+    try {
+      var jar = {}; document.cookie.split('; ').forEach(function (p) { var i = p.indexOf('='); if (i > 0) jar[decodeURIComponent(p.slice(0, i))] = decodeURIComponent(p.slice(i + 1)); });
+      if (jar[KEY] != null) return jar[KEY];
+      var out = ''; for (var n = 0; n < 24 && jar[KEY + '.' + n] != null; n++) out += jar[KEY + '.' + n];
+      return out || null;
+    } catch (e) { return null; }
+  }
+  function session() {
+    var a = null, b = shape(cookieRaw());
+    try { a = shape(localStorage.getItem(KEY)); } catch (e) {}
+    var s = a && b ? (b.expires_at > a.expires_at ? b : a) : (a || b);
+    return s && s.expires_at * 1000 > Date.now() ? s : null;
   }
   function displayName(u) {
     var m = (u && u.user_metadata) || {};
@@ -271,14 +289,20 @@
       renderAccount();
       if (!everywhere) notice(ui('ui.signout_local'));
     };
-    if (!s) return finish(true);
+    if (!s) return finish(true);   /* nothing to revoke here; no claim is made */
+    /* Exactly one outcome: the first of server answer / network error / 6 s deadline wins; a late
+       answer is ignored. Only a 2xx counts as confirmed everywhere — anything else, including
+       401, is reported as this-device-only. */
+    var settled = false;
+    var once = function (everywhere) { if (settled) return; settled = true; clearTimeout(timer); finish(everywhere); };
     var ctl = typeof AbortController === 'function' ? new AbortController() : null;
-    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 6000);
-    fetch(SB_URL + '/auth/v1/logout?scope=global', {
-      method: 'POST', signal: ctl ? ctl.signal : undefined,
-      headers: { apikey: SB_ANON, Authorization: 'Bearer ' + s.access_token }
-    }).then(function (r) { clearTimeout(timer); finish(r.ok || r.status === 401); },
-            function () { clearTimeout(timer); finish(false); });
+    var timer = setTimeout(function () { if (ctl) { try { ctl.abort(); } catch (e) {} } once(false); }, 6000);
+    try {
+      fetch(SB_URL + '/auth/v1/logout?scope=global', {
+        method: 'POST', signal: ctl ? ctl.signal : undefined,
+        headers: { apikey: SB_ANON, Authorization: 'Bearer ' + s.access_token }
+      }).then(function (r) { once(!!(r && r.ok)); }, function () { once(false); });
+    } catch (e) { once(false); }
   }
   wireMenu(acctBtn, acctMenu);
   if (acctMenu) acctMenu.querySelector('.ow-signout').addEventListener('click', function () { closeMenus(); signOut(); });
