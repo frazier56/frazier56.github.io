@@ -150,6 +150,12 @@ html.ow-i18n-pending body{opacity:0;animation:owShow 0s 1.4s forwards}
 @media(max-width:420px){.wordmark{font-size:clamp(28px,10vw,45px);padding:70px 10px;min-width:0}}
 #ow-notice{position:fixed;left:16px;right:16px;bottom:16px;max-width:480px;margin:auto;background:#332a49;color:#fff;border-radius:14px;padding:12px 16px;font-size:14px;line-height:1.35;z-index:80;box-shadow:0 12px 30px #0003}
 #ow-notice[hidden]{display:none}
+/* Longer words in other languages (Russian, German, Portuguese…) must never push a phone screen sideways */
+html:not([lang="en"]) :is(h1,h2,h3,h4,p,li,a,span,strong,label){hyphens:auto;-webkit-hyphens:auto}
+html:not([lang="en"]) :is(h1,h2,h3,h4){overflow-wrap:anywhere}
+html:not([lang="en"]) main :is(p,li){overflow-wrap:break-word}
+/* Chinese headings: break only between phrases, never inside a word like 日常生活 */
+html[lang="zh-CN"] :is(h1,h2,h3){word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
 
 /* ---- VAIA (PUB30, 17 Oct 2026): restored from the previous homepage; placed per Lee ---- */
 #vaia-widget{--color-border:#332a491f;--color-secondary:#f4f1fa;--color-fg:#332a49;--color-bg:#fff;--color-card:#fff;
@@ -195,3 +201,6 @@ html.ow-i18n-pending body{opacity:0;animation:owShow 0s 1.4s forwards}
 @media(min-width:900px){#vaia-widget{top:auto!important;right:auto;left:24px;bottom:calc(24px + env(safe-area-inset-bottom));flex-direction:column;align-items:flex-start}
   .vaia-orb{width:88px;height:88px}.vaia-bars{transform:scale(1.2)}.vaia-think,.vaia-listen{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.vaia-orb,.vaia-ring,.vaia-bars span,.vaia-think,.vaia-listen{animation:none!important}}
+/* keep translated hero lines from running under VAIA on phones (English already clears her) */
+@media(max-width:899px){html:not([lang="en"]):not([lang="zh-CN"]) .hero h1::before{content:"";float:right;width:74px;height:58px}}
+@media(max-width:360px){html:not([lang="en"]):not([lang="zh-CN"]) .hero h1::before{width:64px}}

@@ -14,11 +14,15 @@
 
   var LANGS = [
     { k: 'en', label: 'USA', short: 'EN', html: 'en', flag: 'us' },
-    { k: 'co', label: 'Colombia', short: 'CO', html: 'es-CO', flag: 'co' }
-    /* LANGS-NEXT: es, de, ru, zh, pt are added here when their JSON lands */
+    { k: 'co', label: 'Colombia', short: 'CO', html: 'es-CO', flag: 'co' },
+    { k: 'es', label: 'España', short: 'ES', html: 'es-ES', flag: 'es' },
+    { k: 'de', label: 'Deutschland', short: 'DE', html: 'de-DE', flag: 'de' },
+    { k: 'ru', label: 'Россия', short: 'RU', html: 'ru-RU', flag: 'ru' },
+    { k: 'zh', label: '中国', short: 'ZH', html: 'zh-CN', flag: 'cn' },
+    { k: 'pt', label: 'Brasil', short: 'PT', html: 'pt-BR', flag: 'br' }
   ];
   /* A saved language this build does not carry yet falls back to its nearest neighbour. */
-  var FALLBACK = { es: 'co' };
+  var FALLBACK = {};
 
   var FLAGS = {
     us: '<svg class="ow-flag" viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#B22234"/><path d="M0 1.6h20M0 4.3h20M0 7h20M0 9.7h20M0 12.4h20" stroke="#fff" stroke-width="1.08"/><rect width="8.6" height="7.5" fill="#3C3B6E"/></svg>',
@@ -114,9 +118,29 @@
     renderLangButton();
     renderAccount();
     if (window.owRelabel) window.owRelabel();
+    fitHeadings();
     document.querySelectorAll('[data-contact-form] input,[data-contact-form] textarea').forEach(function (f) { f.setCustomValidity(''); });
     try { document.dispatchEvent(new CustomEvent('ow:lang', { detail: k })); } catch (e) {}
   }
+  /* A long word (Russian "Повседневная", German compounds) must not be split mid-word in a big
+     heading: shrink that heading just enough for its longest word to fit (never below 72%). */
+  function fitHeadings() {
+    document.querySelectorAll('main h1, main h2, main h3').forEach(function (h) {
+      h.style.fontSize = '';
+      if (current === 'en') return;
+      var base = parseFloat(getComputedStyle(h).fontSize), size = base;
+      /* the space the heading really has: its column, which a long word may already have widened */
+      var left = h.getBoundingClientRect().left, avail = Math.min(h.clientWidth, document.documentElement.clientWidth - 2 * Math.max(left, 0));
+      if (!(avail > 0)) return;
+      h.style.overflowWrap = 'normal'; h.style.hyphens = 'manual'; h.style.width = avail + 'px';
+      while (h.scrollWidth > avail + 1 && size > base * 0.72) { size -= base * 0.04; h.style.fontSize = size + 'px'; }
+      h.style.overflowWrap = ''; h.style.hyphens = ''; h.style.width = '';
+    });
+  }
+  var fitTimer;
+  window.addEventListener('resize', function () { clearTimeout(fitTimer); fitTimer = setTimeout(fitHeadings, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitHeadings(); });
+
   function ui(key) {
     var d = dicts[current];
     return (current !== 'en' && d && d[key]) || UI_EN[key] || key;
