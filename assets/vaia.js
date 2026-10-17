@@ -62,6 +62,19 @@
                   wakeLines:["Ah, cochilei um segundinho, desculpa! Já voltei, como posso ajudar?","Opa, me distraí um instante. Já estou de volta — o que estávamos dizendo?","Desculpa, me desconectei um pouco! De volta, pode continuar.","Foi mal, cochilei rapidinho. Estou aqui — como posso ajudar?"],
                   firstWake:"Ah — você me acordou! Que bom que me encontrou. Eu sou a VAIA, sua assistente One World — como posso ajudar?" }
         };
+        /* PUB30 17 Oct: vaia-chat is a members-only endpoint (gateway JWT + server getUser). A visitor
+           who is not signed in gets an honest invitation to sign in instead of a silent 401. */
+        var VAIA_SIGNIN = {
+            en: "I can answer questions once you're signed in with One ID. Tap Sign in at the top — it takes a few seconds.",
+            co: "Puedo responder tus preguntas cuando inicies sesión con One ID. Toca Ingresar arriba; toma unos segundos.",
+            es: "Puedo responder a tus preguntas en cuanto inicies sesión con One ID. Toca Entrar arriba; tarda unos segundos.",
+            de: "Ich kann deine Fragen beantworten, sobald du mit One ID angemeldet bist. Tippe oben auf Login – das dauert nur ein paar Sekunden.",
+            ru: "Я смогу ответить на твои вопросы, когда ты войдёшь через One ID. Нажми «Войти» вверху — это займёт пару секунд.",
+            zh: "使用 One ID 登录后，我就能回答你的问题。点一下顶部的“登录”，几秒钟就好。",
+            pt: "Posso responder às suas perguntas assim que você entrar com o One ID. Toque em Entrar no topo — leva só alguns segundos."
+        };
+        Object.keys(VAIA_SIGNIN).forEach(function(k){ if (VAIA_STRINGS[k]) VAIA_STRINGS[k].signinNeeded = VAIA_SIGNIN[k]; });
+        var VAIA_KEY = 'sb_publishable_hO1MOsFr6lk0XDC6gizF8g_WfBZ68Tc';
         function vaiaT(key){
             var lang = window.OWL_LANG || 'en';
             var dict = VAIA_STRINGS[lang] || VAIA_STRINGS.en;
@@ -119,6 +132,7 @@
                         return new Promise(function(resolve){
                             var audio = new Audio(URL.createObjectURL(blob));
                             currentAudio = audio;
+                            if (window.vaiaAttachAudio) { try { window.vaiaAttachAudio(audio); } catch (e) {} }
                             pendingResolve = resolve;
                             audio.onended = function(){ currentAudio = null; pendingResolve = null; resolve(); };
                             audio.onerror = function(){ currentAudio = null; pendingResolve = null; resolve(); };
@@ -207,9 +221,18 @@
                 }
             }
 
+            var owSession = (typeof window.OW_SESSION === 'function') ? window.OW_SESSION() : null;
+            if (!owSession) {
+                var ask = vaiaT('signinNeeded');
+                full = ask; replyEl.textContent = ask; history.push({ role:'assistant', content: ask });
+                widget.classList.remove('thinking'); openPanel();
+                voiceMode = false; stopListening();
+                speak(ask).then(function(){ busy = false; });
+                return;
+            }
             abortCtl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
             fetch(SUPABASE_URL + '/functions/v1/vaia-chat', {
-                method:'POST', headers:{'Content-Type':'application/json'},
+                method:'POST', headers:{'Content-Type':'application/json', 'apikey': VAIA_KEY, 'Authorization': 'Bearer ' + owSession.access_token},
                 /* NOTE: intentionally NOT sending mode:'voice' here — that activates a 160-token
                    cap server-side, and gemini-flash-latest/2.5-flash-lite burn a chunk of that
                    budget on hidden reasoning/thought-signature content via the OpenAI-compat
@@ -402,6 +425,7 @@
 
         /* keep VAIA's ears in sync if the visitor switches language mid-session — updates the
            speech-recognition locale for the NEXT listen cycle (can't hot-swap mid-utterance). */
+        document.addEventListener('ow:lang', function(){ if (recog) { try { recog.lang = VAIA_BCP47[window.OWL_LANG || 'en'] || 'en-US'; } catch(e){} } });
         var prevOwlLangChange = window.OWL_ON_LANG_CHANGE;
         window.OWL_ON_LANG_CHANGE = function(){
             if (typeof prevOwlLangChange === 'function') prevOwlLangChange();

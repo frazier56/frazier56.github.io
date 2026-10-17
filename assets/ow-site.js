@@ -133,7 +133,8 @@
       var left = h.getBoundingClientRect().left, avail = Math.min(h.clientWidth, document.documentElement.clientWidth - 2 * Math.max(left, 0));
       if (!(avail > 0)) return;
       h.style.overflowWrap = 'normal'; h.style.hyphens = 'manual'; h.style.width = avail + 'px';
-      while (h.scrollWidth > avail + 1 && size > base * 0.72) { size -= base * 0.04; h.style.fontSize = size + 'px'; }
+      var floor = base * 0.72;
+      while (h.scrollWidth > avail + 1 && size > floor) { size = Math.max(floor, size - base * 0.04); h.style.fontSize = size + 'px'; }
       h.style.overflowWrap = ''; h.style.hyphens = ''; h.style.width = '';
     });
   }
@@ -259,6 +260,7 @@
     var n = m.full_name || m.name || (u && u.email) || '';
     return String(n).split(' ')[0].split('@')[0];
   }
+  window.OW_SESSION = session;   /* VAIA asks for the member's token at question time; never stored elsewhere */
   var acctIn = document.getElementById('ow-acct-in');
   var acctOut = document.getElementById('ow-acct-out');
   var acctBtn = document.getElementById('ow-acct-btn');

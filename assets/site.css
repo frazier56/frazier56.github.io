@@ -204,3 +204,17 @@ html[lang="zh-CN"] :is(h1,h2,h3){word-break:keep-all;overflow-wrap:anywhere;line
 /* keep translated hero lines from running under VAIA on phones (English already clears her) */
 @media(max-width:899px){html:not([lang="en"]):not([lang="zh-CN"]) .hero h1::before{content:"";float:right;width:74px;height:58px}}
 @media(max-width:360px){html:not([lang="en"]):not([lang="zh-CN"]) .hero h1::before{width:64px}}
+#vaia-widget .vaia-orb.vaia-living-ready{width:104px;height:104px;background:transparent;border:0;box-shadow:none;animation:none;opacity:1;overflow:visible}
+#vaia-widget .vaia-living-ready>*:not(.vaia-living-canvas):not(.vaia-living-name){display:none!important}
+#vaia-widget .vaia-living-ready::after{display:none}
+.vaia-living-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.vaia-living-name{position:absolute;inset:0;display:grid;place-items:center;font-size:10px;font-weight:800;letter-spacing:.1em;color:#342b4c;pointer-events:none;text-shadow:0 0 5px #fff}
+html[data-theme="dark"] .vaia-living-name{color:#fff;text-shadow:0 0 5px #142030}
+#vaia-widget.asleep .vaia-living-canvas{opacity:.78}
+#vaia-widget .vaia-living-ready:focus-visible{outline:2px solid #8960ce;outline-offset:2px}
+/* PUB30: living VAIA keeps Lee's phone placement (under the menu, right of the headline) */
+#vaia-widget .vaia-orb.vaia-living-ready{width:72px;height:72px}
+@media(max-width:360px){#vaia-widget .vaia-orb.vaia-living-ready{width:62px;height:62px}}
+@media(min-width:900px){#vaia-widget .vaia-orb.vaia-living-ready{width:104px;height:104px}}
+/* fade the canvas edge into a circle so its soft mist never reads as a square on the page */
+#vaia-widget .vaia-living-canvas{-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 52%,transparent 71%);mask-image:radial-gradient(circle at 50% 50%,#000 52%,transparent 71%)}
