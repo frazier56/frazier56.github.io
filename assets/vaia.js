@@ -74,6 +74,27 @@
             pt: "Posso responder às suas perguntas assim que você entrar com o One ID. Toque em Entrar no topo — leva só alguns segundos."
         };
         Object.keys(VAIA_SIGNIN).forEach(function(k){ if (VAIA_STRINGS[k]) VAIA_STRINGS[k].signinNeeded = VAIA_SIGNIN[k]; });
+        /* PUB30 17 Oct (Max security review of candidate 6): the visitor only ever sees these controlled lines,
+           never raw server error text. */
+        var VAIA_LIMIT = {
+            en: "I've answered a lot of questions in a short time. Let's pause for a minute, then ask me again.",
+            co: "He respondido muchas preguntas en poco tiempo. Hagamos una pausa de un minuto y vuelve a preguntarme.",
+            es: "He respondido muchas preguntas en poco tiempo. Hagamos una pausa de un minuto y vuelve a preguntarme.",
+            de: "Ich habe in kurzer Zeit viele Fragen beantwortet. Lass uns eine Minute Pause machen, dann frag mich wieder.",
+            ru: "За короткое время я ответила на много вопросов. Давай сделаем минутную паузу, а потом спроси снова.",
+            zh: "我在短时间内回答了很多问题。我们先休息一分钟，然后再问我吧。",
+            pt: "Respondi muitas perguntas em pouco tempo. Vamos fazer uma pausa de um minuto e depois me pergunte de novo."
+        };
+        var VAIA_REAUTH = {
+            en: "Your sign-in has expired. Tap Sign in at the top, then ask me again.",
+            co: "Tu sesión expiró. Toca Ingresar arriba y vuelve a preguntarme.",
+            es: "Tu sesión ha caducado. Toca Entrar arriba y vuelve a preguntarme.",
+            de: "Deine Anmeldung ist abgelaufen. Tippe oben auf Login und frag mich dann noch einmal.",
+            ru: "Срок входа истёк. Нажми «Войти» вверху и спроси меня снова.",
+            zh: "你的登录已过期。点一下顶部的“登录”，然后再问我。",
+            pt: "Sua sessão expirou. Toque em Entrar no topo e me pergunte de novo."
+        };
+        Object.keys(VAIA_LIMIT).forEach(function(k){ if (VAIA_STRINGS[k]) { VAIA_STRINGS[k].limitLine = VAIA_LIMIT[k]; VAIA_STRINGS[k].reauthLine = VAIA_REAUTH[k]; } });
         var VAIA_KEY = 'sb_publishable_hO1MOsFr6lk0XDC6gizF8g_WfBZ68Tc';
         function vaiaT(key){
             var lang = window.OWL_LANG || 'en';
@@ -88,7 +109,7 @@
         var log = document.getElementById('vaia-log');
         var textIn = document.getElementById('vaia-text');
         var history = [];
-        var busy = false, voiceMode = false, asleep = false, everSlept = false, currentAudio = null, pendingResolve = null, abortCtl = null;
+        var busy = false, voiceMode = false, asleep = false, everSlept = false, currentAudio = null, pendingResolve = null;
         /* tracks consecutive listen cycles that ended with nothing heard, so she can announce
            "going to rest" after real silence instead of either looping forever or going mute
            with no explanation (the "5th state" — neither listening, thinking, speaking, nor asleep) */
@@ -119,7 +140,9 @@
         }
 
         /* one voice path for EVERY utterance (greeting included) so she never switches voices mid-conversation */
+        var gen = 0;  /* bumped on every identity change / reset: anything started under an older value is discarded */
         function speak(text){
+            var g = gen;
             widget.classList.add('speaking');
             var spoken = phoneticize(text);
             return fetch(SUPABASE_URL + '/functions/v1/elevenlabs-tts', {
@@ -127,8 +150,10 @@
                 body: JSON.stringify({ text: spoken, voiceId: VAIA_VOICE_ID })
             }).then(function(r){
                 var ct = r.headers.get('content-type') || '';
+                if (g !== gen) return;
                 if (ct.indexOf('audio') !== -1) {
                     return r.blob().then(function(blob){
+                        if (g !== gen) return;
                         return new Promise(function(resolve){
                             var audio = new Audio(URL.createObjectURL(blob));
                             currentAudio = audio;
@@ -141,7 +166,7 @@
                     });
                 }
                 return fallbackSpeak(spoken);
-            }).catch(function(){ return fallbackSpeak(spoken); })
+            }).catch(function(){ if (g === gen) return fallbackSpeak(spoken); })
               .then(function(){ widget.classList.remove('speaking'); });
         }
 
@@ -185,9 +210,39 @@
             return false;
         }
 
+        /* ---- conversation identity (PUB30, hardened 17 Oct after Max's candidate-6 security review) ----
+           A conversation belongs to exactly one identity key: a member's id, or "anon". Any change —
+           sign-out, sign-in, another member, another tab, the shared cookie — bumps `gen`, which
+           cancels the request in flight, stops current and queued speech, and clears the transcript.
+           Every asynchronous step re-checks `gen` before it touches the page, the history or the voice. */
+        var historyOwner = null, authBlockedToken = null, inflight = null;
+        function currentIdentity(){ var s = (typeof window.OW_SESSION === 'function') ? window.OW_SESSION() : null; return (s && s.userId && s.accessToken) ? s : null; }
+        function idKey(s){ return s ? 'm:' + s.userId : 'anon'; }
+        function resetConversation(){
+            gen++;
+            if (inflight) { try { inflight.cancel(); } catch(e){} inflight = null; }
+            stopSpeaking();
+            history.length = 0; while (log.firstChild) log.removeChild(log.firstChild);
+            historyOwner = null; authBlockedToken = null;
+            busy = false;
+            widget.classList.remove('thinking', 'speaking');
+        }
+        function checkIdentity(){ if (historyOwner !== null && historyOwner !== idKey(currentIdentity())) resetConversation(); }
+        window.addEventListener('storage', function(e){ if (!e.key || e.key.indexOf('-auth-token') > -1) checkIdentity(); });
+        document.addEventListener('ow:session', checkIdentity);
+        window.addEventListener('focus', checkIdentity);
+        document.addEventListener('visibilitychange', function(){ if (!document.hidden) checkIdentity(); });
+
+        var MAX_REPLY = 6000, MAX_BYTES = 262144, MAX_EVENTS = 4000, MAX_CHUNKS = 4096, DEADLINE_MS = 30000;
+
         function askVaia(userText){
             if (busy || !userText) return;
+            var who = currentIdentity();
+            if (historyOwner !== null && historyOwner !== idKey(who)) resetConversation();
             if (handleLocalIntent(userText)) return;
+            historyOwner = idKey(who);
+            var myGen = gen;
+            var live = function(){ return myGen === gen; };
             busy = true;
             widget.classList.add('thinking');
             addMsg('user', userText);
@@ -196,15 +251,13 @@
             var full = '';
             var spokenUpTo = 0;
             var speakQueue = Promise.resolve();
-            var rateLimited = false;
 
-            /* speak completed sentences as they arrive instead of waiting for the whole reply —
-               this is what makes her feel like she's answering right away instead of after a pause */
+            /* speak completed sentences as they arrive instead of waiting for the whole reply */
             function queueSentence(s){
                 s = s.trim();
                 if (!s) return;
                 speakQueue = speakQueue.then(function(){
-                    if (asleep) return;
+                    if (asleep || !live()) return;
                     widget.classList.remove('thinking');
                     return speak(s);
                 });
@@ -220,85 +273,139 @@
                     spokenUpTo = full.length;
                 }
             }
-
-            var owSession = (typeof window.OW_SESSION === 'function') ? window.OW_SESSION() : null;
-            if (!owSession) {
-                var ask = vaiaT('signinNeeded');
-                full = ask; replyEl.textContent = ask; history.push({ role:'assistant', content: ask });
+            /* a reply that is not from the server: shown, remembered and spoken under the same generation guard */
+            function localReply(line, then){
+                if (!live()) return;
+                full = line; replyEl.textContent = line; history.push({ role:'assistant', content: line });
                 widget.classList.remove('thinking'); openPanel();
-                voiceMode = false; stopListening();
-                speak(ask).then(function(){ busy = false; });
-                return;
+                speak(line).then(function(){ if (live()) { busy = false; if (then) then(); } });
             }
-            abortCtl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
-            fetch(SUPABASE_URL + '/functions/v1/vaia-chat', {
-                method:'POST', headers:{'Content-Type':'application/json', 'apikey': VAIA_KEY, 'Authorization': 'Bearer ' + owSession.access_token},
-                /* NOTE: intentionally NOT sending mode:'voice' here — that activates a 160-token
-                   cap server-side, and gemini-flash-latest/2.5-flash-lite burn a chunk of that
-                   budget on hidden reasoning/thought-signature content via the OpenAI-compat
-                   endpoint, so real replies got cut off after 2-3 words (finish_reason:"length").
-                   Confirmed live Jul 14: identical request with mode:'voice' truncated ("Think of…"),
-                   without it the same question returned a full, correct answer. Leave uncapped
-                   (TEXT_STYLE) until a safe token budget for this model is found. */
-                body: JSON.stringify({ messages: history, app: 'homepage', lang: window.OWL_LANG || 'en' }),
-                signal: abortCtl ? abortCtl.signal : undefined
-            }).then(function(r){
-                if (!r.ok || !r.body) {
-                    return r.json().catch(function(){ return {}; }).then(function(errBody){
-                        var e = new Error(errBody.error || 'bad response');
-                        e.rateLimited = !!errBody.rateLimited;
-                        throw e;
-                    });
-                }
-                var reader = r.body.getReader(), decoder = new TextDecoder();
-                function pump(){
-                    return reader.read().then(function(res){
-                        if (res.done) return;
-                        var chunk = decoder.decode(res.value, {stream:true});
-                        chunk.split('\n').forEach(function(line){
-                            line = line.trim();
-                            if (line.indexOf('data:') !== 0) return;
-                            var payload = line.slice(5).trim();
-                            if (payload === '[DONE]') return;
-                            try {
-                                var json = JSON.parse(payload);
-                                var delta = json.choices && json.choices[0] && json.choices[0].delta && json.choices[0].delta.content;
-                                if (delta) { full += delta; replyEl.textContent = full; log.scrollTop = log.scrollHeight; drainSentences(false); }
-                            } catch(e){}
-                        });
-                        return pump();
-                    });
-                }
-                return pump();
-            }).then(function(){
-                if (!full) full = vaiaT('noCatch');
-                replyEl.textContent = full;
-                history.push({ role:'assistant', content: full });
-                drainSentences(true);
-                return speakQueue;
-            }).catch(function(err){
-                widget.classList.remove('thinking');
-                if (err && err.name === 'AbortError') return;
-                var m = (err && err.rateLimited && err.message) ? err.message : vaiaT('connError');
-                rateLimited = !!(err && err.rateLimited);
-                full = m;
-                replyEl.textContent = m;
-                history.push({ role:'assistant', content: m });
-                return speak(m);
-            }).then(function(){
-                widget.classList.remove('thinking');
-                busy = false;
-                if (rateLimited) {
-                    /* out of session budget for this visitor — go quiet instead of immediately
-                       re-asking (which would just hit the limit again) or looping TTS calls */
-                    asleep = true; voiceMode = false;
-                    widget.classList.remove('listening', 'speaking');
-                    widget.classList.add('asleep');
-                    everSlept = true;
+
+            if (!who) { voiceMode = false; stopListening(); localReply(vaiaT('signinNeeded')); return; }
+            /* 401 already seen for this exact token: do not call the server again until the sign-in changes */
+            if (authBlockedToken && authBlockedToken === who.accessToken) { voiceMode = false; stopListening(); localReply(vaiaT('reauthLine')); return; }
+
+            /* ---- one request, exactly one outcome ---- */
+            var settled = false, reader = null;
+            var ctl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+            function stopTransport(){
+                if (ctl) { try { ctl.abort(); } catch(e){} }
+                if (reader) { try { reader.cancel(); } catch(e){} }
+            }
+            var deadline = setTimeout(function(){ settle('timeout'); }, DEADLINE_MS);
+            inflight = { cancel: function(){ settle('cancelled'); } };
+            /* kind: ok | truncated | timeout | cancelled | limit | auth | error */
+            function settle(kind){
+                if (settled) return;
+                settled = true;
+                clearTimeout(deadline);
+                stopTransport();
+                if (inflight && myGen === gen) inflight = null;
+                if (!live()) return;   /* resetConversation() already cleared busy, speech and transcript */
+                if (kind === 'cancelled') {   /* she was put to sleep mid-answer: drop the request quietly */
+                    if (replyEl && replyEl.parentNode && !full) replyEl.parentNode.removeChild(replyEl);
+                    widget.classList.remove('thinking');
+                    busy = false;
                     return;
                 }
-                if (voiceMode && !asleep) startListening();
-            });
+                widget.classList.remove('thinking');
+                if (kind === 'ok' || kind === 'truncated') {
+                    if (!full) full = vaiaT('noCatch');
+                    else if (kind === 'truncated') full += '…';
+                    replyEl.textContent = full;
+                    history.push({ role:'assistant', content: full });
+                    drainSentences(true);
+                    speakQueue.then(function(){ if (!live()) return; busy = false; if (voiceMode && !asleep) startListening(); });
+                    return;
+                }
+                if (kind === 'auth') { authBlockedToken = who.accessToken; voiceMode = false; stopListening(); }
+                var line = kind === 'limit' ? vaiaT('limitLine') : kind === 'auth' ? vaiaT('reauthLine') : vaiaT('connError');
+                full = line; replyEl.textContent = line;
+                history.push({ role:'assistant', content: line });
+                speak(line).then(function(){
+                    if (!live()) return;
+                    busy = false;
+                    if (kind === 'limit') {
+                        /* out of budget for now — go quiet instead of re-asking straight into the limit */
+                        asleep = true; voiceMode = false;
+                        widget.classList.remove('listening', 'speaking');
+                        widget.classList.add('asleep');
+                        everSlept = true;
+                        return;
+                    }
+                    if (kind !== 'auth' && voiceMode && !asleep) startListening();
+                });
+            }
+
+            var bytes = 0, events = 0, chunks = 0, carry = '';
+            function onLine(line){
+                line = line.trim();
+                if (line.indexOf('data:') !== 0) return true;
+                if (++events > MAX_EVENTS) return false;
+                var payload = line.slice(5).trim();
+                if (payload === '[DONE]') return true;
+                try {
+                    var json = JSON.parse(payload);
+                    var delta = json.choices && json.choices[0] && json.choices[0].delta && json.choices[0].delta.content;
+                    if (typeof delta === 'string' && delta) {
+                        if (full.length + delta.length > MAX_REPLY) { full += delta.slice(0, MAX_REPLY - full.length); replyEl.textContent = full; return false; }
+                        full += delta; replyEl.textContent = full; log.scrollTop = log.scrollHeight; drainSentences(false);
+                    }
+                } catch(e){}
+                return true;
+            }
+            try {
+                fetch(SUPABASE_URL + '/functions/v1/vaia-chat', {
+                    method:'POST', headers:{'Content-Type':'application/json', 'apikey': VAIA_KEY, 'Authorization': 'Bearer ' + who.accessToken},
+                    /* intentionally NOT sending mode:'voice' — that server-side 160-token cap truncated real replies (Jul 14) */
+                    body: JSON.stringify({ messages: history, app: 'homepage', lang: window.OWL_LANG || 'en' }),
+                    signal: ctl ? ctl.signal : undefined
+                }).then(function(r){
+                    if (settled) { try { r.body && r.body.cancel(); } catch(e){} return; }
+                    if (!live()) return settle('cancelled');
+                    if (r.status === 401 || r.status === 403) return settle('auth');
+                    if (r.status === 429) return settle('limit');
+                    if (!r.ok || !r.body) {
+                        /* read only a small, bounded error body, and only for the rate-limit flag — its text is never shown */
+                        if (!r.body) return settle('error');
+                        reader = r.body.getReader();
+                        var got = '', dec0 = new TextDecoder();
+                        var readErr = function(){
+                            return reader.read().then(function(res){
+                                if (settled) return;
+                                if (!res.done && got.length < 4096) { got += dec0.decode(res.value, {stream:true}); return readErr(); }
+                                var lim = false; try { lim = !!JSON.parse(got.slice(0, 4096)).rateLimited; } catch(e){}
+                                settle(lim ? 'limit' : 'error');
+                            });
+                        };
+                        return readErr();
+                    }
+                    var ctype = (r.headers.get('content-type') || '').toLowerCase();
+                    if (ctype.indexOf('text/event-stream') === -1) return settle('error');
+                    reader = r.body.getReader();
+                    var decoder = new TextDecoder();
+                    function pump(){
+                        return reader.read().then(function(res){
+                            if (settled) return;
+                            if (!live()) return settle('cancelled');
+                            if (res.done) {
+                                /* the last event may arrive without a trailing newline */
+                                var tail = carry + decoder.decode(); carry = '';
+                                if (tail) onLine(tail);
+                                return settle('ok');
+                            }
+                            bytes += res.value.byteLength;
+                            if (++chunks > MAX_CHUNKS || bytes > MAX_BYTES) return settle(full ? 'truncated' : 'error');
+                            var lines = (carry + decoder.decode(res.value, {stream:true})).split('\n');
+                            carry = lines.pop();
+                            if (carry.length > 65536) return settle(full ? 'truncated' : 'error');
+                            for (var i = 0; i < lines.length; i++) { if (!onLine(lines[i])) return settle('truncated'); }
+                            return pump();
+                        });
+                    }
+                    return pump();
+                }).then(null, function(){ settle('error'); });
+            } catch(e) { settle('error'); }
         }
 
         /* ---- speech recognition (Chrome/Edge/Safari webkit) ---- */
@@ -358,7 +465,7 @@
         function sleep(){
             asleep = true;
             voiceMode = false;
-            if (abortCtl) { try { abortCtl.abort(); } catch(e){} }
+            if (inflight) { try { inflight.cancel(); } catch(e){} }
             stopListening();
             stopSpeaking();
             widget.classList.remove('listening', 'speaking');

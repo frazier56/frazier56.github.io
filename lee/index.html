@@ -15,16 +15,23 @@
        · location.replace()      — instant, and leaves no history entry, so Back from /founder/
          returns to wherever the person actually came from rather than bouncing them round a loop
 
-     A server-side 301 would be better than all three and should replace them the moment whoever
-     owns the hosting can add one. Until then this is the honest best a static host can do.
+     17 Oct 2026 — retargeted from /founder/ straight to founder.oneworldlabs.ai. /founder/ is
+     itself a 301 to that subdomain, so going through it made the card take THREE hops instead of
+     two. Measured on the live site: that middle hop cost about 150 milliseconds of the roughly
+     600 the forwarder adds in total.
+
+     The remaining 400 or so is this page being fetched and parsed at all. Only a real 301 can
+     remove that, and GitHub Pages cannot serve one — it has to be a Cloudflare Redirect Rule
+     (/lee and /lee/ -> https://founder.oneworldlabs.ai/, 301, preserve query string). Cloudflare
+     is already in front of this host, so it is one rule in the dashboard, no deploy.
      ══════════════════════════════════════════════════════════════════════════════════════ -->
-<link rel="canonical" href="https://www.oneworldlabs.ai/founder/">
-<meta http-equiv="refresh" content="0; url=/founder/">
+<link rel="canonical" href="https://founder.oneworldlabs.ai/">
+<meta http-equiv="refresh" content="0; url=https://founder.oneworldlabs.ai/">
 <meta name="robots" content="noindex, follow">
-<script>location.replace("/founder/" + location.search + location.hash);</script>
+<script>location.replace("https://founder.oneworldlabs.ai/" + location.search + location.hash);</script>
 <style>body{margin:0;display:grid;place-items:center;min-height:100vh;background:#0B0F1A;color:#EAF0FA;
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;text-align:center;padding:24px}
 a{color:#9DBCFA}</style>
 </head><body>
-<p>Taking you to <a href="/founder/">Lee Frazier's contact page</a>…</p>
+<p>Taking you to <a href="https://founder.oneworldlabs.ai/">Lee Frazier's contact page</a>…</p>
 </body></html>

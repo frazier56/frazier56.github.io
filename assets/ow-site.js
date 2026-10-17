@@ -260,12 +260,20 @@
     var n = m.full_name || m.name || (u && u.email) || '';
     return String(n).split(' ')[0].split('@')[0];
   }
-  window.OW_SESSION = session;   /* VAIA asks for the member's token at question time; never stored elsewhere */
+  /* VAIA gets only what it needs to call its endpoint: who, and the short-lived access token.
+     Never the refresh token, never the whole stored session. */
+  window.OW_SESSION = function () {
+    var s = session();
+    return s ? { userId: s.user.id, accessToken: s.access_token } : null;
+  };
   var acctIn = document.getElementById('ow-acct-in');
   var acctOut = document.getElementById('ow-acct-out');
   var acctBtn = document.getElementById('ow-acct-btn');
   var acctMenu = document.getElementById('ow-acct-menu');
+  /* Tell the page (VAIA) that the sign-in state may have changed: this-tab sign-out, other tabs, shared cookie. */
+  function announceSession() { try { document.dispatchEvent(new CustomEvent('ow:session')); } catch (e) {} }
   function renderAccount() {
+    announceSession();
     if (!acctIn || !acctOut) return;
     var s = session();
     var outLong = acctOut.querySelector('.ow-long'), outShort = acctOut.querySelector('.ow-short');

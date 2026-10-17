@@ -202,19 +202,51 @@ html[lang="zh-CN"] :is(h1,h2,h3){word-break:keep-all;overflow-wrap:anywhere;line
   .vaia-orb{width:88px;height:88px}.vaia-bars{transform:scale(1.2)}.vaia-think,.vaia-listen{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.vaia-orb,.vaia-ring,.vaia-bars span,.vaia-think,.vaia-listen{animation:none!important}}
 /* keep translated hero lines from running under VAIA on phones (English already clears her) */
-@media(max-width:899px){html:not([lang="en"]):not([lang="zh-CN"]) .hero h1::before{content:"";float:right;width:74px;height:58px}}
-@media(max-width:360px){html:not([lang="en"]):not([lang="zh-CN"]) .hero h1::before{width:64px}}
+/* Phones: keep the first headline line clear of VAIA (UI r6: 120 px, right 16 px), every language */
+@media(max-width:899px){.hero h1::before{content:"";float:right;width:86px;height:50px}}
+@media(max-width:360px){.hero h1::before{width:80px}}
 #vaia-widget .vaia-orb.vaia-living-ready{width:104px;height:104px;background:transparent;border:0;box-shadow:none;animation:none;opacity:1;overflow:visible}
 #vaia-widget .vaia-living-ready>*:not(.vaia-living-canvas):not(.vaia-living-name){display:none!important}
 #vaia-widget .vaia-living-ready::after{display:none}
 .vaia-living-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.vaia-living-name{position:absolute;inset:0;display:grid;place-items:center;font-size:10px;font-weight:800;letter-spacing:.1em;color:#342b4c;pointer-events:none;text-shadow:0 0 5px #fff}
+.vaia-living-name{position:absolute;inset:0;display:grid;place-items:center;font-size:10px;font-weight:800;letter-spacing:.1em;color:#fff;pointer-events:none;text-shadow:0 1px 3px #332a49aa}
 html[data-theme="dark"] .vaia-living-name{color:#fff;text-shadow:0 0 5px #142030}
 #vaia-widget.asleep .vaia-living-canvas{opacity:.78}
 #vaia-widget .vaia-living-ready:focus-visible{outline:2px solid #8960ce;outline-offset:2px}
-/* PUB30: living VAIA keeps Lee's phone placement (under the menu, right of the headline) */
-#vaia-widget .vaia-orb.vaia-living-ready{width:72px;height:72px}
-@media(max-width:360px){#vaia-widget .vaia-orb.vaia-living-ready{width:62px;height:62px}}
-@media(min-width:900px){#vaia-widget .vaia-orb.vaia-living-ready{width:104px;height:104px}}
-/* fade the canvas edge into a circle so its soft mist never reads as a square on the page */
-#vaia-widget .vaia-living-canvas{-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 52%,transparent 71%);mask-image:radial-gradient(circle at 50% 50%,#000 52%,transparent 71%)}
+
+@media(min-width:900px){
+ .hero-copy{position:relative}
+ .vaia-hero-slot{position:absolute;top:-156px;left:80px;width:104px;height:104px;margin:0}
+ #vaia-widget.vaia-in-hero{position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;align-items:flex-start;flex-direction:column}
+ #vaia-widget.vaia-in-hero .vaia-panel{position:absolute;left:112px;bottom:0;z-index:46}
+}
+
+.vaia-living-canvas[hidden],.vaia-living-name[hidden]{display:none!important}
+
+@media(min-width:900px){
+ .vaia-hero-slot{top:-208px;left:28px;width:208px;height:208px}
+ #vaia-widget.vaia-in-hero .vaia-orb.vaia-living-ready{width:208px;height:208px}
+ #vaia-widget.vaia-in-hero .vaia-living-name{font-size:16px}
+ #vaia-widget.vaia-in-hero .vaia-panel{left:216px}
+}
+
+/* Lee: modestly larger, desktop left / mobile right. */
+@media(min-width:900px){
+ .vaia-hero-slot{top:-224px;left:12px;width:240px;height:240px}
+ #vaia-widget.vaia-in-hero .vaia-orb.vaia-living-ready{width:240px;height:240px}
+ #vaia-widget.vaia-in-hero .vaia-panel{left:248px}
+}
+@media(max-width:899px){
+ #vaia-widget{left:auto!important;right:16px!important}
+ #vaia-widget .vaia-orb.vaia-living-ready{width:120px;height:120px}
+}
+/* PUB30 site glue for UI living VAIA r6 (Lee: desktop LEFT 240 px, phone RIGHT 120 px).
+   Sizes and sides come from UI's package; this file only makes room for her on the live hero. */
+/* Desktop: r6 hangs the 240 px VAIA above the headline, which only fits a hero with that much open space.
+   The live hero is vertically centred and leaves ~110-130 px, so her canvas would sit under the navigation bar.
+   Same spot, same size, same centre - reserved in the hero, so the headline makes room and she always sits below the menu
+   (248 px = her 240 px canvas + 8 px air). */
+@media(min-width:900px){
+ .hero-copy:has(> .vaia-hero-slot){padding-top:248px}
+ .hero-copy > .vaia-hero-slot{top:0;left:12px}
+}

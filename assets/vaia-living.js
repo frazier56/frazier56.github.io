@@ -78,6 +78,7 @@ void main(){
  gl_Position=vec4(screen,0.,1.);
  gl_PointSize=mix(1.5+1.8*pow(.5+.5*sin(u*19.+v*13.+t),8.),mix(65.+25.*sin(v)*sin(v),24.,spark),mist)*uDpr;
  if(soul>.5)gl_PointSize=(155.+45.*sin(u*7.+v)*sin(u*7.+v))*uDpr;
+ if(mist>.5)gl_PointSize*=min(1.,min(uResolution.x,uResolution.y)/(430.*uDpr));
  float fixedDepth=sin(u)*sin(v);
  float front=smoothstep(-1.,1.,fixedDepth);
  vec3 color=palette(u/6.283+v*.19);
@@ -100,6 +101,8 @@ void main(){
  color=mix(vec3(.025,.20,1.),vec3(.02,.95,.68),.5+.5*sin(u*2.+v+t*.32));
  alpha=.30*(.75+.25*sin(t*.9+u*2.+v));
  }
+ // Homepage: no exterior halo or glow lights; preserve the approved inner soul.
+ if(mist>.5 && soul<.5)alpha=0.;
  vColor=vec4(color,alpha);
 }`;
   const fs=`precision mediump float;uniform mediump float uPoint;varying mediump vec4 vColor;varying mediump float vGlow;void main(){float a=vColor.a;if(uPoint>.5){float d=length(gl_PointCoord-.5);a*=mix(1.-smoothstep(.15,.5,d),mix(exp(-d*d*28.)*.65+exp(-d*d*500.)*.35,exp(-d*d*18.)*(1.-smoothstep(.35,.5,d)),step(1.5,vGlow)),min(vGlow,1.));}gl_FragColor=vec4(vColor.rgb,a);}`;
@@ -124,7 +127,8 @@ void main(){
   const loc=gl.getAttribLocation(this.program,'aSeed');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,3,gl.FLOAT,false,0,0);gl.enable(gl.BLEND);gl.disable(gl.DEPTH_TEST);
   this.observer=new IntersectionObserver(es=>{this.visible=es[0].isIntersecting});this.observer.observe(canvas);
   this.lost=false;canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();this.lost=true;canvas.dataset.status='context-lost'});
-  canvas.addEventListener('webglcontextrestored',()=>location.reload());
+  // Keep the existing assistant functional via its original decoration after GPU loss.
+  canvas.addEventListener('webglcontextrestored',()=>{canvas.dataset.status='fallback';});
   canvas.dataset.status='ready';this.last=performance.now();this.tick=this.tick.bind(this);this.raf=requestAnimationFrame(this.tick);
  }
  setState(state){if(!['rest','listening','thinking','speaking'].includes(state))throw new Error('Unknown VAIA state');this.state=state}
@@ -173,7 +177,7 @@ void main(){
   const movement={rest:.85,listening:.95,thinking:2.55,speaking:.85}[this.state];
   if(!this.paused)this.energy+=(this.targetEnergy-this.energy)*(1-Math.exp(-dt*(this.targetEnergy>this.energy?48:22)));
   if(!this.paused&&!this.reduce.matches)this.time+=dt*movement;
-  const gl=this.gl,dpr=Math.min(devicePixelRatio||1,2),w=Math.round(this.canvas.clientWidth*dpr),h=Math.round(this.canvas.clientHeight*dpr);
+  const gl=this.gl,dpr=2,w=Math.round(this.canvas.clientWidth*dpr),h=Math.round(this.canvas.clientHeight*dpr);
   if(this.canvas.width!==w||this.canvas.height!==h){this.canvas.width=w;this.canvas.height=h}gl.viewport(0,0,w,h);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
   gl.useProgram(this.program);const f=(n,v)=>gl.uniform1f(this.uniforms[n],v);
   gl.uniform2f(this.uniforms.uResolution,w,h);f('uTime',this.time);f('uStabilize',this.stabilize(this.time));gl.uniformMatrix2fv(this.uniforms.uShapeLock,false,this.shapeLock);gl.uniform2fv(this.uniforms.uCenter,this.shapeCenter);f('uEnergy',this.reduce.matches?0:this.energy);f('uActivity',movement);f('uScale',.94);f('uLight',this.light?1:0);f('uDpr',dpr);
