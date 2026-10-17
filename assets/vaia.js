@@ -109,7 +109,7 @@
         var log = document.getElementById('vaia-log');
         var textIn = document.getElementById('vaia-text');
         var history = [];
-        var busy = false, voiceMode = false, asleep = false, everSlept = false, currentAudio = null, pendingResolve = null;
+        var busy = false, voiceMode = false, asleep = false, everSlept = false, currentAudio = null, activeSpeech = [];
         /* tracks consecutive listen cycles that ended with nothing heard, so she can announce
            "going to rest" after real silence instead of either looping forever or going mute
            with no explanation (the "5th state" — neither listening, thinking, speaking, nor asleep) */
@@ -141,33 +141,56 @@
 
         /* one voice path for EVERY utterance (greeting included) so she never switches voices mid-conversation */
         var gen = 0;  /* bumped on every identity change / reset: anything started under an older value is discarded */
+        /* One utterance, always finished within a bound (PUB30 17 Oct, Max candidate-7 review): the TTS fetch,
+           the audio blob, playback and the browser fallback all end by `limit` at the latest. Only the newest
+           utterance may clear the speaking state, and nothing plays once the conversation's identity changed. */
+        var speakSeq = 0, MAX_TTS_BYTES = 5242880;
         function speak(text){
-            var g = gen;
+            var g = gen, mine = ++speakSeq;
             widget.classList.add('speaking');
-            var spoken = phoneticize(text);
-            return fetch(SUPABASE_URL + '/functions/v1/elevenlabs-tts', {
-                method: 'POST', headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ text: spoken, voiceId: VAIA_VOICE_ID })
-            }).then(function(r){
-                var ct = r.headers.get('content-type') || '';
-                if (g !== gen) return;
-                if (ct.indexOf('audio') !== -1) {
-                    return r.blob().then(function(blob){
-                        if (g !== gen) return;
-                        return new Promise(function(resolve){
-                            var audio = new Audio(URL.createObjectURL(blob));
+            var spoken = phoneticize(String(text || ''));
+            var limit = Math.min(60000, 8000 + spoken.length * 120);
+            return new Promise(function(done){
+                var finished = false, audio = null, url = null, usedFallback = false;
+                var ctl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+                function finish(timedOut){
+                    if (finished) return;
+                    finished = true;
+                    clearTimeout(timer);
+                    if (ctl) { try { ctl.abort(); } catch(e){} }
+                    if (audio) { try { audio.pause(); } catch(e){} if (currentAudio === audio) currentAudio = null; }
+                    if (url) { try { URL.revokeObjectURL(url); } catch(e){} }
+                    if (timedOut === true && usedFallback && window.speechSynthesis) { try { window.speechSynthesis.cancel(); } catch(e){} }
+                    var at = activeSpeech.indexOf(finish); if (at > -1) activeSpeech.splice(at, 1);
+                    if (mine === speakSeq) widget.classList.remove('speaking');
+                    done();
+                }
+                var timer = setTimeout(function(){ finish(true); }, limit);
+                activeSpeech.push(finish);   /* stopSpeaking() ends every utterance in progress */
+                function fallback(){ if (finished || g !== gen) return finish(); usedFallback = true; fallbackSpeak(spoken).then(finish); }
+                try {
+                    fetch(SUPABASE_URL + '/functions/v1/elevenlabs-tts', {
+                        method: 'POST', headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify({ text: spoken, voiceId: VAIA_VOICE_ID }),
+                        signal: ctl ? ctl.signal : undefined
+                    }).then(function(r){
+                        if (finished || g !== gen) return finish();
+                        var ct = r.headers.get('content-type') || '';
+                        var len = parseInt(r.headers.get('content-length') || '0', 10) || 0;
+                        if (ct.indexOf('audio') === -1 || len > MAX_TTS_BYTES) return fallback();
+                        return r.blob().then(function(blob){
+                            if (finished || g !== gen) return finish();
+                            if (!blob || blob.size > MAX_TTS_BYTES) return fallback();
+                            url = URL.createObjectURL(blob);
+                            audio = new Audio(url);
                             currentAudio = audio;
                             if (window.vaiaAttachAudio) { try { window.vaiaAttachAudio(audio); } catch (e) {} }
-                            pendingResolve = resolve;
-                            audio.onended = function(){ currentAudio = null; pendingResolve = null; resolve(); };
-                            audio.onerror = function(){ currentAudio = null; pendingResolve = null; resolve(); };
-                            audio.play().catch(function(){ currentAudio = null; pendingResolve = null; resolve(); });
+                            audio.onended = finish; audio.onerror = finish;
+                            var pl = audio.play(); if (pl && pl.catch) pl.catch(function(){ finish(); });
                         });
-                    });
-                }
-                return fallbackSpeak(spoken);
-            }).catch(function(){ if (g === gen) return fallbackSpeak(spoken); })
-              .then(function(){ widget.classList.remove('speaking'); });
+                    }).then(null, function(){ if (!finished) fallback(); });
+                } catch(e) { fallback(); }
+            });
         }
 
         /* only used if the ElevenLabs call truly fails — same content, so still one coherent turn.
@@ -197,14 +220,14 @@
                 openPanel();
                 var m = vaiaT('openChat');
                 addMsg('vaia', m);
-                speak(m).then(function(){ if (voiceMode) startListening(); });
+                var g1 = gen; speak(m).then(function(){ if (g1 === gen && voiceMode) startListening(); });
                 return true;
             }
             if (wantsClose) {
                 addMsg('user', text);
                 var m2 = vaiaT('closeChat');
                 addMsg('vaia', m2);
-                speak(m2).then(function(){ closePanel(); if (voiceMode) startListening(); });
+                var g2 = gen; speak(m2).then(function(){ if (g2 !== gen) return; closePanel(); if (voiceMode) startListening(); });
                 return true;
             }
             return false;
@@ -224,9 +247,10 @@
             stopSpeaking();
             history.length = 0; while (log.firstChild) log.removeChild(log.firstChild);
             historyOwner = null; authBlockedToken = null;
-            busy = false;
+            busy = false; voiceMode = false; stopListening();
             widget.classList.remove('thinking', 'speaking');
         }
+        function own(){ if (historyOwner === null) historyOwner = idKey(currentIdentity()); }
         function checkIdentity(){ if (historyOwner !== null && historyOwner !== idKey(currentIdentity())) resetConversation(); }
         window.addEventListener('storage', function(e){ if (!e.key || e.key.indexOf('-auth-token') > -1) checkIdentity(); });
         document.addEventListener('ow:session', checkIdentity);
@@ -369,13 +393,24 @@
                         /* read only a small, bounded error body, and only for the rate-limit flag — its text is never shown */
                         if (!r.body) return settle('error');
                         reader = r.body.getReader();
-                        var got = '', dec0 = new TextDecoder();
+                        /* at most 4096 BYTES and 64 reads of an error body; only a literal rateLimited:true counts; its text is never shown */
+                        var parts = [], took = 0, reads = 0;
+                        var errDone = function(){
+                            var buf = new Uint8Array(took), o = 0;
+                            parts.forEach(function(x){ buf.set(x, o); o += x.byteLength; });
+                            var lim = false;
+                            try { var j = JSON.parse(new TextDecoder().decode(buf)); lim = !!j && j.rateLimited === true; } catch(e){}
+                            settle(lim ? 'limit' : 'error');
+                        };
                         var readErr = function(){
                             return reader.read().then(function(res){
                                 if (settled) return;
-                                if (!res.done && got.length < 4096) { got += dec0.decode(res.value, {stream:true}); return readErr(); }
-                                var lim = false; try { lim = !!JSON.parse(got.slice(0, 4096)).rateLimited; } catch(e){}
-                                settle(lim ? 'limit' : 'error');
+                                if (res.done) return errDone();
+                                if (++reads > 64) return errDone();
+                                var v = res.value || new Uint8Array(0), room = 4096 - took;
+                                if (v.byteLength) { var part = v.subarray(0, Math.min(room, v.byteLength)); parts.push(part); took += part.byteLength; }
+                                if (took >= 4096) return errDone();
+                                return readErr();
                             });
                         };
                         return readErr();
@@ -390,8 +425,8 @@
                             if (!live()) return settle('cancelled');
                             if (res.done) {
                                 /* the last event may arrive without a trailing newline */
-                                var tail = carry + decoder.decode(); carry = '';
-                                if (tail) onLine(tail);
+                                var tail = (carry + decoder.decode()).split('\n'); carry = '';
+                                for (var t = 0; t < tail.length; t++) { if (tail[t] && !onLine(tail[t])) return settle('truncated'); }
                                 return settle('ok');
                             }
                             bytes += res.value.byteLength;
@@ -436,8 +471,10 @@
                     noResultStreak = 0;
                     var line = vaiaT('restLine');
                     addMsg('vaia', line);
-                    history.push({ role:'assistant', content: line });
+                    own(); history.push({ role:'assistant', content: line });
+                    var gr = gen;
                     speak(line).then(function(){
+                        if (gr !== gen) return;
                         asleep = true; voiceMode = false;
                         widget.classList.remove('listening', 'speaking');
                         widget.classList.add('asleep');
@@ -459,7 +496,7 @@
         function stopSpeaking(){
             window.speechSynthesis && window.speechSynthesis.cancel();
             if (currentAudio) { try { currentAudio.pause(); } catch(e){} currentAudio = null; }
-            if (pendingResolve) { var _r = pendingResolve; pendingResolve = null; _r(); }
+            activeSpeech.slice().forEach(function(f){ try { f(); } catch(e){} });
         }
 
         function sleep(){
@@ -477,13 +514,14 @@
             asleep = false;
             noResultStreak = 0;
             widget.classList.remove('asleep');
-            var goListen = function(){ voiceMode = true; startListening(); };
+            var gw = gen;
+            var goListen = function(){ if (gw !== gen || asleep) return; voiceMode = true; startListening(); };
             if (!everWoken) {
                 /* Sleep-first (Lee, Jul 16): the FIRST tap is the introduction —
                    she never speaks before being touched. */
                 everWoken = true;
                 var firstWake = vaiaT('firstWake');
-                history.push({ role:'assistant', content: firstWake });
+                own(); history.push({ role:'assistant', content: firstWake });
                 addMsg('vaia', firstWake);
                 speak(firstWake).then(goListen);
             }
@@ -544,6 +582,9 @@
    headline, and stays there while people scroll. Desktop keeps her in the bottom-left corner. */
 (function(){
   var w = document.getElementById('vaia-widget'); if (!w) return;
+  /* browsers without :has() (Safari < 15.4, Firefox < 121) still get the desktop room for VAIA's hero slot */
+  var heroCopy = document.querySelector('.hero-copy');
+  if (heroCopy && heroCopy.querySelector(':scope > .vaia-hero-slot')) heroCopy.classList.add('vaia-has-slot');
   function place(){
     if (window.matchMedia('(min-width:900px)').matches) { w.style.top = ''; return; }
     var h = document.querySelector('header');

@@ -247,6 +247,7 @@ html[data-theme="dark"] .vaia-living-name{color:#fff;text-shadow:0 0 5px #142030
    Same spot, same size, same centre - reserved in the hero, so the headline makes room and she always sits below the menu
    (248 px = her 240 px canvas + 8 px air). */
 @media(min-width:900px){
+ .hero-copy.vaia-has-slot{padding-top:248px}
  .hero-copy:has(> .vaia-hero-slot){padding-top:248px}
  .hero-copy > .vaia-hero-slot{top:0;left:12px}
 }
