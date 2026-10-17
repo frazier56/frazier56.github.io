@@ -33,7 +33,7 @@
   var UI_EN = {
     'ui.signin': 'Sign in', 'ui.signin_long': 'Sign in with One ID', 'ui.open': 'Open my apps',
     'ui.signout': 'Sign out', 'ui.hi': 'Hi, {name}', 'ui.signed_in': 'Signed in', 'ui.lang': 'Language and country',
-    'ui.account': 'Your One ID', 'ui.required': 'Please fill in this field.', 'ui.email_bad': 'Enter a valid email address.'
+    'ui.account': 'Your One ID', 'ui.signout_local': 'Signed out on this device. We could not reach One ID to sign you out everywhere — try again when you are online.', 'ui.required': 'Please fill in this field.', 'ui.email_bad': 'Enter a valid email address.'
   };
 
   function find(k) { for (var i = 0; i < LANGS.length; i++) if (LANGS[i].k === k) return LANGS[i]; return null; }
@@ -43,9 +43,10 @@
     try { q = new URLSearchParams(location.search).get('owl_lang'); } catch (e) {}
     var s = null;
     try { s = localStorage.getItem('owl-lang'); } catch (e) {}
-    var want = q || s || 'en';
-    if (!find(want) && FALLBACK[want]) want = FALLBACK[want];
-    return find(want) ? want : 'en';
+    function norm(v) { if (!v) return null; if (!find(v) && FALLBACK[v]) v = FALLBACK[v]; return find(v) ? v : null; }
+    var fromQuery = norm(q);
+    if (fromQuery) { store(fromQuery); return fromQuery; }   /* a valid ?owl_lang is a choice: keep it on the next page */
+    return norm(s) || 'en';                                  /* an invalid one is ignored, never a reset */
   }
 
   /* ---------------- translation engine ---------------- */
@@ -112,19 +113,22 @@
     window.OWL_LANG = k;
     renderLangButton();
     renderAccount();
-    document.querySelectorAll('.carousel-toggle').forEach(function (t) { if (t.dataset.owState && window.owT) t.textContent = window.owT(t.dataset.owState); });
+    if (window.owRelabel) window.owRelabel();
+    document.querySelectorAll('[data-contact-form] input,[data-contact-form] textarea').forEach(function (f) { f.setCustomValidity(''); });
     try { document.dispatchEvent(new CustomEvent('ow:lang', { detail: k })); } catch (e) {}
   }
   function ui(key) {
     var d = dicts[current];
     return (current !== 'en' && d && d[key]) || UI_EN[key] || key;
   }
+  var langSeq = 0;
   function setLang(k, save) {
     if (!find(k)) k = 'en';
     if (save) store(k);
-    return load(k).then(function (d) { applyDict(k, d); })
-      .catch(function () { applyDict('en', {}); })
-      .then(function () { ROOT.classList.remove('ow-i18n-pending'); });
+    var mine = ++langSeq;   /* a slower earlier request must never overwrite the newest choice */
+    return load(k).then(function (d) { if (mine === langSeq) applyDict(k, d); },
+      function () { if (mine === langSeq) applyDict('en', {}); })
+      .then(function () { if (mine === langSeq) ROOT.classList.remove('ow-i18n-pending'); });
   }
 
   /* ---------------- menus ---------------- */
@@ -202,7 +206,10 @@
     try {
       var s = JSON.parse(localStorage.getItem(KEY) || 'null');
       if (s && s.currentSession) s = s.currentSession;
-      return s && s.access_token && s.refresh_token ? s : null;
+      if (!s || typeof s.access_token !== 'string' || typeof s.refresh_token !== 'string') return null;
+      if (!s.user || typeof s.user.id !== 'string') return null;
+      if (s.expires_at != null && typeof s.expires_at !== 'number') return null;
+      return s;
     } catch (e) { return null; }
   }
   function displayName(u) {
@@ -244,19 +251,34 @@
     document.cookie = encodeURIComponent(KEY) + base;
     for (var i = 0; i < 24; i++) document.cookie = encodeURIComponent(KEY + '.' + i) + base;
   }
+  var signingOut = false;
+  function notice(text) {
+    var n = document.getElementById('ow-notice');
+    if (!n) { n = document.createElement('div'); n.id = 'ow-notice'; n.setAttribute('role', 'status'); document.body.appendChild(n); }
+    n.textContent = text; n.hidden = false;
+    clearTimeout(notice.t); notice.t = setTimeout(function () { n.hidden = true; }, 7000);
+  }
   function signOut() {
+    if (signingOut) return;
+    signingOut = true;
     var s = session();
-    var done = function () {
+    /* This device is always signed out. "Everywhere" is only claimed when the server confirms it. */
+    var finish = function (everywhere) {
       try { localStorage.removeItem(KEY); } catch (e) {}
       try { sessionStorage.removeItem('ow_bridge_had_session'); } catch (e) {}
       clearSharedCookie();
+      signingOut = false;
       renderAccount();
+      if (!everywhere) notice(ui('ui.signout_local'));
     };
-    if (!s) return done();
+    if (!s) return finish(true);
+    var ctl = typeof AbortController === 'function' ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 6000);
     fetch(SB_URL + '/auth/v1/logout?scope=global', {
-      method: 'POST', keepalive: true,
+      method: 'POST', signal: ctl ? ctl.signal : undefined,
       headers: { apikey: SB_ANON, Authorization: 'Bearer ' + s.access_token }
-    }).catch(function () {}).then(done, done);
+    }).then(function (r) { clearTimeout(timer); finish(r.ok || r.status === 401); },
+            function () { clearTimeout(timer); finish(false); });
   }
   wireMenu(acctBtn, acctMenu);
   if (acctMenu) acctMenu.querySelector('.ow-signout').addEventListener('click', function () { closeMenus(); signOut(); });
