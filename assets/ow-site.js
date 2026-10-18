@@ -276,7 +276,8 @@
     if (!keys.length) return;
     var b = document.createElement('a');
     b.id = 'ow-flag-badge';
-    b.href = location.pathname + '?ow_flags=reset';
+    try { var u = new URL(location.href); u.searchParams.set('ow_flags', 'reset'); b.href = u.pathname + u.search + u.hash; }
+    catch (e) { b.href = location.pathname + '?ow_flags=reset'; }
     b.textContent = 'TEST · ' + keys.map(function (k) { return (o[k] ? '' : 'no ') + k; }).join(', ') + ' · \u2715';
     b.setAttribute('aria-label', 'Test mode for features: ' + keys.join(', ') + '. Tap to return to the public view.');
     document.body.appendChild(b);

@@ -151,13 +151,14 @@
             var spoken = phoneticize(String(text || ''));
             var limit = Math.min(60000, 8000 + spoken.length * 120);
             return new Promise(function(done){
-                var finished = false, audio = null, url = null, usedFallback = false;
+                var finished = false, audio = null, url = null, usedFallback = false, rd = null;
                 var ctl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
                 function finish(timedOut){
                     if (finished) return;
                     finished = true;
                     clearTimeout(timer);
                     if (ctl) { try { ctl.abort(); } catch(e){} }
+                    if (rd) { try { rd.cancel(); } catch(e){} rd = null; }   /* also ends a read that is still pending */
                     if (audio) { try { audio.pause(); } catch(e){} if (currentAudio === audio) currentAudio = null; }
                     if (url) { try { URL.revokeObjectURL(url); } catch(e){} }
                     if (timedOut === true && usedFallback && window.speechSynthesis) { try { window.speechSynthesis.cancel(); } catch(e){} }
@@ -178,12 +179,14 @@
                         var ct = r.headers.get('content-type') || '';
                         var len = parseInt(r.headers.get('content-length') || '0', 10) || 0;
                         if (ct.indexOf('audio') === -1 || len > MAX_TTS_BYTES || !r.body) return fallback();
-                        /* stream the audio with a running byte count: stop reading (and cancel) the moment it passes 5 MB,
-                           so memory held for one line of speech never exceeds the cap */
-                        var rd = r.body.getReader(), chunks = [], total = 0;
+                        /* stream the audio with a running byte count: stop reading (and cancel) once the RETAINED payload passes 5 MB,
+                           and after at most 4096 reads (zero-length chunks included). This bounds what is kept, not every transient buffer. */
+                        rd = r.body.getReader(); var chunks = [], total = 0, audioReads = 0;
                         var pump = function(){
+                            if (finished || !rd) return Promise.resolve(null);
+                            if (++audioReads > 4096) { try { rd.cancel(); } catch(e){} chunks = []; return Promise.resolve('too-big'); }
                             return rd.read().then(function(res){
-                                if (finished || g !== gen) { try { rd.cancel(); } catch(e){} return null; }
+                                if (finished || g !== gen || !rd) { if (rd) { try { rd.cancel(); } catch(e){} } return null; }
                                 if (res.done) return new Blob(chunks, { type: ct.split(';')[0] });
                                 var v = res.value || new Uint8Array(0);
                                 total += v.byteLength;
