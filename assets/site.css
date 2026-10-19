@@ -255,3 +255,43 @@ html[data-theme="dark"] .vaia-living-name{color:#fff;text-shadow:0 0 5px #142030
  .hero-copy:has(> .vaia-hero-slot){padding-top:248px}
  .hero-copy > .vaia-hero-slot{top:0;left:12px}
 }
+
+/* Selected D: append after all existing site CSS. Destination cards only. */
+.destination[data-video]{--d-padding:26px;--d-tone:237,241,245;--d-ink:#20283a;min-height:689px;background:rgb(var(--d-tone));border:1px solid #ffffffb0;border-radius:26px;overflow:hidden;isolation:isolate;padding:var(--d-padding)}
+.destination[data-video]>.destination-poster,.destination[data-video]>.destination-video{inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:inherit;filter:none;backdrop-filter:none}
+.destination[data-video]::before{display:none}
+.destination[data-video]::after{inset:0;background:linear-gradient(180deg,rgba(var(--d-tone),0) 34%,rgba(var(--d-tone),.08) 48%,rgba(var(--d-tone),.36) 68%,rgba(var(--d-tone),.68) 84%,rgba(var(--d-tone),.95) 94%,rgb(var(--d-tone)) 100%);filter:none;backdrop-filter:none;pointer-events:none}
+.destination[data-video] .destination-top{color:#fff;margin-bottom:auto;padding-bottom:100px;text-shadow:0 1px 5px #0009}
+.destination[data-video] h3{color:var(--d-ink);text-shadow:none;max-width:100%;font-size:29px;line-height:1.08;text-wrap:balance}
+.destination[data-video] p{color:var(--d-ink);text-shadow:none;font-size:14px;line-height:1.55;margin:14px 0 20px}
+.destination[data-video] .actions{position:relative;isolation:isolate;background:transparent;margin-top:0;min-height:44px;gap:8px 16px;align-items:center;justify-content:space-between}
+/* Anchor the final fade to the actual action block, including wrapped links.
+   It reaches opaque 8px above that block and continues through bottom padding. */
+.destination[data-video] .actions::before{content:'';position:absolute;z-index:-1;pointer-events:none;top:-100px;bottom:calc(-1 * var(--d-padding));left:calc(-1 * var(--d-padding));right:calc(-1 * var(--d-padding));background:linear-gradient(180deg,rgba(var(--d-tone),0) 0,rgb(var(--d-tone)) 92px,rgb(var(--d-tone)) 100%)}
+.destination[data-video] h3,.destination[data-video] p{position:relative;z-index:3;pointer-events:none}
+.destination[data-video] .actions a{color:var(--d-ink);min-height:44px;display:inline-flex;align-items:center;font-size:12px;padding:8px 0;text-shadow:none}
+.destination[data-video] .actions a:focus-visible{outline:3px solid #583182;outline-offset:3px;border-radius:4px}
+.destination[data-video] .destination-play:focus-visible{outline:3px solid #583182;outline-offset:-5px}
+@media(max-width:680px){.destination[data-video]{--d-padding:24px;min-height:662px}.destination[data-video] .destination-top{padding-bottom:100px}}
+@media(max-width:360px){.destination[data-video]{--d-padding:22px}.destination[data-video] h3{font-size:28px}}
+
+/* Keep the portrait footage's headroom at every breakpoint. */
+.carousel .scene img,.carousel .scene-video{object-position:center top}
+@media(min-width:681px){
+ .scenes.carousel{height:auto;aspect-ratio:4/5;max-height:570px;margin:24px 22px 12px}
+ .carousel .scene{inset:12px 8px 18px}
+}
+html[data-theme="dark"]{color-scheme:dark}
+html[data-theme="dark"] body{color:#f1eff8;background:radial-gradient(ellipse at 0 0,#26395a 0,transparent 38%),radial-gradient(ellipse at 100% 12%,#48335c 0,transparent 44%),linear-gradient(155deg,#181e32,#252035 50%,#17383e)}
+html[data-theme="dark"] p{color:#d0d1df}
+html[data-theme="dark"] .headline,html[data-theme="dark"] .eyebrow,html[data-theme="dark"] .steps span{color:#c9afea}
+html[data-theme="dark"] .world-panel,html[data-theme="dark"] .division-grid article,html[data-theme="dark"] .contact form{background:#ffffff0c;border-color:#ffffff40}
+html[data-theme="dark"] .button,html[data-theme="dark"] .contact form button{background:#cbb4e8;color:#211b30}
+html[data-theme="dark"] .carousel-controls button{color:#f1eff8;background:#ffffff12}
+html[data-theme="dark"] .contact input,html[data-theme="dark"] .contact select,html[data-theme="dark"] .contact textarea{background:#151b2c;color:#f1eff8;border-color:#77718a}
+html[data-theme="dark"] .destination[data-video]{--d-tone:16,21,34;--d-ink:#fff;border-color:#ffffff70}
+html[data-theme="dark"] .destination[data-video] p{color:var(--d-ink)}
+.site-theme-toggle{justify-self:start;border:1px solid currentColor;border-radius:999px;background:transparent;color:inherit;padding:8px 18px;min-height:44px;cursor:pointer;font:inherit;font-size:13px}
+
+/* Resolve independent dark keyboard-focus contrast finding. */
+html[data-theme="dark"] .destination[data-video] .actions a:focus-visible,html[data-theme="dark"] .destination[data-video] .destination-play:focus-visible{outline-color:#d9c4f3}
