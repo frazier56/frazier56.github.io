@@ -183,7 +183,13 @@
       var i = items.indexOf(document.activeElement);
       if (e.key === 'ArrowDown') { e.preventDefault(); (items[i + 1] || items[0]).focus(); }
       if (e.key === 'ArrowUp') { e.preventDefault(); (items[i - 1] || items[items.length - 1]).focus(); }
+      /* Menu pattern: items are not in the Tab order. Tab / Shift+Tab closes the menu and
+         focus continues from the trigger to the next / previous control on the page. */
+      if (e.key === 'Tab') { closeMenus(); btn.focus(); }
     });
+    var tagItems = function () { menu.querySelectorAll('button,a').forEach(function (el) { el.setAttribute('tabindex', '-1'); }); };
+    tagItems();
+    btn.addEventListener('click', tagItems);
   }
   document.addEventListener('click', closeMenus);
   document.addEventListener('keydown', function (e) {
