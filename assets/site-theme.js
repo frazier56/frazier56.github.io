@@ -3,6 +3,8 @@
    this file adds the footer switch, keeps following the system setting until the visitor chooses, and
    labels the switch in all seven site languages. Loaded once per page. */
 (function () {
+  if (window.__owSiteThemeInit) return;   /* runs once even if the script is included twice */
+  window.__owSiteThemeInit = true;
   var root = document.documentElement, system = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
   var L = {
     en: ['Use light mode', 'Use dark mode'], co: ['Usar modo claro', 'Usar modo oscuro'], es: ['Usar modo claro', 'Usar modo oscuro'],
