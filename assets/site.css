@@ -255,6 +255,37 @@ html[data-theme="dark"] .vaia-living-name{color:#fff;text-shadow:0 0 5px #142030
  .hero-copy:has(> .vaia-hero-slot){padding-top:248px}
  .hero-copy > .vaia-hero-slot{top:0;left:12px}
 }
+/* Approved v10-1 app icon for header sizes below the 96px mark floor. */
+header .brand{gap:2px;min-height:48px;flex-shrink:0;letter-spacing:-.04em}
+header .brand img{width:48px;height:48px;object-fit:contain;flex:none}
+header .brand .brand-name{white-space:nowrap;color:#2c2622}
+header .brand .brand-world,header .brand-small{color:#1b49b8}
+header .brand .brand-lockup{display:block}
+@media(max-width:400px){header .brand{font-size:18px;gap:0}header .brand img{width:44px;height:44px}}
+/* Dark page (ONEWORLD 31, website 15): v10-1 kit dark-background colours and the DARK-MODE icon. */
+header .brand img.brand-icon-dark{display:none}
+html[data-theme="dark"] header .brand img.brand-icon-light{display:none}
+html[data-theme="dark"] header .brand img.brand-icon-dark{display:block}
+html[data-theme="dark"] header .brand .brand-name{color:#f1f1ee}
+html[data-theme="dark"] header .brand .brand-world,html[data-theme="dark"] header .brand-small{color:#93b4f7}
+
+/* S8 (Lee, 19 Oct 2026): on a phone the header is the flag and the menu, two plain icons, no circles.
+   Page links, Sign in / One ID and light-dark mode are inside the menu (built by ow-site.js). */
+.ow-navpop{display:none}
+.ow-plain{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;border-radius:10px;background:transparent;color:inherit;cursor:pointer}
+.ow-plain:focus-visible{outline:2px solid #6d4fc2;outline-offset:2px}
+html[data-theme="dark"] .ow-plain:focus-visible,html[data-theme="dark"] .ow-phone-menu #ow-lang-btn:focus-visible{outline-color:#d9c4f3}
+.ow-menu .ow-sep{height:1px;margin:4px 6px;background:#332a4914}
+@media(max-width:680px){
+html.ow-phone-menu header{flex-wrap:nowrap}
+html.ow-phone-menu header nav,html.ow-phone-menu #ow-acct-out,html.ow-phone-menu #ow-acct-in{display:none!important}
+html.ow-phone-menu .ow-navpop{display:block}
+html.ow-phone-menu .ow-tools{gap:2px}
+html.ow-phone-menu #ow-lang-btn{width:44px;min-width:44px;padding:0;border:0;border-radius:10px;background:transparent;box-shadow:none;color:inherit}
+html.ow-phone-menu #ow-lang-btn .ow-code{display:none}
+html.ow-phone-menu #ow-lang-btn .ow-flag{width:26px;height:18px}
+html.ow-phone-menu #ow-nav-menu{min-width:230px}
+}
 
 /* Selected D: append after all existing site CSS. Destination cards only. */
 .destination[data-video]{--d-padding:26px;--d-tone:237,241,245;--d-ink:#20283a;min-height:689px;background:rgb(var(--d-tone));border:1px solid #ffffffb0;border-radius:26px;overflow:hidden;isolation:isolate;padding:var(--d-padding)}

@@ -1,11 +1,12 @@
 /* Website light/dark theme (UI "full-page theme framing", approved 17 Oct; integrated by PUB30 18 Oct).
    Independent of One ID and app preferences. The early head script sets data-theme before first paint;
-   this file adds the footer switch, keeps following the system setting until the visitor chooses, and
-   labels the switch in all seven site languages. Loaded once per page. */
+   this file adds the footer switch (the phone menu reuses it) and labels it in all seven site languages.
+   LIGHT BY DEFAULT (Lee, 19 Oct 2026, 7:25 PM): the site no longer follows the phone's dark setting.
+   It opens light; dark only when the visitor picks it, and that choice is remembered. Loaded once per page. */
 (function () {
   if (window.__owSiteThemeInit) return;   /* runs once even if the script is included twice */
   window.__owSiteThemeInit = true;
-  var root = document.documentElement, system = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
+  var root = document.documentElement;
   var L = {
     en: ['Use light mode', 'Use dark mode'], co: ['Usar modo claro', 'Usar modo oscuro'], es: ['Usar modo claro', 'Usar modo oscuro'],
     de: ['Hellen Modus verwenden', 'Dunklen Modus verwenden'], ru: ['Светлая тема', 'Тёмная тема'],
@@ -17,7 +18,7 @@
   var button = document.createElement('button');
   button.type = 'button'; button.className = 'site-theme-toggle';
   function render() {
-    var dark = (choice || (system && system.matches ? 'dark' : 'light')) === 'dark';
+    var dark = choice === 'dark';
     root.setAttribute('data-theme', dark ? 'dark' : 'light');
     var t = L[window.OWL_LANG] || L.en;
     button.textContent = dark ? t[0] : t[1];
@@ -28,7 +29,6 @@
     try { localStorage.setItem('owl_site_theme', choice); } catch (e) {}
     render();
   });
-  if (system) { try { system.addEventListener('change', render); } catch (e) { system.addListener && system.addListener(render); } }
   document.addEventListener('ow:lang', render);
   var footer = document.querySelector('footer');
   if (footer && !footer.querySelector('.site-theme-toggle')) footer.appendChild(button);

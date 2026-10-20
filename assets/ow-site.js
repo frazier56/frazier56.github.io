@@ -386,6 +386,74 @@
     });
   }
 
+  /* ---------------- phone header: flag + menu, nothing else (S8, Lee 19 Oct 2026) ----------------
+     Lee, from his phone: the header showed a flag in a circle and a Sign in button, with no menu
+     and no light/dark switch. On a phone the header is now TWO plain icons — the language flag and
+     the menu — and the page links, Sign in (or the One ID items) and light/dark mode live inside
+     the menu. Desktop is unchanged. The menu is built each time it opens, from the header's own
+     links and the footer's own theme switch, so it is always in the current language and can never
+     drift from them. Without JavaScript nothing changes (the phone rules key off html.ow-phone-menu). */
+  var NAV_COPY = { en: 'Menu', co: 'Menú', es: 'Menú', de: 'Menü', ru: 'Меню', zh: '菜单', pt: 'Menu' };
+  var tools = document.querySelector('header .ow-tools');
+  var headNav = document.querySelector('header nav');
+  if (tools) {
+    var navPop = document.createElement('div');
+    navPop.className = 'ow-pop ow-navpop';
+    var navBtn = document.createElement('button');
+    navBtn.type = 'button'; navBtn.id = 'ow-nav-btn'; navBtn.className = 'ow-plain';
+    navBtn.setAttribute('aria-haspopup', 'menu'); navBtn.setAttribute('aria-expanded', 'false'); navBtn.setAttribute('aria-controls', 'ow-nav-menu');
+    navBtn.innerHTML = '<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+    var navMenu = document.createElement('div');
+    navMenu.id = 'ow-nav-menu'; navMenu.className = 'ow-menu'; navMenu.setAttribute('role', 'menu'); navMenu.hidden = true;
+    navPop.appendChild(navBtn); navPop.appendChild(navMenu); tools.appendChild(navPop);
+    ROOT.classList.add('ow-phone-menu');
+    var labelNav = function () { var t = NAV_COPY[current] || NAV_COPY.en; navBtn.setAttribute('aria-label', t); navMenu.setAttribute('aria-label', t); };
+    labelNav();
+    document.addEventListener('ow:lang', labelNav);
+    var item = function (tag, text, attrs) {
+      var el = document.createElement(tag);
+      el.setAttribute('role', 'menuitem');
+      if (tag === 'button') el.type = 'button';
+      for (var k in attrs) el.setAttribute(k, attrs[k]);
+      el.textContent = text;
+      return el;
+    };
+    var buildNavMenu = function () {
+      while (navMenu.firstChild) navMenu.removeChild(navMenu.firstChild);
+      if (headNav) headNav.querySelectorAll('a').forEach(function (a) {
+        navMenu.appendChild(item('a', (a.textContent || '').trim(), { href: a.getAttribute('href') }));
+      });
+      var sep = document.createElement('div'); sep.className = 'ow-sep'; sep.setAttribute('role', 'separator');
+      navMenu.appendChild(sep);
+      var s = session();
+      if (s) {
+        var name = displayName(s.user || {});
+        var who = document.createElement('div'); who.className = 'ow-who';
+        var st = document.createElement('strong'); st.textContent = name ? ui('ui.hi').replace('{name}', name) : ui('ui.signed_in');
+        var sp = document.createElement('span'); sp.textContent = (s.user && s.user.email) || 'One ID';
+        who.appendChild(st); who.appendChild(sp); navMenu.insertBefore(who, sep.nextSibling);
+        var open = acctMenu && acctMenu.querySelector('.ow-open');
+        navMenu.appendChild(item('a', ui('ui.open'), { href: open ? open.getAttribute('href') : 'https://app.oneworldlabs.ai/', 'data-act': 'open' }));
+        navMenu.appendChild(item('button', ui('ui.signout'), { 'data-act': 'signout', 'class': 'ow-signout' }));
+      } else if (acctOut) {
+        navMenu.appendChild(item('a', ui('ui.signin'), { href: acctOut.getAttribute('href'), 'data-act': 'signin' }));
+      }
+      var theme = document.querySelector('footer .site-theme-toggle');
+      if (theme) navMenu.appendChild(item('button', (theme.textContent || '').trim(), { 'data-act': 'theme' }));
+    };
+    navBtn.addEventListener('click', buildNavMenu);   /* registered BEFORE wireMenu, so the items exist when it opens and tags them */
+    wireMenu(navBtn, navMenu);
+    navMenu.addEventListener('click', function (e) {
+      var el = e.target.closest('a,button');
+      if (!el) return;
+      var act = el.getAttribute('data-act');
+      closeMenus();
+      if (act === 'signout') signOut();
+      if (act === 'theme') { var t = document.querySelector('footer .site-theme-toggle'); if (t) t.click(); navBtn.focus(); }
+    });
+    if (window.matchMedia) { var mq = matchMedia('(max-width:680px)'); var off = function () { if (!mq.matches && openMenu && openMenu.menu === navMenu) closeMenus(); }; try { mq.addEventListener('change', off); } catch (e) { mq.addListener && mq.addListener(off); } }
+  }
+
   /* ---------------- start ---------------- */
   current = 'en';
   renderAccount();
