@@ -1,30 +1,47 @@
 # One World Labs
 
-> One World Labs (oneworldlabs.ai) is an AI agency and app platform for small businesses and
-> freelancers. Two divisions: The Agency — done-for-you AI services our team builds and runs —
-> and The Platform — five apps that share one login (One ID).
+> One World Labs (https://www.oneworldlabs.ai/) makes One World: one app with one login (One ID) for finding events, work and homes, plus an agency that builds and runs AI services for small businesses. The app lives at https://app.oneworldlabs.ai/. It is one download, not a set of separate apps: each product below is a part of the same app, and a member opens only the parts they need.
 
-## The Agency (done-for-you AI services)
-- [OneVoice](https://onevoice.oneworldlabs.ai/): AI answering, scheduling & booking — an AI receptionist that answers every call 24/7, qualifies leads, and books appointments.
-- [OnePage](https://onepage.oneworldlabs.ai/): AI websites — built with AI, then hosted, updated, and managed for the client.
-- [OneApp](https://oneapp.oneworldlabs.ai/): a business's own mobile app, designed free, launched on the App Store and Google Play.
-- Reputation & review management, Search & AI visibility (SEO + AI-assistant visibility), customer win-back campaigns, missed-call text-back, AI chat for web & social, marketing & follow-up automation, custom AI agents & integrations.
-- Full menu: https://www.oneworldlabs.ai/services/
+Key facts:
+- Company: One World Labs. Consumer brand: One World.
+- Two divisions: The Platform (the One World app) and The Agency (done-for-you AI services).
+- One login, One ID, works across every part of the app.
+- Markets: the United States and Colombia (Medellín). Languages: English and Spanish, with German, Russian, Chinese and Portuguese (Brazil) site translations.
+- Contact: support@oneworldlabs.ai, +1-855-770-0200.
 
-## The Platform (apps, one login)
-- [OneJob](https://onejob.oneworldlabs.ai/): jobs marketplace — get hired and get paid, with verified reviews and contracts.
-- [OneScore](https://onescore.oneworldlabs.ai/): a free, verified professional credibility score — like a credit score for your work reputation.
-- [OneEvent](https://oneevent.oneworldlabs.ai/): create events, sell tickets, QR check-in.
-- [OneSocial](https://onesocial.oneworldlabs.ai/): all your platforms, one professional identity.
-- OneAgent: an AI workforce for professionals — coming soon.
-- Overview: https://www.oneworldlabs.ai/apps/
+## The Platform: the One World app
+
+Live now:
+- [OneEvent](https://www.oneworldlabs.ai/apps/oneevent/): discover local events, buy tickets, or host your own with ticket sales and QR check-in.
+- [OneJob](https://www.oneworldlabs.ai/apps/onejob/): find work or hire talent, with the contract, payment and reviews for each job in one place.
+- [OneHome](https://www.oneworldlabs.ai/apps/onehome/): homes to rent or buy, and direct contact with the hosts and agents behind them.
+
+Coming soon (built, in testing, not yet open to the public):
+- [OneSocial](https://www.oneworldlabs.ai/apps/onesocial/): your professional presence and social platforms in one profile.
+- [OneScore](https://www.oneworldlabs.ai/apps/onescore/): a reputation profile that brings together work, credentials and reviews.
+- [OnePay](https://www.oneworldlabs.ai/apps/onepay/): payments, transactions and receipts for small businesses.
+- [OneAgent](https://www.oneworldlabs.ai/apps/oneagent/): a real middleman who finds and negotiates work for you.
+- [One Business](https://www.oneworldlabs.ai/apps/onebusiness/): a business's services, leads and results in one workspace.
+
+Overview of all parts: https://www.oneworldlabs.ai/apps/
+
+## The Agency: done-for-you AI services
+- [OneVoice](https://www.oneworldlabs.ai/onevoice/): an AI receptionist that answers every call 24/7, books appointments, sends follow-up texts and updates your CRM.
+- [OnePage](https://www.oneworldlabs.ai/onepage/): an AI-built business website, then hosted, updated and managed for you.
+- [OneApp](https://oneapp.oneworldlabs.ai/): a business's own branded mobile app on the App Store and Google Play.
+- Also: reputation and review management, search and AI-assistant visibility, missed-call text-back, AI chat for web and social, marketing automation, and custom AI agents.
+- Full services menu: https://www.oneworldlabs.ai/services/
 
 ## Guides
-- Blog: https://www.oneworldlabs.ai/blog/
-- What is a OneScore: https://www.oneworldlabs.ai/blog/what-is-onescore/
-- AI answering for small business: https://www.oneworldlabs.ai/blog/ai-answering-service-small-business/
-- Getting more five-star reviews: https://www.oneworldlabs.ai/blog/get-more-five-star-reviews/
+- [Blog](https://www.oneworldlabs.ai/blog/)
+- [What is OneScore?](https://www.oneworldlabs.ai/blog/what-is-onescore/)
+- [AI answering services for small business](https://www.oneworldlabs.ai/blog/ai-answering-service-small-business/)
+- [How to get more five-star reviews](https://www.oneworldlabs.ai/blog/get-more-five-star-reviews/)
+- [Event planning tips for first-time hosts](https://www.oneworldlabs.ai/blog/event-planning-tips/)
+- [How DJs get booked more](https://www.oneworldlabs.ai/blog/how-djs-book-more-gigs/)
+- [Freelance contracts and payments](https://www.oneworldlabs.ai/blog/freelance-contracts-protected-payments/)
 
-## Company
-- Contact: contact@oneworldlabs.ai
-- Languages: English, Spanish (Colombia + Spain), German, Russian, Chinese, Portuguese (Brazil)
+## Optional
+- Founder: Lee Frazier, Founder and Chief Executive — https://founder.oneworldlabs.ai/
+- Privacy policy: https://app.oneworldlabs.ai/privacy
+- Terms of service: https://app.oneworldlabs.ai/terms
