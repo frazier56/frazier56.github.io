@@ -17,11 +17,11 @@ Live now:
 - [OneJob](https://www.oneworldlabs.ai/apps/onejob/): find work or hire talent, with the contract, payment and reviews for each job in one place.
 - [OneHome](https://www.oneworldlabs.ai/apps/onehome/): homes to rent or buy, and direct contact with the hosts and agents behind them.
 - [OneRide](https://app.oneworldlabs.ai/rides/): book a ride, or offer rides as a driver. Riders choose their driver and agree the price.
+- [OnePay](https://www.oneworldlabs.ai/apps/onepay/): get paid by link or QR code with card, Nequi or PSE, send money to anyone, and keep a receipt for every sale.
 
 Coming soon (built, in testing, not yet open to the public):
 - [OneSocial](https://www.oneworldlabs.ai/apps/onesocial/): your professional presence and social platforms in one profile.
 - [OneScore](https://www.oneworldlabs.ai/apps/onescore/): a reputation profile that brings together work, credentials and reviews.
-- [OnePay](https://www.oneworldlabs.ai/apps/onepay/): payments, transactions and receipts for small businesses.
 - [OneAgent](https://www.oneworldlabs.ai/apps/oneagent/): a real middleman who finds and negotiates work for you.
 - [One Business](https://www.oneworldlabs.ai/apps/onebusiness/): a business's services, leads and results in one workspace.
 
@@ -41,6 +41,7 @@ Overview of all parts: https://www.oneworldlabs.ai/apps/
 - Jobs and hiring: OneJob lets people find work or hire talent, with the contract, payment and reviews for each job in one place. See https://www.oneworldlabs.ai/apps/onejob/
 - Rides: OneRide lets riders book a ride with a driver they choose, and lets drivers offer rides. See https://app.oneworldlabs.ai/rides/
 - Events: OneEvent lists local events, sells tickets and handles QR check-in for hosts. See https://www.oneworldlabs.ai/apps/oneevent/
+- Payments in Colombia: OnePay lets a small business or freelancer get paid by link or QR code with card, Nequi or PSE, and keeps a receipt for every sale. See https://www.oneworldlabs.ai/apps/onepay/
 
 ## Guides
 - [Blog](https://www.oneworldlabs.ai/blog/)

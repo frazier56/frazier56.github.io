@@ -47,7 +47,7 @@ window.OWL_PUBLIC_COPY = {
       "directory_oneagent_tag": "Tu intermediario",
       "directory_oneagent_desc": "Alguien de tu lado que encuentra y negocia trabajo, y solo recibe una parte cuando tú cobras.",
       "directory_onepay_tag": "Pagos más sencillos",
-      "directory_onepay_desc": "Administra ventas, recibos, reembolsos y cierre diario desde tu teléfono. Efectivo y transferencias ya funcionan; el pago sin contacto se activará al conectar un proveedor certificado.",
+      "directory_onepay_desc": "Recibe pagos por enlace o código QR, con tarjeta, Nequi o PSE, y guarda un recibo de cada venta.",
       "directory_onebusiness_tag": "Todos los servicios, una cuenta",
       "directory_onebusiness_desc": "Las llamadas, el sitio web, los prospectos y los resultados de cada servicio que nos contratas, en un solo lugar."
     },
