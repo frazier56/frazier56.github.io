@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Child safety standards — One World Labs</title>
+<meta name="description" content="One World Labs standards against child sexual abuse and exploitation (CSAE): zero tolerance, in-app reporting, removal and reporting to authorities." />
+<meta name="robots" content="index,follow" />
+<link rel="icon" href="/logo-mark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0B0F1A; --paper:#FAFAF8; --teal:#0d9488;
+    --bg:#FFFFFF; --fg:#0B0F1A; --muted:#475569;
+    --line:#e2e8f0; --card:#FAFAF8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.55;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:28px 20px 72px}
+  header.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:34px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em}
+  .brand img{width:28px;height:28px;border-radius:8px}
+  .langs{display:flex;gap:6px}
+  .langs button{
+    font:inherit;font-weight:600;font-size:13px;cursor:pointer;
+    padding:7px 13px;border-radius:999px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);
+  }
+  .langs button[aria-pressed="true"]{
+    background:var(--teal);border-color:var(--teal);color:#fff;
+  }
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:800;
+    color:var(--teal);margin:0 0 10px;
+  }
+  h1{font-size:clamp(28px,6vw,40px);line-height:1.12;letter-spacing:-.025em;margin:0 0 14px;font-weight:800}
+  h2{font-size:19px;letter-spacing:-.015em;margin:38px 0 12px;font-weight:800}
+  p{margin:0 0 14px;color:var(--fg)}
+  .lede{font-size:17px;color:var(--muted);margin-bottom:6px}
+  ul{margin:0 0 14px;padding-left:20px}
+  li{margin:0 0 8px}
+  .card{
+    border:1px solid var(--line);background:var(--card);
+    border-radius:22px;padding:22px;margin:24px 0;
+  }
+  .cta{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--teal);color:#fff;text-decoration:none;
+    font-weight:800;font-size:16px;padding:15px 26px;border-radius:18px;
+    margin-top:6px;
+  }
+  .steps{counter-reset:s;list-style:none;padding:0;margin:6px 0 0}
+  .steps li{
+    counter-increment:s;position:relative;padding-left:40px;margin-bottom:14px;
+  }
+  .steps li::before{
+    content:counter(s);position:absolute;left:0;top:1px;
+    width:26px;height:26px;border-radius:999px;
+    background:var(--teal);color:#fff;
+    font-size:13px;font-weight:800;display:grid;place-items:center;
+  }
+  table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:14.5px}
+  th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;
+    background:var(--card);padding:2px 6px;border-radius:6px;
+  }
+  a{color:var(--teal)}
+  footer{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+  [data-lang]{display:none}
+  [data-lang].on{display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="bar">
+    <div class="brand"><img src="/logo-mark.png" alt="" />One World Labs</div>
+    <div class="langs">
+      <button type="button" data-set="en" aria-pressed="true">English</button>
+      <button type="button" data-set="es" aria-pressed="false">Español</button>
+    </div>
+  </header>
+
+  <!-- ============================ ENGLISH ============================ -->
+  <main data-lang="en" class="on">
+    <p class="eyebrow">One World</p>
+    <h1>Child safety standards</h1>
+    <p class="lede">One World Labs has zero tolerance for child sexual abuse and exploitation (CSAE) and child sexual abuse material (CSAM) anywhere in One World.</p>
+    <h2>Our standards</h2>
+    <ul>
+      <li>One World is for adults 18 and over. We remove accounts that belong to minors.</li>
+      <li>Any content, message, profile or behaviour that sexualises, grooms, exploits or endangers a child is forbidden, including CSAM of any kind, real or generated.</li>
+      <li>We remove violating content, permanently ban the accounts involved, and preserve evidence as the law requires.</li>
+      <li>We report CSAM and child exploitation to the National Center for Missing &amp; Exploited Children (NCMEC) in the United States and to the competent authorities in Colombia (Policía Nacional, Fiscalía General de la Nación and ICBF), and we cooperate with law enforcement.</li>
+    </ul>
+    <div class="card">
+      <h2 style="margin-top:0">Report a concern</h2>
+      <p>In the app: open the profile, post or message and use <strong>Report</strong>. Reports are reviewed by our team.</p>
+      <p>By email: <a href="mailto:leefrazier@oneworldlabs.ai?subject=Child%20safety%20report">leefrazier@oneworldlabs.ai</a>. If a child is in immediate danger, contact local emergency services first (911 in the US, 123 in Colombia).</p>
+    </div>
+    <h2>Contact for child safety</h2>
+    <p>Lee Frazier, Founder, One World Labs — <a href="mailto:leefrazier@oneworldlabs.ai">leefrazier@oneworldlabs.ai</a></p>
+  </main>
+
+  <!-- ============================ ESPAÑOL ============================ -->
+  <main data-lang="es">
+    <p class="eyebrow">One World</p>
+    <h1>Normas de seguridad infantil</h1>
+    <p class="lede">One World Labs tiene tolerancia cero con el abuso y la explotación sexual infantil (CSAE) y con el material de abuso sexual infantil (CSAM) en cualquier parte de One World.</p>
+    <h2>Nuestras normas</h2>
+    <ul>
+      <li>One World es para mayores de 18 años. Eliminamos las cuentas que pertenezcan a menores.</li>
+      <li>Está prohibido cualquier contenido, mensaje, perfil o conducta que sexualice, acose, explote o ponga en peligro a un menor, incluido cualquier tipo de CSAM, real o generado.</li>
+      <li>Eliminamos el contenido infractor, bloqueamos de forma permanente las cuentas involucradas y conservamos la evidencia según exige la ley.</li>
+      <li>Reportamos el CSAM y la explotación infantil al National Center for Missing &amp; Exploited Children (NCMEC) en Estados Unidos y a las autoridades competentes en Colombia (Policía Nacional, Fiscalía General de la Nación e ICBF), y colaboramos con las autoridades.</li>
+    </ul>
+    <div class="card">
+      <h2 style="margin-top:0">Reportar una preocupación</h2>
+      <p>En la app: abre el perfil, la publicación o el mensaje y usa <strong>Reportar</strong>. Nuestro equipo revisa cada reporte.</p>
+      <p>Por correo: <a href="mailto:leefrazier@oneworldlabs.ai?subject=Reporte%20de%20seguridad%20infantil">leefrazier@oneworldlabs.ai</a>. Si un menor está en peligro inmediato, contacta primero a los servicios de emergencia (123 en Colombia, 911 en EE. UU.).</p>
+    </div>
+    <h2>Contacto de seguridad infantil</h2>
+    <p>Lee Frazier, fundador, One World Labs — <a href="mailto:leefrazier@oneworldlabs.ai">leefrazier@oneworldlabs.ai</a></p>
+  </main>
+
+  <footer>
+    <span data-lang="en" class="on">One World is a One World Labs product. &nbsp;·&nbsp; <a href="/">Back to One World</a></span>
+    <span data-lang="es">One World es un producto de One World Labs. &nbsp;·&nbsp; <a href="/">Volver a One World</a></span>
+  </footer>
+</div>
+
+<script>
+  (function(){
+    var btns = document.querySelectorAll('.langs button');
+    function set(lang){
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-lang]').forEach(function(el){
+        el.classList.toggle('on', el.getAttribute('data-lang') === lang);
+      });
+      btns.forEach(function(b){
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-set') === lang));
+      });
+    }
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){ set(b.getAttribute('data-set')); });
+    });
+    // Colombia is the launch market — default to Spanish for Spanish-speaking browsers.
+    if ((navigator.language || '').toLowerCase().indexOf('es') === 0) set('es');
+  })();
+</script>
+</body>
+</html>
