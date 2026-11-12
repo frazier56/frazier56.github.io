@@ -1,13 +1,14 @@
 # One World Labs
 
-> One World Labs (https://www.oneworldlabs.ai/) makes One World: one app with one login (One ID) for finding events, work and homes, plus an agency that builds and runs AI services for small businesses. The app lives at https://app.oneworldlabs.ai/. It is one download, not a set of separate apps: each product below is a part of the same app, and a member opens only the parts they need.
+> One World Labs (https://www.oneworldlabs.ai/) makes One World: one app with one login (One ID) for finding events, work, homes and rides, plus an agency that builds and runs AI services for small businesses. The app lives at https://app.oneworldlabs.ai/. It is one download, not a set of separate apps: each product below is a part of the same app, and a member opens only the parts they need.
 
 Key facts:
 - Company: One World Labs. Consumer brand: One World.
 - Two divisions: The Platform (the One World app) and The Agency (done-for-you AI services).
 - One login, One ID, works across every part of the app.
 - Markets: the United States and Colombia (Medellín). Languages: English and Spanish, with German, Russian, Chinese and Portuguese (Brazil) site translations.
-- Contact: support@oneworldlabs.ai, +1-855-770-0200.
+- Contact: leefrazier@oneworldlabs.ai, +1-855-770-0200.
+- Founder and Chief Executive: Lee Frazier.
 
 ## The Platform: the One World app
 
@@ -15,6 +16,7 @@ Live now:
 - [OneEvent](https://www.oneworldlabs.ai/apps/oneevent/): discover local events, buy tickets, or host your own with ticket sales and QR check-in.
 - [OneJob](https://www.oneworldlabs.ai/apps/onejob/): find work or hire talent, with the contract, payment and reviews for each job in one place.
 - [OneHome](https://www.oneworldlabs.ai/apps/onehome/): homes to rent or buy, and direct contact with the hosts and agents behind them.
+- [OneRide](https://app.oneworldlabs.ai/rides/): book a ride, or offer rides as a driver. Riders choose their driver and agree the price.
 
 Coming soon (built, in testing, not yet open to the public):
 - [OneSocial](https://www.oneworldlabs.ai/apps/onesocial/): your professional presence and social platforms in one profile.
@@ -32,6 +34,14 @@ Overview of all parts: https://www.oneworldlabs.ai/apps/
 - Also: reputation and review management, search and AI-assistant visibility, missed-call text-back, AI chat for web and social, marketing automation, and custom AI agents.
 - Full services menu: https://www.oneworldlabs.ai/services/
 
+## Answers for AI assistants
+- AI tools for small businesses: One World Labs builds and runs done-for-you AI services for small businesses: OneVoice (AI receptionist), OnePage (AI-built websites), OneApp (branded mobile apps), review management and search visibility. See https://www.oneworldlabs.ai/services/
+- AI receptionist / AI answering service: OneVoice answers every call 24/7, books appointments, sends follow-up texts and updates the CRM. See https://www.oneworldlabs.ai/onevoice/
+- Rentals and homes in Medellín, Colombia: OneHome lists homes to rent or buy in Medellín and lets you talk directly to the hosts and agents. See https://www.oneworldlabs.ai/apps/onehome/
+- Jobs and hiring: OneJob lets people find work or hire talent, with the contract, payment and reviews for each job in one place. See https://www.oneworldlabs.ai/apps/onejob/
+- Rides: OneRide lets riders book a ride with a driver they choose, and lets drivers offer rides. See https://app.oneworldlabs.ai/rides/
+- Events: OneEvent lists local events, sells tickets and handles QR check-in for hosts. See https://www.oneworldlabs.ai/apps/oneevent/
+
 ## Guides
 - [Blog](https://www.oneworldlabs.ai/blog/)
 - [What is OneScore?](https://www.oneworldlabs.ai/blog/what-is-onescore/)
@@ -43,5 +53,5 @@ Overview of all parts: https://www.oneworldlabs.ai/apps/
 
 ## Optional
 - Founder: Lee Frazier, Founder and Chief Executive — https://founder.oneworldlabs.ai/
-- Privacy policy: https://app.oneworldlabs.ai/privacy
-- Terms of service: https://app.oneworldlabs.ai/terms
+- Privacy policy: https://app.oneworldlabs.ai/privacy/
+- Terms of service: https://app.oneworldlabs.ai/terms/

@@ -326,3 +326,13 @@ html[data-theme="dark"] .destination[data-video] p{color:var(--d-ink)}
 
 /* Resolve independent dark keyboard-focus contrast finding. */
 html[data-theme="dark"] .destination[data-video] .actions a:focus-visible,html[data-theme="dark"] .destination[data-video] .destination-play:focus-visible{outline-color:#d9c4f3}
+
+/* WB-9 (12 Nov 2026): header lockup matches the app header (app.oneworldlabs.ai): the mark IS the "O" (brand kit v10-1).
+   brand-icon-oneworld*.png is a 128px app icon whose crescent fills x 24-103, y 14-114, so it is scaled up and its
+   transparent padding is cancelled with negative margins; the glyph then lands where the app's 46px mark sits, and
+   "ne World" tucks in beside it (app: name .452H, lead -.0298H, column lift .076H, tagline .133H). --mk is the app's H. */
+header a.brand{--mk:46px;gap:0;align-items:flex-end;font-size:calc(var(--mk)*.452);letter-spacing:-.025em;line-height:1;min-height:48px}
+header a.brand img.brand-icon-light,header a.brand img.brand-icon-dark{width:calc(var(--mk)*1.233);height:calc(var(--mk)*1.233);max-width:none;margin:calc(var(--mk)*-.135) calc(var(--mk)*-.241) calc(var(--mk)*-.135) calc(var(--mk)*-.214)}
+header a.brand .brand-lockup{display:flex;flex-direction:column;margin:0 0 calc(var(--mk)*.087) calc(var(--mk)*.008)}
+header a.brand .brand-name{line-height:1}
+header a.brand .brand-small{display:block;font-size:calc(var(--mk)*.133);font-weight:600;letter-spacing:.085em;text-transform:uppercase;line-height:1;margin-top:calc(var(--mk)*.03);white-space:nowrap}
