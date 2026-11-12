@@ -7,6 +7,9 @@
  *
  * Custom design (the site draws its own cards from the same data):
  *   OneWorldEmbed.load("victoria-yoga", { lang: "es" }).then(function (data) { ... })
+ *   Reviews: show data.reviews (One World) and data.google as two separate blocks, each with its own
+ *   average and count. Never show data.summary (a blend of both) — Google's Places policy forbids
+ *   mixing Google ratings with non-Google ones. data.summary stays in the feed only for old pages.
  *
  * Options: data-lang="es|en" on the element (default: <html lang>), data-limit="6",
  * data-tz="America/Bogota" (time zone for events that have none), data-endpoint on the <script>.
@@ -120,7 +123,10 @@
       ".owe-who{display:flex;align-items:center;gap:10px;margin-top:auto}.owe-av{width:36px;height:36px;border-radius:50%;background:#ddd center/cover;display:grid;place-items:center;font-weight:600;flex-shrink:0}" +
       ".owe-src{font-size:.78em;opacity:.75;display:inline-flex;align-items:center;gap:4px}.owe-src a{color:inherit}" +
       ".owe-google{display:inline-flex;align-items:center;gap:4px;font-weight:600}.owe-g{flex-shrink:0}" +
-      ".owe-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;font-size:.9em}.owe-links a{color:var(--owe-accent);font-weight:600}";
+      ".owe-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;font-size:.9em}.owe-links a{color:var(--owe-accent);font-weight:600}" +
+      ".owe-who a{color:inherit}.owe-section+.owe-section{margin-top:28px;padding-top:24px;border-top:1px solid rgba(0,0,0,.12)}" +
+      ".owe-srcname{font-weight:700;font-size:1.05em;display:inline-flex;align-items:center}.owe-srcname .owe-g{width:20px;height:20px}" +
+      ".owe-section .owe-avg{font-size:1.5em}.owe-count{opacity:.75}.owe-empty a{color:var(--owe-accent);font-weight:600}";
     d.head.appendChild(s);
   }
 
@@ -144,29 +150,53 @@
     el.innerHTML = html;
   }
 
+  /** One source's header line: "One World 4.8 ★★★★★ (12)" or, for Google, the Google logo in place of the name. */
+  function sourceHead(name, avg, count, lang) {
+    var label = (name.indexOf("<") >= 0 ? "Google" : name) + " " + Number(avg).toFixed(1) + " / 5, " + count + " " + t(lang, count === 1 ? "review" : "reviews", count === 1 ? "reseña" : "reseñas");
+    return '<div class="owe-sum" aria-label="' + esc(label) + '"><span class="owe-srcname">' + name + '</span>' +
+      '<span class="owe-avg">' + esc(Number(avg).toFixed(1)) + '</span>' + stars(avg) + '<span class="owe-count">(' + esc(count) + ')</span></div>';
+  }
+  function reviewCard(r, lang) {
+    var av = r.author_photo ? '<span class="owe-av" style="background-image:url(&quot;' + esc(r.author_photo) + '&quot;)"></span>'
+      : '<span class="owe-av">' + esc((r.author || "·").charAt(0)) + '</span>';
+    var name = r.author_url ? '<a href="' + esc(r.author_url) + '" target="_blank" rel="noopener">' + esc(r.author) + '</a>' : esc(r.author);
+    var meta = r.source === "google"
+      ? '<span class="owe-src">' + (r.when ? esc(r.when) : "") + (r.url ? (r.when ? " · " : "") + '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(t(lang, "View on Google Maps", "Ver en Google Maps")) + '</a>' : "") + '</span>'
+      : "";
+    return '<figure class="owe-rev">' + stars(r.rating) + '<blockquote>' + esc(r.text) + '</blockquote>' +
+      '<figcaption class="owe-who">' + av + '<div><b>' + name + '</b>' + (meta ? '<br>' + meta : "") + '</div></figcaption></figure>';
+  }
+
+  /** Two separate blocks — One World, then Google — never one blended number (Google Places policy:
+   *  Google content stays visually separate and is not credited with non-Google content).
+   *  A source with no reviews is hidden. data.summary is still sent by the server for older custom pages. */
   function renderReviews(el, data, lang) {
-    var list = allReviews(data), s = data.summary || {}, g = data.google;
+    var all = allReviews(data), g = data.google, ow = data.reviews || {};
     var limit = parseInt(el.getAttribute("data-limit") || "6", 10) || 6;
+    var owList = all.filter(function (r) { return r.source === "oneworld"; });
+    var gList = all.filter(function (r) { return r.source === "google"; });
+    var owCount = Number(ow.count) || 0;
+    var gOn = !!(g && g.available && g.rating != null && (Number(g.count) || 0) > 0);
+    var gWrite = g && safeUrl(g.write_review_url), gAll = g && safeUrl(g.url);
     var html = "";
-    if (s.count) {
-      html += '<div class="owe-sum"><span class="owe-avg">' + esc(Number(s.average).toFixed(1)) + '</span>' + stars(s.average) +
-        '<span>' + esc(s.count + " " + t(lang, s.count === 1 ? "review" : "reviews", s.count === 1 ? "reseña" : "reseñas")) + '</span>' +
-        (s.sources && s.sources.indexOf("google") >= 0 ? '<span class="owe-src">' + esc(t(lang, "Includes", "Incluye")) + " " + googleMark() + '</span>' : "") + '</div>';
+    if (owCount && owList.length) {
+      html += '<section class="owe-section owe-section-ow" aria-label="One World">' +
+        sourceHead("One World", ow.average, owCount, lang) +
+        '<div class="owe-grid">' + owList.slice(0, limit).map(function (r) { return reviewCard(r, lang); }).join("") + '</div></section>';
     }
-    html += list.length ? '<div class="owe-grid">' + list.slice(0, limit).map(function (r) {
-      var av = r.author_photo ? '<span class="owe-av" style="background-image:url(&quot;' + esc(r.author_photo) + '&quot;)"></span>'
-        : '<span class="owe-av">' + esc((r.author || "·").charAt(0)) + '</span>';
-      var name = r.author_url ? '<a href="' + esc(r.author_url) + '" target="_blank" rel="noopener">' + esc(r.author) + '</a>' : esc(r.author);
-      var src = r.source === "google"
-        ? '<span class="owe-src">' + googleMark() + (r.url ? ' · <a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(t(lang, "View on Google Maps", "Ver en Google Maps")) + '</a>' : "") + '</span>'
-        : '<span class="owe-src">One World</span>';
-      return '<figure class="owe-rev">' + stars(r.rating) + '<blockquote>' + esc(r.text) + '</blockquote>' +
-        '<figcaption class="owe-who">' + av + '<div><b>' + name + '</b><br>' + src + '</div></figcaption></figure>';
-    }).join("") + '</div>' : '<p class="owe-empty">' + esc(t(lang, "No reviews yet", "Aún no hay reseñas")) + '</p>';
-    var links = [];
-    if (g && safeUrl(g.write_review_url)) links.push('<a href="' + esc(g.write_review_url) + '" target="_blank" rel="noopener">' + esc(t(lang, "Review on Google", "Reseñar en Google")) + '</a>');
-    if (g && safeUrl(g.url)) links.push('<a href="' + esc(g.url) + '" target="_blank" rel="noopener">' + esc(t(lang, "All Google reviews", "Todas las reseñas en Google")) + '</a>');
-    if (links.length) html += '<div class="owe-links">' + links.join("") + '</div>';
+    if (gOn) {
+      var links = [];
+      if (gWrite) links.push('<a href="' + esc(gWrite) + '" target="_blank" rel="noopener">' + esc(t(lang, "Write a review on Google", "Escribe una reseña en Google")) + '</a>');
+      if (gAll) links.push('<a href="' + esc(gAll) + '" target="_blank" rel="noopener">' + esc(t(lang, "All Google reviews", "Todas las reseñas en Google")) + '</a>');
+      html += '<section class="owe-section owe-section-google" aria-label="Google">' +
+        sourceHead(googleMark(), g.rating, Number(g.count) || 0, lang) +
+        (gList.length ? '<div class="owe-grid">' + gList.slice(0, limit).map(function (r) { return reviewCard(r, lang); }).join("") + '</div>' : "") +
+        (links.length ? '<div class="owe-links">' + links.join("") + '</div>' : "") + '</section>';
+    }
+    if (!html) {
+      html = '<p class="owe-empty">' + esc(t(lang, "No reviews yet", "Aún no hay reseñas")) +
+        (gWrite ? '<br><a href="' + esc(gWrite) + '" target="_blank" rel="noopener">' + esc(t(lang, "Write a review on Google", "Escribe una reseña en Google")) + '</a>' : "") + '</p>';
+    }
     el.innerHTML = html;
   }
 
@@ -189,10 +219,10 @@
   }
 
   w.OneWorldEmbed = {
-    version: "1.0.0",
+    version: "1.1.0",
     load: load,
     mountAll: mountAll,
-    helpers: { esc: esc, safeUrl: safeUrl, parts: parts, price: price, actionLabel: actionLabel, stars: stars, googleMark: googleMark, allReviews: allReviews },
+    helpers: { esc: esc, reviewCard: reviewCard, sourceHead: sourceHead, safeUrl: safeUrl, parts: parts, price: price, actionLabel: actionLabel, stars: stars, googleMark: googleMark, allReviews: allReviews },
   };
   if (d.readyState === "loading") d.addEventListener("DOMContentLoaded", mountAll); else mountAll();
   // Re-render when the site switches language (<html lang> changes).
