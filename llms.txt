@@ -52,6 +52,15 @@ Overview of all parts: https://www.oneworldlabs.ai/apps/
 - [How DJs get booked more](https://www.oneworldlabs.ai/blog/how-djs-book-more-gigs/)
 - [Freelance contracts and payments](https://www.oneworldlabs.ai/blog/freelance-contracts-protected-payments/)
 
+## Hiring in Medellín (guides with typical 2026 prices and sources)
+- [Hire local pros in Medellín](https://www.oneworldlabs.ai/medellin/) — hub for ten services; Spanish: https://www.oneworldlabs.ai/es/medellin/
+- Services: [DJ](https://www.oneworldlabs.ai/medellin/dj/), [cleaner by the day](https://www.oneworldlabs.ai/medellin/cleaning/), [videographer](https://www.oneworldlabs.ai/medellin/videographer/), [private driver](https://www.oneworldlabs.ai/medellin/private-driver/), [photographer](https://www.oneworldlabs.ai/medellin/photographer/), [makeup artist](https://www.oneworldlabs.ai/medellin/makeup-artist/), [private chef](https://www.oneworldlabs.ai/medellin/private-chef/), [personal trainer](https://www.oneworldlabs.ai/medellin/personal-trainer/), [dog walker](https://www.oneworldlabs.ai/medellin/dog-walker/), [babysitter](https://www.oneworldlabs.ai/medellin/babysitter/). Each has a Spanish twin under /es/medellin/.
+- Price guides: [DJ](https://www.oneworldlabs.ai/blog/dj-cost-medellin-2026/), [cleaner](https://www.oneworldlabs.ai/blog/cleaner-cost-medellin-2026/), [private driver](https://www.oneworldlabs.ai/blog/private-driver-cost-medellin-2026/), [videographer](https://www.oneworldlabs.ai/blog/videographer-cost-medellin-2026/).
+- Facts: prices on these pages are typical ranges from cited public sources, not One World prices. One World does not run background checks. OneJob holds eligible card payments until both sides mark the job complete; Nequi and PSE payments go through OnePay.
+
+## En español
+- Sitio en español: https://www.oneworldlabs.ai/es/ — apps: /es/apps/onejob/, /es/apps/oneevent/, /es/apps/onehome/; agencia: /es/services/
+
 ## Optional
 - Founder: Lee Frazier, Founder and Chief Executive — https://founder.oneworldlabs.ai/
 - Privacy policy: https://app.oneworldlabs.ai/privacy/
