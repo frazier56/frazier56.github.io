@@ -11,6 +11,7 @@
   var ROOT = document.documentElement;
   var P = ROOT.getAttribute('data-ow-prefix') || '';
   var V = ROOT.getAttribute('data-ow-v') || '1';
+  var STATIC = ROOT.getAttribute('data-ow-static');
 
   var LANGS = [
     { k: 'en', label: 'USA', short: 'EN', html: 'en', flag: 'us' },
@@ -48,6 +49,10 @@
     var s = null;
     try { s = localStorage.getItem('owl-lang'); } catch (e) {}
     function norm(v) { if (!v) return null; if (!find(v) && FALLBACK[v]) v = FALLBACK[v]; return find(v) ? v : null; }
+    /* WB-22 (12 Nov 2026): a page written in one language (the /es/ pages, the city pages) says
+       so with data-ow-static. It always shows in that language, whatever was saved: Google reads
+       the words in the HTML, and the <html lang> must never be rewritten to another language. */
+    if (STATIC && find(STATIC)) return STATIC;
     var fromQuery = norm(q);
     if (fromQuery) { store(fromQuery); return fromQuery; }   /* a valid ?owl_lang is a choice: keep it on the next page */
     return norm(s) || 'en';                                  /* an invalid one is ignored, never a reset */
@@ -112,7 +117,7 @@
       });
     });
     var L = find(k);
-    ROOT.setAttribute('lang', L ? L.html : 'en');
+    if (!STATIC) ROOT.setAttribute('lang', L ? L.html : 'en');   /* a one-language page keeps its own lang */
     current = k;
     window.OWL_LANG = k;
     renderLangButton();
@@ -219,7 +224,24 @@
       var b = e.target.closest('[data-lang]');
       if (!b) return;
       closeMenus();
-      setLang(b.getAttribute('data-lang'), true);
+      var k = b.getAttribute('data-lang');
+      /* WB-22: when this page has a real address in the chosen language (its hreflang
+         alternate), go there instead of translating in place. Colombia and España both use the
+         Spanish pages. A language with no page of its own, picked on a one-language page, opens
+         the English page translated in the browser, as before. */
+      var group = k === 'co' || k === 'es' ? 'es' : k === 'en' ? 'en' : null;
+      var alt = group && document.querySelector('link[rel="alternate"][hreflang="' + group + '"]');
+      if (!alt && STATIC) alt = document.querySelector('link[rel="alternate"][hreflang="x-default"]');
+      if (alt) {
+        var to = new URL(alt.getAttribute('href'), location.href);
+        if (to.pathname !== location.pathname) {
+          store(k);
+          if (!group) to.searchParams.set('owl_lang', k);
+          location.href = to.pathname + to.search + to.hash;
+          return;
+        }
+      }
+      setLang(k, true);
       langBtn.focus();
     });
   }
