@@ -37,7 +37,7 @@ APPS = [
 ]
 APP_BY = {a[0]: a for a in APPS}
 # pages that exist in Spanish (others fall back to the English page)
-ES_APP_PAGES = {"oneevent", "onejob", "onehome", "oneride", "onepay", "onebusiness", "onescore", "onesocial"}
+ES_APP_PAGES = {"oneevent", "onejob", "onehome", "oneride", "onepay", "onebusiness", "onescore", "oneagent"}
 
 # ── HOME ──────────────────────────────────────────────────────────────────────────────────────
 HOME = {
@@ -120,7 +120,6 @@ SCREENS = [
     ("onepay", "/assets/v2/img/scr-pay.jpg", {"en": ("Get paid by link or QR", "Card, Nequi or PSE", "Send link"), "es": ("Cobre con enlace o QR", "Tarjeta, Nequi o PSE", "Enviar enlace")}),
     ("onebusiness", "/assets/v2/img/scr-biz.jpg", {"en": ("Your business in one place", "Calls, website and your own app", ""), "es": ("Su negocio en un solo lugar", "Llamadas, página web y su app", "")}),
     ("onescore", "/assets/v2/img/scr-score.jpg", {"en": ("Your reputation", "Work, credentials and reviews", ""), "es": ("Su reputación", "Trabajo, credenciales y reseñas", "")}),
-    ("onesocial", "/assets/v2/img/scr-social.jpg", {"en": ("Your platforms, connected", "One professional profile", ""), "es": ("Sus redes, conectadas", "Un solo perfil profesional", "")}),
     ("oneagent", "/assets/v2/img/scr-agent.jpg", {"en": ("Your middleman", "Finds and negotiates the work", ""), "es": ("Su intermediario", "Busca y negocia el trabajo", "")}),
 ]
 
@@ -715,7 +714,7 @@ PAGES["onebusiness"] = {
 
 # ── BLOG ─────────────────────────────────────────────────────────────────────────────────────
 TOPICS = [("all", "All", "Todo"), ("business", "Small business", "Pequeño negocio"), ("hire", "Hire in Medellín", "Contratar en Medellín"),
-          ("work", "Get hired", "Conseguir trabajo"), ("events", "Events", "Eventos"), ("homes", "Homes", "Vivienda"), ("rides", "Rides", "Viajes")]
+          ("work", "Get hired", "Conseguir trabajo"), ("events", "Events", "Eventos"), ("homes", "Homes", "Vivienda"), ("rides", "Rides", "Viajes"), ("payments", "Getting paid", "Cobrar")]
 # EN slug -> (topics, app)
 POST_TAGS = {
     "ai-answering-service-small-business": ("business", "onebusiness"),
@@ -725,12 +724,12 @@ POST_TAGS = {
     "dj-cost-medellin-2026": ("hire events", "onejob"),
     "event-planning-tips": ("events", "oneevent"),
     "event-promoters-medellin-fill-events": ("events work", "oneevent"),
-    "freelance-contracts-protected-payments": ("work business", "onejob"),
+    "freelance-contracts-protected-payments": ("work business payments", "onejob"),
     "freelancer-or-agency": ("work business hire", "onejob"),
     "get-more-five-star-reviews": ("business", "onebusiness"),
     "host-networking-events-medellin": ("events", "oneevent"),
     "how-djs-book-more-gigs": ("work events", "onejob"),
-    "one-app-for-the-whole-job": ("work business", "onejob"),
+    "one-app-for-the-whole-job": ("work business payments", "onejob"),
     "plan-a-wedding-in-medellin-vendors": ("events hire", "onejob"),
     "price-photography-medellin": ("work", "onejob"),
     "private-chefs-catering-medellin": ("work", "onejob"),

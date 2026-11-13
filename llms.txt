@@ -20,12 +20,18 @@ Live now:
 - [OnePay](https://www.oneworldlabs.ai/apps/onepay/): get paid by link or QR code with card, Nequi or PSE, send money to anyone, and keep a receipt for every sale.
 
 Coming soon (built, in testing, not yet open to the public):
-- [OneSocial](https://www.oneworldlabs.ai/apps/onesocial/): your professional presence and social platforms in one profile.
 - [OneScore](https://www.oneworldlabs.ai/apps/onescore/): a reputation profile that brings together work, credentials and reviews.
 - [OneAgent](https://www.oneworldlabs.ai/apps/oneagent/): a real middleman who finds and negotiates work for you.
 - [One Business](https://www.oneworldlabs.ai/apps/onebusiness/): a business's services, leads and results in one workspace.
 
 Overview of all parts: https://www.oneworldlabs.ai/apps/
+
+## Works across every app (features, not separate apps)
+- [One profile](https://www.oneworldlabs.ai/features/one-profile/): one One ID login and one profile across every One World app.
+- [Payments](https://www.oneworldlabs.ai/features/payments/): card, Nequi or PSE by link or QR code through OnePay; eligible OneJob card payments held until both sides mark the job complete; One World is not a bank.
+- [Messages and reviews](https://www.oneworldlabs.ai/features/messaging-and-reviews/): one inbox across apps; reviews come from jobs done in the app.
+- [OneSocial](https://www.oneworldlabs.ai/features/onesocial/) (coming soon): your social profile, media and feed across One World. It is a feature, not a separate app.
+- All features: https://www.oneworldlabs.ai/features/
 
 ## The Agency: done-for-you AI services
 - [OneVoice](https://www.oneworldlabs.ai/onevoice/): an AI receptionist that answers every call 24/7, books appointments, sends follow-up texts and updates your CRM.
@@ -44,7 +50,8 @@ Overview of all parts: https://www.oneworldlabs.ai/apps/
 - Payments in Colombia: OnePay lets a small business or freelancer get paid by link or QR code with card, Nequi or PSE, and keeps a receipt for every sale. See https://www.oneworldlabs.ai/apps/onepay/
 
 ## Guides
-- [Blog](https://www.oneworldlabs.ai/blog/) — every guide, filterable by topic (small business, hiring in Medellín, getting hired, events, homes, rides), e.g. https://www.oneworldlabs.ai/blog/?topic=hire
+- Guides by topic: [small business](https://www.oneworldlabs.ai/blog/topic/business/), [hiring in Medellín](https://www.oneworldlabs.ai/blog/topic/hire/), [getting hired](https://www.oneworldlabs.ai/blog/topic/work/), [events](https://www.oneworldlabs.ai/blog/topic/events/), [homes](https://www.oneworldlabs.ai/blog/topic/homes/), [private drivers](https://www.oneworldlabs.ai/blog/topic/rides/), [getting paid](https://www.oneworldlabs.ai/blog/topic/payments/)
+- [Blog](https://www.oneworldlabs.ai/blog/) — every guide, filterable by topic (small business, hiring in Medellín, getting hired, events, homes, rides), e.g. https://www.oneworldlabs.ai/blog/topic/hire/
 - [What is OneScore?](https://www.oneworldlabs.ai/blog/what-is-onescore/)
 - [AI answering services for small business](https://www.oneworldlabs.ai/blog/ai-answering-service-small-business/)
 - [How to get more five-star reviews](https://www.oneworldlabs.ai/blog/get-more-five-star-reviews/)

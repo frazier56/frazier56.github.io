@@ -399,3 +399,25 @@ html[data-theme="dark"] .v2 .contact form button{background:linear-gradient(135d
 @media (max-width:640px){.v2 .stage{margin-left:0;margin-right:0}}
 .v2 .filters{margin-left:-32px;margin-right:-32px;padding:12px 32px;background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 @media (max-width:640px){.v2 .filters{margin-left:-20px;margin-right:-20px;padding:10px 20px}}
+
+/* ── PASS 3: feature rows, apps index, footer links ── */
+.v2 .app-links b{display:block;font-size:16px;font-weight:750;color:var(--ink);letter-spacing:-.01em}
+.v2 .feat-row{margin-top:64px}
+.v2 .feat-row h3{font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-.03em}
+.v2 .feat-row>p{margin-top:6px}
+.v2 .feat-row.compact{margin-top:36px}
+.v2 .feat-row.compact h3{font-size:17px;letter-spacing:-.01em}
+.v2 .feat-row.compact .app-links{grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.v2 .feat-row.compact .app-links a{padding:12px 14px}
+.v2 .sec-head+.cards+.feat-row{margin-top:56px}
+@media (min-width:981px){.v2 .cards.n4{grid-template-columns:repeat(2,1fr)}}
+body.v2 footer .foot-more{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:0 22px;font-size:13px}
+body.v2 footer .foot-more a{min-height:40px;display:inline-flex;align-items:center;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--teal)}
+@media (max-width:640px){.v2 .feat-row.compact .app-links{grid-template-columns:1fr}.v2 .feat-row{margin-top:48px}}
+.v2 .app-links b>span{display:inline;font-size:inherit;color:inherit;font-weight:inherit}
+.v2 .app-links b .badge{margin-left:8px;vertical-align:2px;font-style:normal;height:20px;font-size:11px;padding:0 8px}
+.v2 .app-links.rich{grid-template-columns:repeat(2,1fr)}
+.v2 .app-links.rich a{padding:12px 12px 12px 18px}
+.v2 .app-links>a>div{flex:1;min-width:0}
+.v2 .app-links img.thumb{width:96px;height:72px;object-fit:cover;border-radius:14px;flex:none}
+@media (max-width:640px){.v2 .app-links.rich{grid-template-columns:1fr}.v2 .app-links img.thumb{width:76px;height:64px}}

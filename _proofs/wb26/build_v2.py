@@ -13,6 +13,11 @@ import html, json, os, re, subprocess, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import (APP, APPS, APP_BY, ES_APP_PAGES, HOME, SCREENS, EXPLORER, STORY, HOME_GUIDES, PAGES,
                      JOB_NEEDS, NEED_NAMES, TOPICS, POST_TAGS, FALLBACK_IMG, BLOG)
+from content3 import APP_PAGES3, FEATURES, FEATURE_BY, FEAT_PAGES, FEAT_INDEX, APPS_INDEX, HUBS
+PAGES.update(APP_PAGES3)
+for _k, _n, _live, _img, _line in FEATURES:
+    if _k not in APP_BY:
+        APP_BY[_k] = (_k, _n["en"], "#0D9488", _live, None, _img, {"en": (_line["en"], _line["en"]), "es": (_line["es"], _line["es"])})
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 BASE = "05c5c9b"          # the commit whose header/footer we keep
@@ -107,6 +112,8 @@ def L(lg, h):
         return "/es/blog/%s/" % PAIR[m.group(1)]
     if h == "/blog/":
         return "/es/blog/"
+    if h.startswith("/features/") or h == "/apps/":
+        return "/es" + h
     if h.startswith("/medellin/") or h == "/services/":
         return "/es" + h
     return h
@@ -150,7 +157,11 @@ def tail(lg, home=False):
 
 def doc(lg, headhtml, main, home=False):
     p = PARTS[lg]
-    return headhtml + p["body"] + p["header"] + '<main id="main">' + main + "</main>" + (p["vaia_box"] if home else "") + p["footer"] + tail(lg, home)
+    more = {"en": (("/apps/", "All apps"), ("/features/", "Features"), ("/blog/", "Guides by topic")),
+            "es": (("/es/apps/", "Todas las apps"), ("/es/features/", "Funciones"), ("/es/blog/", "Guías por tema"))}[lg]
+    foot = p["footer"].replace("</footer>", '<nav class="foot-more" aria-label="%s">%s</nav></footer>' % (
+        "More" if lg == "en" else "Más", "".join('<a href="%s">%s</a>' % (h, E(t)) for h, t in more)))
+    return headhtml + p["body"] + p["header"] + '<main id="main">' + main + "</main>" + (p["vaia_box"] if home else "") + foot + tail(lg, home)
 
 
 def write(rel, s):
@@ -175,6 +186,8 @@ def img(src, alt="", cls="", lazy=True):
 
 
 def app_page(lg, k):
+    if k in FEATURE_BY:
+        return L(lg, "/features/%s/" % k)
     return L(lg, "/apps/%s/" % k)
 
 
@@ -258,8 +271,8 @@ def build_home(lg):
 
     steps = "".join('<div><b>0%d</b><h4>%s</h4><p>%s</p></div>' % (i + 1, E(t), E(p)) for i, (t, p) in enumerate(H["steps"]))
     oneid = ('<section class="sec"><div class="wrap oneid"><div class="oneid-mark"><img src="/mark-oneworld.png" alt="" loading="lazy"/></div>'
-             '<div><span class="eyebrow">%s</span><h2 style="font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-.045em;line-height:1.05">%s</h2><div class="steps3">%s</div></div></div></section>') % (
-        E(H["id_eyebrow"]), E(H["id_h2"]), steps)
+             '<div><span class="eyebrow">%s</span><h2 style="font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-.045em;line-height:1.05">%s</h2><div class="steps3">%s</div>%s</div></div></section>') % (
+        E(H["id_eyebrow"]), E(H["id_h2"]), steps, features_row(lg, compact=True))
     gp = POSTS[lg][HOME_GUIDES[lg][0]]
     gt, gapp = POST_TAGS.get(gp["en"] or "", ("", None))
     one = ('<a class="feature-post" href="%s">%s<div><em>%s</em><h3 class="fp-h">%s</h3><p>%s</p><time datetime="%s">%s</time></div></a>') % (
@@ -312,8 +325,10 @@ def side_html(lg, k, s, first):
     out.append('<div class="faq"><h3>%s</h3>%s</div>' % (E(faq_h), "".join('<details><summary>%s</summary><p>%s</p></details>' % (E(q), E(ans)) for q, ans in s["faq"])))
     ci, ch, cp = s["cta"]
     cacts = []
-    if a[3]:
+    if a[3] and a[4]:
         cacts.append('<a class="btn" href="%s">%s</a>' % (APP + a[4], E(HOME[lg]["open_x"].format(n=a[1]))))
+    elif a[3]:
+        cacts.append('<a class="btn" href="%s/">%s</a>' % (APP, E(HOME[lg]["open"])))
     else:
         cacts.append('<a class="btn" href="%s">%s</a>' % (L(lg, "/#contact"), E({"en": "Talk to us", "es": "Hablemos"}[lg])))
     out.append('<div class="cta-band">%s<div><h3>%s</h3><p>%s</p><div class="oc-act">%s</div></div></div><div class="side-end"></div>' % (img(ci, ""), E(ch), E(cp), "".join(cacts)))
@@ -333,7 +348,7 @@ def build_app(lg, k):
         s["id"], s["id"], s["id"], side_html(lg, k, s, i == 0)) for i, s in enumerate(P["sides"]))
     sides = ('<section data-sides><div class="seg-wrap"><div class="seg" role="tablist" aria-label="%s" data-at="0"><i aria-hidden="true"></i>%s</div></div>'
              '<div class="sides">%s</div></section>') % (E(P["seg"]), tabs, panes)
-    order = ["oneevent", "onejob", "onehome", "oneride", "onepay", "onebusiness"]
+    order = ["oneevent", "onejob", "onehome", "oneride", "onepay", "onebusiness", "onescore", "oneagent"]
     nxt = order[(order.index(k) + 1) % len(order)]
     gh = {"en": ("Guides", "Read before you start."), "es": ("Guías", "Léalas antes de empezar.")}[lg]
     nh = {"en": "Explore another app", "es": "Conozca otra app"}[lg]
@@ -341,6 +356,7 @@ def build_app(lg, k):
              '<div class="onecard" style="margin-top:72px"><div class="oc-top"><h3>%s</h3><a class="link" href="%s">%s</a></div><div class="oc-track">%s</div></div></div></section>') % (
         E(gh[0]), E(gh[1]), guide_cards(lg, P["guides"]), E(nh), L(lg, "/#destinations"),
         E({"en": "See all", "es": "Ver todas"}[lg]), one_card(lg, nxt, True))
+    after = after[:-len("</div></section>")] + features_row(lg) + "</div></section>"
     main = top + sides + after
     faqs = [q for s in P["sides"] for q in s["faq"]]
     path = "/apps/%s/" % k
@@ -348,7 +364,7 @@ def build_app(lg, k):
     ld = ldjson({"@context": "https://schema.org", "@graph": [
         {"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "One World", "item": page_url(lg, "/")},
-            {"@type": "ListItem", "position": 2, "name": "Apps" if lg == "en" else "Apps", "item": SITE + "/apps/"},
+            {"@type": "ListItem", "position": 2, "name": "Apps", "item": page_url(lg, "/apps/")},
             {"@type": "ListItem", "position": 3, "name": a[1], "item": url}]},
         {"@type": "SoftwareApplication", "name": a[1], "applicationCategory": "LifestyleApplication" if k not in ("onepay", "onebusiness") else ("FinanceApplication" if k == "onepay" else "BusinessApplication"),
          "operatingSystem": "Web", "url": url, "inLanguage": "en" if lg == "en" else "es-CO",
@@ -370,8 +386,7 @@ def build_blog(lg):
         for t in POST_TAGS.get(p["en"] or "", ("", None))[0].split():
             counts[t] += 1
     counts["all"] = len(posts)
-    chips = "".join('<a href="?topic=%s" data-topic="%s" aria-current="%s">%s<span>%d</span></a>' % (
-        t, t, "true" if t == "all" else "false", E(en if lg == "en" else es), counts[t]) for t, en, es in TOPICS if counts[t])
+    chips = topic_chips(lg, "all", counts)
     lead = posts[0]
 
     def tags(p):
@@ -397,7 +412,7 @@ def build_blog(lg):
         app_page(lg, k), mark(k), APP_BY[k][1], E(APP_BY[k][6][lg][0] + ("" if APP_BY[k][3] else " · " + HOME[lg]["soon"]))) for k in used)
     hub = '<a href="%s"><img src="%s" alt=""/><div><span style="font-size:16px;font-weight:750;color:var(--ink)">%s</span><span>%s</span></div></a>' % (B["hub"][2], mark("onejob"), E(B["hub"][0]), E(B["hub"][1]))
     main = ('<section class="blog-hero"><div class="wrap"><span class="eyebrow">Blog</span><h1>%s</h1><p class="lead">%s</p>'
-            '<nav class="filters" data-filters aria-label="%s">%s</nav>%s<div class="cards">%s</div><p class="empty" data-empty hidden>%s</p></div></section>'
+            '<nav class="filters" aria-label="%s">%s</nav>%s<div class="cards">%s</div><p class="empty" data-empty hidden>%s</p></div></section>'
             '<section class="sec"><div class="wrap"><div class="sec-head"><h2>%s</h2><p>%s</p></div><div class="app-links">%s%s</div></div></section>') % (
         E(B["h1"]), E(B["lead"]), E(B["filter_label"]), chips, feature, "".join(cards), E(B["empty"]), E(B["apps_h2"]), E(B["apps_p"]), applinks, hub)
     path = "/blog/"
@@ -411,7 +426,193 @@ def build_blog(lg):
          "blogPost": [{"@type": "BlogPosting", "headline": p["title"], "url": SITE + href(p), "datePublished": p["date"],
                        "image": SITE + p["img"], "description": p["desc"]} for p in posts]}]})
     h = head(lg, B["title"], B["desc"], path, "/og-cover.png", ld)
-    write("blog/index.html" if lg == "en" else "es/blog/index.html", doc(lg, h, main))
+    write("blog/index.html" if lg == "en" else "es/blog/index.html", doc(lg, h, blog_topic_redirect(lg) + main))
+
+
+# ── PASS 3 (13 Nov 2026): feature pages, apps index, OneSocial redirect, blog topic hubs ──────
+TOPIC_NAME = {t: {"en": en, "es": es} for t, en, es in TOPICS}
+
+
+def topic_url(lg, t):
+    return ("/blog/" if lg == "en" else "/es/blog/") + ("" if t == "all" else "topic/%s/" % t)
+
+
+def topic_counts(lg):
+    counts = {t: 0 for t, _e, _s in TOPICS}
+    for p in POSTS[lg].values():
+        for t in POST_TAGS.get(p["en"] or "", ("", None))[0].split():
+            counts[t] += 1
+    counts["all"] = len(POSTS[lg])
+    return counts
+
+
+def topic_chips(lg, cur, counts=None):
+    counts = counts or topic_counts(lg)
+    return "".join('<a href="%s" aria-current="%s">%s<span>%d</span></a>' % (
+        topic_url(lg, t), "true" if t == cur else "false", E(TOPIC_NAME[t][lg]), counts[t]) for t, _e, _s in TOPICS if counts[t])
+
+
+def link_row(lg, href, mk, title, line, soon=False, thumb=None):
+    b = ' <em class="badge">%s</em>' % E(HOME[lg]["soon"]) if soon else ""
+    t = '<img class="thumb" src="%s" alt="" loading="lazy"/>' % thumb if thumb else ""
+    return '<a href="%s"><img src="%s" alt=""/><div><b><span translate="no">%s</span>%s</b><span>%s</span></div>%s</a>' % (href, mk, E(title), b, E(line), t)
+
+
+def features_row(lg, compact=False, skip=None):
+    h = {"en": "Works across every app", "es": "Funciona en todas las apps"}[lg]
+    links = "".join(link_row(lg, L(lg, "/features/%s/" % k), mark(k), n[lg], line[lg], not live)
+                    for k, n, live, _i, line in FEATURES if k != skip)
+    return '<div class="feat-row%s"><h3>%s</h3><div class="app-links">%s</div></div>' % (" compact" if compact else "", E(h), links)
+
+
+def app_row(lg, k, thumb=False):
+    a = APP_BY[k]
+    return link_row(lg, app_page(lg, k), mark(k), a[1], a[6][lg][0], not a[3], a[5] if thumb else None)
+
+
+APP_ORDER = ["oneevent", "onejob", "onehome", "oneride", "onepay", "onebusiness", "onescore", "oneagent"]
+
+
+def crumbs(lg, items):
+    return {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "name": n, "item": SITE + u} for i, (n, u) in enumerate(items)]}
+
+
+def build_feature(lg, k):
+    P = FEAT_PAGES[k][lg]
+    f = FEATURE_BY[k]
+    badge = '<span class="badge live">%s</span>' % E(HOME[lg]["live"]) if f[2] else '<span class="badge">%s</span>' % E(HOME[lg]["soon"])
+    fc = FEAT_INDEX[lg]["crumb"]
+    top = ('<section class="ap-top"><div class="wrap"><a class="crumb" href="%s">← %s</a>'
+           '<div class="ap-id"><img src="%s" alt=""/><h1><span style="display:inline;font-size:inherit;font-weight:inherit;color:inherit;margin:0">%s</span><span>%s</span></h1>%s</div></div></section>') % (
+        L(lg, "/features/"), E(fc), mark(k), E(P["h1"]), E(P["h1s"]), badge)
+    body = '<section class="one-side"><div class="wrap">%s</div></section>' % side_html(lg, k, P["sides"][0], True)
+    gh = {"en": ("Guides", "Read more."), "es": ("Guías", "Lea más.")}[lg]
+    apps = '<div class="feat-row"><h3>%s</h3><div class="app-links">%s</div></div>' % (
+        E(FEAT_INDEX[lg]["apps_h2"]), "".join(app_row(lg, a) for a in APP_ORDER))
+    after = ('<section class="after"><div class="wrap"><div class="sec-head"><span class="eyebrow">%s</span><h2>%s</h2></div>%s%s%s</div></section>') % (
+        E(gh[0]), E(gh[1]), guide_cards(lg, P["guides"]), features_row(lg, skip=k), apps)
+    path = "/features/%s/" % k
+    pre = "" if lg == "en" else "/es"
+    faqs = P["sides"][0]["faq"]
+    ld = ldjson({"@context": "https://schema.org", "@graph": [
+        crumbs(lg, [("One World", pre + "/"), (fc, pre + "/features/"), (P["h1"], pre + path)]),
+        {"@type": "WebPage", "name": P["title"], "url": page_url(lg, path), "description": P["desc"], "inLanguage": "en" if lg == "en" else "es-CO",
+         "isPartOf": {"@id": SITE + "/#site"}, "about": {"@type": "Thing", "name": P["h1"]}},
+        {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faqs]}]})
+    write(("features/%s/index.html" if lg == "en" else "es/features/%s/index.html") % k,
+          doc(lg, head(lg, P["title"], P["desc"], path, P["sides"][0]["img"], ld), top + body + after))
+
+
+def build_feat_index(lg):
+    X = FEAT_INDEX[lg]
+    cards = "".join('<a class="gcard" href="%s">%s<div><em>%s</em><h3>%s</h3><p>%s</p></div></a>' % (
+        L(lg, "/features/%s/" % k), img(im), E(HOME[lg]["live"] if live else HOME[lg]["soon"]), E(n[lg]), E(line[lg]))
+        for k, n, live, im, line in FEATURES)
+    apps = '<div class="feat-row"><h3>%s</h3><p>%s</p><div class="app-links">%s</div></div>' % (
+        E(X["apps_h2"]), E(X["apps_p"]), "".join(app_row(lg, a) for a in APP_ORDER))
+    main = ('<section class="blog-hero"><div class="wrap"><span class="eyebrow">%s</span><h1>%s</h1><p class="lead">%s</p></div></section>'
+            '<section class="sec" style="padding-top:40px"><div class="wrap"><div class="cards n4">%s</div>%s</div></section>') % (
+        E(X["crumb"]), E(X["h1"]), E(X["lead"]), cards, apps)
+    pre = "" if lg == "en" else "/es"
+    ld = ldjson({"@context": "https://schema.org", "@graph": [
+        crumbs(lg, [("One World", pre + "/"), (X["crumb"], pre + "/features/")]),
+        {"@type": "CollectionPage", "name": X["title"], "url": page_url(lg, "/features/"), "description": X["desc"],
+         "mainEntity": {"@type": "ItemList", "numberOfItems": len(FEATURES), "itemListElement": [
+             {"@type": "ListItem", "position": i + 1, "url": page_url(lg, "/features/%s/" % f[0]), "name": f[1][lg]} for i, f in enumerate(FEATURES)]}}]})
+    write("features/index.html" if lg == "en" else "es/features/index.html",
+          doc(lg, head(lg, X["title"], X["desc"], "/features/", "/og-cover.png", ld), main))
+
+
+def build_apps_index(lg):
+    X = APPS_INDEX[lg]
+    live = [k for k in APP_ORDER if APP_BY[k][3]]
+    soon = [k for k in APP_ORDER if not APP_BY[k][3]]
+
+    def block(h, keys):
+        return '<div class="feat-row"><h3>%s</h3><div class="app-links rich">%s</div></div>' % (E(h), "".join(app_row(lg, k, True) for k in keys))
+    main = ('<section class="blog-hero"><div class="wrap"><span class="eyebrow">Apps</span><h1>%s</h1><p class="lead">%s</p>'
+            '<div class="hero-cta" style="justify-content:flex-start"><a class="btn glass" href="%s/">%s</a></div></div></section>'
+            '<section class="sec" style="padding-top:24px"><div class="wrap">%s%s%s</div></section>') % (
+        E(X["h1"]), E(X["lead"]), APP, E(HOME[lg]["open"]), block(X["live_h"], live), block(X["soon_h"], soon), features_row(lg))
+    pre = "" if lg == "en" else "/es"
+    ld = ldjson({"@context": "https://schema.org", "@graph": [
+        crumbs(lg, [("One World", pre + "/"), ("Apps", pre + "/apps/")]),
+        {"@type": "ItemList", "name": X["title"], "numberOfItems": len(APP_ORDER), "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "item": {"@type": "SoftwareApplication", "name": APP_BY[k][1], **({"alternateName": "One Business"} if k == "onebusiness" else {}), "url": SITE + app_page(lg, k),
+                                                               "applicationCategory": "LifestyleApplication", "operatingSystem": "Web"}} for i, k in enumerate(APP_ORDER)]}]})
+    write("apps/index.html" if lg == "en" else "es/apps/index.html",
+          doc(lg, head(lg, X["title"], X["desc"], "/apps/", "/og-cover.png", ld), main))
+
+
+def build_redirect(lg):
+    to = L(lg, "/features/onesocial/")
+    t = {"en": ("OneSocial has moved", "OneSocial is now part of every One World app.", "Go to OneSocial"),
+         "es": ("OneSocial cambió de lugar", "OneSocial ahora es parte de todas las apps de One World.", "Ir a OneSocial")}[lg]
+    html_ = ('<!DOCTYPE html>\n<html lang="%s"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>'
+             '<title>%s</title><link rel="canonical" href="%s"/><meta name="robots" content="noindex,follow"/>'
+             '<meta http-equiv="refresh" content="0; url=%s"/><script>location.replace(%s+location.hash)</script></head>'
+             '<body><p>%s <a href="%s">%s</a></p></body></html>\n') % (
+        "en" if lg == "en" else "es-CO", E(t[0]), SITE + to, to, json.dumps(to), E(t[1]), to, E(t[2]))
+    write("apps/onesocial/index.html" if lg == "en" else "es/apps/onesocial/index.html", html_)
+
+
+def build_hub(lg, t):
+    app, words = HUBS[t]
+    h1, title, desc, intro = words[lg]
+    posts = sorted([p for p in POSTS[lg].values() if t in POST_TAGS.get(p["en"] or "", ("", None))[0].split()],
+                   key=lambda p: (p["date"], 1 if (p["img"] or "").startswith("/blog/img/") else 0), reverse=True)
+    blog = "/blog/" if lg == "en" else "/es/blog/"
+    cards = guide_cards(lg, [p["slug"] for p in posts])
+    see = {"en": ("The app for this", "Works across every app"), "es": ("La app para esto", "Funciona en todas las apps")}[lg]
+    extra = link_row(lg, L(lg, "/features/payments/"), mark("payments"), FEATURE_BY["payments"][1][lg], FEATURE_BY["payments"][4][lg]) if t in ("payments", "business") else ""
+    main = ('<section class="blog-hero"><div class="wrap"><a class="crumb" href="%s">← Blog</a><h1 style="margin-top:12px">%s</h1><p class="lead">%s</p>'
+            '<nav class="filters" aria-label="%s">%s</nav>%s'
+            '<div class="feat-row"><h3>%s</h3><div class="app-links">%s%s</div></div></div></section>') % (
+        blog, E(h1), E(intro), E(BLOG[lg]["filter_label"]), topic_chips(lg, t), cards, E(see[0]), app_row(lg, app), extra)
+    path = "/blog/topic/%s/" % t
+    pre = "" if lg == "en" else "/es"
+    ld = ldjson({"@context": "https://schema.org", "@graph": [
+        crumbs(lg, [("One World", pre + "/"), ("Blog", pre + "/blog/"), (h1, pre + path)]),
+        {"@type": "CollectionPage", "name": title, "url": page_url(lg, path), "description": desc, "inLanguage": "en" if lg == "en" else "es-CO",
+         "isPartOf": {"@id": page_url(lg, "/blog/") + "#blog"},
+         "mainEntity": {"@type": "ItemList", "numberOfItems": len(posts), "itemListElement": [
+             {"@type": "ListItem", "position": i + 1, "url": SITE + blog + p["slug"] + "/", "name": p["title"]} for i, p in enumerate(posts)]}}]})
+    write(("blog/topic/%s/index.html" if lg == "en" else "es/blog/topic/%s/index.html") % t,
+          doc(lg, head(lg, title, desc, path, posts[0]["img"] if posts else "/og-cover.png", ld), main))
+
+
+def inject_posts(lg):
+    """Every guide links back to its topic hubs and its app page (idempotent)."""
+    root = "blog" if lg == "en" else "es/blog"
+    for slug, p in POSTS[lg].items():
+        f = os.path.join(ROOT, root, slug, "index.html")
+        s = open(f).read()
+        s = re.sub(r'<li data-hub="1">.*?</li>', "", s)
+        s = re.sub(r'<section class="related" data-hubs="1">.*?</section>', "", s, flags=re.S)
+        tags, app = POST_TAGS.get(p["en"] or "", ("", None))
+        more = {"en": "More guides: ", "es": "Más guías: "}[lg]
+        lis = "".join('<li data-hub="1"><a href="%s">%s%s</a></li>' % (topic_url(lg, t), more, E(HUBS[t][1][lg][0])) for t in tags.split() if t in HUBS)
+        if app:
+            a = APP_BY[app]
+            lis += '<li data-hub="1"><a href="%s">%s: %s</a></li>' % (app_page(lg, app), a[1], E(a[6][lg][0]))
+        s = re.sub(r'<ul class="wb-links" data-hubs-list="1">.*?</ul>', "", s, flags=re.S)
+        if 'class="wb-links"' in s:
+            i = s.index('class="wb-links"'); j = s.index("</ul>", i)
+            s = s[:j] + lis + s[j:]
+        elif '<section class="related">' in s:
+            i = s.index('<section class="related">'); j = s.index("</section>", i)
+            s = s[:j] + '<ul class="wb-links" data-hubs-list="1">%s</ul>' % lis + s[j:]
+        else:
+            h = {"en": "Keep exploring", "es": "Siga explorando"}[lg]
+            s = s.replace("</main>", '<section class="related" data-hubs="1"><h2>%s</h2><ul class="wb-links">%s</ul></section></main>' % (h, lis), 1)
+        open(f, "w").write(s)
+    print("linked", len(POSTS[lg]), lg, "guides to their hubs")
+
+
+def blog_topic_redirect(lg):
+    m = {t: topic_url(lg, t) for t in HUBS}
+    return '<script>(function(){try{var t=new URLSearchParams(location.search).get("topic"),m=%s;if(t&&m[t])location.replace(m[t])}catch(e){}})()</script>' % json.dumps(m)
 
 
 if __name__ == "__main__":
@@ -420,3 +621,11 @@ if __name__ == "__main__":
         for k in PAGES:
             build_app(lg, k)
         build_blog(lg)
+        for k in FEAT_PAGES:
+            build_feature(lg, k)
+        build_feat_index(lg)
+        build_apps_index(lg)
+        build_redirect(lg)
+        for t in HUBS:
+            build_hub(lg, t)
+        inject_posts(lg)
