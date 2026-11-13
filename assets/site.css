@@ -363,3 +363,7 @@ html[data-theme="dark"] .wb-page th,html[data-theme="dark"] .wb-page td{border-c
 html[data-theme="dark"] .wb-cta .wb-chips a{background:#ffffff12;border-color:#ffffff40;color:#f1eff8}
 .wb-page .wb-nw{white-space:nowrap}
 @media(max-width:680px){.wb-page table,.wb-page tbody,.wb-page tr,.wb-page td{display:block;width:100%}.wb-page thead{display:none}.wb-page tr{padding:12px 0;border-bottom:1px solid #8a83a64d}.wb-page td{border:0;padding:2px 0}.wb-page td:first-child{font-size:13px;font-weight:700}.wb-page td:nth-child(2){font-size:17px}.wb-page th:last-child,.wb-page td:last-child{min-width:0}html[data-theme="dark"] .wb-page tr{border-color:#ffffff30}}
+.wb-page ul.wb-list{list-style:none;padding:0}
+.wb-page ul.wb-list li{padding:14px 0;border-bottom:1px solid #8a83a64d;margin:0}
+html[data-theme="dark"] .wb-page ul.wb-list li{border-color:#ffffff30}
+.wb-page>img{aspect-ratio:16/9;object-fit:cover;height:auto}

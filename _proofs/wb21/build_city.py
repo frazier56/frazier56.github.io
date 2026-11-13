@@ -9,6 +9,7 @@ import html, json, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import SERVICES, PROS, S, UPDATED, UPDATED_EN, UPDATED_ES, APP_FIND, PROFILE
 from articles import ARTICLES
+from blog_port import POSTS
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SITE = "https://www.oneworldlabs.ai"
@@ -257,7 +258,7 @@ AL = {
  "en": dict(back="Back to the blog", backhref="/blog/", eyebrow="Price guide · Medellín · <span class=\"wb-nw\">%s</span>" % UPDATED_EN, short="Short answer",
             table="Typical 2026 prices", faq="Questions people ask", sources="Sources", city="Hire in Medellín",
             hire="See the %s page for Medellín", disclaimer="Prices are typical ranges from the public sources listed below, checked on %s. They change over time and each pro sets their own price. One World does not set or guarantee any of these prices." % UPDATED_EN),
- "es": dict(back="Medellín", backhref="/es/medellin/", eyebrow="Guía de precios · Medellín · <span class=\"wb-nw\">%s</span>" % UPDATED_ES, short="Respuesta corta",
+ "es": dict(back="Volver al blog", backhref="/es/blog/", eyebrow="Guía de precios · Medellín · <span class=\"wb-nw\">%s</span>" % UPDATED_ES, short="Respuesta corta",
             table="Precios habituales 2026", faq="Preguntas frecuentes", sources="Fuentes", city="Contratar en Medellín",
             hire="Vea la página de %s en Medellín", disclaimer="Los precios son rangos habituales tomados de las fuentes públicas que se listan abajo, revisadas el %s. Cambian con el tiempo y cada profesional fija su propio precio. One World no fija ni garantiza ninguno de estos precios." % UPDATED_ES),
 }
@@ -278,7 +279,7 @@ def article_page(a, lang):
                E(l["faq"]), "".join("<h3>%s</h3><p>%s</p>" % (E(q), E(x)) for q, x in faq),
                E(l["city"]), city_path(lang, svc["slug"]), E(l["hire"] % svc[lang]["name"]), svc_links(lang, svc["slug"]),
                E(l["sources"]), srcs))
-    graph = [crumbs(lang, [(T[lang]["home"], "/" if lang == "en" else "/es/"), ("Blog" if lang == "en" else "Medellín", "/blog/" if lang == "en" else "/es/medellin/"), (c["h1"], path)]),
+    graph = [crumbs(lang, [(T[lang]["home"], "/" if lang == "en" else "/es/"), ("Blog", "/blog/" if lang == "en" else "/es/blog/"), (c["h1"], path)]),
              {"@type": "BlogPosting", "headline": c["h1"], "description": c["desc"], "datePublished": UPDATED, "dateModified": UPDATED,
               "inLanguage": T[lang]["html"], "author": {"@type": "Organization", "name": "One World Labs", "@id": SITE + "/#org"},
               "publisher": {"@id": SITE + "/#org"}, "mainEntityOfPage": SITE + path,
@@ -287,12 +288,60 @@ def article_page(a, lang):
     return write(path, page(lang, path, art_path("en", a), art_path("es", a), c["title"], c["desc"], body, graph, "article"))
 
 
+def post_path(lang, b):
+    return ("/blog/%s/" % b["slug_en"]) if lang == "en" else ("/es/blog/%s/" % b["slug_es"])
+
+
+APPNAME = {"https://app.oneworldlabs.ai/jobs": "OneJob", "https://app.oneworldlabs.ai/events": "OneEvent", "https://app.oneworldlabs.ai/home": "OneHome"}
+
+
+def post_page(b, lang):
+    c = b[lang]; path = post_path(lang, b)
+    img = b["img"] if b["img"].startswith("/") else "/blog/img/" + b["img"]
+    secs = "".join("<h2>%s</h2>%s" % (E(h), x) for h, x in c["sections"])
+    app = APPNAME[b["app"]]
+    open_txt = ("Open %s ↗" if lang == "en" else "Abrir %s ↗") % app
+    rel = []
+    if b.get("city"):
+        svc = next(s for s in SERVICES if s["slug"] == b["city"])
+        rel.append('<a href="%s">%s</a>' % (city_path(lang, b["city"]), E(svc[lang]["h1"])))
+    rel.append('<a href="%s">%s</a>' % (city_path(lang), E(HUB[lang]["h1"])))
+    more = "Keep exploring" if lang == "en" else "Siga explorando"
+    back = ("/blog/", "Back to the blog") if lang == "en" else ("/es/blog/", "Volver al blog")
+    eyebrow = '%s · <span class="wb-nw">%s</span>' % (E(c["cat"]), UPDATED_EN if lang == "en" else UPDATED_ES)
+    body = ('<article class="blog-article wb-page"><nav><a href="%s">← %s</a></nav><div><span>%s</span></div><h1>%s</h1><p>%s</p>'
+            '<img alt="" src="%s" width="1024" height="576"/><div>%s<p class="actions"><a class="button" href="%s">%s</a></p>'
+            '<h2>%s</h2><ul class="wb-links">%s</ul></div></article>'
+            % (back[0], E(back[1]), eyebrow, E(c["h1"]), E(c["dek"]), img, secs, b["app"], E(open_txt), E(more), "".join("<li>%s</li>" % r for r in rel)))
+    graph = [crumbs(lang, [(T[lang]["home"], "/" if lang == "en" else "/es/"), ("Blog", back[0]), (c["h1"], path)]),
+             {"@type": "BlogPosting", "headline": c["h1"], "description": c["desc"], "image": SITE + img,
+              "datePublished": UPDATED, "dateModified": UPDATED, "inLanguage": T[lang]["html"],
+              "author": {"@type": "Organization", "name": "One World Labs", "@id": SITE + "/#org"},
+              "publisher": {"@id": SITE + "/#org"}, "mainEntityOfPage": SITE + path}]
+    return write(path, page(lang, path, post_path("en", b), post_path("es", b), c["title"], c["desc"], body, graph, "article"))
+
+
+def es_blog_index():
+    path = "/es/blog/"
+    items = [(art_path("es", a), a["es"]["h1"], a["es"]["dek"]) for a in ARTICLES] + [(post_path("es", b), b["es"]["h1"], b["es"]["dek"]) for b in POSTS]
+    cards = "".join('<li><a href="%s"><strong>%s</strong></a><br/>%s</li>' % (u, E(h), E(d)) for u, h, d in items)
+    body = ('<article class="blog-article wb-page"><div><span>Blog de One World</span></div><h1>Guías en español</h1>'
+            '<p>Precios, contratación y consejos prácticos para Medellín.</p><div><ul class="wb-list">%s</ul>'
+            '<p><a href="/blog/">English guides →</a></p></div></article>' % cards)
+    graph = [crumbs("es", [("Inicio", "/es/"), ("Blog", path)]),
+             {"@type": "Blog", "name": "Blog de One World", "url": SITE + path, "inLanguage": "es-CO",
+              "blogPost": [{"@type": "BlogPosting", "headline": h, "url": SITE + u} for u, h, d in items]}]
+    return write(path, page("es", path, None, None, "Blog de One World: guías en español | One World", "Guías en español sobre precios y contratación de profesionales en Medellín.", body, graph))
+
+
 def all_paths():
     out = []
     for lang in ("en", "es"):
         out.append(city_path(lang))
         out += [city_path(lang, s["slug"]) for s in SERVICES]
         out += [art_path(lang, a) for a in ARTICLES]
+        out += [post_path(lang, b) for b in POSTS]
+    out.append('/es/blog/')
     return out
 
 
@@ -302,4 +351,6 @@ if __name__ == "__main__":
         hub_page(lang); n += 1
         for s in SERVICES: city_page(s, lang); n += 1
         for a in ARTICLES: article_page(a, lang); n += 1
+        for b in POSTS: post_page(b, lang); n += 1
+    es_blog_index(); n += 1
     print("pages written:", n)
