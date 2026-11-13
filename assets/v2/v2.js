@@ -136,4 +136,10 @@
     if (!links.some(function (a) { return a.getAttribute('data-topic') === t; })) t = 'all';
     apply(t, false);
   });
+
+  /* the chosen topic chip starts in view, even when it sits far right on a phone */
+  $$('.filters').forEach(function (bar) {
+    var on = $('a[aria-current="true"]', bar); if (!on) return;
+    bar.scrollLeft = Math.max(0, on.offsetLeft - bar.offsetLeft - 20);
+  });
 })();
