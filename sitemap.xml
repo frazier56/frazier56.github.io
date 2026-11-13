@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SEO 1, 10 Nov 2026: every URL here answers 200 and carries a self-canonical (onepage after the head edit). /founder/ removed: it 301s to founder.oneworldlabs.ai, and a sitemap must list only final URLs. Added /apps/onebusiness/, /apps/onepay/, /onevoice/, /onepage/. Blog lastmod = each post's dateModified; pages = last deploy (20 Oct). -->
 <!-- WB-21/22/25, 12 Nov 2026: Spanish pages (/es/), Medellín service pages and price guides added; each pair is linked with hreflang in its HTML. -->
+<!-- Website v2, 13 Nov 2026: new homepage, two-sided app pages (adds /apps/oneride/ and /es/apps/oneride/, /es/apps/onepay/), blog index with topic filters (adds /es/blog/). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.oneworldlabs.ai/</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://www.oneworldlabs.ai/apps/</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.oneworldlabs.ai/services/</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/apps/oneevent/</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/apps/onejob/</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/apps/onehome/</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/apps/oneevent/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/apps/onejob/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/apps/onehome/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.oneworldlabs.ai/apps/onesocial/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.oneworldlabs.ai/apps/onescore/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/apps/onepay/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/apps/onepay/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.oneworldlabs.ai/apps/oneagent/</loc><lastmod>2026-10-20</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/apps/onebusiness/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/apps/onebusiness/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.oneworldlabs.ai/onevoice/</loc><lastmod>2026-10-20</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.oneworldlabs.ai/onepage/</loc><lastmod>2026-10-20</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/blog/</loc><lastmod>2026-11-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/blog/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.oneworldlabs.ai/blog/what-is-onescore/</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.oneworldlabs.ai/blog/ai-answering-service-small-business/</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.oneworldlabs.ai/blog/get-more-five-star-reviews/</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.oneworldlabs.ai/blog/event-planning-tips/</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.oneworldlabs.ai/blog/how-djs-book-more-gigs/</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.oneworldlabs.ai/blog/freelance-contracts-protected-payments/</loc><lastmod>2026-08-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/es/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/es/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.oneworldlabs.ai/es/services/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/es/apps/onejob/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/es/apps/oneevent/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/es/apps/onehome/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/es/apps/onejob/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/es/apps/oneevent/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/es/apps/onehome/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.oneworldlabs.ai/es/apps/onesocial/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.oneworldlabs.ai/es/apps/onescore/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/es/apps/onebusiness/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/es/apps/onebusiness/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.oneworldlabs.ai/medellin/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.oneworldlabs.ai/medellin/dj/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.oneworldlabs.ai/medellin/cleaning/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -84,5 +85,8 @@
   <url><loc>https://www.oneworldlabs.ai/es/blog/una-app-para-todo-el-trabajo/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.oneworldlabs.ai/es/blog/limpieza-para-anfitriones-medellin/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.oneworldlabs.ai/es/blog/arrendar-en-medellin-guia/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.oneworldlabs.ai/es/blog/</loc><lastmod>2026-11-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/es/blog/</loc><lastmod>2026-11-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/apps/oneride/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/es/apps/oneride/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.oneworldlabs.ai/es/apps/onepay/</loc><lastmod>2026-11-13</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
