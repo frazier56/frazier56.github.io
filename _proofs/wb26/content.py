@@ -55,7 +55,7 @@ HOME = {
         "ex_p": "Pick one. We take you to the right app.",
         "back": "All categories",
         "via": "in",
-        "learn": "Learn more",
+        "learn": "Learn more", "learn_x": "Learn more about {n}",
         "oc_h3": "Explore the apps",
         "prev": "Previous app", "next": "Next app",
         "soon": "Coming soon", "live": "Open now",
@@ -73,7 +73,7 @@ HOME = {
                   ("Come back anytime", "Your profile, messages and history follow you, on phone or computer.")],
         "g_eyebrow": "Guides",
         "g_h2": "Learn from people doing the work.",
-        "g_all": "All guides",
+        "g_all": "View all",
     },
     "es": {
         "title": "One World | Herramientas de IA para que su pequeño negocio crezca",
@@ -89,7 +89,7 @@ HOME = {
         "ex_p": "Elija una opción. Lo llevamos a la app indicada.",
         "back": "Todas las categorías",
         "via": "en",
-        "learn": "Ver más",
+        "learn": "Ver más", "learn_x": "Ver más sobre {n}",
         "oc_h3": "Conozca las apps",
         "prev": "App anterior", "next": "App siguiente",
         "soon": "Próximamente", "live": "Abierta",
@@ -107,7 +107,7 @@ HOME = {
                   ("Vuelva cuando quiera", "Su perfil, sus mensajes y su historial lo acompañan, en el celular o el computador.")],
         "g_eyebrow": "Guías",
         "g_h2": "Aprenda de quienes hacen el trabajo.",
-        "g_all": "Todas las guías",
+        "g_all": "Ver todas",
     },
 }
 
@@ -118,6 +118,10 @@ SCREENS = [
     ("onehome", "/assets/v2/img/scr-home.jpg", {"en": ("Furnished apartment", "Monthly rent · El Poblado", "Request"), "es": ("Apartamento amoblado", "Arriendo mensual · El Poblado", "Solicitar")}),
     ("oneride", "/assets/v2/img/scr-ride.jpg", {"en": ("A driver you choose", "You agree the price first", "Request ride"), "es": ("Un conductor que usted elige", "Acuerdan el precio antes", "Pedir viaje")}),
     ("onepay", "/assets/v2/img/scr-pay.jpg", {"en": ("Get paid by link or QR", "Card, Nequi or PSE", "Send link"), "es": ("Cobre con enlace o QR", "Tarjeta, Nequi o PSE", "Enviar enlace")}),
+    ("onebusiness", "/assets/v2/img/scr-biz.jpg", {"en": ("Your business in one place", "Calls, website and your own app", ""), "es": ("Su negocio en un solo lugar", "Llamadas, página web y su app", "")}),
+    ("onescore", "/assets/v2/img/scr-score.jpg", {"en": ("Your reputation", "Work, credentials and reviews", ""), "es": ("Su reputación", "Trabajo, credenciales y reseñas", "")}),
+    ("onesocial", "/assets/v2/img/scr-social.jpg", {"en": ("Your platforms, connected", "One professional profile", ""), "es": ("Sus redes, conectadas", "Un solo perfil profesional", "")}),
+    ("oneagent", "/assets/v2/img/scr-agent.jpg", {"en": ("Your middleman", "Finds and negotiates the work", ""), "es": ("Su intermediario", "Busca y negocia el trabajo", "")}),
 ]
 
 # explorer categories: id, image, app, {lang: (name, small, panel p)}, options [(href, {lang: label})], kind
@@ -197,7 +201,7 @@ PAGES["onehome"] = {
     "en": S(h1="OneHome", h1s="Homes to rent or buy in Medellín",
             title="OneHome | Rent, buy or list a home in Medellín",
             desc="Find an apartment or house to rent or buy in Medellín and talk directly to the host or agent. Agents and owners can list homes and manage requests in one app.",
-            crumb="What are you looking for?", seg="Choose your side",
+            crumb="All apps", seg="Choose your side",
             sides=[
                 S(id="find", tab="Rent or buy", h2="Find a place to call home.",
                   lead="Homes to rent or buy in Medellín. See the photos and the price, then talk directly to the host or agent.",
@@ -236,7 +240,7 @@ PAGES["onehome"] = {
     "es": S(h1="OneHome", h1s="Vivienda para arrendar o comprar en Medellín",
             title="OneHome | Arriende, compre o publique vivienda en Medellín",
             desc="Encuentre un apartamento o una casa para arrendar o comprar en Medellín y hable directamente con el anfitrión o el agente. Agentes y propietarios publican y gestionan solicitudes en una sola app.",
-            crumb="¿Qué está buscando?", seg="Elija su lado",
+            crumb="Todas las apps", seg="Elija su lado",
             sides=[
                 S(id="find", tab="Arrendar o comprar", h2="Encuentre un lugar para vivir.",
                   lead="Vivienda para arrendar o comprar en Medellín. Vea las fotos y el precio, y hable directamente con el anfitrión o el agente.",
@@ -286,7 +290,7 @@ PAGES["onejob"] = {
     "en": S(h1="OneJob", h1s="Hire a local pro, or get hired",
             title="OneJob | Hire local pros or get hired in Medellín",
             desc="Hire cleaners, DJs, videographers, chefs and more in Medellín, or advertise your service and get booked. The contract, payment and reviews for each job live in one place.",
-            crumb="What are you looking for?", seg="Choose your side",
+            crumb="All apps", seg="Choose your side",
             sides=[
                 S(id="hire", tab="Hire a pro", h2="Hire a local pro.",
                   lead="Cleaners, DJs, videographers, chefs and more. See their work and reviews, agree the job and pay in the app.",
@@ -327,7 +331,7 @@ PAGES["onejob"] = {
     "es": S(h1="OneJob", h1s="Contrate a un profesional local, o consiga trabajo",
             title="OneJob | Contrate profesionales o consiga trabajo en Medellín",
             desc="Contrate limpieza, DJ, videógrafos, chefs y más en Medellín, o promueva su servicio y consiga clientes. El contrato, el pago y las reseñas de cada trabajo quedan en un solo lugar.",
-            crumb="¿Qué está buscando?", seg="Elija su lado",
+            crumb="Todas las apps", seg="Elija su lado",
             sides=[
                 S(id="hire", tab="Contratar", h2="Contrate a un profesional local.",
                   lead="Limpieza, DJ, videógrafos, chefs y más. Vea su trabajo y sus reseñas, acuerden el trabajo y pague en la app.",
@@ -371,7 +375,7 @@ PAGES["oneevent"] = {
     "en": S(h1="OneEvent", h1s="Find events or host your own",
             title="OneEvent | Find events or sell tickets to your own",
             desc="Discover local events and buy tickets on your phone, or host your own with ticket sales and QR check-in at the door. Part of One World, one app with one login.",
-            crumb="What are you looking for?", seg="Choose your side",
+            crumb="All apps", seg="Choose your side",
             sides=[
                 S(id="attend", tab="Find events", h2="Make your next great plan.",
                   lead="Discover local events, buy tickets on your phone and walk in with a QR code.",
@@ -410,7 +414,7 @@ PAGES["oneevent"] = {
     "es": S(h1="OneEvent", h1s="Encuentre eventos u organice el suyo",
             title="OneEvent | Encuentre eventos o venda boletas para el suyo",
             desc="Descubra eventos locales y compre boletas en su celular, u organice el suyo con venta de boletas y registro con QR en la entrada. Parte de One World, una app con un solo inicio de sesión.",
-            crumb="¿Qué está buscando?", seg="Elija su lado",
+            crumb="Todas las apps", seg="Elija su lado",
             sides=[
                 S(id="attend", tab="Encontrar eventos", h2="Arme su próximo gran plan.",
                   lead="Descubra eventos locales, compre boletas en su celular y entre con un código QR.",
@@ -452,7 +456,7 @@ PAGES["oneride"] = {
     "en": S(h1="OneRide", h1s="Private rides with a driver you choose",
             title="OneRide | Book a private driver you choose",
             desc="Book a private ride with a driver you pick and agree the price before you go. Drivers can offer private rides and build regular clients. Part of One World.",
-            crumb="What are you looking for?", seg="Choose your side",
+            crumb="All apps", seg="Choose your side",
             sides=[
                 S(id="ride", tab="Book a ride", h2="A private driver you choose.",
                   lead="Pick the driver, agree the price, then ride. No random match.",
@@ -491,7 +495,7 @@ PAGES["oneride"] = {
     "es": S(h1="OneRide", h1s="Viajes privados con el conductor que usted elige",
             title="OneRide | Pida un conductor privado que usted elige",
             desc="Pida un viaje privado con el conductor que usted elige y acuerde el precio antes de salir. Los conductores ofrecen viajes privados y construyen clientes fijos. Parte de One World.",
-            crumb="¿Qué está buscando?", seg="Elija su lado",
+            crumb="Todas las apps", seg="Elija su lado",
             sides=[
                 S(id="ride", tab="Pedir un viaje", h2="Un conductor privado que usted elige.",
                   lead="Elija al conductor, acuerden el precio y viaje. Sin asignación al azar.",
@@ -533,7 +537,7 @@ PAGES["onepay"] = {
     "en": S(h1="OnePay", h1s="Send money or get paid by link or QR",
             title="OnePay | Send money or get paid by link or QR code",
             desc="Send money to anyone with a link, or get paid by link or QR code with card, Nequi or PSE. Every paid charge gets a receipt. Open now with your One ID.",
-            crumb="What are you looking for?", seg="Choose your side",
+            crumb="All apps", seg="Choose your side",
             sides=[
                 S(id="send", tab="Pay someone", h2="Send money to anyone.",
                   lead="Pick a person, enter the amount and share a link. If they are new to One World, they join from the link with a phone code.",
@@ -577,7 +581,7 @@ PAGES["onepay"] = {
     "es": S(h1="OnePay", h1s="Envíe dinero o cobre con enlace o QR",
             title="OnePay | Envíe dinero o cobre con enlace o código QR",
             desc="Envíe dinero a quien sea con un enlace, o cobre con enlace o código QR con tarjeta, Nequi o PSE. Cada cobro pagado tiene su recibo. Disponible hoy con su One ID.",
-            crumb="¿Qué está buscando?", seg="Elija su lado",
+            crumb="Todas las apps", seg="Elija su lado",
             sides=[
                 S(id="send", tab="Pagar", h2="Envíe dinero a quien sea.",
                   lead="Elija a la persona, escriba el monto y comparta un enlace. Si es nueva en One World, se une desde el enlace con un código por celular.",
@@ -624,7 +628,7 @@ PAGES["onebusiness"] = {
     "en": S(h1="OneBusiness", h1s="AI tools for small businesses, freelancers and creators",
             title="OneBusiness | AI tools for small businesses and freelancers",
             desc="OneVoice AI call answering, OnePage websites and OneApp mobile apps for small businesses, set up and run with you. OneBusiness brings them into one place in the One World app. Coming soon.",
-            crumb="What are you looking for?", seg="Choose your side",
+            crumb="All apps", seg="Choose your side",
             sides=[
                 S(id="biz", tab="Business owners", h2="Your business, handled.",
                   lead="Calls answered, a website that works and your own app, set up and run with you. OneBusiness brings them into one place in the app.",
@@ -667,7 +671,7 @@ PAGES["onebusiness"] = {
     "es": S(h1="OneBusiness", h1s="Herramientas de IA para pequeños negocios, independientes y creadores",
             title="OneBusiness | Herramientas de IA para pequeños negocios",
             desc="Atención de llamadas con IA (OneVoice), páginas web (OnePage) y apps móviles (OneApp) para pequeños negocios, configuradas y operadas con usted. OneBusiness las reúne en la app de One World. Próximamente.",
-            crumb="¿Qué está buscando?", seg="Elija su lado",
+            crumb="Todas las apps", seg="Elija su lado",
             sides=[
                 S(id="biz", tab="Dueños de negocio", h2="Su negocio, resuelto.",
                   lead="Llamadas atendidas, una página web que funciona y su propia app, configuradas y operadas con usted. OneBusiness las reúne en un solo lugar en la app.",

@@ -17,26 +17,33 @@
 
   /* ── phone previews: one app in focus; neighbours dimmed ─────────────── */
   $$('[data-screens]').forEach(function (stage) {
-    var track = $('.screens', stage), phones = $$('.phone', track), dots = $$('.dots button', stage);
+    var track = $('.screens', stage), slides = $$('.slide', track), box = stage.closest('.apps2') || stage;
+    var count = $('.oc-count', box), prev = $('[data-prev]', box), next = $('[data-next]', box);
     var at = -1, timer = null, touched = false, visible = true;
     function mark(i) {
       if (i === at) return; at = i;
-      phones.forEach(function (p, k) { p.classList.toggle('on', k === i); p.setAttribute('aria-hidden', k === i ? 'false' : 'true'); });
-      dots.forEach(function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+      slides.forEach(function (p, k) { var on = k === i; p.classList.toggle('on', on); p.setAttribute('aria-hidden', on ? 'false' : 'true'); $$('a', p).forEach(function (a) { a.tabIndex = on ? 0 : -1; }); });
+      if (count) count.textContent = (i + 1) + ' / ' + slides.length;
     }
     var start = +(stage.getAttribute('data-start') || 0);
-    requestAnimationFrame(function () { centre(track, phones[start], false); mark(start); });
+    requestAnimationFrame(function () { centre(track, slides[start], false); mark(start); });
     var raf = 0;
-    track.addEventListener('scroll', function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(function () { mark(nearest(track, phones)); }); }, { passive: true });
-    dots.forEach(function (d, k) { d.addEventListener('click', function () { stop(); centre(track, phones[k], true); }); });
-    phones.forEach(function (p, k) { p.addEventListener('click', function () { if (k !== at) { stop(); centre(track, p, true); } }); });
+    track.addEventListener('scroll', function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(function () { mark(nearest(track, slides)); }); }, { passive: true });
+    function go(i) { stop(); i = (i + slides.length) % slides.length; centre(track, slides[i], true); mark(i); }
+    if (prev) prev.addEventListener('click', function () { go(at - 1); });
+    if (next) next.addEventListener('click', function () { go(at + 1); });
+    /* a tap on a dimmed neighbour brings it into focus instead of following its link */
+    track.addEventListener('click', function (e) {
+      var s = e.target.closest('.slide'); if (!s) return; var k = slides.indexOf(s);
+      if (k !== at) { e.preventDefault(); go(k); }
+    }, true);
     ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function (e) { track.addEventListener(e, stop, { passive: true }); });
     function stop() { touched = true; clearInterval(timer); }
     if (!reduce && 'IntersectionObserver' in window) {
       new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }, { threshold: .4 }).observe(track);
-      timer = setInterval(function () { if (!touched && visible && !document.hidden) centre(track, phones[(at + 1) % phones.length], true); }, 3800);
+      timer = setInterval(function () { if (!touched && visible && !document.hidden) { centre(track, slides[(at + 1) % slides.length], true); } }, 4200);
     }
-    addEventListener('resize', function () { if (at >= 0) centre(track, phones[at], false); });
+    addEventListener('resize', function () { if (at >= 0) centre(track, slides[at], false); });
   });
 
   /* ── explorer: category → its choices → the app's own page ─────────── */

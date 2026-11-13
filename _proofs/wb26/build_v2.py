@@ -43,8 +43,8 @@ for lg, s in TPL.items():
         pre=pre,
         ld=re.search(r'<script type="application/ld\+json">.*?</script>', s, re.S).group(0),
         body=body_open.replace("<body>", '<body class="v2">', 1),
-        header=cut(s, "<header", "</header>"),
-        footer=cut(s, "<footer", "</footer>"),
+        header=cut(s, "<header", "</header>").replace('<a href="/blog/">Blog</a>', '<a href="/es/blog/">Blog</a>') if lg == "es" else cut(s, "<header", "</header>"),
+        footer=cut(s, "<footer", "</footer>").replace('<a href="/blog/">Lea el blog</a>', '<a href="/es/blog/">Lea el blog</a>') if lg == "es" else cut(s, "<footer", "</footer>"),
         contact=cut(s, '<section class="contact" id="contact">', "</section>"),
         widget=re.search(r'<script[^>]*widgets\.leadconnectorhq\.com/loader\.js[^>]*></script>', s).group(0),
         vaia=re.search(r'<script>/\* feature flag vaia.*?</script>', s, re.S).group(0),
@@ -223,44 +223,27 @@ def one_card(lg, k, first=False):
 # ── HOME ─────────────────────────────────────────────────────────────────────────────────────
 def build_home(lg):
     H = HOME[lg]
-    phones = "".join(
-        '<div class="phone" role="group" aria-label="%s" style="--hue:%s"><div class="scr">%s<div class="lane-bar"><i></i><span translate="no">%s</span></div>'
-        '<div class="post"><strong>%s</strong><span>%s</span><b>%s</b></div><div class="tabbar" aria-hidden="true"><u></u><u></u><u class="c"></u><u></u><u></u></div></div></div>' % (
-            APP_BY[k][1], APP_BY[k][2], img(src, "", lazy=False), APP_BY[k][1], E(t[lg][0]), E(t[lg][1]), E(t[lg][2]))
-        for k, src, t in SCREENS)
-    dots = "".join('<button type="button" aria-label="%s"></button>' % E(H["dot"].format(n=APP_BY[k][1])) for k, _s, _t in SCREENS)
+    slides = []
+    for k, src, t in SCREENS:
+        a = APP_BY[k]
+        title, sub, tag = t[lg]
+        if a[3]:
+            act = '<a class="ptag" href="%s">%s</a>' % (APP + a[4], E(tag))
+        else:
+            act = '<span class="ptag soon">%s</span>' % E(H["soon"])
+        slides.append(
+            '<div class="slide"><div class="phone" role="group" aria-label="%s" style="--hue:%s"><div class="scr">%s<div class="lane-bar"><i></i><span translate="no">%s</span></div>'
+            '<div class="post"><strong>%s</strong><span>%s</span>%s</div></div></div>'
+            '<a class="link more-link" href="%s" aria-label="%s">%s</a></div>' % (
+                a[1], a[2], img(src, "", lazy=False), a[1], E(title), E(sub), act,
+                app_page(lg, k), E(H["learn_x"].format(n=a[1])), E(H["learn"])))
     hero = ('<section class="hero2"><div class="wrap"><div class="hero-copy"><h1>%s</h1><p class="hero-sub">%s</p><p class="lead">%s</p>'
-            '<div class="hero-cta"><a class="btn" href="%s/">%s%s</a></div></div>'
-            '<div class="stage" data-screens data-start="1" role="region" aria-label="%s"><div class="screens">%s</div><div class="dots">%s</div></div></div></section>') % (
-        E(H["h1"]), E(H["sub"]), E(H["lead"]), APP, PHONE, E(H["open"]), E(H["stage_label"]), phones, dots)
-
-    cats, panels = [], []
-    for cid, pic, app, words, opts, kind in EXPLORER:
-        name, small, para = words[lg]
-        cats.append('<button class="ex-cat" type="button" aria-expanded="false" aria-controls="ex-%s">%s<span>%s</span><small>%s</small></button>' % (
-            cid, img(pic), E(name), E(small)))
-        main_opts = [o for o in opts if not (kind == "chips" and "side=work" in o[0])]
-        work_opts = [o for o in opts if kind == "chips" and "side=work" in o[0]]
-        lis = "".join('<li><a href="%s">%s</a></li>' % (L(lg, h), E(lab[lg])) for h, lab in main_opts)
-        a = APP_BY[app]
-        via = '<p class="ex-app"><img src="%s" alt=""/><span>%s <strong translate="no">%s</strong>%s</span></p>' % (
-            mark(app), E(H["via"].capitalize()), a[1], "" if a[3] else " · " + E(H["soon"]))
-        if cid == "grow":
-            via = '<p class="ex-app"><img src="%s" alt=""/><span>%s <strong translate="no">OneJob</strong> · <strong translate="no">OneBusiness</strong></span></p>' % (mark("onejob"), E(H["via"].capitalize()))
-        panels.append('<div class="ex-panel" id="ex-%s">%s<div class="ex-body"><button class="ex-back" type="button" hidden>%s%s</button><h3>%s</h3><p>%s</p>'
-                      '<ul class="ex-opts%s">%s</ul>%s%s</div></div>' % (
-                          cid, img(pic), LEFT, E(H["back"]), E(name), E(para), " chips" if kind == "chips" else "", lis,
-                          ('<p class="ex-sub">%s</p><ul class="ex-opts">%s</ul>' % (E({"en": "Or get hired", "es": "O consiga trabajo"}[lg]),
-                           "".join('<li><a href="%s">%s</a></li>' % (L(lg, h), E(lab[lg])) for h, lab in work_opts))) if work_opts else "", via))
-    order = ["oneevent", "onejob", "onehome", "oneride", "onepay", "onebusiness", "onescore", "onesocial", "oneagent"]
-    onecard = ('<div class="onecard" data-onecard><div class="oc-top"><h3>%s</h3><div class="oc-nav"><button type="button" data-prev aria-label="%s">%s</button>'
-               '<span class="oc-count" aria-live="polite">1 / %d</span><button type="button" data-next aria-label="%s">%s</button></div></div>'
-               '<div class="oc-track" role="region" aria-roledescription="carousel" aria-label="%s">%s</div></div>') % (
-        E(H["oc_h3"]), E(H["prev"]), LEFT, len(order), E(H["next"]), RIGHT, E(H["oc_h3"]),
-        "".join(one_card(lg, k, i == 0) for i, k in enumerate(order)))
-    explore = ('<section class="sec explore" id="destinations"><div class="wrap"><div class="sec-head"><span class="eyebrow">%s</span><h2>%s</h2><p>%s</p></div>'
-               '<div class="ex" data-explorer><div class="ex-cats">%s</div>%s</div>%s</div></section>') % (
-        E(H["ex_eyebrow"]), E(H["ex_h2"]), E(H["ex_p"]), "".join(cats), "".join(panels), onecard)
+            '<div class="hero-cta"><a class="btn glass" href="%s/">%s%s</a></div></div></div>'
+            '<div class="apps2" id="destinations"><div class="wrap"><div class="oc-top"><h2>%s</h2><div class="oc-nav"><button type="button" data-prev aria-label="%s">%s</button>'
+            '<span class="oc-count" aria-live="polite">1 / %d</span><button type="button" data-next aria-label="%s">%s</button></div></div></div>'
+            '<div class="stage" data-screens data-start="0" role="region" aria-roledescription="carousel" aria-label="%s"><div class="screens">%s</div></div></div></section>') % (
+        E(H["h1"]), E(H["sub"]), E(H["lead"]), APP, PHONE, E(H["open"]),
+        E(H["oc_h3"]), E(H["prev"]), LEFT, len(SCREENS), E(H["next"]), RIGHT, E(H["oc_h3"]), "".join(slides))
 
     rows = []
     for app, pic, link, words in STORY:
@@ -274,14 +257,18 @@ def build_home(lg):
         L(lg, "/services/"), E(H["note_a"]), L(lg, "/#contact"), E(H["note_b"]))
 
     steps = "".join('<div><b>0%d</b><h4>%s</h4><p>%s</p></div>' % (i + 1, E(t), E(p)) for i, (t, p) in enumerate(H["steps"]))
-    oneid = ('<section class="sec explore"><div class="wrap oneid"><div class="oneid-mark"><img src="/mark-oneworld.png" alt="" loading="lazy"/></div>'
+    oneid = ('<section class="sec"><div class="wrap oneid"><div class="oneid-mark"><img src="/mark-oneworld.png" alt="" loading="lazy"/></div>'
              '<div><span class="eyebrow">%s</span><h2 style="font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-.045em;line-height:1.05">%s</h2><div class="steps3">%s</div></div></div></section>') % (
         E(H["id_eyebrow"]), E(H["id_h2"]), steps)
-    guides = ('<section class="sec"><div class="wrap"><div class="sec-head"><span class="eyebrow">%s</span><h2>%s</h2></div>%s'
-              '<p class="more"><a class="btn ghost" href="%s">%s</a></p></div></section>') % (
-        E(H["g_eyebrow"]), E(H["g_h2"]), guide_cards(lg, HOME_GUIDES[lg]), L(lg, "/blog/"), E(H["g_all"]))
+    gp = POSTS[lg][HOME_GUIDES[lg][0]]
+    gt, gapp = POST_TAGS.get(gp["en"] or "", ("", None))
+    one = ('<a class="feature-post" href="%s">%s<div><em>%s</em><h3 class="fp-h">%s</h3><p>%s</p><time datetime="%s">%s</time></div></a>') % (
+        ("/blog/%s/" if lg == "en" else "/es/blog/%s/") % gp["slug"], img(gp["img"]), E(APP_BY[gapp][1] if gapp else "One World"),
+        E(gp["title"]), E(gp["desc"]), gp["date"], fmt_date(lg, gp["date"]))
+    guides = ('<section class="sec"><div class="wrap"><div class="oc-top"><div><span class="eyebrow">%s</span><h2 class="g-h2">%s</h2></div><a class="link" href="%s">%s</a></div>%s</div></section>') % (
+        E(H["g_eyebrow"]), E(H["g_h2"]), L(lg, "/blog/"), E(H["g_all"]), one)
     contact = '<div class="wrap" style="padding-bottom:40px">' + PARTS[lg]["contact"].replace('<section class="contact" id="contact">', '<section class="contact" id="contact" style="max-width:none;margin:0;padding:0">') + "</div>"
-    main = hero + explore + biz + oneid + guides + contact
+    main = hero + biz + oneid + guides + contact
     ld = PARTS[lg]["ld"]
     h = head(lg, H["title"], H["desc"], "/", "/og-cover.png", ld)
     write("index.html" if lg == "en" else "es/index.html", doc(lg, h, main, home=True))

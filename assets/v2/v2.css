@@ -324,3 +324,78 @@ body.v2 main h1,body.v2 main h2,body.v2 main h3,body.v2 main h4,body.v2 main p,b
 html[data-theme="dark"] .v2 .ap-id img,html[data-theme="dark"] .v2 .oc-id img,html[data-theme="dark"] .v2 .row-tag img,html[data-theme="dark"] .v2 .ex-app img,html[data-theme="dark"] .v2 .app-links img{filter:drop-shadow(0 0 5px rgba(255,255,255,.45))}
 @media (max-width:640px){.v2 .ex-panel>img{aspect-ratio:2.2/1}.v2 .ex-sub{margin-top:18px}}
 .v2 .ex-sub+.ex-opts{margin-top:10px}
+
+/* ── PASS 2 (13 Nov 2026): brand background back, glass surfaces, one Explore section ── */
+body.v2{--bg:#F7F4EC;--card:rgba(255,255,255,.56);--soft:rgba(255,255,255,.42);--glass-line:rgba(255,255,255,.85);
+  --glass-shadow:0 22px 48px -26px rgba(71,48,94,.38),inset 0 1px 0 rgba(255,255,255,.9);--teal-ink:#fff}
+html[data-theme="dark"] body.v2{--bg:#0B0F1A;--card:rgba(255,255,255,.065);--soft:rgba(255,255,255,.04);--glass-line:rgba(255,255,255,.15);
+  --glass-shadow:0 22px 48px -24px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.08);--teal-ink:#04201C}
+body.v2:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+  radial-gradient(60% 42% at 0% 0%,rgba(171,197,239,.8),transparent 70%),
+  radial-gradient(55% 42% at 100% 6%,rgba(199,168,232,.72),transparent 70%),
+  radial-gradient(50% 40% at 92% 96%,rgba(150,214,186,.55),transparent 70%),
+  radial-gradient(48% 38% at 4% 78%,rgba(179,213,216,.6),transparent 70%)}
+html[data-theme="dark"] body.v2:before{background:
+  radial-gradient(60% 42% at 0% 0%,rgba(38,57,90,.95),transparent 70%),
+  radial-gradient(55% 42% at 100% 6%,rgba(72,51,92,.9),transparent 70%),
+  radial-gradient(50% 40% at 92% 96%,rgba(23,56,62,.95),transparent 70%),
+  radial-gradient(48% 38% at 4% 78%,rgba(30,45,80,.7),transparent 70%)}
+.v2 .hero2:before{display:none}
+.v2 .explore{background:transparent}
+.v2 .ex-cat,.v2 .ex-panel,.v2 .oc,.v2 .how li,.v2 .feat li,.v2 .band,.v2 .biz-note,.v2 .feature-post,.v2 .gcard,.v2 .app-links a,.v2 .oneid-mark,.v2 .oc-nav button,.v2 .chips2 a,.v2 .filters a{
+  background:var(--card);border-color:var(--glass-line);box-shadow:var(--glass-shadow);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%)}
+.v2 .filters a[aria-current="true"]{background:linear-gradient(135deg,rgba(15,118,110,.95),rgba(13,148,136,.86));color:#fff;border-color:rgba(255,255,255,.5)}
+html[data-theme="dark"] .v2 .filters a[aria-current="true"]{background:linear-gradient(135deg,rgba(45,212,191,.94),rgba(20,184,166,.84));color:#04201C}
+.v2 .seg{background:var(--card);border-color:var(--glass-line);box-shadow:var(--glass-shadow)}
+.v2 .seg i{background:linear-gradient(135deg,#0F766E,#0D9488)}
+html[data-theme="dark"] .v2 .seg i{background:linear-gradient(135deg,#2DD4BF,#14B8A6)}
+
+/* buttons: teal glass, high contrast */
+.v2 .btn{background:linear-gradient(135deg,rgba(15,118,110,.96),rgba(13,148,136,.86));color:#fff;border:1px solid rgba(255,255,255,.5);
+  box-shadow:0 16px 32px -14px rgba(13,148,136,.8),inset 0 1px 0 rgba(255,255,255,.4);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.v2 .btn:hover{background:linear-gradient(135deg,#0F766E,#0D9488)}
+html[data-theme="dark"] .v2 .btn{background:linear-gradient(135deg,rgba(45,212,191,.95),rgba(20,184,166,.85));color:#04201C;border-color:rgba(255,255,255,.35);box-shadow:0 16px 32px -14px rgba(45,212,191,.55),inset 0 1px 0 rgba(255,255,255,.45)}
+.v2 .btn.glass{min-height:56px;padding:0 30px;font-size:17px}
+.v2 .btn.ghost{background:var(--card);color:var(--ink);border:1.5px solid var(--line-strong);box-shadow:var(--glass-shadow)}
+.v2 .btn.soon{background:var(--soft);color:var(--muted);border:1.5px dashed var(--line-strong);box-shadow:none}
+
+/* the one Explore section: phone in focus, its action inside, Learn more under it */
+.v2 .hero2{padding-bottom:40px}
+.v2 .apps2{margin-top:56px}
+.v2 .apps2 .oc-top{margin-bottom:6px}
+.v2 .apps2 .oc-top h2,.v2 .g-h2{font-size:clamp(26px,3vw,38px);font-weight:800;letter-spacing:-.04em;line-height:1.1;white-space:nowrap}
+.v2 .stage{margin-top:4px}
+.v2 .slide{flex:none;display:flex;flex-direction:column;align-items:center;gap:16px;scroll-snap-align:center;opacity:.38;transform:scale(.88);transition:opacity .45s,transform .45s cubic-bezier(.3,.7,.2,1)}
+.v2 .slide.on{opacity:1;transform:none}
+.v2 .phone,.v2 .phone.on{opacity:1;transform:none;scroll-snap-align:none}
+.v2 .post{bottom:30px}
+.v2 .ptag{display:inline-flex;margin-top:14px;min-height:40px;align-items:center;padding:0 18px;border-radius:14px;background:rgba(255,255,255,.24);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.45);font-size:14px;font-weight:750;color:#fff;white-space:nowrap}
+.v2 .ptag:hover{background:rgba(255,255,255,.34)}
+.v2 .ptag.soon{background:rgba(0,0,0,.38)}
+.v2 .more-link{font-size:15.5px}
+.v2 .feature-post .fp-h{font-size:clamp(24px,2.6vw,34px);line-height:1.15;font-weight:800;letter-spacing:-.035em}
+.v2 .feature-post time{font-size:13px;color:var(--muted)}
+
+/* contact: the glass card it had before */
+.v2 .contact form{background:var(--card);border:1px solid var(--glass-line);border-radius:26px;box-shadow:var(--glass-shadow);-webkit-backdrop-filter:blur(20px) saturate(140%);backdrop-filter:blur(20px) saturate(140%)}
+.v2 .contact input,.v2 .contact select,.v2 .contact textarea{background:rgba(255,255,255,.62);border:1px solid rgba(28,26,36,.22);color:var(--ink)}
+html[data-theme="dark"] .v2 .contact input,html[data-theme="dark"] .v2 .contact select,html[data-theme="dark"] .v2 .contact textarea{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.28);color:var(--ink)}
+.v2 .contact form button{background:linear-gradient(135deg,rgba(15,118,110,.96),rgba(13,148,136,.86));color:#fff;border:1px solid rgba(255,255,255,.5)}
+html[data-theme="dark"] .v2 .contact form button{background:linear-gradient(135deg,rgba(45,212,191,.95),rgba(20,184,166,.85));color:#04201C}
+
+@media (max-width:640px){
+  .v2 .apps2{margin-top:40px}
+  .v2 .apps2 .oc-top h2,.v2 .g-h2{font-size:24px}
+  /* the footer, condensed */
+  body.v2 footer{padding:22px 20px 24px;gap:12px}
+  body.v2 footer .eyebrow{margin-bottom:6px}
+  body.v2 footer strong{font-size:34px}
+  body.v2 footer nav{grid-template-columns:1fr 1fr;gap:0 16px}
+  body.v2 footer nav a{min-height:40px}
+  body.v2 footer p{padding-right:56px}
+}
+.v2 .g-h2{white-space:normal}
+.v2 .oc-top .link{flex:none}
+@media (max-width:640px){.v2 .stage{margin-left:0;margin-right:0}}
+.v2 .filters{margin-left:-32px;margin-right:-32px;padding:12px 32px;background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+@media (max-width:640px){.v2 .filters{margin-left:-20px;margin-right:-20px;padding:10px 20px}}
