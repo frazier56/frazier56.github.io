@@ -378,6 +378,20 @@
       }).then(function (r) { once(!!(r && r.ok)); }, function () { once(false); });
     } catch (e) { once(false); }
   }
+  /* Get the app (12 Nov 2026): the app is one tap from every page. Desktop shows it in the
+     header beside Sign in; the phone header stays flag + menu (Lee, S8, 19 Oct) and the item is
+     the first row of the menu instead. One place, every page that loads this file. */
+  var GETAPP = { en: 'Get the app', co: 'Abrir la app', es: 'Abrir la app', de: 'App öffnen', ru: 'Открыть приложение', zh: '打开应用', pt: 'Abrir o app' };
+  var APP_URL = 'https://app.oneworldlabs.ai/';
+  var getApp = null;
+  if (acctOut && acctOut.parentNode) {
+    getApp = document.createElement('a');
+    getApp.className = 'button small ow-getapp'; getApp.href = APP_URL;
+    acctOut.parentNode.insertBefore(getApp, acctOut);
+  }
+  function labelGetApp() { if (getApp) getApp.textContent = GETAPP[current] || GETAPP.en; }
+  labelGetApp();
+  document.addEventListener('ow:lang', labelGetApp);
   wireMenu(acctBtn, acctMenu);
   if (acctMenu) acctMenu.querySelector('.ow-signout').addEventListener('click', function () { closeMenus(); signOut(); });
   window.addEventListener('storage', function (e) { if (!e.key || e.key === KEY) renderAccount(); });
@@ -447,6 +461,7 @@
       });
       var sep = document.createElement('div'); sep.className = 'ow-sep'; sep.setAttribute('role', 'separator');
       navMenu.appendChild(sep);
+      navMenu.appendChild(item('a', GETAPP[current] || GETAPP.en, { href: APP_URL, 'data-act': 'getapp' }));
       var s = session();
       if (s) {
         var name = displayName(s.user || {});

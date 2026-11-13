@@ -25,18 +25,18 @@ def art_path(lang, a):
 
 T = {
  "en": dict(lang="en", html="en", static="en", skip="Skip to content", tag="A world of possibilities.",
-            nav=[("/#destinations", "The platform"), ("/services/", "The agency"), ("/blog/", "Blog"), ("/#contact", "Contact")],
+            nav=[("/#destinations", "The apps"), ("/services/", "For business"), ("/blog/", "Blog"), ("/#contact", "Contact")],
             signin_long="Sign in with One ID", signin="Sign in", signed="Signed in", open="Open my apps", out="Sign out",
             lang_label="Language and country", acct="Your One ID", main="Main", footer_label="Footer",
             f_eyebrow="One account. Many possibilities.",
-            f_nav=[("/#destinations", "Explore the apps"), ("/services/", "Explore the agency"), ("/blog/", "Read the blog"), ("mailto:support@oneworldlabs.ai", "Get in touch")],
+            f_nav=[("/#destinations", "Explore the apps"), ("/services/", "For business"), ("/blog/", "Read the blog"), ("mailto:support@oneworldlabs.ai", "Get in touch")],
             privacy="Privacy Policy", terms="Terms of Service", home="Home", hub="Medellín", ogl="en_US", ogl_alt="es_CO"),
  "es": dict(lang="es", html="es-CO", static="co", skip="Ir al contenido", tag="Un mundo de posibilidades.",
-            nav=[("/es/#destinations", "La plataforma"), ("/es/services/", "La agencia"), ("/blog/", "Blog"), ("/es/#contact", "Contacto")],
+            nav=[("/es/#destinations", "Las apps"), ("/es/services/", "Para su negocio"), ("/blog/", "Blog"), ("/es/#contact", "Contacto")],
             signin_long="Inicie sesión con One ID", signin="Iniciar sesión", signed="Sesión iniciada", open="Abrir mis apps", out="Cerrar sesión",
             lang_label="Idioma y país", acct="Su One ID", main="Principal", footer_label="Pie de página",
             f_eyebrow="Una cuenta. Muchas posibilidades.",
-            f_nav=[("/es/#destinations", "Explore las apps"), ("/es/services/", "Explore la agencia"), ("/blog/", "Lea el blog"), ("mailto:support@oneworldlabs.ai", "Contáctenos")],
+            f_nav=[("/es/#destinations", "Explore las apps"), ("/es/services/", "Para su negocio"), ("/blog/", "Lea el blog"), ("mailto:support@oneworldlabs.ai", "Contáctenos")],
             privacy="Política de privacidad", terms="Términos del servicio", home="Inicio", hub="Medellín", ogl="es_CO", ogl_alt="en_US"),
 }
 
@@ -82,7 +82,7 @@ def footer(t):
     nav = "".join('<a href="%s">%s</a>' % (h, E(x)) for h, x in t["f_nav"])
     return ('<footer><div><span class="eyebrow">%s</span><strong>One World.</strong></div><nav aria-label="%s">%s</nav>'
             '<p>© 2026 One World Labs · <a href="https://app.oneworldlabs.ai/privacy">%s</a> · <a href="https://app.oneworldlabs.ai/terms">%s</a></p></footer>'
-            '<script src="/assets/ow-site.js?v=wb22" defer></script>\n<script src="/assets/site-theme.js?v=%s" defer></script>\n'
+            '<script src="/assets/ow-site.js?v=wb23" defer></script>\n<script src="/assets/site-theme.js?v=%s" defer></script>\n'
             % (E(t["f_eyebrow"]), E(t["footer_label"]), nav, E(t["privacy"]), E(t["terms"]), V))
 
 

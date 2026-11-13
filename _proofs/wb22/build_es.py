@@ -17,7 +17,7 @@ from bs4 import BeautifulSoup, NavigableString
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SITE = "https://www.oneworldlabs.ai"
-JSV = "wb22"
+JSV = "wb23"
 
 # English path -> Spanish path. Only pages built on the shared data-i18n template are here.
 PAGES = {

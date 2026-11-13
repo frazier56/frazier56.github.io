@@ -367,3 +367,36 @@ html[data-theme="dark"] .wb-cta .wb-chips a{background:#ffffff12;border-color:#f
 .wb-page ul.wb-list li{padding:14px 0;border-bottom:1px solid #8a83a64d;margin:0}
 html[data-theme="dark"] .wb-page ul.wb-list li{border-color:#ffffff30}
 .wb-page>img{aspect-ratio:16/9;object-fit:cover;height:auto}
+/* Homepage doors (12 Nov 2026): Open the app first, two doors, Medellín search. */
+.home-doors .world-panel.doors{transform:rotate(-1deg)}
+.app-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.app-tile{display:flex;flex-direction:column;gap:4px;min-height:96px;padding:14px;border-radius:18px;background:#ffffff70;border:1px solid #ffffffc2;border-top:4px solid var(--accent);box-shadow:0 6px 14px #47305e12}
+.app-tile strong{font-size:16px;letter-spacing:-.02em}
+.app-tile span{font-size:12.5px;line-height:1.35;color:#4a4b63}
+.app-tile em{margin-top:auto;font-style:normal;font-size:10.5px;font-weight:750;text-transform:uppercase;letter-spacing:.1em;color:#554174}
+.app-tile.soon{background:#ffffff38}
+.door-biz{display:block;margin-top:14px;padding:16px 18px;border-radius:18px;background:#332a490d;border:1px solid #ffffffc2}
+.door-biz .eyebrow{margin-bottom:6px}
+.door-biz strong{display:block;font-size:20px;letter-spacing:-.03em}
+.door-biz span:last-child{display:block;font-size:13px;color:#4a4b63;margin-top:4px}
+.home-search{max-width:1240px}
+.find-form label{display:block}
+.find-row{display:flex;gap:10px;max-width:760px}
+.find-row input{flex:1;min-width:0;min-height:52px;padding:0 18px;border-radius:999px;border:1px solid #8a83a6a0;background:#ffffffa0;color:#25283e;font-size:16px}
+.home-search .wb-chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0;max-width:900px}
+.home-search .wb-chips a{display:inline-block;padding:10px 17px;border-radius:999px;border:1px solid #8a83a680;background:#ffffff60;font-size:14px;font-weight:650;line-height:1.3}
+#business .destination{border-top:4px solid var(--accent)}
+#business>.actions{margin-top:28px}
+.soon-tag{font-size:12px;font-weight:700;opacity:.7;padding:10px 0}
+html[data-theme="dark"] .app-tile{background:#ffffff10;border-color:#ffffff38}
+html[data-theme="dark"] .app-tile span,html[data-theme="dark"] .door-biz span:last-child{color:#d0d1df}
+html[data-theme="dark"] .app-tile em,html[data-theme="dark"] .door-biz .eyebrow{color:#cbb4e8}
+html[data-theme="dark"] .app-tile.soon{background:#ffffff08}
+html[data-theme="dark"] .door-biz{background:#ffffff0c;border-color:#ffffff38}
+html[data-theme="dark"] .find-row input{background:#ffffff14;border-color:#ffffff50;color:#f1eff8}
+html[data-theme="dark"] .home-search .wb-chips a{background:#ffffff12;border-color:#ffffff40;color:#f1eff8}
+@media(max-width:950px){.app-tiles{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.home-doors .world-panel.doors{transform:none}.app-tile{min-height:84px;padding:12px}.find-row .button{padding:0 18px}}
+.ow-tools .ow-getapp{background:transparent;color:inherit;border:1.5px solid currentColor;box-shadow:none}
+html[data-theme="dark"] .ow-tools .ow-getapp{background:transparent;color:#f1eff8}
+@media(max-width:680px){html.ow-phone-menu .ow-getapp{display:none!important}}
