@@ -79,12 +79,12 @@ APPU = "https://app.oneworldlabs.ai"
 FOOTER = {
     "en": dict(tag="One account. Many possibilities.", rights="© 2026 One World Labs. All rights reserved.", label="Footer",
                cols=[("Company", [("Why One World", "/why/"), ("Founder", "/founder/"), ("Careers", "/careers/"), ("Investors", "/investors/"), ("Press", "/press/"), ("Partners", "/partners/")]),
-                     ("Explore", [("All apps", "/apps/"), ("OneBusiness", "/apps/onebusiness/"), ("Features", "/features/"), ("Blog", "/blog/"), ("Hire in Medellín", "/medellin/"), ("One World Agency", "/services/")]),
+                     ("Explore", [("All apps", "/apps/"), ("Infrastructure", "/infrastructure/"), ("Features", "/features/"), ("Blog", "/blog/"), ("Hire in Medellín", "/medellin/"), ("One World Agency", "/services/")]),
                      ("Support", [("Contact us", "/#contact"), ("Safety and trust", "/safety/"), ("Child safety", "/child-safety/"), ("Accessibility", "/accessibility/"), ("Delete your account", "/delete-account.html")]),
                      ("Legal", [("Terms of Service", APPU + "/terms"), ("Privacy Policy", APPU + "/privacy"), ("Cookie Policy", "/cookies/"), ("SMS terms", "/sms-terms/"), ("Intellectual property", "/legal/ip/")])]),
     "es": dict(tag="Una cuenta. Muchas posibilidades.", rights="© 2026 One World Labs. Todos los derechos reservados.", label="Pie de página",
                cols=[("Compañía", [("Por qué One World", "/es/why/"), ("Fundador", "/founder/"), ("Trabaje con nosotros", "/es/careers/"), ("Inversionistas", "/es/investors/"), ("Prensa", "/es/press/"), ("Aliados", "/es/partners/")]),
-                     ("Explorar", [("Todas las apps", "/es/apps/"), ("OneBusiness", "/es/apps/onebusiness/"), ("Funciones", "/es/features/"), ("Blog", "/es/blog/"), ("Contrate en Medellín", "/es/medellin/"), ("One World Agency", "/es/services/")]),
+                     ("Explorar", [("Todas las apps", "/es/apps/"), ("Infraestructura", "/es/infrastructure/"), ("Funciones", "/es/features/"), ("Blog", "/es/blog/"), ("Contrate en Medellín", "/es/medellin/"), ("One World Agency", "/es/services/")]),
                      ("Ayuda", [("Contáctenos", "/es/#contact"), ("Seguridad y confianza", "/es/safety/"), ("Seguridad infantil", "/child-safety/"), ("Accesibilidad", "/es/accessibility/"), ("Eliminar su cuenta", "/delete-account.html")]),
                      ("Legal", [("Términos del servicio", APPU + "/terms"), ("Política de privacidad", APPU + "/privacy"), ("Política de cookies", "/es/cookies/"), ("Términos de SMS", "/es/sms-terms/"), ("Propiedad intelectual", "/es/legal/ip/")])]),
 }
@@ -288,3 +288,55 @@ DOCS["accessibility"] = {  # counsel draft from onesocial access.*; "aim" wordin
                          ("Lo que hacemos", ("ul", ["HTML semántico compatible con lectores de pantalla", "Navegación con teclado y foco visible", "Contraste de color revisado en modo claro y oscuro", "Texto alternativo para las imágenes importantes", "Diseños que funcionan en celulares, tabletas y computadores", "Respeto por la configuración de movimiento reducido"])),
                          ("Límites conocidos", ["Algunas páginas antiguas, videos y herramientas de terceros, como la ventana de chat, aún pueden no cumplir todas las pautas. Corregimos los problemas a medida que los encontramos."]),
                          ("Reportar una barrera", ["Escriba a support@oneworldlabs.ai con \"Accesibilidad\" en el asunto, la página o pantalla y lo que pasó. Le responderemos y podemos darle la información en otro formato."])])}
+
+# ── /infrastructure/ (Lee, 13 Nov 2026, pass 7): the story of what ties One World together ──────
+INFRA = {
+    "en": dict(
+        title="Infrastructure | The one foundation behind every One World app",
+        desc="Why One World is one app and not eight: one profile, OneScore, OneSocial, payments, messages, reviews, contracts and signatures shared by every app, so trust follows your small business everywhere.",
+        eyebrow="Infrastructure", h1="One foundation under every app.",
+        lead="Eight apps. Underneath them, one profile, one score and one way to get paid.",
+        why_h="Why not eight separate apps?",
+        why_p=["Separate apps start from zero. New login, new profile, no reviews.",
+               "One World apps share one foundation: your profile, OneScore, your social media, payments, messages, reviews, contracts and signatures. Set it up once. Every app uses it."],
+        scattered_h="Today, your business is scattered.",
+        scattered_p="Sales, marketing, payments, contracts, signatures and reviews each live in a different tool. None of them talk to each other.",
+        scattered=["Sales", "Marketing", "Payments", "Contracts", "Signatures", "Reviews"],
+        trust_h="With One World, trust goes where you go.",
+        trust_p=["Someone pays you. Someone signs a contract with you. Someone looks at your event.",
+                 "Each time, they see the same things: your reviews, your OneScore and what you are about. Your credibility is visible across your whole business."],
+        pieces_h="The pieces.",
+        pieces=[("profile", "One profile", "One ID and one profile in every app. Your work, photos and services in one place.", "About One profile", "/features/one-profile/", False),
+                ("score", "OneScore", "Your credibility in one score, built from real jobs, reviews and credentials.", "See OneScore", "/apps/onescore/", False),
+                ("social", "OneSocial", "Your social media inside your profile, so people see your work without leaving.", "About OneSocial", "/features/onesocial/", True),
+                ("pay", "Payments", "Card, Nequi or PSE, with a receipt for every sale.", "About payments", "/features/payments/", False),
+                ("msg", "Messages and reviews", "One inbox for every app, and reviews from real jobs that follow you.", "About messages and reviews", "/features/messaging-and-reviews/", False),
+                ("contract", "Contracts and signatures", "Agree the terms in the app, so the deal, the payment and the review stay together.", "Read the guide", "/blog/freelance-contracts-protected-payments/", False)],
+        cta_h="One profile. Every app.", cta_p="Open One World and set up your profile once.", see_apps="See the apps"),
+    "es": dict(
+        title="Infraestructura | La base que comparten todas las apps de One World",
+        desc="Por qué One World es una app y no ocho: un perfil, OneScore, OneSocial, pagos, mensajes, reseñas, contratos y firmas que comparten todas las apps, para que la confianza acompañe a su negocio en todas partes.",
+        eyebrow="Infraestructura", h1="Una sola base bajo todas las apps.",
+        lead="Ocho apps. Debajo de ellas, un perfil, un puntaje y una forma de cobrar.",
+        why_h="¿Por qué no ocho apps separadas?",
+        why_p=["Las apps separadas empiezan de cero. Nuevo inicio de sesión, nuevo perfil, sin reseñas.",
+               "Las apps de One World comparten una base: su perfil, OneScore, sus redes sociales, pagos, mensajes, reseñas, contratos y firmas. La configura una vez. Todas las apps la usan."],
+        scattered_h="Hoy, su negocio está disperso.",
+        scattered_p="Ventas, mercadeo, pagos, contratos, firmas y reseñas viven cada uno en una herramienta distinta. Ninguna habla con las otras.",
+        scattered=["Ventas", "Mercadeo", "Pagos", "Contratos", "Firmas", "Reseñas"],
+        trust_h="Con One World, la confianza va donde usted va.",
+        trust_p=["Alguien le paga. Alguien firma un contrato con usted. Alguien mira su evento.",
+                 "Cada vez ven lo mismo: sus reseñas, su OneScore y quién es usted. Su credibilidad se ve en todo su negocio."],
+        pieces_h="Las piezas.",
+        pieces=[("profile", "Un solo perfil", "Un One ID y un perfil en todas las apps. Su trabajo, sus fotos y sus servicios en un solo lugar.", "Sobre el perfil", "/features/one-profile/", False),
+                ("score", "OneScore", "Su credibilidad en un puntaje, construido con trabajos reales, reseñas y credenciales.", "Ver OneScore", "/apps/onescore/", False),
+                ("social", "OneSocial", "Sus redes sociales dentro de su perfil, para que vean su trabajo sin salir.", "Sobre OneSocial", "/features/onesocial/", True),
+                ("pay", "Pagos", "Tarjeta, Nequi o PSE, con recibo de cada venta.", "Sobre los pagos", "/features/payments/", False),
+                ("msg", "Mensajes y reseñas", "Una bandeja para todas las apps, y reseñas de trabajos reales que lo acompañan.", "Sobre mensajes y reseñas", "/features/messaging-and-reviews/", False),
+                ("contract", "Contratos y firmas", "Acuerde los términos en la app, así el trato, el pago y la reseña quedan juntos.", "Leer la guía", "/blog/freelance-contracts-protected-payments/", False)],
+        cta_h="Un perfil. Todas las apps.", cta_p="Abra One World y configure su perfil una sola vez.", see_apps="Ver las apps"),
+}
+WHY["en"]["infra_p"] = "They work as one because they share one foundation: your profile, OneScore, payments, messages, reviews and contracts."
+WHY["en"]["infra_link"] = "How the apps fit together"
+WHY["es"]["infra_p"] = "Funcionan como una sola porque comparten una base: su perfil, OneScore, pagos, mensajes, reseñas y contratos."
+WHY["es"]["infra_link"] = "Cómo encajan las apps"

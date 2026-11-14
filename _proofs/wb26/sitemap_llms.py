@@ -5,7 +5,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 S = "https://www.oneworldlabs.ai"
 TODAY = "2026-11-13"
 CHANGED = ["/", "/es/", "/blog/", "/es/blog/"] + ["/apps/%s/" % k for k in ("onehome", "onejob", "oneevent", "oneride", "onepay", "onebusiness")] + \
-          ["/es/apps/%s/" % k for k in ("onehome", "onejob", "oneevent", "oneride", "onepay", "onebusiness")]
+          ["/es/apps/%s/" % k for k in ("onehome", "onejob", "oneevent", "oneride", "onepay", "onebusiness")] + \
+          ["/infrastructure/", "/es/infrastructure/"]
 p = os.path.join(ROOT, "sitemap.xml"); s = open(p).read()
 for path in CHANGED:
     loc = S + path
@@ -26,5 +27,7 @@ s = s.replace("See https://app.oneworldlabs.ai/rides/", "See https://www.oneworl
 s = s.replace("- Sitio en español: https://www.oneworldlabs.ai/es/ — apps: /es/apps/onejob/, /es/apps/oneevent/, /es/apps/onehome/; agencia: /es/services/",
               "- Sitio en español: https://www.oneworldlabs.ai/es/ — apps: /es/apps/onejob/, /es/apps/oneevent/, /es/apps/onehome/, /es/apps/oneride/, /es/apps/onepay/, /es/apps/onebusiness/; guías: /es/blog/; agencia: /es/services/")
 s = s.replace("- [Blog](https://www.oneworldlabs.ai/blog/)\n", "- [Blog](https://www.oneworldlabs.ai/blog/) — every guide, filterable by topic (small business, hiring in Medellín, getting hired, events, homes, rides), e.g. https://www.oneworldlabs.ai/blog/?topic=hire\n")
+if "/infrastructure/" not in s:
+    s = s.replace("- [Blog](https://www.oneworldlabs.ai/blog/)", "- [Infrastructure](https://www.oneworldlabs.ai/infrastructure/): the one foundation every app shares: one profile (One ID), OneScore, OneSocial, payments, messages, reviews, contracts and signatures.\n- [Blog](https://www.oneworldlabs.ai/blog/)", 1)
 open(p, "w").write(s)
 print("sitemap urls:", s and open(os.path.join(ROOT, "sitemap.xml")).read().count("<url>"))

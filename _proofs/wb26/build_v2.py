@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import (APP, APPS, APP_BY, ES_APP_PAGES, HOME, SCREENS, EXPLORER, STORY, HOME_GUIDES, PAGES,
                      JOB_NEEDS, NEED_NAMES, TOPICS, POST_TAGS, FALLBACK_IMG, BLOG)
 from content3 import APP_PAGES3, FEATURES, FEATURE_BY, FEAT_PAGES, FEAT_INDEX, APPS_INDEX, HUBS
-from content5 import FEATURED, WHY, FOOTER, DOCS, DOC_IMG
+from content5 import FEATURED, WHY, FOOTER, DOCS, DOC_IMG, INFRA
 PAGES.update(APP_PAGES3)
 for _k, _n, _live, _img, _line in FEATURES:
     if _k not in APP_BY:
@@ -23,7 +23,7 @@ for _k, _n, _live, _img, _line in FEATURES:
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 BASE = "05c5c9b"          # the commit whose header/footer we keep
 SITE = "https://www.oneworldlabs.ai"
-V = "v2f"                  # cache-buster for v2.css / v2.js
+V = "v2g"                  # cache-buster for v2.css / v2.js
 E = lambda s: html.escape(s, quote=True)
 
 
@@ -61,25 +61,21 @@ for lg, s in TPL.items():
 
 # Lee 13 Nov 2026: "For business" read as something other than the apps. OneBusiness is ONE of the
 # apps, so the header says Apps + OneBusiness (the phone menu is built from these same links).
-NAV_FIX = {
-    '<nav aria-label="Main" data-i18n="kb7e4919ac" data-i18n-attr="aria-label:keb814be3c"><a href="/#destinations">The apps</a><a href="/services/">For business</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a></nav>':
-    '<nav aria-label="Main" data-i18n="kb7e4919ac" data-i18n-attr="aria-label:keb814be3c"><a href="/apps/">Apps</a><a href="/apps/onebusiness/">OneBusiness</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a></nav>',
-    '<nav aria-label="Main"><a href="/#destinations">The apps</a><a href="/services/">For business</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a></nav>':
-    '<nav aria-label="Main"><a href="/apps/">Apps</a><a href="/apps/onebusiness/">OneBusiness</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a></nav>',
-    '<nav aria-label="Principal"><a href="/es/#destinations">Las apps</a><a href="/es/services/">Para su negocio</a><a href="/es/blog/">Blog</a><a href="/es/#contact">Contacto</a></nav>':
-    '<nav aria-label="Principal"><a href="/es/apps/">Las apps</a><a href="/es/apps/onebusiness/">OneBusiness</a><a href="/es/blog/">Blog</a><a href="/es/#contact">Contacto</a></nav>',
+# Pass 7 (Lee 13 Nov 2026): the header is Apps · Infrastructure · Blog. OneBusiness is reached from
+# Apps like every other app. The phone menu is built from these same links.
+NAV_NEW = {
+    "Main": '<nav aria-label="Main" data-i18n="kb7e4919ac" data-i18n-attr="aria-label:keb814be3c"><a href="/apps/">Apps</a><a href="/infrastructure/">Infrastructure</a><a href="/blog/">Blog</a></nav>',
+    "Principal": '<nav aria-label="Principal"><a href="/es/apps/">Las apps</a><a href="/es/infrastructure/">Infraestructura</a><a href="/es/blog/">Blog</a></nav>',
 }
 
 
 def fix_nav(s):
-    for a, b in NAV_FIX.items():
-        s = s.replace(a, b)
-    return s
+    return re.sub(r'<nav aria-label="(Main|Principal)"[^>]*>.*?</nav>', lambda m: NAV_NEW[m.group(1)], s, count=1, flags=re.S)
 
 
 for _lg in PARTS:
     PARTS[_lg]["header"] = fix_nav(PARTS[_lg]["header"])
-    assert "/apps/onebusiness/" in PARTS[_lg]["header"], _lg
+    assert "/infrastructure/" in PARTS[_lg]["header"], _lg
 
 APP_PATHS = {"/home", "/jobs", "/events", "/rides", "/pay", "/business", "/onescore", "/agent"}
 
@@ -137,7 +133,7 @@ def L(lg, h):
         return "/es/blog/%s/" % PAIR[m.group(1)]
     if h == "/blog/":
         return "/es/blog/"
-    if h.startswith("/features/") or h == "/apps/" or h.split("?")[0] in ("/why/", "/careers/", "/partners/", "/investors/", "/press/", "/safety/", "/accessibility/", "/cookies/", "/sms-terms/", "/legal/ip/"):
+    if h.startswith("/features/") or h == "/apps/" or h.split("?")[0] in ("/why/", "/infrastructure/", "/careers/", "/partners/", "/investors/", "/press/", "/safety/", "/accessibility/", "/cookies/", "/sms-terms/", "/legal/ip/"):
         return "/es" + h
     if h.startswith("/medellin/") or h == "/services/":
         return "/es" + h
@@ -265,9 +261,9 @@ def one_card(lg, k, first=False):
     act = '<a class="link" href="%s">%s</a>' % (app_page(lg, k), E(HOME[lg]["learn"]))
     if a[3]:
         act = open_btn(lg, k) + act
-    return ('<article class="oc" aria-roledescription="slide">%s<div class="oc-body"><div class="oc-id"><img src="%s" alt=""/><strong translate="no">%s</strong>%s</div>'
+    return ('<article class="oc" aria-roledescription="slide">%s<div class="oc-body"><div class="oc-id">%s<strong translate="no">%s</strong>%s</div>'
             '<h4>%s</h4><p>%s</p><div class="oc-act">%s</div></div></article>') % (
-        img(a[5], "", lazy=not first), mark(k), a[1], badge, E(title), E(line), act)
+        img(a[5], "", lazy=not first), biz_icon(k), a[1], badge, E(title), E(line), act)
 
 
 # ── HOME ─────────────────────────────────────────────────────────────────────────────────────
@@ -301,17 +297,17 @@ def build_home(lg):
     for k, pic, words in FEATURED:
         a = APP_BY[k]
         h3, p = words[lg]
-        rows.append('<article class="row"><div class="row-media">%s</div><div><span class="row-tag"><img src="%s" alt=""/><span translate="no">%s</span></span>'
+        rows.append('<article class="row"><div class="row-media">%s</div><div><span class="row-tag">%s<span translate="no">%s</span></span>'
                     '<h3>%s</h3><p>%s</p><div class="oc-act"><a class="btn small-btn" href="%s">%s</a><a class="link" href="%s">%s</a></div></div></article>' % (
-                        img(pic, h3), mark(k), a[1], E(h3), E(p), APP + a[4], E(H["open_x"].format(n=a[1])), app_page(lg, k), E(H["learn"])))
+                        img(pic, h3), biz_icon(k), a[1], E(h3), E(p), APP + a[4], E(H["open_x"].format(n=a[1])), app_page(lg, k), E(H["learn"])))
     biz = ('<section class="sec" id="business"><div class="wrap"><div class="sec-head"><span class="eyebrow">%s</span><h2>%s</h2><p>%s</p></div>'
            '<div class="rows">%s</div><p class="more"><a class="btn ghost" href="%s">%s</a></p></div></section>') % (
         E(H["feat_eyebrow"]), E(H["feat_h2"]), E(H["feat_p"]), "".join(rows), L(lg, "/apps/"), E(H["feat_all"]))
 
     steps = "".join('<div class="step"><b>%d</b><div><h4>%s</h4><p>%s</p></div></div>' % (i + 1, E(t), E(p)) for i, (t, p) in enumerate(H["steps"]))
-    oneid = ('<section class="sec sec-oneid"><div class="wrap oneid"><div class="oneid-mark"><img src="/mark-oneworld.png" alt="" loading="lazy"/></div>'
+    oneid = ('<section class="sec sec-oneid"><div class="wrap oneid"><div class="oneid-mark">%s</div>'
              '<div><span class="eyebrow">%s</span><h2 style="font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-.045em;line-height:1.05">%s</h2><div class="steps3">%s</div>%s</div></div></section>') % (
-        E(H["id_eyebrow"]), E(H["id_h2"]), steps, features_row(lg, compact=True))
+        svg(ic("id")), E(H["id_eyebrow"]), E(H["id_h2"]), steps, features_row(lg, compact=True))
     gp = POSTS[lg][HOME_GUIDES[lg][0]]
     gt, gapp = POST_TAGS.get(gp["en"] or "", ("", None))
     one = ('<a class="feature-post" href="%s">%s<div><em>%s</em><h3 class="fp-h">%s</h3><p>%s</p><time datetime="%s">%s</time></div></a>') % (
@@ -335,8 +331,33 @@ BIZ_ICON = {
 }
 
 
+# Pass 7 (Lee): the coloured crescent is the same mark in every colour, so outside the wordmark and
+# the app-page title it is replaced by a line icon per app in the same tinted square.
+APP_ICON = {
+    "onebusiness": '<path d="M4 9.5 5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 11.5V20h13v-8.5"/><path d="M10 20v-4.5h4V20"/>',
+    "oneevent": '<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h15A1.5 1.5 0 0 1 21 7.5V10a2 2 0 0 0 0 4v2.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 16.5V14a2 2 0 0 0 0-4z"/><path d="M14.5 6v2.5M14.5 11v2M14.5 15.5V18"/>',
+    "onehome": '<path d="M3 11 12 4l9 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/>',
+    "onepay": '<path d="M21 3 10 14"/><path d="M21 3l-7 18-4-7-7-4z"/>',
+    "onejob": '<rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7"/><path d="M3 12.5h18"/>',
+    "oneride": '<path d="M4 16.5v-4L6.2 7h11.6l2.2 5.5v4z"/><path d="M4 12.5h16"/><circle cx="7.5" cy="16.5" r="1.8"/><circle cx="16.5" cy="16.5" r="1.8"/>',
+    "onescore": '<path d="M4 17a8 8 0 1 1 16 0"/><path d="m12 17 4-5"/><circle cx="12" cy="17" r="1.3"/>',
+    "oneagent": '<circle cx="9" cy="8" r="3.5"/><path d="M3 20c.8-3.6 3.2-5.5 6-5.5s5.2 1.9 6 5.5"/><path d="m18 4.5.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L15.1 6.6l2-.3z"/>',
+    "onesocial": '<rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><path d="m15 17 2 2 4-4"/>',
+    "id": '<rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2.3"/><path d="M5.8 16c.6-1.6 1.8-2.4 3.2-2.4s2.6.8 3.2 2.4"/><path d="M14.5 10h4M14.5 13.5h3"/>',
+    "contract": '<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/><path d="M8.5 16.5c1.2 0 1.6-3 2.8-3s.4 3 1.6 3 1.2-1.5 2.6-1.5"/>',
+    "sales": '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+    "marketing": '<path d="M3 10v4h3l7 4V6l-7 4z"/><path d="M17 9a4 4 0 0 1 0 6"/>',
+    "signature": '<path d="M3 16c2.5 0 3.5-9 6-9s-1 9 2 9 3-4 5-4 1.5 4 5 4"/><path d="M3 20.5h18"/>',
+    "star": '<path d="m12 3.5 2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9z"/>',
+}
+
+
+def ic(k):
+    return APP_ICON.get(k) or FICON.get(k) or BIZ_ICON.get(k)
+
+
 def biz_icon(k, cls="biz-ic"):
-    return '<span class="%s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg></span>' % (cls, BIZ_ICON[k])
+    return '<span class="%s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg></span>' % (cls, ic(k))
 
 
 def oneview_mock(lg):
@@ -350,8 +371,8 @@ def oneview_mock(lg):
 
 
 def biz_intro(lg, I):
-    left = "".join('<li><img src="%s" alt=""/><span><a href="%s" translate="no">%s</a>: %s</span></li>' % (
-        mark(k), app_page(lg, k), APP_BY[k][1], E(t)) for k, t in I["left"][1])
+    left = "".join('<li>%s<span><a href="%s" translate="no">%s</a>: %s</span></li>' % (
+        biz_icon(k), app_page(lg, k), APP_BY[k][1], E(t)) for k, t in I["left"][1])
     right = "".join('<li>%s<span><b translate="no">%s</b> %s</span></li>' % (biz_icon(ic), E(n), E(t)) for ic, n, t in I["right"][1])
     return ('<section class="biz-intro"><div class="wrap"><div class="bi-card"><h2>%s</h2><p class="lead">%s</p><div class="bi-cols">'
             '<div class="bi-col"><h3>%s</h3><p>%s</p><ul>%s</ul></div><div class="bi-col mine"><h3 translate="no">%s</h3><p>%s</p><ul>%s</ul></div></div></div></div></section>') % (
@@ -374,8 +395,8 @@ def side_html(lg, k, s, first):
     if s.get("need_label"):
         need = '<p class="need-line" data-need-line data-names="%s" hidden>%s <b></b></p>' % (E(json.dumps(NEED_NAMES[lg], ensure_ascii=False)), E(s["need_label"]))
     note = '<p class="need-line" style="display:block;border-radius:16px">%s</p>' % E(s["soon_note"]) if s.get("soon_note") else ""
-    out = ['<div class="side-hero"><div><h2>%s</h2><p class="lead">%s</p>%s%s<div class="oc-act">%s</div></div><figure>%s</figure></div>' % (
-        E(s["h2"]), E(s["lead"]), need, note, "".join(acts), img(s["img"], s["alt"], lazy=not first))]
+    out = ['<div class="side-hero"><div><h2>%s</h2><p class="lead">%s</p>%s%s<div class="oc-act">%s</div></div><figure style="--glow:%s">%s</figure></div>' % (
+        E(s["h2"]), E(s["lead"]), need, note, "".join(acts), a[2], img(s["img"], s["alt"], lazy=not first))]
     if s.get("rows"):
         rr = "".join('<article class="row"><div class="row-media">%s</div><div><span class="row-tag">%s<span translate="no">%s</span></span><h3>%s</h3><p>%s</p><div class="oc-act"><a class="link" href="%s">%s</a></div></div></article>' % (
             oneview_mock(lg) if r[0] == "@oneview" else img(r[0], r[2]), biz_icon(r[5]) if len(r) > 5 else "", E(r[1]), E(r[2]), E(r[3]), L(lg, r[4][1]), E(r[4][0])) for r in s["rows"])
@@ -437,7 +458,7 @@ def build_app(lg, k):
              '<div class="onecard" style="margin-top:72px"><div class="oc-top"><h3>%s</h3><a class="link" href="%s">%s</a></div><div class="oc-track">%s</div></div></div></section>') % (
         E(gh[0]), E(gh[1]), guide_cards(lg, P["guides"]), E(nh), L(lg, "/#destinations"),
         E({"en": "See all", "es": "Ver todas"}[lg]), one_card(lg, nxt, True))
-    after = after[:-len("</div></section>")] + features_row(lg) + "</div></section>"
+    after = after[:-len("</div></section>")] + features_row(lg, compact=True) + "</div></section>"
     main = top + (biz_intro(lg, P["intro"]) if P.get("intro") else "") + sides + after
     faqs = [q for s in P["sides"] for q in s["faq"]]
     path = "/apps/%s/" % k
@@ -490,7 +511,7 @@ def build_blog(lg):
             used.append(ap)
     used.sort(key=lambda k: [a[0] for a in APPS].index(k))
     applinks = "".join(app_row(lg, k) for k in used)
-    hub = link_row(lg, B["hub"][2], mark("onejob"), B["hub"][0], B["hub"][1], False, "/assets/v2/img/cleanteam.jpg")
+    hub = link_row(lg, B["hub"][2], ic("onejob"), B["hub"][0], B["hub"][1], False, "/assets/v2/img/cleanteam.jpg")
     main = ('<section class="blog-hero"><div class="wrap"><span class="eyebrow">Blog</span><h1>%s</h1><p class="lead">%s</p>'
             '<nav class="filters" aria-label="%s">%s</nav>%s<div class="cards">%s</div><p class="empty" data-empty hidden>%s</p></div></section>'
             '<section class="sec"><div class="wrap"><div class="sec-head"><h2>%s</h2><p>%s</p></div><div class="app-links">%s%s</div></div></section>') % (
@@ -544,24 +565,25 @@ FICON = {  # distinct line icons for the cross-app features
 def link_row(lg, href, mk, title, line, soon=False, thumb=None, icon=None):
     b = '<em class="badge">%s</em>' % E(HOME[lg]["soon"]) if soon else ""
     if thumb:
-        lead = '<span class="lr-media"><img class="thumb" src="%s" alt="" loading="lazy"/>%s</span>' % (
-            thumb, ('<span class="lr-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg></span>' % icon) if icon
-            else '<img class="lr-mk" src="%s" alt=""/>' % mk)
+        lead = '<span class="lr-media"><img class="thumb" src="%s" alt="" loading="lazy"/></span>' % thumb
     else:
-        lead = '<img class="lr-mk solo" src="%s" alt=""/>' % mk
+        lead = '<span class="lr-solo">%s</span>' % svg(icon or mk)
     return '<a class="lrow" href="%s">%s<div><b><span translate="no">%s</span>%s</b><span>%s</span></div>%s</a>' % (href, lead, E(title), b, E(line), CHEVRON)
 
 
 def features_row(lg, compact=False, skip=None):
     h = {"en": "Works across every app", "es": "Funciona en todas las apps"}[lg]
-    links = "".join(link_row(lg, L(lg, "/features/%s/" % k), mark(k), n[lg], line[lg], not live, im, FICON[k])
-                    for k, n, live, im, line in FEATURES if k != skip)
-    return '<div class="feat-row%s"><h3>%s</h3><div class="app-links">%s</div></div>' % (" compact" if compact else "", E(h), links)
+    rows = [link_row(lg, L(lg, "/features/%s/" % k), ic(k), n[lg], line[lg], not live, im) for k, n, live, im, line in FEATURES if k != skip]
+    score = {"en": "Your credibility, built from real jobs and reviews.", "es": "Su credibilidad, construida con trabajos y reseñas reales."}[lg]
+    rows.insert(1, link_row(lg, app_page(lg, "onescore"), ic("onescore"), "OneScore", score, False, "/blog/img/badges.jpg"))
+    more = {"en": "How it fits together", "es": "Cómo encaja todo"}[lg]
+    return ('<div class="feat-row%s"><div class="oc-top"><h3>%s</h3><a class="link" href="%s">%s</a></div><div class="app-links">%s</div></div>') % (
+        " compact" if compact else "", E(h), L(lg, "/infrastructure/"), E(more), "".join(rows))
 
 
 def app_row(lg, k, thumb=True):
     a = APP_BY[k]
-    return link_row(lg, app_page(lg, k), mark(k), a[1], a[6][lg][0], not a[3], a[5] if thumb else None)
+    return link_row(lg, app_page(lg, k), ic(k), a[1], a[6][lg][0], not a[3], a[5] if thumb else None)
 
 
 APP_ORDER = ["onebusiness", "oneevent", "oneride", "onehome", "onepay", "onejob", "onescore", "oneagent"]
@@ -688,7 +710,7 @@ def build_hub(lg, t):
     blog = "/blog/" if lg == "en" else "/es/blog/"
     cards = guide_cards(lg, [p["slug"] for p in posts])
     see = {"en": ("The app for this", "Works across every app"), "es": ("La app para esto", "Funciona en todas las apps")}[lg]
-    extra = link_row(lg, L(lg, "/features/payments/"), mark("payments"), FEATURE_BY["payments"][1][lg], FEATURE_BY["payments"][4][lg], False, FEATURE_BY["payments"][3], FICON["payments"]) if t in ("payments", "business") else ""
+    extra = link_row(lg, L(lg, "/features/payments/"), ic("payments"), FEATURE_BY["payments"][1][lg], FEATURE_BY["payments"][4][lg], False, FEATURE_BY["payments"][3], FICON["payments"]) if t in ("payments", "business") else ""
     main = ('<section class="blog-hero"><div class="wrap"><a class="crumb" href="%s">← Blog</a><h1 style="margin-top:12px">%s</h1><p class="lead">%s</p>'
             '<nav class="filters" aria-label="%s">%s</nav>%s'
             '<div class="feat-row"><h3>%s</h3><div class="app-links">%s%s</div></div></div></section>') % (
@@ -764,8 +786,8 @@ def build_why(lg):
     loop = ('<section class="sec"><div class="wrap"><div class="row"><div><h2 class="why-h2">%s</h2><p class="why-p">%s</p>'
             '<ol class="loop" aria-label="%s">%s</ol></div><div class="row-media">%s</div></div></div></section>') % (
         E(W["loop_h"]), E(W["loop_p"]), E(W["loop_h"]), steps, img("/blog/img/reviews.jpg", ""))
-    suite = ('<section class="sec"><div class="wrap"><div class="sec-head"><h2>%s</h2><p>%s</p></div><div class="app-links">%s</div></div></section>') % (
-        E(W["suite_h"]), E(W["suite_p"]), "".join(link_row(lg, app_page(lg, k), mark(k), APP_BY[k][1], line, False, APP_BY[k][5]) for k, line in W["suite"]))
+    suite = ('<section class="sec"><div class="wrap"><div class="sec-head"><h2>%s</h2><p>%s</p><p>%s <a class="link" href="%s">%s</a></p></div><div class="app-links">%s</div></div></section>') % (
+        E(W["suite_h"]), E(W["suite_p"]), E(W["infra_p"]), L(lg, "/infrastructure/"), E(W["infra_link"]), "".join(link_row(lg, app_page(lg, k), ic(k), APP_BY[k][1], line, False, APP_BY[k][5]) for k, line in W["suite"]))
     founder = ('<section class="sec"><div class="wrap"><div class="founder"><img src="/founder/founder-lee-full.jpg" alt="%s" loading="lazy"/>'
                '<div><span class="eyebrow">%s</span><h2 class="why-h2">%s</h2><p class="founder-role">%s</p><p class="why-p">%s</p>'
                '<div class="oc-act"><a class="link" href="/founder/">%s</a></div></div></div></div></section>') % (
@@ -778,6 +800,34 @@ def build_why(lg):
          "about": {"@id": SITE + "/#org"}}]})
     write("why/index.html" if lg == "en" else "es/why/index.html",
           doc(lg, head(lg, W["title"], W["desc"], "/why/", "/assets/v2/img/team.jpg", ld), hero + problem + idea + loop + suite + founder + cta))
+
+
+def build_infra(lg):
+    X = INFRA[lg]
+    pre = "" if lg == "en" else "/es"
+    hero = ('<section class="ap-top why-top infra-top"><div class="wrap"><span class="eyebrow">%s</span><h1 class="why-h1">%s</h1><p class="lead why-lead">%s</p></div></section>') % (
+        E(X["eyebrow"]), E(X["h1"]), E(X["lead"]))
+    why = ('<section class="sec infra-sec"><div class="wrap"><div class="infra-card"><h2>%s</h2>%s</div></div></section>') % (
+        E(X["why_h"]), "".join('<p>%s</p>' % E(p) for p in X["why_p"]))
+    chips = "".join('<li>%s<span>%s</span></li>' % (biz_icon(k), E(t)) for k, t in zip(("sales", "marketing", "payments", "contract", "signature", "star"), X["scattered"]))
+    scattered = ('<section class="sec infra-sec"><div class="wrap"><div class="infra-card"><h2>%s</h2><p>%s</p><ul class="infra-chips">%s</ul></div></div></section>') % (
+        E(X["scattered_h"]), E(X["scattered_p"]), chips)
+    trust = ('<section class="sec infra-sec"><div class="wrap"><div class="infra-card glow"><h2>%s</h2>%s</div></div></section>') % (
+        E(X["trust_h"]), "".join('<p>%s</p>' % E(p) for p in X["trust_p"]))
+    icons = {"profile": "one-profile", "score": "onescore", "social": "onesocial", "pay": "payments", "msg": "messaging-and-reviews", "contract": "contract"}
+    cards = "".join('<article class="half"><span class="ap-ic">%s</span><h3>%s%s</h3><p>%s</p><div class="oc-act"><a class="link" href="%s">%s</a></div></article>' % (
+        svg(ic(icons[k])), '<span translate="no">%s</span>' % E(h) if h.startswith("One") else E(h), ' <em class="badge">%s</em>' % E(HOME[lg]["soon"]) if soon else "",
+        E(p), app_page(lg, "onescore") if k == "score" else L(lg, href), E(lk)) for k, h, p, lk, href, soon in X["pieces"])
+    pieces = ('<section class="sec infra-sec"><div class="wrap"><div class="sec-head infra-head"><h2>%s</h2></div><div class="infra-grid">%s</div></div></section>') % (E(X["pieces_h"]), cards)
+    cta = ('<section class="sec"><div class="wrap"><div class="cta-band">%s<div><h3>%s</h3><p>%s</p><div class="oc-act"><a class="btn shine" href="%s/">%s</a>'
+           '<a class="btn ghost" href="%s">%s</a></div></div></div></div></section>') % (
+        img("/assets/v2/img/team.jpg", ""), E(X["cta_h"]), E(X["cta_p"]), APP, E(HOME[lg]["open"]), L(lg, "/apps/"), E(X["see_apps"]))
+    ld = ldjson({"@context": "https://schema.org", "@graph": [
+        crumbs(lg, [("One World", pre + "/"), (X["eyebrow"], pre + "/infrastructure/")]),
+        {"@type": "WebPage", "name": X["title"], "url": page_url(lg, "/infrastructure/"), "description": X["desc"], "inLanguage": "en" if lg == "en" else "es-CO",
+         "about": {"@id": SITE + "/#org"}}]})
+    write("infrastructure/index.html" if lg == "en" else "es/infrastructure/index.html",
+          doc(lg, head(lg, X["title"], X["desc"], "/infrastructure/", "/blog/img/ecosystem.jpg", ld), hero + why + scattered + trust + pieces + cta))
 
 
 def build_doc(lg, slug):
@@ -819,6 +869,7 @@ if __name__ == "__main__":
             build_hub(lg, t)
         inject_posts(lg)
         build_why(lg)
+        build_infra(lg)
         for d in DOCS:
             build_doc(lg, d)
     build_404()

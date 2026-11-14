@@ -51,6 +51,7 @@ Overview of all parts: https://www.oneworldlabs.ai/apps/
 
 ## Guides
 - Guides by topic: [small business](https://www.oneworldlabs.ai/blog/topic/business/), [hiring in Medellín](https://www.oneworldlabs.ai/blog/topic/hire/), [getting hired](https://www.oneworldlabs.ai/blog/topic/work/), [events](https://www.oneworldlabs.ai/blog/topic/events/), [homes](https://www.oneworldlabs.ai/blog/topic/homes/), [private drivers](https://www.oneworldlabs.ai/blog/topic/rides/), [getting paid](https://www.oneworldlabs.ai/blog/topic/payments/)
+- [Infrastructure](https://www.oneworldlabs.ai/infrastructure/): the one foundation every app shares: one profile (One ID), OneScore, OneSocial, payments, messages, reviews, contracts and signatures.
 - [Blog](https://www.oneworldlabs.ai/blog/) — every guide, filterable by topic (small business, hiring in Medellín, getting hired, events, homes, rides), e.g. https://www.oneworldlabs.ai/blog/topic/hire/
 - [What is OneScore?](https://www.oneworldlabs.ai/blog/what-is-onescore/)
 - [AI answering services for small business](https://www.oneworldlabs.ai/blog/ai-answering-service-small-business/)
