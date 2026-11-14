@@ -2,7 +2,7 @@
 """13 Nov 2026 (Lee): the header said "The apps" and "For business" as if they were different
 things. Put the generator's header links (Apps + OneBusiness) on every page that still has the old
 header, generated or not. Idempotent."""
-import os, sys
+import os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_v2 as B
 done = 0
@@ -11,7 +11,7 @@ for dp, dn, fn in os.walk(B.ROOT):
         continue
     for f in fn:
         if f.endswith(".html"):
-            p = os.path.join(dp, f); s = open(p).read(); n = B.fix_nav(s)
+            p = os.path.join(dp, f); s = open(p).read(); n = re.sub(r'/assets/ow-site\.js\?v=[\w]+', '/assets/ow-site.js?v=p9', B.fix_nav(s))
             if n != s:
                 open(p, "w").write(n); done += 1
 print("header links updated in", done, "pages")

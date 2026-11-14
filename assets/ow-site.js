@@ -52,7 +52,30 @@
     /* WB-22 (12 Nov 2026): a page written in one language (the /es/ pages, the city pages) says
        so with data-ow-static. It always shows in that language, whatever was saved: Google reads
        the words in the HTML, and the <html lang> must never be rewritten to another language. */
-    if (STATIC && find(STATIC)) return STATIC;
+    /* Pass 9 (Lee): the choice persists everywhere. A visitor who picked a language and lands
+       on a page in another one is taken to that page's own version in their language. Search
+       engines keep nothing in storage, so they still read each page as written. */
+    var want = norm(q) || norm(s);
+    var groupOf = function (k) { return k === 'co' || k === 'es' ? 'es' : k === 'en' ? 'en' : 'x'; };
+    if (want) {
+      var here = STATIC ? groupOf(STATIC) : 'en';
+      var g = groupOf(want);
+      if (g !== here) {
+        var alt = document.querySelector('link[rel="alternate"][hreflang="' + (g === 'es' ? 'es' : 'en') + '"]') || (g !== 'es' && document.querySelector('link[rel="alternate"][hreflang="x-default"]'));
+        if (alt) {
+          try {
+            var to = new URL(alt.getAttribute('href'), location.href);
+            if (to.pathname !== location.pathname) {
+              store(want);
+              if (g === 'x') to.searchParams.set('owl_lang', want);
+              location.replace(to.pathname + to.search + location.hash);
+            }
+          } catch (e) {}
+        }
+      }
+    }
+    /* An English-only page (no twin in the chosen language) is translated here in the browser. */
+    if (STATIC && find(STATIC)) return STATIC === 'en' && want ? want : STATIC;
     var fromQuery = norm(q);
     if (fromQuery) { store(fromQuery); return fromQuery; }   /* a valid ?owl_lang is a choice: keep it on the next page */
     return norm(s) || 'en';                                  /* an invalid one is ignored, never a reset */
@@ -117,7 +140,7 @@
       });
     });
     var L = find(k);
-    if (!STATIC) ROOT.setAttribute('lang', L ? L.html : 'en');   /* a one-language page keeps its own lang */
+    if (!STATIC || STATIC === 'en') ROOT.setAttribute('lang', L ? L.html : 'en');   /* a one-language page keeps its own lang */
     current = k;
     window.OWL_LANG = k;
     renderLangButton();
@@ -156,10 +179,125 @@
     if (!find(k)) k = 'en';
     if (save) store(k);
     var mine = ++langSeq;   /* a slower earlier request must never overwrite the newest choice */
-    return load(k).then(function (d) { if (mine === langSeq) applyDict(k, d); },
-      function () { if (mine === langSeq) applyDict('en', {}); })
+    return Promise.all([load(k), loadStr(k)]).then(function (r) { if (mine === langSeq) { applyDict(k, r[0]); applyStr(k, r[1]); } },
+      function () { if (mine === langSeq) { applyDict('en', {}); applyStr('en', null); } })
       .then(function () { if (mine === langSeq) ROOT.classList.remove('ow-i18n-pending'); });
   }
+
+  /* ---------------- every other string (pass 9, Lee 13 Nov 2026) ----------------
+     "If it's in Russian, everything is in Russian." The data-i18n blocks above only cover the
+     older pages. /assets/i18n/str-<code>.json maps the exact English text (spaces collapsed) to
+     the translation, and is applied to every text node, alt, aria-label, title and placeholder,
+     plus the tab title and description, including anything a script adds later (menus, dialogs,
+     the music button). Built by _proofs/wb26/i18n_strings.py. English is restored exactly. */
+  var SV = 'p9c';
+  var strDicts = {}, strDict = null, strSaved = new WeakMap(), docSaved = null, strObs = null;
+  var STR_ATTRS = ['alt', 'aria-label', 'title', 'placeholder'];
+  var STR_SKIP = 'script,style,noscript,template,code,pre,[translate="no"],[contenteditable]';
+  function loadStr(k) {
+    if (k === 'en') return Promise.resolve(null);   /* Spanish pages load it too: it catches the chat widget and any leftover English */
+    if (strDicts[k]) return Promise.resolve(strDicts[k]);
+    return fetch(P + '/assets/i18n/str-' + k + '.json?v=' + SV, { credentials: 'omit' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { strDicts[k] = d; return d; }, function () { return null; });
+  }
+  function nrm(v) { return String(v).replace(/\s+/g, ' ').trim(); }
+  /* One record per node: the English it had and what we wrote. If a script has since put new
+     text there, that new text becomes the English. */
+  function strOne(rec, cur) {
+    if (!rec || (cur !== rec.o && cur !== rec.t)) rec = { o: cur, t: null };
+    var key = nrm(rec.o), tr = strDict && key && strDict[key];
+    if (tr) { var m = rec.o.match(/^(\s*)[\s\S]*?(\s*)$/); rec.t = m[1] + tr + m[2]; }
+    else rec.t = rec.o;
+    return rec;
+  }
+  function strText(n) {
+    if (n.parentElement && n.parentElement.tagName === 'TEXTAREA') return;   /* what a visitor types is never touched */
+    var rec = strOne(strSaved.get(n), n.nodeValue);
+    strSaved.set(n, rec);
+    if (n.nodeValue !== rec.t) n.nodeValue = rec.t;
+  }
+  function strAttrs(el) {
+    var all = strSaved.get(el);
+    for (var i = 0; i < STR_ATTRS.length; i++) {
+      var a = STR_ATTRS[i];
+      if (!el.hasAttribute(a)) continue;
+      all = all || {};
+      var rec = strOne(all[a], el.getAttribute(a));
+      all[a] = rec;
+      if (el.getAttribute(a) !== rec.t) el.setAttribute(a, rec.t);
+    }
+    if (all) strSaved.set(el, all);
+    /* A box the chat widget pre-fills ("I want to know more"), never what a visitor typed. */
+    if ((el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') && !el.__owTyped && el.value) {
+      if (!el.__owWatch) { el.__owWatch = 1; el.addEventListener('input', function (e) { if (e.isTrusted) el.__owTyped = 1; }); }
+      var vr = strOne(el.__owVal, el.value); el.__owVal = vr;
+      if (el.value !== vr.t) { el.value = vr.t; try { el.dispatchEvent(new Event('input', { bubbles: true })); } catch (e) {} }
+    }
+  }
+  function strWalk(root) {
+    if (!root) return;
+    if (root.nodeType === 3) { if (!(root.parentElement && root.parentElement.closest(STR_SKIP))) strText(root); return; }
+    if (root.nodeType !== 1 || root.closest(STR_SKIP)) return;
+    var w = document.createTreeWalker(root, 5, { acceptNode: function (n) {
+      if (n.nodeType === 1) return n.matches(STR_SKIP) ? 2 : 1;
+      return /[A-Za-z]/.test(n.nodeValue) || strSaved.has(n) ? 1 : 3;
+    } });
+    strAttrs(root);
+    var n;
+    while ((n = w.nextNode())) { if (n.nodeType === 3) strText(n); else strAttrs(n); }
+  }
+  /* The chat widget draws itself inside an open shadow root: watch and translate that too. */
+  var strShadowSeen = typeof WeakSet === 'function' ? new WeakSet() : null;
+  function strShadow(host) {
+    var sr = host && host.shadowRoot;
+    if (!sr || !strShadowSeen) return;
+    if (!strShadowSeen.has(sr)) { strShadowSeen.add(sr); if (strObs) strObs.observe(sr, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: STR_ATTRS }); }
+    Array.prototype.forEach.call(sr.children, function (c) { strWalk(c); });
+    Array.prototype.forEach.call(sr.querySelectorAll('*'), function (e) { if (e.shadowRoot) strShadow(e); });
+  }
+  function strShadows() { if (strDict) document.querySelectorAll('chat-widget').forEach(strShadow); }
+  setInterval(strShadows, 1500);
+  function strDoc() {
+    var md = document.querySelector('meta[name="description"]');
+    if (!docSaved) docSaved = { title: document.title, desc: md ? md.getAttribute('content') : null };
+    var t = strDict && strDict[nrm(docSaved.title)];
+    document.title = t || docSaved.title;
+    if (md && docSaved.desc != null) { var d = strDict && strDict[nrm(docSaved.desc)]; md.setAttribute('content', d || docSaved.desc); }
+  }
+  function applyStr(k, d) {
+    strDict = k === 'en' ? null : d;
+    strWalk(document.body);
+    strDoc();
+    if (strDict && !strObs && window.MutationObserver) {
+      strObs = new MutationObserver(function (list) {
+        if (!strDict) return;
+        list.forEach(function (m) {
+          if (m.type === 'childList') m.addedNodes.forEach(strWalk);
+          else if (m.type === 'attributes') { if (!m.target.closest(STR_SKIP)) strAttrs(m.target); }
+          else if (m.type === 'characterData') strWalk(m.target);
+        });
+      });
+      strObs.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: STR_ATTRS });
+    }
+    strShadows();
+  }
+
+  /* The app (app.oneworldlabs.ai) reads ?lang= from the link and keeps it (lib/i18n.tsx in the
+     shell), so every link into the app carries the language chosen here. */
+  function appLang(a) {
+    try {
+      if (!a || !a.href) return;
+      var u = new URL(a.href, location.href);
+      if (u.hostname !== 'app.oneworldlabs.ai') return;
+      var saved = null; try { saved = localStorage.getItem('owl-lang'); } catch (e) {}
+      if (current === 'en' && !saved) { if (u.searchParams.has('lang')) { u.searchParams.delete('lang'); a.href = u.toString(); } return; }
+      if (u.searchParams.get('lang') !== current) { u.searchParams.set('lang', current); a.href = u.toString(); }
+    } catch (e) {}
+  }
+  ['click', 'auxclick', 'contextmenu', 'focusin', 'mouseover', 'touchstart'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) { var a = e.target && e.target.closest && e.target.closest('a[href]'); if (a) appLang(a); }, { capture: true, passive: true });
+  });
 
   /* ---------------- menus ---------------- */
   var openMenu = null;
@@ -500,7 +638,7 @@
      The round speaker button bottom right; its own file so a page can work without it. */
   try {
     var mu = document.createElement('script');
-    mu.src = P + '/assets/ow-music.js?v=1'; mu.async = true;
+    mu.src = P + '/assets/ow-music.js?v=2'; mu.async = true;
     document.head.appendChild(mu);
   } catch (e) {}
 })();

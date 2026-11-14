@@ -23,7 +23,7 @@ for _k, _n, _live, _img, _line in FEATURES:
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 BASE = "05c5c9b"          # the commit whose header/footer we keep
 SITE = "https://www.oneworldlabs.ai"
-V = "v2h"                  # cache-buster for v2.css / v2.js
+V = "v2i"                  # cache-buster for v2.css / v2.js
 E = lambda s: html.escape(s, quote=True)
 
 
@@ -168,7 +168,7 @@ def ldjson(obj):
 
 
 def tail(lg, home=False):
-    t = ('<script src="/assets/ow-site.js?v=wb27" defer></script>\n'
+    t = ('<script src="/assets/ow-site.js?v=p9" defer></script>\n'
          '<script src="/assets/site-theme.js?v=09f8469a" defer></script>\n'
          '<script src="/assets/v2/v2.js?v=%s" defer></script>\n') % V
     if home:
@@ -193,7 +193,8 @@ def doc(lg, headhtml, main, home=False):
 
 
 def bust(s):
-    return s.replace("site.css?v=wb21", "site.css?v=wb26").replace("site.css?v=wb9", "site.css?v=wb26").replace("site-theme.js?v=09f8469a", "site-theme.js?v=wb26")
+    s = re.sub(r"site\.css\?v=\w+", "site.css?v=p9", s)
+    return s.replace("site-theme.js?v=09f8469a", "site-theme.js?v=wb26")
 
 
 def write(rel, s):

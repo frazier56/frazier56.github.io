@@ -1,0 +1,31 @@
+# Strings that only exist once a script has run (pass 9). One per line, exact English.
+# Music button (assets/ow-music.js)
+Turn music on
+Turn music off
+Music volume
+# Chat widget (LeadConnector, configured in GoHighLevel; translated in the page)
+Select to close the chat widget
+Avatar
+Have a question?
+Enter your question below and a representative will get right back to you.
+Name
+Phone
+Message
+By submitting, you authorize ONE WORLD LABS INC to text/call the number above for informational/transactional messages, possibly using automated means. Msg/data rates apply, msg frequency varies. Consent is not a condition of purchase.
+and
+. Text HELP for help and STOP to unsubscribe.
+See terms
+privacy policy
+send message
+Send
+Powered by
+United States: +1
+Chat with us
+Hi there, have a question? Text us here.
+Thank you! We will be in touch shortly.
+Use light mode
+Use dark mode
+Get the app
+Sign in
+Menu
+I want to know more

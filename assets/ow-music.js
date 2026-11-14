@@ -175,6 +175,8 @@
     document.body.appendChild(wrap);
     placeAboveChat();
     setTimeout(placeAboveChat, 2500);
+    /* the open chat panel covers this corner: step aside while it is open */
+    setInterval(function () { wrap.style.display = document.querySelector('chat-widget[data-active="true"]') ? 'none' : ''; }, 400);
     btn.addEventListener('click', function () {
       if (playing && !muted) { muted = true; lsSet(KEY, 'off'); stop(); }
       else { muted = false; lsSet(KEY, 'on'); play(); peek(); }

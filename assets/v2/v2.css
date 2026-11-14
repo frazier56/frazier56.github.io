@@ -671,3 +671,10 @@ html[data-theme="dark"] .v2 .lr-ic,html[data-theme="dark"] .v2 .lr-mk{background
 /* Pass 8: the centred phone plays its loop over the still */
 .v2 .scr>video.scr-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease;pointer-events:none}
 .v2 .scr>video.scr-vid.playing{opacity:1}
+/* Pass 9: 44px tap areas on phones without moving the text (an invisible larger hit box) */
+@media (max-width:680px){
+  .v2 a.link,.v2 .crumb,.v2 .bi-col li a,.v2 main p a:not(.btn),.v2 main li a:not(.btn):not(.lrow){position:relative}
+  .v2 a.link::after,.v2 .crumb::after,.v2 .bi-col li a::after,.v2 main p a:not(.btn)::after,.v2 main li a:not(.btn):not(.lrow)::after{content:"";position:absolute;left:-6px;right:-6px;top:50%;height:44px;transform:translateY(-50%)}
+  .v2 .ptag,.v2 .crumb{min-height:44px}
+}
+@media (max-width:680px){html body.v2 footer.ow-foot li a{min-height:44px}html body.v2 footer.ow-foot ul{gap:0}}

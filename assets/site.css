@@ -429,3 +429,9 @@ footer.ow-foot .site-theme-toggle{min-height:36px;padding:6px 14px;font-size:12p
   /* the light/dark switch lives in the phone menu; it stays in the page (the menu uses it) but is not shown here */
   footer.ow-foot .site-theme-toggle{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}
 }
+/* Pass 9: every tap target on a phone is at least 44px (Lee's rule) */
+@media (max-width:680px){
+  footer.ow-foot li a{min-height:44px}
+  footer.ow-foot ul{gap:0}
+  .site-theme-toggle{min-height:44px}
+}
