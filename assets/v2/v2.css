@@ -668,3 +668,6 @@ html[data-theme="dark"] .v2 .lr-ic,html[data-theme="dark"] .v2 .lr-mk{background
 .v2 .feat-row .oc-top{flex-wrap:wrap;row-gap:6px}
 .v2 .infra-top .why-h1{margin-left:auto;margin-right:auto}
 .v2 .infra-top .why-lead,.v2 .infra-card p{text-wrap:balance}
+/* Pass 8: the centred phone plays its loop over the still */
+.v2 .scr>video.scr-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease;pointer-events:none}
+.v2 .scr>video.scr-vid.playing{opacity:1}

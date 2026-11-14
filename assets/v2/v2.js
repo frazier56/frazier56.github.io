@@ -24,7 +24,27 @@
       if (i === at) return; at = i;
       slides.forEach(function (p, k) { var on = k === i; p.classList.toggle('on', on); p.setAttribute('aria-hidden', on ? 'false' : 'true'); $$('a', p).forEach(function (a) { a.tabIndex = on ? 0 : -1; }); });
       if (count) count.textContent = (i + 1) + ' / ' + slides.length;
+      vids();
     }
+    /* Lee, pass 8: the phone in focus plays its loop (muted); the others show their still.
+       Only while the carousel is on screen and the tab is visible; never with reduced motion or
+       data saver. The video file is fetched the first time its phone comes into focus. */
+    var canPlay = !reduce && !(navigator.connection && navigator.connection.saveData), seen = true;
+    function vids() {
+      slides.forEach(function (p, k) {
+        var v = $('video.scr-vid', p); if (!v) return;
+        if (canPlay && k === at && seen && !document.hidden) {
+          if (!v.getAttribute('src')) { v.src = v.getAttribute('data-src'); }
+          var r = v.play(); if (r && r.catch) r.catch(function () {});
+        } else if (!v.paused) { v.pause(); }
+      });
+    }
+    $$('video.scr-vid', track).forEach(function (v) {
+      v.addEventListener('playing', function () { v.classList.add('playing'); });
+      v.addEventListener('pause', function () { v.classList.remove('playing'); });
+    });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; vids(); }, { threshold: .25 }).observe(track);
+    document.addEventListener('visibilitychange', vids);
     var start = +(stage.getAttribute('data-start') || 0);
     requestAnimationFrame(function () { centre(track, slides[start], false); mark(start); });
     var raf = 0;

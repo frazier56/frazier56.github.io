@@ -23,7 +23,7 @@ for _k, _n, _live, _img, _line in FEATURES:
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 BASE = "05c5c9b"          # the commit whose header/footer we keep
 SITE = "https://www.oneworldlabs.ai"
-V = "v2g"                  # cache-buster for v2.css / v2.js
+V = "v2h"                  # cache-buster for v2.css / v2.js
 E = lambda s: html.escape(s, quote=True)
 
 
@@ -266,6 +266,17 @@ def one_card(lg, k, first=False):
         img(a[5], "", lazy=not first), biz_icon(k), a[1], badge, E(title), E(line), act)
 
 
+# Pass 8 (Lee): the phone in the centre of "Explore the apps" plays its loop; the rest stay still.
+# 448x960 web cuts of the 1080p loops (assets/v2/vid/). The src is set by v2.js on first focus.
+SCREEN_VIDEO = {"onebusiness", "oneevent", "onehome", "onejob", "onescore"}
+
+
+def screen_video(k, poster):
+    if k not in SCREEN_VIDEO:
+        return ""
+    return '<video class="scr-vid" muted playsinline loop preload="none" poster="%s" data-src="/assets/v2/vid/%s.mp4?v=1" aria-hidden="true" tabindex="-1"></video>' % (poster, k)
+
+
 # ── HOME ─────────────────────────────────────────────────────────────────────────────────────
 def build_home(lg):
     H = HOME[lg]
@@ -278,10 +289,10 @@ def build_home(lg):
         else:
             act = '<span class="ptag soon">%s</span>' % E(H["soon"])
         slides.append(
-            '<div class="slide"><div class="phone" role="group" aria-label="%s" style="--hue:%s"><div class="scr">%s<div class="lane-bar"><i></i><span translate="no">%s</span></div>'
+            '<div class="slide"><div class="phone" role="group" aria-label="%s" style="--hue:%s"><div class="scr">%s%s<div class="lane-bar"><i></i><span translate="no">%s</span></div>'
             '<div class="post"><strong>%s</strong><span>%s</span>%s</div></div></div>'
             '<a class="link more-link" href="%s" aria-label="%s">%s</a></div>' % (
-                a[1], a[2], img(src, "", lazy=False), a[1], E(title), E(sub), act,
+                a[1], a[2], img(src, "", lazy=False), screen_video(k, src), a[1], E(title), E(sub), act,
                 app_page(lg, k), E(H["learn_x"].format(n=a[1])), E(H["learn"])))
     hero = ('<section class="hero2"><div class="wrap"><div class="hero-copy"><h1>%s</h1><p class="hero-sub">%s</p><p class="lead">%s</p><p class="why-link"><a class="link" href="%s" aria-label="%s">%s</a></p>'
             '<div class="hero-cta"><a class="btn glass shine" href="%s/">%s%s</a></div></div></div>'
