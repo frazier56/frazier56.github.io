@@ -608,3 +608,38 @@ html[data-theme="dark"] .v2 .lr-ic,html[data-theme="dark"] .v2 .lr-mk{background
 }
 @media (max-width:640px){.v2 .hero-copy .why-link{text-align:center;margin-top:16px}.v2 .hero-cta{margin-top:18px}}
 .v2 .btn.shine{overflow:clip}
+/* OneBusiness: "one of the apps" card, the four tool icons and the OneView illustration (13 Nov 2026) */
+.v2 .biz-intro{padding:28px 0 8px}
+.v2 .bi-card{padding:34px 32px;border-radius:28px;border:1px solid var(--glass-line);background:var(--card);box-shadow:var(--glass-shadow);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);text-align:center}
+.v2 .bi-card h2{font-size:clamp(28px,3.4vw,42px);font-weight:800;letter-spacing:-.04em;line-height:1.08}
+.v2 .bi-card .lead{margin:12px auto 0;max-width:34em;font-size:17.5px;line-height:1.55}
+.v2 .bi-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px;text-align:left}
+.v2 .bi-col{padding:22px 22px 18px;border-radius:22px;border:1px solid var(--line);background:var(--soft)}
+.v2 .bi-col.mine{border-color:rgba(13,148,136,.45);box-shadow:inset 0 0 0 1px rgba(13,148,136,.18)}
+.v2 .bi-col h3{font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.v2 .bi-col>p{margin-top:2px;font-size:14.5px;color:var(--muted)}
+.v2 .bi-col ul{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:12px}
+.v2 .bi-col li{display:flex;gap:12px;align-items:center;font-size:15.5px;line-height:1.45;color:var(--muted)}
+.v2 .bi-col li img{flex:none;width:30px;height:30px;object-fit:contain}
+.v2 .bi-col li a,.v2 .bi-col li b{color:var(--ink);font-weight:750;text-decoration:none}
+.v2 .bi-col li a:hover{text-decoration:underline}
+.v2 .biz-ic{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--teal-soft,rgba(13,148,136,.12));color:var(--teal,#0D9488)}
+.v2 .biz-ic svg{width:18px;height:18px}
+.v2 .row-tag .biz-ic{width:28px;height:28px}
+.v2 .ov-mock{width:100%;height:100%;padding:22px;display:flex;flex-direction:column;gap:14px;background:linear-gradient(135deg,rgba(30,78,140,.16),rgba(124,58,237,.14) 55%,rgba(13,148,136,.16))}
+.v2 .ov-head{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--ink)}
+.v2 .ov-ic{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--teal,#0D9488);color:var(--teal-ink,#fff)}
+.v2 .ov-ic svg{width:20px;height:20px}
+.v2 .ov-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.v2 .ov-tile{display:flex;flex-direction:column;justify-content:space-between;padding:14px;border-radius:18px;border:1px solid var(--glass-line);background:var(--card);box-shadow:var(--glass-shadow)}
+.v2 .ov-tile span{font-size:13px;font-weight:750;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.v2 .ov-bars{display:flex;align-items:flex-end;gap:5px;height:56%;min-height:34px;margin-top:10px}
+.v2 .ov-bars b{flex:1;border-radius:4px 4px 2px 2px;background:linear-gradient(180deg,#14B8A6,rgba(124,58,237,.75))}
+@media (max-width:680px){
+  .v2 .bi-card{padding:26px 18px;border-radius:24px}
+  .v2 .bi-cols{grid-template-columns:1fr}
+  .v2 .ov-mock{padding:16px;gap:10px}
+  .v2 .ov-grid{gap:10px}
+}
+@media (max-width:420px){.v2 .seg button .tl{display:block;line-height:1.12}}
+.v2 .bi-card,.v2 .bi-card *{-webkit-hyphens:manual;hyphens:manual}

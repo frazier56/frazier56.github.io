@@ -495,4 +495,12 @@
   current = 'en';
   renderAccount();
   setLang(initialLang(), false);
+
+  /* ---------------- background music (Lee, 13 Nov 2026) ----------------
+     The round speaker button bottom right; its own file so a page can work without it. */
+  try {
+    var mu = document.createElement('script');
+    mu.src = P + '/assets/ow-music.js?v=1'; mu.async = true;
+    document.head.appendChild(mu);
+  } catch (e) {}
 })();

@@ -6,8 +6,8 @@ insurance or background checks."""
 # ── FEATURED APPS on the homepage (replaces "Your business, handled") ─────────────────────────
 FEATURED = [
     ("onebusiness", "/assets/v2/img/team.jpg",
-     {"en": ("Run your business from one app.", "Your services, AI call answering, your website and your own app, all inside OneBusiness."),
-      "es": ("Maneje su negocio desde una app.", "Sus servicios, la atención de llamadas con IA, su página web y su propia app, todo dentro de OneBusiness.")}),
+     {"en": ("Run your business from one app.", "Calls answered, your website, your own app and one dashboard, all inside OneBusiness."),
+      "es": ("Maneje su negocio desde una app.", "Llamadas atendidas, su página web, su propia app y un tablero, todo dentro de OneBusiness.")}),
     ("oneevent", "/blog/img/networking.jpg",
      {"en": ("Fill your events.", "Sell tickets on a page you can share, and check guests in with a QR code."),
       "es": ("Llene sus eventos.", "Venda boletas en una página que puede compartir y registre a los invitados con un código QR.")}),
@@ -43,7 +43,7 @@ WHY = {
         loop=["Get found", "Get hired", "Get paid", "Get reviewed", "Score grows"],
         suite_h="One profile, many apps.",
         suite_p="Real estate, private drivers, cleaning, security, videographers, DJs and events are all local business. Each app does one job, and all of them share your One World profile.",
-        suite=[("onebusiness", "Your services, calls, website and app."), ("oneevent", "Events and tickets."), ("oneride", "Private rides with a driver you choose."),
+        suite=[("onebusiness", "Calls, website, app and dashboard."), ("oneevent", "Events and tickets."), ("oneride", "Private rides with a driver you choose."),
                ("onehome", "Homes to rent or buy."), ("onepay", "Pay and get paid."), ("onejob", "Hire or get hired."), ("onescore", "Your credibility score."), ("oneagent", "An agent in your corner.")],
         founder_h="From the founder", founder_name="Lee Frazier", founder_role="Founder and Chief Executive, One World Labs",
         founder_p="One World was founded in Medellín, Colombia, to give small businesses, freelancers and creators the trust that big brands take for granted.",
@@ -66,7 +66,7 @@ WHY = {
         loop=["Lo encuentran", "Lo contratan", "Le pagan", "Lo reseñan", "Sube su puntaje"],
         suite_h="Un perfil, muchas apps.",
         suite_p="Finca raíz, conductores privados, limpieza, seguridad, videógrafos, DJ y eventos: todo es negocio local. Cada app hace un trabajo, y todas comparten su perfil de One World.",
-        suite=[("onebusiness", "Sus servicios, llamadas, página web y app."), ("oneevent", "Eventos y boletas."), ("oneride", "Viajes privados con el conductor que usted elige."),
+        suite=[("onebusiness", "Llamadas, página web, app y tablero."), ("oneevent", "Eventos y boletas."), ("oneride", "Viajes privados con el conductor que usted elige."),
                ("onehome", "Vivienda para arrendar o comprar."), ("onepay", "Pague y cobre."), ("onejob", "Contrate o consiga trabajo."), ("onescore", "Su puntaje de credibilidad."), ("oneagent", "Un agente de su lado.")],
         founder_h="Del fundador", founder_name="Lee Frazier", founder_role="Fundador y director ejecutivo, One World Labs",
         founder_p="One World nació en Medellín, Colombia, para darles a los pequeños negocios, independientes y creadores la confianza que las grandes marcas dan por sentada.",
@@ -79,12 +79,12 @@ APPU = "https://app.oneworldlabs.ai"
 FOOTER = {
     "en": dict(tag="One account. Many possibilities.", rights="© 2026 One World Labs. All rights reserved.", label="Footer",
                cols=[("Company", [("Why One World", "/why/"), ("Founder", "/founder/"), ("Careers", "/careers/"), ("Investors", "/investors/"), ("Press", "/press/"), ("Partners", "/partners/")]),
-                     ("Explore", [("All apps", "/apps/"), ("Features", "/features/"), ("For business", "/services/"), ("Blog", "/blog/"), ("Hire in Medellín", "/medellin/")]),
+                     ("Explore", [("All apps", "/apps/"), ("OneBusiness", "/apps/onebusiness/"), ("Features", "/features/"), ("Blog", "/blog/"), ("Hire in Medellín", "/medellin/"), ("One World Agency", "/services/")]),
                      ("Support", [("Contact us", "/#contact"), ("Safety and trust", "/safety/"), ("Child safety", "/child-safety/"), ("Accessibility", "/accessibility/"), ("Delete your account", "/delete-account.html")]),
                      ("Legal", [("Terms of Service", APPU + "/terms"), ("Privacy Policy", APPU + "/privacy"), ("Cookie Policy", "/cookies/"), ("SMS terms", "/sms-terms/"), ("Intellectual property", "/legal/ip/")])]),
     "es": dict(tag="Una cuenta. Muchas posibilidades.", rights="© 2026 One World Labs. Todos los derechos reservados.", label="Pie de página",
                cols=[("Compañía", [("Por qué One World", "/es/why/"), ("Fundador", "/founder/"), ("Trabaje con nosotros", "/es/careers/"), ("Inversionistas", "/es/investors/"), ("Prensa", "/es/press/"), ("Aliados", "/es/partners/")]),
-                     ("Explorar", [("Todas las apps", "/es/apps/"), ("Funciones", "/es/features/"), ("Para su negocio", "/es/services/"), ("Blog", "/es/blog/"), ("Contrate en Medellín", "/es/medellin/")]),
+                     ("Explorar", [("Todas las apps", "/es/apps/"), ("OneBusiness", "/es/apps/onebusiness/"), ("Funciones", "/es/features/"), ("Blog", "/es/blog/"), ("Contrate en Medellín", "/es/medellin/"), ("One World Agency", "/es/services/")]),
                      ("Ayuda", [("Contáctenos", "/es/#contact"), ("Seguridad y confianza", "/es/safety/"), ("Seguridad infantil", "/child-safety/"), ("Accesibilidad", "/es/accessibility/"), ("Eliminar su cuenta", "/delete-account.html")]),
                      ("Legal", [("Términos del servicio", APPU + "/terms"), ("Política de privacidad", APPU + "/privacy"), ("Política de cookies", "/es/cookies/"), ("Términos de SMS", "/es/sms-terms/"), ("Propiedad intelectual", "/es/legal/ip/")])]),
 }

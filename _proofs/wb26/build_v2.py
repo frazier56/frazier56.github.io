@@ -23,7 +23,7 @@ for _k, _n, _live, _img, _line in FEATURES:
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 BASE = "05c5c9b"          # the commit whose header/footer we keep
 SITE = "https://www.oneworldlabs.ai"
-V = "v2e"                  # cache-buster for v2.css / v2.js
+V = "v2f"                  # cache-buster for v2.css / v2.js
 E = lambda s: html.escape(s, quote=True)
 
 
@@ -58,6 +58,28 @@ for lg, s in TPL.items():
         vaia=re.search(r'<script>/\* feature flag vaia.*?</script>', s, re.S).group(0),
         vaia_box=cut(s, '<div class="asleep" id="vaia-widget">', "<footer", incl=False),
     )
+
+# Lee 13 Nov 2026: "For business" read as something other than the apps. OneBusiness is ONE of the
+# apps, so the header says Apps + OneBusiness (the phone menu is built from these same links).
+NAV_FIX = {
+    '<nav aria-label="Main" data-i18n="kb7e4919ac" data-i18n-attr="aria-label:keb814be3c"><a href="/#destinations">The apps</a><a href="/services/">For business</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a></nav>':
+    '<nav aria-label="Main" data-i18n="kb7e4919ac" data-i18n-attr="aria-label:keb814be3c"><a href="/apps/">Apps</a><a href="/apps/onebusiness/">OneBusiness</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a></nav>',
+    '<nav aria-label="Main"><a href="/#destinations">The apps</a><a href="/services/">For business</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a></nav>':
+    '<nav aria-label="Main"><a href="/apps/">Apps</a><a href="/apps/onebusiness/">OneBusiness</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a></nav>',
+    '<nav aria-label="Principal"><a href="/es/#destinations">Las apps</a><a href="/es/services/">Para su negocio</a><a href="/es/blog/">Blog</a><a href="/es/#contact">Contacto</a></nav>':
+    '<nav aria-label="Principal"><a href="/es/apps/">Las apps</a><a href="/es/apps/onebusiness/">OneBusiness</a><a href="/es/blog/">Blog</a><a href="/es/#contact">Contacto</a></nav>',
+}
+
+
+def fix_nav(s):
+    for a, b in NAV_FIX.items():
+        s = s.replace(a, b)
+    return s
+
+
+for _lg in PARTS:
+    PARTS[_lg]["header"] = fix_nav(PARTS[_lg]["header"])
+    assert "/apps/onebusiness/" in PARTS[_lg]["header"], _lg
 
 APP_PATHS = {"/home", "/jobs", "/events", "/rides", "/pay", "/business", "/onescore", "/agent"}
 
@@ -150,7 +172,7 @@ def ldjson(obj):
 
 
 def tail(lg, home=False):
-    t = ('<script src="/assets/ow-site.js?v=wb23" defer></script>\n'
+    t = ('<script src="/assets/ow-site.js?v=wb27" defer></script>\n'
          '<script src="/assets/site-theme.js?v=09f8469a" defer></script>\n'
          '<script src="/assets/v2/v2.js?v=%s" defer></script>\n') % V
     if home:
@@ -304,6 +326,38 @@ def build_home(lg):
     write("index.html" if lg == "en" else "es/index.html", doc(lg, h, main, home=True))
 
 
+# OneBusiness's four tools (Lee 13 Nov 2026): one line-icon each, same stroke as the feature icons.
+BIZ_ICON = {
+    "voice": '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',
+    "page": '<circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5a14.5 14.5 0 0 1 0 19M12 2.5a14.5 14.5 0 0 0 0 19"/>',
+    "app": '<rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M11 18.5h2"/>',
+    "view": '<rect x="3" y="3" width="18" height="18" rx="3.5"/><path d="M7.5 16.5v-4M12 16.5V8M16.5 16.5v-6"/>',
+}
+
+
+def biz_icon(k, cls="biz-ic"):
+    return '<span class="%s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg></span>' % (cls, BIZ_ICON[k])
+
+
+def oneview_mock(lg):
+    """An illustration of the OneView dashboard: four tiles, no invented numbers."""
+    names = {"en": ("Sales", "Bookings", "Payouts", "Reviews"), "es": ("Ventas", "Reservas", "Pagos", "Reseñas")}[lg]
+    bars = ((40, 55, 48, 70, 62, 84), (30, 42, 38, 50, 66, 58), (52, 52, 70, 70, 88, 88), (60, 72, 68, 80, 86, 92))
+    tiles = "".join('<div class="ov-tile"><span>%s</span><i class="ov-bars">%s</i></div>' % (
+        E(n), "".join('<b style="height:%d%%"></b>' % h for h in bb)) for n, bb in zip(names, bars))
+    return '<div class="ov-mock" role="img" aria-label="%s"><div class="ov-head">%s<span translate="no">OneView</span></div><div class="ov-grid">%s</div></div>' % (
+        E({"en": "OneView: sales, bookings, payouts and reviews", "es": "OneView: ventas, reservas, pagos y reseñas"}[lg]), biz_icon("view", "ov-ic"), tiles)
+
+
+def biz_intro(lg, I):
+    left = "".join('<li><img src="%s" alt=""/><span><a href="%s" translate="no">%s</a>: %s</span></li>' % (
+        mark(k), app_page(lg, k), APP_BY[k][1], E(t)) for k, t in I["left"][1])
+    right = "".join('<li>%s<span><b translate="no">%s</b> %s</span></li>' % (biz_icon(ic), E(n), E(t)) for ic, n, t in I["right"][1])
+    return ('<section class="biz-intro"><div class="wrap"><div class="bi-card"><h2>%s</h2><p class="lead">%s</p><div class="bi-cols">'
+            '<div class="bi-col"><h3>%s</h3><p>%s</p><ul>%s</ul></div><div class="bi-col mine"><h3 translate="no">%s</h3><p>%s</p><ul>%s</ul></div></div></div></div></section>') % (
+        E(I["h2"]), E(I["p"]), E(I["left"][0][0]), E(I["left"][0][1]), left, E(I["right"][0][0]), E(I["right"][0][1]), right)
+
+
 # ── APP PAGES ────────────────────────────────────────────────────────────────────────────────
 def side_html(lg, k, s, first):
     a = APP_BY[k]
@@ -323,8 +377,8 @@ def side_html(lg, k, s, first):
     out = ['<div class="side-hero"><div><h2>%s</h2><p class="lead">%s</p>%s%s<div class="oc-act">%s</div></div><figure>%s</figure></div>' % (
         E(s["h2"]), E(s["lead"]), need, note, "".join(acts), img(s["img"], s["alt"], lazy=not first))]
     if s.get("rows"):
-        rr = "".join('<article class="row"><div class="row-media">%s</div><div><span class="row-tag"><span translate="no">%s</span></span><h3>%s</h3><p>%s</p><div class="oc-act"><a class="link" href="%s">%s</a></div></div></article>' % (
-            img(p, h3), E(tag), E(h3), E(t), L(lg, lk[1]), E(lk[0])) for p, tag, h3, t, lk in s["rows"])
+        rr = "".join('<article class="row"><div class="row-media">%s</div><div><span class="row-tag">%s<span translate="no">%s</span></span><h3>%s</h3><p>%s</p><div class="oc-act"><a class="link" href="%s">%s</a></div></div></article>' % (
+            oneview_mock(lg) if r[0] == "@oneview" else img(r[0], r[2]), biz_icon(r[5]) if len(r) > 5 else "", E(r[1]), E(r[2]), E(r[3]), L(lg, r[4][1]), E(r[4][0])) for r in s["rows"])
         out.append('<div class="how"><div class="rows">%s</div></div>' % rr)
     if s.get("chips"):
         t, p = s["chips"]
@@ -352,6 +406,16 @@ def side_html(lg, k, s, first):
     return "".join(out)
 
 
+# Long tab labels: on a phone they take two lines, broken where the meaning breaks.
+TAB_SPLIT = {"Freelancers and creators": ("Freelancers", "and creators"), "Revisar a un profesional": ("Revisar a", "un profesional")}
+
+
+def tab_label(t):
+    if t in TAB_SPLIT:
+        return '<span class="tl">%s</span> <span class="tl">%s</span>' % tuple(E(x) for x in TAB_SPLIT[t])
+    return E(t)
+
+
 def build_app(lg, k):
     P = PAGES[k][lg]
     a = APP_BY[k]
@@ -360,7 +424,7 @@ def build_app(lg, k):
            '<div class="ap-id"><img src="%s" alt=""/><h1><span translate="no" style="display:inline;font-size:inherit;font-weight:inherit;color:inherit;margin:0">%s</span><span>%s</span></h1>%s</div></div></section>') % (
         L(lg, "/#destinations"), E(P["crumb"]), mark(k), a[1], E(P["h1s"]), badge)
     tabs = "".join('<button type="button" role="tab" id="tab-%s" aria-controls="side-%s" aria-selected="%s"%s>%s</button>' % (
-        s["id"], s["id"], "true" if i == 0 else "false", "" if i == 0 else ' tabindex="-1"', E(s["tab"])) for i, s in enumerate(P["sides"]))
+        s["id"], s["id"], "true" if i == 0 else "false", "" if i == 0 else ' tabindex="-1"', tab_label(s["tab"])) for i, s in enumerate(P["sides"]))
     panes = "".join('<div class="side" id="side-%s" role="tabpanel" aria-labelledby="tab-%s" data-side="%s"><div class="wrap">%s</div></div>' % (
         s["id"], s["id"], s["id"], side_html(lg, k, s, i == 0)) for i, s in enumerate(P["sides"]))
     sides = ('<section data-sides><div class="seg-wrap"><div class="seg" role="tablist" aria-label="%s" data-at="0"><i aria-hidden="true"></i>%s</div></div>'
@@ -374,7 +438,7 @@ def build_app(lg, k):
         E(gh[0]), E(gh[1]), guide_cards(lg, P["guides"]), E(nh), L(lg, "/#destinations"),
         E({"en": "See all", "es": "Ver todas"}[lg]), one_card(lg, nxt, True))
     after = after[:-len("</div></section>")] + features_row(lg) + "</div></section>"
-    main = top + sides + after
+    main = top + (biz_intro(lg, P["intro"]) if P.get("intro") else "") + sides + after
     faqs = [q for s in P["sides"] for q in s["faq"]]
     path = "/apps/%s/" % k
     url = page_url(lg, path)
@@ -591,6 +655,31 @@ def build_redirect(lg):
     write("apps/onesocial/index.html" if lg == "en" else "es/apps/onesocial/index.html", html_)
 
 
+def build_alias(lg, rel, to, words):
+    """A short www address that forwards to the real page (Lee says "/business")."""
+    html_ = ('<!DOCTYPE html>\n<html lang="%s"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>'
+             '<title>%s</title><link rel="canonical" href="%s"/><meta name="robots" content="noindex,follow"/>'
+             '<meta http-equiv="refresh" content="0; url=%s"/><script>location.replace(%s+location.search+location.hash)</script></head>'
+             '<body><p><a href="%s">%s</a></p></body></html>\n') % (
+        "en" if lg == "en" else "es-CO", E(words), SITE + to, to, json.dumps(to), to, E(words))
+    write(rel, html_)
+
+
+def build_404():
+    """GitHub Pages serves /404.html for every missing address. It used to be an old copy of the
+    homepage that still said OneAgent and One Business were "Coming soon"."""
+    lg = "en"
+    apps = "".join(app_row(lg, k, True) for k in APP_ORDER)
+    main = ('<section class="blog-hero"><div class="wrap"><span class="eyebrow">404</span><h1>Page not found.</h1>'
+            '<p class="lead">This page may have moved. Every One&nbsp;World app is below.</p>'
+            '<div class="hero-cta" style="justify-content:flex-start"><a class="btn glass shine" href="/">Go to the homepage</a></div></div></section>'
+            '<section class="sec" style="padding-top:24px"><div class="wrap"><div class="feat-row"><h3>Apps</h3><div class="app-links">%s</div></div></div></section>') % apps
+    h = head(lg, "Page not found | One World", "This page may have moved. Find every One World app here.", "/404.html", "/og-cover.png", "")
+    h = h.replace('<link href="%s/404.html" rel="canonical"/>' % SITE, '<meta name="robots" content="noindex"/>')
+    h = re.sub(r'<link rel="alternate" hreflang="[^"]*" href="[^"]*"/>', "", h)
+    write("404.html", doc(lg, h, main))
+
+
 def build_hub(lg, t):
     app, words = HUBS[t]
     h1, title, desc, intro = words[lg]
@@ -724,9 +813,12 @@ if __name__ == "__main__":
         build_feat_index(lg)
         build_apps_index(lg)
         build_redirect(lg)
+        build_alias(lg, "business/index.html" if lg == "en" else "es/business/index.html", L(lg, "/apps/onebusiness/"),
+                    "OneBusiness" if lg == "en" else "OneBusiness")
         for t in HUBS:
             build_hub(lg, t)
         inject_posts(lg)
         build_why(lg)
         for d in DOCS:
             build_doc(lg, d)
+    build_404()
