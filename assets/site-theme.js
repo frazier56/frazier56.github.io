@@ -31,6 +31,7 @@
   });
   document.addEventListener('ow:lang', render);
   var footer = document.querySelector('footer');
-  if (footer && !footer.querySelector('.site-theme-toggle')) footer.appendChild(button);
+  var slot = footer && footer.querySelector('.fbottom');
+  if (footer && !footer.querySelector('.site-theme-toggle')) (slot || footer).appendChild(button);
   render();
 })();

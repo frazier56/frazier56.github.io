@@ -12,17 +12,17 @@ Key facts:
 
 ## The Platform: the One World app
 
-Live now:
+Live now (all open in the One World app):
+- [OneBusiness](https://www.oneworldlabs.ai/apps/onebusiness/): a small business's services, AI call answering (OneVoice), website (OnePage) and own app (OneApp) in one place.
 - [OneEvent](https://www.oneworldlabs.ai/apps/oneevent/): discover local events, buy tickets, or host your own with ticket sales and QR check-in.
-- [OneJob](https://www.oneworldlabs.ai/apps/onejob/): find work or hire talent, with the contract, payment and reviews for each job in one place.
-- [OneHome](https://www.oneworldlabs.ai/apps/onehome/): homes to rent or buy, and direct contact with the hosts and agents behind them.
 - [OneRide](https://www.oneworldlabs.ai/apps/oneride/): book a ride, or offer rides as a driver. Riders choose their driver and agree the price.
+- [OneHome](https://www.oneworldlabs.ai/apps/onehome/): homes to rent or buy, and direct contact with the hosts and agents behind them.
 - [OnePay](https://www.oneworldlabs.ai/apps/onepay/): get paid by link or QR code with card, Nequi or PSE, send money to anyone, and keep a receipt for every sale.
-
-Coming soon (built, in testing, not yet open to the public):
+- [OneJob](https://www.oneworldlabs.ai/apps/onejob/): find work or hire talent, with the contract, payment and reviews for each job in one place.
 - [OneScore](https://www.oneworldlabs.ai/apps/onescore/): a reputation profile that brings together work, credentials and reviews.
 - [OneAgent](https://www.oneworldlabs.ai/apps/oneagent/): a real middleman who finds and negotiates work for you.
-- [One Business](https://www.oneworldlabs.ai/apps/onebusiness/): a business's services, leads and results in one workspace.
+
+Why One World (the vision): https://www.oneworldlabs.ai/why/ — one place built only for business, where small businesses, freelancers and creators get found, trusted and paid, and every reviewed job builds their reputation.
 
 Overview of all parts: https://www.oneworldlabs.ai/apps/
 

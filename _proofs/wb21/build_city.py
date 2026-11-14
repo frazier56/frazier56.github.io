@@ -160,8 +160,8 @@ HOW = {
         ("Pague como prefiera.", "Los pagos con tarjeta hechos por OneJob en contratos elegibles quedan retenidos y se liberan cuando ambos marcan el trabajo como terminado. Para pagarle a una persona en pesos con Nequi o PSE, use OnePay, parte de la misma app, por enlace o código QR. El efectivo o una transferencia directa son decisión suya, pero OneJob no retiene ese dinero."),
         ("Deje una reseña.", "Después del trabajo, cada uno califica al otro, para que la próxima persona decida con más información.")],
 }
-ONESCORE = {"en": "Coming soon: OneScore, a credibility score built from a member's connected accounts, reviews and paid work.",
-            "es": "Próximamente: OneScore, un puntaje de credibilidad construido con las cuentas conectadas, las reseñas y el trabajo pagado de cada miembro."}
+ONESCORE = {"en": "OneScore, a credibility score built from a member's connected accounts, reviews and paid work, is open now in the One World app.",
+            "es": "OneScore, un puntaje de credibilidad construido con las cuentas conectadas, las reseñas y el trabajo pagado de cada miembro, ya está abierto en la app de One World."}
 
 
 def how_block(lang):

@@ -516,3 +516,95 @@ body.v2 footer .foot-more a{min-height:40px;display:inline-flex;align-items:cent
 @media (max-width:640px){.v2 .ap-ic{width:42px;height:42px;border-radius:14px}.v2 .ap-ic svg{width:22px;height:22px}}
 .v2 .filters{background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;position:static}
 @media (max-width:640px){.v2 .sec-oneid{padding-bottom:16px}}
+
+/* ── PASS 5 ─────────────────────────────────────────────────────────────── */
+/* A2 · "Open the app": the OnePage/OneApp action button (gloss layer over a 3-stop gradient,
+   contoured inner edge, layered shadow) in our teal, plus a slow shimmer sweep */
+.v2 .btn.shine{position:relative;overflow:hidden;isolation:isolate;color:#fff;border:1px solid rgba(255,255,255,.28);
+  background:linear-gradient(160deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,.05) 42%,rgba(255,255,255,0) 62%),linear-gradient(160deg,#14B8A6 0%,#0D9488 52%,#0B6F66 100%);
+  box-shadow:0 14px 28px -12px rgba(13,148,136,.75),0 2px 5px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.14),inset 0 0 0 1px rgba(255,255,255,.08)}
+.v2 .btn.shine:after{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:-60%;width:45%;transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);animation:owshine 4.8s ease-in-out infinite}
+@keyframes owshine{0%,62%{left:-60%}100%{left:130%}}
+.v2 .btn.shine:hover{filter:brightness(1.07)}
+html[data-theme="dark"] .v2 .btn.shine{color:#fff;background:linear-gradient(160deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,.05) 42%,rgba(255,255,255,0) 62%),linear-gradient(160deg,#2DD4BF 0%,#14A396 52%,#0B7C72 100%);
+  box-shadow:0 14px 28px -12px rgba(45,212,191,.55),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -2px 0 rgba(0,0,0,.18)}
+.v2 .hero-cta .btn.shine{min-height:56px;padding:0 40px;font-size:17px}
+@media (prefers-reduced-motion:reduce){.v2 .btn.shine:after{display:none}}
+
+/* A1/A3 · hero rhythm, the "Learn more" link */
+.v2 .why-link{margin:14px 0 0;font-size:16px}
+.v2 .hero-copy .why-link{text-align:center}
+@media (max-width:640px){
+  .v2 .hero2{padding-top:36px}
+  .v2 .hero-copy .why-link{text-align:left}
+  .v2 .hero-cta{justify-content:center}
+  .v2 .hero-cta .btn.shine{width:auto;max-width:80%;padding:0 44px}
+}
+
+/* B5–B7 · carousel */
+.v2 .apps2-h{text-align:center!important}
+.v2 .lane-bar{top:24px}
+.v2 .ptag{min-width:150px;justify-content:center;text-align:center;line-height:1}
+.v2 span.ptag{display:inline-flex;align-items:center}
+.v2 .see-all{text-align:center;margin:14px 0 0}
+
+/* C10 · featured rows: a real button plus a link */
+.v2 .btn.small-btn{min-height:46px;padding:0 22px;font-size:15px}
+.v2 .row .oc-act{gap:20px}
+
+/* D12 · link-row thumbnails: a crisp chip fully inside the photo corner, nothing over the text */
+.v2 .lr-media{width:68px;height:68px}
+.v2 .lr-media .thumb,.v2 .app-links img.thumb{width:68px;height:68px}
+.v2 .lr-ic,.v2 .lr-mk{right:4px;bottom:4px;width:26px;height:26px;border-radius:9px;background:rgba(255,255,255,.94);border:0;box-shadow:0 2px 6px rgba(0,0,0,.28);color:#0B7C72}
+html[data-theme="dark"] .v2 .lr-ic,html[data-theme="dark"] .v2 .lr-mk{background:rgba(11,15,26,.9);color:#5EEAD4}
+.v2 .lr-ic svg{width:15px;height:15px}
+.v2 .lr-mk{padding:3px}
+.v2 .lr-mk.solo{background:var(--card);box-shadow:none}
+
+/* /apps/ intro */
+.v2 .suite-p{margin-top:12px;font-size:16.5px;max-width:36em}
+
+/* /why/ */
+.v2 .why-top{padding-top:40px}
+.v2 .why-h1{font-size:clamp(40px,6vw,80px);font-weight:800;letter-spacing:-.05em;line-height:1.02;max-width:14ch}
+.v2 .why-lead{margin-top:18px;max-width:34em;font-size:clamp(17px,1.6vw,20px)}
+.v2 .why-h2{font-size:clamp(30px,3.4vw,46px);font-weight:800;letter-spacing:-.045em;line-height:1.05}
+.v2 .why-p{margin-top:14px;font-size:17.5px;line-height:1.6;max-width:32em}
+.v2 .halves{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.v2 .half{padding:28px;border-radius:24px;background:var(--card);border:1px solid var(--glass-line);box-shadow:var(--glass-shadow);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.v2 .half h3{margin-top:16px;font-size:24px;font-weight:800;letter-spacing:-.03em}
+.v2 .half p{margin-top:8px;font-size:16px}
+.v2 .loop{list-style:none;padding:0;margin:26px 0 0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:l}
+.v2 .loop li{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:14px 6px;border-radius:18px;background:var(--card);border:1px solid var(--glass-line)}
+.v2 .loop li b{font-size:13.5px;font-weight:750;color:var(--ink);line-height:1.2}
+.v2 .loop .ap-ic{width:40px;height:40px;border-radius:12px}
+.v2 .loop .ap-ic svg{width:20px;height:20px}
+.v2 .founder{display:grid;grid-template-columns:320px 1fr;gap:40px;align-items:center;padding:28px;border-radius:30px;background:var(--card);border:1px solid var(--glass-line);box-shadow:var(--glass-shadow);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.v2 .founder img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;border-radius:22px}
+.v2 .founder-role{margin-top:6px;font-weight:700;color:var(--teal)!important}
+
+/* company and legal pages */
+.v2 .doc-wrap{max-width:820px}
+.v2 .doc-h1{font-size:clamp(38px,5vw,64px);font-weight:800;letter-spacing:-.05em;line-height:1.04}
+.v2 .doc-wrap .lead{margin-top:14px;font-size:18px}
+.v2 .doc-fig{margin:28px 0 0;border-radius:26px;overflow:hidden;aspect-ratio:16/7;box-shadow:var(--glass-shadow)}
+.v2 .doc-fig img{width:100%;height:100%;object-fit:cover}
+.v2 .doc-card{margin-top:28px;padding:32px 36px;border-radius:26px;background:var(--card);border:1px solid var(--glass-line);box-shadow:var(--glass-shadow);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.v2 .doc-card section+section{margin-top:26px}
+.v2 .doc-card h2{font-size:21px;font-weight:800;letter-spacing:-.02em}
+.v2 .doc-card p,.v2 .doc-card li{margin-top:8px;font-size:16px;line-height:1.6;color:var(--muted)}
+.v2 .doc-card ul{margin:8px 0 0;padding-left:20px}
+
+@media (max-width:980px){.v2 .halves{grid-template-columns:1fr}.v2 .founder{grid-template-columns:1fr}.v2 .founder img{max-width:320px}}
+@media (max-width:640px){
+  .v2 .loop{grid-template-columns:1fr;gap:8px}
+  .v2 .loop li{flex-direction:row;justify-content:flex-start;padding:10px 14px;text-align:left}
+  .v2 .why-h1{font-size:40px}
+  .v2 .founder{padding:18px;gap:20px}
+  .v2 .doc-card{padding:22px 20px}
+  .v2 .doc-h1{font-size:36px}
+  .v2 .doc-fig{aspect-ratio:16/9;border-radius:20px}
+}
+@media (max-width:640px){.v2 .hero-copy .why-link{text-align:center;margin-top:16px}.v2 .hero-cta{margin-top:18px}}
+.v2 .btn.shine{overflow:clip}

@@ -7,6 +7,7 @@ S = "https://www.oneworldlabs.ai"; TODAY = "2026-11-13"
 FEATS = ["one-profile", "payments", "messaging-and-reviews", "onesocial"]
 TOPICS = ["business", "hire", "work", "events", "homes", "rides", "payments"]
 paths = ["/apps/", "/apps/onescore/", "/apps/oneagent/", "/features/"] + ["/features/%s/" % f for f in FEATS] + ["/blog/topic/%s/" % t for t in TOPICS]
+paths += ["/why/", "/careers/", "/partners/", "/investors/", "/press/", "/safety/", "/accessibility/", "/cookies/", "/sms-terms/", "/legal/ip/"]
 paths += ["/es" + p for p in paths]
 p = os.path.join(ROOT, "sitemap.xml"); s = open(p).read()
 for gone in ("/apps/onesocial/", "/es/apps/onesocial/"):

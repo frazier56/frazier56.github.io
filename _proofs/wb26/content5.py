@@ -1,0 +1,290 @@
+# -*- coding: utf-8 -*-
+"""Pass 5 (13 Nov 2026): featured apps, the /why/ page, the footer and the company/legal pages.
+Sources for ported text are named next to each page. Nothing here claims escrow, guarantees,
+insurance or background checks."""
+
+# ── FEATURED APPS on the homepage (replaces "Your business, handled") ─────────────────────────
+FEATURED = [
+    ("onebusiness", "/assets/v2/img/team.jpg",
+     {"en": ("Run your business from one app.", "Your services, AI call answering, your website and your own app, all inside OneBusiness."),
+      "es": ("Maneje su negocio desde una app.", "Sus servicios, la atención de llamadas con IA, su página web y su propia app, todo dentro de OneBusiness.")}),
+    ("oneevent", "/blog/img/networking.jpg",
+     {"en": ("Fill your events.", "Sell tickets on a page you can share, and check guests in with a QR code."),
+      "es": ("Llene sus eventos.", "Venda boletas en una página que puede compartir y registre a los invitados con un código QR.")}),
+    ("oneride", "/assets/v2/img/car-door.jpg",
+     {"en": ("Drive for people who chose you.", "Riders pick their driver and agree the price before the trip."),
+      "es": ("Conduzca para quienes lo eligen.", "Los pasajeros eligen a su conductor y acuerdan el precio antes del viaje.")}),
+    ("onehome", "/assets/v2/img/living.jpg",
+     {"en": ("Rent or sell homes.", "List homes, answer requests and keep every conversation in one inbox."),
+      "es": ("Arriende o venda inmuebles.", "Publique inmuebles, responda solicitudes y tenga cada conversación en una bandeja.")}),
+    ("onepay", "/assets/v2/img/phonepay.jpg",
+     {"en": ("Get paid where they found you.", "Send a link or show a QR code. Card, Nequi or PSE, with a receipt for every sale."),
+      "es": ("Cobre donde lo encontraron.", "Envíe un enlace o muestre un código QR. Tarjeta, Nequi o PSE, con recibo de cada venta.")}),
+]
+
+# ── /why/ ────────────────────────────────────────────────────────────────────────────────────
+# Lee's vision (13 Nov 2026), written for the page. Founder facts only from /founder/ and the old
+# OneSocial About page ("Founded in Medellín, Colombia").
+WHY = {
+    "en": dict(
+        title="Why One World | Trust and credibility for small businesses",
+        desc="Why One World exists: a place built only for business, where small businesses, freelancers and creators get found, get trusted and get paid, and where every job builds their reputation.",
+        eyebrow="Why One World", h1="Small businesses run on trust.",
+        lead="People already know Amazon and Nike. They don't know you yet. For a small business, a freelancer or a creator, credibility is everything, and today there is nowhere built to earn it.",
+        problem_h="The noise problem.",
+        problem_p=["Today a local business promotes itself on international platforms built for everything else. You post between politics, lip-syncing and arguments, and you pay for ads just to be seen by your own neighbours.",
+                   "Then the customer finds you in one app, messages you in another, pays you in a third and reviews you somewhere else, if at all. Nothing connects, so nothing adds up."],
+        idea_h="One place, built only for business.",
+        idea_p="One World removes the noise. It is one app where people find you, trust you and pay you, and where every finished job counts toward your reputation.",
+        halves=[("People see you.", "Your photos, videos, services and social media in one profile, in every One World app."),
+                ("People believe in you.", "Reviews from real jobs and your OneScore show the record behind your name.")],
+        loop_h="How trust compounds.",
+        loop_p="You pay in the same place you found someone, and you review in the same place you paid. Everyone is accountable, like on Airbnb or Uber. Good reviews raise your score, a higher score brings more business, and it keeps building.",
+        loop=["Get found", "Get hired", "Get paid", "Get reviewed", "Score grows"],
+        suite_h="One profile, many apps.",
+        suite_p="Real estate, private drivers, cleaning, security, videographers, DJs and events are all local business. Each app does one job, and all of them share your One World profile.",
+        suite=[("onebusiness", "Your services, calls, website and app."), ("oneevent", "Events and tickets."), ("oneride", "Private rides with a driver you choose."),
+               ("onehome", "Homes to rent or buy."), ("onepay", "Pay and get paid."), ("onejob", "Hire or get hired."), ("onescore", "Your credibility score."), ("oneagent", "An agent in your corner.")],
+        founder_h="From the founder", founder_name="Lee Frazier", founder_role="Founder and Chief Executive, One World Labs",
+        founder_p="One World was founded in Medellín, Colombia, to give small businesses, freelancers and creators the trust that big brands take for granted.",
+        founder_link="Meet the founder",
+        cta_h="Start building your reputation.", cta_p="Open the app with your One ID. It takes a minute."),
+    "es": dict(
+        title="Por qué One World | Confianza y credibilidad para pequeños negocios",
+        desc="Por qué existe One World: un lugar hecho solo para negocios, donde pequeños negocios, independientes y creadores consiguen clientes, confianza y pagos, y donde cada trabajo construye su reputación.",
+        eyebrow="Por qué One World", h1="Los pequeños negocios viven de la confianza.",
+        lead="La gente ya conoce a Amazon y a Nike. A usted todavía no. Para un pequeño negocio, un independiente o un creador, la credibilidad lo es todo, y hoy no hay un lugar hecho para ganarla.",
+        problem_h="El problema del ruido.",
+        problem_p=["Hoy un negocio local se promueve en plataformas internacionales hechas para todo lo demás. Publica entre política, videos de playback y peleas, y paga anuncios solo para que lo vean sus propios vecinos.",
+                   "Luego el cliente lo encuentra en una app, le escribe en otra, le paga en una tercera y lo reseña en otro lugar, si acaso. Nada se conecta, así que nada suma."],
+        idea_h="Un solo lugar, hecho solo para negocios.",
+        idea_p="One World quita el ruido. Es una app donde la gente lo encuentra, confía en usted y le paga, y donde cada trabajo terminado suma a su reputación.",
+        halves=[("La gente lo ve.", "Sus fotos, videos, servicios y redes sociales en un solo perfil, en todas las apps de One World."),
+                ("La gente cree en usted.", "Las reseñas de trabajos reales y su OneScore muestran el historial detrás de su nombre.")],
+        loop_h="Cómo crece la confianza.",
+        loop_p="Paga en el mismo lugar donde encontró a alguien y reseña en el mismo lugar donde pagó. Todos responden por lo que hacen, como en Airbnb o Uber. Las buenas reseñas suben su puntaje, un mejor puntaje trae más negocio, y sigue creciendo.",
+        loop=["Lo encuentran", "Lo contratan", "Le pagan", "Lo reseñan", "Sube su puntaje"],
+        suite_h="Un perfil, muchas apps.",
+        suite_p="Finca raíz, conductores privados, limpieza, seguridad, videógrafos, DJ y eventos: todo es negocio local. Cada app hace un trabajo, y todas comparten su perfil de One World.",
+        suite=[("onebusiness", "Sus servicios, llamadas, página web y app."), ("oneevent", "Eventos y boletas."), ("oneride", "Viajes privados con el conductor que usted elige."),
+               ("onehome", "Vivienda para arrendar o comprar."), ("onepay", "Pague y cobre."), ("onejob", "Contrate o consiga trabajo."), ("onescore", "Su puntaje de credibilidad."), ("oneagent", "Un agente de su lado.")],
+        founder_h="Del fundador", founder_name="Lee Frazier", founder_role="Fundador y director ejecutivo, One World Labs",
+        founder_p="One World nació en Medellín, Colombia, para darles a los pequeños negocios, independientes y creadores la confianza que las grandes marcas dan por sentada.",
+        founder_link="Conozca al fundador",
+        cta_h="Empiece a construir su reputación.", cta_p="Abra la app con su One ID. Toma un minuto."),
+}
+
+# ── FOOTER (old OneSocial footer categories: Company, Support, Legal, Resources) ─────────────
+APPU = "https://app.oneworldlabs.ai"
+FOOTER = {
+    "en": dict(tag="One account. Many possibilities.", rights="© 2026 One World Labs. All rights reserved.", label="Footer",
+               cols=[("Company", [("Why One World", "/why/"), ("Founder", "/founder/"), ("Careers", "/careers/"), ("Investors", "/investors/"), ("Press", "/press/"), ("Partners", "/partners/")]),
+                     ("Explore", [("All apps", "/apps/"), ("Features", "/features/"), ("For business", "/services/"), ("Blog", "/blog/"), ("Hire in Medellín", "/medellin/")]),
+                     ("Support", [("Contact us", "/#contact"), ("Safety and trust", "/safety/"), ("Child safety", "/child-safety/"), ("Accessibility", "/accessibility/"), ("Delete your account", "/delete-account.html")]),
+                     ("Legal", [("Terms of Service", APPU + "/terms"), ("Privacy Policy", APPU + "/privacy"), ("Cookie Policy", "/cookies/"), ("SMS terms", "/sms-terms/"), ("Intellectual property", "/legal/ip/")])]),
+    "es": dict(tag="Una cuenta. Muchas posibilidades.", rights="© 2026 One World Labs. Todos los derechos reservados.", label="Pie de página",
+               cols=[("Compañía", [("Por qué One World", "/es/why/"), ("Fundador", "/founder/"), ("Trabaje con nosotros", "/es/careers/"), ("Inversionistas", "/es/investors/"), ("Prensa", "/es/press/"), ("Aliados", "/es/partners/")]),
+                     ("Explorar", [("Todas las apps", "/es/apps/"), ("Funciones", "/es/features/"), ("Para su negocio", "/es/services/"), ("Blog", "/es/blog/"), ("Contrate en Medellín", "/es/medellin/")]),
+                     ("Ayuda", [("Contáctenos", "/es/#contact"), ("Seguridad y confianza", "/es/safety/"), ("Seguridad infantil", "/child-safety/"), ("Accesibilidad", "/es/accessibility/"), ("Eliminar su cuenta", "/delete-account.html")]),
+                     ("Legal", [("Términos del servicio", APPU + "/terms"), ("Política de privacidad", APPU + "/privacy"), ("Política de cookies", "/es/cookies/"), ("Términos de SMS", "/es/sms-terms/"), ("Propiedad intelectual", "/es/legal/ip/")])]),
+}
+
+# ── COMPANY AND LEGAL PAGES ──────────────────────────────────────────────────────────────────
+# slug: {lang: dict(title, desc, eyebrow, h1, lead, sections=[(h2, [paragraphs] or ("ul", [items]))], source)}
+DOCS = {}
+DOCS["cookies"] = {  # ported: onesocial repo src/i18n/LanguageContext.tsx cookie.* (March 2026), brand updated
+    "en": dict(title="Cookie Policy | One World", desc="How One World uses cookies and similar storage on oneworldlabs.ai and in the One World app.",
+               eyebrow="Legal", h1="Cookie Policy", lead="Last updated: 13 November 2026.",
+               sections=[("What are cookies?", ["Cookies are small text files stored on your device when you visit a website. They help us recognize your browser, remember your preferences and improve your experience on One World."]),
+                         ("How we use cookies", ["We use essential cookies and similar browser storage to keep you signed in and maintain your session. We may also use analytics to understand how people use the site so we can improve performance and usability."]),
+                         ("Types we use", ("ul", ["Essential: required for core functions like sign-in and security.", "Analytics: help us measure site performance and use.", "Preferences: remember settings like your language and light or dark mode."])),
+                         ("Managing cookies", ["You can control or delete cookies through your browser settings. Turning off essential cookies may stop parts of the site or app from working."]),
+                         ("Updates", ["We may update this policy from time to time. Changes will appear on this page with a new date. Our Privacy Policy explains how we handle personal information."])]),
+    "es": dict(title="Política de cookies | One World", desc="Cómo One World usa cookies y almacenamiento similar en oneworldlabs.ai y en la app de One World.",
+               eyebrow="Legal", h1="Política de cookies", lead="Última actualización: 13 de noviembre de 2026.",
+               sections=[("¿Qué son las cookies?", ["Las cookies son pequeños archivos de texto que se guardan en su dispositivo cuando visita un sitio web. Nos ayudan a reconocer su navegador, recordar sus preferencias y mejorar su experiencia en One World."]),
+                         ("Cómo usamos las cookies", ["Usamos cookies esenciales y almacenamiento similar del navegador para mantener su sesión iniciada. También podemos usar analítica para entender cómo se usa el sitio y mejorar su rendimiento."]),
+                         ("Tipos que usamos", ("ul", ["Esenciales: necesarias para funciones básicas como el inicio de sesión y la seguridad.", "Analíticas: nos ayudan a medir el rendimiento y el uso del sitio.", "De preferencias: recuerdan configuraciones como su idioma y el modo claro u oscuro."])),
+                         ("Gestionar las cookies", ["Puede controlar o eliminar las cookies desde la configuración de su navegador. Desactivar las cookies esenciales puede impedir que partes del sitio o de la app funcionen."]),
+                         ("Cambios", ["Podemos actualizar esta política. Los cambios aparecerán en esta página con una nueva fecha. Nuestra Política de privacidad explica cómo tratamos la información personal."])])}
+DOCS["accessibility"] = {  # ported: onesocial access.* (WCAG 2.1 AA aim), brand and contact updated
+    "en": dict(title="Accessibility | One World", desc="One World's commitment to accessibility and how to report a barrier.",
+               eyebrow="Support", h1="Accessibility", lead="One World is committed to making the site and the app usable by everyone.",
+               sections=[("Our commitment", ["We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA and keep improving the experience for every visitor."]),
+                         ("What we do", ("ul", ["Semantic HTML that works with screen readers", "Keyboard navigation", "Colour contrast checked in light and dark mode", "Text alternatives for meaningful images", "Layouts that work on phones, tablets and computers", "Regular accessibility reviews"])),
+                         ("Feedback", ["If something is hard to use, email support@oneworldlabs.ai and tell us where. We read every message."])]),
+    "es": dict(title="Accesibilidad | One World", desc="El compromiso de One World con la accesibilidad y cómo reportar una barrera.",
+               eyebrow="Ayuda", h1="Accesibilidad", lead="One World se compromete a que el sitio y la app puedan ser usados por todos.",
+               sections=[("Nuestro compromiso", ["Buscamos cumplir las Pautas de Accesibilidad para el Contenido Web (WCAG) 2.1 nivel AA y seguir mejorando la experiencia de cada visitante."]),
+                         ("Lo que hacemos", ("ul", ["HTML semántico compatible con lectores de pantalla", "Navegación con teclado", "Contraste de color revisado en modo claro y oscuro", "Texto alternativo para las imágenes importantes", "Diseños que funcionan en celulares, tabletas y computadores", "Revisiones de accesibilidad periódicas"])),
+                         ("Comentarios", ["Si algo es difícil de usar, escriba a support@oneworldlabs.ai y cuéntenos dónde. Leemos cada mensaje."])])}
+DOCS["safety"] = {  # ported and trimmed: onesocial safety.* pillars, rewritten to match the 22 Oct 2026 platform terms/privacy
+    "en": dict(title="Safety and trust | One World", desc="How One World builds trust: reviews from real jobs, OneScore, account controls, community rules and child safety.",
+               eyebrow="Support", h1="Safety and trust", lead="Trust is the point of One World. Here is how we build it and what you should still check yourself.",
+               sections=[("Reputation you can see", ["Reviews come from jobs done in the app, and OneScore shows the record behind a member's name. Read profiles and reviews before you hire or book."]),
+                         ("What we do not do", ["One World does not run background checks. Meet somewhere safe, and keep messages and payments in the app."]),
+                         ("Your data", ["Access controls and signed-in workflows help limit who can see your information. No website can promise absolute security, so contact support promptly about anything suspicious. Our Privacy Policy explains what we collect and why."]),
+                         ("Community standards", ["We may restrict access for misuse, safety or legal reasons. You can ask support to review a decision."]),
+                         ("Children", ["One World is for adults aged 18 or older. Read our child safety standards, and report anything that puts a child at risk."])]),
+    "es": dict(title="Seguridad y confianza | One World", desc="Cómo One World construye confianza: reseñas de trabajos reales, OneScore, controles de cuenta, normas de la comunidad y seguridad infantil.",
+               eyebrow="Ayuda", h1="Seguridad y confianza", lead="La confianza es la razón de ser de One World. Así la construimos, y esto es lo que usted debe seguir revisando.",
+               sections=[("Una reputación que se puede ver", ["Las reseñas vienen de trabajos hechos en la app, y OneScore muestra el historial detrás del nombre de un miembro. Lea los perfiles y las reseñas antes de contratar o reservar."]),
+                         ("Lo que no hacemos", ["One World no verifica antecedentes. Reúnase en un lugar seguro y mantenga los mensajes y los pagos en la app."]),
+                         ("Sus datos", ["Los controles de acceso y los flujos con sesión iniciada ayudan a limitar quién ve su información. Ningún sitio puede prometer seguridad absoluta; escriba a soporte de inmediato si ve algo sospechoso. Nuestra Política de privacidad explica qué recogemos y por qué."]),
+                         ("Normas de la comunidad", ["Podemos restringir el acceso por uso indebido, seguridad o exigencias legales. Puede pedir a soporte que revise la decisión."]),
+                         ("Menores de edad", ["One World es para adultos de 18 años o más. Lea nuestras normas de seguridad infantil y reporte cualquier cosa que ponga en riesgo a un menor."])])}
+DOCS["sms-terms"] = {  # source: app legal platform-terms-20261022.md + platform-privacy-20261022.md (SMS sentences)
+    "en": dict(title="SMS terms | One World", desc="How One World uses text messages: verification codes and service messages, STOP and HELP, and how your number is handled.",
+               eyebrow="Legal", h1="SMS terms", lead="One World sends text messages to support the features you use.",
+               sections=[("What we send", ["Verification codes, service messages and notifications that support the features you request. Account terms are not consent to unrelated marketing, and marketing choices are separate."]),
+                         ("Rates", ["Message and data rates may apply."]),
+                         ("STOP and HELP", ["Follow the sender's STOP and HELP instructions in any message. You can also email support@oneworldlabs.ai."]),
+                         ("Your number", ["Mobile numbers and SMS consent information are not sold, rented or shared with third parties or affiliates for their marketing or promotional purposes. Delivery providers may process them to send authorized messages."])]),
+    "es": dict(title="Términos de SMS | One World", desc="Cómo One World usa los mensajes de texto: códigos de verificación y avisos del servicio, STOP y HELP, y cómo se trata su número.",
+               eyebrow="Legal", h1="Términos de SMS", lead="One World envía mensajes de texto para apoyar las funciones que usted usa.",
+               sections=[("Qué enviamos", ["Códigos de verificación, avisos del servicio y notificaciones que apoyan las funciones que usted solicita. Aceptar los términos de la cuenta no autoriza mercadeo ajeno al servicio."]),
+                         ("Cargos", ["Pueden aplicar cargos de mensajes y datos."]),
+                         ("STOP y HELP", ["Siga las instrucciones STOP y HELP del remitente en cualquier mensaje. También puede escribir a support@oneworldlabs.ai."]),
+                         ("Su número", ["No vendemos, alquilamos ni compartimos números móviles ni el consentimiento de SMS con terceros o afiliadas para su mercadeo. Los proveedores de entrega pueden usarlos para enviar mensajes autorizados."])])}
+DOCS["legal/ip"] = {  # PLACEHOLDER — no source; needs counsel
+    "en": dict(title="Intellectual property | One World", desc="Notice about One World Labs' names, logos, software and content.",
+               eyebrow="Legal", h1="Intellectual property", lead="Notice. This page is a summary, not a licence.",
+               sections=[("Our work", ["The One World software, apps, website, designs, text, graphics and logos are owned by One World Labs or its licensors. You may not copy, modify, reverse engineer or redistribute them without written permission."]),
+                         ("Your content", ["You keep ownership of what you post. The Terms of Service explain the rights you give One World to show your content in the apps."]),
+                         ("Reporting", ["If you believe something on One World infringes your rights, email support@oneworldlabs.ai with the details."])]),
+    "es": dict(title="Propiedad intelectual | One World", desc="Aviso sobre los nombres, logotipos, software y contenido de One World Labs.",
+               eyebrow="Legal", h1="Propiedad intelectual", lead="Aviso. Esta página es un resumen, no una licencia.",
+               sections=[("Nuestro trabajo", ["El software, las apps, el sitio web, los diseños, los textos, los gráficos y los logotipos de One World pertenecen a One World Labs o a sus licenciantes. No puede copiarlos, modificarlos, aplicarles ingeniería inversa ni redistribuirlos sin permiso escrito."]),
+                         ("Su contenido", ["Usted sigue siendo dueño de lo que publica. Los Términos del servicio explican los derechos que le da a One World para mostrar su contenido en las apps."]),
+                         ("Reportes", ["Si cree que algo en One World infringe sus derechos, escriba a support@oneworldlabs.ai con los detalles."])])}
+DOCS["careers"] = {  # ported: onesocial careers.* roles (March 2026), brand updated — Lee to confirm roles are still open
+    "en": dict(title="Careers | One World", desc="Work at One World Labs. Remote roles across engineering, design, quality, support, marketing and compliance.",
+               eyebrow="Company", h1="Build One World with us.", lead="We are a small team building a place where small businesses get found, trusted and paid. Roles are remote.",
+               sections=[("Roles we hire for", ("ul", ["Back-end software engineer: scalable APIs, services and cloud infrastructure.", "UI/UX designer: the One World experience on web and mobile.", "QA engineer: test plans, regression and automation across every flow.", "Customer support lead: the voice of One World for our earliest members.", "Marketing manager: growth across digital channels and partnerships.", "Legal and compliance advisor: platform, payments and gig-economy rules."])),
+                         ("How to apply", ["Email support@oneworldlabs.ai with the role in the subject, a short note and a link to your work. Equity may be available for founding-team roles."])]),
+    "es": dict(title="Trabaje con nosotros | One World", desc="Trabaje en One World Labs. Cargos remotos en ingeniería, diseño, calidad, soporte, mercadeo y cumplimiento.",
+               eyebrow="Compañía", h1="Construya One World con nosotros.", lead="Somos un equipo pequeño que construye un lugar donde los pequeños negocios consiguen clientes, confianza y pagos. Los cargos son remotos.",
+               sections=[("Cargos que buscamos", ("ul", ["Ingeniero de software back-end: APIs, servicios e infraestructura en la nube.", "Diseñador UI/UX: la experiencia de One World en web y móvil.", "Ingeniero QA: planes de prueba, regresión y automatización en todos los flujos.", "Líder de soporte: la voz de One World para nuestros primeros miembros.", "Gerente de mercadeo: crecimiento en canales digitales y alianzas.", "Asesor legal y de cumplimiento: normas de plataformas, pagos y economía gig."])),
+                         ("Cómo aplicar", ["Escriba a support@oneworldlabs.ai con el cargo en el asunto, una nota corta y un enlace a su trabajo. Puede haber participación accionaria para cargos del equipo fundador."])])}
+DOCS["partners"] = {  # ported: onesocial partner.* (removed "guaranteed payments" and "verified")
+    "en": dict(title="Partners | One World", desc="Partner with One World Labs: economic development agencies, community organizations, brands and talent networks.",
+               eyebrow="Company", h1="Partner with One World.", lead="We build partnerships with organizations that want local businesses, freelancers and creators to grow.",
+               sections=[("Government and economic development", ["City tourism departments, economic development agencies and local government can promote One World in their communities, connecting residents with work."]),
+                         ("Community organizations", ["Non-profits, workforce programs and community groups can help their members build a reputation, find work and get paid."]),
+                         ("Brands and industry leaders", ["Brands can find local talent with a visible track record, and reach the people who run small businesses."]),
+                         ("Creator and talent networks", ["Agencies and creator collectives can give their members one profile, a portable reputation and more ways to be discovered."]),
+                         ("Get in touch", ["Email support@oneworldlabs.ai with \"Partnership\" in the subject."])]),
+    "es": dict(title="Aliados | One World", desc="Alíese con One World Labs: agencias de desarrollo económico, organizaciones comunitarias, marcas y redes de talento.",
+               eyebrow="Compañía", h1="Alíese con One World.", lead="Construimos alianzas con organizaciones que quieren que los negocios locales, independientes y creadores crezcan.",
+               sections=[("Gobierno y desarrollo económico", ["Secretarías de turismo, agencias de desarrollo económico y gobiernos locales pueden promover One World en sus comunidades y conectar a los residentes con trabajo."]),
+                         ("Organizaciones comunitarias", ["Fundaciones, programas de empleo y grupos comunitarios pueden ayudar a sus miembros a construir reputación, conseguir trabajo y cobrar."]),
+                         ("Marcas y líderes de la industria", ["Las marcas pueden encontrar talento local con un historial visible y llegar a quienes manejan pequeños negocios."]),
+                         ("Redes de creadores y talento", ["Agencias y colectivos de creadores pueden darles a sus miembros un solo perfil, una reputación que los acompaña y más formas de ser descubiertos."]),
+                         ("Contáctenos", ["Escriba a support@oneworldlabs.ai con \"Alianza\" en el asunto."])])}
+DOCS["investors"] = {  # PLACEHOLDER — no current, approved investor material on this site
+    "en": dict(title="Investors | One World", desc="Investor relations for One World Labs.", eyebrow="Company", h1="Investor relations",
+               lead="One World Labs builds One World: one app where small businesses, freelancers and creators get found, trusted and paid.",
+               sections=[("Contact", ["For investor questions, email leefrazier@oneworldlabs.ai. Materials are shared directly on request."])]),
+    "es": dict(title="Inversionistas | One World", desc="Relación con inversionistas de One World Labs.", eyebrow="Compañía", h1="Relación con inversionistas",
+               lead="One World Labs construye One World: una app donde pequeños negocios, independientes y creadores consiguen clientes, confianza y pagos.",
+               sections=[("Contacto", ["Para preguntas de inversionistas, escriba a leefrazier@oneworldlabs.ai. Compartimos los materiales directamente cuando se solicitan."])])}
+DOCS["press"] = {  # PLACEHOLDER
+    "en": dict(title="Press | One World", desc="Press and media contact for One World Labs.", eyebrow="Company", h1="Press",
+               lead="Writing about small businesses, freelancers or creators? We are happy to help.",
+               sections=[("Media contact", ["Email support@oneworldlabs.ai with \"Press\" in the subject. Logos and photos are available on request."])]),
+    "es": dict(title="Prensa | One World", desc="Contacto de prensa y medios de One World Labs.", eyebrow="Compañía", h1="Prensa",
+               lead="¿Escribe sobre pequeños negocios, independientes o creadores? Con gusto le ayudamos.",
+               sections=[("Contacto de medios", ["Escriba a support@oneworldlabs.ai con \"Prensa\" en el asunto. Logotipos y fotos disponibles a solicitud."])])}
+DOC_IMG = {"cookies": None, "accessibility": None, "safety": "/blog/img/badges.jpg", "sms-terms": None, "legal/ip": None,
+           "careers": "/assets/v2/img/team.jpg", "partners": "/assets/v2/img/handshake.jpg", "investors": "/blog/img/ecosystem.jpg", "press": "/blog/img/networking.jpg"}
+ENT = "One World Labs AI, Inc."
+ADDR = "16192 Coastal Highway, Lewes, DE 19958, USA"
+DOCS["cookies"] = {  # counsel draft 13 Nov 2026 from: onesocial cookie.* (Mar 2026) + app privacy OWL-2026-10-29.1 §2 + a read of this site's scripts
+    "en": dict(title="Cookie Policy | One World", desc="The cookies and browser storage One World Labs uses on oneworldlabs.ai, what each is for, and how to control them.",
+               eyebrow="Legal", h1="Cookie Policy", lead="Effective 13 November 2026. This policy covers oneworldlabs.ai, operated by " + ENT + ".",
+               sections=[("What cookies are", ["Cookies are small text files a website stores in your browser. Similar tools, like local storage and session storage, keep small pieces of information on your device. We call all of them cookies here."]),
+                         ("What we use on this site", ("ul", [
+                             "Sign-in (essential): a One ID cookie and session storage that let this site know you are signed in to the One World app, so it can show your account menu.",
+                             "Language (preference): remembers the language and country you picked.",
+                             "Light or dark mode (preference): remembers your choice.",
+                             "Feature testing (preference): if you join a test of a new feature, remembers that for up to 7 days.",
+                             "Security (essential, set by Cloudflare): helps tell real visitors from bots and protects the site from attacks.",
+                             "Chat (set by our chat provider, HighLevel/LeadConnector): on pages with the chat button, keeps your conversation going if you use it."])),
+                         ("What we do not use", ["This site does not run advertising cookies or third-party analytics trackers. The One World app records its own usage events as described in our Privacy Policy, and does not record them when your browser sends a Do Not Track or Global Privacy Control signal."]),
+                         ("Your choices", ["You can block or delete cookies in your browser settings. If you block essential cookies, sign-in and some features may not work. Clearing site data resets your language and light or dark choices."]),
+                         ("Changes and contact", ["We will update this page, and its effective date, when what we use changes. Questions: support@oneworldlabs.ai with \"Privacy\" in the subject, or " + ENT + ", " + ADDR + ". Our Privacy Policy explains how we handle personal information."])]),
+    "es": dict(title="Política de cookies | One World", desc="Las cookies y el almacenamiento del navegador que One World Labs usa en oneworldlabs.ai, para qué sirve cada uno y cómo controlarlos.",
+               eyebrow="Legal", h1="Política de cookies", lead="Vigente desde el 13 de noviembre de 2026. Esta política cubre oneworldlabs.ai, operado por " + ENT + ".",
+               sections=[("Qué son las cookies", ["Las cookies son pequeños archivos de texto que un sitio web guarda en su navegador. Herramientas similares, como el almacenamiento local y de sesión, guardan pequeños datos en su dispositivo. Aquí las llamamos a todas cookies."]),
+                         ("Qué usamos en este sitio", ("ul", [
+                             "Inicio de sesión (esencial): una cookie de One ID y almacenamiento de sesión que le indican a este sitio que usted inició sesión en la app de One World, para mostrar el menú de su cuenta.",
+                             "Idioma (preferencia): recuerda el idioma y el país que eligió.",
+                             "Modo claro u oscuro (preferencia): recuerda su elección.",
+                             "Pruebas de funciones (preferencia): si participa en la prueba de una función nueva, lo recuerda hasta por 7 días.",
+                             "Seguridad (esencial, de Cloudflare): ayuda a distinguir visitantes reales de bots y protege el sitio de ataques.",
+                             "Chat (de nuestro proveedor de chat, HighLevel/LeadConnector): en las páginas con el botón de chat, mantiene su conversación si lo usa."])),
+                         ("Lo que no usamos", ["Este sitio no usa cookies de publicidad ni rastreadores de analítica de terceros. La app de One World registra sus propios eventos de uso según nuestra Política de privacidad, y no los registra cuando su navegador envía una señal Do Not Track o Global Privacy Control."]),
+                         ("Sus opciones", ["Puede bloquear o borrar las cookies en la configuración de su navegador. Si bloquea las cookies esenciales, el inicio de sesión y algunas funciones pueden dejar de funcionar. Borrar los datos del sitio reinicia su idioma y su modo claro u oscuro."]),
+                         ("Cambios y contacto", ["Actualizaremos esta página y su fecha cuando cambie lo que usamos. Preguntas: support@oneworldlabs.ai con \"Privacidad\" en el asunto, o " + ENT + ", " + ADDR + ". Nuestra Política de privacidad explica cómo tratamos la información personal."])])}
+DOCS["sms-terms"] = {  # counsel draft from app terms §SMS and privacy §3 (OWL-2026-10-29.1)
+    "en": dict(title="SMS terms | One World", desc="One World's text-message program: what we send, message frequency, rates, STOP and HELP, and how your number is handled.",
+               eyebrow="Legal", h1="SMS terms", lead="Effective 13 November 2026. Text messages are sent by " + ENT + " for the One World app.",
+               sections=[("What we send", ["Verification codes, account and security alerts, and notifications about activity you asked for, such as a reply, a booking request or a payment. Accepting our Terms is not consent to marketing texts, and we do not send marketing by SMS unless you opt in separately."]),
+                         ("How you opt in", ["You give your mobile number in the app and agree to receive these messages for the features you use."]),
+                         ("Frequency and rates", ["Message frequency varies with your activity. Message and data rates may apply."]),
+                         ("STOP and HELP", ["Reply STOP to any message to stop texts from that number; you will get one confirmation. Reply HELP for help, or email support@oneworldlabs.ai. If you stop texts, you may not receive verification codes, so use another sign-in method."]),
+                         ("Your number", ["Mobile numbers and SMS consent information are not sold, rented or shared with third parties or affiliates for their marketing or promotional purposes. Delivery providers process them only to send authorized messages. Carriers are not liable for delayed or undelivered messages."]),
+                         ("More", ["Our Terms of Service and Privacy Policy also apply. Contact: support@oneworldlabs.ai, +1 (855) 770-0200."])]),
+    "es": dict(title="Términos de SMS | One World", desc="El programa de mensajes de texto de One World: qué enviamos, frecuencia, cargos, STOP y HELP, y cómo se trata su número.",
+               eyebrow="Legal", h1="Términos de SMS", lead="Vigentes desde el 13 de noviembre de 2026. Los mensajes de texto los envía " + ENT + " para la app de One World.",
+               sections=[("Qué enviamos", ["Códigos de verificación, alertas de cuenta y seguridad, y avisos sobre la actividad que usted solicitó, como una respuesta, una solicitud de reserva o un pago. Aceptar nuestros Términos no autoriza mensajes de mercadeo, y no enviamos mercadeo por SMS salvo que usted lo acepte por separado."]),
+                         ("Cómo se inscribe", ["Usted ingresa su número móvil en la app y acepta recibir estos mensajes para las funciones que usa."]),
+                         ("Frecuencia y cargos", ["La frecuencia varía según su actividad. Pueden aplicar cargos de mensajes y datos."]),
+                         ("STOP y HELP", ["Responda STOP a cualquier mensaje para dejar de recibir textos de ese número; recibirá una confirmación. Responda HELP para ayuda, o escriba a support@oneworldlabs.ai. Si detiene los textos, puede que no reciba códigos de verificación; use otro método de inicio de sesión."]),
+                         ("Su número", ["No vendemos, alquilamos ni compartimos números móviles ni el consentimiento de SMS con terceros o afiliadas para su mercadeo. Los proveedores de entrega los usan solo para enviar mensajes autorizados. Los operadores no responden por mensajes demorados o no entregados."]),
+                         ("Más", ["También aplican nuestros Términos del servicio y nuestra Política de privacidad. Contacto: support@oneworldlabs.ai, +1 (855) 770-0200."])])}
+DOCS["legal/ip"] = {  # counsel draft from app terms §4 (Your content) + standard proprietary notice; no ® claimed (see trademark memo 2 Aug 2026)
+    "en": dict(title="Intellectual property | One World", desc="Who owns One World's software, apps, website and brand, what you keep when you post, and how to report infringement.",
+               eyebrow="Legal", h1="Intellectual property", lead="Effective 13 November 2026. This notice supplements our Terms of Service.",
+               sections=[("Our software and brand", ["The One World apps, website, source code, designs, text, graphics, photos we own, and the names and logos One World, OneBusiness, OneEvent, OneRide, OneHome, OnePay, OneJob, OneScore, OneAgent and OneSocial are the property of " + ENT + " or its licensors. Some photos are used under licence from their owners."]),
+                         ("What you may not do", ("ul", ["Copy, sell, modify or publish our software or content, except as the apps let you share it.", "Reverse engineer, decompile or scrape the apps or site, except where the law expressly allows it.", "Use our names or logos in a way that suggests we endorse you, without written permission."])),
+                         ("Your content", ["You keep ownership of what you post. You let us host, process and display it as needed to run the features and reach the audiences you choose, as set out in the Terms."]),
+                         ("Reporting infringement", ["If you believe something on One World infringes your copyright or trademark, email support@oneworldlabs.ai with \"IP\" in the subject: identify the work, the link to the material, your contact details, and a statement that you believe in good faith the use is not authorized. We review reports and may remove material and close repeat infringers' accounts."]),
+                         ("Contact", [ENT + ", " + ADDR + "."])]),
+    "es": dict(title="Propiedad intelectual | One World", desc="A quién pertenecen el software, las apps, el sitio web y la marca de One World, qué conserva usted al publicar y cómo reportar una infracción.",
+               eyebrow="Legal", h1="Propiedad intelectual", lead="Vigente desde el 13 de noviembre de 2026. Este aviso complementa nuestros Términos del servicio.",
+               sections=[("Nuestro software y marca", ["Las apps y el sitio web de One World, su código fuente, diseños, textos, gráficos, las fotos de nuestra propiedad, y los nombres y logotipos One World, OneBusiness, OneEvent, OneRide, OneHome, OnePay, OneJob, OneScore, OneAgent y OneSocial pertenecen a " + ENT + " o a sus licenciantes. Algunas fotos se usan con licencia de sus dueños."]),
+                         ("Lo que no puede hacer", ("ul", ["Copiar, vender, modificar o publicar nuestro software o contenido, salvo lo que las apps le permiten compartir.", "Aplicar ingeniería inversa, descompilar o extraer datos masivamente de las apps o del sitio, salvo donde la ley lo permita expresamente.", "Usar nuestros nombres o logotipos de forma que sugiera que lo respaldamos, sin permiso escrito."])),
+                         ("Su contenido", ["Usted sigue siendo dueño de lo que publica. Nos autoriza a alojarlo, procesarlo y mostrarlo según sea necesario para las funciones y audiencias que usted elija, como dicen los Términos."]),
+                         ("Reportar una infracción", ["Si cree que algo en One World infringe sus derechos de autor o su marca, escriba a support@oneworldlabs.ai con \"PI\" en el asunto: identifique la obra, el enlace al material, sus datos de contacto y una declaración de buena fe de que el uso no está autorizado. Revisamos los reportes y podemos retirar material y cerrar las cuentas de quienes infrinjan de forma repetida."]),
+                         ("Contacto", [ENT + ", " + ADDR + "."])])}
+DOCS["safety"] = {  # counsel draft from onesocial safety.* + app terms §1, §4 (reports within 24 h) and privacy §5
+    "en": dict(title="Safety and trust | One World", desc="How One World handles safety: what reviews and OneScore show, what we do not check, how to report and block, and our rules for content and children.",
+               eyebrow="Support", h1="Safety and trust", lead="Trust is the point of One World. Here is what we do, what we do not do, and what you should still check yourself.",
+               sections=[("What a profile shows", ["Reviews come from jobs done in the app, and OneScore summarizes a member's record. A profile, score, badge or document review is not a guarantee of anyone's identity, qualifications, behavior, finances or suitability. Check what matters to you."]),
+                         ("What we do not do", ["One World does not run background checks, does not provide insurance and does not supervise work. Members, hosts, drivers and organizers are responsible for their own offers and conduct. In an emergency, call local emergency services."]),
+                         ("Staying safe", ("ul", ["Keep messages and payments in the app, so there is a record.", "Meet in a public place when you can, and tell someone where you are going.", "Never share sign-in codes or passwords.", "Be careful with anyone who asks you to pay outside the app."])),
+                         ("Report and block", ["You can report a member, message, post, listing or comment and block a member in the apps, or email support@oneworldlabs.ai with the link and details. We review reports and aim to act within 24 hours. We may remove content, limit features, or suspend or close accounts, and you can ask support to review a decision."]),
+                         ("Children", ["One World is for adults aged 18 or older. We have zero tolerance for content that sexualizes minors. Read our child safety standards to learn how we act and how to report."]),
+                         ("Your data", ["Access controls and signed-in workflows limit who can see your information, but no service can promise absolute security. Tell support right away about suspicious activity. Our Privacy Policy explains what we collect and why."])]),
+    "es": dict(title="Seguridad y confianza | One World", desc="Cómo maneja One World la seguridad: qué muestran las reseñas y OneScore, qué no verificamos, cómo reportar y bloquear, y nuestras normas sobre contenido y menores.",
+               eyebrow="Ayuda", h1="Seguridad y confianza", lead="La confianza es la razón de ser de One World. Esto es lo que hacemos, lo que no hacemos y lo que usted debe seguir revisando.",
+               sections=[("Qué muestra un perfil", ["Las reseñas vienen de trabajos hechos en la app, y OneScore resume el historial de un miembro. Un perfil, puntaje, insignia o revisión de documentos no garantiza la identidad, calificaciones, conducta, finanzas ni idoneidad de nadie. Revise lo que le importa."]),
+                         ("Lo que no hacemos", ["One World no verifica antecedentes, no ofrece seguros y no supervisa el trabajo. Miembros, anfitriones, conductores y organizadores responden por sus ofertas y su conducta. En una emergencia, llame a los servicios de emergencia locales."]),
+                         ("Cómo cuidarse", ("ul", ["Mantenga los mensajes y pagos en la app, para que quede registro.", "Reúnase en un lugar público cuando pueda y avise a alguien a dónde va.", "Nunca comparta códigos de inicio de sesión ni contraseñas.", "Desconfíe de quien le pida pagar por fuera de la app."])),
+                         ("Reportar y bloquear", ["Puede reportar a un miembro, mensaje, publicación, inmueble o comentario y bloquear a un miembro en las apps, o escribir a support@oneworldlabs.ai con el enlace y los detalles. Revisamos los reportes y buscamos actuar en 24 horas. Podemos retirar contenido, limitar funciones o suspender o cerrar cuentas, y usted puede pedir a soporte que revise la decisión."]),
+                         ("Menores de edad", ["One World es para adultos de 18 años o más. No toleramos ningún contenido que sexualice a menores. Lea nuestras normas de seguridad infantil para saber cómo actuamos y cómo reportar."]),
+                         ("Sus datos", ["Los controles de acceso y los flujos con sesión iniciada limitan quién ve su información, pero ningún servicio puede prometer seguridad absoluta. Avise a soporte de inmediato si ve actividad sospechosa. Nuestra Política de privacidad explica qué recogemos y por qué."])])}
+DOCS["accessibility"] = {  # counsel draft from onesocial access.*; "aim" wording, no conformance claim
+    "en": dict(title="Accessibility | One World", desc="One World Labs' accessibility goal (WCAG 2.1 AA), what we do, known limits, and how to report a barrier.",
+               eyebrow="Support", h1="Accessibility", lead="Effective 13 November 2026. We want everyone to be able to use One World.",
+               sections=[("Our goal", ["We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA on oneworldlabs.ai and in the One World app. We have not yet completed an independent audit, so we do not claim full conformance."]),
+                         ("What we do", ("ul", ["Use semantic HTML that works with screen readers", "Support keyboard navigation and visible focus", "Check colour contrast in light and dark mode", "Give meaningful images text alternatives", "Build layouts that work on phones, tablets and computers", "Respect reduced-motion settings"])),
+                         ("Known limits", ["Some older pages, videos and third-party tools, such as the chat window, may not meet every guideline yet. We fix issues as we find them."]),
+                         ("Report a barrier", ["Email support@oneworldlabs.ai with \"Accessibility\" in the subject, the page or screen, and what happened. We will reply and can provide the information in another format."])]),
+    "es": dict(title="Accesibilidad | One World", desc="La meta de accesibilidad de One World Labs (WCAG 2.1 AA), lo que hacemos, los límites conocidos y cómo reportar una barrera.",
+               eyebrow="Ayuda", h1="Accesibilidad", lead="Vigente desde el 13 de noviembre de 2026. Queremos que todas las personas puedan usar One World.",
+               sections=[("Nuestra meta", ["Buscamos cumplir las Pautas de Accesibilidad para el Contenido Web (WCAG) 2.1 nivel AA en oneworldlabs.ai y en la app de One World. Aún no hemos completado una auditoría independiente, así que no afirmamos un cumplimiento total."]),
+                         ("Lo que hacemos", ("ul", ["HTML semántico compatible con lectores de pantalla", "Navegación con teclado y foco visible", "Contraste de color revisado en modo claro y oscuro", "Texto alternativo para las imágenes importantes", "Diseños que funcionan en celulares, tabletas y computadores", "Respeto por la configuración de movimiento reducido"])),
+                         ("Límites conocidos", ["Algunas páginas antiguas, videos y herramientas de terceros, como la ventana de chat, aún pueden no cumplir todas las pautas. Corregimos los problemas a medida que los encontramos."]),
+                         ("Reportar una barrera", ["Escriba a support@oneworldlabs.ai con \"Accesibilidad\" en el asunto, la página o pantalla y lo que pasó. Le responderemos y podemos darle la información en otro formato."])])}
