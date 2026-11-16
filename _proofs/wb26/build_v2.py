@@ -23,7 +23,7 @@ for _k, _n, _live, _img, _line in FEATURES:
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 BASE = "05c5c9b"          # the commit whose header/footer we keep
 SITE = "https://www.oneworldlabs.ai"
-V = "v2i"                  # cache-buster for v2.css / v2.js
+V = "v2j"                  # cache-buster for v2.css / v2.js
 E = lambda s: html.escape(s, quote=True)
 
 

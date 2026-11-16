@@ -58,8 +58,8 @@ def hero():
         '<a data-i18n="khall" href="%s/">%s</a></div><div class="app-tiles">%s</div>'
         '<a class="door-biz" href="#business"><span class="eyebrow" data-i18n="khrun">%s</span>'
         '<strong data-i18n="khbizt">%s</strong><span data-i18n="khbizp">%s</span></a></aside></section>'
-        % (t("khlead", "One app for events, work, homes, rides and payments, in Medellín and the United States.",
-             "Una sola app para eventos, trabajo, vivienda, viajes y pagos, en Medellín y Estados Unidos."),
+        % (t("khlead", "One app for events, work, homes, rides and payments.",
+             "Una sola app para eventos, trabajo, vivienda, viajes y pagos."),
            A, t("khopen", "Open the app ↗", "Abrir la app ↗"), t("khbiz", "I run a business →", "Tengo un negocio →"),
            t("khuse", "Use One World", "Use One World"), A, t("khall", "Open ↗", "Abrir ↗"), tiles(),
            t("khrun", "Run a business", "Para su negocio"), t("khbizt", "OneBusiness →", "OneBusiness →"),

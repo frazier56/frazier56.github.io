@@ -194,6 +194,8 @@ html[data-theme="dark"] .v2 .hero2:before{opacity:.35}
 .v2 .band p{margin-top:12px;font-size:16.5px;line-height:1.6}
 .v2 .feat{padding:72px 0 0}
 .v2 .feat ul{list-style:none;padding:0;margin:26px 0 0;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+/* WB 16 Nov: three items fill one row on wider screens instead of leaving a hole in a 2-column grid */
+@media (min-width:641px){.feat ul:has(>li:nth-child(3):last-child){grid-template-columns:repeat(3,1fr)}}
 .v2 .feat li{display:flex;gap:14px;align-items:flex-start;padding:20px 22px;border-radius:20px;border:1px solid var(--line);background:var(--card)}
 .v2 .feat li:before{content:"";flex:none;margin-top:3px;width:22px;height:22px;border-radius:50%;background:var(--teal-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230D9488' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12 4 4 8-8'/%3E%3C/svg%3E") center/14px no-repeat}
 .v2 .feat li strong{display:block;font-size:16.5px;color:var(--ink);letter-spacing:-.01em}

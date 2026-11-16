@@ -48,7 +48,7 @@ _T = {
     "Partners": ("Parceiros", "Partner", "Партнёры", "合作伙伴"),
     "Blog": ("Blog", "Blog", "Блог", "博客"),
     "Hire in Medellín": ("Contrate em Medellín", "In Medellín buchen", "Наём в Медельине", "在麦德林雇人"),
-    "One World Agency": ("One World Agency", "One World Agency", "Агентство One World", "One World 代理服务"),
+    "Business services": ("Serviços para empresas", "Services für Unternehmen", "Услуги для бизнеса", "企业服务"),
     "Safety and trust": ("Segurança e confiança", "Sicherheit und Vertrauen", "Безопасность и доверие", "安全与信任"),
     "Child safety": ("Segurança infantil", "Kinderschutz", "Безопасность детей", "儿童安全"),
     "Accessibility": ("Acessibilidade", "Barrierefreiheit", "Доступность", "无障碍"),

@@ -190,7 +190,7 @@
      the translation, and is applied to every text node, alt, aria-label, title and placeholder,
      plus the tab title and description, including anything a script adds later (menus, dialogs,
      the music button). Built by _proofs/wb26/i18n_strings.py. English is restored exactly. */
-  var SV = 'p9c';
+  var SV = 'p10a';
   var strDicts = {}, strDict = null, strSaved = new WeakMap(), docSaved = null, strObs = null;
   var STR_ATTRS = ['alt', 'aria-label', 'title', 'placeholder'];
   var STR_SKIP = 'script,style,noscript,template,code,pre,[translate="no"],[contenteditable]';
