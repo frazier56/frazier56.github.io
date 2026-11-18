@@ -419,7 +419,10 @@
     var a = null, b = shape(cookieRaw());
     try { a = shape(localStorage.getItem(KEY)); } catch (e) {}
     var s = a && b ? (b.expires_at > a.expires_at ? b : a) : (a || b);
-    return s && s.expires_at * 1000 > Date.now() ? s : null;
+    /* Stay signed in like Instagram: the access token lasts about an hour, but the refresh token
+       renews it, so "signed in" means the member was last active within 90 days. expires_at is
+       roughly last-refresh plus an hour, so 90 days past it is the inactivity limit. */
+    return s && s.expires_at * 1000 + 90 * 864e5 > Date.now() ? s : null;
   }
   function displayName(u) {
     var m = (u && u.user_metadata) || {};
@@ -430,7 +433,7 @@
      Never the refresh token, never the whole stored session. */
   window.OW_SESSION = function () {
     var s = session();
-    return s ? { userId: s.user.id, accessToken: s.access_token } : null;
+    return s && s.expires_at * 1000 > Date.now() ? { userId: s.user.id, accessToken: s.access_token } : null;
   };
   var acctIn = document.getElementById('ow-acct-in');
   var acctOut = document.getElementById('ow-acct-out');
