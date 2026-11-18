@@ -45,7 +45,7 @@ HOME = {
         "title": "One World | AI tools that bring your small business more customers",
         "desc": "AI tools and one app that help small businesses, freelancers and creators get found, get booked and get paid: events, work, homes, rides and payments, in one app with one login.",
         "h1": "AI tools that bring your small business more customers.",
-        "sub": "Your reviews, work and payments become one OneScore customers can see.",
+        "sub": "Reach your target customers faster, without the noise. Get reviewed in one place and earn a reputation score that builds trust.",
         "lead": "One World is one place, built only for business, where people find you, trust you and pay you. Your work, your reviews and your score live in one profile, so customers see you and believe in you.", "why": "Learn more", "why_x": "Why One World", "see_all": "See all apps", "feat_eyebrow": "Featured apps", "feat_h2": "Everything your business needs.", "feat_p": "Each app does one job. They share one profile, so your reputation grows with every job.", "feat_all": "See all the apps",
         "open": "Open the app",
         "stage_label": "App previews",
