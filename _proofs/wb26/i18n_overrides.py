@@ -74,7 +74,7 @@ _T = {
     "Name": ("Nome", "Name", "Имя", "姓名"),
     "Phone": ("Telefone", "Telefon", "Телефон", "电话"),
     "Message": ("Mensagem", "Nachricht", "Сообщение", "留言"),
-    "AI tools that help your small business thrive.": ("Ferramentas de IA que ajudam seu pequeno negócio a crescer.", "KI-Tools, mit denen Ihr kleines Unternehmen wächst.", "ИИ-инструменты для роста вашего малого бизнеса.", "助力小企业发展的 AI 工具。"),
+    "AI tools that bring your small business more customers.": ("Ferramentas de IA que ajudam seu pequeno negócio a crescer.", "KI-Tools, mit denen Ihr kleines Unternehmen wächst.", "ИИ-инструменты для роста вашего малого бизнеса.", "助力小企业发展的 AI 工具。"),
     "I want to know more": ("Quero saber mais", "Ich möchte mehr erfahren", "Хочу узнать больше", "我想了解更多"),
     "Have a question?": ("Tem alguma dúvida?", "Haben Sie eine Frage?", "Есть вопрос?", "有问题吗？"),
     "Powered by": ("Com tecnologia", "Bereitgestellt von", "Работает на", "技术支持"),
