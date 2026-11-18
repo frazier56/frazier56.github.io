@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Investor relations | One World Labs</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="One World Labs investor overview: the problem, the product, the business model the projection model and a live simulator.">
-
+<meta name="description" content="One World Labs investor overview: the problem, three revenue streams, the payment model, scenarios, a returns calculator and a live simulator.">
+<meta name="color-scheme" content="light dark">
 <script>
 /* One ID / OAuth redirect-catcher — MUST stay at the very top of every page that can be
    returned to after sign-in. Supabase returns tokens in the hash (#access_token=…) or ?code=
@@ -26,115 +26,248 @@
   location.replace("https://app.oneworldlabs.ai/" + q + h);
 })();
 </script>
+<script>try{var t=localStorage.getItem('ow-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <style>
-:root{--bg:#0B0F1A;--card:#121826;--line:rgba(255,255,255,.14);--tx:#F2F4F8;--mut:#9AA6B8;--teal:#19C3B4}
+:root{--bg:#FAFAF8;--bg2:#EEF4F3;--tx:#0B0F1A;--mut:#566074;--teal:#0FA89B;--teal2:#19C3B4;--blue:#2F6FEB;--amber:#E08A00;--violet:#7C4DDB;--red:#D6423A;
+--glass:rgba(255,255,255,.62);--glass2:rgba(255,255,255,.82);--line:rgba(11,15,26,.12);--shadow:0 10px 40px rgba(15,60,70,.10);--blob1:rgba(25,195,180,.28);--blob2:rgba(47,111,235,.20);--blob3:rgba(124,77,219,.14);--grid:rgba(11,15,26,.08)}
+[data-theme=dark]{--bg:#0B0F1A;--bg2:#0F1626;--tx:#F2F4F8;--mut:#9AA6B8;--teal:#19C3B4;--teal2:#19C3B4;--blue:#6C9BFF;--amber:#F5A623;--violet:#A98BFF;--red:#FF6B62;
+--glass:rgba(22,30,48,.55);--glass2:rgba(22,30,48,.78);--line:rgba(255,255,255,.14);--shadow:0 10px 40px rgba(0,0,0,.45);--blob1:rgba(25,195,180,.22);--blob2:rgba(47,111,235,.20);--blob3:rgba(124,77,219,.20);--grid:rgba(255,255,255,.08)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-a{color:var(--teal)}main{max-width:980px;margin:0 auto;padding:0 20px 80px}
-nav{position:sticky;top:0;z-index:5;background:rgba(11,15,26,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-nav div{max-width:980px;margin:0 auto;padding:12px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:14px}
-nav b{margin-right:auto;font-size:15px}nav a{color:var(--mut);text-decoration:none}nav a:hover{color:var(--tx)}
-.hero{padding:72px 0 40px}.eyebrow{color:var(--teal);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:12px}
-h1{font-size:clamp(32px,6vw,54px);line-height:1.08;margin:10px 0 16px}h2{font-size:clamp(24px,4vw,34px);margin:0 0 12px}
-section{padding:44px 0;border-top:1px solid var(--line)}p{color:#CBD3E0;margin:0 0 14px}.lead{font-size:19px;color:var(--tx)}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}.card h3{margin:0 0 6px;font-size:17px}.card p{margin:0;font-size:14.5px}
-.num{font-size:30px;font-weight:800;color:var(--teal)}table{width:100%;border-collapse:collapse;font-size:14.5px}
-th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--mut);font-weight:600}
-.sim label{display:block;font-size:14px;color:var(--mut);margin:14px 0 4px}.sim input[type=range]{width:100%;accent-color:var(--teal)}
-.sim output{font-weight:700;color:var(--tx)}.out{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:18px}
-.note{font-size:13px;color:var(--mut)}.pill{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:3px 10px;font-size:12px;color:var(--mut)}
-footer{padding:30px 20px;color:var(--mut);font-size:12.5px;max-width:980px;margin:0 auto;border-top:1px solid var(--line)}
-@media(max-width:600px){nav a{display:none}}
+body{margin:0;color:var(--tx);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);min-height:100vh;transition:background .25s,color .25s}
+body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(60vw 50vh at 12% 8%,var(--blob1),transparent 70%),radial-gradient(55vw 50vh at 92% 22%,var(--blob2),transparent 70%),radial-gradient(60vw 60vh at 50% 100%,var(--blob3),transparent 70%),linear-gradient(180deg,var(--bg),var(--bg2))}
+a{color:var(--teal)}main{max-width:1040px;margin:0 auto;padding:0 20px 80px}
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+nav{position:sticky;top:10px;z-index:10;margin:10px auto 0;max-width:1040px;padding:0 20px}
+nav .bar{display:flex;gap:14px;align-items:center;padding:10px 16px;font-size:14px;border-radius:999px}
+nav .brand{display:flex;gap:10px;align-items:center;margin-right:auto;font-weight:700;color:var(--tx);text-decoration:none}
+nav .brand img{height:26px;width:26px}nav .brand .dk{display:none}[data-theme=dark] nav .brand .lt{display:none}[data-theme=dark] nav .brand .dk{display:inline}
+nav a.l{color:var(--mut);text-decoration:none}nav a.l:hover{color:var(--tx)}
+.tg{border:1px solid var(--line);background:var(--glass2);color:var(--tx);border-radius:99px;padding:6px 12px;font:600 13px inherit;cursor:pointer}
+.hero{padding:70px 0 30px}.eyebrow{color:var(--teal);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:12px}
+h1{font-size:clamp(32px,6vw,56px);line-height:1.06;margin:10px 0 16px;letter-spacing:-.02em}
+h2{font-size:clamp(24px,4vw,36px);margin:0 0 10px;letter-spacing:-.01em}h3{margin:0 0 6px;font-size:17px}
+section{padding:36px 0}p{color:var(--mut);margin:0 0 14px}.lead{font-size:19px;color:var(--tx)}
+.kpis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:24px 0}
+.kpi{padding:18px 20px}.kpi b{display:block;font-size:clamp(26px,4vw,38px);line-height:1.1;background:linear-gradient(90deg,var(--teal),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.kpi span{font-size:13px;color:var(--mut)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{padding:20px}.card p{margin:0;font-size:14.5px}
+.tag{display:inline-block;border-radius:99px;padding:3px 10px;font-size:12px;font-weight:700;margin-bottom:8px}
+.t1{background:color-mix(in srgb,var(--teal) 18%,transparent);color:var(--teal)}.t2{background:color-mix(in srgb,var(--blue) 18%,transparent);color:var(--blue)}
+.t3{background:color-mix(in srgb,var(--amber) 20%,transparent);color:var(--amber)}.t4{background:color-mix(in srgb,var(--violet) 18%,transparent);color:var(--violet)}
+.num{font-size:28px;font-weight:800;color:var(--teal)}
+.tbl{overflow-x:auto;padding:6px 10px}table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600}tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right;white-space:nowrap}
+.note{font-size:13px;color:var(--mut)}.pill{display:inline-block;border:1px solid var(--line);background:var(--glass2);border-radius:99px;padding:4px 12px;font-size:12.5px;color:var(--mut);font-family:inherit}
+button.pill{cursor:pointer;color:var(--tx)}button.pill:hover,button.pill.on{border-color:var(--teal);color:var(--teal)}
+.sim{padding:22px}.sim label{display:block;font-size:14px;color:var(--mut);margin:14px 0 4px}.sim input[type=range]{width:100%;accent-color:var(--teal)}
+.sim output{font-weight:700;color:var(--tx);float:right}
+.cols{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.out{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-top:18px}.out .card{padding:14px 16px}
+.chart{padding:14px 14px 8px}.chart h3{padding:0 6px}svg{width:100%;height:auto;display:block}
+.lg{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--mut);padding:4px 8px 8px}.lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+input[type=number]{width:100%;font:inherit;padding:8px 10px;border-radius:12px;border:1px solid var(--line);background:var(--glass2);color:var(--tx)}
+.good{color:var(--teal)}.bad{color:var(--red)}
+.flag{border-left:4px solid var(--amber);padding:12px 16px;border-radius:12px;background:color-mix(in srgb,var(--amber) 10%,transparent);color:var(--tx);font-size:14.5px;margin-top:12px}
+footer{padding:30px 20px;color:var(--mut);font-size:12.5px;max-width:1040px;margin:0 auto}
+@media(max-width:700px){nav a.l{display:none}}
+@media print{body:before{display:none}.glass{box-shadow:none}}
 </style></head><body>
-<nav><div><b>One World Labs &middot; Investor relations</b><a href="#problem">Problem</a><a href="#model">Business model</a><a href="#projection">Scenarios</a><a href="#sim">Simulator</a><a href="#sens">Sensitivity</a><a href="#risks">Risks</a><a href="#contact">Contact</a></div></nav>
+<nav><div class="bar glass"><a class="brand" href="/"><img class="lt" src="/assets/brand-icon-oneworld.png" alt=""><img class="dk" src="/assets/brand-icon-oneworld-dark.png" alt="">One World Labs</a>
+<a class="l" href="#problem">Problem</a><a class="l" href="#model">Revenue</a><a class="l" href="#rails">Payments</a><a class="l" href="#value">Valuation</a><a class="l" href="#projection">Scenarios</a><a class="l" href="#sim">Simulator</a><a class="l" href="#risks">Risks</a>
+<button class="tg" id="tg" type="button" aria-label="Switch light and dark mode">Dark</button></div></nav>
 <main>
-<div class="hero"><span class="eyebrow">Investor overview &middot; 17 November 2026</span>
-<h1>One place where small businesses get found, get paid and get believed.</h1>
-<p class="lead">Scattered tools do not build credibility. One World puts advertising, payments and reviews in one account, and turns them into the world's first standardized credibility score that customers can read at a glance.</p>
-<span class="pill">Draft for review. Not an offer to sell securities.</span></div>
+<div class="hero"><span class="eyebrow">Investor overview &middot; 18 November 2026</span>
+<h1>One place to advertise for free, process payments and get believed.</h1>
+<p class="lead">Small businesses advertise on one platform, take payment on another and collect reviews on a third. None of it adds up to proof a stranger can trust. One World puts all three in one account and turns them into the world's first standardized social credibility score.</p>
+<div class="kpis">
+<div class="kpi glass"><b>10 million dollars</b><span>Pre-money valuation, pre-revenue</span></div>
+<div class="kpi glass"><b>1.5 million dollars</b><span>Raise modeled in this page</span></div>
+<div class="kpi glass"><b id="own">13.04%</b><span>Ownership sold at 11.5 million dollars post-money</span></div>
+<div class="kpi glass"><b>3 streams</b><span>Transactions, home-sale commission, advertising</span></div></div>
+<span class="pill">Modeled projections, not guarantees. Change any input below.</span></div>
 
 <section id="problem"><h2>The problem</h2>
-<p>A small business today pays for ads on one platform, takes payment on another and collects reviews on a third. None of it adds up to proof a stranger can trust, so every new customer starts from zero.</p>
-<div class="grid"><div class="card"><h3>Found</h3><p>Free discovery in one feed, without Meta ads or social media clutter.</p></div>
-<div class="card"><h3>Paid</h3><p>Rentals, sales, jobs, events and rides settle through one account.</p></div>
-<div class="card"><h3>Believed</h3><p>Every completed job and review feeds one OneScore profile.</p></div></div></section>
+<p>A small business pays for ads on one platform, takes payment on another and collects reviews on a third. Every new customer starts from zero. One World replaces that with one account.</p>
+<div class="grid"><div class="card glass"><span class="tag t1">Advertise</span><h3>Found, for free</h3><p>Free discovery in one feed, without Meta ads or social media clutter. Advertising turns paid later, once the audience is there.</p></div>
+<div class="card glass"><span class="tag t2">Process payments</span><h3>Paid, on record</h3><p>Rentals, sales, jobs, events and rides settle through one account, and every payment is recorded.</p></div>
+<div class="card glass"><span class="tag t3">Get reviewed</span><h3>Believed</h3><p>Every completed job and review feeds one OneScore profile that customers can trust.</p></div></div></section>
 
-<section id="model"><h2>How One World earns</h2>
-<p>One World takes a fee on money that moves through it. It does not hold customer funds. Card processing cost is paid out of that fee.</p>
-<table><tr><th>Line</th><th>Who pays</th><th>One World keeps</th></tr>
-<tr><td>OneHome rental</td><td>Booking payment</td><td>8.99 percent</td></tr>
-<tr><td>Sale earnest money (arras)</td><td>Buyer to seller</td><td>5.99 percent</td></tr>
-<tr><td>Sale commission</td><td>Seller, buyer or split</td><td>2.99 percent</td></tr>
-<tr><td>Fiduciary partner</td><td>Paid from the closing payout list</td><td>Set in a commission agreement (in negotiation)</td></tr></table>
-<p class="note" style="margin-top:10px">Per paid rental: 70.40 dollars of fee revenue, 67.68 dollars after card cost (a 3.86 percent cost on that fee). The model below counts rental fees only. Subscriptions, OneVoice, jobs, events, rides and sale commissions are upside it does not include.</p></section>
+<section id="model"><h2>Three ways One World earns</h2>
+<p>One World does not hold customer funds. Each stream below is modeled separately, and all three feed one revenue line.</p>
+<div class="grid">
+<div class="card glass"><span class="tag t1">1 &middot; Transactions</span><h3>A fee on every payment</h3><p>Rentals keep 8.99 percent. Other payments through One World add 1 percent today, and up to about 2 percent more in some cases. The processor's own fee is paid by the payer on top.</p></div>
+<div class="card glass"><span class="tag t3">2 &middot; Home sales</span><h3>0.25 percent commission</h3><p>On each home sold through OneHome. Small per home, large in volume, and backed by a fiduciary partner once the agreement is signed.</p></div>
+<div class="card glass"><span class="tag t4">3 &middot; Advertising</span><h3>Free now, paid later</h3><p>Advertising is free while the network grows. Businesses pay to promote once there is an audience. The model starts charging at the month you choose.</p></div></div>
+<div class="tbl glass" style="margin-top:14px"><table><tr><th>Line</th><th>Who pays</th><th class="r">One World keeps</th></tr>
+<tr><td>OneHome rental</td><td>Booking payment</td><td class="r">8.99 percent</td></tr>
+<tr><td>Sale earnest money (arras)</td><td>Buyer to seller</td><td class="r">5.99 percent</td></tr>
+<tr><td>Home sale commission</td><td>Seller, buyer or split</td><td class="r">0.25 percent</td></tr>
+<tr><td>Other payments through One World</td><td>Payer</td><td class="r">1 percent now, about 3 percent at most</td></tr>
+<tr><td>Advertising</td><td>Business</td><td class="r">Free now, priced later</td></tr>
+<tr><td>Fiduciary partner</td><td>Paid from the closing payout list</td><td class="r">Set in a commission agreement (in negotiation)</td></tr></table></div>
+<div class="cols" style="margin-top:14px"><div class="chart glass"><h3>Revenue mix at month 36 (current inputs)</h3><div id="donut"></div><div class="lg" id="lgd"></div></div>
+<div class="chart glass"><h3>Cost and fee on a 100 dollar payment</h3><div id="rails100"></div><div class="lg"><span><i style="background:var(--mut)"></i>Processor fee (payer)</span><span><i style="background:var(--teal)"></i>One World fee</span></div></div></div></section>
+
+<section id="rails"><h2>Where the money moves, and where it does not earn</h2>
+<p>Colombians pay in pesos through Wompi. Foreign cards and dollars go through Stripe. Both are processors: they charge their own fee, and One World adds its fee on top. That is how every payment is recorded and feeds the business dashboard and the credibility score.</p>
+<div class="tbl glass"><table><tr><th>Payment path</th><th>Processor cost</th><th>One World earns</th><th>Recorded</th></tr>
+<tr><td>Card or PSE in pesos (Wompi)</td><td>2.65 percent plus 700 pesos</td><td class="good">1 percent now, about 3 percent at most</td><td>Yes</td></tr>
+<tr><td>Nequi, paid through Wompi checkout</td><td>Same Wompi fee</td><td class="good">Yes, same 1 percent</td><td>Yes</td></tr>
+<tr><td>Card in dollars (Stripe)</td><td>About 2.95 percent</td><td class="good">1 percent now, about 3 percent at most</td><td>Yes</td></tr>
+<tr><td>Nequi sent person to person, outside the app</td><td>None to us</td><td class="bad">No revenue</td><td>No</td></tr>
+<tr><td>Zelle, PayPal, Wise</td><td>Their own, outside One World</td><td class="bad">No revenue</td><td>No</td></tr></table></div>
+<div class="flag"><b>The trade.</b> Outside rails are free for the payer but invisible to us: no fee, no record, no credit toward the score or the business dashboard. Paying the 1 percent through One World buys the record. We offer outside rails so no member is blocked, and the dashboard shows what they gain by paying inside.</div></section>
+
+<section id="home"><h2>What a home sale is worth</h2>
+<div class="cols"><div class="sim glass"><label>Average Medell&iacute;n home, in pesos <output id="ho1"></output><input id="hp" type="range" min="300000000" max="3000000000" step="50000000" value="1000000000"></label>
+<label>Pesos per dollar</label><input id="fx" type="number" value="3216" step="10" min="1000" max="6000">
+<p class="note" style="margin-top:8px">3,216 is the mid-market rate on 2 November 2026 (CurrencyBeacon). Other sources showed 3,200 to 3,800 in the same months. Edit the box to test.</p></div>
+<div class="sim glass"><div class="out" style="margin-top:0"><div class="card glass"><div class="num" id="hu"></div><div class="note">Home price in dollars</div></div>
+<div class="card glass"><div class="num" id="hc"></div><div class="note">Commission in dollars at 0.25 percent</div></div>
+<div class="card glass"><div class="num" id="hcc"></div><div class="note">Commission in pesos</div></div></div>
+<div class="flag" id="hflag"></div></div></div></section>
+
+<section id="value"><h2>Valuation and returns</h2>
+<p>The raise is priced at 10 million dollars pre-money, before revenue. Add the 1.5 million dollars raised and the post-money value is 11.5 million dollars. The calculator shows what an investor holds and what the company must be worth for a target return. It reads the revenue from the simulator below.</p>
+<div class="cols"><div class="sim glass"><label>Investment, in dollars <output id="iv1"></output><input id="inv" type="range" min="10000" max="1500000" step="10000" value="100000"></label>
+<label>Dilution from later rounds <output id="iv2"></output><input id="dil" type="range" min="0" max="60" step="1" value="25"></label>
+<label>Exit value as a multiple of yearly revenue <output id="iv3"></output><input id="mult" type="range" min="2" max="20" step="0.5" value="6"></label>
+<div class="out"><div class="card glass"><div class="num" id="v1"></div><div class="note">Ownership at entry</div></div>
+<div class="card glass"><div class="num" id="v2"></div><div class="note">Yearly revenue at month 36</div></div>
+<div class="card glass"><div class="num" id="v3"></div><div class="note">Exit value at that multiple</div></div>
+<div class="card glass"><div class="num" id="v4"></div><div class="note">Investor multiple on money</div></div></div></div>
+<div class="tbl glass"><h3 style="padding:10px 8px 0">What the company must be worth</h3><table><tr><th>Target return</th><th class="r">Exit value needed</th><th class="r">Yearly revenue needed</th></tr><tbody id="targets"></tbody></table>
+<p class="note" style="padding:0 8px">Exit value needed = target x post-money value, divided by what remains after dilution. Yearly revenue needed uses the multiple chosen at left.</p></div></div>
+<div class="chart glass" style="margin-top:14px"><h3>Ten million dollars against yearly revenue at month 36</h3><div id="valchart"></div><div class="lg"><span><i style="background:var(--teal)"></i>Careful</span><span><i style="background:var(--blue)"></i>Middle</span><span><i style="background:var(--amber)"></i>Strong</span><span><i style="background:var(--tx)"></i>Valuation as a multiple of revenue</span></div></div></section>
 
 <section id="projection"><h2>Three scenarios, one honest read</h2>
-<p>Each scenario starts from a rentals-per-month path and runs a 36 month plan that spends a 1.5 million dollar raise (30,000 dollars a month in year 1, 42,000 in year 2, 52,000 in year 3). The raise size is a modeling assumption, not an offer.</p>
-<table><tr><th>Scenario</th><th>Rentals a month, month 12 / 36</th><th>Fee revenue a month, month 12 / 36</th><th>Break-even month*</th><th>Lowest cash balance</th></tr>
-<tr><td>Careful</td><td>21 / 75</td><td>1,478 / 5,280 dollars</td><td>Not within 36 months; cash runs out month 39</td><td>-1,277,000 dollars</td></tr>
-<tr><td>Middle</td><td>135 / 595</td><td>9,504 / 41,888 dollars</td><td>Month 41</td><td>+592,000 dollars</td></tr>
-<tr><td>Strong</td><td>680 / 2,963</td><td>47,872 / 208,595 dollars</td><td>Month 6</td><td>+1,483,000 dollars</td></tr></table>
-<p class="note" style="margin-top:10px">*Break-even means monthly fee revenue after card cost covers monthly spend. Months past 36 extend the same growth rate mechanically, so read them as direction, not forecast. Lowest balance is measured over 120 months.</p>
-<p><b>What this says.</b> On rental fees alone, only the strong case funds itself inside three years. The middle case needs about five more months than the plan covers, and the careful case needs either more capital or other revenue lines. We show that rather than hide it.</p></section>
+<p>Each scenario starts from a rentals-per-month path and adds payment volume, home sales and advertising on the same growth curve. A 36 month plan spends the raise (30,000 dollars a month in year 1, 42,000 in year 2, 52,000 in year 3). The raise size is a modeling assumption.</p>
+<div class="tbl glass"><table><thead><tr><th>Scenario</th><th class="r">Revenue a month at month 36</th><th class="r">Yearly revenue</th><th class="r">Break-even month</th><th class="r">Lowest cash</th><th class="r">10 million as a multiple of revenue</th></tr></thead><tbody id="scen"></tbody></table></div>
+<div class="cols" style="margin-top:14px"><div class="chart glass"><h3>Revenue a month by stream (current inputs)</h3><div id="areach"></div><div class="lg" id="lga"></div></div>
+<div class="chart glass"><h3>Cash balance by month (current inputs)</h3><div id="cashch"></div></div></div>
+<p class="note" style="margin-top:10px">Break-even means monthly net revenue covers monthly spend. The lowest cash is measured over 120 months; months past 36 extend the same growth mechanically, so read them as direction, not forecast.</p>
+<p id="read"></p></section>
 
 <section id="sim"><h2>Simulator</h2>
-<p>Move the sliders. The model reruns the 36 month plan in your browser.</p>
-<div class="sim">
-<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="pill" data-p="21,75">Careful</button><button class="pill" data-p="135,595">Middle</button><button class="pill" data-p="680,2963">Strong</button></div>
+<p>Pick a scenario or move the sliders. Everything above reruns in your browser.</p>
+<div class="sim glass">
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="pill" data-s="0">Careful</button><button class="pill on" data-s="1">Middle</button><button class="pill" data-s="2">Strong</button></div>
+<div class="cols"><div>
 <label>Rentals paid per month at month 12 <output id="o1"></output><input id="r12" type="range" min="10" max="1000" step="1" value="135"></label>
 <label>Rentals paid per month at month 36 <output id="o2"></output><input id="r36" type="range" min="20" max="4000" step="1" value="595"></label>
 <label>Fee revenue per rental, in dollars <output id="o3"></output><input id="rev" type="range" min="20" max="120" step="0.5" value="70.4"></label>
 <label>Card cost per rental, in dollars <output id="o4"></output><input id="card" type="range" min="0" max="10" step="0.1" value="2.72"></label>
 <label>Total raise, in dollars <output id="o5"></output><input id="rs" type="range" min="250000" max="5000000" step="50000" value="1500000"></label>
-<label>Spend versus plan <output id="o6"></output><input id="sp" type="range" min="50" max="150" step="5" value="100"></label>
+<label>Spend versus plan <output id="o6"></output><input id="sp" type="range" min="50" max="150" step="5" value="100"></label></div>
+<div>
+<label>Other payment volume through One World a month at month 36, in dollars <output id="o7"></output><input id="vol" type="range" min="0" max="20000000" step="50000" value="1500000"></label>
+<label>One World fee on that volume <output id="o8"></output><input id="take" type="range" min="0.5" max="3" step="0.25" value="1"></label>
+<label>Homes sold a month at month 36 <output id="o9"></output><input id="homes" type="range" min="0" max="60" step="1" value="6"></label>
+<label>Advertising revenue a month at month 36, in dollars <output id="o10"></output><input id="ads" type="range" min="0" max="100000" step="1000" value="5000"></label>
+<label>Advertising starts charging in month <output id="o11"></output><input id="adsm" type="range" min="1" max="36" step="1" value="13"></label></div></div>
 <div class="out">
-<div class="card"><div class="num" id="a1"></div><div class="note">Fee revenue a month, month 12</div></div>
-<div class="card"><div class="num" id="a2"></div><div class="note">Fee revenue a month, month 36</div></div>
-<div class="card"><div class="num" id="a3"></div><div class="note">Break-even month</div></div>
-<div class="card"><div class="num" id="a4"></div><div class="note">Lowest cash balance (120 months)</div></div>
-<div class="card"><div class="num" id="a5"></div><div class="note">Cash runs out in month</div></div>
-<div class="card"><div class="num" id="a6"></div><div class="note">Cumulative fee revenue, 36 months</div></div></div>
-<p class="note" style="margin-top:12px">Growth rate is solved from the two rental inputs: compound monthly growth = (month 36 / month 12) to the power of 1/24, minus 1.</p></div></section>
+<div class="card glass"><div class="num" id="a1"></div><div class="note">Revenue a month, month 12</div></div>
+<div class="card glass"><div class="num" id="a2"></div><div class="note">Revenue a month, month 36</div></div>
+<div class="card glass"><div class="num" id="a3"></div><div class="note">Break-even month</div></div>
+<div class="card glass"><div class="num" id="a4"></div><div class="note">Lowest cash balance (120 months)</div></div>
+<div class="card glass"><div class="num" id="a5"></div><div class="note">Cash runs out in month</div></div>
+<div class="card glass"><div class="num" id="a6"></div><div class="note">Cumulative revenue, 36 months</div></div></div>
+<p class="note" style="margin-top:12px">Growth is solved from the two rental inputs: compound monthly growth = (month 36 / month 12) to the power of 1/24, minus 1. Payments, home sales and advertising follow the same curve.</p></div></section>
 
 <section id="sens"><h2>What moves the answer</h2>
-<p>Middle scenario, cash at month 36 against a base of 611,000 dollars. Each line changes one input and holds the rest.</p>
-<table><tr><th>Change</th><th>Cash at month 36</th><th>Difference</th></tr>
-<tr><td>Spend 20 percent higher</td><td>314,000 dollars</td><td>-298,000 dollars</td></tr>
-<tr><td>Spend 20 percent lower</td><td>909,000 dollars</td><td>+298,000 dollars</td></tr>
-<tr><td>Fee per rental 20 percent lower</td><td>487,000 dollars</td><td>-125,000 dollars</td></tr>
-<tr><td>Fee per rental 20 percent higher</td><td>736,000 dollars</td><td>+125,000 dollars</td></tr>
-<tr><td>Growth rate 20 percent lower</td><td>530,000 dollars</td><td>-82,000 dollars</td></tr>
-<tr><td>Growth rate 20 percent higher</td><td>713,000 dollars</td><td>+102,000 dollars</td></tr>
-<tr><td>Card cost 50 percent higher</td><td>599,000 dollars</td><td>-12,000 dollars</td></tr></table>
-<p><b>Read.</b> Spend discipline moves the result about twice as much as fee level or growth. Card cost barely matters.</p></section>
+<p>Cash at month 36 under the current inputs. Each bar changes one input by 20 percent (card cost by 50 percent) and holds the rest.</p>
+<div class="chart glass"><div id="torn"></div></div>
+<p id="sread" style="margin-top:10px"></p></section>
 
 <section id="method"><h2>Method and limits</h2>
-<p>Rentals follow a compound growth path fitted to two points (month 12 and month 36). Net revenue is rentals times fee less card cost. Cash is the raise plus net revenue less spend. The model counts rental fees only, assumes no price change, and treats each scenario as a smooth curve, so it cannot show seasonality or a slow start. Adoption in a two sided marketplace is the main uncertainty, and nothing here is a forecast of results.</p></section>
+<p>Rentals follow a compound growth path fitted to two points (month 12 and month 36). Net revenue is rentals times fee less card cost, plus the One World fee on other payment volume, plus 0.25 percent of home sales, plus advertising from its start month. The processor fee on other payments is paid by the payer, so it is not a cost to One World. Cash is the raise plus net revenue less spend. The curve is smooth, so it cannot show seasonality or a slow start. Volume, home-sale and advertising levels are assumptions, not measured results; rentals are the only stream with a fitted history. Adoption in a two sided marketplace is the main uncertainty.</p></section>
 
 <section id="risks"><h2>Risks we state plainly</h2>
-<div class="grid"><div class="card"><h3>Adoption</h3><p>Marketplaces need supply and demand together. In the careful case the model runs out of cash.</p></div>
-<div class="card"><h3>Payments licensing</h3><p>Third-party collection in Colombia depends on our payment partner's written approval. Pending.</p></div>
-<div class="card"><h3>Fiduciary guarantee</h3><p>Commission on sales is only guaranteed once a fiduciary signs a commission agreement.</p></div>
-<div class="card"><h3>Regulation</h3><p>Rentals, deposits, rides and scoring each have their own rules. Counsel reviews every money and trust claim.</p></div></div></section>
+<div class="grid"><div class="card glass"><h3>Adoption</h3><p>Marketplaces need supply and demand together. In the careful case the model runs out of cash.</p></div>
+<div class="card glass"><h3>Outside rails</h3><p>Zelle, PayPal, Wise and direct Nequi earn nothing and leave no record. Revenue depends on members choosing to pay inside.</p></div>
+<div class="card glass"><h3>Payments licensing</h3><p>Third-party collection in Colombia depends on our payment partner's written approval. Pending.</p></div>
+<div class="card glass"><h3>Fiduciary guarantee</h3><p>Commission on sales is only guaranteed once a fiduciary signs a commission agreement.</p></div>
+<div class="card glass"><h3>Valuation</h3><p>At 10 million dollars pre-money the middle case trades at a high multiple of month-36 revenue. The returns calculator shows the exit value each target needs.</p></div></div></section>
 
 <section id="contact"><h2>Talk to us</h2>
 <p>Qualified investors can request the data room and the full model. Email <a href="mailto:leefrazier@oneworldlabs.ai">leefrazier@oneworldlabs.ai</a>.</p></section>
 </main>
-<footer>This page is a general description of One World Labs and its projections. It is not an offer to sell, or a solicitation of an offer to buy, any security. Any offering will be made only to qualified investors through definitive documents. Projections depend on assumptions and may not occur. Past or modeled results are not a promise of future results.</footer>
+<footer>This page describes One World Labs and its projections. Projections depend on assumptions and may not occur.</footer>
 <script>
 (function(){var $=function(i){return document.getElementById(i)};
+var th=$('tg');function lbl(){th.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'Light':'Dark'}lbl();
+th.addEventListener('click',function(){var n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('ow-theme',n)}catch(e){}lbl()});
+var POST=11500000,SC=[{r12:21,r36:75,vol:150000,homes:1,ads:0},{r12:135,r36:595,vol:1500000,homes:6,ads:5000},{r12:680,r36:2963,vol:8000000,homes:25,ads:40000}],NAMES=['Careful','Middle','Strong'],COL=['var(--teal)','var(--blue)','var(--amber)'];
 function spend(m){return m<=12?30000:m<=24?42000:52000}
-function d(v){return (v<0?'-':'')+'$'+Math.abs(Math.round(v)).toLocaleString('en-US')}
-function u(){var r12=+$('r12').value,r36=+$('r36').value,rev=+$('rev').value,card=+$('card').value,rs=+$('rs').value,sp=+$('sp').value/100;
-if(r36<=r12){r36=r12+1}
-var g=Math.pow(r36/r12,1/24)-1,a=r12/Math.pow(1+g,12),cash=rs,tr=cash,be=null,zero=null,cum=0,f12=0,f36=0;
-for(var m=1;m<=120;m++){var R=a*Math.pow(1+g,m),net=R*(rev-card),s=spend(m)*sp;cash+=net-s;if(cash<tr)tr=cash;
-if(be===null&&net>=s)be=m;if(zero===null&&cash<0)zero=m;if(m<=36)cum+=R*rev;if(m===12)f12=R*rev;if(m===36)f36=R*rev}
-$('o1').textContent=r12.toLocaleString('en-US');$('o2').textContent=r36.toLocaleString('en-US');$('o3').textContent='$'+rev.toFixed(2);
-$('o4').textContent='$'+card.toFixed(2);$('o5').textContent=d(rs);$('o6').textContent=Math.round(sp*100)+'%';
-$('a1').textContent=d(f12);$('a2').textContent=d(f36);$('a3').textContent=be===null?'After month 120':'Month '+be;
-$('a4').textContent=d(tr);$('a5').textContent=zero===null?'Not within 120':'Month '+zero;$('a6').textContent=d(cum)}
-['r12','r36','rev','card','rs','sp'].forEach(function(i){$(i).addEventListener('input',u)});
-document.querySelectorAll('[data-p]').forEach(function(b){b.style.cursor='pointer';b.addEventListener('click',function(){var p=b.getAttribute('data-p').split(',');$('r12').value=p[0];$('r36').value=p[1];u()})});u()})();
+function fmt(v){return (v<0?'-':'')+'$'+Math.abs(Math.round(v)).toLocaleString('en-US')}
+function fk(v){var a=Math.abs(v);return (v<0?'-':'')+'$'+(a>=1e6?(a/1e6).toFixed(2)+'M':a>=1e3?(a/1e3).toFixed(a>=1e5?0:1)+'K':Math.round(a))}
+function home(){var p=+$('hp').value,fx=+$('fx').value||3216;return{p:p,fx:fx,usd:p/fx,com:p/fx*0.0025,cop:p*0.0025}}
+function model(P,o){o=o||{};var rev=P.rev*(o.rev||1),card=P.card*(o.card||1),sp=P.sp*(o.sp||1),vol=P.vol*(o.vol||1),ads=P.ads*(o.ads||1);
+var r12=P.r12,r36=P.r36;if(r36<=r12)r36=r12+1;var g=(Math.pow(r36/r12,1/24)-1)*(o.g||1),a=r12/Math.pow(1+g,12),R36=a*Math.pow(1+g,36);
+var cash=P.rs,min=cash,be=null,zero=null,cum=0,rows=[],hm=home().com;
+for(var m=1;m<=120;m++){var R=a*Math.pow(1+g,m),sc=R/R36,fr=R*rev,net1=R*(rev-card),net2=vol*sc*P.take/100,net3=P.homes*sc*hm,net4=m>=P.adsm?ads*sc:0,net=net1+net2+net3+net4,s=spend(m)*sp;
+cash+=net-s;if(cash<min)min=cash;if(be===null&&net>=s)be=m;if(zero===null&&cash<0)zero=m;if(m<=36)cum+=net;rows.push({m:m,s1:net1,s2:net2,s3:net3,s4:net4,net:net,cash:cash})}
+return{rows:rows,min:min,be:be,zero:zero,cum:cum,m12:rows[11].net,m36:rows[35].net,cash36:rows[35].cash,parts:[rows[35].s1,rows[35].s2,rows[35].s3,rows[35].s4]}}
+function P(){return{r12:+$('r12').value,r36:+$('r36').value,rev:+$('rev').value,card:+$('card').value,rs:+$('rs').value,sp:+$('sp').value/100,vol:+$('vol').value,take:+$('take').value,homes:+$('homes').value,ads:+$('ads').value,adsm:+$('adsm').value}}
+function pre(i){var s=SC[i];return{r12:s.r12,r36:s.r36,rev:70.4,card:2.72,rs:1500000,sp:1,vol:s.vol,take:1,homes:s.homes,ads:s.ads,adsm:13}}
+var SCOL=['var(--teal)','var(--blue)','var(--amber)','var(--violet)'],SN=['Rentals','Other payments','Home sales','Advertising'];
+function svgOpen(w,h){return '<svg viewBox="0 0 '+w+' '+h+'" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Inter,system-ui,sans-serif" font-size="11">'}
+function donut(parts){var tot=parts.reduce(function(a,b){return a+b},0)||1,cx=110,cy=100,r=72,w=26,ang=-Math.PI/2,s=svgOpen(420,200);
+parts.forEach(function(v,i){var f=v/tot;if(f<=0)return;var a2=ang+f*2*Math.PI;if(f>.9999)a2-=.0001;var x1=cx+r*Math.cos(ang),y1=cy+r*Math.sin(ang),x2=cx+r*Math.cos(a2),y2=cy+r*Math.sin(a2);
+s+='<path d="M'+x1+' '+y1+' A'+r+' '+r+' 0 '+(f>.5?1:0)+' 1 '+x2+' '+y2+'" fill="none" stroke="'+SCOL[i]+'" stroke-width="'+w+'"/>';ang=a2});
+s+='<text x="'+cx+'" y="'+(cy-2)+'" text-anchor="middle" font-size="18" font-weight="800" fill="var(--tx)">'+fk(tot)+'</text><text x="'+cx+'" y="'+(cy+16)+'" text-anchor="middle" fill="var(--mut)">a month</text>';
+parts.forEach(function(v,i){s+='<rect x="230" y="'+(52+i*28)+'" width="12" height="12" rx="3" fill="'+SCOL[i]+'"/><text x="250" y="'+(62+i*28)+'" fill="var(--tx)">'+SN[i]+'</text><text x="410" y="'+(62+i*28)+'" text-anchor="end" fill="var(--mut)">'+Math.round(v/tot*100)+'%</text>'});
+$('donut').innerHTML=s+'</svg>'}
+function rails(){var c=home().fx,items=[['Wompi',100*.0265+700/c,1],['Stripe',2.95,1],['Rental',0,8.99]],s=svgOpen(420,200),mx=14;
+items.forEach(function(it,i){var y=30+i*52,wp=it[1]/mx*300,wo=it[2]/mx*300;s+='<text x="0" y="'+(y-8)+'" fill="var(--tx)" font-weight="600">'+it[0]+(it[0]==='Rental'?' (OneHome fee)':' + One World 1%')+'</text>';
+if(it[1]>0)s+='<rect x="0" y="'+y+'" width="'+wp+'" height="22" rx="6" fill="var(--mut)" opacity=".55"/><text x="'+(wp+6)+'" y="'+(y+15)+'" fill="var(--mut)">$'+it[1].toFixed(2)+'</text>';
+var x0=it[1]>0?wp+46:0;s+='<rect x="'+x0+'" y="'+y+'" width="'+Math.max(wo,2)+'" height="22" rx="6" fill="var(--teal)"/><text x="'+(x0+wo+6)+'" y="'+(y+15)+'" fill="var(--teal)" font-weight="700">$'+it[2].toFixed(2)+'</text>'});
+$('rails100').innerHTML=s+'</svg>'}
+function axisLine(x1,y1,x2,y2){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="var(--grid)"/>'}
+function area(rows){var W=520,H=230,L=48,B=24,T=10,w=W-L-8,h=H-B-T,tops=rows.slice(0,36).map(function(r){return r.net}),mx=Math.max.apply(null,tops)*1.1||1,s=svgOpen(W,H);
+for(var k=0;k<=4;k++){var y=T+h-h*k/4;s+=axisLine(L,y,W-8,y)+'<text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end" fill="var(--mut)">'+fk(mx*k/4)+'</text>'}
+var base=new Array(36).fill(0);
+for(var j=0;j<4;j++){var up=[],lo=[];for(var i=0;i<36;i++){var v=rows[i]['s'+(j+1)],x=L+w*i/35;lo.push([x,T+h-h*base[i]/mx]);base[i]+=v;up.push([x,T+h-h*base[i]/mx])}
+s+='<path d="M'+up.map(function(p){return p[0]+' '+p[1]}).join(' L')+' L'+lo.reverse().map(function(p){return p[0]+' '+p[1]}).join(' L')+' Z" fill="'+SCOL[j]+'" opacity=".85"/>'}
+[1,12,24,36].forEach(function(m){s+='<text x="'+(L+w*(m-1)/35)+'" y="'+(H-6)+'" text-anchor="middle" fill="var(--mut)">'+m+'</text>'});
+$('areach').innerHTML=s+'</svg>'}
+function cashc(rows){var W=520,H=230,L=52,B=24,T=10,w=W-L-8,h=H-B-T,v=rows.slice(0,36).map(function(r){return r.cash}),mn=Math.min(0,Math.min.apply(null,v)),mx=Math.max(Math.max.apply(null,v),1),sp=(mx-mn)*1.08,s=svgOpen(W,H);
+function Y(c){return T+h-(c-mn)/sp*h}
+for(var k=0;k<=4;k++){var c=mn+sp*k/4,y=Y(c);s+=axisLine(L,y,W-8,y)+'<text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end" fill="var(--mut)">'+fk(c)+'</text>'}
+s+='<line x1="'+L+'" x2="'+(W-8)+'" y1="'+Y(0)+'" y2="'+Y(0)+'" stroke="var(--red)" stroke-dasharray="4 4"/>';
+var pts=v.map(function(c,i){return (L+w*i/35)+' '+Y(c)}).join(' L');
+s+='<path d="M'+pts+' L'+(L+w)+' '+Y(0)+' L'+L+' '+Y(0)+' Z" fill="var(--teal)" opacity=".16"/><path d="M'+pts+'" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linejoin="round"/>';
+[1,12,24,36].forEach(function(m){s+='<text x="'+(L+w*(m-1)/35)+'" y="'+(H-6)+'" text-anchor="middle" fill="var(--mut)">'+m+'</text>'});
+$('cashch').innerHTML=s+'</svg>'}
+function valchart(arrs){var W=520,H=210,L=48,B=30,T=14,h=H-B-T,mx=Math.max.apply(null,arrs.concat([10000000/20]))*1.15,s=svgOpen(W,H),bw=70,gap=(W-L-20-bw*3)/2;
+for(var k=0;k<=4;k++){var y=T+h-h*k/4;s+=axisLine(L,y,W-8,y)+'<text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end" fill="var(--mut)">'+fk(mx*k/4)+'</text>'}
+arrs.forEach(function(a,i){var x=L+10+i*(bw+gap),bh=a/mx*h;s+='<rect x="'+x+'" y="'+(T+h-bh)+'" width="'+bw+'" height="'+bh+'" rx="8" fill="'+COL[i]+'"/><text x="'+(x+bw/2)+'" y="'+(T+h-bh-6)+'" text-anchor="middle" fill="var(--tx)" font-weight="700">'+fk(a)+'</text><text x="'+(x+bw/2)+'" y="'+(H-12)+'" text-anchor="middle" fill="var(--mut)">'+NAMES[i]+' ('+(10000000/a).toFixed(1)+'x)</text>'});
+$('valchart').innerHTML=s+'</svg>'}
+function torn(p,base){var tests=[['Spend 20% higher',{sp:1.2}],['Spend 20% lower',{sp:.8}],['Fee per rental 20% lower',{rev:.8}],['Fee per rental 20% higher',{rev:1.2}],['Growth 20% lower',{g:.8}],['Growth 20% higher',{g:1.2}],['Payment volume 20% lower',{vol:.8}],['Payment volume 20% higher',{vol:1.2}],['Advertising 20% lower',{ads:.8}],['Advertising 20% higher',{ads:1.2}],['Card cost 50% higher',{card:1.5}]],
+res=tests.map(function(t){return[t[0],model(p,t[1]).cash36-base]}),mx=Math.max.apply(null,res.map(function(r){return Math.abs(r[1])}))||1,W=520,rh=26,H=res.length*rh+20,s=svgOpen(W,H),c=300;
+res.forEach(function(r,i){var y=10+i*rh,len=Math.abs(r[1])/mx*150;s+='<text x="0" y="'+(y+16)+'" fill="var(--tx)">'+r[0]+'</text><rect x="'+(r[1]>=0?c:c-len)+'" y="'+(y+3)+'" width="'+Math.max(len,1)+'" height="16" rx="4" fill="'+(r[1]>=0?'var(--teal)':'var(--red)')+'"/><text x="'+(r[1]>=0?c+len+6:c-len-6)+'" y="'+(y+16)+'" text-anchor="'+(r[1]>=0?'start':'end')+'" fill="var(--mut)">'+fk(r[1])+'</text>'});
+s+='<line x1="'+c+'" y1="6" x2="'+c+'" y2="'+(H-6)+'" stroke="var(--grid)"/>';$('torn').innerHTML=s+'</svg>';
+var spn=Math.abs(res[0][1]),vl=Math.abs(res[2][1]),gr=Math.abs(res[4][1]);$('sread').innerHTML='<b>Read.</b> Spend moves cash by '+fk(spn)+' either way, fee per rental by '+fk(vl)+' and growth by about '+fk(gr)+'. Card cost barely matters.'}
+function home_(){var h=home();$('ho1').textContent=h.p.toLocaleString('en-US')+' COP';$('hu').textContent=fmt(h.usd);$('hc').textContent=fmt(h.com);$('hcc').textContent=Math.round(h.cop).toLocaleString('en-US');
+$('hflag').innerHTML='<b>Check on 500,000 dollars.</b> '+h.p.toLocaleString('en-US')+' pesos is about '+fmt(h.usd)+' at this rate, not 500,000. At 500,000 dollars the commission would be 1,250 dollars; on this home it is '+fmt(h.com)+'. A 500,000 dollar home is about '+Math.round(500000*h.fx/1e6).toLocaleString('en-US')+' million pesos.'}
+function u(){var p=P();$('o1').textContent=p.r12.toLocaleString('en-US');$('o2').textContent=p.r36.toLocaleString('en-US');$('o3').textContent='$'+p.rev.toFixed(2);$('o4').textContent='$'+p.card.toFixed(2);$('o5').textContent=fmt(p.rs);$('o6').textContent=Math.round(p.sp*100)+'%';
+$('o7').textContent=fmt(p.vol);$('o8').textContent=p.take.toFixed(2)+'%';$('o9').textContent=p.homes;$('o10').textContent=fmt(p.ads);$('o11').textContent='month '+p.adsm;
+var r=model(p);$('a1').textContent=fmt(r.m12);$('a2').textContent=fmt(r.m36);$('a3').textContent=r.be===null?'After month 120':'Month '+r.be;$('a4').textContent=fmt(r.min);$('a5').textContent=r.zero===null?'Not within 120':'Month '+r.zero;$('a6').textContent=fmt(r.cum);
+donut(r.parts);area(r.rows);cashc(r.rows);torn(p,r.cash36);
+var arr=r.m36*12,inv=+$('inv').value,dil=+$('dil').value/100,mu=+$('mult').value,own=inv/POST,exit=arr*mu,val=exit*own*(1-dil);
+$('iv1').textContent=fmt(inv);$('iv2').textContent=Math.round(dil*100)+'%';$('iv3').textContent=mu+'x';
+$('v1').textContent=(own*100).toFixed(2)+'%';$('v2').textContent=fk(arr);$('v3').textContent=fk(exit);var mm=val/inv;$('v4').textContent=mm.toFixed(2)+'x';$('v4').className='num '+(mm>=1?'':'bad');
+$('targets').innerHTML=[3,5,10].map(function(t){var need=t*POST/(1-dil);return '<tr><td>'+t+'x</td><td class="r">'+fk(need)+'</td><td class="r">'+fk(need/mu)+'</td></tr>'}).join('')}
+function static_(){var res=[0,1,2].map(function(i){var r=model(pre(i));return r}),tb='';
+res.forEach(function(r,i){var arr=r.m36*12;tb+='<tr><td>'+NAMES[i]+'</td><td class="r">'+fmt(r.m36)+'</td><td class="r">'+fk(arr)+'</td><td class="r">'+(r.be===null?'After month 120':'Month '+r.be)+'</td><td class="r '+(r.min<0?'bad':'good')+'">'+fk(r.min)+'</td><td class="r">'+(10000000/arr).toFixed(1)+'x</td></tr>'});
+$('scen').innerHTML=tb;valchart(res.map(function(r){return r.m36*12}));
+var m=res[1],c=res[0],s=res[2];
+$('read').innerHTML='<b>What this says.</b> With all three streams the middle case reaches '+fk(m.m36*12)+' of yearly revenue at month 36'+(m.be?' and covers its spend from month '+m.be:'')+'. The careful case '+(c.zero?'runs out of cash in month '+c.zero+' without more capital':'stays funded')+'. The strong case reaches '+fk(s.m36*12)+'. At 10 million dollars pre-money, investors are paying '+(10000000/(m.m36*12)).toFixed(1)+' times the middle case yearly revenue, so the return depends on growth past month 36.'}
+['r12','r36','rev','card','rs','sp','vol','take','homes','ads','adsm','inv','dil','mult'].forEach(function(i){$(i).addEventListener('input',u)});
+['hp','fx'].forEach(function(i){$(i).addEventListener('input',function(){home_();u();static_()})});
+document.querySelectorAll('[data-s]').forEach(function(b){b.addEventListener('click',function(){var p=pre(+b.getAttribute('data-s'));['r12','r36','vol','homes','ads'].forEach(function(k){$(k).value=p[k]});$('take').value=1;$('adsm').value=13;document.querySelectorAll('[data-s]').forEach(function(x){x.classList.toggle('on',x===b)});u()})});
+rails();home_();u();static_();
+window.__ow={model:model,pre:pre,P:P}})();
 </script></body></html>
