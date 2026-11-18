@@ -46,7 +46,7 @@ HOME = {
         "desc": "AI tools and one app that help small businesses, freelancers and creators get found, get booked and get paid: events, work, homes, rides and payments, in one app with one login.",
         "h1": "AI tools that bring your small business more customers.",
         "sub": "Reach your target customers faster. Get reviewed in one place and get a standardized credibility score that builds trust in your business.",
-        "lead": "One World is one place for everything you need to thrive as a business. Get found for free, without Meta ads or the clutter of social media. Scattered features don't build credibility. Advertise, get paid and get reviewed in one place, and that is how you build real credibility.", "why": "Learn more", "why_x": "Why One World", "see_all": "See all apps", "feat_eyebrow": "Featured apps", "feat_h2": "Everything your business needs.", "feat_p": "Each app does one job. They share one profile, so your reputation grows with every job.", "feat_all": "See all the apps",
+        "lead": "Advertise for free, process payments and get reviewed, all in one place. Reach your target customers faster, without Meta ads or social media clutter, and earn the world's first standardized social credibility score to build more trust in your business.", "why": "Learn more", "why_x": "Why One World", "see_all": "See all apps", "feat_eyebrow": "Featured apps", "feat_h2": "Everything your business needs.", "feat_p": "Each app does one job. They share one profile, so your reputation grows with every job.", "feat_all": "See all the apps",
         "open": "Open the app",
         "stage_label": "App previews",
         "dot": "Show {n}",
