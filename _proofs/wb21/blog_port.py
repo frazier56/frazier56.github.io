@@ -271,3 +271,8 @@ POSTS = [
           ("Ya instalado", "<p>Con las llaves en la mano, la misma cuenta le ayuda a encontrar <a href=\"/es/medellin/cleaning/\">empleada por días</a>, <a href=\"/es/medellin/private-driver/\">conductor</a> o <a href=\"/es/medellin/dog-walker/\">paseador de perros</a>.</p>"),
          ]}},
 ]
+
+
+from content_seo2 import NEW_POSTS
+for _x in NEW_POSTS: _x["fresh"] = True
+POSTS.extend(NEW_POSTS)
