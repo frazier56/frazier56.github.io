@@ -690,3 +690,9 @@ html[data-theme="dark"] .v2 .lr-ic,html[data-theme="dark"] .v2 .lr-mk{background
  .v2 .seg button{font-size:13px;line-height:1.15;white-space:normal;padding:0 8px;min-height:52px;text-align:center}
  .v2 .seg button .tl{display:inline}
 }
+
+/* photoreal phone showcase */
+.v2 .phone-shot{padding:8px 0 24px}
+.v2 .phone-shot figure{margin:0 auto;max-width:420px;text-align:center}
+.v2 .phone-shot.wide figure{max-width:760px}
+.v2 .phone-shot img{display:block;width:100%;height:auto}
