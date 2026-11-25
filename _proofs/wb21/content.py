@@ -297,3 +297,10 @@ PROS = {
  "dj": [("aa1d3014-236c-4eb5-bc59-10a9356b118c", "Diego Esteban Escobar Rodríguez", "Music Producer & DJ", "Productor musical y DJ")],
  "videographer": [("541e40cb-f087-497d-83f6-09dfc3b33f7e", "johavigo.biz", "Video content creator and audiovisual producer", "Creador de contenido en video y productor audiovisual")],
 }
+
+
+# SEO re-aim batch, 24 Nov 2026 (service + city pages; sources; topic guides live in blog_port).
+from content_seo2 import NEW_S, NEW_SERVICES
+S.update(NEW_S)
+for _x in NEW_SERVICES: _x["fresh"] = True
+SERVICES.extend(NEW_SERVICES)

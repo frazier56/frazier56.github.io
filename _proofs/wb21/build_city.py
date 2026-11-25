@@ -133,7 +133,7 @@ L = {
  "en": dict(eyebrow="Medellín · <span class=\"wb-nw\">Updated %s</span>" % UPDATED_EN, back="All services in Medellín",
             cost="What %s costs in Medellín", typical="Typical ranges", th=("What", "Typical range", "Source"),
             caveat="Typical ranges from public listings and guides, checked on %s. They are not One World prices: each pro sets their own, and you agree the price with them." % UPDATED_EN,
-            drives="What changes the price", how="How hiring through OneJob works", pros_h="On OneJob in Medellín",
+            drives="What changes the price", noprice_h="How pricing works", noprice_sub="No public price range", how="How hiring through OneJob works", pros_h="On OneJob in Medellín",
             pros_p="Public One World profiles whose owners say they do this work in Medellín. Open a profile to see their work and reviews.",
             law="Before you hire", faq="Questions people ask", more="More services in Medellín", guide="Read the full price guide",
             find="Find %s in OneJob ↗", sources="Sources",
@@ -142,7 +142,7 @@ L = {
  "es": dict(eyebrow="Medellín · <span class=\"wb-nw\">Actualizada el %s</span>" % UPDATED_ES, back="Todos los servicios en Medellín",
             cost="Cuánto cuesta %s en Medellín", typical="Rangos habituales", th=("Qué", "Rango habitual", "Fuente"),
             caveat="Rangos habituales tomados de anuncios y guías públicas, revisados el %s. No son precios de One World: cada profesional fija el suyo y usted acuerda el precio con esa persona." % UPDATED_ES,
-            drives="Qué cambia el precio", how="Cómo se contrata por OneJob", pros_h="En OneJob en Medellín",
+            drives="Qué cambia el precio", noprice_h="Cómo se cobra", noprice_sub="Sin rango de precios público", how="Cómo se contrata por OneJob", pros_h="En OneJob en Medellín",
             pros_p="Perfiles públicos de One World cuyos dueños dicen que hacen este trabajo en Medellín. Abra un perfil para ver su trabajo y sus reseñas.",
             law="Antes de contratar", faq="Preguntas frecuentes", more="Más servicios en Medellín", guide="Lea la guía de precios completa",
             find="Encuentre %s en OneJob ↗", sources="Fuentes",
@@ -214,10 +214,14 @@ def city_page(svc, lang):
             '<h2>%s</h2><p class="wb-sub">%s</p>%s<p class="wb-note">%s</p>%s%s'
             '<h2>%s</h2><ul>%s</ul>%s%s%s<h2>%s</h2>%s<h2>%s</h2>%s%s</div></article>'
             % (city_path(lang), E(l["back"]), l["eyebrow"], E(c["h1"]), E(c["intro"]), find_button(svc, lang),
-               E(l["cost"] % c["a"]), E(l["typical"]), price_table(svc, lang), E(l["caveat"]),
+               E(l["cost"] % c["a"] if svc["prices"] else l["noprice_h"]), E(l["typical"] if svc["prices"] else l["noprice_sub"]),
+               price_table(svc, lang) if svc["prices"] else "", E(l["caveat"]) if svc["prices"] else "",
                ("<p>%s</p>" % E(note)) if note else "", guide,
                E(l["drives"]), drivers, safety, how_block(lang), pros_block(svc, lang),
                E(l["faq"]), faq_html, E(l["more"]), svc_links(lang, svc["slug"]), find_button(svc, lang)))
+    body = body.replace('<p class="wb-note"></p>', '')
+    if svc.get("fresh"):
+        body = body.replace(UPDATED_EN, "24 November 2026").replace(UPDATED_ES, "24 de noviembre de 2026")
     en_p, es_p = city_path("en", svc["slug"]), city_path("es", svc["slug"])
     graph = [crumbs(lang, [(T[lang]["home"], "/" if lang == "en" else "/es/"), ("Medellín", city_path(lang)), (c["h1"], path)]),
              {"@type": "Service", "@id": SITE + path + "#service", "name": c["h1"], "serviceType": c["name"],
@@ -231,12 +235,12 @@ def city_page(svc, lang):
 
 HUB = {
  "en": dict(title="Hire local pros in Medellín: prices and guides (2026) | One World",
-            desc="Typical 2026 prices and hiring guides for DJs, cleaners, videographers, drivers, photographers, makeup artists, chefs, trainers, dog walkers and babysitters in Medellín.",
-            h1="Hire local pros in Medellín", intro="Ten services people in Medellín hire most often. Each guide shows typical 2026 prices from public sources, what changes the price, and how to agree and pay the job through OneJob.",
+            desc="Typical 2026 prices and hiring guides for DJs, cleaners, videographers, drivers, photographers, makeup artists, chefs, trainers, dog walkers, babysitters, tour guides, event hosts, models and builders in Medellín.",
+            h1="Hire local pros in Medellín", intro="Fourteen services people in Medellín hire most often. Each guide shows typical 2026 prices from public sources, what changes the price, and how to agree and pay the job through OneJob.",
             services="Services", guides="Price guides"),
  "es": dict(title="Contrate profesionales en Medellín: precios y guías (2026) | One World",
-            desc="Precios habituales 2026 y guías para contratar DJ, empleadas por días, videógrafos, conductores, fotógrafos, maquilladoras, chefs, entrenadores, paseadores de perros y niñeras en Medellín.",
-            h1="Contrate profesionales en Medellín", intro="Diez servicios que más se contratan en Medellín. Cada guía muestra precios habituales de 2026 tomados de fuentes públicas, qué cambia el precio y cómo acordar y pagar el servicio por OneJob.",
+            desc="Precios habituales 2026 y guías para contratar DJ, empleadas por días, videógrafos, conductores, fotógrafos, maquilladoras, chefs, entrenadores, paseadores de perros, niñeras, guías turísticos, animadores, modelos y constructores en Medellín.",
+            h1="Contrate profesionales en Medellín", intro="Catorce servicios que más se contratan en Medellín. Cada guía muestra precios habituales de 2026 tomados de fuentes públicas, qué cambia el precio y cómo acordar y pagar el servicio por OneJob.",
             services="Servicios", guides="Guías de precios"),
 }
 
@@ -318,6 +322,10 @@ def post_page(b, lang):
               "datePublished": UPDATED, "dateModified": UPDATED, "inLanguage": T[lang]["html"],
               "author": {"@type": "Organization", "name": "One World Labs", "@id": SITE + "/#org"},
               "publisher": {"@id": SITE + "/#org"}, "mainEntityOfPage": SITE + path}]
+    if b.get("fresh"):
+        body = body.replace(UPDATED_EN, "24 November 2026").replace(UPDATED_ES, "24 de noviembre de 2026")
+        for g in graph:
+            if g.get("@type") == "BlogPosting": g["datePublished"] = g["dateModified"] = "2026-11-24"
     return write(path, page(lang, path, post_path("en", b), post_path("es", b), c["title"], c["desc"], body, graph, "article"))
 
 
