@@ -680,3 +680,13 @@ html[data-theme="dark"] .v2 .lr-ic,html[data-theme="dark"] .v2 .lr-mk{background
   .v2 .ptag,.v2 .crumb{min-height:44px}
 }
 @media (max-width:680px){html body.v2 footer.ow-foot li a{min-height:44px}html body.v2 footer.ow-foot ul{gap:0}}
+
+/* app pages: no floating logo beside the title; title and subtitle use the full width; segmented switch fits phones */
+.v2 .ap-id{display:block}
+.v2 .ap-id>img{display:none}
+.v2 .ap-id h1 span:last-child{max-width:none}
+.v2 .ap-id>.badge{margin-top:10px;display:inline-block}
+@media (max-width:480px){
+ .v2 .seg button{font-size:13px;line-height:1.15;white-space:normal;padding:0 8px;min-height:52px;text-align:center}
+ .v2 .seg button .tl{display:inline}
+}
