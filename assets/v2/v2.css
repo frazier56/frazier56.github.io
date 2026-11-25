@@ -696,3 +696,4 @@ html[data-theme="dark"] .v2 .lr-ic,html[data-theme="dark"] .v2 .lr-mk{background
 .v2 .phone-shot figure{margin:0 auto;max-width:420px;text-align:center}
 .v2 .phone-shot.wide figure{max-width:760px}
 .v2 .phone-shot img{display:block;width:100%;height:auto}
+.v2 .phone-shot.wide img{mix-blend-mode:multiply}
