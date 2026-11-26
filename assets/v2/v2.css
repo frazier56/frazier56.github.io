@@ -716,3 +716,5 @@ html[data-theme="dark"] .v2 .ph-wm{opacity:.3;filter:brightness(.7)}
 .v2 .ap-top.has-wm>.wrap{width:100%}
 .v2 .ap-top .ph-wm{width:48%;background-position:50% 35%}
 @media(max-width:700px){.v2 .hero2 .ph-wm,.v2 .ap-top .ph-wm{width:100%;opacity:.22}}
+/* phone watermark is hidden on phones: no room in the header */
+@media(max-width:700px){.v2 .ph-wm{display:none}}
